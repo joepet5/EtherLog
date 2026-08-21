@@ -68,6 +68,9 @@ class BackupService {
     const typeGroup = XTypeGroup(
       label: 'JSON',
       extensions: ['json'],
+      uniformTypeIdentifiers: ['public.json', 'public.text'],
+      macUTIs: ['public.json', 'public.text'],
+      mimeTypes: ['application/json'],
     );
 
     final XFile? picked = await openFile(

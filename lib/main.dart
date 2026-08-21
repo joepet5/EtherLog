@@ -299,7 +299,14 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _agreedToConfidentiality ? widget.onAccepted : null,
+                  onPressed: () {
+                    if (_agreedToConfidentiality) widget.onAccepted();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    splashFactory: NoSplash.splashFactory,
+                    backgroundColor: _agreedToConfidentiality ? primary : Colors.grey.shade400,
+                    foregroundColor: Colors.white,
+                  ),
                   child: Text(t.getStarted, style: const TextStyle(fontSize: 16)),
                 ),
               ),

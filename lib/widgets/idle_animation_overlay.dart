@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class IdleAnimationOverlay extends StatefulWidget {
   final Widget child;
   final Duration idleAfter;
+  final bool enabled;
 
   const IdleAnimationOverlay({
     super.key,
     required this.child,
+    this.enabled = true,
     this.idleAfter = const Duration(seconds: 30),
   });
 
@@ -68,6 +70,7 @@ class _IdleAnimationOverlayState extends State<IdleAnimationOverlay>
       setState(() => _showOverlay = false);
       _controller.stop();
     }
+    if (!widget.enabled) return;
     _idleTimer = Timer(widget.idleAfter, _onIdle);
   }
 
@@ -82,6 +85,15 @@ class _IdleAnimationOverlayState extends State<IdleAnimationOverlay>
 
   void _onInteraction([_]) {
     _resetIdleTimer();
+  }
+
+  @override
+  @override
+  void didUpdateWidget(IdleAnimationOverlay oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.enabled != oldWidget.enabled) {
+      _resetIdleTimer();
+    }
   }
 
   @override

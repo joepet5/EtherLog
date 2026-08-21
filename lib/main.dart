@@ -176,10 +176,11 @@ class EtherlogAppState extends State<EtherlogApp> {
           ],
         );
 
-        if (_idleAnimationEnabled && _unlocked && !_needsConfidentiality) {
-          return IdleAnimationOverlay(child: content);
-        }
-        return content;
+        final bool enableIdle = _idleAnimationEnabled && _unlocked && !_needsConfidentiality;
+          return IdleAnimationOverlay(
+            enabled: enableIdle,
+            child: content,
+          );
       },
       home: _needsConfidentiality
           ? ConfidentialityScreen(onAccepted: _completeConfidentiality)
@@ -223,7 +224,6 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
     final primary = Theme.of(context).primaryColor;
 
     return Scaffold(
-      key: const ValueKey('confidentiality_scaffold'),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
@@ -254,7 +254,6 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
               const Spacer(),
               // Avoid CheckboxListTile — its internal ink GlobalKey can clash on some devices.
               GestureDetector(
-                key: const ValueKey('confidentiality_agree_row'),
                 onTap: () {
                   setState(() {
                     _agreedToConfidentiality = !_agreedToConfidentiality;
@@ -270,7 +269,6 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                         width: 24,
                         height: 24,
                         child: Checkbox(
-                          key: const ValueKey('confidentiality_checkbox'),
                           value: _agreedToConfidentiality,
                           activeColor: primary,
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -300,7 +298,6 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  key: const ValueKey('confidentiality_get_started'),
                   onPressed: _agreedToConfidentiality ? widget.onAccepted : null,
                   child: Text(t.getStarted, style: const TextStyle(fontSize: 16)),
                 ),

@@ -265,20 +265,17 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      Container(
                         width: 24,
                         height: 24,
-                        child: Checkbox(
-                          value: _agreedToConfidentiality,
-                          activeColor: primary,
-                          splashRadius: 0,
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          onChanged: (val) {
-                            setState(() {
-                              _agreedToConfidentiality = val ?? false;
-                            });
-                          },
+                        decoration: BoxDecoration(
+                          color: _agreedToConfidentiality ? primary : Colors.transparent,
+                          border: Border.all(color: _agreedToConfidentiality ? primary : Colors.grey.shade400, width: 2),
+                          borderRadius: BorderRadius.circular(4),
                         ),
+                        child: _agreedToConfidentiality
+                            ? const Icon(Icons.check, size: 18, color: Colors.white)
+                            : null,
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -295,19 +292,19 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_agreedToConfidentiality) widget.onAccepted();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    splashFactory: NoSplash.splashFactory,
-                    backgroundColor: _agreedToConfidentiality ? primary : Colors.grey.shade400,
-                    foregroundColor: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  if (_agreedToConfidentiality) widget.onAccepted();
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: _agreedToConfidentiality ? primary : Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Text(t.getStarted, style: const TextStyle(fontSize: 16)),
+                  alignment: Alignment.center,
+                  child: Text(t.getStarted, style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 16),

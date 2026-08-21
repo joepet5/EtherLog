@@ -69,7 +69,6 @@ class BackupService {
       label: 'JSON',
       extensions: ['json'],
       uniformTypeIdentifiers: ['public.json', 'public.text'],
-      macUTIs: ['public.json', 'public.text'],
       mimeTypes: ['application/json'],
     );
 

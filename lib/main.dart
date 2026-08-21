@@ -253,14 +253,14 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
               ),
               const Spacer(),
               // Avoid CheckboxListTile — its internal ink GlobalKey can clash on some devices.
-              InkWell(
+              GestureDetector(
                 key: const ValueKey('confidentiality_agree_row'),
                 onTap: () {
                   setState(() {
                     _agreedToConfidentiality = !_agreedToConfidentiality;
                   });
                 },
-                borderRadius: BorderRadius.circular(8),
+                behavior: HitTestBehavior.opaque,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(

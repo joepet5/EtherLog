@@ -271,6 +271,7 @@ class _ConfidentialityScreenState extends State<ConfidentialityScreen> {
                         child: Checkbox(
                           value: _agreedToConfidentiality,
                           activeColor: primary,
+                          splashRadius: 0,
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           onChanged: (val) {
                             setState(() {

@@ -1,0 +1,7 @@
+$lines = @(
+"storePassword=Jo34723el",
+"keyPassword=Jo34723el",
+"keyAlias=etherlog",
+"storeFile=etherlog-upload-key.jks"
+)
+[System.IO.File]::WriteAllLines("C:\Users\joepe\etherlog\android\key.properties", $lines)

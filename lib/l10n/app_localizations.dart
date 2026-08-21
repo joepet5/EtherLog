@@ -5329,7 +5329,7 @@ class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
-  @overridegit init
+  @override
   bool isSupported(Locale locale) => AppLocalizations.supportedLocales
       .any((l) => l.languageCode == locale.languageCode);
 

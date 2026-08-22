@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 /// Eight difficulty tiers — icon / accent colour when unlocked.
 enum AchievementTier {
@@ -37,7 +37,7 @@ extension AchievementTierX on AchievementTier {
   Color get color {
     switch (this) {
       case AchievementTier.copper:
-        return const Color(0xFF00E5FF);
+        return const Color(0xFF45B08C);
       case AchievementTier.bronze:
         return const Color(0xFFCD7F32);
       case AchievementTier.iron:

@@ -7,6 +7,7 @@ import '../services/achievement_service.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/achievement_localizations.dart';
 import '../widgets/animated_gradient_background.dart';
+import '../widgets/achievement_card.dart';
 
 class AchievementsScreen extends StatefulWidget {
   const AchievementsScreen({super.key});
@@ -298,142 +299,11 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         .clamp(0.0, 1.0)
                         : 0.0;
 
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: AppTheme.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: ach.isUnlocked
-                              ? accent.withValues(alpha: 0.45)
-                              : AppTheme.surfaceLight,
-                        ),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(ach.icon, size: 28, color: accent),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        title,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 13.5,
-                                          color: AppTheme.textPrimary,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 6, vertical: 2),
-                                      decoration: BoxDecoration(
-                                        color: ach.tier.color
-                                            .withValues(alpha: 0.18),
-                                        borderRadius:
-                                        BorderRadius.circular(6),
-                                        border: Border.all(
-                                          color: ach.tier.color
-                                              .withValues(alpha: 0.5),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        tierName.toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w800,
-                                          letterSpacing: 0.5,
-                                          color: ach.tier.color,
-                                        ),
-                                      ),
-                                    ),
-                                    IconButton(
-                                      tooltip: l10n.shareAchievement,
-                                      padding: EdgeInsets.zero,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 28,
-                                        minHeight: 28,
-                                      ),
-                                      icon: Icon(
-                                        Icons.ios_share,
-                                        size: 18,
-                                        color: AppTheme.textSecondary,
-                                      ),
-                                      onPressed: () =>
-                                          _shareAchievement(ach, locale),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  desc,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppTheme.textSecondary,
-                                    height: 1.35,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  catName,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.6,
-                                    color: AppTheme.textSecondary,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                // Progress bar
-                                _AnimatedProgressBar(
-                                  value: progress,
-                                  height: 6,
-                                  color: accent,
-                                  backgroundColor: AppTheme.surfaceLight,
-                                  duration: const Duration(milliseconds: 700),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '${ach.currentProgress}/${ach.maxProgress}',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w800,
-                                  color: ach.isUnlocked
-                                      ? AppTheme.success
-                                      : AppTheme.textSecondary,
-                                ),
-                              ),
-                              if (ach.isUnlocked)
-                                Text(
-                                  l10n.unlockedLabel.toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w800,
-                                    color: AppTheme.success,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: AchievementCard(achievement: ach),
                     );
+
                   },
                 ),
               ),

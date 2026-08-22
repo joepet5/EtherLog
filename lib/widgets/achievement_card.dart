@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../models/achievement.dart';
 import '../utils/achievement_sharing.dart';
 import 'achievement_detail_dialog.dart';
@@ -29,118 +30,188 @@ class AchievementCard extends StatelessWidget {
 
     final iconColor = achievement.iconColor ?? Colors.blue;
 
-    return Card(
-      elevation: achievement.isUnlocked ? 2 : 0,
-      color: achievement.isUnlocked
-          ? theme.colorScheme.surface
-          : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: achievement.isUnlocked
-              ? iconColor.withValues(alpha: 0.4)
-              : theme.colorScheme.outline.withValues(alpha: 0.2),
-          width: achievement.isUnlocked ? 1.5 : 1.0,
-        ),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) => AchievementDetailDialog(achievement: achievement),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: iconColor.withValues(alpha: 0.15),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      achievement.icon,
-                      color: iconColor,
-                      size: 24,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      // Direct Share Button on the Card
-                      IconButton(
-                        icon: const Icon(Icons.share_outlined, size: 20),
-                        color: theme.colorScheme.onSurfaceVariant,
-                        tooltip: l10n.shareAchievement,
-                        onPressed: () => AchievementSharing.share(achievement),
-                      ),
-                      Icon(
-                        achievement.isUnlocked ? Icons.verified : Icons.lock_outline,
-                        color: achievement.isUnlocked ? Colors.green : theme.colorScheme.onSurfaceVariant,
-                        size: 20,
-                      ),
-                    ],
-                  ),
+    Widget card = Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: achievement.isUnlocked
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  theme.colorScheme.surface,
+                  iconColor.withValues(alpha: 0.15),
+                  theme.colorScheme.surface,
                 ],
-              ),
-              const Spacer(),
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: achievement.isUnlocked ? theme.colorScheme.onSurface : theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                description,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              const SizedBox(height: 12),
-              if (!achievement.isUnlocked) ...[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: LinearProgressIndicator(
-                    value: achievement.maxProgress > 0
-                        ? (achievement.currentProgress / achievement.maxProgress).clamp(0.0, 1.0)
-                        : 0.0,
-                    minHeight: 6,
-                    backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                    color: iconColor,
+                stops: const [0.0, 0.5, 1.0],
+              )
+            : null,
+        color: achievement.isUnlocked ? null : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        border: Border.all(
+          color: achievement.isUnlocked
+              ? iconColor.withValues(alpha: 0.6)
+              : theme.colorScheme.outline.withValues(alpha: 0.2),
+          width: achievement.isUnlocked ? 2.0 : 1.0,
+        ),
+        boxShadow: achievement.isUnlocked
+            ? [
+                BoxShadow(
+                  color: iconColor.withValues(alpha: 0.25),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 4),
+                )
+              ]
+            : [],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => AchievementDetailDialog(achievement: achievement),
+            );
+          },
+          child: Stack(
+            children: [
+              // Reflection/Gloss effect for HD feel
+              if (achievement.isUnlocked)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 40,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.white.withValues(alpha: 0.15),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  '${achievement.currentProgress} / ${achievement.maxProgress}',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // HD Jewel Icon
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: achievement.isUnlocked
+                                ? RadialGradient(
+                                    colors: [
+                                      iconColor.withValues(alpha: 0.3),
+                                      iconColor.withValues(alpha: 0.1),
+                                    ],
+                                  )
+                                : null,
+                            color: achievement.isUnlocked ? null : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                            border: Border.all(
+                              color: achievement.isUnlocked ? iconColor.withValues(alpha: 0.5) : Colors.transparent,
+                              width: 1.5,
+                            ),
+                            boxShadow: achievement.isUnlocked
+                                ? [
+                                    BoxShadow(
+                                      color: iconColor.withValues(alpha: 0.4),
+                                      blurRadius: 8,
+                                      spreadRadius: 1,
+                                    )
+                                  ]
+                                : [],
+                          ),
+                          child: Icon(
+                            achievement.icon,
+                            color: achievement.isUnlocked ? iconColor : theme.colorScheme.onSurfaceVariant,
+                            size: 28,
+                          ).animate(target: achievement.isUnlocked ? 1 : 0)
+                           .scaleXY(end: 1.1, curve: Curves.easeOutBack, duration: 300.ms),
+                        ),
+                        Row(
+                          children: [
+                            if (achievement.isUnlocked)
+                              IconButton(
+                                icon: const Icon(Icons.ios_share_rounded, size: 22),
+                                color: iconColor,
+                                tooltip: l10n.shareAchievement,
+                                onPressed: () => AchievementSharing.share(achievement),
+                              ),
+                            Icon(
+                              achievement.isUnlocked ? Icons.workspace_premium_rounded : Icons.lock_outline,
+                              color: achievement.isUnlocked ? Colors.amber : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                              size: 24,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                        color: achievement.isUnlocked ? theme.colorScheme.onSurface : theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.3,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    if (achievement.isUnlocked)
+                      Text(
+                        'Achieved on //',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: iconColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    else
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: LinearProgressIndicator(
+                          value: achievement.progress,
+                          backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                          valueColor: AlwaysStoppedAnimation<Color>(iconColor.withValues(alpha: 0.4)),
+                          minHeight: 6,
+                        ),
+                      ),
+                  ],
                 ),
-              ] else ...[
-                Text(
-                  l10n.unlockedLabel.toUpperCase(),
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+              ),
             ],
           ),
         ),
       ),
     );
+
+    if (achievement.isUnlocked) {
+      // Add a shimmering sweep over the entire card if unlocked
+      card = card.animate(onPlay: (c) => c.repeat(reverse: true))
+                 .shimmer(duration: 3000.ms, color: Colors.white.withValues(alpha: 0.1), blendMode: BlendMode.screen);
+    }
+
+    return card;
   }
 }

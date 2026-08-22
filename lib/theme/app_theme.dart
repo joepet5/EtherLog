@@ -57,8 +57,14 @@ class AppTheme {
       'label': 'Night Shift',
       'swatch': Color(0xFFF5E6D3),
       'accent': Color(0xFFD35400),
-    },
-  ];
+    }
+      {
+        'key': 'midnight_cyan',
+        'label': 'Midnight Cyan',
+        'swatch': Color(0xFF040B16),
+        'accent': Color(0xFF00E5FF),
+      }
+    ];
 
   /// Apply a full theme palette by key.
   static void applyTheme(String key) {
@@ -99,8 +105,20 @@ class AppTheme {
         textPrimary = const Color(0xFF3E2723);
         textSecondary = const Color(0xFF6D4C41);
         danger = const Color(0xFFB71C1C);
-        success = const Color(0xFF5D8A4A);
-        warning = const Color(0xFFC07800);
+        success = const Color(0xFF2E7D32);
+        warning = const Color(0xFFE65100);
+        break;
+      case 'midnight_cyan':
+        background = const Color(0xFF020617);
+        surface = const Color(0xFF0F172A).withOpacity(0.65);
+        surfaceSolid = const Color(0xFF0F172A);
+        surfaceLight = const Color(0xFF1E293B).withOpacity(0.5);
+        primary = const Color(0xFF00E5FF);
+        textPrimary = const Color(0xFFF8FAFC);
+        textSecondary = const Color(0xFF94A3B8);
+        danger = const Color(0xFFFF1744);
+        success = const Color(0xFF00E676);
+        warning = const Color(0xFFFFEA00);
         break;
       case 'dark':
       default:

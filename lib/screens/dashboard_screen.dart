@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+﻿import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
@@ -374,7 +374,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(title: Text(t.appName),
             
-            actions: [
+            actions: [ IconButton(icon: const Icon(Icons.star_border, color: Colors.amber), onPressed: () => _triggerCelebration()),
               GestureDetector(
                 onTap: () async {
                   await AppHaptics.light();
@@ -602,7 +602,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Spacer(),
                                 Text(
-                                  '${c.date.day}/${c.date.month}/${c.date.year} · ${c.asaGrade}',
+                                  '${c.date.day}/${c.date.month}/${c.date.year} Â· ${c.asaGrade}',
                                   style: TextStyle(
                                     fontSize: 11,
                                     color: AppTheme.textSecondary,
@@ -1148,19 +1148,19 @@ class _CaseCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '${caseRecord.specialty}  •  ${caseRecord.asaGrade}',
+              '${caseRecord.specialty}  â€¢  ${caseRecord.asaGrade}',
               style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
             ),
             const SizedBox(height: 2),
             Text(
-              '${caseRecord.date.day}/${caseRecord.date.month}/${caseRecord.date.year}  •  ${caseRecord.technique}',
+              '${caseRecord.date.day}/${caseRecord.date.month}/${caseRecord.date.year}  â€¢  ${caseRecord.technique}',
               style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
             ),
             if (caseRecord.difficultAirway)
               Padding(
                 padding: EdgeInsets.only(top: 6),
                 child: Text(
-                  '⚠ Difficult Airway',
+                  'âš  Difficult Airway',
                   style: TextStyle(
                     fontSize: 12,
                     color: AppTheme.danger,
@@ -1243,4 +1243,5 @@ class _CelebrationOverlay extends StatelessWidget {
     );
   }
 }
+
 

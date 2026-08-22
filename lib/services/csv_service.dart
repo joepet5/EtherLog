@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:file_selector/file_selector.dart';
 import 'package:intl/intl.dart';
 import '../models/case_record.dart';
@@ -19,48 +19,62 @@ class CsvService {
 
     final StringBuffer sb = StringBuffer();
     // Header
-    sb.writeln('Date,Hospital,Hospital Number,Age,Sex,Weight,ASA,Priority,Surgery Type,Procedure,Anaesthetist,Supervisor,Anaesthesia 1,Anaesthesia 2,Anaesthesia 3,Airway,Regional,Monitoring,Complications');
+    sb.writeln('Date,Hospital,Case Number,Age,Gender,Weight,ASA,Priority,Specialty,Procedure,Role,Supervisor,Technique,Airway,Regional,Invasive Monitoring,Complications,Notes');
 
     final df = DateFormat('yyyy-MM-dd HH:mm');
 
-    String _esc(String? val) {
+    String esc(String? val) {
       if (val == null) return '';
       String clean = val.replaceAll('"', '""');
       if (clean.contains(',') || clean.contains('\n') || clean.contains('"')) {
-        return '""';
+        return '"$clean"';
       }
       return clean;
     }
 
     for (final c in filtered) {
-      final date = _esc(df.format(c.date));
-      final hosp = _esc(c.hospital);
-      final hn = prefs.includeHospitalNumbers ? _esc(c.hospitalNumber) : '';
-      final age = _esc(c.age.toString());
-      final sex = _esc(c.sex);
-      final weight = _esc(c.weight.toString());
-      final asa = _esc(c.asaGrade);
-      final prio = _esc(c.priority);
-      final surg = _esc(c.surgeryType);
-      final proc = _esc(c.procedure);
-      final ana = _esc(c.primaryAnaesthetist);
-      final sup = _esc(c.supervisor);
-      final type1 = c.anaesthesiaTypes.isNotEmpty ? _esc(c.anaesthesiaTypes[0]) : '';
-      final type2 = c.anaesthesiaTypes.length > 1 ? _esc(c.anaesthesiaTypes[1]) : '';
-      final type3 = c.anaesthesiaTypes.length > 2 ? _esc(c.anaesthesiaTypes[2]) : '';
+      final date = esc(df.format(c.date));
+      final hosp = esc(c.hospital);
+      final hn = prefs.includeHospitalNumbers ? esc(c.caseNumber) : '';
+      final age = esc(c.patientAge?.toString());
+      final sex = esc(c.patientGender);
+      final weight = esc(c.patientWeight?.toString());
+      final asa = esc(c.asaGrade);
+      final prio = esc(c.priority);
+      final surg = esc(c.specialty);
+      final proc = esc(c.procedure);
+      final role = esc(c.role);
+      final sup = esc(c.supervisor);
+      final tech = esc(c.technique);
       
-      final airway = _esc(c.airwayManagement.map((e) => e['name']).join('; '));
-      final reg = _esc(c.regionalBlocks.map((e) => e['name']).join('; '));
-      final mon = _esc(c.monitoring.join('; '));
-      final comp = _esc(c.complications.map((e) => e['title']).join('; '));
+      final airway = esc(c.airwayManagement);
+      
+      final regList = <String>[];
+      for (var map in c.regionalBlocks) {
+        if (map.containsKey('name') && map['name'] != null) {
+          regList.add(map['name'].toString());
+        }
+      }
+      final reg = esc(regList.join('; '));
 
-      sb.writeln(',,,,,,,,,,,,,,,,,,');
+      final invList = <String>[];
+      for (var map in c.invasiveMonitoring) {
+        if (map.containsKey('name') && map['name'] != null) {
+          invList.add(map['name'].toString());
+        }
+      }
+      final inv = esc(invList.join('; '));
+      
+      final comp = esc(c.complications.join('; '));
+      final notes = esc(c.notes);
+
+      sb.writeln('$date,$hosp,$hn,$age,$sex,$weight,$asa,$prio,$surg,$proc,$role,$sup,$tech,$airway,$reg,$inv,$comp,$notes');
     }
 
     try {
       final now = DateTime.now();
       final dateString = DateFormat('yyyyMMdd').format(now);
-      final fileName = 'etherlog_cases_.csv';
+      final fileName = 'etherlog_cases_$dateString.csv';
 
       final location = await getSaveLocation(
         suggestedName: fileName,
@@ -76,7 +90,7 @@ class CsvService {
       await xFile.saveTo(location.path);
       return location.path;
     } catch (e) {
-      throw Exception('Failed to export CSV: ');
+      throw Exception('Failed to export CSV: $e');
     }
   }
 }

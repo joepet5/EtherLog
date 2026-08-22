@@ -28,7 +28,7 @@ class AchievementCard extends StatelessWidget {
       locale,
     );
 
-    final iconColor = achievement.iconColor ?? Colors.blue;
+    final iconColor = achievement.displayColor;
 
     Widget card = Container(
       decoration: BoxDecoration(
@@ -191,7 +191,7 @@ class AchievementCard extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: LinearProgressIndicator(
-                          value: achievement.progress,
+                          value: (achievement.maxProgress > 0 ? (achievement.currentProgress / achievement.maxProgress).clamp(0.0, 1.0) : 0.0),
                           backgroundColor: theme.colorScheme.surfaceContainerHighest,
                           valueColor: AlwaysStoppedAnimation<Color>(iconColor.withValues(alpha: 0.4)),
                           minHeight: 6,
@@ -215,3 +215,4 @@ class AchievementCard extends StatelessWidget {
     return card;
   }
 }
+

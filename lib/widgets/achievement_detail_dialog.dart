@@ -15,7 +15,7 @@ class AchievementDetailDialog extends StatelessWidget {
     final theme = Theme.of(context);
     final locale = Localizations.localeOf(context).languageCode;
     final l10n = AppLocalizations.of(context);
-    final iconColor = achievement.iconColor ?? Colors.blue;
+    final iconColor = achievement.displayColor;
 
     final title = AchievementLocalizations.getTitle(
       achievement.id,
@@ -162,7 +162,7 @@ class AchievementDetailDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        l10n.progress,
+                        l10n.inProgressLabel,
                         style: theme.textTheme.labelMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -180,7 +180,7 @@ class AchievementDetailDialog extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: LinearProgressIndicator(
-                      value: achievement.progress,
+                      value: (achievement.maxProgress > 0 ? (achievement.currentProgress / achievement.maxProgress).clamp(0.0, 1.0) : 0.0),
                       minHeight: 12,
                       backgroundColor: theme.colorScheme.surfaceContainerHighest,
                       valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
@@ -195,7 +195,7 @@ class AchievementDetailDialog extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      child: Text(l10n.close, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(l10n.cancel, style: const TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],
@@ -206,3 +206,4 @@ class AchievementDetailDialog extends StatelessWidget {
     ).animate().fade(duration: 200.ms).scaleXY(begin: 0.9, end: 1.0, curve: Curves.easeOutBack);
   }
 }
+

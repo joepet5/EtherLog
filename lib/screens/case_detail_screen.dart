@@ -67,8 +67,6 @@ class CaseDetailScreen extends StatelessWidget {
       ),
     );
     if (ok == true) {
-      final authOk = await AuthService.verifyBiometrics('Authenticate to delete patient case');
-      if (!authOk) return;
       await CaseStorage.deleteCase(caseRecord.id);
       if (context.mounted) Navigator.pop(context, true);
     }

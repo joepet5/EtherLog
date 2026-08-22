@@ -1,5 +1,8 @@
-﻿import 'dart:convert';
+import 'dart:convert';
+import 'dart:io';
 import 'package:file_selector/file_selector.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import '../models/case_record.dart';
 import 'pdf_preferences.dart';
@@ -76,19 +79,27 @@ class CsvService {
       final dateString = DateFormat('yyyyMMdd').format(now);
       final fileName = 'etherlog_cases_$dateString.csv';
 
-      final location = await getSaveLocation(
-        suggestedName: fileName,
-        acceptedTypeGroups: [
-          const XTypeGroup(label: 'CSV', extensions: ['csv'], uniformTypeIdentifiers: ['public.comma-separated-values-text'])
-        ],
-      );
+      if (Platform.isAndroid || Platform.isIOS) {
+        final tempDir = await getTemporaryDirectory();
+        final file = File('${tempDir.path}/$fileName');
+        await file.writeAsString(sb.toString());
+        await Share.shareXFiles([XFile(file.path)], subject: 'EtherLog CSV Export');
+        return file.path;
+      } else {
+        final location = await getSaveLocation(
+          suggestedName: fileName,
+          acceptedTypeGroups: [
+            const XTypeGroup(label: 'CSV', extensions: ['csv'], uniformTypeIdentifiers: ['public.comma-separated-values-text'])
+          ],
+        );
 
-      if (location == null) return null; // Cancelled
-      
-      final bytes = utf8.encode(sb.toString());
-      final xFile = XFile.fromData(bytes, mimeType: 'text/csv');
-      await xFile.saveTo(location.path);
-      return location.path;
+        if (location == null) return null; // Cancelled
+        
+        final bytes = utf8.encode(sb.toString());
+        final xFile = XFile.fromData(bytes, mimeType: 'text/csv');
+        await xFile.saveTo(location.path);
+        return location.path;
+      }
     } catch (e) {
       throw Exception('Failed to export CSV: $e');
     }

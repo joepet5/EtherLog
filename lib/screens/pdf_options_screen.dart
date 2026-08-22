@@ -108,7 +108,7 @@ class _PdfOptionsScreenState extends State<PdfOptionsScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CSV error: ')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CSV error: $e')));
       }
     } finally {
       if (mounted) setState(() => _exporting = false);

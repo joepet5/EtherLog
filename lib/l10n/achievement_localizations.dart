@@ -8,15 +8,15 @@ class AchievementLocalizations {
     // Simplistic translation for tiers if needed, or just return english.
     // The previous implementation likely handled this via a map.
     final Map<String, Map<String, String>> _tierTranslations = {
-      'es': {'copper': 'Cobre', 'bronze': 'Bronce', 'iron': 'Hierro', 'silver': 'Plata', 'gold': 'Oro', 'platinum': 'Platino', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
-      'fr': {'copper': 'Cuivre', 'bronze': 'Bronze', 'iron': 'Fer', 'silver': 'Argent', 'gold': 'Or', 'platinum': 'Platine', 'obsidian': 'Obsidienne', 'diamond': 'Diamant'},
-      'de': {'copper': 'Kupfer', 'bronze': 'Bronze', 'iron': 'Eisen', 'silver': 'Silber', 'gold': 'Gold', 'platinum': 'Platin', 'obsidian': 'Obsidian', 'diamond': 'Diamant'},
-      'pt': {'copper': 'Cobre', 'bronze': 'Bronze', 'iron': 'Ferro', 'silver': 'Prata', 'gold': 'Ouro', 'platinum': 'Platina', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
-      'zh': {'copper': '铜', 'bronze': '青铜', 'iron': '铁', 'silver': '银', 'gold': '金', 'platinum': '铂', 'obsidian': '黑曜石', 'diamond': '钻石'},
-      'ar': {'copper': 'نحاس', 'bronze': 'برونز', 'iron': 'حديد', 'silver': 'فضة', 'gold': 'ذهب', 'platinum': 'بلاتين', 'obsidian': 'سبج', 'diamond': 'ماس'},
-      'ko': {'copper': '구리', 'bronze': '청동', 'iron': '철', 'silver': '은', 'gold': '금', 'platinum': '백금', 'obsidian': '흑요석', 'diamond': '다이아몬드'},
-      'ja': {'copper': '銅', 'bronze': '青銅', 'iron': '鉄', 'silver': '銀', 'gold': '金', 'platinum': 'プラチナ', 'obsidian': '黒曜石', 'diamond': 'ダイヤモンド'},
-      'id': {'copper': 'Tembaga', 'bronze': 'Perunggu', 'iron': 'Besi', 'silver': 'Perak', 'gold': 'Emas', 'platinum': 'Platina', 'obsidian': 'Obsidian', 'diamond': 'Berlian'}
+      'es': {'copper': 'Cobre', 'bronze': 'Bronce', 'ruby': 'Rubi', 'silver': 'Plata', 'gold': 'Oro', 'platinum': 'Platino', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
+      'fr': {'copper': 'Cuivre', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Argent', 'gold': 'Or', 'platinum': 'Platine', 'obsidian': 'Obsidienne', 'diamond': 'Diamant'},
+      'de': {'copper': 'Kupfer', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Silber', 'gold': 'Gold', 'platinum': 'Platin', 'obsidian': 'Obsidian', 'diamond': 'Diamant'},
+      'pt': {'copper': 'Cobre', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Prata', 'gold': 'Ouro', 'platinum': 'Platina', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
+      'zh': {'copper': '铜', 'bronze': '青铜', 'ruby': 'Rubi', 'silver': '银', 'gold': '金', 'platinum': '铂', 'obsidian': '黑曜石', 'diamond': '钻石'},
+      'ar': {'copper': 'نحاس', 'bronze': 'برونز', 'ruby': 'Rubi', 'silver': 'فضة', 'gold': 'ذهب', 'platinum': 'بلاتين', 'obsidian': 'سبج', 'diamond': 'ماس'},
+      'ko': {'copper': '구리', 'bronze': '청동', 'ruby': 'Rubi', 'silver': '은', 'gold': '금', 'platinum': '백금', 'obsidian': '흑요석', 'diamond': '다이아몬드'},
+      'ja': {'copper': '銅', 'bronze': '青銅', 'ruby': 'Rubi', 'silver': '銀', 'gold': '金', 'platinum': 'プラチナ', 'obsidian': '黒曜石', 'diamond': 'ダイヤモンド'},
+      'id': {'copper': 'Tembaga', 'bronze': 'Perunggu', 'ruby': 'Delima', 'silver': 'Perak', 'gold': 'Emas', 'platinum': 'Platina', 'obsidian': 'Obsidian', 'diamond': 'Berlian'}
     };
     return _tierTranslations[languageCode]?[name] ?? (name[0].toUpperCase() + name.substring(1));
   }

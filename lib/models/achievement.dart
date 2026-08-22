@@ -1,10 +1,10 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 /// Eight difficulty tiers — icon / accent colour when unlocked.
 enum AchievementTier {
   copper,
   bronze,
-  iron,
+  ruby,
   silver,
   gold,
   platinum,
@@ -19,8 +19,8 @@ extension AchievementTierX on AchievementTier {
         return 'Copper';
       case AchievementTier.bronze:
         return 'Bronze';
-      case AchievementTier.iron:
-        return 'Iron';
+      case AchievementTier.ruby:
+        return 'Ruby';
       case AchievementTier.silver:
         return 'Silver';
       case AchievementTier.gold:
@@ -40,10 +40,10 @@ extension AchievementTierX on AchievementTier {
         return const Color(0xFF45B08C);
       case AchievementTier.bronze:
         return const Color(0xFFCD7F32);
-      case AchievementTier.iron:
-        return const Color(0xFF6B7280);
+      case AchievementTier.ruby:
+        return const Color(0xFFE11D48);
       case AchievementTier.silver:
-        return const Color(0xFF9CA3AF);
+        return const Color(0xFFE2E8F0);
       case AchievementTier.gold:
         return const Color(0xFFD4AF37);
       case AchievementTier.platinum:
@@ -63,7 +63,7 @@ extension AchievementTierX on AchievementTier {
       case 'bronze':
         return AchievementTier.bronze;
       case 'iron':
-        return AchievementTier.iron;
+        return AchievementTier.ruby;
       case 'silver':
         return AchievementTier.silver;
       case 'gold':
@@ -83,7 +83,7 @@ extension AchievementTierX on AchievementTier {
   static AchievementTier fromTarget(int target) {
     if (target <= 1) return AchievementTier.copper;
     if (target <= 5) return AchievementTier.bronze;
-    if (target <= 15) return AchievementTier.iron;
+    if (target <= 15) return AchievementTier.ruby;
     if (target <= 40) return AchievementTier.silver;
     if (target <= 100) return AchievementTier.gold;
     if (target <= 250) return AchievementTier.platinum;

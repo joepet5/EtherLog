@@ -107,6 +107,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           }
 
           final unlocked = all.where((a) => a.isUnlocked).length;
+          final currentRank = RankService.getRank(all);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -124,16 +125,40 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: Text(
-                              l10n.overallProgress,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.4,
-                                color: AppTheme.textSecondary,
-                              ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  currentRank.name,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: -0.3,
+                                    color: AppTheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  currentRank.subtitle,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontStyle: FontStyle.italic,
+                                    color: AppTheme.textSecondary.withOpacity(0.8),
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  'Rank Points: ${currentRank.currentPoints}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.textSecondary,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           IconButton(
@@ -152,7 +177,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -160,8 +185,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             '$unlocked / ${all.length}',
                             style: TextStyle(
                               color: AppTheme.textPrimary,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
                             ),
                           ),
                           Text(
@@ -171,12 +196,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             style: TextStyle(
                               color: AppTheme.primary,
                               fontWeight: FontWeight.w800,
-                              fontSize: 16,
+                              fontSize: 14,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 8),
                       _AnimatedProgressBar(
                         // Fills with unlocked achievements only (e.g. 351/702 ≈ half).
                         value: all.isEmpty

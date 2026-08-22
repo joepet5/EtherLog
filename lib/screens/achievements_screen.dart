@@ -4,6 +4,7 @@ import '../theme/app_theme.dart';
 import '../models/achievement.dart';
 import '../services/case_storage.dart';
 import '../services/achievement_service.dart';
+import '../services/rank_service.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/achievement_localizations.dart';
 import '../widgets/animated_gradient_background.dart';

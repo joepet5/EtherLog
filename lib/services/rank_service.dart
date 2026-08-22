@@ -43,12 +43,12 @@ class RankService {
     {
       'name': 'Ward IV Service',
       'subtitle': 'Getting constantly bleeped because "the ward nurses have already tried twice."',
-      'threshold': 100
+      'threshold': 500
     },
     {
       'name': 'Pre-Op Survivor',
       'subtitle': 'Navigating a sea of missing notes and incomplete drug charts.',
-      'threshold': 500
+      'threshold': 1000
     },
     {
       'name': 'Coffee Room Regular',

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../models/achievement.dart';
 import '../utils/achievement_sharing.dart';
@@ -157,7 +157,7 @@ class AchievementCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    const SizedBox(height: 16),
                     Text(
                       title,
                       maxLines: 1,
@@ -181,7 +181,7 @@ class AchievementCard extends StatelessWidget {
                     const SizedBox(height: 12),
                     if (achievement.isUnlocked)
                       Text(
-                        'Achieved on //',
+                        l10n.unlockedLabel.toUpperCase(),
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: iconColor,
                           fontWeight: FontWeight.bold,
@@ -215,4 +215,6 @@ class AchievementCard extends StatelessWidget {
     return card;
   }
 }
+
+
 

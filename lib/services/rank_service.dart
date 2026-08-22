@@ -91,7 +91,7 @@ class RankService {
       'threshold': 65000
     },
     {
-      'name': 'The Oracle',
+      'name': 'The EtherLog Legend',
       'subtitle': 'The one everyone calls in at 2 AM when Plan A, Plan B, and Plan C have all failed.',
       'threshold': 71500
     },

@@ -61,6 +61,11 @@ class BackupService {
       text: 'ETHERLOG Backup – $fileName',
     );
 
+    // Track achievement stats
+    final prefs = await SharedPreferences.getInstance();
+    final currentCount = prefs.getInt('json_backup_count') ?? 0;
+    await prefs.setInt('json_backup_count', currentCount + 1);
+
     return fileName;
   }
 

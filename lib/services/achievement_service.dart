@@ -2624,10 +2624,10 @@ class AchievementService {
       }
       else {
         if (lowerTitle == 'identity verified') current = profileComplete ? 1 : 0;
-        else if (lowerTitle == 'data scientist') current = totalCases >= 1 ? 1 : 0;
+        else if (lowerTitle == 'data scientist') current = pdfExportCount.clamp(0, 1);
         else if (lowerTitle == 'paper trail') current = pdfExportCount.clamp(0, 1);
         else if (lowerTitle == 'logbook archivist') current = pdfExportCount;
-        else if (lowerTitle == 'safety first' || lowerTitle == 'backup fanatic') current = totalCases >= 10 ? 10 : totalCases;
+        else if (lowerTitle == 'safety first' || lowerTitle == 'backup fanatic') current = jsonBackupCount;
         else if (lowerTitle == 'points on the board') current = totalPoints;
         else if (lowerTitle == 'leveling up') current = totalPoints >= 1000 ? 1000 : totalPoints;
         else if (lowerTitle == 'prestige') current = totalPoints >= 5000 ? 5000 : totalPoints;

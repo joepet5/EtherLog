@@ -52,10 +52,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     return await AchievementService.getAllAchievements(cases);
   }
 
-  Future<void> _shareOverall(int unlocked, int total) async {
+  Future<void> _shareOverall(int unlocked, int total, AchievementRank currentRank, String locale) async {
     final pct = total == 0 ? 0 : ((unlocked / total) * 100).round();
+    final rankName = RankLocalizations.getName(currentRank.rankIndex, locale);
+    final emoji = RankLocalizations.getEmoji(currentRank.rankIndex);
     final text =
-        '🏅 *EtherLog ${l10n.achievements}*\n"$unlocked / $total ${l10n.unlockedLabel.toLowerCase()} ($pct%)"\nTracking my anaesthesia logbook progress in EtherLog! 🩺✨';
+        '$emoji I just reached the rank of *$rankName* in EtherLog! [${currentRank.currentPoints} ${RankLocalizations.getXP(locale)}]\n\n"$unlocked / $total ${l10n.achievements.toLowerCase()} ($pct%)"\n\nTracking my anaesthesia logbook progress! 🩺✨';
     await Share.share(text, subject: 'EtherLog ${l10n.achievements}');
   }
 
@@ -133,7 +135,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  RankLocalizations.getName(currentRank.rankIndex, locale),
+                                  '${RankLocalizations.getEmoji(currentRank.rankIndex)} ${RankLocalizations.getName(currentRank.rankIndex, locale)}',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
@@ -174,7 +176,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                               size: 20,
                               color: AppTheme.primary,
                             ),
-                            onPressed: () => _shareOverall(unlocked, all.length),
+                            onPressed: () => _shareOverall(unlocked, all.length, currentRank, locale),
                           ),
                         ],
                       ),
@@ -183,17 +185,19 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '$unlocked / ${all.length}',
+                            currentRank.pointsForNextRank != null
+                                ? '${RankLocalizations.getXP(locale)} to next rank: ${currentRank.pointsForNextRank! - currentRank.currentPoints}'
+                                : 'Max Rank Reached!',
                             style: TextStyle(
                               color: AppTheme.textPrimary,
                               fontWeight: FontWeight.w700,
-                              fontSize: 14,
+                              fontSize: 12,
                             ),
                           ),
                           Text(
-                            all.isEmpty
-                                ? '0%'
-                                : '${((unlocked / all.length) * 100).round()}%',
+                            currentRank.pointsForNextRank != null
+                                ? '${(currentRank.progressToNext * 100).round()}%'
+                                : '100%',
                             style: TextStyle(
                               color: AppTheme.primary,
                               fontWeight: FontWeight.w800,
@@ -204,14 +208,26 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                       ),
                       const SizedBox(height: 8),
                       _AnimatedProgressBar(
-                        // Fills with unlocked achievements only (e.g. 351/702 ≈ half).
-                        value: all.isEmpty
-                            ? 0.0
-                            : (unlocked / all.length).clamp(0.0, 1.0),
+                        value: currentRank.pointsForNextRank != null
+                            ? currentRank.progressToNext.clamp(0.0, 1.0)
+                            : 1.0,
                         height: 12,
                         color: AppTheme.primary,
                         backgroundColor: AppTheme.surfaceLight,
                         duration: const Duration(milliseconds: 900),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '$unlocked / ${all.length} ${l10n.achievements.toLowerCase()} (${all.isEmpty ? 0 : ((unlocked / all.length) * 100).round()}%)',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: AppTheme.textSecondary.withOpacity(0.7),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

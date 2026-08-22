@@ -1,4 +1,4 @@
-﻿class RankLocalizations {
+class RankLocalizations {
   static String getName(int rankIndex, String languageCode) {
     final map = _names[languageCode] ?? _names['en']!;
     return map['r\'] ?? _names['en']!['r\']!;
@@ -13,6 +13,25 @@
     final map = _xp[languageCode] ?? _xp['en']!;
     return map;
   }
+
+  static String getEmoji(int rankIndex) {
+    return _emojis['r$rankIndex'] ?? '🏅';
+  }
+
+  static const Map<String, String> _emojis = {
+    'r1': '🎒', // Medical Student
+    'r2': '💉', // Ward IV Service
+    'r3': '📋', // Pre-Op Survivor
+    'r4': '☕', // Coffee Room Regular
+    'r5': '🦸', // Break Relief Hero
+    'r6': '🦉', // Night On-Call Veteran
+    'r7': '🤹', // List Coordinator
+    'r8': '🎯', // Regional Block Fanatic
+    'r9': '🧠', // The Educator
+    'r10': '💼', // Clinical Lead
+    'r11': '🗞️', // Senior Consultant
+    'r12': '👑', // The EtherLog Legend
+  };
 
   static const Map<String, String> _xp = {
     'en': 'XP',

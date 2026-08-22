@@ -1081,9 +1081,11 @@ class AchievementService {
 
   static Future<List<Achievement>> getAllAchievements(List<CaseRecord> cases) async {
     int pdfExportCount = 0;
+    int jsonBackupCount = 0;
     try {
       final prefs = await SharedPreferences.getInstance();
       pdfExportCount = prefs.getInt('pdf_export_count') ?? 0;
+      jsonBackupCount = prefs.getInt('json_backup_count') ?? 0;
     } catch (_) {}
 
     List<Achievement> achievements = [];

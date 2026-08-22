@@ -92,8 +92,6 @@ class _PdfOptionsScreenState extends State<PdfOptionsScreen> {
 
     final authOk = await AuthService.verifyBiometrics('Authenticate to export patient logbook');
     if (!authOk) return;
-    final authOk = await AuthService.verifyBiometrics('Authenticate to export patient logbook');
-    if (!authOk) return;
     setState(() => _exporting = true);
     try {
       await AppHaptics.light();

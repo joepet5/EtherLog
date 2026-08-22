@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:file_selector/file_selector.dart';
 import 'package:intl/intl.dart';
-import 'case_record.dart';
+import '../models/case_record.dart';
 import 'pdf_preferences.dart';
 
 class CsvService {
@@ -26,8 +26,7 @@ class CsvService {
     String _esc(String? val) {
       if (val == null) return '';
       String clean = val.replaceAll('"', '""');
-      if (clean.contains(',') || clean.contains('
-') || clean.contains('"')) {
+      if (clean.contains(',') || clean.contains('\n') || clean.contains('"')) {
         return '""';
       }
       return clean;

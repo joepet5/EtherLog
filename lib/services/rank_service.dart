@@ -53,47 +53,47 @@ class RankService {
     {
       'name': 'Coffee Room Regular',
       'subtitle': 'You\'ve finally memorised the exact schedule of the espresso machine.',
-      'threshold': 1500
+      'threshold': 2000
     },
     {
       'name': 'Break Relief Hero',
       'subtitle': 'The most beloved person in the entire department at exactly 10:30 AM.',
-      'threshold': 3500
+      'threshold': 5000
     },
     {
       'name': 'Night On-Call Veteran',
       'subtitle': 'Functioning at 3 AM purely on adrenaline and stale biscuits.',
-      'threshold': 7500
+      'threshold': 10000
     },
     {
       'name': 'List Coordinator',
       'subtitle': 'Endlessly negotiating "just one quick add-on" with the surgical team.',
-      'threshold': 12500
+      'threshold': 20000
     },
     {
       'name': 'Regional Block Fanatic',
       'subtitle': 'Offering to do a complex ultrasound-guided block for literally any surgical procedure.',
-      'threshold': 20000
+      'threshold': 35000
     },
     {
       'name': 'The Educator',
       'subtitle': 'Grilling the poor medical students on the exact pharmacology of propofol while the patient goes to sleep.',
-      'threshold': 35000
+      'threshold': 50000
     },
     {
       'name': 'Clinical Lead',
       'subtitle': 'Spending more time in morbidity meetings and dealing with hospital politics than in theatre.',
-      'threshold': 50000
+      'threshold': 70000
     },
     {
       'name': 'Senior Consultant',
       'subtitle': 'Sitting back and doing the crossword while the junior resident sweats over the airway.',
-      'threshold': 65000
+      'threshold': 85000
     },
     {
       'name': 'The EtherLog Legend',
       'subtitle': 'The one everyone calls in at 2 AM when Plan A, Plan B, and Plan C have all failed.',
-      'threshold': 71500
+      'threshold': 100000
     },
   ];
 

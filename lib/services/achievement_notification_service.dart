@@ -191,10 +191,10 @@ class _AchievementPopupWidgetState extends State<_AchievementPopupWidget>
                 decoration: BoxDecoration(
                   color: const Color(0xFF1A1A2E),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: accent.withOpacity(0.55), width: 1.2),
+                  border: Border.all(color: accent.withValues(alpha: 0.55), width: 1.2),
                   boxShadow: [
                     BoxShadow(
-                      color: accent.withOpacity(0.25),
+                      color: accent.withValues(alpha: 0.25),
                       blurRadius: 18,
                       offset: const Offset(0, 6),
                     ),
@@ -206,7 +206,7 @@ class _AchievementPopupWidgetState extends State<_AchievementPopupWidget>
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: accent.withOpacity(0.18),
+                        color: accent.withValues(alpha: 0.18),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(

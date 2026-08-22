@@ -107,7 +107,7 @@ class _ReminderBannerState extends State<ReminderBanner> {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: color.withOpacity(0.35)),
+              border: Border.all(color: color.withValues(alpha: 0.35)),
             ),
             child: Row(
               children: [
@@ -115,7 +115,7 @@ class _ReminderBannerState extends State<ReminderBanner> {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.15),
+                    color: color.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(icon, color: color, size: 22),

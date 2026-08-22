@@ -187,7 +187,7 @@ class _CaseImportQrScreenState extends State<CaseImportQrScreen> {
           // Dim overlay with clear center
           ColorFiltered(
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.45),
+              Colors.black.withValues(alpha: 0.45),
               BlendMode.srcOut,
             ),
             child: Stack(

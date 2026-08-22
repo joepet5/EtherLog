@@ -2176,7 +2176,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   children: chips
                       .map((s) => Chip(
                     label: Text(s, style: TextStyle(fontSize: 12)),
-                    backgroundColor: AppTheme.primary.withOpacity(0.15),
+                    backgroundColor: AppTheme.primary.withValues(alpha: 0.15),
                     labelStyle: TextStyle(color: AppTheme.primary),
                     visualDensity: VisualDensity.compact,
                   ))

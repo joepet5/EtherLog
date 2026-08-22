@@ -33,13 +33,13 @@ class AchievementCard extends StatelessWidget {
       elevation: achievement.isUnlocked ? 2 : 0,
       color: achievement.isUnlocked
           ? theme.colorScheme.surface
-          : theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
+          : theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
           color: achievement.isUnlocked
-              ? iconColor.withOpacity(0.4)
-              : theme.colorScheme.outline.withOpacity(0.2),
+              ? iconColor.withValues(alpha: 0.4)
+              : theme.colorScheme.outline.withValues(alpha: 0.2),
           width: achievement.isUnlocked ? 1.5 : 1.0,
         ),
       ),
@@ -62,7 +62,7 @@ class AchievementCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: iconColor.withOpacity(0.15),
+                      color: iconColor.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

@@ -307,7 +307,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
               color: AppTheme.surface,
               borderRadius: BorderRadius.circular(12),
               border:
-              Border.all(color: AppTheme.primary.withOpacity(0.35)),
+              Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
             ),
             child: Row(
               children: [
@@ -598,7 +598,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
                 color: expanded
-                    ? accent.withOpacity(0.5)
+                    ? accent.withValues(alpha: 0.5)
                     : AppTheme.surfaceLight),
           ),
           child: Column(

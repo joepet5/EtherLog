@@ -70,7 +70,7 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [AppTheme.primary.withOpacity(0.9), const Color(0xFF0F172A)],
+                        colors: [AppTheme.primary.withValues(alpha: 0.9), const Color(0xFF0F172A)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),

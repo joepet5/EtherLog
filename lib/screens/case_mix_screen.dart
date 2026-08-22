@@ -756,10 +756,10 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.12),
+                    color: AppTheme.primary.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppTheme.primary.withOpacity(0.35),
+                      color: AppTheme.primary.withValues(alpha: 0.35),
                     ),
                   ),
                   child: Column(

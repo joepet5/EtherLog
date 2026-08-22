@@ -172,7 +172,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
                             icon: const Icon(Icons.accessibility_new),
                             label: const Text('View Anatomical Heatmap'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF7C3AED).withOpacity(0.15),
+                              backgroundColor: const Color(0xFF7C3AED).withValues(alpha: 0.15),
                               foregroundColor: const Color(0xFF7C3AED),
                               elevation: 0,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -417,7 +417,7 @@ class _BarChart extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: v == 0
                               ? AppTheme.surfaceLight
-                              : color.withOpacity(0.85),
+                              : color.withValues(alpha: 0.85),
                           borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(4),
                           ),
@@ -478,7 +478,7 @@ class _ActivityHeatmap extends StatelessWidget {
       if (count <= 0) return AppTheme.surfaceLight;
       final t = (count / maxCount).clamp(0.15, 1.0);
       return Color.lerp(
-        AppTheme.primary.withOpacity(0.25),
+        AppTheme.primary.withValues(alpha: 0.25),
         AppTheme.primary,
         t,
       ) ??
@@ -547,7 +547,7 @@ class _ActivityHeatmap extends StatelessWidget {
               ...[0.0, 0.25, 0.5, 0.75, 1.0].map((t) {
                 final c = t == 0
                     ? AppTheme.surfaceLight
-                    : (Color.lerp(AppTheme.primary.withOpacity(0.25), AppTheme.primary, t) ??
+                    : (Color.lerp(AppTheme.primary.withValues(alpha: 0.25), AppTheme.primary, t) ??
                     AppTheme.primary);
                 return Container(
                   width: 12,

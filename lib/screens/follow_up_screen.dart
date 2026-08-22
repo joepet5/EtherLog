@@ -179,7 +179,7 @@ class _FollowUpScreenState extends State<FollowUpScreen> {
               return ChoiceChip(
                 label: Text(o),
                 selected: selected,
-                selectedColor: AppTheme.primary.withOpacity(0.25),
+                selectedColor: AppTheme.primary.withValues(alpha: 0.25),
                 labelStyle: TextStyle(
                   color: selected ? AppTheme.primary : AppTheme.textPrimary,
                   fontWeight: FontWeight.w600,
@@ -201,7 +201,7 @@ class _FollowUpScreenState extends State<FollowUpScreen> {
                 return FilterChip(
                   label: Text(o),
                   selected: selected,
-                  selectedColor: AppTheme.primary.withOpacity(0.25),
+                  selectedColor: AppTheme.primary.withValues(alpha: 0.25),
                   labelStyle: TextStyle(
                     color: selected ? AppTheme.primary : AppTheme.textPrimary,
                     fontWeight: FontWeight.w600,

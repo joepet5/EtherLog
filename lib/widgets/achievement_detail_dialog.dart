@@ -36,7 +36,7 @@ class AchievementDetailDialog extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: iconColor.withOpacity(0.15),
+              color: iconColor.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -50,7 +50,7 @@ class AchievementDetailDialog extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
               color: achievement.isUnlocked
-                  ? Colors.green.withOpacity(0.15)
+                  ? Colors.green.withValues(alpha: 0.15)
                   : theme.colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(20),
             ),

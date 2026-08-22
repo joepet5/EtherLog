@@ -8,9 +8,9 @@ class AppTheme {
 
   // Mutable palette (read by screens)
   static Color background = const Color(0xFF0F172A);
-  static Color surface = const Color(0xFF1E293B).withOpacity(0.65);
+  static Color surface = const Color(0xFF1E293B).withValues(alpha: 0.65);
   static Color surfaceSolid = const Color(0xFF1E293B);
-  static Color surfaceLight = const Color(0xFF334155).withOpacity(0.5);
+  static Color surfaceLight = const Color(0xFF334155).withValues(alpha: 0.5);
   static Color primary = const Color(0xFF2563EB);
   static Color textPrimary = const Color(0xFFF1F5F9);
   static Color textSecondary = const Color(0xFF94A3B8);
@@ -72,9 +72,9 @@ class AppTheme {
     switch (key) {
       case 'light':
         background = const Color(0xFFFAFAFA);
-        surface = const Color(0xFFFFFFFF).withOpacity(0.65);
+        surface = const Color(0xFFFFFFFF).withValues(alpha: 0.65);
           surfaceSolid = const Color(0xFFFFFFFF);
-        surfaceLight = const Color(0xFFE2E8F0).withOpacity(0.5);
+        surfaceLight = const Color(0xFFE2E8F0).withValues(alpha: 0.5);
         primary = const Color(0xFF2563EB);
         textPrimary = const Color(0xFF0F172A);
         textSecondary = const Color(0xFF64748B);
@@ -85,9 +85,9 @@ class AppTheme {
       case 'serenity':
       // Soft alabaster + mint surfaces + dusty sage
         background = const Color(0xFFF8FAFC);
-        surface = const Color(0xFFEDF7F6).withOpacity(0.65);
+        surface = const Color(0xFFEDF7F6).withValues(alpha: 0.65);
           surfaceSolid = const Color(0xFFEDF7F6);
-        surfaceLight = const Color(0xFFD8E8E6).withOpacity(0.5);
+        surfaceLight = const Color(0xFFD8E8E6).withValues(alpha: 0.5);
         primary = const Color(0xFF8DA399);
         textPrimary = const Color(0xFF4A4A4A);
         textSecondary = const Color(0xFF6B7280);
@@ -98,9 +98,9 @@ class AppTheme {
       case 'night_shift':
       // Warm parchment / sepia / amber (blue-light reducer)
         background = const Color(0xFFF5E6D3);
-        surface = const Color(0xFFEFE0C8).withOpacity(0.65);
+        surface = const Color(0xFFEFE0C8).withValues(alpha: 0.65);
           surfaceSolid = const Color(0xFFEFE0C8);
-        surfaceLight = const Color(0xFFDCC9A8).withOpacity(0.5);
+        surfaceLight = const Color(0xFFDCC9A8).withValues(alpha: 0.5);
         primary = const Color(0xFFD35400);
         textPrimary = const Color(0xFF3E2723);
         textSecondary = const Color(0xFF6D4C41);
@@ -110,9 +110,9 @@ class AppTheme {
         break;
       case 'midnight_cyan':
         background = const Color(0xFF020617);
-        surface = const Color(0xFF0F172A).withOpacity(0.65);
+        surface = const Color(0xFF0F172A).withValues(alpha: 0.65);
         surfaceSolid = const Color(0xFF0F172A);
-        surfaceLight = const Color(0xFF1E293B).withOpacity(0.5);
+        surfaceLight = const Color(0xFF1E293B).withValues(alpha: 0.5);
         primary = const Color(0xFF00E5FF);
         textPrimary = const Color(0xFFF8FAFC);
         textSecondary = const Color(0xFF94A3B8);
@@ -124,9 +124,9 @@ class AppTheme {
       default:
         _themeKey = 'dark';
         background = const Color(0xFF0F172A);
-        surface = const Color(0xFF1E293B).withOpacity(0.65);
+        surface = const Color(0xFF1E293B).withValues(alpha: 0.65);
           surfaceSolid = const Color(0xFF1E293B);
-        surfaceLight = const Color(0xFF334155).withOpacity(0.5);
+        surfaceLight = const Color(0xFF334155).withValues(alpha: 0.5);
         primary = const Color(0xFF2563EB);
         textPrimary = const Color(0xFFF1F5F9);
         textSecondary = const Color(0xFF94A3B8);
@@ -287,7 +287,7 @@ class AppTheme {
         ),
         trackColor: WidgetStateProperty.resolveWith(
               (s) => s.contains(WidgetState.selected)
-              ? primary.withOpacity(0.45)
+              ? primary.withValues(alpha: 0.45)
               : surfaceLight,
         ),
       ),

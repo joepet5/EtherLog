@@ -164,10 +164,10 @@ class _InteractiveWalkthroughCardState extends State<InteractiveWalkthroughCard>
       decoration: BoxDecoration(
         color: AppTheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.primary.withOpacity(0.5)),
+        border: Border.all(color: AppTheme.primary.withValues(alpha: 0.5)),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primary.withOpacity(0.08),
+            color: AppTheme.primary.withValues(alpha: 0.08),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -181,7 +181,7 @@ class _InteractiveWalkthroughCardState extends State<InteractiveWalkthroughCard>
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withOpacity(0.15),
+                  color: AppTheme.primary.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.rocket_launch, color: AppTheme.primary, size: 20),
@@ -282,7 +282,7 @@ class _InteractiveWalkthroughCardState extends State<InteractiveWalkthroughCard>
           width: 26,
           height: 26,
           decoration: BoxDecoration(
-            color: isDone ? AppTheme.success : AppTheme.primary.withOpacity(0.12),
+            color: isDone ? AppTheme.success : AppTheme.primary.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
           child: Center(

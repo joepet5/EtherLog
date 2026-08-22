@@ -29,14 +29,14 @@ class CasePointsDetailScreen extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppTheme.primary.withOpacity(0.2),
+                  AppTheme.primary.withValues(alpha: 0.2),
                   AppTheme.surface,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppTheme.primary.withOpacity(0.4)),
+              border: Border.all(color: AppTheme.primary.withValues(alpha: 0.4)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +82,7 @@ class CasePointsDetailScreen extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     '${caseRecord.date!.day}/${caseRecord.date!.month}/${caseRecord.date!.year}',
-                    style: TextStyle(fontSize: 12, color: AppTheme.textSecondary.withOpacity(0.8)),
+                    style: TextStyle(fontSize: 12, color: AppTheme.textSecondary.withValues(alpha: 0.8)),
                   ),
                 ],
               ],
@@ -120,7 +120,7 @@ class CasePointsDetailScreen extends StatelessWidget {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.12),
+                      color: color.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

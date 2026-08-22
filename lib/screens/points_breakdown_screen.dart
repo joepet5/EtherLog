@@ -68,7 +68,7 @@ class _PointsBreakdownScreenState extends State<PointsBreakdownScreen> {
             decoration: BoxDecoration(
               color: AppTheme.surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppTheme.primary.withOpacity(0.35)),
+              border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -106,9 +106,9 @@ class CaseDetailScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 4),
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withOpacity(0.15),
+                  color: AppTheme.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppTheme.primary.withOpacity(0.4)),
+                  border: Border.all(color: AppTheme.primary.withValues(alpha: 0.4)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -179,7 +179,7 @@ class CaseDetailScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppTheme.surface,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppTheme.primary.withOpacity(0.35)),
+                border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
               ),
               child: Row(
                 children: [
@@ -341,8 +341,8 @@ class CaseDetailScreen extends StatelessWidget {
                   backgroundColor: AppTheme.surface,
                   side: BorderSide(
                     color: isNone
-                        ? AppTheme.success.withOpacity(0.4)
-                        : Colors.amber.withOpacity(0.4),
+                        ? AppTheme.success.withValues(alpha: 0.4)
+                        : Colors.amber.withValues(alpha: 0.4),
                   ),
                   onPressed: isNone
                       ? null
@@ -529,7 +529,7 @@ class _LessonsLearnedCardState extends State<_LessonsLearnedCard> {
               style: TextStyle(fontSize: 14, color: AppTheme.textPrimary),
               decoration: InputDecoration(
                 hintText: 'e.g. Next time, use a smaller blade for this patient anatomy...',
-                hintStyle: TextStyle(fontSize: 14, color: AppTheme.textSecondary.withOpacity(0.5)),
+                hintStyle: TextStyle(fontSize: 14, color: AppTheme.textSecondary.withValues(alpha: 0.5)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: AppTheme.surfaceLight),

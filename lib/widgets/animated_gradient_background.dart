@@ -40,14 +40,14 @@ class _AnimatedGradientBackgroundState extends State<AnimatedGradientBackground>
               stops: const [0.0, 0.5, 1.0],
               colors: [
                 Color.lerp(
-                  AppTheme.primary.withOpacity(0.5), 
-                  AppTheme.isDarkLike ? const Color(0xFF00E5FF).withOpacity(0.3) : AppTheme.surfaceLight.withOpacity(0.8), 
+                  AppTheme.primary.withValues(alpha: 0.5), 
+                  AppTheme.isDarkLike ? const Color(0xFF00E5FF).withValues(alpha: 0.3) : AppTheme.surfaceLight.withValues(alpha: 0.8), 
                   _controller.value
                 )!,
                 AppTheme.background,
                 Color.lerp(
-                  AppTheme.isDarkLike ? const Color(0xFF00E5FF).withOpacity(0.4) : AppTheme.primary.withOpacity(0.3), 
-                  AppTheme.primary.withOpacity(AppTheme.isDarkLike ? 0.7 : 0.4), 
+                  AppTheme.isDarkLike ? const Color(0xFF00E5FF).withValues(alpha: 0.4) : AppTheme.primary.withValues(alpha: 0.3), 
+                  AppTheme.primary.withValues(alpha: AppTheme.isDarkLike ? 0.7 : 0.4), 
                   _controller.value
                 )!,
               ],

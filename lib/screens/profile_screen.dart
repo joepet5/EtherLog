@@ -360,9 +360,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final textPrimary = cs.onSurface;
-    final textSecondary = cs.onSurface.withOpacity(0.65);
+    final textSecondary = cs.onSurface.withValues(alpha: 0.65);
     final surface = cs.surface;
-    final border = cs.outlineVariant.withOpacity(0.5);
+    final border = cs.outlineVariant.withValues(alpha: 0.5);
 
     if (_loading) {
       return Scaffold(
@@ -488,7 +488,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             label: Text(l10n.exportPdf),
             style: OutlinedButton.styleFrom(
               foregroundColor: AppTheme.primary,
-              side: BorderSide(color: AppTheme.primary.withOpacity(0.5)),
+              side: BorderSide(color: AppTheme.primary.withValues(alpha: 0.5)),
               minimumSize: const Size(double.infinity, 48),
             ),
           ),
@@ -571,7 +571,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         duration: const Duration(milliseconds: 180),
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                         decoration: BoxDecoration(
-                          color: selected ? accent.withOpacity(0.15) : surface,
+                          color: selected ? accent.withValues(alpha: 0.15) : surface,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color: selected ? accent : border,
@@ -815,7 +815,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: BoxDecoration(
               color: surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppTheme.danger.withOpacity(0.45)),
+              border: Border.all(color: AppTheme.danger.withValues(alpha: 0.45)),
             ),
             child: ListTile(
               leading: Icon(Icons.delete_forever, color: AppTheme.danger),

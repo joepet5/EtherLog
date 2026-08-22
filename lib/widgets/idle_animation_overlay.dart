@@ -205,7 +205,7 @@ class _FloatPainter extends CustomPainter {
             
             
             fontSize: item.size,
-            color: const Color(0xFF38BDF8).withOpacity(item.opacity),
+            color: const Color(0xFF38BDF8).withValues(alpha: item.opacity),
           ),
         ),
         textDirection: TextDirection.ltr,

@@ -390,10 +390,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppTheme.primary.withOpacity(0.15),
+                      color: AppTheme.primary.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
                       border:
-                      Border.all(color: AppTheme.primary.withOpacity(0.4)),
+                      Border.all(color: AppTheme.primary.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -565,7 +565,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           alignment: Alignment.centerRight,
                           padding: const EdgeInsets.only(right: 16),
                           decoration: BoxDecoration(
-                            color: AppTheme.danger.withOpacity(0.2),
+                            color: AppTheme.danger.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(Icons.close, color: AppTheme.danger),
@@ -585,7 +585,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             decoration: BoxDecoration(
                               color: AppTheme.surface,
                               borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: AppTheme.primary.withOpacity(0.35)),
+                              border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -626,7 +626,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
               if (!_canAddCases)
                 Material(
-                  color: AppTheme.danger.withOpacity(0.15),
+                  color: AppTheme.danger.withValues(alpha: 0.15),
                   child: InkWell(
                     onTap: () async {
                       await AppHaptics.medium();
@@ -881,10 +881,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppTheme.primary.withOpacity(0.1),
+                            color: AppTheme.primary.withValues(alpha: 0.1),
                             boxShadow: [
                               BoxShadow(
-                                color: AppTheme.primary.withOpacity(0.2),
+                                color: AppTheme.primary.withValues(alpha: 0.2),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                               )
@@ -1112,7 +1112,7 @@ class _CaseCard extends StatelessWidget {
                   padding:
                   const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.12),
+                    color: AppTheme.primary.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -1129,8 +1129,8 @@ class _CaseCard extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: caseRecord.priority == 'Emergency'
-                        ? AppTheme.warning.withOpacity(0.15)
-                        : AppTheme.success.withOpacity(0.15),
+                        ? AppTheme.warning.withValues(alpha: 0.15)
+                        : AppTheme.success.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(

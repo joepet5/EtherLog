@@ -63,8 +63,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: (_status?.canAddCases ?? false)
-                    ? AppTheme.primary.withOpacity(0.4)
-                    : AppTheme.danger.withOpacity(0.5),
+                    ? AppTheme.primary.withValues(alpha: 0.4)
+                    : AppTheme.danger.withValues(alpha: 0.5),
               ),
             ),
             child: Column(

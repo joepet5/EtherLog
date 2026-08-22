@@ -124,9 +124,9 @@ class _CaseShareQrScreenState extends State<CaseShareQrScreen> {
               padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
-                color: AppTheme.danger.withOpacity(0.12),
+                color: AppTheme.danger.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppTheme.danger.withOpacity(0.4)),
+                border: Border.all(color: AppTheme.danger.withValues(alpha: 0.4)),
               ),
               child: Text(
                 l10n.qrPayloadLarge,
@@ -141,7 +141,7 @@ class _CaseShareQrScreenState extends State<CaseShareQrScreen> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.12),
+                    color: Colors.black.withValues(alpha: 0.12),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),

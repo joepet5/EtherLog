@@ -242,7 +242,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         selected: _selectedTier == null,
                         onSelected: (_) =>
                             setState(() => _selectedTier = null),
-                        selectedColor: AppTheme.primary.withOpacity(0.25),
+                        selectedColor: AppTheme.primary.withValues(alpha: 0.25),
                       ),
                     ),
                     ...AchievementTier.values.map((tier) {
@@ -262,7 +262,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           selected: selected,
                           selectedColor: tier.color,
                           backgroundColor: AppTheme.surface,
-                          side: BorderSide(color: tier.color.withOpacity(0.7)),
+                          side: BorderSide(color: tier.color.withValues(alpha: 0.7)),
                           onSelected: (_) =>
                               setState(() => _selectedTier = tier),
                         ),
@@ -306,7 +306,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: ach.isUnlocked
-                              ? accent.withOpacity(0.45)
+                              ? accent.withValues(alpha: 0.45)
                               : AppTheme.surfaceLight,
                         ),
                       ),
@@ -340,12 +340,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                           horizontal: 6, vertical: 2),
                                       decoration: BoxDecoration(
                                         color: ach.tier.color
-                                            .withOpacity(0.18),
+                                            .withValues(alpha: 0.18),
                                         borderRadius:
                                         BorderRadius.circular(6),
                                         border: Border.all(
                                           color: ach.tier.color
-                                              .withOpacity(0.5),
+                                              .withValues(alpha: 0.5),
                                         ),
                                       ),
                                       child: Text(

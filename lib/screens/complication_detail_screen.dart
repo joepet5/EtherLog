@@ -19,7 +19,7 @@ class ComplicationDetailScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final surface = cs.surface;
-    final border = cs.outlineVariant.withOpacity(0.5);
+    final border = cs.outlineVariant.withValues(alpha: 0.5);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -34,7 +34,7 @@ class ComplicationDetailScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppTheme.primary.withOpacity(0.35)),
+              border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +168,7 @@ class ComplicationDetailScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12,
                       fontStyle: FontStyle.italic,
-                      color: cs.onSurface.withOpacity(0.75),
+                      color: cs.onSurface.withValues(alpha: 0.75),
                     ),
                   ),
                 )),

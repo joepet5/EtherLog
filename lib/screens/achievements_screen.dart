@@ -7,6 +7,7 @@ import '../services/achievement_service.dart';
 import '../services/rank_service.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/achievement_localizations.dart';
+import '../l10n/rank_localizations.dart';
 import '../widgets/animated_gradient_background.dart';
 import '../widgets/achievement_card.dart';
 
@@ -132,7 +133,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  currentRank.name,
+                                  RankLocalizations.getName(currentRank.rankIndex, locale),
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
@@ -142,7 +143,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  currentRank.subtitle,
+                                  RankLocalizations.getSubtitle(currentRank.rankIndex, locale),
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontStyle: FontStyle.italic,
@@ -151,7 +152,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'XP: ${currentRank.currentPoints}',
+                                  '${RankLocalizations.getXP(locale)}: ${currentRank.currentPoints}',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,

@@ -74,8 +74,7 @@ class CaseDetailScreen extends StatelessWidget {
   void _shareQr(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => CaseShareQrScreen(caseRecord: caseRecord),
+      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CaseShareQrScreen(caseRecord: caseRecord),
       ),
     );
   }
@@ -98,8 +97,7 @@ class CaseDetailScreen extends StatelessWidget {
                 AppHaptics.light();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => CasePointsDetailScreen(caseRecord: caseRecord),
+                  PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CasePointsDetailScreen(caseRecord: caseRecord),
                   ),
                 );
               },
@@ -147,8 +145,7 @@ class CaseDetailScreen extends StatelessWidget {
             onPressed: () async {
               final result = await Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => NewCaseScreen(existingCase: caseRecord),
+                PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => NewCaseScreen(existingCase: caseRecord),
                 ),
               );
               if (result == true || result == 'celebrate') {
@@ -170,8 +167,7 @@ class CaseDetailScreen extends StatelessWidget {
               AppHaptics.light();
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => CasePointsDetailScreen(caseRecord: caseRecord),
+                PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CasePointsDetailScreen(caseRecord: caseRecord),
                 ),
               );
             },
@@ -355,8 +351,7 @@ class CaseDetailScreen extends StatelessWidget {
                     if (!context.mounted) return;
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => ComplicationDetailScreen(
+                      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => ComplicationDetailScreen(
                           complicationName: comp,
                         ),
                       ),

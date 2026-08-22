@@ -223,7 +223,7 @@ class AppPageRoute<T> extends PageRouteBuilder<T> {
     if (style == TransitionStyle.none) {
       return Navigator.push<T>(
         context,
-        MaterialPageRoute(builder: (_) => page),
+        PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => page),
       );
     }
     return Navigator.push<T>(
@@ -242,7 +242,7 @@ class AppPageRoute<T> extends PageRouteBuilder<T> {
     if (style == TransitionStyle.none) {
       return Navigator.pushReplacement<T, TO>(
         context,
-        MaterialPageRoute(builder: (_) => page),
+        PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => page),
         result: result,
       );
     }

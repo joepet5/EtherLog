@@ -191,8 +191,7 @@ class _PointsBreakdownScreenState extends State<PointsBreakdownScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (_) => CaseDetailScreen(caseRecord: c)),
+                    PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CaseDetailScreen(caseRecord: c)),
                   ).then((_) => _load());
                 },
                 child: Container(

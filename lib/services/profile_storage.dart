@@ -132,7 +132,7 @@ class ProfileStorage {
 
   static Future<String> getTransitionStyle() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_transitionKey) ?? 'fade';
+    return prefs.getString(_transitionKey) ?? 'none';
   }
 
   static Future<void> setTransitionStyle(String style) async {

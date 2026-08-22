@@ -53,7 +53,7 @@ class _ReminderBannerState extends State<ReminderBanner> {
           onTap: () async {
             await Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const NewCaseScreen()),
+              PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const NewCaseScreen()),
             );
             _load();
             widget.onChanged?.call();
@@ -77,7 +77,7 @@ class _ReminderBannerState extends State<ReminderBanner> {
           onTap: () async {
             await Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const NewCaseScreen()),
+              PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const NewCaseScreen()),
             );
             _load();
             widget.onChanged?.call();

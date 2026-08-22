@@ -997,7 +997,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
       onTap: () async {
         await Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => CaseDetailScreen(caseRecord: c)),
+          PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CaseDetailScreen(caseRecord: c)),
         );
         await _load();
       },

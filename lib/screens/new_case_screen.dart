@@ -1113,7 +1113,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   Future<void> _pickTemplate() async {
     final t = await Navigator.push<CaseTemplate>(
       context,
-      MaterialPageRoute(builder: (_) => const TemplatesScreen()),
+      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const TemplatesScreen()),
     );
     if (t != null && mounted) _applyTemplate(t);
   }

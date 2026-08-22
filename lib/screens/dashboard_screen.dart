@@ -445,7 +445,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   if (value == 'case_mix') {
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const CaseMixScreen()),
+                      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const CaseMixScreen()),
                     );
                   } else if (value == 'achievements') {
                     if (!mounted) return;
@@ -463,14 +463,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     if (!mounted) return;
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const HelpGuideScreen()),
+                      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const HelpGuideScreen()),
                     );
                   } else if (value == 'backup_restore') {
                     if (!mounted) return;
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const DataBackupScreen(),
+                      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const DataBackupScreen(),
                       ),
                     );
                     await _loadData();
@@ -575,8 +574,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           onTap: () async {
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (_) => FollowUpScreen(caseRecord: c),
+                              PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => FollowUpScreen(caseRecord: c),
                               ),
                             );
                             await _loadData();

@@ -27,8 +27,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
   Future<void> _shareMilestoneCard() async {
     if (_data == null) return;
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => MilestoneShareScreen(data: _data!),
+      PageRouteBuilder(
+        transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => MilestoneShareScreen(data: _data!),
       ),
     );
   }
@@ -179,8 +179,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => RegionalHeatmapScreen(data: _data!),
+                                PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => RegionalHeatmapScreen(data: _data!),
                                 ),
                               );
                             },

@@ -116,7 +116,7 @@ class _InteractiveWalkthroughCardState extends State<InteractiveWalkthroughCard>
     if (mounted) {
       await Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const StatisticsScreen()),
+        PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const StatisticsScreen()),
       );
     }
   }

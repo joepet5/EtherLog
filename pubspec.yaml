@@ -33,6 +33,7 @@ dependencies:
   bodychart_heatmap: ^1.1.0
   flutter_body_atlas: ^0.2.1
   flutter_animate: ^4.5.2
+  fl_chart: ^1.2.0
 
 
 dev_dependencies:

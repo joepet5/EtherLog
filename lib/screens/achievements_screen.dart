@@ -151,7 +151,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'Rank Points: ${currentRank.currentPoints}',
+                                  'XP: ${currentRank.currentPoints}',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,

@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
@@ -374,7 +374,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(title: Text(t.appName),
             
-            actions: [ IconButton(icon: const Icon(Icons.star_border, color: Colors.amber), onPressed: () => _triggerCelebration()),
+            actions: [
               GestureDetector(
                 onTap: () async {
                   await AppHaptics.light();
@@ -1182,66 +1182,14 @@ class _CelebrationOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: IgnorePointer(
-        child: Container(
-          color: AppTheme.background.withValues(alpha: 0.85),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Lottie.asset(
-                'assets/animations/celebration.json',
-                repeat: false,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppTheme.surface,
-                      border: Border.all(color: AppTheme.primary, width: 4),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.primary.withValues(alpha: 0.6),
-                          blurRadius: 40,
-                          spreadRadius: 10,
-                        ),
-                      ],
-                    ),
-                    child: const Center(
-                      child: Icon(Icons.workspace_premium_rounded, size: 80, color: Colors.amber),
-                    ),
-                  ).animate().scale(duration: 800.ms, curve: Curves.elasticOut).shimmer(delay: 400.ms, duration: 1200.ms),
-                  const SizedBox(height: 32),
-                  Text(
-                    'MILESTONE UNLOCKED!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.5,
-                      color: AppTheme.textPrimary,
-                    ),
-                  ).animate().fade(delay: 300.ms, duration: 600.ms).slideY(begin: 0.5),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Incredible work. Keep logging!',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppTheme.textSecondary,
-                    ),
-                  ).animate().fade(delay: 600.ms, duration: 600.ms),
-                ],
-              ),
-            ],
+        child: Center(
+          child: Lottie.asset(
+            'assets/animations/celebration.json',
+            repeat: false,
+            fit: BoxFit.contain,
           ),
         ),
       ),
     );
   }
 }
-
-

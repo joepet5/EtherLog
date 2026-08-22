@@ -57,7 +57,7 @@ class AppTheme {
       'label': 'Night Shift',
       'swatch': Color(0xFFF5E6D3),
       'accent': Color(0xFFD35400),
-    }
+    },
       {
         'key': 'midnight_cyan',
         'label': 'Midnight Cyan',

@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
@@ -1148,12 +1148,12 @@ class _CaseCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '${caseRecord.specialty}  �  ${caseRecord.asaGrade}',
+              '${caseRecord.specialty}  •  ${caseRecord.asaGrade}',
               style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
             ),
             const SizedBox(height: 2),
             Text(
-              '${caseRecord.date.day}/${caseRecord.date.month}/${caseRecord.date.year}  �  ${caseRecord.technique}',
+              '${caseRecord.date.day}/${caseRecord.date.month}/${caseRecord.date.year}  •  ${caseRecord.technique}',
               style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
             ),
             if (caseRecord.difficultAirway)

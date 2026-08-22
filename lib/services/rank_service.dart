@@ -1,6 +1,7 @@
 import '../models/achievement.dart';
 
 class AchievementRank {
+  final int rankIndex; // 1 to 12
   final String name;
   final String subtitle;
   final int currentPoints;
@@ -8,6 +9,7 @@ class AchievementRank {
   final int? pointsForNextRank;
 
   AchievementRank({
+    required this.rankIndex,
     required this.name,
     required this.subtitle,
     required this.currentPoints,
@@ -123,6 +125,7 @@ class RankService {
     final nextRank = currentRankIndex < _ranks.length - 1 ? _ranks[currentRankIndex + 1] : null;
 
     return AchievementRank(
+      rankIndex: currentRankIndex + 1,
       name: currentRank['name'] as String,
       subtitle: currentRank['subtitle'] as String,
       currentPoints: points,

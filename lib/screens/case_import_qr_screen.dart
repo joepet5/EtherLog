@@ -80,7 +80,7 @@ class _CaseImportQrScreenState extends State<CaseImportQrScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(l10n.importSharedCase, style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           '$previewProcedure\n$previewSpecialty · $previewAsa\n\n'

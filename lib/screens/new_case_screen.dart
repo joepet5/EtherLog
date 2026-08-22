@@ -664,7 +664,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   void _showImageSourceDialog() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppTheme.surface,
+      backgroundColor: AppTheme.surfaceSolid,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
       builder: (ctx) => SafeArea(
         child: Column(
@@ -713,7 +713,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: AppTheme.surface,
+          backgroundColor: AppTheme.surfaceSolid,
           title: Text(l10n.complications, style: TextStyle(color: AppTheme.textPrimary)),
           content: SingleChildScrollView(
             child: Column(
@@ -779,7 +779,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            backgroundColor: AppTheme.surface,
+            backgroundColor: AppTheme.surfaceSolid,
             title: Text(l10n.regionalAnaesthesia, style: TextStyle(color: AppTheme.textPrimary)),
             content: SizedBox(
               width: double.maxFinite,
@@ -926,7 +926,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            backgroundColor: AppTheme.surface,
+            backgroundColor: AppTheme.surfaceSolid,
             title: Text(l10n.invasiveLines, style: TextStyle(color: AppTheme.textPrimary)),
             content: SizedBox(
               width: double.maxFinite,
@@ -1139,7 +1139,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     final name = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(l10n.saveAsTemplate, style: TextStyle(color: AppTheme.textPrimary)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1270,7 +1270,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     final resume = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(l10n.resumeIncompleteCase, style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           l10n.unsavedDraftRestore,

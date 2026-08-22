@@ -48,7 +48,7 @@ class CaseDetailScreen extends StatelessWidget {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(AppLocalizations.of(ctx).deleteCase, style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           AppLocalizations.of(ctx).deleteCaseWarning,
@@ -339,7 +339,7 @@ class CaseDetailScreen extends StatelessWidget {
                     color: isNone ? AppTheme.success : Colors.amber,
                   ),
                   label: Text(l10n.term(comp)),
-                  backgroundColor: AppTheme.surface,
+                  backgroundColor: AppTheme.surfaceSolid,
                   side: BorderSide(
                     color: isNone
                         ? AppTheme.success.withValues(alpha: 0.4)

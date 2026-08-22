@@ -499,7 +499,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text('Save query', style: TextStyle(color: AppTheme.textPrimary)),
         content: TextField(
           controller: nameController,
@@ -543,7 +543,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text('Delete query?', style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           'Remove “${q.name}”?',
@@ -730,7 +730,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
                           onPressed: () => _applySaved(q),
                           onDeleted: () => _deleteSaved(q),
                           deleteIconColor: AppTheme.textSecondary,
-                          backgroundColor: AppTheme.surface,
+                          backgroundColor: AppTheme.surfaceSolid,
                           side: BorderSide(color: AppTheme.surfaceLight),
                           labelStyle: TextStyle(
                             color: AppTheme.textPrimary,

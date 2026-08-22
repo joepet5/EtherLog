@@ -258,7 +258,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                       ),
                       selected: selected,
                       selectedColor: AppTheme.primary,
-                      backgroundColor: AppTheme.surface,
+                      backgroundColor: AppTheme.surfaceSolid,
                       side: BorderSide(
                         color: selected
                             ? AppTheme.primary
@@ -305,7 +305,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                           selected: selected,
                           selectedColor: tier.color,
-                          backgroundColor: AppTheme.surface,
+                          backgroundColor: AppTheme.surfaceSolid,
                           side: BorderSide(color: tier.color.withValues(alpha: 0.7)),
                           onSelected: (_) =>
                               setState(() => _selectedTier = tier),

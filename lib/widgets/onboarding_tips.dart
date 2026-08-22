@@ -14,7 +14,7 @@ Future<void> maybeShowOnboardingTip(BuildContext context) async {
     barrierDismissible: false,
     builder: (ctx) {
       return AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: [

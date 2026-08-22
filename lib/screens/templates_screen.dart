@@ -37,7 +37,7 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(l10n.deleteTemplate, style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           l10n.deleteTemplateConfirm.replaceAll('{name}', t.name),
@@ -63,7 +63,7 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
     final name = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: AppTheme.surfaceSolid,
         title: Text(l10n.renameTemplate, style: TextStyle(color: AppTheme.textPrimary)),
         content: TextField(
           controller: ctrl,

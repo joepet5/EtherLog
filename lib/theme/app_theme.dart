@@ -21,7 +21,7 @@ class AppTheme {
   static String get themeKey => _themeKey;
   static String get accentKey => _accentKey;
 
-  static bool get isDarkLike => _themeKey == 'dark';
+  static bool get isDarkLike => ['dark', 'midnight_cyan'].contains(_themeKey);
 
   /// Accent colour options (used mainly on Light / Dark).
   static final Map<String, Color> accentColours = {

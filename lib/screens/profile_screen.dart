@@ -66,6 +66,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return l10n.themeSerenity;
       case 'night_shift':
         return l10n.themeNightShift;
+      case 'midnight_cyan':
+        return 'Midnight Cyan';
       case 'dark':
       default:
         return l10n.themeDark;

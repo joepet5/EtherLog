@@ -1,4 +1,4 @@
-﻿import '../models/achievement.dart';
+import '../models/achievement.dart';
 
 class AchievementRank {
   final String name;
@@ -34,7 +34,7 @@ class RankService {
     AchievementTier.diamond: 2500,
   };
 
-  static final List<Map<String, dynamic>> _ranks = [
+    static final List<Map<String, dynamic>> _ranks = [
     {
       'name': 'Medical Student',
       'subtitle': 'Standing awkwardly by the anaesthetic machine, afraid to touch anything.',
@@ -42,7 +42,7 @@ class RankService {
     },
     {
       'name': 'Ward IV Service',
-      'subtitle': 'Getting constantly bleeped because \"the ward nurses have already tried twice.\"',
+      'subtitle': 'Getting constantly bleeped because "the ward nurses have already tried twice."',
       'threshold': 100
     },
     {
@@ -52,7 +52,7 @@ class RankService {
     },
     {
       'name': 'Coffee Room Regular',
-      'subtitle': 'You\\'ve finally memorised the exact schedule of the espresso machine.',
+      'subtitle': 'You\'ve finally memorised the exact schedule of the espresso machine.',
       'threshold': 1500
     },
     {
@@ -67,7 +67,7 @@ class RankService {
     },
     {
       'name': 'List Coordinator',
-      'subtitle': 'Endlessly negotiating \"just one quick add-on\" with the surgical team.',
+      'subtitle': 'Endlessly negotiating "just one quick add-on" with the surgical team.',
       'threshold': 12500
     },
     {
@@ -77,22 +77,22 @@ class RankService {
     },
     {
       'name': 'The Educator',
-      'subtitle': 'Grilling the poor medical students on the exact pharmacology of propofol.',
+      'subtitle': 'Grilling the poor medical students on the exact pharmacology of propofol while the patient goes to sleep.',
       'threshold': 35000
     },
     {
       'name': 'Clinical Lead',
-      'subtitle': 'Spending more time in morbidity meetings than in theatre.',
+      'subtitle': 'Spending more time in morbidity meetings and dealing with hospital politics than in theatre.',
       'threshold': 50000
     },
     {
       'name': 'Senior Consultant',
-      'subtitle': 'Doing the crossword while the junior resident sweats over the airway.',
+      'subtitle': 'Sitting back and doing the crossword while the junior resident sweats over the airway.',
       'threshold': 65000
     },
     {
       'name': 'The Oracle',
-      'subtitle': 'The one everyone calls in at 2 AM when Plan A, B, and C have failed.',
+      'subtitle': 'The one everyone calls in at 2 AM when Plan A, Plan B, and Plan C have all failed.',
       'threshold': 71500
     },
   ];

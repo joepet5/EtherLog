@@ -7,6 +7,7 @@ import '../services/profile_storage.dart';
 import '../services/reminder_service.dart';
 import '../services/case_storage.dart';
 import '../services/pdf_service.dart';
+import '../services/auth_service.dart';
 import '../utils/app_haptics.dart';
 import '../main.dart';
 import '../l10n/app_localizations.dart';

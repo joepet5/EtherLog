@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../services/backup_service.dart';
+import '../services/auth_service.dart';
 import '../services/case_storage.dart';
 import '../utils/app_haptics.dart';
 import '../l10n/app_localizations.dart';
@@ -42,6 +43,8 @@ class _DataBackupScreenState extends State<DataBackupScreen> {
       return;
     }
 
+    final authOk = await AuthService.verifyBiometrics('Authenticate to export JSON backup');
+    if (!authOk) return;
     setState(() => _busy = true);
     try {
       final fileName = await BackupService.exportToJson();

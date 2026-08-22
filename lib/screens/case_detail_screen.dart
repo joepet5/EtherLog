@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../models/case_record.dart';
 import '../services/usage_stats.dart';
 import '../services/case_storage.dart';
+import '../services/auth_service.dart';
 import '../services/pdf_service.dart';
 import '../services/points_service.dart';
 import '../utils/app_haptics.dart';
@@ -66,6 +67,8 @@ class CaseDetailScreen extends StatelessWidget {
       ),
     );
     if (ok == true) {
+      final authOk = await AuthService.verifyBiometrics('Authenticate to delete patient case');
+      if (!authOk) return;
       await CaseStorage.deleteCase(caseRecord.id);
       if (context.mounted) Navigator.pop(context, true);
     }

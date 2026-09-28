@@ -1,27 +1,29 @@
 name: etherlog
 description: Anaesthesia Clinical Logbook
 publish_to: 'none'
-version: 2.9.0+1
+version: 2.14.1+11
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
+  flutter:
+    sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.20.2
 
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   shared_preferences: ^2.3.3
   flutter_secure_storage: ^9.2.2
   local_auth: ^2.3.0
-  image_picker: ^1.1.2
   path_provider: ^2.1.5
   path: ^1.9.0
   pdf: ^3.11.1
   printing: ^5.13.4
   share_plus: ^10.1.2
-  uuid: ^4.5.1
+  uuid: ^4.6.0
   file_selector: ^1.0.3
   vibration: ^3.2.0
   qr_flutter: ^4.1.0
@@ -33,6 +35,11 @@ dependencies:
   bodychart_heatmap: ^1.1.0
   flutter_body_atlas: ^0.2.1
   flutter_animate: ^4.5.2
+  firebase_core: ^4.13.0
+  cloud_firestore: ^6.8.0
+  image_picker: ^1.2.3
+  focused_menu: ^1.0.5
+  crypto: ^3.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,11 +51,15 @@ flutter:
   assets:
     - assets/icon/
     - assets/animations/
+    - assets/leagues/
 
 flutter_launcher_icons:
   android: true
-  ios: false
+  ios: true
+  remove_alpha_ios: true
   image_path: "assets/icon/app_icon.png"
   adaptive_icon_background: "#161F36"
   adaptive_icon_foreground: "assets/icon/app_icon.png"
   min_sdk_android: 21
+
+

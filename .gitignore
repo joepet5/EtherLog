@@ -43,3 +43,23 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Scratch, one-off scripts, and local utilities
+/scratch/
+*.bak
+*.patch
+*.log
+
+# Sensitive Credentials / Keystores
+*.jks
+*.keystore
+key.properties
+key.properties.txt
+
+# Binaries & CLI tools
+firebase.exe
+
+# Large prompt / debug dump files
+*.txt
+*.jsonl
+

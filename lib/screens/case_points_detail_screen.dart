@@ -3,7 +3,6 @@ import '../theme/app_theme.dart';
 import '../models/case_record.dart';
 import '../services/points_service.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class CasePointsDetailScreen extends StatelessWidget {
   final CaseRecord caseRecord;
@@ -78,13 +77,13 @@ class CasePointsDetailScreen extends StatelessWidget {
                       : (caseRecord.diagnosis.isNotEmpty ? caseRecord.diagnosis : l10n.procedure),
                   style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
                 ),
-                if (caseRecord.date != null) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    '${caseRecord.date!.day}/${caseRecord.date!.month}/${caseRecord.date!.year}',
-                    style: TextStyle(fontSize: 12, color: AppTheme.textSecondary.withValues(alpha: 0.8)),
-                  ),
-                ],
+                ...[
+                const SizedBox(height: 4),
+                Text(
+                  '${caseRecord.date.day}/${caseRecord.date.month}/${caseRecord.date.year}',
+                  style: TextStyle(fontSize: 12, color: AppTheme.textSecondary.withValues(alpha: 0.8)),
+                ),
+              ],
               ],
             ),
           ),

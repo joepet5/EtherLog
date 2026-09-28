@@ -6,12 +6,12 @@ import 'package:printing/printing.dart';
 import '../theme/app_theme.dart';
 import '../models/case_record.dart';
 import '../services/case_storage.dart';
+import '../services/profile_storage.dart';
 import '../utils/app_haptics.dart';
 import '../services/usage_stats.dart';
 import 'case_detail_screen.dart';
 import '../services/case_mix_query_storage.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 enum MixField {
   ageYears,
@@ -60,6 +60,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
   List<CaseRecord> _matches = [];
   List<SavedMixQuery> _saved = [];
   bool _loading = true;
+  bool _zenMode = false;
   final List<MixCondition> _conditions = [
     MixCondition(field: MixField.priority, op: MixOp.isEqual, value: 'Emergency'),
   ];
@@ -180,6 +181,8 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
 
   Future<void> _load() async {
     final cases = await CaseStorage.getAllCases();
+    final profile = await ProfileStorage.getProfile();
+    _zenMode = profile.zenMode == true;
     final saved = await CaseMixQueryStorage.getAll();
     if (!mounted) return;
     setState(() {
@@ -862,7 +865,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
             children: [
               Expanded(
                 child: DropdownButtonFormField<MixField>(
-                  value: cond.field,
+                  initialValue: cond.field,
                   isExpanded: true,
                   decoration: InputDecoration(
                     labelText: l10n.field.toUpperCase(),
@@ -924,7 +927,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
               SizedBox(
                 width: 100,
                 child: DropdownButtonFormField<MixOp>(
-                  value: cond.op,
+                  initialValue: cond.op,
                   isExpanded: true,
                   decoration: const InputDecoration(
                     labelText: 'OP',
@@ -997,7 +1000,7 @@ class _CaseMixScreenState extends State<CaseMixScreen> {
       onTap: () async {
         await Navigator.push(
           context,
-          PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CaseDetailScreen(caseRecord: c)),
+          PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => CaseDetailScreen(caseRecord: c, zenMode: _zenMode)),
         );
         await _load();
       },

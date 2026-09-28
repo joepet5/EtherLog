@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidString(str, minLen, maxLen) {
+      return str is string && str.size() >= minLen && str.size() <= maxLen;
+    }
+
+    // 1. Alias Reservations (First-Come, First-Served)
+    // Document ID is lowercase alias
+    match /aliases/{aliasKey} {
+      allow read: if true;
+      allow create: if isValidString(request.resource.data.alias, 3, 20)
+                    && request.resource.data.uid is string
+                    && !exists(/databases/$(database)/documents/aliases/$(aliasKey));
+      allow update: if isValidString(request.resource.data.alias, 3, 20)
+                    && resource.data.uid == request.resource.data.uid;
+      allow delete: if resource.data.uid is string;
+    }
+
+    // 2. Global Leaderboards
+    // Strictly scoped to /leaderboards/{leagueId}/entries/{userId}
+    match /leaderboards/{leagueId}/entries/{userId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.score is int
+                            && request.resource.data.score > 0
+                            && isValidString(request.resource.data.alias, 3, 20);
+      allow delete: if true;
+    }
+
+    // 3. Private Groups
+    match /groups/{groupId} {
+      allow read: if true;
+      allow create: if isValidString(request.resource.data.name, 1, 50);
+      allow update: if true;
+      allow delete: if false; // Protect groups from being deleted by non-owners
+
+      // Group Leaderboards
+      match /leaderboards/{leagueId}/entries/{userId} {
+        allow read: if true;
+        allow create, update: if request.resource.data.score is int
+                              && request.resource.data.score > 0
+                              && isValidString(request.resource.data.alias, 3, 20);
+        allow delete: if true;
+      }
+    }
+  }
+}

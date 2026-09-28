@@ -6,7 +6,6 @@ import '../theme/app_theme.dart';
 import '../models/case_record.dart';
 import '../services/case_share_service.dart';
 import '../utils/app_haptics.dart';
-import '../widgets/animated_gradient_background.dart';
 
 /// Stage 1: show a temporary QR so another Etherlog user can import this case later (Stage 2).
 class CaseShareQrScreen extends StatefulWidget {
@@ -111,7 +110,7 @@ class _CaseShareQrScreenState extends State<CaseShareQrScreen> {
               style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
             ),
             value: _stripHospitalNumbers,
-            activeColor: AppTheme.primary,
+            activeThumbColor: AppTheme.primary,
             onChanged: (v) {
               setState(() => _stripHospitalNumbers = v);
               _rebuildPayload();

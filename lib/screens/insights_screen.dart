@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
-import '../models/case_record.dart';
 import '../services/case_storage.dart';
 import '../services/insights_service.dart';
+import '../services/pac_storage.dart';
 import 'milestone_share_screen.dart';
 import 'regional_heatmap_screen.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class InsightsScreen extends StatefulWidget {
   const InsightsScreen({super.key});
@@ -22,6 +20,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
   bool _loading = true;
   InsightsData? _data;
   late int _year;
+  int _yearPacPatients = 0;
   final GlobalKey _reviewCardKey = GlobalKey();
 
   Future<void> _shareMilestoneCard() async {
@@ -44,9 +43,11 @@ class _InsightsScreenState extends State<InsightsScreen> {
     setState(() => _loading = true);
     final cases = await CaseStorage.getAllCases();
     final data = InsightsService.build(cases, year: _year);
+    final pacPatients = await PacStorage.getTotalPacPatients(year: _year);
     if (!mounted) return;
     setState(() {
       _data = data;
+      _yearPacPatients = pacPatients;
       _loading = false;
     });
   }
@@ -90,7 +91,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : (_data == null || _data!.totalCases == 0)
+          : ((_data == null || _data!.totalCases == 0) && _yearPacPatients == 0)
               ? Center(
                   child: Padding(
                     padding: const EdgeInsets.all(24),
@@ -105,92 +106,94 @@ class _InsightsScreenState extends State<InsightsScreen> {
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
                   children: [
                         _yearSummary(_data!),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.activityHeatmap),
-                        _ActivityHeatmap(
-                          days: _data!.activityHeatmap,
-                          maxCount: _data!.heatmapMax,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          l10n.heatmapCaption,
-                          style: TextStyle(fontSize: 11, color: AppTheme.textSecondary),
-                        ),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.monthlyCaseVolume),
-                        _BarChart(
-                          values: _data!.monthlyTrends.map((e) => e.caseCount.toDouble()).toList(),
-                          labels: l10n.monthAbbrs,
-                          color: AppTheme.primary,
-                          valueFormatter: (v) => v.toInt().toString(),
-                        ),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.avgAnaesthesiaDurationMin),
-                        _BarChart(
-                          values: _data!.monthlyTrends
-                              .map((e) => e.avgAnaesthesiaMinutes)
-                              .toList(),
-                          labels: l10n.monthAbbrs,
-                          color: const Color(0xFF0891B2),
-                          valueFormatter: (v) => v == 0 ? '\u2014' : v.toStringAsFixed(0),
-                        ),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.percentUneventful),
-                        _BarChart(
-                          values: _data!.monthlyTrends
-                              .map((e) => e.uneventfulPercent)
-                              .toList(),
-                          labels: l10n.monthAbbrs,
-                          color: AppTheme.success,
-                          maxValue: 100,
-                          valueFormatter: (v) => v == 0 ? '\u2014' : '${v.toStringAsFixed(0)}%',
-                        ),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.percentDifficultAirway),
-                        _BarChart(
-                          values: _data!.monthlyTrends
-                              .map((e) => e.difficultAirwayPercent)
-                              .toList(),
-                          labels: l10n.monthAbbrs,
-                          color: AppTheme.danger,
-                          maxValue: 100,
-                          valueFormatter: (v) => v == 0 ? '\u2014' : '${v.toStringAsFixed(0)}%',
-                        ),
-                        const SizedBox(height: 20),
-                        _sectionTitle(l10n.topSpecialties),
-                        _RankList(items: _data!.topSpecialties, color: AppTheme.primary),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.topRegionalBlocks),
-                        _RankList(
-                          items: _data!.topBlocks.take(8).toList(),
-                          color: const Color(0xFF7C3AED),
-                          emptyLabel: l10n.noRegionalBlocksThisYear,
-                        ),
-                        const SizedBox(height: 12),
-                        Center(
-                          child: ElevatedButton.icon(
-                            icon: const Icon(Icons.accessibility_new),
-                            label: const Text('View Anatomical Heatmap'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF7C3AED).withValues(alpha: 0.15),
-                              foregroundColor: const Color(0xFF7C3AED),
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => RegionalHeatmapScreen(data: _data!),
-                                ),
-                              );
-                            },
+                        if (_data != null && _data!.totalCases > 0) ...[
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.activityHeatmap),
+                          _ActivityHeatmap(
+                            days: _data!.activityHeatmap,
+                            maxCount: _data!.heatmapMax,
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.asaMix),
-                        _RankList(items: _data!.asaMix, color: AppTheme.warning),
-                        const SizedBox(height: 16),
-                        _sectionTitle(l10n.topTechniques),
-                        _RankList(items: _data!.topTechniques, color: const Color(0xFF059669)),
+                          const SizedBox(height: 8),
+                          Text(
+                            l10n.heatmapCaption,
+                            style: TextStyle(fontSize: 11, color: AppTheme.textSecondary),
+                          ),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.monthlyCaseVolume),
+                          _BarChart(
+                            values: _data!.monthlyTrends.map((e) => e.caseCount.toDouble()).toList(),
+                            labels: l10n.monthAbbrs,
+                            color: AppTheme.primary,
+                            valueFormatter: (v) => v.toInt().toString(),
+                          ),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.avgAnaesthesiaDurationMin),
+                          _BarChart(
+                            values: _data!.monthlyTrends
+                                .map((e) => e.avgAnaesthesiaMinutes)
+                                .toList(),
+                            labels: l10n.monthAbbrs,
+                            color: const Color(0xFF0891B2),
+                            valueFormatter: (v) => v == 0 ? '\u2014' : v.toStringAsFixed(0),
+                          ),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.percentUneventful),
+                          _BarChart(
+                            values: _data!.monthlyTrends
+                                .map((e) => e.uneventfulPercent)
+                                .toList(),
+                            labels: l10n.monthAbbrs,
+                            color: AppTheme.success,
+                            maxValue: 100,
+                            valueFormatter: (v) => v == 0 ? '\u2014' : '${v.toStringAsFixed(0)}%',
+                          ),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.percentDifficultAirway),
+                          _BarChart(
+                            values: _data!.monthlyTrends
+                                .map((e) => e.difficultAirwayPercent)
+                                .toList(),
+                            labels: l10n.monthAbbrs,
+                            color: AppTheme.danger,
+                            maxValue: 100,
+                            valueFormatter: (v) => v == 0 ? '\u2014' : '${v.toStringAsFixed(0)}%',
+                          ),
+                          const SizedBox(height: 20),
+                          _sectionTitle(l10n.topSpecialties),
+                          _RankList(items: _data!.topSpecialties, color: AppTheme.primary),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.topRegionalBlocks),
+                          _RankList(
+                            items: _data!.topBlocks.take(8).toList(),
+                            color: const Color(0xFF7C3AED),
+                            emptyLabel: l10n.noRegionalBlocksThisYear,
+                          ),
+                          const SizedBox(height: 12),
+                          Center(
+                            child: ElevatedButton.icon(
+                              icon: const Icon(Icons.accessibility_new),
+                              label: const Text('View Anatomical Heatmap'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF7C3AED).withValues(alpha: 0.15),
+                                foregroundColor: const Color(0xFF7C3AED),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => RegionalHeatmapScreen(data: _data!),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.asaMix),
+                          _RankList(items: _data!.asaMix, color: AppTheme.warning),
+                          const SizedBox(height: 16),
+                          _sectionTitle(l10n.topTechniques),
+                          _RankList(items: _data!.topTechniques, color: const Color(0xFF059669)),
+                        ],
                       ],
                 ),
     );
@@ -244,8 +247,10 @@ class _InsightsScreenState extends State<InsightsScreen> {
                       const Color(0xFF0891B2),
                     ),
                     _miniStat(
-                      l10n.uneventful,
-                      '${d.overallUneventfulPercent.toStringAsFixed(0)}%',
+                      'Total Time',
+                      d.totalHours == 0
+                          ? (d.totalMinutes > 0 ? '${d.totalMinutes}m' : '-')
+                          : '${d.totalHours}h',
                       AppTheme.success,
                     ),
                     _miniStat(
@@ -254,6 +259,45 @@ class _InsightsScreenState extends State<InsightsScreen> {
                       AppTheme.danger,
                     ),
                   ],
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0D9488).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: const Color(0xFF0D9488).withValues(alpha: 0.25),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/icon/pac_icon.png',
+                        width: 18,
+                        height: 18,
+                        color: const Color(0xFF0D9488),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'PAC Patients in $_year:',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.textPrimary,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '$_yearPacPatients',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF0D9488),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

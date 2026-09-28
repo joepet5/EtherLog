@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/app_haptics.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class HelpGuideScreen extends StatelessWidget {
   const HelpGuideScreen({super.key});
@@ -107,6 +106,40 @@ class HelpGuideScreen extends StatelessWidget {
             l10n.helpFooter,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+          ),
+          const SizedBox(height: 12),
+          Center(
+            child: TextButton.icon(
+              icon: Icon(Icons.gavel_rounded, size: 14, color: AppTheme.primary),
+              label: Text(
+                'Open Source Licenses',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: AppTheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              onPressed: () {
+                showLicensePage(
+                  context: context,
+                  applicationName: 'EtherLog',
+                  applicationVersion: 'v2.12.0',
+                  applicationLegalese: 'Made by an Anaesthetist.\n© ${DateTime.now().year} EtherLog. All rights reserved.\n\nAnatomical atlas illustrations based on work by Ryan Graves (CC BY 4.0).',
+                  applicationIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        'assets/icon/app_icon.png',
+                        width: 52,
+                        height: 52,
+                        errorBuilder: (_, __, ___) => const Icon(Icons.medical_services, size: 48),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

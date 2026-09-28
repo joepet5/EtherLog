@@ -5,7 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../theme/app_theme.dart';
 import '../utils/app_haptics.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class LockScreen extends StatefulWidget {
   final VoidCallback onUnlocked;
@@ -202,7 +201,7 @@ class _LockScreenState extends State<LockScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 36),
+            const SizedBox(height: 24),
             // Logo
             Container(
               width: 88,
@@ -315,18 +314,6 @@ class _LockScreenState extends State<LockScreen> {
             ),
 
             const SizedBox(height: 24),
-
-            if (_biometricAvailable)
-              TextButton.icon(
-                onPressed: _busy ? null : _onBiometric,
-                icon: Icon(Icons.fingerprint, color: AppTheme.primary),
-                label: Text(
-                  l10n.unlockWithBiometric,
-                  style: TextStyle(color: AppTheme.primary),
-                ),
-              ),
-
-            const SizedBox(height: 28),
           ],
         ),
       ),

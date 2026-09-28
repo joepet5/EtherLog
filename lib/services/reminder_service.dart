@@ -127,11 +127,17 @@ class ReminderService {
     bool inactive = false;
     if (enabled && threshold > 0 && !inQuiet) {
       if (last != null) {
-        final today = DateTime.now();
-        final lastDay = DateTime(last.year, last.month, last.day);
-        final todayDay = DateTime(today.year, today.month, today.day);
-        daysSince = todayDay.difference(lastDay).inDays;
-        inactive = daysSince >= threshold;
+        final now = DateTime.now();
+        if (threshold == 1) {
+          final hoursSince = now.difference(last).inHours;
+          daysSince = (hoursSince / 24).floor().clamp(1, 9999);
+          inactive = hoursSince >= 24;
+        } else {
+          final lastDay = DateTime(last.year, last.month, last.day);
+          final todayDay = DateTime(now.year, now.month, now.day);
+          daysSince = todayDay.difference(lastDay).inDays;
+          inactive = daysSince >= threshold;
+        }
       }
     }
 

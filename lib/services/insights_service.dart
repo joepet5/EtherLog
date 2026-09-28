@@ -1,4 +1,4 @@
-import '../models/case_record.dart';
+﻿import '../models/case_record.dart';
 
 class MonthTrend {
   final DateTime month; // first day of month
@@ -39,13 +39,18 @@ class InsightsData {
   final List<NamedCount> topAirways;
   final List<NamedCount> topInvasiveLines;
   final List<NamedCount> topProcedures;
+  final List<NamedCount> priorityMix;
+  final List<NamedCount> topIntubationMethods;
   final int totalCases;
+  final int totalMinutes;
   final double overallAvgMinutes;
   final double overallUneventfulPercent;
   final double overallDifficultPercent;
   final int year;
   final List<DayCount> activityHeatmap;
   final int heatmapMax;
+
+  int get totalHours => (totalMinutes / 60).round();
 
   const InsightsData({
     required this.monthlyTrends,
@@ -58,7 +63,10 @@ class InsightsData {
     required this.topAirways,
     required this.topInvasiveLines,
     required this.topProcedures,
+    required this.priorityMix,
+    required this.topIntubationMethods,
     required this.totalCases,
+    required this.totalMinutes,
     required this.overallAvgMinutes,
     required this.overallUneventfulPercent,
     required this.overallDifficultPercent,
@@ -149,11 +157,21 @@ class InsightsService {
     final airwayMap = <String, int>{};
     final invasiveMap = <String, int>{};
     final procedureMap = <String, int>{};
+    final priorityMap = <String, int>{};
+    final intubationMethodMap = <String, int>{};
     int totalMinAll = 0, withDur = 0, uneventfulAll = 0, difficultAll = 0;
 
     for (final c in inYear) {
       final sp = c.specialty.trim().isEmpty ? 'Unspecified' : c.specialty.trim();
       specialtyMap[sp] = (specialtyMap[sp] ?? 0) + 1;
+
+      final prio = c.priority.trim().isEmpty ? 'Elective' : c.priority.trim();
+      priorityMap[prio] = (priorityMap[prio] ?? 0) + 1;
+
+      final method = c.methodOfIntubation?.trim() ?? '';
+      if (method.isNotEmpty && method != 'None' && method != 'Not applicable') {
+        intubationMethodMap[method] = (intubationMethodMap[method] ?? 0) + 1;
+      }
 
       final asa = c.asaGrade.trim().isEmpty ? 'Unknown' : c.asaGrade.trim();
       asaMap[asa] = (asaMap[asa] ?? 0) + 1;
@@ -230,7 +248,10 @@ class InsightsService {
       topAirways: top(airwayMap, 5),
       topInvasiveLines: top(invasiveMap, 5),
       topProcedures: top(procedureMap, 5),
+      priorityMix: top(priorityMap, 4),
+      topIntubationMethods: top(intubationMethodMap, 5),
       totalCases: inYear.length,
+      totalMinutes: totalMinAll,
       overallAvgMinutes: withDur == 0 ? 0 : totalMinAll / withDur,
       overallUneventfulPercent:
       inYear.isEmpty ? 0 : 100.0 * uneventfulAll / inYear.length,

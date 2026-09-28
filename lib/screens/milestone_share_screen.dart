@@ -7,7 +7,6 @@ import 'package:share_plus/share_plus.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../services/insights_service.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class MilestoneShareScreen extends StatefulWidget {
   final InsightsData data;
@@ -39,7 +38,7 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
       final file = File('${directory.path}/etherlog_milestone_${widget.data.year}.png');
       await file.writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
       
-      await Share.shareXFiles([XFile(file.path)], text: 'My Etherlog ${widget.data.year} in Review!');
+      await Share.shareXFiles([XFile(file.path)], text: 'My EtherLog ${widget.data.year} in Review!');
     } catch (e) {
       debugPrint('Share error: $e');
     } finally {
@@ -86,7 +85,7 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'ETHERLOG',
+                              'EtherLog',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w900,
@@ -122,7 +121,7 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                           children: [
                             _buildStat(l10n.cases, '${d.totalCases}', Colors.white),
                             _buildStat(l10n.avgDuration, d.overallAvgMinutes == 0 ? '-' : '${d.overallAvgMinutes.toStringAsFixed(0)}m', Colors.cyanAccent),
-                            _buildStat(l10n.uneventful, '${d.overallUneventfulPercent.toStringAsFixed(0)}%', Colors.greenAccent),
+                            _buildStat('Total Time', d.totalHours == 0 ? (d.totalMinutes > 0 ? '${d.totalMinutes}m' : '-') : '${d.totalHours}h', Colors.greenAccent),
                           ],
                         ),
                         const SizedBox(height: 32),
@@ -132,6 +131,14 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                           _buildSectionTitle(l10n.topSpecialties),
                           const SizedBox(height: 12),
                           ...d.topSpecialties.take(3).map((s) => _buildBar(l10n.term(s.name), s.count, d.topSpecialties.first.count, Colors.cyanAccent)),
+                          const SizedBox(height: 24),
+                        ],
+
+                        // Case Priority
+                        if (d.priorityMix.isNotEmpty) ...[
+                          _buildSectionTitle(l10n.priority),
+                          const SizedBox(height: 12),
+                          ...d.priorityMix.take(3).map((p) => _buildBar(l10n.term(p.name), p.count, d.priorityMix.first.count, Colors.tealAccent)),
                           const SizedBox(height: 24),
                         ],
 
@@ -159,11 +166,11 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                           const SizedBox(height: 24),
                         ],
 
-                        // Top Complications
-                        if (d.topComplications.isNotEmpty) ...[
-                          _buildSectionTitle('Top Complications'),
+                        // Intubation Methods
+                        if (d.topIntubationMethods.isNotEmpty) ...[
+                          _buildSectionTitle(l10n.methodOfIntubation),
                           const SizedBox(height: 12),
-                          ...d.topComplications.take(3).map((c) => _buildBar(c.name, c.count, d.topComplications.first.count, Colors.redAccent)),
+                          ...d.topIntubationMethods.take(3).map((m) => _buildBar(l10n.term(m.name), m.count, d.topIntubationMethods.first.count, const Color(0xFF10B981))),
                           const SizedBox(height: 24),
                         ],
 
@@ -192,7 +199,7 @@ class _MilestoneShareScreenState extends State<MilestoneShareScreen> {
                         const SizedBox(height: 24),
                         Center(
                           child: Text(
-                            'Logged with Etherlog',
+                            'Logged with EtherLog',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,

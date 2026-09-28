@@ -27,6 +27,7 @@ class CaseTemplate {
   final List<Map<String, dynamic>> regionalBlocks;
   final List<Map<String, dynamic>> invasiveMonitoring;
   final bool catheterPlaced;
+  final bool pca;
   final String? diagnosis;
   final String? procedure;
   final String? notes;
@@ -55,6 +56,7 @@ class CaseTemplate {
     this.regionalBlocks = const [],
     this.invasiveMonitoring = const [],
     this.catheterPlaced = false,
+    this.pca = false,
     this.diagnosis,
     this.procedure,
     this.notes,
@@ -84,6 +86,7 @@ class CaseTemplate {
     'regionalBlocks': regionalBlocks,
     'invasiveMonitoring': invasiveMonitoring,
     'catheterPlaced': catheterPlaced,
+    'pca': pca,
     'diagnosis': diagnosis,
     'procedure': procedure,
     'notes': notes,
@@ -117,6 +120,7 @@ class CaseTemplate {
         .map((e) => Map<String, dynamic>.from(e as Map))
         .toList(),
     catheterPlaced: j['catheterPlaced'] == true,
+    pca: j['pca'] == true,
     diagnosis: j['diagnosis']?.toString(),
     procedure: j['procedure']?.toString(),
     notes: j['notes']?.toString(),
@@ -149,6 +153,7 @@ class CaseTemplate {
       invasiveMonitoring:
       c.invasiveMonitoring.map((e) => Map<String, dynamic>.from(e)).toList(),
       catheterPlaced: c.catheterPlaced,
+      pca: c.pca,
       diagnosis: c.diagnosis,
       procedure: c.procedure,
       notes: null, // do not copy free-text notes by default

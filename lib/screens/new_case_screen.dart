@@ -15,11 +15,13 @@ import '../services/achievement_notification_service.dart';
 import '../services/template_storage.dart';
 import '../data/medical_suggestions.dart';
 import 'templates_screen.dart';
-import '../widgets/animated_gradient_background.dart';
+import 'case_import_qr_screen.dart';
+import 'detailed_assessment_screen.dart';
 
 class NewCaseScreen extends StatefulWidget {
   final CaseRecord? existingCase;
-  const NewCaseScreen({super.key, this.existingCase});
+  final CaseTemplate? initialTemplate;
+  const NewCaseScreen({super.key, this.existingCase, this.initialTemplate});
 
   @override
   State<NewCaseScreen> createState() => _NewCaseScreenState();
@@ -77,6 +79,14 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   final List<Map<String, dynamic>> _regionalList = [];
   bool _flagForFollowUp = false;
   bool _catheterPlaced = false;
+  bool _catheterValidationError = false;
+  bool _pca = false;
+  bool _verificationEnabled = false;
+  bool _verified = false;
+  String? _verifiedBy;
+  DateTime? _verifiedAt;
+  bool _isSaved = false;
+  Map<String, dynamic>? _detailedAssessment;
 
   final List<String> _selectedComplications = [];
   String? _selectedOutcome;
@@ -85,7 +95,13 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   List<String> _procedureSuggestions = [];
 
   final List<String> _priorities = ['Elective', 'Emergency'];
-  final List<String> _asaGrades = ['ASA I', 'ASA II', 'ASA III', 'ASA IV', 'ASA V'];
+  final List<String> _asaGrades = [
+    'ASA I',
+    'ASA II',
+    'ASA III',
+    'ASA IV',
+    'ASA V'
+  ];
   final List<String> _ageUnits = ['years', 'months', 'days'];
   final List<String> _specialties = [
     'General Surgery',
@@ -107,6 +123,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     'Paediatric Surgery',
     'Trauma Surgery',
     'Vascular surgery',
+    'Vascular access',
     'Head and Neck Surgery',
     'Dental/Maxillofacial surgery',
     'HPB Surgery',
@@ -168,8 +185,15 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     'Video laryngoscopy',
     'Awake fiberoptic intubation',
     'Asleep fiberoptic intubation',
+    'In situ (pre-intubated)',
   ];
-  final List<String> _intubationRoles = ['Performed', 'Assisted', 'Observed'];
+  final List<String> _intubationRoles = [
+    'Performed',
+    'Supervised',
+    'Assisted',
+    'Observed',
+    'In situ',
+  ];
   final List<String> _ettTypesAll = [
     'Regular cuffed ETT',
     'Regular uncuffed ETT',
@@ -177,8 +201,14 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     'Nasal ETT',
     'RAE tube',
     'Flexometallic tube',
+    'MLT tube',
   ];
-  final List<String> _ettTypesNasalOnly = ['Nasal ETT', 'RAE tube'];
+  final List<String> _ettTypesNasalOnly = [
+    'Nasal ETT',
+    'RAE tube',
+    'Flexometallic tube',
+    'MLT tube',
+  ];
   final List<String> _lmaTypes = [
     'Classic LMA',
     'ProSeal LMA',
@@ -201,11 +231,19 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     'PiCCO monitor',
     'TCI pump',
   ];
-  final List<String> _lineRoles = ['Performed', 'Assisted', 'Observed'];
+  final List<String> _lineRoles = [
+    'Performed',
+    'Supervised',
+    'Assisted',
+    'Observed',
+    'In situ',
+  ];
   final List<String> _monitorRoles = [
     'Used independently',
+    'Supervised',
     'Used with assistance',
     'Observed',
+    'In situ',
   ];
   final Set<String> _monitorDevices = {
     'BIS/Entropy',
@@ -277,12 +315,16 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     'Sacral plexus block',
     'Other peripheral nerve block',
   ];
-  final Set<String> _noUsgBlocks = {'Spinal (SAB)', 'Epidural', 'None / Not performed'};
+  final Set<String> _noUsgBlocks = {
+    'Spinal (SAB)',
+    'Epidural',
+    'None / Not performed'
+  };
 
   bool get _isSpinalTechnique =>
       _technique == 'Spinal (SAB)' ||
-          _technique == 'Epidural' ||
-          _technique == 'Combined Spinal-Epidural (CSE)';
+      _technique == 'Epidural' ||
+      _technique == 'Combined Spinal-Epidural (CSE)';
 
   bool get _showCatheterOption {
     if (_regionalList.isEmpty) return false;
@@ -297,8 +339,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   bool get _isDLT => _airway == 'Double lumen tube (DLT)';
   bool get _isTubeAirway =>
       _airway == 'Endotracheal Tube (ETT)' ||
-          _airway == 'Double lumen tube (DLT)' ||
-          _airway == 'Bronchial blocker';
+      _airway == 'Double lumen tube (DLT)' ||
+      _airway == 'Bronchial blocker';
   bool get _isLma => _airway == 'Laryngeal Mask Airway (LMA)';
   bool get _isETT => _airway == 'Endotracheal Tube (ETT)';
   bool get _isNasalIntubation => _typeOfIntubation == 'Nasal intubation';
@@ -321,26 +363,42 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   @override
   void initState() {
     super.initState();
+    final hour = DateTime.now().hour;
+    if (hour >= 22 || hour < 6) {
+      _priority = 'Emergency';
+    }
     _loadProfileHospital();
     _loadSuggestions();
     _loadExistingCase();
+    if (widget.initialTemplate != null) {
+      _applyTemplate(widget.initialTemplate!, showSnackbar: false);
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) => _restoreDraftIfAny());
   }
 
   Future<void> _loadProfileHospital() async {
     final profile = await ProfileStorage.getProfile();
     setState(() {
-      _hospitalFromProfile = profile.hospital.isNotEmpty ? profile.hospital : null;
+      _hospitalFromProfile =
+          profile.hospital.isNotEmpty ? profile.hospital : null;
+      _verificationEnabled = profile.clinicalVerificationEnabled;
+      if (!_verificationEnabled && widget.existingCase == null) {
+        _verified = false;
+      }
     });
   }
 
   Future<void> _loadSuggestions() async {
     final cases = await CaseStorage.getAllCases();
-    final customDiagnoses = cases.map((c) => c.diagnosis).where((d) => d.trim().isNotEmpty);
-    final customProcedures = cases.map((c) => c.procedure).where((p) => p.trim().isNotEmpty);
+    final customDiagnoses =
+        cases.map((c) => c.diagnosis).where((d) => d.trim().isNotEmpty);
+    final customProcedures =
+        cases.map((c) => c.procedure).where((p) => p.trim().isNotEmpty);
 
-    final allDiagnoses = {...customDiagnoses, ...CommonMedicalSuggestions.diagnoses}.toList();
-    final allProcedures = {...customProcedures, ...CommonMedicalSuggestions.procedures}.toList();
+    final allDiagnoses =
+        {...customDiagnoses, ...CommonMedicalSuggestions.diagnoses}.toList();
+    final allProcedures =
+        {...customProcedures, ...CommonMedicalSuggestions.procedures}.toList();
 
     setState(() {
       _diagnosisSuggestions = allDiagnoses;
@@ -357,12 +415,13 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     _diagnosisController.text = c.diagnosis;
     _procedureController.text = c.procedure;
     _notesController.text = c.notes ?? '';
-    _ageController.text = c.patientAge?.toString() ?? '';
+    _ageController.text = c.formattedAge;
     _weightController.text = c.patientWeight?.toString() ?? '';
     _heightController.text = c.patientHeight?.toString() ?? '';
     _supervisorController.text = c.supervisor ?? '';
     _specialtyOtherController.text = c.specialtyOther ?? '';
-    _airwayAttemptsController.text = c.difficultAirwayAttempts?.toString() ?? '';
+    _airwayAttemptsController.text =
+        c.difficultAirwayAttempts?.toString() ?? '';
     _ettSizeController.text = c.ettSize?.toString() ?? '';
     _lmaSizeController.text = c.lmaSize?.toString() ?? '';
     _selectedDate = c.date;
@@ -372,7 +431,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     if (!_specialties.contains(c.specialty) && c.specialty.isNotEmpty) {
       _specialtyOtherController.text = c.specialty;
     }
-    if (c.specialty.contains('Hand and Leprosy') || c.specialty.contains('HLRS')) {
+    if (c.specialty.contains('Hand and Leprosy') ||
+        c.specialty.contains('HLRS')) {
       _specialty = 'Hand and reconstructive surgery';
     }
     _technique = c.technique;
@@ -400,17 +460,39 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     _ettType = c.ettType;
     _lmaType = c.lmaType;
     _lmaRole = c.lmaRole;
-    _invasiveList.addAll(c.invasiveMonitoring.map((e) => Map<String, dynamic>.from(e)));
-    _regionalList.addAll(c.regionalBlocks.map((e) => Map<String, dynamic>.from(e)));
+    _invasiveList
+        .addAll(c.invasiveMonitoring.map((e) => Map<String, dynamic>.from(e)));
+    _regionalList
+        .addAll(c.regionalBlocks.map((e) => Map<String, dynamic>.from(e)));
     _selectedComplications.addAll(c.complications);
     _catheterPlaced = c.catheterPlaced;
+    if (_catheterPlaced) {
+      final active = _regionalList
+          .where((e) =>
+              e['name'] != null && e['name'] != 'None / Not performed')
+          .toList();
+      if (active.length == 1) {
+        active.first['catheterPlaced'] = true;
+        active.first['hasCatheter'] = true;
+      }
+    }
+    _pca = c.pca;
     _selectedOutcome = c.outcome;
     _anaesthesiaDuration = c.anaesthesiaDuration;
-    _surgeryDuration = c.surgeryDuration;
     _anaesthesiaStart = _parseTime(c.anaesthesiaStartTime);
     _anaesthesiaEnd = _parseTime(c.anaesthesiaEndTime);
-    _surgeryStart = _parseTime(c.surgeryStartTime);
-    _surgeryEnd = _parseTime(c.surgeryEndTime);
+    if (_specialty == 'Vascular access') {
+      _surgeryDuration = null;
+      _surgeryStart = null;
+      _surgeryEnd = null;
+    } else {
+      _surgeryDuration = c.surgeryDuration;
+      _surgeryStart = _parseTime(c.surgeryStartTime);
+      _surgeryEnd = _parseTime(c.surgeryEndTime);
+    }
+    _verified = c.verified || c.role.toLowerCase().contains('consultant');
+    _verifiedBy = c.verifiedBy;
+    _verifiedAt = c.verifiedAt;
 
     if (_isDLT) {
       _typeOfIntubation = 'Oral intubation';
@@ -420,6 +502,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         (_ettType == null || !_ettTypesNasalOnly.contains(_ettType))) {
       _ettType = 'Nasal ETT';
     }
+    _detailedAssessment = c.detailedAssessment;
   }
 
   TimeOfDay? _parseTime(String? t) {
@@ -431,6 +514,9 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
 
   @override
   void dispose() {
+    // Fire-and-forget draft save when leaving the screen if unfinished
+    // ignore: unawaited_futures
+    _autosaveDraft();
     _caseNumberController.dispose();
     _diagnosisController.dispose();
     _procedureController.dispose();
@@ -443,9 +529,6 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     _airwayAttemptsController.dispose();
     _ettSizeController.dispose();
     _lmaSizeController.dispose();
-    // Fire-and-forget draft save when leaving the screen
-    // ignore: unawaited_futures
-    _autosaveDraft();
     super.dispose();
   }
 
@@ -502,14 +585,26 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     if (picked != null) setState(() => _selectedDate = picked);
   }
 
-
   /// Ages over 12 years are whole numbers only (no decimals).
   void _normalizeAgeInput() {
     if (_ageUnit != 'years') return;
     final raw = _ageController.text.trim();
     if (raw.isEmpty) return;
     final n = double.tryParse(raw);
-    if (n == null) return;
+    if (n == null) {
+      if (raw.contains('.')) {
+        final parts = raw.split('.');
+        final firstNum = int.tryParse(parts[0]);
+        if (firstNum != null && firstNum > 12) {
+          final whole = firstNum.toString();
+          _ageController.value = TextEditingValue(
+            text: whole,
+            selection: TextSelection.collapsed(offset: whole.length),
+          );
+        }
+      }
+      return;
+    }
     if (n > 12) {
       final whole = n.round().toString();
       if (raw != whole) {
@@ -553,12 +648,17 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     }
   }
 
-  Future<void> _pickTime({required bool isAnaesthesia, required bool isStart}) async {
+  Future<void> _pickTime(
+      {required bool isAnaesthesia, required bool isStart}) async {
     TimeOfDay? initial;
     if (isAnaesthesia) {
-      initial = isStart ? (_anaesthesiaStart ?? TimeOfDay.now()) : (_anaesthesiaEnd ?? TimeOfDay.now());
+      initial = isStart
+          ? (_anaesthesiaStart ?? TimeOfDay.now())
+          : (_anaesthesiaEnd ?? TimeOfDay.now());
     } else {
-      initial = isStart ? (_surgeryStart ?? TimeOfDay.now()) : (_surgeryEnd ?? TimeOfDay.now());
+      initial = isStart
+          ? (_surgeryStart ?? TimeOfDay.now())
+          : (_surgeryEnd ?? TimeOfDay.now());
     }
     final picked = await showTimePicker(context: context, initialTime: initial);
     if (picked == null) return;
@@ -570,7 +670,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         } else {
           _anaesthesiaEnd = picked;
         }
-        _anaesthesiaDuration = _calcDuration(_anaesthesiaStart, _anaesthesiaEnd);
+        _anaesthesiaDuration =
+            _calcDuration(_anaesthesiaStart, _anaesthesiaEnd);
         _validateSurgeryTimes();
       } else {
         if (isStart) {
@@ -581,7 +682,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
             if (sS < aS) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Surgical time cannot start prior to anaesthesia time'),
+                  content: Text(
+                      'Surgical time cannot start prior to anaesthesia time'),
                   backgroundColor: AppTheme.danger,
                 ),
               );
@@ -597,7 +699,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
             if (sEndRel > aEndRel) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Surgical time cannot end after anaesthesia time'),
+                  content:
+                      Text('Surgical time cannot end after anaesthesia time'),
                   backgroundColor: AppTheme.danger,
                 ),
               );
@@ -612,6 +715,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   }
 
   void _validateSurgeryTimes() {
+    if (_specialty == 'Vascular access') {
+      _surgeryStart = null;
+      _surgeryEnd = null;
+      _surgeryDuration = null;
+      return;
+    }
     if (_anaesthesiaStart == null) return;
 
     if (_surgeryStart != null) {
@@ -648,8 +757,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
-      final XFile? image =
-      await _picker.pickImage(source: source, imageQuality: 70, maxWidth: 1200);
+      final XFile? image = await _picker.pickImage(
+          source: source, imageQuality: 70, maxWidth: 1200);
       if (image == null) return;
       final directory = await getApplicationDocumentsDirectory();
       final fileName = 'case_${DateTime.now().millisecondsSinceEpoch}.jpg';
@@ -657,7 +766,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       final File newImage = await File(image.path).copy(savedPath);
       setState(() => _imagePath = newImage.path);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Could not pick image: $e')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Could not pick image: $e')));
     }
   }
 
@@ -665,7 +775,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppTheme.surfaceSolid,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
       builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -706,7 +817,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       if (o == 'High spinal/Bradycardia') return _isSpinalTechnique;
       return true;
     }).toList();
-    if (!_isSpinalTechnique) _selectedComplications.remove('High spinal/Bradycardia');
+    if (!_isSpinalTechnique)
+      _selectedComplications.remove('High spinal/Bradycardia');
 
     final temp = List<String>.from(_selectedComplications);
     showDialog(
@@ -714,14 +826,17 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
           backgroundColor: AppTheme.surfaceSolid,
-          title: Text(l10n.complications, style: TextStyle(color: AppTheme.textPrimary)),
+          title: Text(l10n.complications,
+              style: TextStyle(color: AppTheme.textPrimary)),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: available.map((option) {
                 final selected = temp.contains(option);
                 return CheckboxListTile(
-                  title: Text(l10n.term(option), style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
+                  title: Text(l10n.term(option),
+                      style:
+                          TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
                   value: selected,
                   activeColor: AppTheme.primary,
                   onChanged: (val) {
@@ -744,7 +859,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
+            TextButton(
+                onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
             TextButton(
               onPressed: () {
                 setState(() {
@@ -763,14 +879,15 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   }
 
   void _showRegionalDialog() {
-    final temp = _regionalList.map((e) => Map<String, dynamic>.from(e)).toList();
+    final temp =
+        _regionalList.map((e) => Map<String, dynamic>.from(e)).toList();
     final otherCtrl = TextEditingController(
       text: temp
-          .firstWhere(
-            (e) => e['isOther'] == true,
-        orElse: () => <String, dynamic>{},
-      )['customName']
-          ?.toString() ??
+              .firstWhere(
+                (e) => e['isOther'] == true,
+                orElse: () => <String, dynamic>{},
+              )['customName']
+              ?.toString() ??
           '',
     );
 
@@ -780,7 +897,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         builder: (context, setDialogState) {
           return AlertDialog(
             backgroundColor: AppTheme.surfaceSolid,
-            title: Text(l10n.regionalAnaesthesia, style: TextStyle(color: AppTheme.textPrimary)),
+            title: Text(l10n.regionalAnaesthesia,
+                style: TextStyle(color: AppTheme.textPrimary)),
             content: SizedBox(
               width: double.maxFinite,
               child: SingleChildScrollView(
@@ -788,8 +906,9 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: _regionalOptions.map((option) {
                     final idx = temp.indexWhere((e) =>
-                    e['name'] == option ||
-                        (option == 'Other peripheral nerve block' && e['isOther'] == true));
+                        e['name'] == option ||
+                        (option == 'Other peripheral nerve block' &&
+                            e['isOther'] == true));
                     final isSelected = idx >= 0;
                     final entry = isSelected ? temp[idx] : null;
                     final showUsg = !_noUsgBlocks.contains(option);
@@ -799,7 +918,9 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                       children: [
                         CheckboxListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(l10n.term(option), style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
+                          title: Text(l10n.term(option),
+                              style: TextStyle(
+                                  color: AppTheme.textPrimary, fontSize: 14)),
                           value: isSelected,
                           activeColor: AppTheme.primary,
                           onChanged: (val) {
@@ -814,20 +935,23 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                                     'nerveStimulator': false,
                                   });
                                 } else {
-                                  temp.removeWhere((e) => e['name'] == 'None / Not performed');
+                                  temp.removeWhere((e) =>
+                                      e['name'] == 'None / Not performed');
                                   temp.add({
                                     'name': option,
                                     'role': 'Performed',
                                     'usgGuided': false,
                                     'nerveStimulator': false,
-                                    'isOther': option == 'Other peripheral nerve block',
+                                    'isOther': option ==
+                                        'Other peripheral nerve block',
                                     'customName': '',
                                   });
                                 }
                               } else {
                                 temp.removeWhere((e) =>
-                                e['name'] == option ||
-                                    (option == 'Other peripheral nerve block' && e['isOther'] == true));
+                                    e['name'] == option ||
+                                    (option == 'Other peripheral nerve block' &&
+                                        e['isOther'] == true));
                               }
                             });
                           },
@@ -835,33 +959,40 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                         if (isSelected && option != 'None / Not performed') ...[
                           if (option == 'Other peripheral nerve block')
                             Padding(
-                              padding: const EdgeInsets.only(left: 12, bottom: 8),
+                              padding:
+                                  const EdgeInsets.only(left: 12, bottom: 8),
                               child: TextField(
                                 controller: otherCtrl,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   hintText: l10n.enterBlockName,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 10),
                                 ),
                                 onChanged: (v) {
                                   entry!['customName'] = v;
-                                  entry['name'] = v.trim().isEmpty ? 'Other peripheral nerve block' : v.trim();
+                                  entry['name'] = v.trim().isEmpty
+                                      ? 'Other peripheral nerve block'
+                                      : v.trim();
                                 },
                               ),
                             ),
                           Padding(
                             padding: const EdgeInsets.only(left: 12, bottom: 4),
                             child: DropdownButtonFormField<String>(
-                              value: entry!['role'] as String? ?? 'Performed',
+                              initialValue: entry!['role'] as String? ?? 'Performed',
                               decoration: const InputDecoration(
                                 isDense: true,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
                               ),
                               items: _lineRoles
                                   .map((r) => DropdownMenuItem(
-                                value: r,
-                                child: Text(l10n.term(r), style: const TextStyle(fontSize: 13)),
-                              ))
+                                        value: r,
+                                        child: Text(l10n.term(r),
+                                            style:
+                                                const TextStyle(fontSize: 13)),
+                                      ))
                                   .toList(),
                               onChanged: (v) {
                                 if (v == null) return;
@@ -874,20 +1005,25 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                               dense: true,
                               contentPadding: const EdgeInsets.only(left: 12),
                               title: Text(l10n.usgGuided,
-                                  style: TextStyle(fontSize: 13, color: AppTheme.textPrimary)),
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppTheme.textPrimary)),
                               value: entry['usgGuided'] == true,
                               activeColor: AppTheme.primary,
-                              onChanged: (v) => setDialogState(() => entry['usgGuided'] = v ?? false),
+                              onChanged: (v) => setDialogState(
+                                  () => entry['usgGuided'] = v ?? false),
                             ),
                             CheckboxListTile(
                               dense: true,
                               contentPadding: const EdgeInsets.only(left: 12),
                               title: Text(l10n.nerveStimulatorUsed,
-                                  style: TextStyle(fontSize: 13, color: AppTheme.textPrimary)),
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppTheme.textPrimary)),
                               value: entry['nerveStimulator'] == true,
                               activeColor: AppTheme.primary,
-                              onChanged: (v) =>
-                                  setDialogState(() => entry['nerveStimulator'] = v ?? false),
+                              onChanged: (v) => setDialogState(
+                                  () => entry['nerveStimulator'] = v ?? false),
                             ),
                           ],
                         ],
@@ -898,14 +1034,30 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               ),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
+              TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: Text(l10n.cancel)),
               TextButton(
                 onPressed: () {
                   setState(() {
                     _regionalList
                       ..clear()
                       ..addAll(temp);
-                    if (!_showCatheterOption) _catheterPlaced = false;
+                    if (!_showCatheterOption) {
+                      _catheterPlaced = false;
+                      _catheterValidationError = false;
+                    } else if (_catheterPlaced) {
+                      final active = _regionalList
+                          .where((e) =>
+                              e['name'] != null &&
+                              e['name'] != 'None / Not performed')
+                          .toList();
+                      if (active.length == 1) {
+                        active.first['catheterPlaced'] = true;
+                        active.first['hasCatheter'] = true;
+                        _catheterValidationError = false;
+                      }
+                    }
                   });
                   Navigator.pop(ctx);
                 },
@@ -919,7 +1071,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   }
 
   void _showInvasiveDialog() {
-    final temp = _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList();
+    final temp =
+        _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList();
 
     showDialog(
       context: context,
@@ -927,7 +1080,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         builder: (context, setDialogState) {
           return AlertDialog(
             backgroundColor: AppTheme.surfaceSolid,
-            title: Text(l10n.invasiveLines, style: TextStyle(color: AppTheme.textPrimary)),
+            title: Text(l10n.invasiveLines,
+                style: TextStyle(color: AppTheme.textPrimary)),
             content: SizedBox(
               width: double.maxFinite,
               child: SingleChildScrollView(
@@ -937,19 +1091,23 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                     final idx = temp.indexWhere((e) => e['name'] == option);
                     final isSelected = idx >= 0;
                     final entry = isSelected ? temp[idx] : null;
-                    final needsUsg = option == 'Arterial line' || option == 'CVC line';
+                    final needsUsg =
+                        option == 'Arterial line' || option == 'CVC line';
                     final roles = _rolesForInvasive(option);
                     final currentRole = entry?['role'] as String?;
-                    final safeRole = (currentRole != null && roles.contains(currentRole))
-                        ? currentRole
-                        : roles.first;
+                    final safeRole =
+                        (currentRole != null && roles.contains(currentRole))
+                            ? currentRole
+                            : roles.first;
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CheckboxListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(l10n.term(option), style: TextStyle(color: AppTheme.textPrimary, fontSize: 14)),
+                          title: Text(l10n.term(option),
+                              style: TextStyle(
+                                  color: AppTheme.textPrimary, fontSize: 14)),
                           value: isSelected,
                           activeColor: AppTheme.primary,
                           onChanged: (val) {
@@ -970,16 +1128,19 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 12, bottom: 4),
                             child: DropdownButtonFormField<String>(
-                              value: safeRole,
+                              initialValue: safeRole,
                               decoration: const InputDecoration(
                                 isDense: true,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
                               ),
                               items: roles
                                   .map((r) => DropdownMenuItem(
-                                value: r,
-                                child: Text(l10n.term(r), style: const TextStyle(fontSize: 13)),
-                              ))
+                                        value: r,
+                                        child: Text(l10n.term(r),
+                                            style:
+                                                const TextStyle(fontSize: 13)),
+                                      ))
                                   .toList(),
                               onChanged: (v) {
                                 if (v == null) return;
@@ -992,10 +1153,13 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                               dense: true,
                               contentPadding: const EdgeInsets.only(left: 12),
                               title: Text(l10n.usgGuided,
-                                  style: TextStyle(fontSize: 13, color: AppTheme.textPrimary)),
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppTheme.textPrimary)),
                               value: entry!['usgGuided'] == true,
                               activeColor: AppTheme.primary,
-                              onChanged: (v) => setDialogState(() => entry['usgGuided'] = v ?? false),
+                              onChanged: (v) => setDialogState(
+                                  () => entry['usgGuided'] = v ?? false),
                             ),
                         ],
                       ],
@@ -1005,7 +1169,9 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               ),
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
+              TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: Text(l10n.cancel)),
               TextButton(
                 onPressed: () {
                   setState(() {
@@ -1063,21 +1229,21 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     });
   }
 
-
-  void _applyTemplate(CaseTemplate t) {
+  void _applyTemplate(CaseTemplate t, {bool showSnackbar = true}) {
     setState(() {
-      _specialty = _specialties.contains(t.specialty) ? t.specialty! : 'Other';
+      _specialty = _specialties.contains(t.specialty) ? t.specialty : 'Other';
       if (_specialty == 'Other') {
         _specialtyOtherController.text = t.specialtyOther ?? t.specialty ?? '';
       } else {
         _specialtyOtherController.text = '';
       }
       _technique = _techniques.contains(t.technique) ? t.technique : _technique;
-      _priority = _priorities.contains(t.priority) ? t.priority! : _priority;
-      _asaGrade = _asaGrades.contains(t.asaGrade) ? t.asaGrade! : _asaGrade;
+      _priority = _priorities.contains(t.priority) ? t.priority : _priority;
+      _asaGrade = _asaGrades.contains(t.asaGrade) ? t.asaGrade : _asaGrade;
       _role = _roles.contains(t.role) ? t.role : _role;
       _supervisorController.text = t.supervisor ?? '';
-      _airway = _airways.contains(t.airwayManagement) ? t.airwayManagement! : _airway;
+      _airway =
+          _airways.contains(t.airwayManagement) ? t.airwayManagement : _airway;
       _cormack = t.cormackLehane ?? 'Not graded';
       _typeOfIntubation = t.typeOfIntubation;
       _methodOfIntubation = t.methodOfIntubation;
@@ -1093,6 +1259,17 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         ..clear()
         ..addAll(t.regionalBlocks.map((e) => Map<String, dynamic>.from(e)));
       _catheterPlaced = t.catheterPlaced;
+      if (_catheterPlaced) {
+        final active = _regionalList
+            .where((e) =>
+                e['name'] != null && e['name'] != 'None / Not performed')
+            .toList();
+        if (active.length == 1) {
+          active.first['catheterPlaced'] = true;
+          active.first['hasCatheter'] = true;
+        }
+      }
+      _pca = t.pca;
       if (t.diagnosis != null && t.diagnosis!.isNotEmpty) {
         _diagnosisController.text = t.diagnosis!;
       }
@@ -1100,20 +1277,53 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         _procedureController.text = t.procedure!;
       }
       if (t.outcome != null) _selectedOutcome = t.outcome;
-      // Never copy case number / patient demographics from templates
+      if (t.notes != null && t.notes!.isNotEmpty) {
+        _notesController.text = t.notes!;
+      }
+
+      // Explicitly blank out time, durations, hospital number, age, gender, weight, height, and bmi
+      _caseNumberController.clear();
+      _ageController.clear();
+      _gender = 'Male';
+      _weightController.clear();
+      _heightController.clear();
+      _bmi = null;
+      _anaesthesiaStart = null;
+      _anaesthesiaEnd = null;
+      _anaesthesiaDuration = null;
+      _surgeryStart = null;
+      _surgeryEnd = null;
+      _surgeryDuration = null;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
+    if (showSnackbar) { ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(l10n.templateAppliedMsg(t.name)),
         backgroundColor: AppTheme.success,
       ),
+    ); }
+  }
+
+  Future<void> _importViaQr() async {
+    final imported = await Navigator.push<bool>(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (_, __, ___) => const CaseImportQrScreen(),
+      ),
     );
+    if (imported == true && mounted) {
+      Navigator.pop(context, true);
+    }
   }
 
   Future<void> _pickTemplate() async {
     final t = await Navigator.push<CaseTemplate>(
       context,
-      PageRouteBuilder(transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero, pageBuilder: (_, __, ___) => const TemplatesScreen()),
+      PageRouteBuilder(
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+          pageBuilder: (_, __, ___) => const TemplatesScreen()),
     );
     if (t != null && mounted) _applyTemplate(t);
   }
@@ -1133,14 +1343,16 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     final ctrl = TextEditingController(
       text: [
         _specialty,
-        if (_procedureController.text.trim().isNotEmpty) _procedureController.text.trim(),
+        if (_procedureController.text.trim().isNotEmpty)
+          _procedureController.text.trim(),
       ].join(' · '),
     );
     final name = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppTheme.surfaceSolid,
-        title: Text(l10n.saveAsTemplate, style: TextStyle(color: AppTheme.textPrimary)),
+        title: Text(l10n.saveAsTemplate,
+            style: TextStyle(color: AppTheme.textPrimary)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1158,7 +1370,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx), child: Text(l10n.cancel)),
           TextButton(
             onPressed: () => Navigator.pop(ctx, ctrl.text.trim()),
             child: Text(l10n.saveAction),
@@ -1170,8 +1383,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
 
     final resolvedSpecialty = _isOtherSpecialty
         ? (_specialtyOtherController.text.trim().isEmpty
-        ? 'Other'
-        : _specialtyOtherController.text.trim())
+            ? 'Other'
+            : _specialtyOtherController.text.trim())
         : _specialty;
 
     final template = CaseTemplate(
@@ -1179,7 +1392,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       name: name,
       createdAt: DateTime.now(),
       specialty: resolvedSpecialty,
-      specialtyOther: _isOtherSpecialty ? _specialtyOtherController.text.trim() : null,
+      specialtyOther:
+          _isOtherSpecialty ? _specialtyOtherController.text.trim() : null,
       technique: _technique,
       priority: _priority,
       asaGrade: _asaGrade,
@@ -1196,9 +1410,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       lmaType: _lmaType,
       lmaRole: _lmaRole,
       difficultAirway: _difficultAirway,
-      regionalBlocks: _regionalList.map((e) => Map<String, dynamic>.from(e)).toList(),
-      invasiveMonitoring: _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList(),
+      regionalBlocks:
+          _regionalList.map((e) => Map<String, dynamic>.from(e)).toList(),
+      invasiveMonitoring:
+          _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList(),
       catheterPlaced: _catheterPlaced,
+      pca: _pca,
       diagnosis: _diagnosisController.text.trim().isEmpty
           ? null
           : _diagnosisController.text.trim(),
@@ -1215,6 +1432,297 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         backgroundColor: AppTheme.success,
       ),
     );
+  }
+
+  Future<void> _openDetailedAssessment() async {
+    // Derive ETT/airway plan from normal case screen
+    String? derivedEttPlan;
+    if (_airway == 'Endotracheal Tube (ETT)') {
+      final parts = <String>[];
+      if (_ettSizeController.text.trim().isNotEmpty) {
+        parts.add('Size ${_ettSizeController.text.trim()}');
+      }
+      if (_ettType != null && _ettType!.isNotEmpty) {
+        parts.add(_ettType!);
+      } else {
+        parts.add('ETT');
+      }
+      if (_typeOfIntubation != null && _typeOfIntubation!.isNotEmpty) {
+        parts.add('($_typeOfIntubation)');
+      }
+      derivedEttPlan = parts.join(' ');
+    } else if (_airway == 'Laryngeal Mask Airway (LMA)') {
+      final parts = <String>[];
+      if (_lmaSizeController.text.trim().isNotEmpty) {
+        parts.add('Size ${_lmaSizeController.text.trim()}');
+      }
+      if (_lmaType != null && _lmaType!.isNotEmpty) {
+        parts.add(_lmaType!);
+      } else {
+        parts.add('LMA');
+      }
+      derivedEttPlan = parts.join(' ');
+    } else if (_airway != 'Not applicable') {
+      derivedEttPlan = _airway;
+    }
+
+    // Derive invasive lines and monitors
+    final linesList = <String>[];
+    final monitorsList = <String>['Standard ASA'];
+    for (final inv in _invasiveList) {
+      final lineName = inv['line']?.toString() ?? '';
+      if (lineName.isNotEmpty) {
+        final lower = lineName.toLowerCase();
+        if (lower.contains('arterial')) {
+          if (!monitorsList.contains('Arterial line')) {
+            monitorsList.add('Arterial line');
+          }
+          linesList.add(lineName);
+        } else if (lower.contains('cvc')) {
+          if (!monitorsList.contains('CVC line')) {
+            monitorsList.add('CVC line');
+          }
+          linesList.add(lineName);
+        } else if (lower.contains('bis') || lower.contains('entropy')) {
+          if (!monitorsList.contains('BIS/Entropy')) {
+            monitorsList.add('BIS/Entropy');
+          }
+        } else if (_monitorDevices.contains(lineName)) {
+          if (!monitorsList.contains(lineName)) {
+            monitorsList.add(lineName);
+          }
+        } else {
+          linesList.add(lineName);
+        }
+      }
+    }
+
+    String derivedMonitors = monitorsList.join(', ');
+    if (_detailedAssessment != null &&
+        _detailedAssessment!['monitors'] != null &&
+        _detailedAssessment!['monitors'].toString().trim().isNotEmpty) {
+      final existingList = _detailedAssessment!['monitors']
+          .toString()
+          .split(',')
+          .map((s) => s.trim())
+          .where((s) => s.isNotEmpty)
+          .toList();
+      for (final m in monitorsList) {
+        if (!existingList.any((e) => e.toLowerCase() == m.toLowerCase())) {
+          existingList.add(m);
+        }
+      }
+      derivedMonitors = existingList.join(', ');
+    }
+
+    final ageNum = double.tryParse(_ageController.text.trim());
+    final isChild = ageNum != null && (_ageUnit != 'years' || ageNum < 17);
+
+    // Derive regional / analgesia plan
+    final regionalNames = _regionalList
+        .map((r) => (r['name'] ?? r['block'])?.toString() ?? '')
+        .where((b) => b.isNotEmpty && b != 'None / Not performed')
+        .toList();
+    if (_technique.toLowerCase().contains('spinal') ||
+        _technique.toLowerCase().contains('epidural') ||
+        _technique.toLowerCase().contains('cse') ||
+        _technique.toLowerCase().contains('block') ||
+        _technique.toLowerCase().contains('regional')) {
+      if (!regionalNames.any((r) => r.toLowerCase() == _technique.toLowerCase())) {
+        regionalNames.insert(0, _technique);
+      }
+    }
+    if (_catheterPlaced) {
+      final catheterBlocks = _regionalList
+          .where((r) =>
+              (r['catheterPlaced'] == true || r['hasCatheter'] == true) &&
+              r['name'] != null &&
+              r['name'] != 'None / Not performed')
+          .map((r) => (r['name'] ?? r['block'])?.toString() ?? '')
+          .where((s) => s.isNotEmpty)
+          .toList();
+
+      if (catheterBlocks.isNotEmpty) {
+        for (final cb in catheterBlocks) {
+          final idx = regionalNames.indexWhere(
+              (r) => r.toLowerCase() == cb.toLowerCase());
+          if (idx >= 0) {
+            if (!regionalNames[idx].toLowerCase().contains('catheter')) {
+              regionalNames[idx] = '${regionalNames[idx]} (+ Catheter)';
+            }
+          } else {
+            regionalNames.add('$cb (+ Catheter)');
+          }
+        }
+      } else if (regionalNames.isNotEmpty) {
+        final idx = regionalNames.indexWhere((r) =>
+            r.toLowerCase().contains('epidural') ||
+            r.toLowerCase().contains('cse') ||
+            r.toLowerCase().contains('block') ||
+            r.toLowerCase().contains('nerve') ||
+            r.toLowerCase().contains('catheter'));
+        if (idx >= 0) {
+          if (!regionalNames[idx].toLowerCase().contains('catheter')) {
+            regionalNames[idx] = '${regionalNames[idx]} (+ Catheter)';
+          }
+        } else {
+          regionalNames.add('Catheter placed');
+        }
+      } else {
+        regionalNames.add('Catheter placed');
+      }
+    }
+
+    if (_pca) {
+      if (!regionalNames.any((r) => r.toLowerCase().contains('pca'))) {
+        regionalNames.add('Patient-Controlled Analgesia (PCA)');
+      }
+    }
+
+    String derivedAnalgesia = regionalNames.join(', ');
+    if (_detailedAssessment != null &&
+        _detailedAssessment!['analgesiaPlan'] != null &&
+        _detailedAssessment!['analgesiaPlan'].toString().trim().isNotEmpty) {
+      final existingParts = _detailedAssessment!['analgesiaPlan']
+          .toString()
+          .split(',')
+          .map((s) => s.trim())
+          .where((s) => s.isNotEmpty)
+          .toList();
+      for (final r in regionalNames) {
+        if (!existingParts.any((p) => p.toLowerCase() == r.toLowerCase())) {
+          existingParts.add(r);
+        }
+      }
+      derivedAnalgesia = existingParts.join(', ');
+    }
+
+    // Video laryngoscope / FOB from method of intubation
+    String? derivedFobCmac;
+    if (_methodOfIntubation != null) {
+      if (_methodOfIntubation!.toLowerCase().contains('video')) {
+        derivedFobCmac = 'Video Laryngoscope';
+      } else if (_methodOfIntubation!.toLowerCase().contains('fiberoptic')) {
+        derivedFobCmac = _methodOfIntubation!;
+      }
+    }
+
+    final currentData = <String, dynamic>{
+      if (_detailedAssessment != null) ..._detailedAssessment!,
+      if (isChild &&
+          (_detailedAssessment?['occupation'] == null ||
+              _detailedAssessment!['occupation'].toString().trim().isEmpty))
+        'occupation': 'Child',
+      if (_caseNumberController.text.trim().isNotEmpty)
+        'hospitalNo': _caseNumberController.text.trim(),
+      if (_diagnosisController.text.trim().isNotEmpty)
+        'dx': _diagnosisController.text.trim(),
+      if (_procedureController.text.trim().isNotEmpty)
+        'sx': _procedureController.text.trim(),
+      if (_ageController.text.trim().isNotEmpty)
+        'age': _ageController.text.trim(),
+      'ageUnit': _ageUnit,
+      'gender': _gender,
+      if (_weightController.text.trim().isNotEmpty)
+        'weight': _weightController.text.trim(),
+      if (_heightController.text.trim().isNotEmpty)
+        'height': _heightController.text.trim(),
+      'date': _selectedDate.toIso8601String(),
+      if (_notesController.text.trim().isNotEmpty)
+        'intraopNotes': _notesController.text.trim(),
+      if (_priority == 'Emergency') 'caseOrder': 'Emergency',
+      if (_asaGrade.isNotEmpty && _asaGrade != 'ASA I')
+        'comorbidities': _asaGrade,
+      if (_supervisorController.text.trim().isNotEmpty)
+        'consults':
+            'Supervisor: ${_supervisorController.text.trim()} ($_role)',
+      if (derivedEttPlan != null && derivedEttPlan.isNotEmpty)
+        'ettPlan': derivedEttPlan,
+      if (derivedFobCmac != null) 'fobCmac': derivedFobCmac,
+      if (linesList.isNotEmpty) 'ivPlan': linesList.join(', '),
+      'monitors': derivedMonitors,
+      if (_surgeryDuration != null && _surgeryDuration!.isNotEmpty)
+        'estTime': _surgeryDuration,
+      if (derivedAnalgesia.isNotEmpty)
+        'analgesiaPlan': derivedAnalgesia,
+    };
+
+    final result = await Navigator.push<Map<String, dynamic>>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DetailedAssessmentScreen(
+          initialData: currentData,
+          existingCase: widget.existingCase,
+        ),
+      ),
+    );
+
+    if (result != null && mounted) {
+      setState(() {
+        _detailedAssessment = result;
+
+        // Synchronize primary fields back to NewCaseScreen if they were filled in detailed assessment
+        if (_caseNumberController.text.trim().isEmpty &&
+            result['hospitalNo'] != null &&
+            result['hospitalNo'].toString().isNotEmpty) {
+          _caseNumberController.text = result['hospitalNo'].toString();
+        }
+        if (_diagnosisController.text.trim().isEmpty &&
+            result['dx'] != null &&
+            result['dx'].toString().isNotEmpty) {
+          _diagnosisController.text = result['dx'].toString();
+        }
+        if (_procedureController.text.trim().isEmpty &&
+            result['sx'] != null &&
+            result['sx'].toString().isNotEmpty) {
+          _procedureController.text = result['sx'].toString();
+        }
+        if (_ageController.text.trim().isEmpty &&
+            result['age'] != null &&
+            result['age'].toString().isNotEmpty) {
+          _ageController.text = result['age'].toString();
+        }
+        if (result['ageUnit'] != null) {
+          _ageUnit = result['ageUnit'].toString();
+        }
+        if (result['gender'] != null) {
+          _gender = result['gender'].toString();
+        }
+        if (_weightController.text.trim().isEmpty &&
+            result['weight'] != null &&
+            result['weight'].toString().isNotEmpty) {
+          _weightController.text = result['weight'].toString();
+        }
+        if (_heightController.text.trim().isEmpty &&
+            result['height'] != null &&
+            result['height'].toString().isNotEmpty) {
+          _heightController.text = result['height'].toString();
+        }
+        if (_notesController.text.trim().isEmpty &&
+            result['intraopNotes'] != null &&
+            result['intraopNotes'].toString().isNotEmpty) {
+          _notesController.text = result['intraopNotes'].toString();
+        }
+        if (_priority == 'Elective' &&
+            result['caseOrder'] != null &&
+            result['caseOrder'].toString().toLowerCase().contains('emergency')) {
+          _priority = 'Emergency';
+        }
+        if (_ettSizeController.text.trim().isEmpty &&
+            result['ettPlan'] != null) {
+          final match = RegExp(r'\b(\d+(\.\d+)?)\b')
+              .firstMatch(result['ettPlan'].toString());
+          if (match != null) {
+            _ettSizeController.text = match.group(1)!;
+          }
+        }
+        if (result['analgesiaPlan'] != null &&
+            result['analgesiaPlan'].toString().toLowerCase().contains('pca')) {
+          _pca = true;
+        }
+        _recalculateBmi();
+      });
+    }
   }
 
   Map<String, dynamic> _draftMap() {
@@ -1238,6 +1746,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       'regionalBlocks': _regionalList,
       'invasiveMonitoring': _invasiveList,
       'catheterPlaced': _catheterPlaced,
+      'pca': _pca,
       'diagnosis': _diagnosisController.text,
       'procedure': _procedureController.text,
       'notes': _notesController.text,
@@ -1248,11 +1757,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       'weight': _weightController.text,
       'height': _heightController.text,
       'gender': _gender,
+      'detailedAssessment': _detailedAssessment,
     };
   }
 
   Future<void> _autosaveDraft() async {
-    if (widget.existingCase != null) return; // don't draft over edits
+    if (_isSaved || widget.existingCase != null) return; // don't draft over edits or completed saves
     // Only if user has entered something meaningful
     final hasContent = _procedureController.text.trim().isNotEmpty ||
         _diagnosisController.text.trim().isNotEmpty ||
@@ -1264,14 +1774,15 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
   }
 
   Future<void> _restoreDraftIfAny() async {
-    if (widget.existingCase != null) return;
+    if (widget.existingCase != null || widget.initialTemplate != null) return;
     final draft = await TemplateStorage.getDraft();
     if (draft == null || !mounted) return;
     final resume = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppTheme.surfaceSolid,
-        title: Text(l10n.resumeIncompleteCase, style: TextStyle(color: AppTheme.textPrimary)),
+        title: Text(l10n.resumeIncompleteCase,
+            style: TextStyle(color: AppTheme.textPrimary)),
         content: Text(
           l10n.unsavedDraftRestore,
           style: TextStyle(color: AppTheme.textSecondary),
@@ -1294,7 +1805,8 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
     if (resume != true || !mounted) return;
     setState(() {
       _specialty = draft['specialty']?.toString() ?? _specialty;
-      _specialtyOtherController.text = draft['specialtyOther']?.toString() ?? '';
+      _specialtyOtherController.text =
+          draft['specialtyOther']?.toString() ?? '';
       _technique = draft['technique']?.toString() ?? _technique;
       _priority = draft['priority']?.toString() ?? _priority;
       _asaGrade = draft['asaGrade']?.toString() ?? _asaGrade;
@@ -1310,6 +1822,7 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       _lmaRole = draft['lmaRole']?.toString();
       _difficultAirway = draft['difficultAirway'] == true;
       _catheterPlaced = draft['catheterPlaced'] == true;
+      _pca = draft['pca'] == true;
       _diagnosisController.text = draft['diagnosis']?.toString() ?? '';
       _procedureController.text = draft['procedure']?.toString() ?? '';
       _notesController.text = draft['notes']?.toString() ?? '';
@@ -1326,26 +1839,71 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
           ..addAll((draft['regionalBlocks'] as List)
               .map((e) => Map<String, dynamic>.from(e as Map)));
       }
+      if (_catheterPlaced) {
+        final active = _regionalList
+            .where((e) =>
+                e['name'] != null && e['name'] != 'None / Not performed')
+            .toList();
+        if (active.length == 1) {
+          active.first['catheterPlaced'] = true;
+          active.first['hasCatheter'] = true;
+        }
+      }
       if (draft['invasiveMonitoring'] is List) {
         _invasiveList
           ..clear()
           ..addAll((draft['invasiveMonitoring'] as List)
               .map((e) => Map<String, dynamic>.from(e as Map)));
       }
+      if (draft['detailedAssessment'] is Map) {
+        _detailedAssessment =
+            Map<String, dynamic>.from(draft['detailedAssessment'] as Map);
+      }
+      if (_specialty == 'Vascular access') {
+        _surgeryStart = null;
+        _surgeryEnd = null;
+        _surgeryDuration = null;
+      }
       _recalculateBmi();
     });
   }
 
-
   void _saveCase() async {
     if (!_formKey.currentState!.validate()) return;
+
+    if (_showCatheterOption && _catheterPlaced) {
+      final activeRegional = _regionalList
+          .where((e) =>
+              e['name'] != null && e['name'] != 'None / Not performed')
+          .toList();
+      if (activeRegional.length == 1) {
+        activeRegional.first['catheterPlaced'] = true;
+        activeRegional.first['hasCatheter'] = true;
+      } else if (activeRegional.length > 1) {
+        final hasCatheterSelected = activeRegional.any((b) =>
+            b['catheterPlaced'] == true || b['hasCatheter'] == true);
+        if (!hasCatheterSelected) {
+          setState(() {
+            _catheterValidationError = true;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(l10n.catheterSelectAtLeastOne),
+              backgroundColor: AppTheme.danger,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          return;
+        }
+      }
+    }
 
     _validateSurgeryTimes();
 
     final resolvedSpecialty = _isOtherSpecialty
         ? (_specialtyOtherController.text.trim().isEmpty
-        ? 'Other'
-        : _specialtyOtherController.text.trim())
+            ? 'Other'
+            : _specialtyOtherController.text.trim())
         : _specialty;
 
     final celebrate = _selectedComplications.contains('None/uneventful');
@@ -1357,11 +1915,17 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       anaesthesiaStartTime: _formatTime(_anaesthesiaStart),
       anaesthesiaEndTime: _formatTime(_anaesthesiaEnd),
       anaesthesiaDuration: _anaesthesiaDuration,
-      surgeryStartTime: _formatTime(_surgeryStart),
-      surgeryEndTime: _formatTime(_surgeryEnd),
-      surgeryDuration: _surgeryDuration,
+      surgeryStartTime: resolvedSpecialty == 'Vascular access'
+          ? null
+          : _formatTime(_surgeryStart),
+      surgeryEndTime: resolvedSpecialty == 'Vascular access'
+          ? null
+          : _formatTime(_surgeryEnd),
+      surgeryDuration:
+          resolvedSpecialty == 'Vascular access' ? null : _surgeryDuration,
       specialty: resolvedSpecialty,
-      specialtyOther: _isOtherSpecialty ? _specialtyOtherController.text.trim() : null,
+      specialtyOther:
+          _isOtherSpecialty ? _specialtyOtherController.text.trim() : null,
       diagnosis: _capitalizeFirst(_diagnosisController.text.trim()),
       procedure: _capitalizeFirst(_procedureController.text.trim()),
       priority: _priority,
@@ -1369,9 +1933,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       technique: _technique,
       role: _role,
       difficultAirway: _difficultAirway,
-      difficultAirwayAttempts:
-      _difficultAirway ? int.tryParse(_airwayAttemptsController.text.trim()) : null,
-      notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
+      difficultAirwayAttempts: _difficultAirway
+          ? int.tryParse(_airwayAttemptsController.text.trim())
+          : null,
+      notes: _notesController.text.trim().isEmpty
+          ? null
+          : _notesController.text.trim(),
       patientAge: _parsedPatientAge(),
       ageUnit: _ageUnit,
       patientGender: _gender,
@@ -1382,37 +1949,86 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       supervisor: _role == 'Consultant'
           ? null
           : (_supervisorController.text.trim().isEmpty
-          ? null
-          : _supervisorController.text.trim()),
+              ? null
+              : _supervisorController.text.trim()),
       airwayManagement: _airway,
-      cormackLehane: _isETT ? _cormack : 'Not graded',
+      cormackLehane: (_isETT && _methodOfIntubationRole != 'In situ')
+          ? _cormack
+          : 'Not graded',
       typeOfIntubation: _isTubeAirway
           ? (_isDLT ? 'Oral intubation' : _typeOfIntubation)
           : null,
-      methodOfIntubation: _isTubeAirway ? _methodOfIntubation : null,
+      methodOfIntubation: (_isTubeAirway && _methodOfIntubationRole != 'In situ')
+          ? _methodOfIntubation
+          : null,
       methodOfIntubationRole: _isTubeAirway ? _methodOfIntubationRole : null,
       ettType: _showEttType ? _ettType : null,
-      ettSize: _isTubeAirway && !_isDLT ? double.tryParse(_ettSizeController.text.trim()) : null,
+      ettSize: _isTubeAirway && !_isDLT
+          ? double.tryParse(_ettSizeController.text.trim())
+          : null,
       lmaType: _isLma ? _lmaType : null,
       lmaSize: _isLma ? double.tryParse(_lmaSizeController.text.trim()) : null,
       lmaRole: _isLma ? _lmaRole : null,
-      invasiveMonitoring: _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList(),
+      invasiveMonitoring:
+          _invasiveList.map((e) => Map<String, dynamic>.from(e)).toList(),
       complications: List.from(_selectedComplications),
       outcome: _selectedOutcome,
       caseSheetImagePath: _imagePath,
-      regionalBlocks: _regionalList.map((e) => Map<String, dynamic>.from(e)).toList(),
+      regionalBlocks:
+          _regionalList.map((e) => Map<String, dynamic>.from(e)).toList(),
       catheterPlaced: _showCatheterOption ? _catheterPlaced : false,
+      pca: _pca,
       starred: widget.existingCase?.starred ?? false,
       flagForFollowUp: _flagForFollowUp,
-      followUpStatus: 'pending', // set properly next line
+      followUpStatus: widget.existingCase?.followUpStatus ?? 'pending',
+      restPainScore: widget.existingCase?.restPainScore,
+      movementPainScore: widget.existingCase?.movementPainScore,
+      ponv: widget.existingCase?.ponv,
+      blockAssessmentTags:
+          widget.existingCase?.blockAssessmentTags ?? const [],
+      followUpComplications:
+          widget.existingCase?.followUpComplications ?? const [],
+      followUpNotes: widget.existingCase?.followUpNotes,
+      followUpCompletedAt: widget.existingCase?.followUpCompletedAt,
+      verified: _verificationEnabled
+          ? (_verified ||
+              _role.toLowerCase().contains('consultant') ||
+              (widget.existingCase?.verified ?? false))
+          : (widget.existingCase?.verified ?? false),
+      verifiedBy: _verificationEnabled
+          ? (_verifiedBy ??
+              widget.existingCase?.verifiedBy ??
+              ((_verified ||
+                      _role.toLowerCase().contains('consultant') ||
+                      (widget.existingCase?.verified ?? false))
+                  ? (_role.toLowerCase().contains('consultant')
+                      ? 'Self (Consultant)'
+                      : (_supervisorController.text.trim().isNotEmpty
+                          ? _supervisorController.text.trim()
+                          : 'Verified Clinician'))
+                  : null))
+          : null,
+      verifiedAt: _verificationEnabled
+          ? (_verifiedAt ??
+              widget.existingCase?.verifiedAt ??
+              ((_verified ||
+                      _role.toLowerCase().contains('consultant') ||
+                      (widget.existingCase?.verified ?? false))
+                  ? _selectedDate
+                  : null))
+          : null,
+      detailedAssessment: _detailedAssessment,
     );
-    newCase = newCase.copyWith(
-      followUpStatus: FollowUpService.initialStatus(newCase),
-    );
+    if (widget.existingCase == null) {
+      newCase = newCase.copyWith(
+        followUpStatus: FollowUpService.initialStatus(newCase),
+      );
+    }
 
     // 1. Fetch achievements *before* saving the new case
     final existingCases = await CaseStorage.getAllCases();
-    final previousAchievements = await AchievementService.getAllAchievements(existingCases);
+    final previousAchievements =
+        await AchievementService.getAllAchievements(existingCases);
     final previouslyUnlockedIds = previousAchievements
         .where((a) => a.isUnlocked)
         .map((a) => a.id)
@@ -1423,15 +2039,17 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       await CaseStorage.deleteCase(widget.existingCase!.id);
     }
     await CaseStorage.saveCase(newCase);
+    _isSaved = true;
     await TemplateStorage.clearDraft();
     final updatedCases = await CaseStorage.getAllCases();
 
     // 3. Fetch achievements *after* saving to detect newly unlocked ones
-    final currentAchievements = await AchievementService.getAllAchievements(updatedCases);
+    final currentAchievements =
+        await AchievementService.getAllAchievements(updatedCases);
 
     if (!mounted) return;
 
-    // 4. Queue ALL newly unlocked achievements — shown one after another
+    // 4. Queue ALL newly unlocked achievements - shown one after another
     final newlyUnlocked = currentAchievements
         .where((a) => a.isUnlocked && !previouslyUnlockedIds.contains(a.id))
         .toList();
@@ -1441,7 +2059,9 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(widget.existingCase != null ? 'Case updated' : 'Case saved successfully'),
+        content: Text(widget.existingCase != null
+            ? 'Case updated'
+            : 'Case saved successfully'),
         backgroundColor: AppTheme.success,
       ),
     );
@@ -1450,26 +2070,53 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context);
-
     final isConsultant = _role == 'Consultant';
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(title: Text(widget.existingCase != null ? l10n.edit : l10n.newCase),
-        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
+      appBar: AppBar(
+        title: Text(widget.existingCase != null ? l10n.edit : l10n.newCase),
+        leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.pop(context)),
         actions: [
+          if (widget.existingCase == null)
+            IconButton(
+              icon: const Icon(Icons.qr_code_scanner_rounded),
+              tooltip: l10n.importCaseQr,
+              onPressed: _importViaQr,
+            ),
           PopupMenuButton<String>(
-            tooltip: l10n.term('Templates'),
+            tooltip: l10n.term('Options'),
             onSelected: (v) {
+              if (v == 'detailed_assessment') _openDetailedAssessment();
               if (v == 'template') _pickTemplate();
               if (v == 'last') _fromLastCase();
               if (v == 'save_template') _saveAsTemplate();
             },
             itemBuilder: (_) => [
+              PopupMenuItem(
+                value: 'detailed_assessment',
+                child: Row(
+                  children: [
+                    Icon(Icons.assignment_outlined,
+                        size: 20, color: AppTheme.primary),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        l10n.term('Detailed Assessment & Plan'),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const PopupMenuDivider(),
               PopupMenuItem(value: 'template', child: Text(l10n.useTemplate)),
-              PopupMenuItem(value: 'last', child: Text(l10n.copyLastCasePattern)),
-              PopupMenuItem(value: 'save_template', child: Text(l10n.saveAsTemplate)),
+              PopupMenuItem(
+                  value: 'last', child: Text(l10n.copyLastCasePattern)),
+              PopupMenuItem(
+                  value: 'save_template', child: Text(l10n.saveAsTemplate)),
             ],
           ),
         ],
@@ -1479,6 +2126,53 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            if (_detailedAssessment != null) ...[
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                      color: AppTheme.primary.withValues(alpha: 0.4)),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.check_circle_outline,
+                        color: AppTheme.primary, size: 24),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.term('Detailed Assessment & Plan Attached'),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.textPrimary,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            l10n.term(
+                                'Pre-op assessment and surgical plan linked to case.'),
+                            style: TextStyle(
+                              color: AppTheme.textSecondary,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: _openDetailedAssessment,
+                      child: Text(l10n.edit),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             _sectionHeader(l10n.caseSheetPhotoHeader),
             GestureDetector(
               onTap: _showImageSourceDialog,
@@ -1492,17 +2186,22 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 ),
                 child: _imagePath != null
                     ? ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.file(File(_imagePath!), fit: BoxFit.cover, width: double.infinity, height: 160),
-                )
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.file(File(_imagePath!),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 160),
+                      )
                     : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.camera_alt, size: 36, color: AppTheme.textSecondary),
-                    const SizedBox(height: 8),
-                    Text(l10n.tapToAddCaseSheetPhoto, style: TextStyle(color: AppTheme.textSecondary)),
-                  ],
-                ),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.camera_alt,
+                              size: 36, color: AppTheme.textSecondary),
+                          const SizedBox(height: 8),
+                          Text(l10n.tapToAddCaseSheetPhoto,
+                              style: TextStyle(color: AppTheme.textSecondary)),
+                        ],
+                      ),
               ),
             ),
             if (_imagePath != null)
@@ -1511,7 +2210,6 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 icon: const Icon(Icons.edit, size: 16),
                 label: Text(l10n.changePhoto),
               ),
-
             _sectionHeader(l10n.basicInformationHeader),
             Row(
               children: [
@@ -1543,7 +2241,6 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 ),
               ],
             ),
-
             _sectionHeader(l10n.anaesthesiaTimeHeader),
             Row(
               children: [
@@ -1551,9 +2248,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.anaesthesiaStart,
                     child: InkWell(
-                      onTap: () => _pickTime(isAnaesthesia: true, isStart: true),
+                      onTap: () =>
+                          _pickTime(isAnaesthesia: true, isStart: true),
                       child: _box(Text(
-                        _anaesthesiaStart != null ? _formatTime(_anaesthesiaStart)! : l10n.selectLabel,
+                        _anaesthesiaStart != null
+                            ? _formatTime(_anaesthesiaStart)!
+                            : l10n.selectLabel,
                         style: TextStyle(color: AppTheme.textPrimary),
                       )),
                     ),
@@ -1564,9 +2264,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.anaesthesiaEnd,
                     child: InkWell(
-                      onTap: () => _pickTime(isAnaesthesia: true, isStart: false),
+                      onTap: () =>
+                          _pickTime(isAnaesthesia: true, isStart: false),
                       child: _box(Text(
-                        _anaesthesiaEnd != null ? _formatTime(_anaesthesiaEnd)! : l10n.selectLabel,
+                        _anaesthesiaEnd != null
+                            ? _formatTime(_anaesthesiaEnd)!
+                            : l10n.selectLabel,
                         style: TextStyle(color: AppTheme.textPrimary),
                       )),
                     ),
@@ -1579,49 +2282,61 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Text(
                   '${l10n.anaesthesiaDurationLabel}: $_anaesthesiaDuration',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.primary),
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.primary),
                 ),
               ),
-
-            _sectionHeader(l10n.surgicalTimeHeader),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildField(
-                    label: l10n.surgeryStart,
-                    child: InkWell(
-                      onTap: () => _pickTime(isAnaesthesia: false, isStart: true),
-                      child: _box(Text(
-                        _surgeryStart != null ? _formatTime(_surgeryStart)! : l10n.selectLabel,
-                        style: TextStyle(color: AppTheme.textPrimary),
-                      )),
+            if (_specialty != 'Vascular access') ...[
+              _sectionHeader(l10n.surgicalTimeHeader),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildField(
+                      label: l10n.surgeryStart,
+                      child: InkWell(
+                        onTap: () =>
+                            _pickTime(isAnaesthesia: false, isStart: true),
+                        child: _box(Text(
+                          _surgeryStart != null
+                              ? _formatTime(_surgeryStart)!
+                              : l10n.selectLabel,
+                          style: TextStyle(color: AppTheme.textPrimary),
+                        )),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildField(
-                    label: l10n.surgeryEnd,
-                    child: InkWell(
-                      onTap: () => _pickTime(isAnaesthesia: false, isStart: false),
-                      child: _box(Text(
-                        _surgeryEnd != null ? _formatTime(_surgeryEnd)! : l10n.selectLabel,
-                        style: TextStyle(color: AppTheme.textPrimary),
-                      )),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: _buildField(
+                      label: l10n.surgeryEnd,
+                      child: InkWell(
+                        onTap: () =>
+                            _pickTime(isAnaesthesia: false, isStart: false),
+                        child: _box(Text(
+                          _surgeryEnd != null
+                              ? _formatTime(_surgeryEnd)!
+                              : l10n.selectLabel,
+                          style: TextStyle(color: AppTheme.textPrimary),
+                        )),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            if (_surgeryDuration != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Text(
-                  '${l10n.surgicalDurationLabel}: $_surgeryDuration',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.primary),
-                ),
+                ],
               ),
-
+              if (_surgeryDuration != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    '${l10n.surgicalDurationLabel}: $_surgeryDuration',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.primary),
+                  ),
+                ),
+            ],
             _sectionHeader(l10n.patientHeader),
             Row(
               children: [
@@ -1631,9 +2346,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                     label: l10n.age,
                     child: TextFormField(
                       controller: _ageController,
-                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}')),
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d*\.?\d{0,1}')),
                         LengthLimitingTextInputFormatter(5),
                       ],
                       decoration: const InputDecoration(hintText: 'e.g. 0.5'),
@@ -1647,8 +2364,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.unitLabel,
                     child: DropdownButtonFormField<String>(
-                      value: _ageUnit,
-                      items: _ageUnits.map((u) => DropdownMenuItem(value: u, child: Text(l10n.term(u)))).toList(),
+                      initialValue: _ageUnit,
+                      items: _ageUnits
+                          .map((u) => DropdownMenuItem(
+                              value: u, child: Text(l10n.term(u))))
+                          .toList(),
                       onChanged: (v) {
                         setState(() => _ageUnit = v!);
                         _normalizeAgeInput();
@@ -1664,8 +2384,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.genderLabel,
                     child: DropdownButtonFormField<String>(
-                      value: _gender,
-                      items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(l10n.term(g)))).toList(),
+                      initialValue: _gender,
+                      items: _genders
+                          .map((g) => DropdownMenuItem(
+                              value: g, child: Text(l10n.term(g))))
+                          .toList(),
                       onChanged: (v) => setState(() => _gender = v!),
                     ),
                   ),
@@ -1710,23 +2433,34 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.bmiLabel,
                     child: _box(Text(
-                      _bmi != null ? _bmi!.toStringAsFixed(1) : '—',
-                      style: TextStyle(color: AppTheme.textPrimary, fontWeight: FontWeight.w600),
+                      _bmi != null ? _bmi!.toStringAsFixed(1) : '-',
+                      style: TextStyle(
+                          color: AppTheme.textPrimary,
+                          fontWeight: FontWeight.w600),
                     )),
                   ),
                 ),
               ],
             ),
-
             _sectionHeader(l10n.surgeryAndAnaesthesiaHeader),
             _buildField(
               label: l10n.specialty,
               child: DropdownButtonFormField<String>(
-                value: _specialty,
+                initialValue: _specialty,
                 items: _specialties
-                    .map((s) => DropdownMenuItem(value: s, child: Text(l10n.term(s), overflow: TextOverflow.ellipsis)))
+                    .map((s) => DropdownMenuItem(
+                        value: s,
+                        child: Text(l10n.term(s),
+                            overflow: TextOverflow.ellipsis)))
                     .toList(),
-                onChanged: (v) => setState(() => _specialty = v!),
+                onChanged: (v) => setState(() {
+                  _specialty = v!;
+                  if (_specialty == 'Vascular access') {
+                    _surgeryStart = null;
+                    _surgeryEnd = null;
+                    _surgeryDuration = null;
+                  }
+                }),
               ),
             ),
             if (_isOtherSpecialty)
@@ -1748,17 +2482,20 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               child: Autocomplete<String>(
                 optionsBuilder: (tev) {
                   if (tev.text.isEmpty) return const Iterable<String>.empty();
-                  return _diagnosisSuggestions
-                      .where((o) => o.toLowerCase().contains(tev.text.toLowerCase()));
+                  return _diagnosisSuggestions.where(
+                      (o) => o.toLowerCase().contains(tev.text.toLowerCase()));
                 },
                 onSelected: (s) => _diagnosisController.text = s,
-                fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+                fieldViewBuilder:
+                    (context, controller, focusNode, onFieldSubmitted) {
                   controller.text = _diagnosisController.text;
-                  controller.addListener(() => _diagnosisController.text = controller.text);
+                  controller.addListener(
+                      () => _diagnosisController.text = controller.text);
                   return TextFormField(
                     controller: controller,
                     focusNode: focusNode,
-                    decoration: InputDecoration(hintText: l10n.primaryDiagnosis),
+                    decoration:
+                        InputDecoration(hintText: l10n.primaryDiagnosis),
                   );
                 },
               ),
@@ -1768,18 +2505,23 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               child: Autocomplete<String>(
                 optionsBuilder: (tev) {
                   if (tev.text.isEmpty) return const Iterable<String>.empty();
-                  return _procedureSuggestions
-                      .where((o) => o.toLowerCase().contains(tev.text.toLowerCase()));
+                  return _procedureSuggestions.where(
+                      (o) => o.toLowerCase().contains(tev.text.toLowerCase()));
                 },
                 onSelected: (s) => _procedureController.text = s,
-                fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+                fieldViewBuilder:
+                    (context, controller, focusNode, onFieldSubmitted) {
                   controller.text = _procedureController.text;
-                  controller.addListener(() => _procedureController.text = controller.text);
+                  controller.addListener(
+                      () => _procedureController.text = controller.text);
                   return TextFormField(
                     controller: controller,
                     focusNode: focusNode,
-                    decoration: InputDecoration(hintText: l10n.procedurePerformed),
-                    validator: (v) => (v == null || v.isEmpty) ? l10n.pleaseEnterProcedure : null,
+                    decoration:
+                        InputDecoration(hintText: l10n.procedurePerformed),
+                    validator: (v) => (v == null || v.isEmpty)
+                        ? l10n.pleaseEnterProcedure
+                        : null,
                   );
                 },
               ),
@@ -1790,8 +2532,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.priority,
                     child: DropdownButtonFormField<String>(
-                      value: _priority,
-                      items: _priorities.map((p) => DropdownMenuItem(value: p, child: Text(l10n.term(p)))).toList(),
+                      initialValue: _priority,
+                      items: _priorities
+                          .map((p) => DropdownMenuItem(
+                              value: p, child: Text(l10n.term(p))))
+                          .toList(),
                       onChanged: (v) => setState(() => _priority = v!),
                     ),
                   ),
@@ -1801,8 +2546,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   child: _buildField(
                     label: l10n.asaGrade,
                     child: DropdownButtonFormField<String>(
-                      value: _asaGrade,
-                      items: _asaGrades.map((a) => DropdownMenuItem(value: a, child: Text(l10n.term(a)))).toList(),
+                      initialValue: _asaGrade,
+                      items: _asaGrades
+                          .map((a) => DropdownMenuItem(
+                              value: a, child: Text(l10n.term(a))))
+                          .toList(),
                       onChanged: (v) => setState(() => _asaGrade = v!),
                     ),
                   ),
@@ -1812,9 +2560,12 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
             _buildField(
               label: l10n.primaryTechnique,
               child: DropdownButtonFormField<String>(
-                value: _technique,
+                initialValue: _technique,
                 items: _techniques
-                    .map((t) => DropdownMenuItem(value: t, child: Text(l10n.term(t), overflow: TextOverflow.ellipsis)))
+                    .map((t) => DropdownMenuItem(
+                        value: t,
+                        child: Text(l10n.term(t),
+                            overflow: TextOverflow.ellipsis)))
                     .toList(),
                 onChanged: (v) {
                   setState(() {
@@ -1827,7 +2578,6 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 },
               ),
             ),
-
             _sectionHeader(l10n.regionalAnaesthesiaHeader),
             _buildDetailTile(
               title: l10n.regionalAnaesthesia,
@@ -1838,38 +2588,250 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 final parts = <String>[l10n.term(name), l10n.term(roleStr)];
                 if (e['usgGuided'] == true) parts.add('USG');
                 if (e['nerveStimulator'] == true) parts.add('NS');
+                if (_catheterPlaced &&
+                    (e['catheterPlaced'] == true || e['hasCatheter'] == true)) {
+                  parts.add(l10n.catheterLabel);
+                }
                 return parts.join(' · ');
               }).toList(),
               onTap: _showRegionalDialog,
             ),
             if (_showCatheterOption)
-              Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: AppTheme.surface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppTheme.surfaceLight),
-                ),
-                child: CheckboxListTile(
+              Builder(
+                builder: (context) {
+                  final activeRegional = _regionalList
+                      .where((e) =>
+                          e['name'] != null &&
+                          e['name'] != 'None / Not performed')
+                      .toList();
+                  final hasMultipleBlocks = activeRegional.length > 1;
+                  final hasSelectedCatheter = activeRegional.any((b) =>
+                      b['catheterPlaced'] == true || b['hasCatheter'] == true);
+                  final showError = _catheterValidationError &&
+                      _catheterPlaced &&
+                      hasMultipleBlocks &&
+                      !hasSelectedCatheter;
+
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: AppTheme.surface,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color:
+                            showError ? AppTheme.danger : AppTheme.surfaceLight,
+                        width: showError ? 1.5 : 1.0,
+                      ),
+                    ),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CheckboxListTile(
+                            title: Text(
+                              l10n.catheterPlacedInfo,
+                              style: TextStyle(
+                                  color: AppTheme.textPrimary, fontSize: 14),
+                            ),
+                            value: _catheterPlaced,
+                            activeColor: AppTheme.primary,
+                            onChanged: (v) {
+                              setState(() {
+                                _catheterPlaced = v ?? false;
+                                _catheterValidationError = false;
+                                if (!_catheterPlaced) {
+                                  for (final b in _regionalList) {
+                                    b['catheterPlaced'] = false;
+                                    b['hasCatheter'] = false;
+                                  }
+                                } else {
+                                  if (activeRegional.length == 1) {
+                                    activeRegional.first['catheterPlaced'] =
+                                        true;
+                                    activeRegional.first['hasCatheter'] = true;
+                                  }
+                                }
+                              });
+                            },
+                          ),
+                          if (_catheterPlaced && hasMultipleBlocks) ...[
+                            Divider(
+                              height: 1,
+                              thickness: 1,
+                              color: showError
+                                  ? AppTheme.danger.withValues(alpha: 0.3)
+                                  : AppTheme.surfaceLight,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.tune_rounded,
+                                        size: 16,
+                                        color: showError
+                                            ? AppTheme.danger
+                                            : AppTheme.primary,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          l10n.selectCatheterBlocks,
+                                          style: TextStyle(
+                                            color: AppTheme.textPrimary,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: showError
+                                              ? AppTheme.danger
+                                                  .withValues(alpha: 0.15)
+                                              : AppTheme.surfaceLight,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          l10n.selectAtLeastOne,
+                                          style: TextStyle(
+                                            color: showError
+                                                ? AppTheme.danger
+                                                : AppTheme.textSecondary,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Wrap(
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: activeRegional.map((block) {
+                                      final isSelected =
+                                          block['catheterPlaced'] == true ||
+                                              block['hasCatheter'] == true;
+                                      final rawName =
+                                          block['name']?.toString() ?? '';
+                                      final blockName = l10n.term(rawName);
+
+                                      return FilterChip(
+                                        label: Text(
+                                          blockName,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: isSelected
+                                                ? FontWeight.w600
+                                                : FontWeight.w400,
+                                            color: isSelected
+                                                ? Colors.white
+                                                : AppTheme.textPrimary,
+                                          ),
+                                        ),
+                                        selected: isSelected,
+                                        selectedColor: AppTheme.primary,
+                                        backgroundColor: AppTheme.surfaceLight,
+                                        checkmarkColor: Colors.white,
+                                        showCheckmark: true,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          side: BorderSide(
+                                            color: isSelected
+                                                ? AppTheme.primary
+                                                : AppTheme.surfaceLight,
+                                          ),
+                                        ),
+                                        onSelected: (selected) {
+                                          setState(() {
+                                            block['catheterPlaced'] = selected;
+                                            block['hasCatheter'] = selected;
+                                            if (selected) {
+                                              _catheterValidationError = false;
+                                            }
+                                          });
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                                  if (showError) ...[
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.error_outline_rounded,
+                                          size: 14,
+                                          color: AppTheme.danger,
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Expanded(
+                                          child: Text(
+                                            l10n.catheterSelectAtLeastOne,
+                                            style: TextStyle(
+                                              color: AppTheme.danger,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: AppTheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppTheme.surfaceLight),
+              ),
+              child: Material(
+                type: MaterialType.transparency,
+                child: SwitchListTile(
                   title: Text(
-                    l10n.catheterPlacedInfo,
+                    l10n.term('Patient controlled analgesia (PCA)'),
                     style: TextStyle(color: AppTheme.textPrimary, fontSize: 14),
                   ),
-                  value: _catheterPlaced,
-                  activeColor: AppTheme.primary,
-                  onChanged: (v) => setState(() => _catheterPlaced = v ?? false),
+                  value: _pca,
+                  activeThumbColor: AppTheme.primary,
+                  onChanged: (v) => setState(() => _pca = v),
                 ),
               ),
-
+            ),
             _buildField(
               label: l10n.yourRole,
               child: DropdownButtonFormField<String>(
-                value: _role,
-                items: _roles.map((r) => DropdownMenuItem(value: r, child: Text(l10n.term(r)))).toList(),
+                initialValue: _role,
+                items: _roles
+                    .map((r) =>
+                        DropdownMenuItem(value: r, child: Text(l10n.term(r))))
+                    .toList(),
                 onChanged: (v) {
                   setState(() {
                     _role = v!;
-                    if (_role == 'Consultant') _supervisorController.clear();
+                    if (_role == 'Consultant') {
+                      _supervisorController.clear();
+                      _verified = true;
+                    }
                   });
                 },
               ),
@@ -1882,13 +2844,15 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   decoration: InputDecoration(hintText: l10n.ifSupervised),
                 ),
               ),
-
             _sectionHeader(l10n.airwayHeader),
             _buildField(
               label: l10n.airwayManagement,
               child: DropdownButtonFormField<String>(
-                value: _airway,
-                items: _airways.map((a) => DropdownMenuItem(value: a, child: Text(l10n.term(a)))).toList(),
+                initialValue: _airway,
+                items: _airways
+                    .map((a) =>
+                        DropdownMenuItem(value: a, child: Text(l10n.term(a))))
+                    .toList(),
                 onChanged: (v) {
                   if (v != null) _onAirwayChanged(v);
                 },
@@ -1898,69 +2862,92 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               _buildField(
                 label: l10n.typeOfIntubationLabel,
                 child: DropdownButtonFormField<String>(
-                  value: _isDLT
+                  initialValue: _isDLT
                       ? 'Oral intubation'
                       : (_availableIntubationTypes.contains(_typeOfIntubation)
-                      ? _typeOfIntubation
-                      : null),
+                          ? _typeOfIntubation
+                          : null),
                   hint: Text(l10n.selectLabel),
                   items: _availableIntubationTypes
-                      .map((t) => DropdownMenuItem(value: t, child: Text(l10n.term(t))))
+                      .map((t) =>
+                          DropdownMenuItem(value: t, child: Text(l10n.term(t))))
                       .toList(),
                   onChanged: _isDLT ? null : _onTypeOfIntubationChanged,
                 ),
               ),
               _buildField(
-                label: l10n.methodOfIntubationLabel,
-                child: DropdownButtonFormField<String>(
-                  value: _methodOfIntubation,
-                  hint: Text(l10n.selectLabel),
-                  items: _intubationMethods
-                      .map((t) => DropdownMenuItem(value: t, child: Text(l10n.term(t), overflow: TextOverflow.ellipsis)))
-                      .toList(),
-                  onChanged: (v) => setState(() => _methodOfIntubation = v),
-                ),
-              ),
-              _buildField(
                 label: l10n.intubationRoleLabel,
                 child: DropdownButtonFormField<String>(
-                  value: _methodOfIntubationRole,
+                  initialValue: _methodOfIntubationRole,
                   hint: Text(l10n.selectLabel),
                   items: _intubationRoles
-                      .map((r) => DropdownMenuItem(value: r, child: Text(l10n.term(r))))
+                      .map((r) =>
+                          DropdownMenuItem(value: r, child: Text(l10n.term(r))))
                       .toList(),
-                  onChanged: (v) => setState(() => _methodOfIntubationRole = v),
+                  onChanged: (v) => setState(() {
+                    _methodOfIntubationRole = v;
+                    if (v == 'In situ') {
+                      _methodOfIntubation = null;
+                      _cormack = 'Not graded';
+                    }
+                  }),
                 ),
               ),
+              if (_methodOfIntubationRole != 'In situ')
+                _buildField(
+                  label: l10n.methodOfIntubationLabel,
+                  child: DropdownButtonFormField<String>(
+                    initialValue: _methodOfIntubation,
+                    hint: Text(l10n.selectLabel),
+                    items: _intubationMethods
+                        .map((t) => DropdownMenuItem(
+                            value: t,
+                            child: Text(l10n.term(t),
+                                overflow: TextOverflow.ellipsis)))
+                        .toList(),
+                    onChanged: (v) => setState(() => _methodOfIntubation = v),
+                  ),
+                ),
               if (_showEttType) ...[
                 _buildField(
                   label: l10n.ettTypeLabel,
                   child: DropdownButtonFormField<String>(
-                    value: _availableEttTypes.contains(_ettType) ? _ettType : null,
+                    initialValue:
+                        _availableEttTypes.contains(_ettType) ? _ettType : null,
                     hint: Text(l10n.selectLabel),
                     items: _availableEttTypes
-                        .map((t) => DropdownMenuItem(value: t, child: Text(l10n.term(t), overflow: TextOverflow.ellipsis)))
+                        .map((t) => DropdownMenuItem(
+                            value: t,
+                            child: Text(l10n.term(t),
+                                overflow: TextOverflow.ellipsis)))
                         .toList(),
                     onChanged: (v) => setState(() => _ettType = v),
                   ),
                 ),
                 _buildField(
-                  label: '${l10n.ettSizeLabel} (2.0 – 9.0)',
+                  label: '${l10n.ettSizeLabel} (2.0 - 9.0)',
                   child: TextFormField(
                     controller: _ettSizeController,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}'))],
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d*\.?\d{0,1}'))
+                    ],
                     decoration: const InputDecoration(hintText: 'e.g. 7.5'),
                   ),
                 ),
               ],
             ],
-            if (_isETT)
+            if (_isETT && _methodOfIntubationRole != 'In situ')
               _buildField(
                 label: l10n.cormackLehaneGrade,
                 child: DropdownButtonFormField<String>(
-                  value: _cormack,
-                  items: _cormackGrades.map((c) => DropdownMenuItem(value: c, child: Text(l10n.term(c)))).toList(),
+                  initialValue: _cormack,
+                  items: _cormackGrades
+                      .map((c) =>
+                          DropdownMenuItem(value: c, child: Text(l10n.term(c))))
+                      .toList(),
                   onChanged: (v) => setState(() => _cormack = v!),
                 ),
               ),
@@ -1968,29 +2955,36 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               _buildField(
                 label: l10n.lmaTypeLabel,
                 child: DropdownButtonFormField<String>(
-                  value: _lmaType,
+                  initialValue: _lmaType,
                   hint: Text(l10n.selectLabel),
-                  items: _lmaTypes.map((t) => DropdownMenuItem(value: t, child: Text(l10n.term(t)))).toList(),
+                  items: _lmaTypes
+                      .map((t) =>
+                          DropdownMenuItem(value: t, child: Text(l10n.term(t))))
+                      .toList(),
                   onChanged: (v) => setState(() => _lmaType = v),
                 ),
               ),
               _buildField(
                 label: l10n.lmaRoleLabel,
                 child: DropdownButtonFormField<String>(
-                  value: _lmaRole,
+                  initialValue: _lmaRole,
                   hint: Text(l10n.selectLabel),
                   items: _intubationRoles
-                      .map((r) => DropdownMenuItem(value: r, child: Text(l10n.term(r))))
+                      .map((r) =>
+                          DropdownMenuItem(value: r, child: Text(l10n.term(r))))
                       .toList(),
                   onChanged: (v) => setState(() => _lmaRole = v),
                 ),
               ),
               _buildField(
-                label: '${l10n.lmaSizeLabel} (1.0 – 7.0)',
+                label: '${l10n.lmaSizeLabel} (1.0 - 7.0)',
                 child: TextFormField(
                   controller: _lmaSizeController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}'))],
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,1}'))
+                  ],
                   decoration: const InputDecoration(hintText: 'e.g. 4.0'),
                 ),
               ),
@@ -2002,14 +2996,18 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: AppTheme.surfaceLight),
               ),
-              child: SwitchListTile(
-                title: Text(l10n.difficultAirwayLabel, style: TextStyle(color: AppTheme.textPrimary)),
-                value: _difficultAirway,
-                activeColor: AppTheme.primary,
-                onChanged: (v) => setState(() {
-                  _difficultAirway = v;
-                  if (!v) _airwayAttemptsController.clear();
-                }),
+              child: Material(
+                type: MaterialType.transparency,
+                child: SwitchListTile(
+                  title: Text(l10n.difficultAirwayLabel,
+                      style: TextStyle(color: AppTheme.textPrimary)),
+                  value: _difficultAirway,
+                  activeThumbColor: AppTheme.primary,
+                  onChanged: (v) => setState(() {
+                    _difficultAirway = v;
+                    if (!v) _airwayAttemptsController.clear();
+                  }),
+                ),
               ),
             ),
             if (_difficultAirway)
@@ -2025,7 +3023,6 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   decoration: const InputDecoration(hintText: 'e.g. 2'),
                 ),
               ),
-
             _sectionHeader(l10n.invasiveLinesHeader),
             _buildDetailTile(
               title: l10n.invasiveLinesAndEquipmentUsed,
@@ -2038,42 +3035,69 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               }).toList(),
               onTap: _showInvasiveDialog,
             ),
-
             _sectionHeader(l10n.complicationsHeader),
             _buildDetailTile(
               title: l10n.intraOpPostOpComplications,
-              chips: _selectedComplications.map<String>((c) => l10n.term(c)).toList(),
+              chips: _selectedComplications
+                  .map<String>((c) => l10n.term(c))
+                  .toList(),
               onTap: _showComplicationDialog,
             ),
-
             _sectionHeader(l10n.outcomeHeader),
             _buildField(
               label: l10n.outcome,
               child: DropdownButtonFormField<String>(
-                value: _selectedOutcome,
+                initialValue: _selectedOutcome,
                 hint: Text(l10n.selectOutcome),
                 items: _outcomeOptions
-                    .map((o) => DropdownMenuItem(value: o, child: Text(l10n.term(o), overflow: TextOverflow.ellipsis)))
+                    .map((o) => DropdownMenuItem(
+                        value: o,
+                        child: Text(l10n.term(o),
+                            overflow: TextOverflow.ellipsis)))
                     .toList(),
                 onChanged: (v) => setState(() => _selectedOutcome = v),
               ),
             ),
-
-
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
                 l10n.flagForPostOpFollowUp,
-                style: TextStyle(color: AppTheme.textPrimary, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: AppTheme.textPrimary, fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
                 l10n.flagForFollowUpSubtitle,
                 style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
               ),
               value: _flagForFollowUp,
-              activeColor: AppTheme.primary,
+              activeThumbColor: AppTheme.primary,
               onChanged: (v) => setState(() => _flagForFollowUp = v),
             ),
+            if (_verificationEnabled)
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  'Clinically Verified Record',
+                  style: TextStyle(
+                      color: AppTheme.textPrimary, fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  _verified
+                      ? (_verifiedBy != null
+                          ? 'Verified by $_verifiedBy'
+                          : 'Record tagged as clinically verified')
+                      : 'Tag this case as clinically verified',
+                  style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+                ),
+                value: _verified,
+                activeThumbColor: AppTheme.success,
+                onChanged: (v) => setState(() {
+                  _verified = v;
+                  if (v && _verifiedAt == null) {
+                    _verifiedAt = DateTime.now();
+                  }
+                }),
+              ),
             const SizedBox(height: 8),
             _sectionHeader(l10n.notesHeader),
             _buildField(
@@ -2081,10 +3105,10 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
               child: TextFormField(
                 controller: _notesController,
                 maxLines: 3,
-                decoration: InputDecoration(hintText: l10n.additionalClinicalNotes),
+                decoration:
+                    InputDecoration(hintText: l10n.additionalClinicalNotes),
               ),
             ),
-
             const SizedBox(height: 12),
             ElevatedButton(onPressed: _saveCase, child: Text(l10n.saveCase)),
             const SizedBox(height: 32),
@@ -2128,7 +3152,11 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+          Text(label,
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.textSecondary)),
           const SizedBox(height: 6),
           child,
         ],
@@ -2162,7 +3190,10 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   Expanded(
                     child: Text(
                       title,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.textPrimary),
                     ),
                   ),
                   Icon(Icons.arrow_drop_down, color: AppTheme.textSecondary),
@@ -2175,17 +3206,20 @@ class _NewCaseScreenState extends State<NewCaseScreen> {
                   runSpacing: 6,
                   children: chips
                       .map((s) => Chip(
-                    label: Text(s, style: TextStyle(fontSize: 12)),
-                    backgroundColor: AppTheme.primary.withValues(alpha: 0.15),
-                    labelStyle: TextStyle(color: AppTheme.primary),
-                    visualDensity: VisualDensity.compact,
-                  ))
+                            label: Text(s, style: TextStyle(fontSize: 12)),
+                            backgroundColor:
+                                AppTheme.primary.withValues(alpha: 0.15),
+                            labelStyle: TextStyle(color: AppTheme.primary),
+                            visualDensity: VisualDensity.compact,
+                          ))
                       .toList(),
                 ),
               ] else
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
-                  child: Text(l10n.tapToSelect, style: TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
+                  child: Text(l10n.tapToSelect,
+                      style: TextStyle(
+                          fontSize: 12, color: AppTheme.textSecondary)),
                 ),
             ],
           ),

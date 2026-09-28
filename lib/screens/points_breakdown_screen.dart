@@ -6,7 +6,7 @@ import '../services/points_service.dart';
 import '../services/profile_storage.dart';
 import '../l10n/app_localizations.dart';
 import 'case_detail_screen.dart';
-import '../widgets/animated_gradient_background.dart';
+import 'category_points_detail_screen.dart';
 
 class PointsBreakdownScreen extends StatefulWidget {
   const PointsBreakdownScreen({super.key});
@@ -55,6 +55,10 @@ class _PointsBreakdownScreenState extends State<PointsBreakdownScreen> {
     final sortedCases = List<CaseRecord>.from(_cases)
       ..sort((a, b) =>
           PointsService.forCase(b).compareTo(PointsService.forCase(a)));
+    final sortedCategories = _categories.entries
+        .where((e) => e.value != 0)
+        .toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -104,70 +108,115 @@ class _PointsBreakdownScreenState extends State<PointsBreakdownScreen> {
             ),
           ),
           const SizedBox(height: 10),
-          ..._categories.entries.map((e) {
-            if (e.value == 0) return const SizedBox.shrink();
+          ...sortedCategories.map((e) {
             final positive = e.value > 0;
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppTheme.surface,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppTheme.surfaceLight),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l10n.term(e.key),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.textPrimary,
-                        fontWeight: FontWeight.w500,
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    pageBuilder: (_, __, ___) => CategoryPointsDetailScreen(
+                      categoryKey: e.key,
+                      cases: _cases,
+                      profileBonus: _profileBonus,
+                    ),
+                  ),
+                );
+              },
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppTheme.surface,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppTheme.surfaceLight),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.term(e.key),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppTheme.textPrimary,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    positive ? '+${e.value}' : '${e.value}',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                      color: positive ? AppTheme.primary : AppTheme.danger,
+                    Text(
+                      positive ? '+${e.value}' : '${e.value}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: positive ? AppTheme.primary : AppTheme.danger,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Icon(
+                      Icons.chevron_right,
+                      size: 16,
+                      color: AppTheme.textSecondary.withValues(alpha: 0.6),
+                    ),
+                  ],
+                ),
               ),
             );
           }),
           if (_profileBonus > 0)
-            Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppTheme.surface,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppTheme.surfaceLight),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l10n.profileCompletionBonus,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                    pageBuilder: (_, __, ___) => CategoryPointsDetailScreen(
+                      categoryKey: 'Profile completion bonus',
+                      cases: _cases,
+                      profileBonus: _profileBonus,
+                    ),
+                  ),
+                );
+              },
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: AppTheme.surface,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppTheme.surfaceLight),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.profileCompletionBonus,
+                        style: TextStyle(
+                            fontSize: 14, color: AppTheme.textPrimary),
+                      ),
+                    ),
+                    Text(
+                      '+$_profileBonus',
                       style: TextStyle(
-                          fontSize: 14, color: AppTheme.textPrimary),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '+$_profileBonus',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                      color: AppTheme.primary,
+                    const SizedBox(width: 8),
+                    Icon(
+                      Icons.chevron_right,
+                      size: 16,
+                      color: AppTheme.textSecondary.withValues(alpha: 0.6),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           const SizedBox(height: 20),

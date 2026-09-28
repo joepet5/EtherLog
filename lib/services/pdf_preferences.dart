@@ -8,6 +8,7 @@ class PdfPreferences {
   final bool includeAirway;
   final bool includeInvasive;
   final bool includeComplications;
+  final bool includeFollowUp;
   final bool includeSummaryTables;
   final bool includeSignatureBlock;
 
@@ -24,6 +25,7 @@ class PdfPreferences {
     this.includeAirway = true,
     this.includeInvasive = true,
     this.includeComplications = true,
+    this.includeFollowUp = true,
     this.includeSummaryTables = true,
     this.includeSignatureBlock = true,
     this.useDateRange = false,
@@ -39,6 +41,7 @@ class PdfPreferences {
     bool? includeAirway,
     bool? includeInvasive,
     bool? includeComplications,
+    bool? includeFollowUp,
     bool? includeSummaryTables,
     bool? includeSignatureBlock,
     bool? useDateRange,
@@ -55,6 +58,7 @@ class PdfPreferences {
       includeAirway: includeAirway ?? this.includeAirway,
       includeInvasive: includeInvasive ?? this.includeInvasive,
       includeComplications: includeComplications ?? this.includeComplications,
+      includeFollowUp: includeFollowUp ?? this.includeFollowUp,
       includeSummaryTables: includeSummaryTables ?? this.includeSummaryTables,
       includeSignatureBlock: includeSignatureBlock ?? this.includeSignatureBlock,
       useDateRange: useDateRange ?? this.useDateRange,
@@ -70,6 +74,7 @@ class PdfPreferences {
   static const _kAirway = 'pdf_include_airway';
   static const _kInvasive = 'pdf_include_invasive';
   static const _kComplications = 'pdf_include_complications';
+  static const _kFollowUp = 'pdf_include_follow_up';
   static const _kSummary = 'pdf_include_summary_tables';
   static const _kSignature = 'pdf_include_signature_block';
   static const _kUseRange = 'pdf_use_date_range';
@@ -91,6 +96,7 @@ class PdfPreferences {
       includeAirway: p.getBool(_kAirway) ?? true,
       includeInvasive: p.getBool(_kInvasive) ?? true,
       includeComplications: p.getBool(_kComplications) ?? true,
+      includeFollowUp: p.getBool(_kFollowUp) ?? true,
       includeSummaryTables: p.getBool(_kSummary) ?? true,
       includeSignatureBlock: p.getBool(_kSignature) ?? true,
       useDateRange: p.getBool(_kUseRange) ?? false,
@@ -108,6 +114,7 @@ class PdfPreferences {
     await p.setBool(_kAirway, includeAirway);
     await p.setBool(_kInvasive, includeInvasive);
     await p.setBool(_kComplications, includeComplications);
+    await p.setBool(_kFollowUp, includeFollowUp);
     await p.setBool(_kSummary, includeSummaryTables);
     await p.setBool(_kSignature, includeSignatureBlock);
     await p.setBool(_kUseRange, useDateRange);

@@ -49,6 +49,7 @@ class CaseRecord {
   final String? caseSheetImagePath;
   final List<Map<String, dynamic>> regionalBlocks;
   final bool catheterPlaced;
+  final bool pca;
 
   /// Rare / unique case flag for later filtering.
   final bool starred;
@@ -66,6 +67,11 @@ class CaseRecord {
   final List<String> blockAssessmentTags;
   final List<String> followUpComplications;
   final String? followUpNotes;
+  final bool verified;
+  final String? verifiedBy;
+  final DateTime? verifiedAt;
+  final Map<String, dynamic>? detailedAssessment;
+  final Map<String, dynamic>? dopsAssessment;
 
   CaseRecord({
     String? id,
@@ -112,6 +118,7 @@ class CaseRecord {
     this.caseSheetImagePath,
     List<Map<String, dynamic>>? regionalBlocks,
     this.catheterPlaced = false,
+    this.pca = false,
     this.starred = false,
     this.flagForFollowUp = false,
     this.followUpStatus = 'none',
@@ -122,6 +129,11 @@ class CaseRecord {
     List<String>? blockAssessmentTags,
     List<String>? followUpComplications,
     this.followUpNotes,
+    this.verified = false,
+    this.verifiedBy,
+    this.verifiedAt,
+    this.detailedAssessment,
+    this.dopsAssessment,
   })  : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         invasiveMonitoring = invasiveMonitoring ?? const [],
         complications = complications ?? const [],
@@ -181,6 +193,7 @@ class CaseRecord {
     String? caseSheetImagePath,
     List<Map<String, dynamic>>? regionalBlocks,
     bool? catheterPlaced,
+    bool? pca,
     bool? starred,
     bool? flagForFollowUp,
     String? followUpStatus,
@@ -191,6 +204,14 @@ class CaseRecord {
     List<String>? blockAssessmentTags,
     List<String>? followUpComplications,
     String? followUpNotes,
+    bool? verified,
+    String? verifiedBy,
+    DateTime? verifiedAt,
+    bool clearVerification = false,
+    Map<String, dynamic>? detailedAssessment,
+    bool clearDetailedAssessment = false,
+    Map<String, dynamic>? dopsAssessment,
+    bool clearDopsAssessment = false,
   }) {
     return CaseRecord(
       id: id ?? this.id,
@@ -212,7 +233,7 @@ class CaseRecord {
       role: role ?? this.role,
       difficultAirway: difficultAirway ?? this.difficultAirway,
       difficultAirwayAttempts:
-      difficultAirwayAttempts ?? this.difficultAirwayAttempts,
+          difficultAirwayAttempts ?? this.difficultAirwayAttempts,
       notes: notes ?? this.notes,
       patientAge: patientAge ?? this.patientAge,
       ageUnit: ageUnit ?? this.ageUnit,
@@ -227,7 +248,7 @@ class CaseRecord {
       typeOfIntubation: typeOfIntubation ?? this.typeOfIntubation,
       methodOfIntubation: methodOfIntubation ?? this.methodOfIntubation,
       methodOfIntubationRole:
-      methodOfIntubationRole ?? this.methodOfIntubationRole,
+          methodOfIntubationRole ?? this.methodOfIntubationRole,
       ettType: ettType ?? this.ettType,
       ettSize: ettSize ?? this.ettSize,
       lmaType: lmaType ?? this.lmaType,
@@ -239,6 +260,7 @@ class CaseRecord {
       caseSheetImagePath: caseSheetImagePath ?? this.caseSheetImagePath,
       regionalBlocks: regionalBlocks ?? this.regionalBlocks,
       catheterPlaced: catheterPlaced ?? this.catheterPlaced,
+      pca: pca ?? this.pca,
       starred: starred ?? this.starred,
       flagForFollowUp: flagForFollowUp ?? this.flagForFollowUp,
       followUpStatus: followUpStatus ?? this.followUpStatus,
@@ -247,9 +269,31 @@ class CaseRecord {
       movementPainScore: movementPainScore ?? this.movementPainScore,
       ponv: ponv ?? this.ponv,
       blockAssessmentTags: blockAssessmentTags ?? this.blockAssessmentTags,
-      followUpComplications: followUpComplications ?? this.followUpComplications,
+      followUpComplications:
+          followUpComplications ?? this.followUpComplications,
       followUpNotes: followUpNotes ?? this.followUpNotes,
+      verified: clearVerification ? false : (verified ?? this.verified),
+      verifiedBy: clearVerification ? null : (verifiedBy ?? this.verifiedBy),
+      verifiedAt: clearVerification ? null : (verifiedAt ?? this.verifiedAt),
+      detailedAssessment: clearDetailedAssessment
+          ? null
+          : (detailedAssessment ?? this.detailedAssessment),
+      dopsAssessment: clearDopsAssessment
+          ? null
+          : (dopsAssessment ?? this.dopsAssessment),
     );
+  }
+
+  /// Formatted age string with decimals stripped when age > 12 years or when it is a whole number.
+  String get formattedAge {
+    if (patientAge == null) return '';
+    if (ageUnit == 'years' && patientAge! > 12) {
+      return patientAge!.round().toString();
+    }
+    if (patientAge! % 1 == 0) {
+      return patientAge!.toInt().toString();
+    }
+    return patientAge!.toString();
   }
 
   Map<String, dynamic> toJson() => {
@@ -297,6 +341,7 @@ class CaseRecord {
     'caseSheetImagePath': caseSheetImagePath,
     'regionalBlocks': regionalBlocks,
     'catheterPlaced': catheterPlaced,
+    'pca': pca,
     'starred': starred,
     'flagForFollowUp': flagForFollowUp,
     'followUpStatus': followUpStatus,
@@ -307,6 +352,13 @@ class CaseRecord {
     'blockAssessmentTags': blockAssessmentTags,
     'followUpComplications': followUpComplications,
     'followUpNotes': followUpNotes,
+    'verified': verified,
+    'isVerified': verified,
+    'clinicallyVerified': verified,
+    'verifiedBy': verifiedBy,
+    'verifiedAt': verifiedAt?.toIso8601String(),
+    'detailedAssessment': detailedAssessment,
+    'dopsAssessment': dopsAssessment,
   };
 
   factory CaseRecord.fromJson(Map<String, dynamic> json) {
@@ -325,6 +377,17 @@ class CaseRecord {
       }
       return raw.map((e) => e.toString()).toList();
     }
+
+    final isConsultant =
+        json['role']?.toString().toLowerCase().contains('consultant') ?? false;
+
+    final isVerified = json['verified'] == true ||
+        json['verified'] == 'true' ||
+        json['verified'] == 1 ||
+        json['isVerified'] == true ||
+        json['isVerified'] == 'true' ||
+        json['clinicallyVerified'] == true ||
+        json['clinically_verified'] == true;
 
     return CaseRecord(
       id: json['id']?.toString(),
@@ -385,6 +448,7 @@ class CaseRecord {
       caseSheetImagePath: json['caseSheetImagePath']?.toString(),
       regionalBlocks: mapList(json['regionalBlocks']),
       catheterPlaced: json['catheterPlaced'] == true,
+      pca: json['pca'] == true,
       starred: json['starred'] == true,
       flagForFollowUp: json['flagForFollowUp'] == true,
       followUpStatus: json['followUpStatus']?.toString() ?? 'none',
@@ -401,6 +465,26 @@ class CaseRecord {
       blockAssessmentTags: stringList(json['blockAssessmentTags']),
       followUpComplications: stringList(json['followUpComplications']),
       followUpNotes: json['followUpNotes']?.toString(),
+      verified: isVerified,
+      verifiedBy: json['verifiedBy']?.toString() ??
+          json['verified_by']?.toString() ??
+          (isVerified && isConsultant
+              ? (json['supervisor']?.toString() ?? 'Self (Consultant)')
+              : null),
+      verifiedAt: json['verifiedAt'] != null
+          ? DateTime.tryParse(json['verifiedAt'].toString())
+          : (json['verified_at'] != null
+              ? DateTime.tryParse(json['verified_at'].toString())
+              : (isVerified && isConsultant
+                  ? (DateTime.tryParse(json['date']?.toString() ?? '') ??
+                      DateTime.now())
+                  : null)),
+      detailedAssessment: json['detailedAssessment'] is Map
+          ? Map<String, dynamic>.from(json['detailedAssessment'] as Map)
+          : null,
+      dopsAssessment: json['dopsAssessment'] is Map
+          ? Map<String, dynamic>.from(json['dopsAssessment'] as Map)
+          : null,
     );
   }
 }

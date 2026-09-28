@@ -18,6 +18,70 @@ class RankLocalizations {
     return _emojis['r$rankIndex'] ?? '🏅';
   }
 
+  static String getScreenTitle(String languageCode) {
+    const map = {
+      'en': 'XP Titles & Ranks',
+      'es': 'Títulos y Rangos de EXP',
+      'fr': 'Titres et Rangs d\'EXP',
+      'de': 'EP-Titel & Ränge',
+      'pt': 'Títulos e Níveis de XP',
+      'zh': '经验值等级与称号',
+      'ar': 'ألقاب ومستويات نقاط الخبرة',
+      'ko': '경험치 등급 및 칭호',
+      'ja': 'XPランクと称号',
+      'id': 'Gelar & Peringkat XP',
+    };
+    return map[languageCode] ?? map['en']!;
+  }
+
+  static String getAchievedStatus(String languageCode) {
+    const map = {
+      'en': 'Achieved',
+      'es': 'Conseguido',
+      'fr': 'Obtenu',
+      'de': 'Erreicht',
+      'pt': 'Alcançado',
+      'zh': '已达成',
+      'ar': 'مكتمل',
+      'ko': '달성 완료',
+      'ja': '達成済み',
+      'id': 'Tercapai',
+    };
+    return map[languageCode] ?? map['en']!;
+  }
+
+  static String getCurrentRankStatus(String languageCode) {
+    const map = {
+      'en': 'Current Rank',
+      'es': 'Rango Actual',
+      'fr': 'Rang Actuel',
+      'de': 'Aktueller Rang',
+      'pt': 'Nível Atual',
+      'zh': '当前等级',
+      'ar': 'الرتبة الحالية',
+      'ko': '현재 등급',
+      'ja': '現在のランク',
+      'id': 'Peringkat Saat Ini',
+    };
+    return map[languageCode] ?? map['en']!;
+  }
+
+  static String getLockedStatus(String languageCode) {
+    const map = {
+      'en': 'Locked',
+      'es': 'Bloqueado',
+      'fr': 'Verrouillé',
+      'de': 'Gesperrt',
+      'pt': 'Bloqueado',
+      'zh': '未解锁',
+      'ar': 'مقفل',
+      'ko': '잠김',
+      'ja': '未獲得',
+      'id': 'Terkunci',
+    };
+    return map[languageCode] ?? map['en']!;
+  }
+
   static const Map<String, String> _emojis = {
     'r1': '🎒',
     'r2': '💉',

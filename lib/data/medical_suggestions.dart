@@ -314,6 +314,14 @@ class CommonMedicalSuggestions {
     'Thrombectomy / Embolectomy of peripheral artery',
     'Varicose veins radiofrequency ablation / stripping',
 
+    // Vascular Access
+    'Central venous catheter (CVC) insertion',
+    'Peripherally inserted central catheter (PICC) line insertion',
+    'Chemo port / Totally implantable venous access device (TIVAD) insertion',
+    'Permcath / Tunneled dialysis catheter insertion',
+    'Arterial line insertion',
+    'Dialysis catheter insertion',
+
     // ENT & Head/Neck
     'Coblation / Dissection tonsillectomy',
     'Adenotonsillectomy',

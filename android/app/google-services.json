@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883439999168",
+    "project_id": "etherlog",
+    "storage_bucket": "etherlog.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883439999168:android:ae967f96355a13b1b8b525",
+        "android_client_info": {
+          "package_name": "com.etherlog.etherlog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0KEI7zSxr8rzInaamOWk3HEZCkLSBTkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

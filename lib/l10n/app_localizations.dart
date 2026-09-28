@@ -112,6 +112,7 @@ class AppLocalizations {
   String get caseSaved => _t('caseSaved');
   String get yourRole => _t('yourRole');
   String get performed => _t('performed');
+  String get supervised => _t('supervised');
   String get assisted => _t('assisted');
   String get observed => _t('observed');
   String get freeTrial => _t('freeTrial');
@@ -123,15 +124,18 @@ class AppLocalizations {
   String get byCategory => _t('byCategory');
   String get byCase => _t('byCase');
   String get profileCompletionBonus => _t('profileCompletionBonus');
-  String includesProfileCompletionBonus(int n) => _t('includesProfileCompletionBonus').replaceAll('{n}', n.toString());
+  String includesProfileCompletionBonus(int n) =>
+      _t('includesProfileCompletionBonus').replaceAll('{n}', n.toString());
   String get exportStatisticsPdf => _t('exportStatisticsPdf');
   String get noCasesYet => _t('noCasesYet');
   String get totalPoints => _t('totalPoints');
-  String includesProfileBonus(int n) => _t('includesProfileBonus').replaceAll('{n}', n.toString());
+  String includesProfileBonus(int n) =>
+      _t('includesProfileBonus').replaceAll('{n}', n.toString());
   String get avgPerCase => _t('avgPerCase');
   String get averageAnaesthesiaDuration => _t('averageAnaesthesiaDuration');
   String get noDurationData => _t('noDurationData');
-  String basedOnCases(int n) => _t('basedOnCases').replaceAll('{n}', n.toString());
+  String basedOnCases(int n) =>
+      _t('basedOnCases').replaceAll('{n}', n.toString());
   String get divisionByAge => _t('divisionByAge');
   String get divisionByBmi => _t('divisionByBmi');
   String get regionalBlocksByType => _t('regionalBlocksByType');
@@ -171,7 +175,8 @@ class AppLocalizations {
   String get alignQrHint => _t('alignQrHint');
   String get importing => _t('importing');
   String get pointsEarnedThisCase => _t('pointsEarnedThisCase');
-  String get tapToViewCalculationBreakdown => _t('tapToViewCalculationBreakdown');
+  String get tapToViewCalculationBreakdown =>
+      _t('tapToViewCalculationBreakdown');
   String get caseTemplatesMenu => _t('caseTemplatesMenu');
   String get achievementsTitle => _t('achievementsTitle');
   String get overallProgress => _t('overallProgress');
@@ -254,7 +259,8 @@ class AppLocalizations {
   String get continueText => _t('continueText');
   String get enterPinToConfirm => _t('enterPinToConfirm');
   String get incorrectPinCasesNotDeleted => _t('incorrectPinCasesNotDeleted');
-  String deletedNCases(int n) => _t('deletedNCases').replaceAll('{n}', n.toString());
+  String deletedNCases(int n) =>
+      _t('deletedNCases').replaceAll('{n}', n.toString());
   String get logbookCleared => _t('logbookCleared');
   String get fromDate => _t('fromDate');
   String get toDate => _t('toDate');
@@ -277,7 +283,8 @@ class AppLocalizations {
   String get matchAll => _t('matchAll');
   String get matchAny => _t('matchAny');
   String get queryResults => _t('queryResults');
-  String matchingCases(int n) => _t('matchingCases').replaceAll('{n}', n.toString());
+  String matchingCases(int n) =>
+      _t('matchingCases').replaceAll('{n}', n.toString());
   String get saveQuery => _t('saveQuery');
   String get savedQueries => _t('savedQueries');
   String get queryName => _t('queryName');
@@ -296,8 +303,10 @@ class AppLocalizations {
   String get exportBackupFile => _t('exportBackupFile');
   String get restoreFromBackup => _t('restoreFromBackup');
   String get noCasesToBackup => _t('noCasesToBackup');
-  String backupSaved(String name) => _t('backupSaved').replaceAll('{name}', name);
-  String restoredNCases(int n) => _t('restoredNCases').replaceAll('{n}', n.toString());
+  String backupSaved(String name) =>
+      _t('backupSaved').replaceAll('{name}', name);
+  String restoredNCases(int n) =>
+      _t('restoredNCases').replaceAll('{n}', n.toString());
   String get noCasesImported => _t('noCasesImported');
 
   // PDF options
@@ -380,10 +389,12 @@ class AppLocalizations {
   String get helpFooter => _t('helpFooter');
   String get helpMenu => _t('helpMenu');
 
-    String get previousYear => _t('previousYear');
+  String get previousYear => _t('previousYear');
   String get nextYear => _t('nextYear');
-  String yourYearInReview(int year) => _t('yourYearInReview').replaceAll('{year}', '$year');
-  String noCasesLoggedYearYet(int year) => _t('noCasesLoggedYearYet').replaceAll('{year}', '$year');
+  String yourYearInReview(int year) =>
+      _t('yourYearInReview').replaceAll('{year}', '$year');
+  String noCasesLoggedYearYet(int year) =>
+      _t('noCasesLoggedYearYet').replaceAll('{year}', '$year');
   String get activityHeatmap => _t('activityHeatmap');
   String get heatmapCaption => _t('heatmapCaption');
   String get monthlyCaseVolume => _t('monthlyCaseVolume');
@@ -404,18 +415,57 @@ class AppLocalizations {
   List<String> get monthAbbrs {
     switch (locale.languageCode) {
       case 'es':
-        return const ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+        return const [
+          'E',
+          'F',
+          'M',
+          'A',
+          'M',
+          'J',
+          'J',
+          'A',
+          'S',
+          'O',
+          'N',
+          'D'
+        ];
       case 'zh':
       case 'ko':
       case 'ja':
       case 'ar':
-        return const ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+        return const [
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9',
+          '10',
+          '11',
+          '12'
+        ];
       default:
-        return const ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+        return const [
+          'J',
+          'F',
+          'M',
+          'A',
+          'M',
+          'J',
+          'J',
+          'A',
+          'S',
+          'O',
+          'N',
+          'D'
+        ];
     }
   }
 
-    String get pdfOptionsDescription => _t('pdfOptionsDescription');
+  String get pdfOptionsDescription => _t('pdfOptionsDescription');
   String get pdfExportFullExplanation => _t('pdfExportFullExplanation');
   String get dateRangeExportSubtitle => _t('dateRangeExportSubtitle');
   String get hospitalNumbersSubtitle => _t('hospitalNumbersSubtitle');
@@ -434,15 +484,18 @@ class AppLocalizations {
   String get patientDetails => _t('patientDetails');
   String get anaesthesiaAndSurgeryTimes => _t('anaesthesiaAndSurgeryTimes');
 
-    String get caseInformationHeader => _t('caseInformationHeader');
+  String get caseInformationHeader => _t('caseInformationHeader');
   String get patientHeader => _t('patientHeader');
-  String get procedureAndAnaesthesiaHeader => _t('procedureAndAnaesthesiaHeader');
+  String get procedureAndAnaesthesiaHeader =>
+      _t('procedureAndAnaesthesiaHeader');
   String get regionalAnaesthesiaHeader => _t('regionalAnaesthesiaHeader');
   String get airwayHeader => _t('airwayHeader');
   String get invasiveLinesHeader => _t('invasiveLinesHeader');
   String get complicationsHeader => _t('complicationsHeader');
   String get outcomeHeader => _t('outcomeHeader');
   String get postOpFollowUpHeader => _t('postOpFollowUpHeader');
+  String get postOpFollowUp => _t('postOpFollowUp');
+  String get postOpFollowUpSubtitle => _t('postOpFollowUpSubtitle');
   String get notesHeader => _t('notesHeader');
 
   String get dateLabel => _t('dateLabel');
@@ -466,6 +519,9 @@ class AppLocalizations {
   String get supervisorLabel => _t('supervisorLabel');
   String get blocksLabel => _t('blocksLabel');
   String get catheterLabel => _t('catheterLabel');
+  String get selectCatheterBlocks => _t('selectCatheterBlocks');
+  String get catheterSelectAtLeastOne => _t('catheterSelectAtLeastOne');
+  String get selectAtLeastOne => _t('selectAtLeastOne');
   String get placedLabel => _t('placedLabel');
   String get airwayManagementLabel => _t('airwayManagementLabel');
   String get typeOfIntubationLabel => _t('typeOfIntubationLabel');
@@ -511,7 +567,8 @@ class AppLocalizations {
   String get ifSupervised => _t('ifSupervised');
   String get cormackLehaneGrade => _t('cormackLehaneGrade');
   String get numberOfAttempts => _t('numberOfAttempts');
-  String get invasiveLinesAndEquipmentUsed => _t('invasiveLinesAndEquipmentUsed');
+  String get invasiveLinesAndEquipmentUsed =>
+      _t('invasiveLinesAndEquipmentUsed');
   String get intraOpPostOpComplications => _t('intraOpPostOpComplications');
   String get selectOutcome => _t('selectOutcome');
   String get flagForPostOpFollowUp => _t('flagForPostOpFollowUp');
@@ -533,46 +590,53 @@ class AppLocalizations {
   String get restoreAction => _t('restoreAction');
   String get caseUpdated => _t('caseUpdated');
   String get caseSavedSuccessfully => _t('caseSavedSuccessfully');
-  String templateAppliedMsg(String name) => _t('templateAppliedMsg').replaceAll('{name}', name);
-  String templateSavedMsg(String name) => _t('templateSavedMsg').replaceAll('{name}', name);
+  String templateAppliedMsg(String name) =>
+      _t('templateAppliedMsg').replaceAll('{name}', name);
+  String templateSavedMsg(String name) =>
+      _t('templateSavedMsg').replaceAll('{name}', name);
 
   String get achievementUnlocked => _t('achievementUnlocked');
   String get etherlogReminder => _t('etherlogReminder');
-  String inactivityReminderBody(int days) => _t('inactivityReminderBody').replaceAll('{days}', '$days');
+  String inactivityReminderBody(int days) =>
+      _t('inactivityReminderBody').replaceAll('{days}', '$days');
   String get incompleteCaseDraft => _t('incompleteCaseDraft');
-  String incompleteDraftSaved(String time) => _t('incompleteDraftSaved').replaceAll('{time}', time);
+  String incompleteDraftSaved(String time) =>
+      _t('incompleteDraftSaved').replaceAll('{time}', time);
   String get incompleteDraftSubtitle => _t('incompleteDraftSubtitle');
-  String noCasesInDays(int days) => _t('noCasesInDays').replaceAll('{days}', '$days');
+  String noCasesInDays(int days) =>
+      _t('noCasesInDays').replaceAll('{days}', '$days');
   String lastCaseOn(String date) => _t('lastCaseOn').replaceAll('{date}', date);
   String get timeForLogbookEntry => _t('timeForLogbookEntry');
 
-    String get takePhoto => _t('takePhoto');
+  String get takePhoto => _t('takePhoto');
   String get chooseFromGallery => _t('chooseFromGallery');
   String get removePhoto => _t('removePhoto');
   String get selectLabel => _t('selectLabel');
 
   static final Map<String, Map<String, String>> _localizedValues = {
-
     'en': {
       'clinicalOverview': 'Clinical Overview',
       'immediateManagementSteps': 'Immediate Management Steps',
       'differentialDiagnosis': 'Differential Diagnosis',
       'referencesAndGuidelines': 'References & Guidelines',
       'walkthroughTitle': 'Interactive Walkthrough',
-      'walkthroughSubtitle': 'Complete these 3 quick steps to get started with Etherlog',
+      'walkthroughSubtitle':
+          'Complete these 3 quick steps to get started with Etherlog',
       'walkthroughStep1': 'Log a Demo Case',
-      'walkthroughStep1Desc': 'Add a sample case to test points, airway & block tracking',
+      'walkthroughStep1Desc':
+          'Add a sample case to test points, airway & block tracking',
       'walkthroughStep2': 'View Statistics & Analytics',
-      'walkthroughStep2Desc': 'Inspect your ASA mix, age distribution and clinical insights',
+      'walkthroughStep2Desc':
+          'Inspect your ASA mix, age distribution and clinical insights',
       'walkthroughStep3': 'Export a Sample PDF',
-      'walkthroughStep3Desc': 'Generate an official logbook summary PDF ready for review',
+      'walkthroughStep3Desc':
+          'Generate an official logbook summary PDF ready for review',
       'completed': 'Completed',
       'dismiss': 'Dismiss',
       'takePhoto': 'Take Photo',
       'chooseFromGallery': 'Choose from Gallery',
       'removePhoto': 'Remove Photo',
       'selectLabel': 'Select',
-
       'caseInformationHeader': 'CASE INFORMATION',
       'patientHeader': 'PATIENT',
       'procedureAndAnaesthesiaHeader': 'PROCEDURE & ANAESTHESIA',
@@ -582,6 +646,9 @@ class AppLocalizations {
       'complicationsHeader': 'COMPLICATIONS',
       'outcomeHeader': 'OUTCOME',
       'postOpFollowUpHeader': 'POST-OP FOLLOW-UP',
+      'postOpFollowUp': 'Post-Op Follow-Up',
+      'postOpFollowUpSubtitle':
+          'Include pain scores, PONV, block checks, and follow-up notes',
       'notesHeader': 'NOTES',
       'dateLabel': 'Date',
       'anaesthesiaLabel': 'Anaesthesia',
@@ -643,16 +710,23 @@ class AppLocalizations {
       'primaryDiagnosis': 'Primary diagnosis',
       'procedurePerformed': 'Procedure performed',
       'pleaseEnterProcedure': 'Please enter procedure',
-      'catheterPlacedInfo': 'Catheter placed (for continuous infusion / post-op boluses)',
+      'catheterPlacedInfo':
+          'Catheter placed (for continuous infusion / post-op boluses)',
+      'selectCatheterBlocks': 'Specify block(s) with catheter:',
+      'catheterSelectAtLeastOne':
+          'Please select at least one regional block for the catheter.',
+      'selectAtLeastOne': 'Select ≥ 1',
       'supervisorName': 'Supervisor Name',
       'ifSupervised': 'If supervised',
       'cormackLehaneGrade': 'Cormack-Lehane Grade',
       'numberOfAttempts': 'Number of attempts',
-      'invasiveLinesAndEquipmentUsed': 'Invasive lines and monitoring equipment used',
+      'invasiveLinesAndEquipmentUsed':
+          'Invasive lines and monitoring equipment used',
       'intraOpPostOpComplications': 'Intra-op / Post-op complications',
       'selectOutcome': 'Select outcome',
       'flagForPostOpFollowUp': 'Flag for post-op follow-up',
-      'flagForFollowUpSubtitle': 'Adds this case to the rounding queue (also auto for regional / ASA 3–5)',
+      'flagForFollowUpSubtitle':
+          'Adds this case to the rounding queue (also auto for regional / ASA 3–5)',
       'additionalNotes': 'Additional Notes',
       'additionalClinicalNotes': 'Additional clinical notes…',
       'tapToSelect': 'Tap to select',
@@ -661,7 +735,8 @@ class AppLocalizations {
       'enterBlockName': 'Enter block name',
       'copyLastCasePattern': 'Copy last case pattern',
       'saveAsTemplate': 'Save as template',
-      'storesTemplateExplanation': 'Stores specialty, technique, airway, blocks, and monitoring — not hospital numbers or ages.',
+      'storesTemplateExplanation':
+          'Stores specialty, technique, airway, blocks, and monitoring — not hospital numbers or ages.',
       'saveAction': 'Save',
       'noPreviousCasesToCopy': 'No previous cases to copy',
       'resumeIncompleteCase': 'Resume incomplete case?',
@@ -674,17 +749,20 @@ class AppLocalizations {
       'templateSavedMsg': 'Template “{name}” saved',
       'achievementUnlocked': 'ACHIEVEMENT UNLOCKED',
       'etherlogReminder': 'Etherlog reminder',
-      'inactivityReminderBody': 'No cases logged for {days} days. Open the app to add a case or update your logbook.',
+      'inactivityReminderBody':
+          'No cases logged for {days} days. Open the app to add a case or update your logbook.',
       'incompleteCaseDraft': 'Incomplete case draft',
       'incompleteDraftSaved': 'Saved {time}. Tap to continue.',
       'incompleteDraftSubtitle': 'You left a case unfinished. Tap to continue.',
       'noCasesInDays': 'No cases in {days} days',
       'lastCaseOn': 'Last case {date}. Log one when you next work.',
       'timeForLogbookEntry': 'Time for a logbook entry when you next work.',
-
-      'pdfOptionsDescription': 'Choose what appears on exported PDFs. These settings apply to single-case and full logbook PDFs.',
-      'pdfExportFullExplanation': 'Saves these options, then generates the full logbook PDF (respecting date range if enabled).',
-      'dateRangeExportSubtitle': 'When on, full logbook PDF only includes cases between From and To dates',
+      'pdfOptionsDescription':
+          'Choose what appears on exported PDFs. These settings apply to single-case and full logbook PDFs.',
+      'pdfExportFullExplanation':
+          'Saves these options, then generates the full logbook PDF (respecting date range if enabled).',
+      'dateRangeExportSubtitle':
+          'When on, full logbook PDF only includes cases between From and To dates',
       'hospitalNumbersSubtitle': 'Case number on logbook rows and case PDFs',
       'patientDetailsSubtitle': 'Age, gender, weight, height, BMI',
       'anaesthesiaTimesSubtitle': 'Start, end, and durations',
@@ -692,7 +770,8 @@ class AppLocalizations {
       'airwaySubtitle': 'Airway type, intubation, ETT/LMA, Cormack-Lehane',
       'invasiveSubtitle': 'Lines, monitors, and roles',
       'complicationsSubtitle': 'Intra-op / post-op complications list',
-      'summaryTablesSubtitle': 'Specialty / technique breakdown on full logbook',
+      'summaryTablesSubtitle':
+          'Specialty / technique breakdown on full logbook',
       'signatureSubtitle': 'Doctor and Head of Unit signature lines',
       'inProgressLabel': 'In progress',
       'pendingFollowUp': 'Pending follow-up',
@@ -700,11 +779,11 @@ class AppLocalizations {
       'trialExpiredTapRenew': 'Trial/subscription expired — tap to renew.',
       'patientDetails': 'Patient details',
       'anaesthesiaAndSurgeryTimes': 'Anaesthesia & surgery times',
-
       'previousYear': 'Previous year',
       'nextYear': 'Next year',
       'yourYearInReview': 'Your {year} in review',
-      'noCasesLoggedYearYet': 'No cases logged in {year} yet.\nInsights will appear as you log.',
+      'noCasesLoggedYearYet':
+          'No cases logged in {year} yet.\nInsights will appear as you log.',
       'activityHeatmap': 'Activity heatmap',
       'heatmapCaption': 'Each cell is a day. Darker = more cases logged.',
       'monthlyCaseVolume': 'Monthly case volume',
@@ -721,8 +800,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Diff. airway',
       'achievementsBadges': 'Achievements & Badges',
       'noAchievementsInFilter': 'No achievements in this filter',
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Save',
       'cancel': 'Cancel',
       'delete': 'Delete',
@@ -784,6 +862,7 @@ class AppLocalizations {
       'caseSaved': 'Case saved',
       'yourRole': 'Your role',
       'performed': 'Performed',
+      'supervised': 'Supervised',
       'assisted': 'Assisted',
       'observed': 'Observed',
       'freeTrial': 'Free trial',
@@ -795,7 +874,8 @@ class AppLocalizations {
       'byCategory': 'BY CATEGORY',
       'byCase': 'BY CASE',
       'profileCompletionBonus': 'Profile completion bonus',
-      'includesProfileCompletionBonus': 'Includes +{n} profile completion bonus',
+      'includesProfileCompletionBonus':
+          'Includes +{n} profile completion bonus',
       'exportStatisticsPdf': 'Export Statistics PDF',
       'noCasesYet': 'No cases yet',
       'totalPoints': 'Total points',
@@ -824,23 +904,29 @@ class AppLocalizations {
       'caseDetails': 'Case Details',
       'deleteCase': 'Delete case?',
       'deleteCaseWarning': 'This cannot be undone.',
-      'shareCase': 'Show this QR code to another Etherlog user. They will be able to import this case directly into their case log.',
+      'shareCase':
+          'Show this QR code to another Etherlog user. They will be able to import this case directly into their case log.',
       'shareCaseQr': 'Share case QR',
       'importCaseQr': 'Import case QR',
       'importSharedCase': 'Import shared case?',
-      'importSharedCaseBody': 'This will save a copy in your logbook with role set to Consultant.',
+      'importSharedCaseBody':
+          'This will save a copy in your logbook with role set to Consultant.',
       'import': 'Import',
       'caseImportedConsultant': 'Case imported as Consultant',
       'invalidCaseQr': 'Not a valid Etherlog case QR',
       'subscriptionRequiredImport': 'Subscription required to import cases',
       'copyCaseData': 'Copy case data',
-      'caseDataCopied': 'Case data copied — paste on the other device if QR fails',
+      'caseDataCopied':
+          'Case data copied — paste on the other device if QR fails',
       'hideHospitalNumber': 'Hide hospital / case number',
       'hideHospitalNumberHint': 'Recommended for anonymized sharing',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'Points earned for this case',
       'caseTemplatesMenu': 'Case templates',
@@ -857,18 +943,21 @@ class AppLocalizations {
       'pdfOptionsSaved': 'PDF options saved',
       'noCasesToExport': 'No cases to export',
       'logbookPdfExported': 'Logbook PDF exported',
-      'selectBothDates': 'Please select both From and To dates for the date range',
+      'selectBothDates':
+          'Please select both From and To dates for the date range',
       'toDateBeforeFrom': 'To date cannot be before From date',
       'exportByDateRange': 'Export by date range',
       'caseTemplates': 'Case templates',
       'deleteTemplate': 'Delete template?',
-      'deleteTemplateConfirm': '“{name}” will be removed. This cannot be undone.',
+      'deleteTemplateConfirm':
+          '“{name}” will be removed. This cannot be undone.',
       'renameTemplate': 'Rename template',
       'useTemplate': 'Use template',
       'rename': 'Rename',
       'templateName': 'Template name',
       'noTemplatesSaved': 'No templates yet',
-      'templatesEmptyHint': 'On New Case, use the menu to “Save as template” after filling specialty, technique, airway, and blocks.',
+      'templatesEmptyHint':
+          'On New Case, use the menu to “Save as template” after filling specialty, technique, airway, and blocks.',
       'insights': 'Insights',
       'less': 'Less',
       'more': 'More',
@@ -910,7 +999,8 @@ class AppLocalizations {
       'idleAnimation': 'Idle animation',
       'idleAnimationSubtitle': 'Floating anaesthesia icons after 30s idle',
       'celebrationAnimation': 'Celebration animation',
-      'celebrationAnimationSubtitle': 'Show Celebration animation when a case is marked as none/uneventful',
+      'celebrationAnimationSubtitle':
+          'Show Celebration animation when a case is marked as none/uneventful',
       'haptics': 'Haptics',
       'hapticsSubtitle': 'Vibration on taps and key presses',
       'logbookReminders': 'LOGBOOK REMINDERS',
@@ -918,10 +1008,12 @@ class AppLocalizations {
       'off': 'Off',
       'nDays': '{n} days',
       'quietHours': 'Quiet hours',
-      'quietHoursSubtitle': 'Hide inactivity reminders from 10pm–7am (drafts still show)',
+      'quietHoursSubtitle':
+          'Hide inactivity reminders from 10pm–7am (drafts still show)',
       'deleteAllCases': 'Delete all cases',
       'deleteAllCasesWarning': 'Requires PIN. Permanently clears the logbook.',
-      'deleteAllCasesBody': 'This will permanently delete every case in the logbook.\n\nThis cannot be undone.\n\nYou must enter your PIN to continue.',
+      'deleteAllCasesBody':
+          'This will permanently delete every case in the logbook.\n\nThis cannot be undone.\n\nYou must enter your PIN to continue.',
       'continueText': 'Continue',
       'enterPinToConfirm': 'Enter PIN to confirm',
       'incorrectPinCasesNotDeleted': 'Incorrect PIN. Cases were not deleted.',
@@ -929,8 +1021,10 @@ class AppLocalizations {
       'logbookCleared': 'Logbook cleared.',
       'fromDate': 'From date',
       'toDate': 'To date',
-      'confidentialityBody': 'You are responsible for maintaining strict patient confidentiality. Do not store identifiable patient names; use anonymized identifiers, case numbers, or hospital IDs. All data is stored securely on your local device.',
-      'iAgree': 'I agree to handle all patient data with strict confidentiality and comply with medical privacy standards.',
+      'confidentialityBody':
+          'You are responsible for maintaining strict patient confidentiality. Do not store identifiable patient names; use anonymized identifiers, case numbers, or hospital IDs. All data is stored securely on your local device.',
+      'iAgree':
+          'I agree to handle all patient data with strict confidentiality and comply with medical privacy standards.',
       'filterAll': 'All',
       'regionalBlock': 'Regional block',
       'dateRange': 'Date range',
@@ -958,8 +1052,10 @@ class AppLocalizations {
       'operator': 'Operator',
       'value': 'Value',
       'backupRestore': 'Backup & restore',
-      'backupDescription': 'Save all cases to a file on this device. Keep a copy somewhere safe.',
-      'restoreDescription': 'Import cases from a previous Etherlog backup file. Existing cases with the same id are updated.',
+      'backupDescription':
+          'Save all cases to a file on this device. Keep a copy somewhere safe.',
+      'restoreDescription':
+          'Import cases from a previous Etherlog backup file. Existing cases with the same id are updated.',
       'exportBackupFile': 'Create backup',
       'restoreFromBackup': 'Restore backup',
       'noCasesToBackup': 'No cases to back up yet',
@@ -971,60 +1067,96 @@ class AppLocalizations {
       'columnsToInclude': 'Columns to include in table',
       'helpTitle': 'Help & guide',
       'helpIntroTitle': 'How Etherlog works',
-      'helpIntroBody': 'Short tips for each part of the app. Open a section to read more. Your cases stay on this phone unless you make a backup or share a QR code.',
+      'helpIntroBody':
+          'Short tips for each part of the app. Open a section to read more. Your cases stay on this phone unless you make a backup or share a QR code.',
       'helpSecGettingStarted': 'Getting started',
-      'helpGs1': 'The first time you open the app, set a PIN. You can also use fingerprint or face unlock if your phone allows it.',
-      'helpGs2': 'Go to Doctor profile from the menu. Add your name, job title, and hospital. This appears on PDFs and gives you a one-time points bonus.',
-      'helpGs3': 'In your profile you can change language, colours, dark mode, vibration feedback, and the floating icons when the app is idle.',
+      'helpGs1':
+          'The first time you open the app, set a PIN. You can also use fingerprint or face unlock if your phone allows it.',
+      'helpGs2':
+          'Go to Doctor profile from the menu. Add your name, job title, and hospital. This appears on PDFs and gives you a one-time points bonus.',
+      'helpGs3':
+          'In your profile you can change language, colours, dark mode, vibration feedback, and the floating icons when the app is idle.',
       'helpSecLogging': 'Logging a case',
       'helpLog1': 'Tap the blue + button on the home screen to add a case.',
-      'helpLog2': 'Surgery must start after anaesthesia starts, and must finish before anaesthesia ends.',
-      'helpLog3': 'For patients older than 12 years, age is a whole number only. For babies and young children, use months or days.',
-      'helpLog4': 'If you choose Spinal, Epidural, or CSE as the main technique, the matching regional options are ticked for you.',
-      'helpLog5': 'If the type of intubation chosen is oral, then you cannot choose Nasal ETT as the ETT type and vice versa.',
-      'helpLog6': 'Press and hold a case on the home list to star it. Use the Starred filter to find those cases later.',
-      'helpLog7': 'Turn on “Flag for post-op follow-up” (or log a regional block / high ASA) so the case appears in the follow-up list.',
+      'helpLog2':
+          'Surgery must start after anaesthesia starts, and must finish before anaesthesia ends.',
+      'helpLog3':
+          'For patients older than 12 years, age is a whole number only. For babies and young children, use months or days.',
+      'helpLog4':
+          'If you choose Spinal, Epidural, or CSE as the main technique, the matching regional options are ticked for you.',
+      'helpLog5':
+          'If the type of intubation chosen is oral, then you cannot choose Nasal ETT as the ETT type and vice versa.',
+      'helpLog6':
+          'Press and hold a case on the home list to star it. Use the Starred filter to find those cases later.',
+      'helpLog7':
+          'Turn on “Flag for post-op follow-up” (or log a regional block / high ASA) so the case appears in the follow-up list.',
       'helpSecDashboard': 'Dashboard',
-      'helpDash1': 'The top row shows totals: all cases, elective, emergency, and difficult airway.',
-      'helpDash2': 'Use the search box to find text in procedures, diagnoses, or case numbers.',
-      'helpDash3': 'The chips under search filter the list (All, Emergency, Regional block, Date range, Starred, and more).',
+      'helpDash1':
+          'The top row shows totals: all cases, elective, emergency, and difficult airway.',
+      'helpDash2':
+          'Use the search box to find text in procedures, diagnoses, or case numbers.',
+      'helpDash3':
+          'The chips under search filter the list (All, Emergency, Regional block, Date range, Starred, and more).',
       'helpDash4': 'For Date range, choose a From date and a To date.',
       'helpDash5': 'The lock icon takes you back to the PIN screen.',
-      'helpDash6': 'Follow-up cards show cases that may need follow-up on the ward. Swipe a card away if it is not required.',
+      'helpDash6':
+          'Follow-up cards show cases that may need follow-up on the ward. Swipe a card away if it is not required.',
       'helpSecCaseMix': 'Case mix builder',
       'helpMix1': 'Open Case mix builder from the menu.',
       'helpMix2': 'Add rules one after another. A case must match every rule.',
-      'helpMix3': 'Use “contains” for words in a sentence. Use “is” when the value must match exactly (for example Emergency).',
-      'helpMix4': 'For ASA, you can type 1-5, III or ASA 1-5. The \'under\' and \'over\' filters also work here.',
-      'helpMix5': 'Tap the bookmark icon to save your rules. Tap a saved chip later to load them again.',
-      'helpMix6': 'Use CV blurb or Export PDF above the results for job applications and portfolios.',
+      'helpMix3':
+          'Use “contains” for words in a sentence. Use “is” when the value must match exactly (for example Emergency).',
+      'helpMix4':
+          'For ASA, you can type 1-5, III or ASA 1-5. The \'under\' and \'over\' filters also work here.',
+      'helpMix5':
+          'Tap the bookmark icon to save your rules. Tap a saved chip later to load them again.',
+      'helpMix6':
+          'Use CV blurb or Export PDF above the results for job applications and portfolios.',
       'helpSecStats': 'Statistics & Insights',
-      'helpStats1': 'Statistics breaks down age groups, BMI, blocks, airway, and lines. Tap a row to see performed / assisted / observed.',
-      'helpStats2': 'You can export a statistics PDF from the top of that screen.',
-      'helpStats3': 'Insights shows a year view: busy days, monthly volume, and top specialties or blocks.',
+      'helpStats1':
+          'Statistics breaks down age groups, BMI, blocks, airway, and lines. Tap a row to see performed / assisted / observed.',
+      'helpStats2':
+          'You can export a statistics PDF from the top of that screen.',
+      'helpStats3':
+          'Insights shows a year view: busy days, monthly volume, and top specialties or blocks.',
       'helpSecAchievements': 'Achievements & points',
-      'helpAch1': 'You earn points when you log cases (ASA level, emergency work, blocks, hard airways, and longer cases).',
-      'helpAch2': 'Tap the points number on the home screen to see how they add up.',
-      'helpAch3': 'Badges unlock as you do more cases in different areas. You can share a badge or your overall progress.',
+      'helpAch1':
+          'You earn points when you log cases (ASA level, emergency work, blocks, hard airways, and longer cases).',
+      'helpAch2':
+          'Tap the points number on the home screen to see how they add up.',
+      'helpAch3':
+          'Badges unlock as you do more cases in different areas. You can share a badge or your overall progress.',
       'helpAch4': 'Badge colour shows how hard that badge is to earn.',
       'helpSecQr': 'Share a case (QR)',
-      'helpQr1': 'On a case page, share makes a short-lived QR code with the case details (no photos).',
-      'helpQr2': 'The other doctor opens Import case (QR) from the menu and scans it. Their role is set to Consultant.',
-      'helpQr3': 'Use this when two people worked the same list and do not want to type the case twice.',
+      'helpQr1':
+          'On a case page, share makes a short-lived QR code with the case details (no photos).',
+      'helpQr2':
+          'The other doctor opens Import case (QR) from the menu and scans it. Their role is set to Consultant.',
+      'helpQr3':
+          'Use this when two people worked the same list and do not want to type the case twice.',
       'helpSecPdf': 'PDFs & backups',
-      'helpPdf1': 'PDF options in the menu lets you choose what appears on logbook PDFs, including an optional date range.',
-      'helpPdf2': 'Backup & restore saves all cases to a JSON file, or loads an old backup. Keep a copy in a safe place.',
+      'helpPdf1':
+          'PDF options in the menu lets you choose what appears on logbook PDFs, including an optional date range.',
+      'helpPdf2':
+          'Backup & restore saves all cases to a JSON file, or loads an old backup. Keep a copy in a safe place.',
       'helpPdf3': 'Backups do not include your PIN.',
       'helpSecSub': 'Subscription',
       'helpSub1': 'One-month free trial starts automatically.',
-      'helpSub2': 'After the trial, plans unlock continued ability to add new cases (viewing existing data remains available).',
-      'helpSub3': 'Manage or purchase from the subscription screen when prompted.',
+      'helpSub2':
+          'After the trial, plans unlock continued ability to add new cases (viewing existing data remains available).',
+      'helpSub3':
+          'Manage or purchase from the subscription screen when prompted.',
       'helpSecTips': 'Tips if you are stuck',
-      'helpTip1': 'Cannot add a case? Check that your trial or plan is still active.',
-      'helpTip2': 'Fingerprint not working? Unlock with your PIN, and turn on biometrics in the phone settings.',
-      'helpTip3': 'List empty after a restore? Open Backup & restore again, then close and reopen the app.',
-      'helpTip4': 'Case mix shows zero? Remove some rules, try “contains”, and check spelling of Emergency / Elective.',
-      'helpTip5': 'Changing language only changes labels on screen. Case data stays in English so search and stats still work.',
+      'helpTip1':
+          'Cannot add a case? Check that your trial or plan is still active.',
+      'helpTip2':
+          'Fingerprint not working? Unlock with your PIN, and turn on biometrics in the phone settings.',
+      'helpTip3':
+          'List empty after a restore? Open Backup & restore again, then close and reopen the app.',
+      'helpTip4':
+          'Case mix shows zero? Remove some rules, try “contains”, and check spelling of Emergency / Elective.',
+      'helpTip5':
+          'Changing language only changes labels on screen. Case data stays in English so search and stats still work.',
       'helpFooter': 'Etherlog v2.8 · Offline anaesthesia logbook',
       'helpMenu': 'Help & guide',
     },
@@ -1037,7 +1169,8 @@ class AppLocalizations {
       'walkthroughTitle': 'Inicio Rápido de EtherLog',
       'walkthroughSubtitle': 'Completa estos 3 pasos para comenzar',
       'walkthroughStep1': 'Registrar un caso de prueba',
-      'walkthroughStep1Desc': 'Crea un caso de demostración para explorar el registro',
+      'walkthroughStep1Desc':
+          'Crea un caso de demostración para explorar el registro',
       'walkthroughStep2': 'Ver estadísticas y análisis',
       'walkthroughStep2Desc': 'Explora tus métricas clínicas y gráficos',
       'walkthroughStep3': 'Exportar un PDF de muestra',
@@ -1057,6 +1190,9 @@ class AppLocalizations {
       'complicationsHeader': 'COMPLICACIONES',
       'outcomeHeader': 'DESTINO Y EVOLUCIÓN',
       'postOpFollowUpHeader': 'SEGUIMIENTO POSTOPERATORIO (DÍA 1)',
+      'postOpFollowUp': 'Seguimiento postoperatorio',
+      'postOpFollowUpSubtitle':
+          'Incluye puntuaciones de dolor, NVPO, bloqueos y notas',
       'notesHeader': 'NOTAS Y OBSERVACIONES',
       'dateLabel': 'Fecha',
       'anaesthesiaLabel': 'Anestesia',
@@ -1119,15 +1255,21 @@ class AppLocalizations {
       'procedurePerformed': 'Procedimiento Realizado',
       'pleaseEnterProcedure': 'Por favor ingrese el procedimiento',
       'catheterPlacedInfo': 'Catéter para infusión continua colocado',
+      'selectCatheterBlocks': 'Especifique bloqueo(s) con catéter:',
+      'catheterSelectAtLeastOne':
+          'Por favor seleccione al menos un bloqueo para el catéter.',
+      'selectAtLeastOne': 'Seleccione ≥ 1',
       'supervisorName': 'Nombre del Supervisor',
       'ifSupervised': 'Si fue asistido u observado',
       'cormackLehaneGrade': 'Grado Cormack-Lehane',
       'numberOfAttempts': 'Número de intentos',
-      'invasiveLinesAndEquipmentUsed': 'Líneas invasivas y monitorización utilizada',
+      'invasiveLinesAndEquipmentUsed':
+          'Líneas invasivas y monitorización utilizada',
       'intraOpPostOpComplications': 'Complicaciones perioperatorias',
       'selectOutcome': 'Seleccionar destino / resultado',
       'flagForPostOpFollowUp': 'Marcar para seguimiento postoperatorio',
-      'flagForFollowUpSubtitle': 'Añade este caso a la lista de pase de visita (Día 1)',
+      'flagForFollowUpSubtitle':
+          'Añade este caso a la lista de pase de visita (Día 1)',
       'additionalNotes': 'Notas Adicionales',
       'additionalClinicalNotes': 'Observaciones clínicas relevantes...',
       'tapToSelect': 'Toca para seleccionar',
@@ -1136,11 +1278,13 @@ class AppLocalizations {
       'enterBlockName': 'Nombre del bloqueo...',
       'copyLastCasePattern': 'Copiar último caso',
       'saveAsTemplate': 'Guardar como plantilla',
-      'storesTemplateExplanation': 'Guarda la técnica y bloqueos para reutilizarlos',
+      'storesTemplateExplanation':
+          'Guarda la técnica y bloqueos para reutilizarlos',
       'saveAction': 'Guardar',
       'noPreviousCasesToCopy': 'No hay casos previos para copiar',
       'resumeIncompleteCase': '¿Reanudar caso incompleto?',
-      'unsavedDraftRestore': 'Se encontró un borrador no guardado. ¿Deseas restaurarlo?',
+      'unsavedDraftRestore':
+          'Se encontró un borrador no guardado. ¿Deseas restaurarlo?',
       'discardAction': 'Descartar',
       'restoreAction': 'Restaurar',
       'caseUpdated': 'Caso actualizado',
@@ -1149,15 +1293,18 @@ class AppLocalizations {
       'templateSavedMsg': 'Plantilla guardada',
       'achievementUnlocked': '¡Logro desbloqueado!',
       'etherlogReminder': 'Recordatorio de EtherLog',
-      'inactivityReminderBody': '¿Has tenido casos recientemente? ¡No olvides registrarlos!',
+      'inactivityReminderBody':
+          '¿Has tenido casos recientemente? ¡No olvides registrarlos!',
       'incompleteCaseDraft': 'Borrador de caso incompleto',
       'incompleteDraftSaved': 'Borrador guardado',
       'incompleteDraftSubtitle': 'Puedes continuar completándolo más tarde',
       'noCasesInDays': 'Sin casos registrados en {n} días',
       'lastCaseOn': 'Último caso el {date}',
       'timeForLogbookEntry': 'Momento de actualizar tu libro de registro',
-      'pdfOptionsDescription': 'Configura los datos que aparecerán en tus informes PDF exportados.',
-      'pdfExportFullExplanation': 'Personaliza encabezados, firmas, columnas y tablas de resumen.',
+      'pdfOptionsDescription':
+          'Configura los datos que aparecerán en tus informes PDF exportados.',
+      'pdfExportFullExplanation':
+          'Personaliza encabezados, firmas, columnas y tablas de resumen.',
       'dateRangeExportSubtitle': 'Filtrar casos por rango de fechas específico',
       'hospitalNumbersSubtitle': 'Incluir identificadores de historia clínica',
       'patientDetailsSubtitle': 'Incluir edad, género, peso, talla e IMC',
@@ -1165,8 +1312,10 @@ class AppLocalizations {
       'regionalSubtitle': 'Incluir detalles de bloqueos regionales y catéteres',
       'airwaySubtitle': 'Incluir dispositivos, intubación y Cormack-Lehane',
       'invasiveSubtitle': 'Incluir vías arteriales, CVC y monitores avanzados',
-      'complicationsSubtitle': 'Incluir registro de incidencias y complicaciones',
-      'summaryTablesSubtitle': 'Generar tablas de resumen por especialidad y técnica',
+      'complicationsSubtitle':
+          'Incluir registro de incidencias y complicaciones',
+      'summaryTablesSubtitle':
+          'Generar tablas de resumen por especialidad y técnica',
       'signatureSubtitle': 'Añadir espacio para firma y sello del supervisor',
       'inProgressLabel': 'En Curso',
       'pendingFollowUp': 'Seguimiento Pendiente',
@@ -1179,7 +1328,8 @@ class AppLocalizations {
       'yourYearInReview': 'Tu {year} en resumen',
       'noCasesLoggedYearYet': 'No hay casos registrados en {year} todavía',
       'activityHeatmap': 'Mapa de Actividad',
-      'heatmapCaption': 'Cada celda representa un día. Más oscuro = más casos registrados',
+      'heatmapCaption':
+          'Cada celda representa un día. Más oscuro = más casos registrados',
       'monthlyCaseVolume': 'Volumen Mensual de Casos',
       'avgAnaesthesiaDurationMin': 'Duración Media de Anestesia (min)',
       'percentUneventful': '% Sin Incidencias',
@@ -1194,12 +1344,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Vía Aérea Difícil',
       'achievementsBadges': 'Logros y Medallas',
       'noAchievementsInFilter': 'No hay logros en este filtro',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Guardar',
       'cancel': 'Cancelar',
       'delete': 'Eliminar',
@@ -1261,11 +1406,13 @@ class AppLocalizations {
       'caseSaved': 'Caso guardado',
       'yourRole': 'Tu rol',
       'performed': 'Realizado',
+      'supervised': 'Supervisado',
       'assisted': 'Asistido',
       'observed': 'Observado',
       'freeTrial': 'Prueba gratuita',
       'subscriptionExpired': 'Suscripción expirada',
-      'cannotAddCases': 'No se pueden añadir casos hasta renovar la suscripción.',
+      'cannotAddCases':
+          'No se pueden añadir casos hasta renovar la suscripción.',
       'welcomeTitle': 'Bienvenido a Etherlog',
       'getStarted': 'Comenzar',
       'pointsBreakdown': 'Desglose de puntos',
@@ -1301,11 +1448,13 @@ class AppLocalizations {
       'caseDetails': 'Detalles del caso',
       'deleteCase': '¿Eliminar caso?',
       'deleteCaseWarning': 'Esta acción no se puede deshacer.',
-      'shareCase': 'Muestra este código QR a otro colega con Etherlog para compartir este caso.',
+      'shareCase':
+          'Muestra este código QR a otro colega con Etherlog para compartir este caso.',
       'shareCaseQr': 'Compartir caso (QR)',
       'importCaseQr': 'Importar caso (QR)',
       'importSharedCase': '¿Importar caso compartido?',
-      'importSharedCaseBody': 'Se guardará una copia en tu libro con el rol de Consultor.',
+      'importSharedCaseBody':
+          'Se guardará una copia en tu libro con el rol de Consultor.',
       'import': 'Importar',
       'caseImportedConsultant': 'Caso importado como Consultor',
       'invalidCaseQr': 'Código QR de Etherlog no válido',
@@ -1314,8 +1463,10 @@ class AppLocalizations {
       'caseDataCopied': 'Datos copiados al portapapeles',
       'hideHospitalNumber': 'Ocultar número de historia / hospital',
       'hideHospitalNumberHint': 'Recomendado para compartir de forma anónima',
-      'qrPayloadLarge': 'El código es extenso. Puedes usar Copiar si el escaneo falla.',
-      'shareCaseFooter': 'Las fotos no se transfieren por QR. El rol cambia a Consultor al importar.',
+      'qrPayloadLarge':
+          'El código es extenso. Puedes usar Copiar si el escaneo falla.',
+      'shareCaseFooter':
+          'Las fotos no se transfieren por QR. El rol cambia a Consultor al importar.',
       'clipboardEmpty': 'El portapapeles está vacío',
       'alignQrHint': 'Alinea el código QR dentro del marco para escanear',
       'importing': 'Importando…',
@@ -1345,7 +1496,8 @@ class AppLocalizations {
       'rename': 'Renombrar',
       'templateName': 'Nombre de la plantilla',
       'noTemplatesSaved': 'Sin plantillas aún',
-      'templatesEmptyHint': 'En Nuevo Caso, usa el menú para guardar tus cirugías frecuentes como plantilla.',
+      'templatesEmptyHint':
+          'En Nuevo Caso, usa el menú para guardar tus cirugías frecuentes como plantilla.',
       'insights': 'Análisis Clínico',
       'less': 'Menos',
       'more': 'Más',
@@ -1358,7 +1510,8 @@ class AppLocalizations {
       'fullName': 'Nombre completo',
       'doctorNameHint': 'Dr. / Dra. ...',
       'qualifications': 'Titulaciones',
-      'qualificationsHint': 'p. ej. Licenciatura, Especialidad en Anestesiología',
+      'qualificationsHint':
+          'p. ej. Licenciatura, Especialidad en Anestesiología',
       'designation': 'Cargo / Categoría',
       'designationHint': 'p. ej. Facultativo Especialista',
       'hospital': 'Hospital',
@@ -1368,11 +1521,13 @@ class AppLocalizations {
       'dateOfBirth': 'Fecha de nacimiento',
       'selectDateOfBirth': 'Seleccionar fecha de nacimiento',
       'notSpecified': 'No especificado',
-      'profileBonusHint': 'Completa nombre y hospital para ganar +10 puntos de bonificación.',
+      'profileBonusHint':
+          'Completa nombre y hospital para ganar +10 puntos de bonificación.',
       'saveProfile': 'Guardar perfil',
       'profileSaved': 'Perfil guardado con éxito',
       'appTheme': 'Tema de la aplicación',
-      'chooseThemeSubtitle': 'Elige la apariencia visual de Etherlog en tu dispositivo.',
+      'chooseThemeSubtitle':
+          'Elige la apariencia visual de Etherlog en tu dispositivo.',
       'themeDark': 'Oscuro',
       'themeLight': 'Claro',
       'themeSerenity': 'Serenidad',
@@ -1385,9 +1540,11 @@ class AppLocalizations {
       'surgicalRose': 'Rosa Quirúrgico',
       'amberGold': 'Oro Ámbar',
       'idleAnimation': 'Animación en reposo',
-      'idleAnimationSubtitle': 'Iconos flotantes de anestesia tras 30s de inactividad',
+      'idleAnimationSubtitle':
+          'Iconos flotantes de anestesia tras 30s de inactividad',
       'celebrationAnimation': 'Animación de celebración',
-      'celebrationAnimationSubtitle': 'Mostrar animación de celebración al marcar un caso como sin complicaciones',
+      'celebrationAnimationSubtitle':
+          'Mostrar animación de celebración al marcar un caso como sin complicaciones',
       'haptics': 'Respuesta háptica',
       'hapticsSubtitle': 'Vibración táctil al pulsar y seleccionar opciones',
       'logbookReminders': 'RECORDATORIOS DEL LIBRO',
@@ -1395,19 +1552,25 @@ class AppLocalizations {
       'off': 'Desactivado',
       'nDays': '{n} días',
       'quietHours': 'Horas de silencio',
-      'quietHoursSubtitle': 'Silenciar recordatorios de inactividad de 22:00 a 07:00',
+      'quietHoursSubtitle':
+          'Silenciar recordatorios de inactividad de 22:00 a 07:00',
       'deleteAllCases': 'Eliminar todos los casos',
-      'deleteAllCasesWarning': 'Requiere PIN. Borra permanentemente el libro de registro.',
-      'deleteAllCasesBody': 'Esta acción eliminará de forma irreversible todos los casos registrados.\n\nDebes introducir tu PIN para confirmar.',
+      'deleteAllCasesWarning':
+          'Requiere PIN. Borra permanentemente el libro de registro.',
+      'deleteAllCasesBody':
+          'Esta acción eliminará de forma irreversible todos los casos registrados.\n\nDebes introducir tu PIN para confirmar.',
       'continueText': 'Continuar',
       'enterPinToConfirm': 'Introduce tu PIN para confirmar',
-      'incorrectPinCasesNotDeleted': 'PIN incorrecto. Los casos no fueron eliminados.',
+      'incorrectPinCasesNotDeleted':
+          'PIN incorrecto. Los casos no fueron eliminados.',
       'deletedNCases': 'Se han eliminado {n} caso(s) del libro de registro.',
       'logbookCleared': 'Libro de registro vaciado.',
       'fromDate': 'Fecha inicial',
       'toDate': 'Fecha final',
-      'confidentialityBody': 'Eres responsable de proteger la confidencialidad médica. No registres nombres identificables de pacientes. Todos los datos permanecen en este dispositivo.',
-      'iAgree': 'Acepto cumplir los estándares de confidencialidad y privacidad médica.',
+      'confidentialityBody':
+          'Eres responsable de proteger la confidencialidad médica. No registres nombres identificables de pacientes. Todos los datos permanecen en este dispositivo.',
+      'iAgree':
+          'Acepto cumplir los estándares de confidencialidad y privacidad médica.',
       'filterAll': 'Todos',
       'regionalBlock': 'Bloqueo regional',
       'dateRange': 'Rango de fechas',
@@ -1435,8 +1598,10 @@ class AppLocalizations {
       'operator': 'Operador',
       'value': 'Valor',
       'backupRestore': 'Copia y Restauración',
-      'backupDescription': 'Guarda todos los casos en un archivo JSON en tu dispositivo o nube.',
-      'restoreDescription': 'Restaura tus casos desde una copia JSON previa de Etherlog.',
+      'backupDescription':
+          'Guarda todos los casos en un archivo JSON en tu dispositivo o nube.',
+      'restoreDescription':
+          'Restaura tus casos desde una copia JSON previa de Etherlog.',
       'exportBackupFile': 'Crear copia de seguridad',
       'restoreFromBackup': 'Restaurar copia',
       'noCasesToBackup': 'No hay casos para respaldar',
@@ -1448,56 +1613,82 @@ class AppLocalizations {
       'columnsToInclude': 'Columnas a incluir en la tabla',
       'helpTitle': 'Ayuda y guía',
       'helpIntroTitle': 'Cómo funciona Etherlog',
-      'helpIntroBody': 'Guía rápida para cada sección de la aplicación. Tus datos no salen de este teléfono salvo copia o QR.',
+      'helpIntroBody':
+          'Guía rápida para cada sección de la aplicación. Tus datos no salen de este teléfono salvo copia o QR.',
       'helpSecGettingStarted': 'Primeros pasos',
-      'helpGs1': 'Al abrir la aplicación por primera vez, crea un PIN de 4 dígitos o usa tu huella dactilar.',
-      'helpGs2': 'Ve a Perfil médico para rellenar tus datos profesionales y obtener +10 puntos de bonificación.',
-      'helpGs3': 'Personaliza temas, colores de acento, idioma y respuesta de vibración desde tu perfil.',
+      'helpGs1':
+          'Al abrir la aplicación por primera vez, crea un PIN de 4 dígitos o usa tu huella dactilar.',
+      'helpGs2':
+          'Ve a Perfil médico para rellenar tus datos profesionales y obtener +10 puntos de bonificación.',
+      'helpGs3':
+          'Personaliza temas, colores de acento, idioma y respuesta de vibración desde tu perfil.',
       'helpSecLogging': 'Registro de casos',
-      'helpLog1': 'Toca el botón azul + en la pantalla principal para registrar una anestesia.',
-      'helpLog2': 'La cirugía debe comenzar después de la inducción y finalizar antes del despertar.',
-      'helpLog3': 'Para mayores de 12 años, la edad se introduce en años. Para pediatría y neonatos, en meses o días.',
-      'helpLog4': 'Si seleccionas anestesia neuroaxial, las opciones de bloqueos correspondientes se marcan automáticamente.',
-      'helpLog5': 'Las opciones incompatibles de intubación quedan filtradas para evitar incoherencias.',
-      'helpLog6': 'Mantén pulsado un caso de la lista para destacarlo con estrella.',
-      'helpLog7': 'Activa el seguimiento postoperatorio para revisiones en planta.',
+      'helpLog1':
+          'Toca el botón azul + en la pantalla principal para registrar una anestesia.',
+      'helpLog2':
+          'La cirugía debe comenzar después de la inducción y finalizar antes del despertar.',
+      'helpLog3':
+          'Para mayores de 12 años, la edad se introduce en años. Para pediatría y neonatos, en meses o días.',
+      'helpLog4':
+          'Si seleccionas anestesia neuroaxial, las opciones de bloqueos correspondientes se marcan automáticamente.',
+      'helpLog5':
+          'Las opciones incompatibles de intubación quedan filtradas para evitar incoherencias.',
+      'helpLog6':
+          'Mantén pulsado un caso de la lista para destacarlo con estrella.',
+      'helpLog7':
+          'Activa el seguimiento postoperatorio para revisiones en planta.',
       'helpSecDashboard': 'Panel principal',
-      'helpDash1': 'Las tarjetas superiores muestran los totales de programadas, urgencias y vía aérea difícil.',
-      'helpDash2': 'Usa el buscador por procedimiento, diagnóstico o código de caso.',
-      'helpDash3': 'Filtra rápidamente por urgencias, bloqueos, rango de fechas o destacados.',
-      'helpDash4': 'Selecciona fechas Desde y Hasta para delimitar un periodo formativo.',
+      'helpDash1':
+          'Las tarjetas superiores muestran los totales de programadas, urgencias y vía aérea difícil.',
+      'helpDash2':
+          'Usa el buscador por procedimiento, diagnóstico o código de caso.',
+      'helpDash3':
+          'Filtra rápidamente por urgencias, bloqueos, rango de fechas o destacados.',
+      'helpDash4':
+          'Selecciona fechas Desde y Hasta para delimitar un periodo formativo.',
       'helpDash5': 'El icono del candado bloquea la app al instante.',
       'helpDash6': 'Las tarjetas de seguimiento recuerdan visitas pendientes.',
       'helpSecCaseMix': 'Constructor de Case Mix',
-      'helpMix1': 'Diseña consultas avanzadas combinando múltiples criterios de búsqueda.',
-      'helpMix2': 'Filtra por ASA, técnica, especialidad o edad para tus memorias de residencia.',
+      'helpMix1':
+          'Diseña consultas avanzadas combinando múltiples criterios de búsqueda.',
+      'helpMix2':
+          'Filtra por ASA, técnica, especialidad o edad para tus memorias de residencia.',
       'helpMix3': 'Guarda tus filtros favoritos con el icono de marcador.',
-      'helpMix4': 'Exporta informes en PDF o copia el texto de resumen para tu CV.',
+      'helpMix4':
+          'Exporta informes en PDF o copia el texto de resumen para tu CV.',
       'helpMix5': 'Ideal para auditorías y solicitudes de empleo.',
       'helpMix6': 'Genera estadísticas clínicas exactas en segundos.',
       'helpSecStats': 'Estadísticas y Análisis',
-      'helpStats1': 'Gráficos detallados por grupos de edad, IMC, bloqueos y técnicas.',
+      'helpStats1':
+          'Gráficos detallados por grupos de edad, IMC, bloqueos y técnicas.',
       'helpStats2': 'Exporta un PDF estadístico para comisiones de docencia.',
-      'helpStats3': 'La vista de Análisis muestra tu volumen mensual y distribución anual.',
+      'helpStats3':
+          'La vista de Análisis muestra tu volumen mensual y distribución anual.',
       'helpSecAchievements': 'Logros y puntos',
-      'helpAch1': 'Gana puntos de experiencia según la complejidad de los casos.',
+      'helpAch1':
+          'Gana puntos de experiencia según la complejidad de los casos.',
       'helpAch2': 'Toca el marcador de puntos para ver el desglose.',
       'helpAch3': 'Desbloquea medallas desde Cobre hasta Diamante.',
       'helpAch4': 'Comparte tus progresos clínicos con colegas.',
       'helpSecQr': 'Compartir caso (QR)',
-      'helpQr1': 'Genera un código QR cifrado para compartir un caso con un compañero.',
-      'helpQr2': 'El receptor escanea el código y el caso se añade automáticamente.',
+      'helpQr1':
+          'Genera un código QR cifrado para compartir un caso con un compañero.',
+      'helpQr2':
+          'El receptor escanea el código y el caso se añade automáticamente.',
       'helpQr3': 'Ahorra tiempo en quirófanos compartidos.',
       'helpSecPdf': 'PDFs y copias de seguridad',
-      'helpPdf1': 'Configura qué columnas y resúmenes aparecen en tu libro oficial en PDF.',
+      'helpPdf1':
+          'Configura qué columnas y resúmenes aparecen en tu libro oficial en PDF.',
       'helpPdf2': 'Realiza copias de seguridad periódicas en formato JSON.',
       'helpPdf3': 'Las copias no contienen tu PIN por motivos de seguridad.',
       'helpSecSub': 'Suscripción',
       'helpSub1': 'El periodo de prueba gratuito comienza automáticamente.',
-      'helpSub2': 'La suscripción permite seguir añadiendo nuevos casos sin límite.',
+      'helpSub2':
+          'La suscripción permite seguir añadiendo nuevos casos sin límite.',
       'helpSub3': 'Gestiona tu plan en cualquier momento desde la app.',
       'helpSecTips': 'Consejos útiles',
-      'helpTip1': '¿No puedes añadir casos? Revisa el estado de tu suscripción.',
+      'helpTip1':
+          '¿No puedes añadir casos? Revisa el estado de tu suscripción.',
       'helpTip2': '¿Falla la huella? Puedes desbloquear siempre con tu PIN.',
       'helpTip3': 'Realiza copias antes de cambiar de dispositivo.',
       'helpTip4': 'Usa el constructor de Case Mix para preparar tus exámenes.',
@@ -1534,6 +1725,9 @@ class AppLocalizations {
       'complicationsHeader': 'COMPLICATIONS',
       'outcomeHeader': 'DEVENIR ET DESTINATION',
       'postOpFollowUpHeader': 'SUIVI POSTOPÉRATOIRE (JOUR 1)',
+      'postOpFollowUp': 'Suivi postopératoire',
+      'postOpFollowUpSubtitle':
+          'Inclut scores de douleur, NVPO, blocs et notes de suivi',
       'notesHeader': 'NOTES ET COMMENTAIRES',
       'dateLabel': 'Date',
       'anaesthesiaLabel': 'Anesthésie',
@@ -1596,6 +1790,10 @@ class AppLocalizations {
       'procedurePerformed': 'Procédure Réalisée',
       'pleaseEnterProcedure': 'Veuillez entrer la procédure',
       'catheterPlacedInfo': 'Cathéter posé pour analgésie continue',
+      'selectCatheterBlocks': 'Préciser le(s) bloc(s) avec cathéter :',
+      'catheterSelectAtLeastOne':
+          'Veuillez sélectionner au moins un bloc pour le cathéter.',
+      'selectAtLeastOne': 'Sélectionner ≥ 1',
       'supervisorName': 'Nom du Superviseur',
       'ifSupervised': 'Si supervisé ou assisté',
       'cormackLehaneGrade': 'Grade Cormack-Lehane',
@@ -1604,7 +1802,8 @@ class AppLocalizations {
       'intraOpPostOpComplications': 'Complications per/postopératoires',
       'selectOutcome': 'Sélectionner le devenir',
       'flagForPostOpFollowUp': 'Marquer pour suivi postopératoire',
-      'flagForFollowUpSubtitle': 'Ajouter à la liste des visites postopératoires (J1)',
+      'flagForFollowUpSubtitle':
+          'Ajouter à la liste des visites postopératoires (J1)',
       'additionalNotes': 'Notes Complémentaires',
       'additionalClinicalNotes': 'Remarques cliniques...',
       'tapToSelect': 'Appuyez pour sélectionner',
@@ -1613,11 +1812,13 @@ class AppLocalizations {
       'enterBlockName': 'Nom du bloc...',
       'copyLastCasePattern': 'Copier le dernier cas',
       'saveAsTemplate': 'Enregistrer comme modèle',
-      'storesTemplateExplanation': 'Conserve la technique et les blocs pour réutilisation',
+      'storesTemplateExplanation':
+          'Conserve la technique et les blocs pour réutilisation',
       'saveAction': 'Enregistrer',
       'noPreviousCasesToCopy': 'Aucun cas précédent à copier',
       'resumeIncompleteCase': 'Reprendre le cas en cours ?',
-      'unsavedDraftRestore': 'Un brouillon non enregistré a été trouvé. Voulez-vous le restaurer ?',
+      'unsavedDraftRestore':
+          'Un brouillon non enregistré a été trouvé. Voulez-vous le restaurer ?',
       'discardAction': 'Ignorer',
       'restoreAction': 'Restaurer',
       'caseUpdated': 'Cas mis à jour',
@@ -1626,24 +1827,31 @@ class AppLocalizations {
       'templateSavedMsg': 'Modèle enregistré',
       'achievementUnlocked': 'Succès débloqué !',
       'etherlogReminder': 'Rappel EtherLog',
-      'inactivityReminderBody': 'Avez-vous eu des cas récemment ? Pensez à les consigner !',
+      'inactivityReminderBody':
+          'Avez-vous eu des cas récemment ? Pensez à les consigner !',
       'incompleteCaseDraft': 'Brouillon de cas incomplet',
       'incompleteDraftSaved': 'Brouillon enregistré',
       'incompleteDraftSubtitle': 'Vous pourrez continuer la saisie plus tard',
       'noCasesInDays': 'Aucun cas saisi depuis {n} jours',
       'lastCaseOn': 'Dernier cas le {date}',
       'timeForLogbookEntry': 'Il est temps de mettre à jour votre logbook',
-      'pdfOptionsDescription': 'Configurez les éléments qui apparaîtront sur vos rapports PDF exportés.',
-      'pdfExportFullExplanation': 'Personnalisez en-têtes, signatures, colonnes et tableaux de synthèse.',
+      'pdfOptionsDescription':
+          'Configurez les éléments qui apparaîtront sur vos rapports PDF exportés.',
+      'pdfExportFullExplanation':
+          'Personnalisez en-têtes, signatures, colonnes et tableaux de synthèse.',
       'dateRangeExportSubtitle': 'Filtrer les cas par période spécifique',
-      'hospitalNumbersSubtitle': 'Inclure les numéros d\'identification patient',
+      'hospitalNumbersSubtitle':
+          'Inclure les numéros d\'identification patient',
       'patientDetailsSubtitle': 'Inclure âge, sexe, poids, taille et IMC',
       'anaesthesiaTimesSubtitle': 'Inclure heures de début, fin et durée',
       'regionalSubtitle': 'Inclure détails des blocs ALR et cathéters',
       'airwaySubtitle': 'Inclure matériel de ventilation et Cormack-Lehane',
-      'invasiveSubtitle': 'Inclure cathéters artériels, voies centrales et monitorage',
-      'complicationsSubtitle': 'Inclure le registre des événements et complications',
-      'summaryTablesSubtitle': 'Générer des tableaux synthétiques par spécialité et technique',
+      'invasiveSubtitle':
+          'Inclure cathéters artériels, voies centrales et monitorage',
+      'complicationsSubtitle':
+          'Inclure le registre des événements et complications',
+      'summaryTablesSubtitle':
+          'Générer des tableaux synthétiques par spécialité et technique',
       'signatureSubtitle': 'Ajouter un espace pour visa et signature du tuteur',
       'inProgressLabel': 'En Cours',
       'pendingFollowUp': 'Suivi en Attente',
@@ -1656,7 +1864,8 @@ class AppLocalizations {
       'yourYearInReview': 'Votre {year} en revue',
       'noCasesLoggedYearYet': 'Aucun cas enregistré en {year} pour l\'instant',
       'activityHeatmap': 'Carte d\'Activité',
-      'heatmapCaption': 'Chaque case représente un jour. Plus sombre = plus de cas enregistrés',
+      'heatmapCaption':
+          'Chaque case représente un jour. Plus sombre = plus de cas enregistrés',
       'monthlyCaseVolume': 'Volume Mensuel de Cas',
       'avgAnaesthesiaDurationMin': 'Durée Moyenne d\'Anesthésie (min)',
       'percentUneventful': '% Sans Incident',
@@ -1671,12 +1880,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Voies Difficiles',
       'achievementsBadges': 'Succès et Badges',
       'noAchievementsInFilter': 'Aucun succès dans ce filtre',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Enregistrer',
       'cancel': 'Annuler',
       'delete': 'Supprimer',
@@ -1738,11 +1942,13 @@ class AppLocalizations {
       'caseSaved': 'Cas enregistré',
       'yourRole': 'Votre rôle',
       'performed': 'Réalisé',
+      'supervised': 'Supervisé',
       'assisted': 'Assisté',
       'observed': 'Observé',
       'freeTrial': 'Essai gratuit',
       'subscriptionExpired': 'Abonnement expiré',
-      'cannotAddCases': 'Impossible d\'ajouter des cas avant le renouvellement de l\'abonnement.',
+      'cannotAddCases':
+          'Impossible d\'ajouter des cas avant le renouvellement de l\'abonnement.',
       'welcomeTitle': 'Bienvenue sur Etherlog',
       'getStarted': 'Commencer',
       'pointsBreakdown': 'Détail des points',
@@ -1778,11 +1984,13 @@ class AppLocalizations {
       'caseDetails': 'Détails du cas',
       'deleteCase': 'Supprimer le cas ?',
       'deleteCaseWarning': 'Cette action est irréversible.',
-      'shareCase': 'Montrez ce QR code à un confrère pour importer ce cas dans Etherlog.',
+      'shareCase':
+          'Montrez ce QR code à un confrère pour importer ce cas dans Etherlog.',
       'shareCaseQr': 'Partager le cas (QR)',
       'importCaseQr': 'Importer un cas (QR)',
       'importSharedCase': 'Importer le cas partagé ?',
-      'importSharedCaseBody': 'Une copie sera enregistrée dans votre carnet avec le rôle de Praticien.',
+      'importSharedCaseBody':
+          'Une copie sera enregistrée dans votre carnet avec le rôle de Praticien.',
       'import': 'Importer',
       'caseImportedConsultant': 'Cas importé en tant que Praticien',
       'invalidCaseQr': 'QR code Etherlog invalide',
@@ -1791,7 +1999,8 @@ class AppLocalizations {
       'caseDataCopied': 'Données copiées dans le presse-papiers',
       'hideHospitalNumber': 'Masquer le numéro de dossier / IPP',
       'hideHospitalNumberHint': 'Recommandé pour un partage anonyme',
-      'qrPayloadLarge': 'Contenu volumineux. Utilisez la copie si le scan échoue.',
+      'qrPayloadLarge':
+          'Contenu volumineux. Utilisez la copie si le scan échoue.',
       'shareCaseFooter': 'Les photos ne sont pas incluses dans le QR code.',
       'clipboardEmpty': 'Presse-papiers vide',
       'alignQrHint': 'Alignez le QR code dans le cadre pour scanner',
@@ -1812,7 +2021,8 @@ class AppLocalizations {
       'noCasesToExport': 'Aucun cas à exporter',
       'logbookPdfExported': 'PDF du carnet exporté',
       'selectBothDates': 'Veuillez sélectionner les dates Du et Au',
-      'toDateBeforeFrom': 'La date de fin ne peut être antérieure à la date de début',
+      'toDateBeforeFrom':
+          'La date de fin ne peut être antérieure à la date de début',
       'exportByDateRange': 'Exporter par plage de dates',
       'caseTemplates': 'Modèles de cas',
       'deleteTemplate': 'Supprimer le modèle ?',
@@ -1822,7 +2032,8 @@ class AppLocalizations {
       'rename': 'Renommer',
       'templateName': 'Nom du modèle',
       'noTemplatesSaved': 'Aucun modèle enregistré',
-      'templatesEmptyHint': 'Dans Nouveau Cas, enregistrez vos interventions fréquentes en modèle pour gagner du temps.',
+      'templatesEmptyHint':
+          'Dans Nouveau Cas, enregistrez vos interventions fréquentes en modèle pour gagner du temps.',
       'insights': 'Analyses Cliniques',
       'less': 'Moins',
       'more': 'Plus',
@@ -1845,7 +2056,8 @@ class AppLocalizations {
       'dateOfBirth': 'Date de naissance',
       'selectDateOfBirth': 'Sélectionner la date de naissance',
       'notSpecified': 'Non renseigné',
-      'profileBonusHint': 'Remplissez votre profil pour gagner +10 points de bonus.',
+      'profileBonusHint':
+          'Remplissez votre profil pour gagner +10 points de bonus.',
       'saveProfile': 'Enregistrer le profil',
       'profileSaved': 'Profil enregistré avec succès',
       'appTheme': 'Thème de l\'application',
@@ -1862,9 +2074,11 @@ class AppLocalizations {
       'surgicalRose': 'Rose Chirurgical',
       'amberGold': 'Or Ambré',
       'idleAnimation': 'Animation de veille',
-      'idleAnimationSubtitle': 'Icônes d\'anesthésie flottantes après 30s d\'inactivité',
+      'idleAnimationSubtitle':
+          'Icônes d\'anesthésie flottantes après 30s d\'inactivité',
       'celebrationAnimation': 'Animation de célébration',
-      'celebrationAnimationSubtitle': 'Afficher l\'animation de célébration lorsqu\'un cas est marqué sans complications',
+      'celebrationAnimationSubtitle':
+          'Afficher l\'animation de célébration lorsqu\'un cas est marqué sans complications',
       'haptics': 'Retour haptique',
       'hapticsSubtitle': 'Vibrations lors des touches et sélections',
       'logbookReminders': 'RAPPELS DU CARNET',
@@ -1872,10 +2086,12 @@ class AppLocalizations {
       'off': 'Désactivé',
       'nDays': '{n} jours',
       'quietHours': 'Heures calmes',
-      'quietHoursSubtitle': 'Désactiver les rappels d\'inactivité entre 22h et 7h',
+      'quietHoursSubtitle':
+          'Désactiver les rappels d\'inactivité entre 22h et 7h',
       'deleteAllCases': 'Supprimer tous les cas',
       'deleteAllCasesWarning': 'Nécessite le code PIN. Efface tout le carnet.',
-      'deleteAllCasesBody': 'Cette action supprimera définitivement tous les cas du carnet.\n\nSaisissez votre code PIN pour continuer.',
+      'deleteAllCasesBody':
+          'Cette action supprimera définitivement tous les cas du carnet.\n\nSaisissez votre code PIN pour continuer.',
       'continueText': 'Continuer',
       'enterPinToConfirm': 'Entrez le code PIN pour confirmer',
       'incorrectPinCasesNotDeleted': 'Code PIN incorrect. Cas non supprimés.',
@@ -1883,8 +2099,10 @@ class AppLocalizations {
       'logbookCleared': 'Carnet de cas réinitialisé.',
       'fromDate': 'Date de début',
       'toDate': 'Date de fin',
-      'confidentialityBody': 'Vous êtes tenu au secret médical. Ne stockez aucun nom directement identifiable de patient. Les données restent sur cet appareil.',
-      'iAgree': 'Je m\'engage à respecter les règles de confidentialité et de secret médical.',
+      'confidentialityBody':
+          'Vous êtes tenu au secret médical. Ne stockez aucun nom directement identifiable de patient. Les données restent sur cet appareil.',
+      'iAgree':
+          'Je m\'engage à respecter les règles de confidentialité et de secret médical.',
       'filterAll': 'Tous',
       'regionalBlock': 'Bloc locorégional',
       'dateRange': 'Plage de dates',
@@ -1912,61 +2130,91 @@ class AppLocalizations {
       'operator': 'Opérateur',
       'value': 'Valeur',
       'backupRestore': 'Sauvegarde & Restauration',
-      'backupDescription': 'Enregistrez tous vos cas dans un fichier JSON sur votre téléphone ou cloud.',
-      'restoreDescription': 'Importez vos cas à partir d\'un fichier de sauvegarde JSON Etherlog.',
+      'backupDescription':
+          'Enregistrez tous vos cas dans un fichier JSON sur votre téléphone ou cloud.',
+      'restoreDescription':
+          'Importez vos cas à partir d\'un fichier de sauvegarde JSON Etherlog.',
       'exportBackupFile': 'Créer une sauvegarde',
       'restoreFromBackup': 'Restaurer la sauvegarde',
       'noCasesToBackup': 'Aucun cas à sauvegarder',
       'backupSaved': 'Sauvegarde créée : {name}',
       'restoredNCases': '{n} cas restauré(s)',
       'noCasesImported': 'Aucun cas importé (ou annulé)',
-      'includeSupervisorSignature': 'Inclure la section de validation par le tuteur / chef de service',
-      'includeSpecialtySummary': 'Inclure le tableau de synthèse par spécialité',
+      'includeSupervisorSignature':
+          'Inclure la section de validation par le tuteur / chef de service',
+      'includeSpecialtySummary':
+          'Inclure le tableau de synthèse par spécialité',
       'columnsToInclude': 'Colonnes du tableau',
       'helpTitle': 'Aide & guide',
       'helpIntroTitle': 'Fonctionnement d\'Etherlog',
-      'helpIntroBody': 'Guide pratique pour chaque fonctionnalité. Vos données restent confidentielles sur votre appareil.',
+      'helpIntroBody':
+          'Guide pratique pour chaque fonctionnalité. Vos données restent confidentielles sur votre appareil.',
       'helpSecGettingStarted': 'Prise en main',
-      'helpGs1': 'Créez un code PIN à 4 chiffres ou activez l\'empreinte digitale au premier lancement.',
-      'helpGs2': 'Complétez votre Profil Médecin pour afficher vos titres sur les PDF officiels.',
-      'helpGs3': 'Personnalisez le thème graphique, la langue et les alertes depuis vos paramètres.',
+      'helpGs1':
+          'Créez un code PIN à 4 chiffres ou activez l\'empreinte digitale au premier lancement.',
+      'helpGs2':
+          'Complétez votre Profil Médecin pour afficher vos titres sur les PDF officiels.',
+      'helpGs3':
+          'Personnalisez le thème graphique, la langue et les alertes depuis vos paramètres.',
       'helpSecLogging': 'Saisir un acte anesthésique',
       'helpLog1': 'Appuyez sur le bouton + bleu de l\'écran d\'accueil.',
-      'helpLog2': 'L\'horodatage chirurgical s\'intègre dans la plage d\'anesthésie.',
-      'helpLog3': 'Pour les plus de 12 ans, l\'âge est en années. Pour les nourrissons, en mois ou jours.',
-      'helpLog4': 'Les choix de rachianesthésie ou péridurale pré-sélectionnent les blocs associés.',
-      'helpLog5': 'Les options incompatibles d\'intubation sont automatiquement filtrées.',
-      'helpLog6': 'Maintenez un cas dans la liste pour l\'ajouter aux favoris étoilés.',
-      'helpLog7': 'Activez le suivi post-opératoire pour les visites en chambre.',
+      'helpLog2':
+          'L\'horodatage chirurgical s\'intègre dans la plage d\'anesthésie.',
+      'helpLog3':
+          'Pour les plus de 12 ans, l\'âge est en années. Pour les nourrissons, en mois ou jours.',
+      'helpLog4':
+          'Les choix de rachianesthésie ou péridurale pré-sélectionnent les blocs associés.',
+      'helpLog5':
+          'Les options incompatibles d\'intubation sont automatiquement filtrées.',
+      'helpLog6':
+          'Maintenez un cas dans la liste pour l\'ajouter aux favoris étoilés.',
+      'helpLog7':
+          'Activez le suivi post-opératoire pour les visites en chambre.',
       'helpSecDashboard': 'Tableau de bord',
-      'helpDash1': 'Les compteurs affichent le total, les programmés, les urgences et les VAD.',
-      'helpDash2': 'Recherchez par geste opératoire, diagnostic ou numéro d\'acte.',
+      'helpDash1':
+          'Les compteurs affichent le total, les programmés, les urgences et les VAD.',
+      'helpDash2':
+          'Recherchez par geste opératoire, diagnostic ou numéro d\'acte.',
       'helpDash3': 'Filtrez facilement par urgence, bloc, période ou favoris.',
-      'helpDash4': 'Sélectionnez des dates pour délimiter vos semestres de stage.',
-      'helpDash5': 'L\'icône de cadenas verrouille instantanément l\'application.',
-      'helpDash6': 'Les cartes de suivi récapitulent vos visites au lit du patient.',
+      'helpDash4':
+          'Sélectionnez des dates pour délimiter vos semestres de stage.',
+      'helpDash5':
+          'L\'icône de cadenas verrouille instantanément l\'application.',
+      'helpDash6':
+          'Les cartes de suivi récapitulent vos visites au lit du patient.',
       'helpSecCaseMix': 'Générateur de Case Mix',
       'helpMix1': 'Créez des requêtes multi-critères avancées.',
-      'helpMix2': 'Filtrez par classe ASA, acte ou terrain pour vos validations de stage.',
-      'helpMix3': 'Enregistrez vos requêtes favorites pour les réutiliser en un clic.',
-      'helpMix4': 'Exportez vos bilans d\'activité en PDF pour vos commissions et dossiers.',
+      'helpMix2':
+          'Filtrez par classe ASA, acte ou terrain pour vos validations de stage.',
+      'helpMix3':
+          'Enregistrez vos requêtes favorites pour les réutiliser en un clic.',
+      'helpMix4':
+          'Exportez vos bilans d\'activité en PDF pour vos commissions et dossiers.',
       'helpMix5': 'Idéal pour le portfolio et les demandes de poste.',
-      'helpMix6': 'Générez des statistiques cliniques certifiées en quelques secondes.',
+      'helpMix6':
+          'Générez des statistiques cliniques certifiées en quelques secondes.',
       'helpSecStats': 'Statistiques et Analyses',
-      'helpStats1': 'Graphiques précis par tranche d\'âge, IMC, gestes et techniques.',
-      'helpStats2': 'Exportez un PDF récapitulatif pour vos bilans semestriels.',
-      'helpStats3': 'La section Analyses affiche votre volume d\'activité mensuel.',
+      'helpStats1':
+          'Graphiques précis par tranche d\'âge, IMC, gestes et techniques.',
+      'helpStats2':
+          'Exportez un PDF récapitulatif pour vos bilans semestriels.',
+      'helpStats3':
+          'La section Analyses affiche votre volume d\'activité mensuel.',
       'helpSecAchievements': 'Succès et progression',
-      'helpAch1': 'Gagnez des points d\'expérience selon la technicité des actes.',
+      'helpAch1':
+          'Gagnez des points d\'expérience selon la technicité des actes.',
       'helpAch2': 'Touchez vos points pour voir le décompte détaillé.',
       'helpAch3': 'Débloquez des badges de Cuivre à Diamant.',
       'helpAch4': 'Partagez vos étapes d\'apprentissage.',
       'helpSecQr': 'Partage de cas (QR)',
-      'helpQr1': 'Générez un QR code chiffré pour transmettre un cas à un interne.',
-      'helpQr2': 'Le destinataire scanne le code et l\'acte est dupliqué instantanément.',
+      'helpQr1':
+          'Générez un QR code chiffré pour transmettre un cas à un interne.',
+      'helpQr2':
+          'Le destinataire scanne le code et l\'acte est dupliqué instantanément.',
       'helpQr3': 'Gain de temps précieux en salle d\'opération.',
       'helpSecPdf': 'PDFs et sauvegardes',
-      'helpPdf1': 'Choisissez les colonnes et synthèses de votre livret d\'interne PDF.',
+      'helpPdf1':
+          'Choisissez les colonnes et synthèses de votre livret d\'interne PDF.',
       'helpPdf2': 'Effectuez des sauvegardes JSON régulières.',
       'helpPdf3': 'Les sauvegardes n\'incluent pas votre code PIN.',
       'helpSecSub': 'Abonnement',
@@ -1975,15 +2223,19 @@ class AppLocalizations {
       'helpSub3': 'Gérez votre formule à tout moment.',
       'helpSecTips': 'Astuces et dépannage',
       'helpTip1': 'Impossible d\'ajouter un cas ? Vérifiez votre abonnement.',
-      'helpTip2': 'Empreinte non reconnue ? Utilisez votre code PIN de secours.',
+      'helpTip2':
+          'Empreinte non reconnue ? Utilisez votre code PIN de secours.',
       'helpTip3': 'Exportez vos données avant tout changement de téléphone.',
-      'helpTip4': 'Le module Case Mix vous aide à valider vos objectifs de maquette.',
-      'helpTip5': 'Le changement de langue conserve l\'intégrité de vos dossiers médicaux.',
+      'helpTip4':
+          'Le module Case Mix vous aide à valider vos objectifs de maquette.',
+      'helpTip5':
+          'Le changement de langue conserve l\'intégrité de vos dossiers médicaux.',
       'helpFooter': 'Etherlog v2.8 · Carnet d\'anesthésie autonome',
       'helpMenu': 'Aide & guide',
     },
     'de': {
-      'tapToViewCalculationBreakdown': 'Tippen, um die Punkteaufschlüsselung anzuzeigen',
+      'tapToViewCalculationBreakdown':
+          'Tippen, um die Punkteaufschlüsselung anzuzeigen',
       'clinicalOverview': 'Klinische Übersicht',
       'immediateManagementSteps': 'Sofortmaßnahmen',
       'differentialDiagnosis': 'Differentialdiagnose',
@@ -2011,6 +2263,9 @@ class AppLocalizations {
       'complicationsHeader': 'KOMPLIKATIONEN',
       'outcomeHeader': 'VERLAUF & VERLEGUNG',
       'postOpFollowUpHeader': 'POSTOPERATIVE VISITE (TAG 1)',
+      'postOpFollowUp': 'Postoperative Visite',
+      'postOpFollowUpSubtitle':
+          'Schmerzscores, PONV, Blockkontrollen und Notizen',
       'notesHeader': 'NOTIZEN & BEMERKUNGEN',
       'dateLabel': 'Datum',
       'anaesthesiaLabel': 'Anästhesie',
@@ -2072,7 +2327,12 @@ class AppLocalizations {
       'primaryDiagnosis': 'Hauptdiagnose',
       'procedurePerformed': 'Durchgeführte Prozedur',
       'pleaseEnterProcedure': 'Bitte Prozedur eingeben',
-      'catheterPlacedInfo': 'Katheter zur kontinuierlichen Schmerztherapie gelegt',
+      'catheterPlacedInfo':
+          'Katheter zur kontinuierlichen Schmerztherapie gelegt',
+      'selectCatheterBlocks': 'Block(s) mit Katheter angeben:',
+      'catheterSelectAtLeastOne':
+          'Bitte mindestens einen Block für den Katheter auswählen.',
+      'selectAtLeastOne': 'Mind. 1 wählen',
       'supervisorName': 'Name des Supervisors',
       'ifSupervised': 'Falls assistiert oder supervidiert',
       'cormackLehaneGrade': 'Cormack-Lehane Grad',
@@ -2081,7 +2341,8 @@ class AppLocalizations {
       'intraOpPostOpComplications': 'Perioperative Komplikationen',
       'selectOutcome': 'Verlegung / Outcome wählen',
       'flagForPostOpFollowUp': 'Für postoperative Visite markieren',
-      'flagForFollowUpSubtitle': 'Fügt diesen Fall der Visitenliste hinzu (Tag 1)',
+      'flagForFollowUpSubtitle':
+          'Fügt diesen Fall der Visitenliste hinzu (Tag 1)',
       'additionalNotes': 'Zusätzliche Notizen',
       'additionalClinicalNotes': 'Klinische Anmerkungen...',
       'tapToSelect': 'Tippen zum Auswählen',
@@ -2090,11 +2351,13 @@ class AppLocalizations {
       'enterBlockName': 'Name der Blockade...',
       'copyLastCasePattern': 'Letzten Fall kopieren',
       'saveAsTemplate': 'Als Vorlage speichern',
-      'storesTemplateExplanation': 'Speichert Verfahren und Blockaden zur Wiederverwendung',
+      'storesTemplateExplanation':
+          'Speichert Verfahren und Blockaden zur Wiederverwendung',
       'saveAction': 'Speichern',
       'noPreviousCasesToCopy': 'Keine vorherigen Fälle zum Kopieren',
       'resumeIncompleteCase': 'Unvollständigen Fall fortsetzen?',
-      'unsavedDraftRestore': 'Ein ungespeicherter Entwurf wurde gefunden. Möchtest du ihn wiederherstellen?',
+      'unsavedDraftRestore':
+          'Ein ungespeicherter Entwurf wurde gefunden. Möchtest du ihn wiederherstellen?',
       'discardAction': 'Verwerfen',
       'restoreAction': 'Wiederherstellen',
       'caseUpdated': 'Fall aktualisiert',
@@ -2103,28 +2366,40 @@ class AppLocalizations {
       'templateSavedMsg': 'Vorlage gespeichert',
       'achievementUnlocked': 'Erfolg freigeschaltet!',
       'etherlogReminder': 'EtherLog Erinnerung',
-      'inactivityReminderBody': 'Hattest du kürzlich Narkosen? Nicht vergessen zu dokumentieren!',
+      'inactivityReminderBody':
+          'Hattest du kürzlich Narkosen? Nicht vergessen zu dokumentieren!',
       'incompleteCaseDraft': 'Unvollständiger Fallentwurf',
       'incompleteDraftSaved': 'Entwurf gespeichert',
       'incompleteDraftSubtitle': 'Du kannst die Eingabe später fortsetzen',
       'noCasesInDays': 'Keine Fälle seit {n} Tagen protokolliert',
       'lastCaseOn': 'Letzter Fall am {date}',
       'timeForLogbookEntry': 'Zeit für einen Logbucheintrag',
-      'pdfOptionsDescription': 'Wähle aus, was auf deinen exportierten PDF-Logbüchern erscheinen soll.',
-      'pdfExportFullExplanation': 'Passe Kopfzeilen, Unterschriften, Spalten und Übersichtstabellen an.',
+      'pdfOptionsDescription':
+          'Wähle aus, was auf deinen exportierten PDF-Logbüchern erscheinen soll.',
+      'pdfExportFullExplanation':
+          'Passe Kopfzeilen, Unterschriften, Spalten und Übersichtstabellen an.',
       'dateRangeExportSubtitle': 'Fälle nach Datumsbereich filtern',
       'hospitalNumbersSubtitle': 'Patienten- und Fallnummern einbinden',
-      'patientDetailsSubtitle': 'Alter, Geschlecht, Gewicht, Größe und BMI anzeigen',
-      'anaesthesiaTimesSubtitle': 'Start-, End- und Schnitt-Naht-Zeiten einschließen',
-      'regionalSubtitle': 'Details zu Regionalanästhesien und Kathetern anzeigen',
-      'airwaySubtitle': 'Atemwegshilfsmittel, Intubation und Cormack-Lehane einbinden',
-      'invasiveSubtitle': 'Arterielle Zugänge, ZVKs und erweitertes Monitoring auflisten',
-      'complicationsSubtitle': 'Komplikations- und Zwischenfallregister einbinden',
-      'summaryTablesSubtitle': 'Übersichtstabellen nach Fachgebiet und Verfahren generieren',
-      'signatureSubtitle': 'Unterschriftenfeld für Weiterbilder/Chefarzt hinzufügen',
+      'patientDetailsSubtitle':
+          'Alter, Geschlecht, Gewicht, Größe und BMI anzeigen',
+      'anaesthesiaTimesSubtitle':
+          'Start-, End- und Schnitt-Naht-Zeiten einschließen',
+      'regionalSubtitle':
+          'Details zu Regionalanästhesien und Kathetern anzeigen',
+      'airwaySubtitle':
+          'Atemwegshilfsmittel, Intubation und Cormack-Lehane einbinden',
+      'invasiveSubtitle':
+          'Arterielle Zugänge, ZVKs und erweitertes Monitoring auflisten',
+      'complicationsSubtitle':
+          'Komplikations- und Zwischenfallregister einbinden',
+      'summaryTablesSubtitle':
+          'Übersichtstabellen nach Fachgebiet und Verfahren generieren',
+      'signatureSubtitle':
+          'Unterschriftenfeld für Weiterbilder/Chefarzt hinzufügen',
       'inProgressLabel': 'In Bearbeitung',
       'pendingFollowUp': 'Visite Ausstehend',
-      'tapToCompleteSwipeSkip': 'Tippen zum Abschließen • Wischen zum Überspringen',
+      'tapToCompleteSwipeSkip':
+          'Tippen zum Abschließen • Wischen zum Überspringen',
       'trialExpiredTapRenew': 'Testversion abgelaufen. Tippen zum Verlängern',
       'patientDetails': 'Patientendaten',
       'anaesthesiaAndSurgeryTimes': 'Anästhesie- & OP-Zeiten',
@@ -2133,7 +2408,8 @@ class AppLocalizations {
       'yourYearInReview': 'Dein {year} im Rückblick',
       'noCasesLoggedYearYet': 'Noch keine Fälle in {year} protokolliert',
       'activityHeatmap': 'Aktivitäts-Heatmap',
-      'heatmapCaption': 'Jede Zelle ist ein Tag. Dunkler = mehr Fälle protokolliert',
+      'heatmapCaption':
+          'Jede Zelle ist ein Tag. Dunkler = mehr Fälle protokolliert',
       'monthlyCaseVolume': 'Monatliches Fallvolumen',
       'avgAnaesthesiaDurationMin': 'Ø Anästhesiedauer (Min.)',
       'percentUneventful': '% Ereignislos',
@@ -2148,12 +2424,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Schw. Atemweg',
       'achievementsBadges': 'Erfolge & Abzeichen',
       'noAchievementsInFilter': 'Keine Erfolge in diesem Filter',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Speichern',
       'cancel': 'Abbrechen',
       'delete': 'Löschen',
@@ -2215,11 +2486,13 @@ class AppLocalizations {
       'caseSaved': 'Fall gespeichert',
       'yourRole': 'Ihre Rolle',
       'performed': 'Selbstständig',
+      'supervised': 'Unter Aufsicht',
       'assisted': 'Assistiert',
       'observed': 'Beobachtet',
       'freeTrial': 'Kostenlose Testphase',
       'subscriptionExpired': 'Abonnement abgelaufen',
-      'cannotAddCases': 'Erst nach Verlängerung des Abonnements können neue Fälle protokolliert werden.',
+      'cannotAddCases':
+          'Erst nach Verlängerung des Abonnements können neue Fälle protokolliert werden.',
       'welcomeTitle': 'Willkommen bei Etherlog',
       'getStarted': 'Loslegen',
       'pointsBreakdown': 'Punkteübersicht',
@@ -2259,7 +2532,8 @@ class AppLocalizations {
       'shareCaseQr': 'Fall teilen (QR)',
       'importCaseQr': 'Fall importieren (QR)',
       'importSharedCase': 'Geteilten Fall importieren?',
-      'importSharedCaseBody': 'Wird als Facharzt/Oberarzt in Ihrem Logbuch gespeichert.',
+      'importSharedCaseBody':
+          'Wird als Facharzt/Oberarzt in Ihrem Logbuch gespeichert.',
       'import': 'Importieren',
       'caseImportedConsultant': 'Fall als Facharzt importiert',
       'invalidCaseQr': 'Ungültiger Etherlog-QR-Code',
@@ -2268,10 +2542,13 @@ class AppLocalizations {
       'caseDataCopied': 'Falldaten in die Zwischenablage kopiert',
       'hideHospitalNumber': 'Fall-/Patientennummer ausblenden',
       'hideHospitalNumberHint': 'Empfohlen für anonyme Übergaben',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'Punkte für diesen Fall',
       'caseTemplatesMenu': 'Fallvorlagen',
@@ -2299,7 +2576,8 @@ class AppLocalizations {
       'rename': 'Umbenennen',
       'templateName': 'Vorlagenname',
       'noTemplatesSaved': 'Noch keine Vorlagen',
-      'templatesEmptyHint': 'Speichern Sie Routineeingriffe unter Neuer Fall als Vorlage ab.',
+      'templatesEmptyHint':
+          'Speichern Sie Routineeingriffe unter Neuer Fall als Vorlage ab.',
       'insights': 'Klinische Einblicke',
       'less': 'Weniger',
       'more': 'Mehr',
@@ -2322,11 +2600,13 @@ class AppLocalizations {
       'dateOfBirth': 'Geburtsdatum',
       'selectDateOfBirth': 'Geburtsdatum auswählen',
       'notSpecified': 'Nicht angegeben',
-      'profileBonusHint': 'Name und Klinik ausfüllen, um +10 Bonuspunkte zu erhalten.',
+      'profileBonusHint':
+          'Name und Klinik ausfüllen, um +10 Bonuspunkte zu erhalten.',
       'saveProfile': 'Profil speichern',
       'profileSaved': 'Profil erfolgreich gespeichert',
       'appTheme': 'App-Design',
-      'chooseThemeSubtitle': 'Wählen Sie das Erscheinungsbild von Etherlog auf Ihrem Gerät.',
+      'chooseThemeSubtitle':
+          'Wählen Sie das Erscheinungsbild von Etherlog auf Ihrem Gerät.',
       'themeDark': 'Dunkel',
       'themeLight': 'Hell',
       'themeSerenity': 'Serenity',
@@ -2339,9 +2619,11 @@ class AppLocalizations {
       'surgicalRose': 'Chirurgie-Rosé',
       'amberGold': 'Bernstein-Gold',
       'idleAnimation': 'Ruhe-Animation',
-      'idleAnimationSubtitle': 'Schwebende Anästhesie-Symbole nach 30s Inaktivität',
+      'idleAnimationSubtitle':
+          'Schwebende Anästhesie-Symbole nach 30s Inaktivität',
       'celebrationAnimation': 'Feier-Animation',
-      'celebrationAnimationSubtitle': 'Feier-Animation anzeigen, wenn ein Fall als komplikationslos markiert wird',
+      'celebrationAnimationSubtitle':
+          'Feier-Animation anzeigen, wenn ein Fall als komplikationslos markiert wird',
       'haptics': 'Haptisches Feedback',
       'hapticsSubtitle': 'Vibration bei Berührungen und Tastendruck',
       'logbookReminders': 'LOGBUCH-ERINNERUNGEN',
@@ -2349,19 +2631,25 @@ class AppLocalizations {
       'off': 'Aus',
       'nDays': '{n} Tagen',
       'quietHours': 'Ruhezeiten',
-      'quietHoursSubtitle': 'Inaktivitätserinnerungen zwischen 22:00 und 07:00 Uhr stummschalten',
+      'quietHoursSubtitle':
+          'Inaktivitätserinnerungen zwischen 22:00 und 07:00 Uhr stummschalten',
       'deleteAllCases': 'Alle Fälle löschen',
-      'deleteAllCasesWarning': 'Erfordert PIN. Leert das gesamte Logbuch dauerhaft.',
-      'deleteAllCasesBody': 'Hierdurch werden alle Fälle unwiderruflich gelöscht.\n\nZur Bestätigung PIN eingeben.',
+      'deleteAllCasesWarning':
+          'Erfordert PIN. Leert das gesamte Logbuch dauerhaft.',
+      'deleteAllCasesBody':
+          'Hierdurch werden alle Fälle unwiderruflich gelöscht.\n\nZur Bestätigung PIN eingeben.',
       'continueText': 'Fortfahren',
       'enterPinToConfirm': 'PIN zur Bestätigung eingeben',
-      'incorrectPinCasesNotDeleted': 'Falsche PIN. Fälle wurden nicht gelöscht.',
+      'incorrectPinCasesNotDeleted':
+          'Falsche PIN. Fälle wurden nicht gelöscht.',
       'deletedNCases': '{n} Fall/Fälle aus dem Logbuch gelöscht.',
       'logbookCleared': 'Logbuch vollständig geleert.',
       'fromDate': 'Von Datum',
       'toDate': 'Bis Datum',
-      'confidentialityBody': 'Sie sind zur Einhaltung der ärztlichen Schweigepflicht verpflichtet. Verwenden Sie keine identifizierbaren Patientennamen. Alle Daten verbleiben lokal auf Ihrem Gerät.',
-      'iAgree': 'Ich verpflichte mich zur Einhaltung des Datenschutzes und der Schweigepflicht.',
+      'confidentialityBody':
+          'Sie sind zur Einhaltung der ärztlichen Schweigepflicht verpflichtet. Verwenden Sie keine identifizierbaren Patientennamen. Alle Daten verbleiben lokal auf Ihrem Gerät.',
+      'iAgree':
+          'Ich verpflichte mich zur Einhaltung des Datenschutzes und der Schweigepflicht.',
       'filterAll': 'Alle',
       'regionalBlock': 'Regionalanästhesie',
       'dateRange': 'Datumsbereich',
@@ -2389,50 +2677,71 @@ class AppLocalizations {
       'operator': 'Operator',
       'value': 'Wert',
       'backupRestore': 'Sicherung & Wiederherstellung',
-      'backupDescription': 'Alle Fälle in einer JSON-Datei auf diesem Gerät sichern.',
-      'restoreDescription': 'Fälle aus einer früheren Etherlog-Sicherungsdatei wiederherstellen.',
+      'backupDescription':
+          'Alle Fälle in einer JSON-Datei auf diesem Gerät sichern.',
+      'restoreDescription':
+          'Fälle aus einer früheren Etherlog-Sicherungsdatei wiederherstellen.',
       'exportBackupFile': 'Sicherung erstellen',
       'restoreFromBackup': 'Sicherung einlesen',
       'noCasesToBackup': 'Keine Fälle zum Sichern vorhanden',
       'backupSaved': 'Sicherung gespeichert: {name}',
       'restoredNCases': '{n} Fall/Fälle wiederhergestellt',
       'noCasesImported': 'Keine Fälle importiert (oder abgebrochen)',
-      'includeSupervisorSignature': 'Abschnitt für Weiterbildungsbefugten-Unterschrift',
+      'includeSupervisorSignature':
+          'Abschnitt für Weiterbildungsbefugten-Unterschrift',
       'includeSpecialtySummary': 'Fachgebietsübersicht einbinden',
       'columnsToInclude': 'Tabellenspalten',
       'helpTitle': 'Hilfe & Handbuch',
       'helpIntroTitle': 'Funktionsweise von Etherlog',
-      'helpIntroBody': 'Kurzanleitung für alle Bereiche. Ihre Daten verlassen dieses Telefon nicht.',
+      'helpIntroBody':
+          'Kurzanleitung für alle Bereiche. Ihre Daten verlassen dieses Telefon nicht.',
       'helpSecGettingStarted': 'Erste Schritte',
       'helpGs1': 'Legen Sie beim ersten Start eine PIN fest.',
       'helpGs2': 'Füllen Sie Ihr Arztprofil aus, um Bonuspunkte zu erhalten.',
-      'helpGs3': 'Passen Sie Design, Sprache und Vibrationseinstellungen nach Wunsch an.',
+      'helpGs3':
+          'Passen Sie Design, Sprache und Vibrationseinstellungen nach Wunsch an.',
       'helpSecLogging': 'Fallerfassung',
-      'helpLog1': 'Tippen Sie auf das blaue +, um eine Narkose zu dokumentieren.',
-      'helpLog2': 'Schnitt- und Nahtzeiten liegen logisch innerhalb der Narkosezeit.',
-      'helpLog3': 'Erfassen Sie Altersangaben für Erwachsene in Jahren, für Pädiatrie in Monaten oder Tagen.',
-      'helpLog4': 'Spinal- und Periduralanästhesien wählen automatisch passende Regionalblöcke aus.',
-      'helpLog5': 'Inkompatible Intubationsoptionen werden automatisch gefiltert.',
-      'helpLog6': 'Halten Sie Fälle in der Liste gedrückt, um sie mit einem Stern zu markieren.',
-      'helpLog7': 'Aktivieren Sie Visitenanforderungen für die postoperative Betreuung.',
+      'helpLog1':
+          'Tippen Sie auf das blaue +, um eine Narkose zu dokumentieren.',
+      'helpLog2':
+          'Schnitt- und Nahtzeiten liegen logisch innerhalb der Narkosezeit.',
+      'helpLog3':
+          'Erfassen Sie Altersangaben für Erwachsene in Jahren, für Pädiatrie in Monaten oder Tagen.',
+      'helpLog4':
+          'Spinal- und Periduralanästhesien wählen automatisch passende Regionalblöcke aus.',
+      'helpLog5':
+          'Inkompatible Intubationsoptionen werden automatisch gefiltert.',
+      'helpLog6':
+          'Halten Sie Fälle in der Liste gedrückt, um sie mit einem Stern zu markieren.',
+      'helpLog7':
+          'Aktivieren Sie Visitenanforderungen für die postoperative Betreuung.',
       'helpSecDashboard': 'Dashboard',
-      'helpDash1': 'Die oberen Kacheln zeigen Gesamt-, Elektiv-, Notfall- und DAM-Fälle.',
-      'helpDash2': 'Nutzen Sie die Suchleiste nach OP-Art, Diagnose oder Fallnummer.',
-      'helpDash3': 'Schnellfilter für Notfälle, Regionalverfahren, Zeiträume und Favoriten.',
-      'helpDash4': 'Wählen Sie einen Datumsbereich für Ihre Ausbildungsabschnitte.',
+      'helpDash1':
+          'Die oberen Kacheln zeigen Gesamt-, Elektiv-, Notfall- und DAM-Fälle.',
+      'helpDash2':
+          'Nutzen Sie die Suchleiste nach OP-Art, Diagnose oder Fallnummer.',
+      'helpDash3':
+          'Schnellfilter für Notfälle, Regionalverfahren, Zeiträume und Favoriten.',
+      'helpDash4':
+          'Wählen Sie einen Datumsbereich für Ihre Ausbildungsabschnitte.',
       'helpDash5': 'Das Schlosssymbol sperrt die App augenblicklich.',
-      'helpDash6': 'Visitenkarten erinnern an ausstehende postoperative Kontrollen.',
+      'helpDash6':
+          'Visitenkarten erinnern an ausstehende postoperative Kontrollen.',
       'helpSecCaseMix': 'Case-Mix-Filter',
       'helpMix1': 'Erstellen Sie präzise Mehrfachabfragen für Ihr Logbuch.',
-      'helpMix2': 'Filtern Sie nach ASA, Verfahren oder Fachgebiet für Ihre Facharztanmeldung.',
+      'helpMix2':
+          'Filtern Sie nach ASA, Verfahren oder Fachgebiet für Ihre Facharztanmeldung.',
       'helpMix3': 'Speichern Sie häufige Abfragen per Lesezeichen.',
       'helpMix4': 'Exportieren Sie fertige Auswertungen direkt als PDF.',
       'helpMix5': 'Perfekt für Bewerbungen und Weiterbildungsgespräche.',
       'helpMix6': 'Klinische Leistungsnachweise in Sekunden generiert.',
       'helpSecStats': 'Statistiken & Analysen',
-      'helpStats1': 'Detaillierte Verteilungen nach Alter, BMI, Blöcken und Zugängen.',
-      'helpStats2': 'Exportieren Sie ein Statistik-PDF für Weiterbildungsgremien.',
-      'helpStats3': 'Die Analyseansicht zeigt Ihr Jahresvolumen und Auslastung.',
+      'helpStats1':
+          'Detaillierte Verteilungen nach Alter, BMI, Blöcken und Zugängen.',
+      'helpStats2':
+          'Exportieren Sie ein Statistik-PDF für Weiterbildungsgremien.',
+      'helpStats3':
+          'Die Analyseansicht zeigt Ihr Jahresvolumen und Auslastung.',
       'helpSecAchievements': 'Erfolge & Punkte',
       'helpAch1': 'Sammeln Sie Erfahrungspunkte für komplexe Fälle.',
       'helpAch2': 'Tippen Sie auf den Punktestand für die Aufschlüsselung.',
@@ -2440,10 +2749,12 @@ class AppLocalizations {
       'helpAch4': 'Teilen Sie Meilensteine mit Kollegen.',
       'helpSecQr': 'Fall teilen (QR)',
       'helpQr1': 'Erzeugen Sie verschlüsselte QR-Codes zur Fallübergabe.',
-      'helpQr2': 'Kollegen scannen den Code und übernehmen den Eingriff direkt.',
+      'helpQr2':
+          'Kollegen scannen den Code und übernehmen den Eingriff direkt.',
       'helpQr3': 'Spart Zeit bei gemeinsamen Narkosen.',
       'helpSecPdf': 'PDFs & Backups',
-      'helpPdf1': 'Konfigurieren Sie Spalten und Berichte für Ihr offizielles Logbuch-PDF.',
+      'helpPdf1':
+          'Konfigurieren Sie Spalten und Berichte für Ihr offizielles Logbuch-PDF.',
       'helpPdf2': 'Erstellen Sie regelmäßige JSON-Sicherungen.',
       'helpPdf3': 'Sicherungen enthalten aus Sicherheitsgründen keine PIN.',
       'helpSecSub': 'Abonnement',
@@ -2451,16 +2762,21 @@ class AppLocalizations {
       'helpSub2': 'Das Abonnement ermöglicht unbegrenzte Fallerfassungen.',
       'helpSub3': 'Verwalten Sie Ihren Plan jederzeit in der App.',
       'helpSecTips': 'Tipps & Problemlösung',
-      'helpTip1': 'Fall kann nicht hinzugefügt werden? Abonnementstatus prüfen.',
-      'helpTip2': 'Biometrie schlägt fehl? Entsperren Sie einfach mit Ihrer PIN.',
+      'helpTip1':
+          'Fall kann nicht hinzugefügt werden? Abonnementstatus prüfen.',
+      'helpTip2':
+          'Biometrie schlägt fehl? Entsperren Sie einfach mit Ihrer PIN.',
       'helpTip3': 'Vor Gerätewechsel stets eine JSON-Sicherung exportieren.',
-      'helpTip4': 'Der Case-Mix-Filter unterstützt Sie bei der Vorbereitung auf Facharztprüfungen.',
-      'helpTip5': 'Ein Sprachwechsel verändert keine gespeicherten medizinischen Falldaten.',
+      'helpTip4':
+          'Der Case-Mix-Filter unterstützt Sie bei der Vorbereitung auf Facharztprüfungen.',
+      'helpTip5':
+          'Ein Sprachwechsel verändert keine gespeicherten medizinischen Falldaten.',
       'helpFooter': 'Etherlog v2.8 · Autonomes Anästhesie-Logbuch',
       'helpMenu': 'Hilfe & Handbuch',
     },
     'pt': {
-      'tapToViewCalculationBreakdown': 'Toque para ver o detalhamento do cálculo',
+      'tapToViewCalculationBreakdown':
+          'Toque para ver o detalhamento do cálculo',
       'clinicalOverview': 'Visão Geral Clínica',
       'immediateManagementSteps': 'Condutas Imediatas',
       'differentialDiagnosis': 'Diagnóstico Diferencial',
@@ -2488,6 +2804,9 @@ class AppLocalizations {
       'complicationsHeader': 'COMPLICAÇÕES',
       'outcomeHeader': 'DESFECHO / RPA',
       'postOpFollowUpHeader': 'SEGUIMENTO PÓS-OPERATÓRIO (DIA 1)',
+      'postOpFollowUp': 'Seguimento pós-operatório',
+      'postOpFollowUpSubtitle':
+          'Inclui escores de dor, NVPO, bloqueios e notas',
       'notesHeader': 'NOTAS E OBSERVAÇÕES',
       'dateLabel': 'Data',
       'anaesthesiaLabel': 'Anestesia',
@@ -2550,15 +2869,21 @@ class AppLocalizations {
       'procedurePerformed': 'Procedimento Realizado',
       'pleaseEnterProcedure': 'Por favor, insira o procedimento',
       'catheterPlacedInfo': 'Cateter instalado para infusão contínua',
+      'selectCatheterBlocks': 'Especifique o(s) bloqueio(s) com cateter:',
+      'catheterSelectAtLeastOne':
+          'Selecione pelo menos um bloqueio para o cateter.',
+      'selectAtLeastOne': 'Selecione ≥ 1',
       'supervisorName': 'Nome do Supervisor',
       'ifSupervised': 'Se supervisionado ou auxiliado',
       'cormackLehaneGrade': 'Grau Cormack-Lehane',
       'numberOfAttempts': 'Número de tentativas',
-      'invasiveLinesAndEquipmentUsed': 'Linhas invasivas e monitorização utilizadas',
+      'invasiveLinesAndEquipmentUsed':
+          'Linhas invasivas e monitorização utilizadas',
       'intraOpPostOpComplications': 'Complicações perioperatórias',
       'selectOutcome': 'Selecionar desfecho / RPA',
       'flagForPostOpFollowUp': 'Marcar para seguimento pós-operatório',
-      'flagForFollowUpSubtitle': 'Adiciona o caso à fila de visita pós-anestésica (D1)',
+      'flagForFollowUpSubtitle':
+          'Adiciona o caso à fila de visita pós-anestésica (D1)',
       'additionalNotes': 'Notas Adicionais',
       'additionalClinicalNotes': 'Observações clínicas relevantes...',
       'tapToSelect': 'Toque para selecionar',
@@ -2567,11 +2892,13 @@ class AppLocalizations {
       'enterBlockName': 'Nome do bloqueio...',
       'copyLastCasePattern': 'Copiar padrão do último caso',
       'saveAsTemplate': 'Salvar como modelo',
-      'storesTemplateExplanation': 'Armazena técnica e bloqueios para reuso rápido',
+      'storesTemplateExplanation':
+          'Armazena técnica e bloqueios para reuso rápido',
       'saveAction': 'Salvar',
       'noPreviousCasesToCopy': 'Nenhum caso anterior para copiar',
       'resumeIncompleteCase': 'Retomar caso incompleto?',
-      'unsavedDraftRestore': 'Um rascunho não salvo foi encontrado. Deseja restaurá-lo?',
+      'unsavedDraftRestore':
+          'Um rascunho não salvo foi encontrado. Deseja restaurá-lo?',
       'discardAction': 'Descartar',
       'restoreAction': 'Restaurar',
       'caseUpdated': 'Caso atualizado',
@@ -2580,25 +2907,34 @@ class AppLocalizations {
       'templateSavedMsg': 'Modelo salvo',
       'achievementUnlocked': 'Conquista desbloqueada!',
       'etherlogReminder': 'Lembrete do EtherLog',
-      'inactivityReminderBody': 'Teve casos recentemente? Não se esqueça de registrar!',
+      'inactivityReminderBody':
+          'Teve casos recentemente? Não se esqueça de registrar!',
       'incompleteCaseDraft': 'Rascunho de caso incompleto',
       'incompleteDraftSaved': 'Rascunho salvo',
-      'incompleteDraftSubtitle': 'Você pode continuar o preenchimento mais tarde',
+      'incompleteDraftSubtitle':
+          'Você pode continuar o preenchimento mais tarde',
       'noCasesInDays': 'Nenhum caso registrado há {n} dias',
       'lastCaseOn': 'Último caso em {date}',
       'timeForLogbookEntry': 'Hora de atualizar seu livro de registro',
-      'pdfOptionsDescription': 'Configure o que deve aparecer nos seus relatórios PDF exportados.',
-      'pdfExportFullExplanation': 'Personalize colunas, assinaturas de preceptores e tabelas de resumo.',
+      'pdfOptionsDescription':
+          'Configure o que deve aparecer nos seus relatórios PDF exportados.',
+      'pdfExportFullExplanation':
+          'Personalize colunas, assinaturas de preceptores e tabelas de resumo.',
       'dateRangeExportSubtitle': 'Filtrar casos por intervalo de datas',
       'hospitalNumbersSubtitle': 'Incluir números de prontuário do paciente',
       'patientDetailsSubtitle': 'Incluir idade, gênero, peso, altura e IMC',
-      'anaesthesiaTimesSubtitle': 'Incluir horários de início, término e duração',
+      'anaesthesiaTimesSubtitle':
+          'Incluir horários de início, término e duração',
       'regionalSubtitle': 'Incluir bloqueios regionais e cateteres',
       'airwaySubtitle': 'Incluir dispositivos e graus de Cormack-Lehane',
-      'invasiveSubtitle': 'Incluir linhas arteriais, CVCs e monitores avançados',
-      'complicationsSubtitle': 'Incluir registro de complicações e eventos adversos',
-      'summaryTablesSubtitle': 'Incluir tabelas de resumo por especialidade e técnica',
-      'signatureSubtitle': 'Incluir campo de assinatura do supervisor/preceptor',
+      'invasiveSubtitle':
+          'Incluir linhas arteriais, CVCs e monitores avançados',
+      'complicationsSubtitle':
+          'Incluir registro de complicações e eventos adversos',
+      'summaryTablesSubtitle':
+          'Incluir tabelas de resumo por especialidade e técnica',
+      'signatureSubtitle':
+          'Incluir campo de assinatura do supervisor/preceptor',
       'inProgressLabel': 'Em Andamento',
       'pendingFollowUp': 'Visita Pendente',
       'tapToCompleteSwipeSkip': 'Toque para completar • Deslize para ignorar',
@@ -2610,14 +2946,16 @@ class AppLocalizations {
       'yourYearInReview': 'Seu {year} em retrospectiva',
       'noCasesLoggedYearYet': 'Nenhum caso registrado em {year} ainda',
       'activityHeatmap': 'Mapa de Atividade',
-      'heatmapCaption': 'Cada quadrado é um dia. Mais escuro = mais casos registrados',
+      'heatmapCaption':
+          'Cada quadrado é um dia. Mais escuro = mais casos registrados',
       'monthlyCaseVolume': 'Volume Mensal de Casos',
       'avgAnaesthesiaDurationMin': 'Duração Média da Anestesia (min)',
       'percentUneventful': '% Sem Intercorrências',
       'percentDifficultAirway': '% Via Aérea Difícil',
       'topSpecialties': 'Principais Especialidades',
       'topRegionalBlocks': 'Principais Bloqueios Regionais',
-      'noRegionalBlocksThisYear': 'Nenhum bloqueio regional registrado este ano',
+      'noRegionalBlocksThisYear':
+          'Nenhum bloqueio regional registrado este ano',
       'asaMix': 'Distribuição ASA',
       'topTechniques': 'Principais Técnicas',
       'avgDuration': 'Duração Média',
@@ -2625,13 +2963,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Via Aérea Dif.',
       'achievementsBadges': 'Conquistas e Medalhas',
       'noAchievementsInFilter': 'Nenhuma conquista neste filtro',
-
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Salvar',
       'cancel': 'Cancelar',
       'delete': 'Excluir',
@@ -2693,11 +3025,13 @@ class AppLocalizations {
       'caseSaved': 'Caso salvo',
       'yourRole': 'Sua função',
       'performed': 'Executado',
+      'supervised': 'Supervisionado',
       'assisted': 'Assistido',
       'observed': 'Observado',
       'freeTrial': 'Período de teste',
       'subscriptionExpired': 'Assinatura expirada',
-      'cannotAddCases': 'Não é possível adicionar novos casos até renovar a assinatura.',
+      'cannotAddCases':
+          'Não é possível adicionar novos casos até renovar a assinatura.',
       'welcomeTitle': 'Bem-vindo ao Etherlog',
       'getStarted': 'Começar',
       'pointsBreakdown': 'Detalhamento de pontos',
@@ -2733,11 +3067,13 @@ class AppLocalizations {
       'caseDetails': 'Detalhes do Caso',
       'deleteCase': 'Excluir caso?',
       'deleteCaseWarning': 'Esta ação não pode ser desfeita.',
-      'shareCase': 'Mostre este QR code para outro colega importar este caso no Etherlog.',
+      'shareCase':
+          'Mostre este QR code para outro colega importar este caso no Etherlog.',
       'shareCaseQr': 'Compartilhar caso (QR)',
       'importCaseQr': 'Importar caso (QR)',
       'importSharedCase': 'Importar caso compartilhado?',
-      'importSharedCaseBody': 'Será salvo no seu livro de registro com a função de Preceptor/Consultor.',
+      'importSharedCaseBody':
+          'Será salvo no seu livro de registro com a função de Preceptor/Consultor.',
       'import': 'Importar',
       'caseImportedConsultant': 'Caso importado como Preceptor',
       'invalidCaseQr': 'QR code Etherlog inválido',
@@ -2746,10 +3082,13 @@ class AppLocalizations {
       'caseDataCopied': 'Dados do caso copiados',
       'hideHospitalNumber': 'Ocultar prontuário / número do caso',
       'hideHospitalNumberHint': 'Recomendado para compartilhamento anônimo',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'Pontos obtidos neste caso',
       'caseTemplatesMenu': 'Modelos de casos',
@@ -2777,7 +3116,8 @@ class AppLocalizations {
       'rename': 'Renomear',
       'templateName': 'Nome do modelo',
       'noTemplatesSaved': 'Nenhum modelo salvo',
-      'templatesEmptyHint': 'Em Novo Caso, use o menu para salvar cirurgias de rotina como modelo.',
+      'templatesEmptyHint':
+          'Em Novo Caso, use o menu para salvar cirurgias de rotina como modelo.',
       'insights': 'Análise Clínica',
       'less': 'Menos',
       'more': 'Mais',
@@ -2800,11 +3140,13 @@ class AppLocalizations {
       'dateOfBirth': 'Data de nascimento',
       'selectDateOfBirth': 'Selecionar data de nascimento',
       'notSpecified': 'Não informado',
-      'profileBonusHint': 'Preencha nome e hospital para ganhar +10 pontos de bônus.',
+      'profileBonusHint':
+          'Preencha nome e hospital para ganhar +10 pontos de bônus.',
       'saveProfile': 'Salvar perfil',
       'profileSaved': 'Perfil salvo com sucesso',
       'appTheme': 'Tema do aplicativo',
-      'chooseThemeSubtitle': 'Escolha a aparência visual do Etherlog no seu dispositivo.',
+      'chooseThemeSubtitle':
+          'Escolha a aparência visual do Etherlog no seu dispositivo.',
       'themeDark': 'Escuro',
       'themeLight': 'Claro',
       'themeSerenity': 'Serenidade',
@@ -2817,9 +3159,11 @@ class AppLocalizations {
       'surgicalRose': 'Rosa Cirúrgico',
       'amberGold': 'Ouro Âmbar',
       'idleAnimation': 'Animação em repouso',
-      'idleAnimationSubtitle': 'Ícones de anestesia flutuando após 30s de inatividade',
+      'idleAnimationSubtitle':
+          'Ícones de anestesia flutuando após 30s de inatividade',
       'celebrationAnimation': 'Animação de celebração',
-      'celebrationAnimationSubtitle': 'Exibir animação de celebração quando um caso for marcado sem complicações',
+      'celebrationAnimationSubtitle':
+          'Exibir animação de celebração quando um caso for marcado sem complicações',
       'haptics': 'Resposta tátil (Haptic)',
       'hapticsSubtitle': 'Vibração ao tocar e selecionar opções',
       'logbookReminders': 'LEMBRETES DO LIVRO',
@@ -2829,17 +3173,22 @@ class AppLocalizations {
       'quietHours': 'Horário silencioso',
       'quietHoursSubtitle': 'Silenciar lembretes de inatividade das 22h às 7h',
       'deleteAllCases': 'Excluir todos os casos',
-      'deleteAllCasesWarning': 'Requer PIN. Apaga permanentemente todo o livro.',
-      'deleteAllCasesBody': 'Isso excluirá permanentemente todos os casos registrados no aparelho.\n\nDigite seu PIN para continuar.',
+      'deleteAllCasesWarning':
+          'Requer PIN. Apaga permanentemente todo o livro.',
+      'deleteAllCasesBody':
+          'Isso excluirá permanentemente todos os casos registrados no aparelho.\n\nDigite seu PIN para continuar.',
       'continueText': 'Continuar',
       'enterPinToConfirm': 'Digite seu PIN para confirmar',
-      'incorrectPinCasesNotDeleted': 'PIN incorreto. Os casos não foram excluídos.',
+      'incorrectPinCasesNotDeleted':
+          'PIN incorreto. Os casos não foram excluídos.',
       'deletedNCases': '{n} caso(s) excluído(s) do livro.',
       'logbookCleared': 'Livro de registro limpo.',
       'fromDate': 'Data inicial',
       'toDate': 'Data final',
-      'confidentialityBody': 'Você é responsável por manter o sigilo médico. Não armazene nomes identificáveis de pacientes. Todos os dados permanecem salvos neste aparelho.',
-      'iAgree': 'Concordo em cumprir as normas éticas de sigilo e privacidade médica.',
+      'confidentialityBody':
+          'Você é responsável por manter o sigilo médico. Não armazene nomes identificáveis de pacientes. Todos os dados permanecem salvos neste aparelho.',
+      'iAgree':
+          'Concordo em cumprir as normas éticas de sigilo e privacidade médica.',
       'filterAll': 'Todos',
       'regionalBlock': 'Bloqueio regional',
       'dateRange': 'Intervalo de datas',
@@ -2867,58 +3216,86 @@ class AppLocalizations {
       'operator': 'Operador',
       'value': 'Valor',
       'backupRestore': 'Backup & Restauração',
-      'backupDescription': 'Salve todos os casos em um arquivo JSON neste aparelho ou nuvem.',
-      'restoreDescription': 'Restaure seus casos a partir de um backup JSON anterior do Etherlog.',
+      'backupDescription':
+          'Salve todos os casos em um arquivo JSON neste aparelho ou nuvem.',
+      'restoreDescription':
+          'Restaure seus casos a partir de um backup JSON anterior do Etherlog.',
       'exportBackupFile': 'Criar backup',
       'restoreFromBackup': 'Restaurar backup',
       'noCasesToBackup': 'Nenhum caso para fazer backup',
       'backupSaved': 'Backup salvo: {name}',
       'restoredNCases': '{n} caso(s) restaurado(s)',
       'noCasesImported': 'Nenhum caso importado (ou cancelado)',
-      'includeSupervisorSignature': 'Incluir campo de assinatura do preceptor / supervisor',
+      'includeSupervisorSignature':
+          'Incluir campo de assinatura do preceptor / supervisor',
       'includeSpecialtySummary': 'Incluir tabela resumo por especialidade',
       'columnsToInclude': 'Colunas da tabela',
       'helpTitle': 'Ajuda & guia',
       'helpIntroTitle': 'Como funciona o Etherlog',
-      'helpIntroBody': 'Dicas rápidas para cada área. Seus dados permanecem seguros neste aparelho.',
+      'helpIntroBody':
+          'Dicas rápidas para cada área. Seus dados permanecem seguros neste aparelho.',
       'helpSecGettingStarted': 'Primeiros passos',
-      'helpGs1': 'Ao abrir o app pela primeira vez, configure um PIN de segurança.',
-      'helpGs2': 'Complete seu Perfil do Médico para pontuar e validar seus relatórios em PDF.',
-      'helpGs3': 'Ajuste temas, cores, idioma e vibração conforme sua preferência.',
+      'helpGs1':
+          'Ao abrir o app pela primeira vez, configure um PIN de segurança.',
+      'helpGs2':
+          'Complete seu Perfil do Médico para pontuar e validar seus relatórios em PDF.',
+      'helpGs3':
+          'Ajuste temas, cores, idioma e vibração conforme sua preferência.',
       'helpSecLogging': 'Registro de casos',
-      'helpLog1': 'Toque no botão + azul na tela inicial para registrar uma anestesia.',
-      'helpLog2': 'Horários cirúrgicos devem situar-se entre o início e o fim da anestesia.',
-      'helpLog3': 'Para pacientes acima de 12 anos use anos. Para pediatria use meses ou dias.',
-      'helpLog4': 'Bloqueios neuroaxiais selecionam automaticamente os campos de bloqueio correspondentes.',
-      'helpLog5': 'Combinações incompatíveis de via aérea são filtradas automaticamente.',
-      'helpLog6': 'Pressione e segure um caso na lista para marcá-lo como destaque com estrela.',
-      'helpLog7': 'Ative a sinalização para visita de seguimento pós-operatório.',
+      'helpLog1':
+          'Toque no botão + azul na tela inicial para registrar uma anestesia.',
+      'helpLog2':
+          'Horários cirúrgicos devem situar-se entre o início e o fim da anestesia.',
+      'helpLog3':
+          'Para pacientes acima de 12 anos use anos. Para pediatria use meses ou dias.',
+      'helpLog4':
+          'Bloqueios neuroaxiais selecionam automaticamente os campos de bloqueio correspondentes.',
+      'helpLog5':
+          'Combinações incompatíveis de via aérea são filtradas automaticamente.',
+      'helpLog6':
+          'Pressione e segure um caso na lista para marcá-lo como destaque com estrela.',
+      'helpLog7':
+          'Ative a sinalização para visita de seguimento pós-operatório.',
       'helpSecDashboard': 'Painel principal',
-      'helpDash1': 'Os cartões superiores contabilizam total, eletivas, urgências e via aérea difícil.',
-      'helpDash2': 'Busque por procedimento, diagnóstico ou número de prontuário.',
-      'helpDash3': 'Filtre rapidamente por urgências, bloqueios, datas e destaques.',
-      'helpDash4': 'Selecione períodos de residência médica ou estágios específicos.',
+      'helpDash1':
+          'Os cartões superiores contabilizam total, eletivas, urgências e via aérea difícil.',
+      'helpDash2':
+          'Busque por procedimento, diagnóstico ou número de prontuário.',
+      'helpDash3':
+          'Filtre rapidamente por urgências, bloqueios, datas e destaques.',
+      'helpDash4':
+          'Selecione períodos de residência médica ou estágios específicos.',
       'helpDash5': 'O ícone de cadeado bloqueia o aplicativo imediatamente.',
-      'helpDash6': 'Cartões de seguimento lembram visitas de enfermaria pendentes.',
+      'helpDash6':
+          'Cartões de seguimento lembram visitas de enfermaria pendentes.',
       'helpSecCaseMix': 'Construtor de Case Mix',
       'helpMix1': 'Monte consultas avançadas com múltiplos filtros combinados.',
-      'helpMix2': 'Filtre por ASA, procedimento ou especialidade para sua comprovação de residência.',
+      'helpMix2':
+          'Filtre por ASA, procedimento ou especialidade para sua comprovação de residência.',
       'helpMix3': 'Salve suas buscas favoritas com o ícone de marcador.',
-      'helpMix4': 'Exporte relatórios em PDF ou copie o texto para seu currículo.',
+      'helpMix4':
+          'Exporte relatórios em PDF ou copie o texto para seu currículo.',
       'helpMix5': 'Ideal para auditorias, concursos e provas de título.',
       'helpMix6': 'Gere estatísticas clínicas em poucos segundos.',
       'helpSecStats': 'Estatísticas & Análise',
-      'helpStats1': 'Gráficos por faixa etária, IMC, bloqueios e acessos invasivos.',
-      'helpStats2': 'Exporte PDF estatístico para reuniões de serviço e comissões de ensino.',
-      'helpStats3': 'A visualização de Análise exibe seu volume mensal e curva de aprendizado.',
+      'helpStats1':
+          'Gráficos por faixa etária, IMC, bloqueios e acessos invasivos.',
+      'helpStats2':
+          'Exporte PDF estatístico para reuniões de serviço e comissões de ensino.',
+      'helpStats3':
+          'A visualização de Análise exibe seu volume mensal e curva de aprendizado.',
       'helpSecAchievements': 'Conquistas & pontos',
-      'helpAch1': 'Ganhe pontos de experiência conforme a complexidade dos atos anestésicos.',
-      'helpAch2': 'Toque no placar de pontos para ver a discriminação detalhada.',
+      'helpAch1':
+          'Ganhe pontos de experiência conforme a complexidade dos atos anestésicos.',
+      'helpAch2':
+          'Toque no placar de pontos para ver a discriminação detalhada.',
       'helpAch3': 'Conquiste distintivos do nível Cobre ao Diamante.',
       'helpAch4': 'Compartilhe suas conquistas profissionais.',
       'helpSecQr': 'Compartilhar caso (QR)',
-      'helpQr1': 'Gere um QR code para transferir um caso compartilhado com um colega.',
-      'helpQr2': 'O colega escaneia e o procedimento é incorporado ao livro dele.',
+      'helpQr1':
+          'Gere um QR code para transferir um caso compartilhado com um colega.',
+      'helpQr2':
+          'O colega escaneia e o procedimento é incorporado ao livro dele.',
       'helpQr3': 'Evita retrabalho em salas conjuntas.',
       'helpSecPdf': 'PDFs & backups',
       'helpPdf1': 'Escolha as colunas e sumários do seu livro oficial em PDF.',
@@ -2926,14 +3303,17 @@ class AppLocalizations {
       'helpPdf3': 'Os backups não gravam seu PIN por segurança.',
       'helpSecSub': 'Assinatura',
       'helpSub1': 'O teste gratuito é iniciado automaticamente.',
-      'helpSub2': 'A assinatura garante a adição contínua e ilimitada de novos casos.',
+      'helpSub2':
+          'A assinatura garante a adição contínua e ilimitada de novos casos.',
       'helpSub3': 'Gerencie seu plano quando solicitado.',
       'helpSecTips': 'Dicas úteis',
-      'helpTip1': 'Não consegue adicionar casos? Verifique o status da assinatura.',
+      'helpTip1':
+          'Não consegue adicionar casos? Verifique o status da assinatura.',
       'helpTip2': 'Biometria falhou? Desbloqueie com seu PIN cadastrado.',
       'helpTip3': 'Exporte um backup JSON antes de trocar de celular.',
       'helpTip4': 'Utilize o Case Mix para auditar suas metas formativas.',
-      'helpTip5': 'Alterar o idioma mantém seus dados clínicos preservados em segurança.',
+      'helpTip5':
+          'Alterar o idioma mantém seus dados clínicos preservados em segurança.',
       'helpFooter': 'Etherlog v2.8 · Livro de registro anestésico offline',
       'helpMenu': 'Ajuda & guia',
     },
@@ -2966,6 +3346,8 @@ class AppLocalizations {
       'complicationsHeader': '围手术期并发症',
       'outcomeHeader': '转归与去向',
       'postOpFollowUpHeader': '术后随访 (术后第1天)',
+      'postOpFollowUp': '术后随访',
+      'postOpFollowUpSubtitle': '包括疼痛评分、PONV、阻滞检查和随访记录',
       'notesHeader': '备注与特殊记录',
       'dateLabel': '手术日期',
       'anaesthesiaLabel': '麻醉起止时间',
@@ -3028,6 +3410,9 @@ class AppLocalizations {
       'procedurePerformed': '拟施手术',
       'pleaseEnterProcedure': '请输入拟施手术',
       'catheterPlacedInfo': '已留置神经阻滞导管以持续镇痛',
+      'selectCatheterBlocks': '指定置管阻滞：',
+      'catheterSelectAtLeastOne': '请至少选择一个留置导管的神经阻滞。',
+      'selectAtLeastOne': '至少选 1 项',
       'supervisorName': '指导医师姓名',
       'ifSupervised': '若处于带教或指导下完成',
       'cormackLehaneGrade': 'Cormack-Lehane 声门显露分级',
@@ -3103,12 +3488,7 @@ class AppLocalizations {
       'diffAirwayMini': '困难气道',
       'achievementsBadges': '麻醉进阶成就与徽章',
       'noAchievementsInFilter': '该筛选条件下暂无成就',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': '保存',
       'cancel': '取消',
       'delete': '删除',
@@ -3170,6 +3550,7 @@ class AppLocalizations {
       'caseSaved': '病例已保存',
       'yourRole': '操作角色',
       'performed': '主麻',
+      'supervised': '指导下完成',
       'assisted': '副麻/配合',
       'observed': '观摩',
       'freeTrial': '免费试用期',
@@ -3223,10 +3604,13 @@ class AppLocalizations {
       'caseDataCopied': '病例数据已复制至剪贴板',
       'hideHospitalNumber': '隐藏病案号/住院号',
       'hideHospitalNumberHint': '匿名分享推荐开启',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': '本例获得积分',
       'caseTemplatesMenu': '病例模板库',
@@ -3443,6 +3827,9 @@ class AppLocalizations {
       'complicationsHeader': 'المضاعفات',
       'outcomeHeader': 'الإفاقة والمآل',
       'postOpFollowUpHeader': 'متابعة ما بعد الجراحة (اليوم 1)',
+      'postOpFollowUp': 'متابعة ما بعد الجراحة',
+      'postOpFollowUpSubtitle':
+          'يشمل درجات الألم، الغثيان، فحص الإحصار، وملاحظات المتابعة',
       'notesHeader': 'الملاحظات والتعليقات',
       'dateLabel': 'التاريخ',
       'anaesthesiaLabel': 'التخدير',
@@ -3505,6 +3892,9 @@ class AppLocalizations {
       'procedurePerformed': 'العملية الجراحية',
       'pleaseEnterProcedure': 'يرجى إدخال اسم العملية',
       'catheterPlacedInfo': 'تم تركيب قسطرة للضخ المستمر',
+      'selectCatheterBlocks': 'حدد الإحصار(ات) بالقسطرة:',
+      'catheterSelectAtLeastOne': 'يرجى تحديد إحصار واحد على الأقل للقسطرة.',
+      'selectAtLeastOne': 'اختر ≥ 1',
       'supervisorName': 'اسم المشرف',
       'ifSupervised': 'في حال الإشراف أو المساعدة',
       'cormackLehaneGrade': 'درجة كورماك-ليهان',
@@ -3513,7 +3903,8 @@ class AppLocalizations {
       'intraOpPostOpComplications': 'مضاعفات التخدير والجراحة',
       'selectOutcome': 'تحديد مآل المريض / الإفاقة',
       'flagForPostOpFollowUp': 'إضافة لقائمة المتابعة',
-      'flagForFollowUpSubtitle': 'إضافة الحالة لقائمة المرور السريري في اليوم الأول',
+      'flagForFollowUpSubtitle':
+          'إضافة الحالة لقائمة المرور السريري في اليوم الأول',
       'additionalNotes': 'ملاحظات إضافية',
       'additionalClinicalNotes': 'ملاحظات وتفاصيل سريرية هامة...',
       'tapToSelect': 'انقر للاختيار',
@@ -3522,11 +3913,13 @@ class AppLocalizations {
       'enterBlockName': 'اسم الإحصار...',
       'copyLastCasePattern': 'نسخ بيانات الحالة السابقة',
       'saveAsTemplate': 'حفظ كنموذج جاهز',
-      'storesTemplateExplanation': 'حفظ التخصص والتقنية والإحصارات لإعادة استخدامها',
+      'storesTemplateExplanation':
+          'حفظ التخصص والتقنية والإحصارات لإعادة استخدامها',
       'saveAction': 'حفظ',
       'noPreviousCasesToCopy': 'لا توجد حالات سابقة لنسخها',
       'resumeIncompleteCase': 'استئناف الحالة غير المكتملة؟',
-      'unsavedDraftRestore': 'تم العثور على مسودة غير محفوظة. هل ترغب في استعادتها؟',
+      'unsavedDraftRestore':
+          'تم العثور على مسودة غير محفوظة. هل ترغب في استعادتها؟',
       'discardAction': 'تجاهل',
       'restoreAction': 'استعادة',
       'caseUpdated': 'تم تحديث الحالة',
@@ -3535,15 +3928,18 @@ class AppLocalizations {
       'templateSavedMsg': 'تم حفظ النموذج',
       'achievementUnlocked': 'تم فتح إنجاز جديد!',
       'etherlogReminder': 'تذكير EtherLog',
-      'inactivityReminderBody': 'هل أجريت حالات تخدير مؤخراً؟ لا تنسَ توثيقها في سجلك!',
+      'inactivityReminderBody':
+          'هل أجريت حالات تخدير مؤخراً؟ لا تنسَ توثيقها في سجلك!',
       'incompleteCaseDraft': 'مسودة حالة غير مكتملة',
       'incompleteDraftSaved': 'تم حفظ المسودة',
       'incompleteDraftSubtitle': 'يمكنك إكمال إدخال الحالة في وقت لاحق',
       'noCasesInDays': 'لم تسجل أي حالة منذ {n} أيام',
       'lastCaseOn': 'آخر حالة مسجلة بتاريخ {date}',
       'timeForLogbookEntry': 'حان وقت تحديث سجل التخدير الخاص بك',
-      'pdfOptionsDescription': 'تخصيص الخيارات والبيانات التي تظهر في تقارير PDF.',
-      'pdfExportFullExplanation': 'إمكانية إخفاء أرقام المرضى وتضمين توقيع المشرف والجداول التلخيصية.',
+      'pdfOptionsDescription':
+          'تخصيص الخيارات والبيانات التي تظهر في تقارير PDF.',
+      'pdfExportFullExplanation':
+          'إمكانية إخفاء أرقام المرضى وتضمين توقيع المشرف والجداول التلخيصية.',
       'dateRangeExportSubtitle': 'تصدير الحالات ضمن نطاق زمني محدد',
       'hospitalNumbersSubtitle': 'تضمين الأرقام الطبية للمرضى',
       'patientDetailsSubtitle': 'تضمين العمر والجنس والوزن ومؤشر الكتلة',
@@ -3580,12 +3976,7 @@ class AppLocalizations {
       'diffAirwayMini': 'مجرى صعب',
       'achievementsBadges': 'الإنجازات والأوسمة',
       'noAchievementsInFilter': 'لا توجد إنجازات في هذا التصنيف',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'حفظ',
       'cancel': 'إلغاء',
       'delete': 'حذف',
@@ -3647,6 +4038,7 @@ class AppLocalizations {
       'caseSaved': 'تم حفظ الحالة بنجاح',
       'yourRole': 'دورك',
       'performed': 'المنفذ الرئيسي',
+      'supervised': 'تحت الإشراف',
       'assisted': 'مساعد',
       'observed': 'مشاهد',
       'freeTrial': 'فترة تجريبية مجانية',
@@ -3700,10 +4092,13 @@ class AppLocalizations {
       'caseDataCopied': 'تم نسخ بيانات الحالة',
       'hideHospitalNumber': 'إخفاء رقم المستشفى / الملف',
       'hideHospitalNumberHint': 'يوصى به للمشاركة بدون هوية المريض',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'النقاط المكتسبة لهذه الحالة',
       'caseTemplatesMenu': 'قوالب الحالات',
@@ -3731,7 +4126,8 @@ class AppLocalizations {
       'rename': 'إعادة تسمية',
       'templateName': 'اسم القالب',
       'noTemplatesSaved': 'لا توجد قوالب محفوظة',
-      'templatesEmptyHint': 'في شاشة حالة جديدة، احفظ العمليات المتكررة كقوالب لتسريع العمل.',
+      'templatesEmptyHint':
+          'في شاشة حالة جديدة، احفظ العمليات المتكررة كقوالب لتسريع العمل.',
       'insights': 'الرؤى والتحليلات',
       'less': 'أقل',
       'more': 'المزيد',
@@ -3758,7 +4154,8 @@ class AppLocalizations {
       'saveProfile': 'حفظ ملف الطبيب',
       'profileSaved': 'تم حفظ ملف الطبيب بنجاح',
       'appTheme': 'سمة التطبيق والمظهر',
-      'chooseThemeSubtitle': 'اختر المظهر المرئي المفضل لتطبيق Etherlog على جهازك.',
+      'chooseThemeSubtitle':
+          'اختر المظهر المرئي المفضل لتطبيق Etherlog على جهازك.',
       'themeDark': 'داكن',
       'themeLight': 'فاتح',
       'themeSerenity': 'سكون',
@@ -3771,9 +4168,11 @@ class AppLocalizations {
       'surgicalRose': 'وردي جراحي',
       'amberGold': 'ذهبي عنبري',
       'idleAnimation': 'حركة وضع الاستعداد',
-      'idleAnimationSubtitle': 'ظهور أيقونات تخدير عائمة بعد 30 ثانية من الخمول',
+      'idleAnimationSubtitle':
+          'ظهور أيقونات تخدير عائمة بعد 30 ثانية من الخمول',
       'celebrationAnimation': 'حركة الاحتفال',
-      'celebrationAnimationSubtitle': 'عرض حركة احتفالية عند تسجيل حالة بدون أي مضاعفات',
+      'celebrationAnimationSubtitle':
+          'عرض حركة احتفالية عند تسجيل حالة بدون أي مضاعفات',
       'haptics': 'الاهتزاز التفاعلي (Haptics)',
       'hapticsSubtitle': 'اهتزاز لطيف عند الضغط والاختيار',
       'logbookReminders': 'تنبيهات سجل التخدير',
@@ -3783,8 +4182,10 @@ class AppLocalizations {
       'quietHours': 'الساعات الهادئة',
       'quietHoursSubtitle': 'كتم تذكيرات عدم التسجيل من 10 مساءً حتى 7 صباحًا',
       'deleteAllCases': 'حذف جميع الحالات',
-      'deleteAllCasesWarning': 'يتطلب رمز PIN. يمسح سجل التخدير نهائيًا من هذا الجهاز.',
-      'deleteAllCasesBody': 'سيؤدي هذا إلى حذف دائم لجميع الحالات المسجلة.\n\nيجب إدخال رمز PIN للمتابعة.',
+      'deleteAllCasesWarning':
+          'يتطلب رمز PIN. يمسح سجل التخدير نهائيًا من هذا الجهاز.',
+      'deleteAllCasesBody':
+          'سيؤدي هذا إلى حذف دائم لجميع الحالات المسجلة.\n\nيجب إدخال رمز PIN للمتابعة.',
       'continueText': 'متابعة',
       'enterPinToConfirm': 'أدخل رمز PIN للتأكيد',
       'incorrectPinCasesNotDeleted': 'رمز PIN غير صحيح. لم يتم حذف الحالات.',
@@ -3792,7 +4193,8 @@ class AppLocalizations {
       'logbookCleared': 'تم مسح السجل بالكامل.',
       'fromDate': 'من تاريخ',
       'toDate': 'إلى تاريخ',
-      'confidentialityBody': 'أنت مسؤول عن حماية السرية الطبية لبيانات المرضى وعدم تخزين أسماء شخصية صريحة. جميع البيانات محفوظة محليًا.',
+      'confidentialityBody':
+          'أنت مسؤول عن حماية السرية الطبية لبيانات المرضى وعدم تخزين أسماء شخصية صريحة. جميع البيانات محفوظة محليًا.',
       'iAgree': 'أوافق على الالتزام بمعايير الخصوصية والسرية الطبية.',
       'filterAll': 'الكل',
       'regionalBlock': 'تخدير ناحي',
@@ -3821,7 +4223,8 @@ class AppLocalizations {
       'operator': 'المعامل',
       'value': 'القيمة',
       'backupRestore': 'النسخ الاحتياطي والاستعادة',
-      'backupDescription': 'احفظ جميع الحالات في ملف JSON مشفر على جهازك أو سحابتك.',
+      'backupDescription':
+          'احفظ جميع الحالات في ملف JSON مشفر على جهازك أو سحابتك.',
       'restoreDescription': 'استورد الحالات من ملف نسخ احتياطي JSON سابق.',
       'exportBackupFile': 'إنشاء نسخة احتياطية',
       'restoreFromBackup': 'استعادة النسخة الاحتياطية',
@@ -3829,12 +4232,14 @@ class AppLocalizations {
       'backupSaved': 'تم حفظ النسخة: {name}',
       'restoredNCases': 'تم استعادة {n} حالة',
       'noCasesImported': 'لم يتم استيراد أي حالة',
-      'includeSupervisorSignature': 'تضمين خانة توقيع المشرف الطبي / رئيس القسم',
+      'includeSupervisorSignature':
+          'تضمين خانة توقيع المشرف الطبي / رئيس القسم',
       'includeSpecialtySummary': 'تضمين جدول ملخص حسب التخصص',
       'columnsToInclude': 'أعمدة الجدول',
       'helpTitle': 'المساعدة والدليل',
       'helpIntroTitle': 'كيف يعمل Etherlog',
-      'helpIntroBody': 'دليل سريع لجميع وظائف التطبيق. بياناتك محمية داخل هاتفك فقط.',
+      'helpIntroBody':
+          'دليل سريع لجميع وظائف التطبيق. بياناتك محمية داخل هاتفك فقط.',
       'helpSecGettingStarted': 'البدء السريع',
       'helpGs1': 'أنشئ رمز PIN من 4 أرقام أو فعّل البصمة عند فتح التطبيق.',
       'helpGs2': 'أكمل ملف الطبيب للاستفادة من ميزات التوثيق ونقاط المكافأة.',
@@ -3842,8 +4247,10 @@ class AppLocalizations {
       'helpSecLogging': 'تسجيل حالة',
       'helpLog1': 'المس زر + الأزرق في الشاشة الرئيسية لإضافة حالة تخدير.',
       'helpLog2': 'أوقات الجراحة تقع ضمن إطار وقت التخدير.',
-      'helpLog3': 'العمر بالسنوات للكبار، وبالأشهر أو الأيام لحديثي الولادة والأطفال.',
-      'helpLog4': 'اختيار التخدير الشوكي يحدد الخيارات الناحية المرتبطة تلقائيًا.',
+      'helpLog3':
+          'العمر بالسنوات للكبار، وبالأشهر أو الأيام لحديثي الولادة والأطفال.',
+      'helpLog4':
+          'اختيار التخدير الشوكي يحدد الخيارات الناحية المرتبطة تلقائيًا.',
       'helpLog5': 'يتم تصفية أدوات التنبيب المتعارضة تلقائيًا.',
       'helpLog6': 'اضغط مطولاً على الحالة لتمييزها بنجمة.',
       'helpLog7': 'فعّل بطاقات المتابعة لمرضى الأجنحة.',
@@ -3920,6 +4327,8 @@ class AppLocalizations {
       'complicationsHeader': '합병증',
       'outcomeHeader': '회복실 / 환자 결과',
       'postOpFollowUpHeader': '수술 후 회진 (수술 1일차)',
+      'postOpFollowUp': '수술 후 회진',
+      'postOpFollowUpSubtitle': '통증 점수, PONV, 신경차단 확인 및 회진 메모 포함',
       'notesHeader': '메모 및 특이사항',
       'dateLabel': '날짜',
       'anaesthesiaLabel': '마취 시간',
@@ -3982,6 +4391,9 @@ class AppLocalizations {
       'procedurePerformed': '시행 수술명',
       'pleaseEnterProcedure': '수술명을 입력해주세요',
       'catheterPlacedInfo': '지속 주입을 위한 신경차단 카테터 거치',
+      'selectCatheterBlocks': '카테터 거치 차단술 지정:',
+      'catheterSelectAtLeastOne': '카테터를 거치할 신경차단술을 최소 1개 이상 선택해 주세요.',
+      'selectAtLeastOne': '최소 1개 선택',
       'supervisorName': '지도 전문의 성명',
       'ifSupervised': '지도 또는 보조를 받은 경우',
       'cormackLehaneGrade': 'Cormack-Lehane 성문 시야 등급',
@@ -4020,7 +4432,8 @@ class AppLocalizations {
       'lastCaseOn': '마지막 기록일: {date}',
       'timeForLogbookEntry': '마취 로그북을 작성할 시간입니다',
       'pdfOptionsDescription': '내보내는 PDF 마취 로그북에 포함할 항목을 설정합니다.',
-      'pdfExportFullExplanation': '환자 식별자 숨김, 지도 전문의 서명란, 진료과별 요약표 등을 맞춤 설정할 수 있습니다.',
+      'pdfExportFullExplanation':
+          '환자 식별자 숨김, 지도 전문의 서명란, 진료과별 요약표 등을 맞춤 설정할 수 있습니다.',
       'dateRangeExportSubtitle': '특정 기간의 케이스만 필터링하여 내보내기',
       'hospitalNumbersSubtitle': '환자 등록번호 포함',
       'patientDetailsSubtitle': '나이, 성별, 체중, 신장 및 BMI 포함',
@@ -4057,12 +4470,7 @@ class AppLocalizations {
       'diffAirwayMini': '어려운 기도',
       'achievementsBadges': '업적 및 배지',
       'noAchievementsInFilter': '이 필터에 해당하는 업적이 없습니다',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': '저장',
       'cancel': '취소',
       'delete': '삭제',
@@ -4124,6 +4532,7 @@ class AppLocalizations {
       'caseSaved': '케이스가 저장되었습니다',
       'yourRole': '수행 역할',
       'performed': '주 마취의 (집도)',
+      'supervised': '지도 감독',
       'assisted': '보조 마취의 (어시스트)',
       'observed': '참관',
       'freeTrial': '무료 체험 기간',
@@ -4177,10 +4586,13 @@ class AppLocalizations {
       'caseDataCopied': '케이스 데이터가 클립보드에 복사되었습니다',
       'hideHospitalNumber': '환자 등록번호(ID) 숨기기',
       'hideHospitalNumberHint': '익명 공유 시 활성화 권장',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': '이 케이스로 획득한 포인트',
       'caseTemplatesMenu': '케이스 템플릿',
@@ -4261,7 +4673,8 @@ class AppLocalizations {
       'quietHoursSubtitle': '오후 10시부터 오전 7시까지 비활동 알림 무음 처리',
       'deleteAllCases': '전체 케이스 삭제',
       'deleteAllCasesWarning': 'PIN 인증 필요. 기기에 저장된 모든 마취 로그북을 영구 삭제합니다.',
-      'deleteAllCasesBody': '이 기기에 저장된 모든 마취 케이스가 영구히 삭제됩니다.\n\n계속하려면 PIN 번호를 입력하세요.',
+      'deleteAllCasesBody':
+          '이 기기에 저장된 모든 마취 케이스가 영구히 삭제됩니다.\n\n계속하려면 PIN 번호를 입력하세요.',
       'continueText': '계속하기',
       'enterPinToConfirm': '확인을 위해 PIN 번호를 입력하세요',
       'incorrectPinCasesNotDeleted': 'PIN 번호가 일치하지 않아 삭제되지 않았습니다.',
@@ -4269,7 +4682,8 @@ class AppLocalizations {
       'logbookCleared': '로그북이 완전히 초기화되었습니다.',
       'fromDate': '시작일',
       'toDate': '종료일',
-      'confidentialityBody': '의료인은 환자의 비밀을 엄격히 유지할 의무가 있습니다. 식별 가능한 환자 실명을 기록하지 마십시오. 모든 데이터는 본인 기기에만 로컬 저장됩니다.',
+      'confidentialityBody':
+          '의료인은 환자의 비밀을 엄격히 유지할 의무가 있습니다. 식별 가능한 환자 실명을 기록하지 마십시오. 모든 데이터는 본인 기기에만 로컬 저장됩니다.',
       'iAgree': '의료 개인정보 보호 및 기밀 유지 기준을 준수함에 동의합니다.',
       'filterAll': '전체',
       'regionalBlock': '부위 마취',
@@ -4397,6 +4811,8 @@ class AppLocalizations {
       'complicationsHeader': '周術期合併症',
       'outcomeHeader': '帰室先・転帰',
       'postOpFollowUpHeader': '術後回診（術後1日目）',
+      'postOpFollowUp': '術後回診',
+      'postOpFollowUpSubtitle': '疼痛スコア、PONV、ブロック確認、回診記録を含む',
       'notesHeader': '備考・特記事項',
       'dateLabel': '手術日',
       'anaesthesiaLabel': '麻酔時間',
@@ -4459,6 +4875,9 @@ class AppLocalizations {
       'procedurePerformed': '予定手術名',
       'pleaseEnterProcedure': '手術名を入力してください',
       'catheterPlacedInfo': '持続鎮痛用カテーテルを留置',
+      'selectCatheterBlocks': 'カテーテルを留置したブロックを指定:',
+      'catheterSelectAtLeastOne': 'カテーテルを留置したブロックを少なくとも1つ選択してください。',
+      'selectAtLeastOne': '1つ以上選択',
       'supervisorName': '指導医氏名',
       'ifSupervised': '指導または助手の場合',
       'cormackLehaneGrade': 'Cormack-Lehane 喉頭展開視野分類',
@@ -4534,12 +4953,7 @@ class AppLocalizations {
       'diffAirwayMini': '気道困難',
       'achievementsBadges': '実績とバッジ',
       'noAchievementsInFilter': 'この条件に該当する実績はありません',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': '保存',
       'cancel': 'キャンセル',
       'delete': '削除',
@@ -4601,6 +5015,7 @@ class AppLocalizations {
       'caseSaved': '症例を保存しました',
       'yourRole': '担当役割',
       'performed': '術者（主麻酔医）',
+      'supervised': '指導下で実施',
       'assisted': '助手（指導・補助）',
       'observed': '見学',
       'freeTrial': '無料トライアル期間',
@@ -4654,10 +5069,13 @@ class AppLocalizations {
       'caseDataCopied': '症例データをクリップボードにコピーしました',
       'hideHospitalNumber': 'ID・カルテ番号を非表示',
       'hideHospitalNumberHint': '匿名共有時に推奨',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'この症例で獲得したポイント',
       'caseTemplatesMenu': '症例テンプレート',
@@ -4738,7 +5156,8 @@ class AppLocalizations {
       'quietHoursSubtitle': '夜22時から朝7時まで非アクティブ通知をミュート',
       'deleteAllCases': '全症例データを削除',
       'deleteAllCasesWarning': 'PIN認証が必要です。端末内の麻酔ログを完全に消去します。',
-      'deleteAllCasesBody': '端末に保存されているすべての症例データが完全に削除されます。\n\n続行するにはPINを入力してください。',
+      'deleteAllCasesBody':
+          '端末に保存されているすべての症例データが完全に削除されます。\n\n続行するにはPINを入力してください。',
       'continueText': '続行',
       'enterPinToConfirm': '確認のためPINを入力してください',
       'incorrectPinCasesNotDeleted': 'PINが正しくないため、症例は削除されませんでした。',
@@ -4746,7 +5165,8 @@ class AppLocalizations {
       'logbookCleared': 'すべての症例記録を消去しました。',
       'fromDate': '開始日',
       'toDate': '終了日',
-      'confidentialityBody': '医療従事者には守秘義務があります。患者の特定につながる氏名等は入力しないでください。データはすべて端末内に安全に保管されます。',
+      'confidentialityBody':
+          '医療従事者には守秘義務があります。患者の特定につながる氏名等は入力しないでください。データはすべて端末内に安全に保管されます。',
       'iAgree': '医療守秘義務およびプライバシー保護基準の遵守に同意します。',
       'filterAll': 'すべて',
       'regionalBlock': '神経ブロック',
@@ -4846,7 +5266,8 @@ class AppLocalizations {
       'helpMenu': 'ヘルプ＆使い方ガイド',
     },
     'id': {
-      'tapToViewCalculationBreakdown': 'Ketuk untuk melihat rincian perhitungan poin',
+      'tapToViewCalculationBreakdown':
+          'Ketuk untuk melihat rincian perhitungan poin',
       'clinicalOverview': 'Tinjauan Klinis',
       'immediateManagementSteps': 'Langkah Tata Laksana Segera',
       'differentialDiagnosis': 'Diagnosis Banding',
@@ -4854,11 +5275,13 @@ class AppLocalizations {
       'walkthroughTitle': 'Panduan Cepat EtherLog',
       'walkthroughSubtitle': 'Selesaikan 3 langkah mudah ini untuk memulai',
       'walkthroughStep1': 'Catat Kasus Demo',
-      'walkthroughStep1Desc': 'Buat kasus contoh untuk mempelajari alur pencatatan',
+      'walkthroughStep1Desc':
+          'Buat kasus contoh untuk mempelajari alur pencatatan',
       'walkthroughStep2': 'Lihat Statistik & Analisis',
       'walkthroughStep2Desc': 'Eksplorasi metrik klinis dan grafik kasus',
       'walkthroughStep3': 'Ekspor Contoh PDF',
-      'walkthroughStep3Desc': 'Buat dan lihat pratinjau laporan buku log pertama Anda',
+      'walkthroughStep3Desc':
+          'Buat dan lihat pratinjau laporan buku log pertama Anda',
       'completed': 'Selesai',
       'dismiss': 'Tutup',
       'takePhoto': 'Ambil foto',
@@ -4874,6 +5297,8 @@ class AppLocalizations {
       'complicationsHeader': 'KOMPLIKASI',
       'outcomeHeader': 'LUARAN / PACU',
       'postOpFollowUpHeader': 'VISITE PASCAOPERASI (HARI 1)',
+      'postOpFollowUp': 'Visite pascaoperasi',
+      'postOpFollowUpSubtitle': 'Sertakan skor nyeri, PONV, pemeriksaan blok, dan catatan visite',
       'notesHeader': 'CATATAN & KETERANGAN',
       'dateLabel': 'Tanggal',
       'anaesthesiaLabel': 'Anestesi',
@@ -4936,28 +5361,37 @@ class AppLocalizations {
       'procedurePerformed': 'Tindakan Operasi',
       'pleaseEnterProcedure': 'Silakan masukkan tindakan operasi',
       'catheterPlacedInfo': 'Kateter dipasang untuk infus kontinu',
+      'selectCatheterBlocks': 'Tentukan blok dengan kateter:',
+      'catheterSelectAtLeastOne':
+          'Silakan pilih setidaknya satu blok untuk kateter.',
+      'selectAtLeastOne': 'Pilih ≥ 1',
       'supervisorName': 'Nama Supervisor',
       'ifSupervised': 'Jika disupervisi atau didampingi',
       'cormackLehaneGrade': 'Derajat Cormack-Lehane',
       'numberOfAttempts': 'Jumlah upaya intubasi',
-      'invasiveLinesAndEquipmentUsed': 'Jalur invasif dan monitor yang digunakan',
+      'invasiveLinesAndEquipmentUsed':
+          'Jalur invasif dan monitor yang digunakan',
       'intraOpPostOpComplications': 'Komplikasi perioperatif',
       'selectOutcome': 'Pilih status luaran / PACU',
       'flagForPostOpFollowUp': 'Tandai untuk Visite Pascaoperasi',
-      'flagForFollowUpSubtitle': 'Tambahkan ke antrean ronde pascaoperasi hari ke-1',
+      'flagForFollowUpSubtitle':
+          'Tambahkan ke antrean ronde pascaoperasi hari ke-1',
       'additionalNotes': 'Catatan Tambahan',
-      'additionalClinicalNotes': 'Catatan klinis penting atau keterangan khusus...',
+      'additionalClinicalNotes':
+          'Catatan klinis penting atau keterangan khusus...',
       'tapToSelect': 'Ketuk untuk memilih',
       'usgGuided': 'Panduan USG',
       'nerveStimulatorUsed': 'Nerve Stimulator Digunakan',
       'enterBlockName': 'Nama blok saraf...',
       'copyLastCasePattern': 'Salin Pola Kasus Terakhir',
       'saveAsTemplate': 'Simpan sebagai Templat',
-      'storesTemplateExplanation': 'Menyimpan teknik dan blok untuk digunakan kembali dengan cepat',
+      'storesTemplateExplanation':
+          'Menyimpan teknik dan blok untuk digunakan kembali dengan cepat',
       'saveAction': 'Simpan',
       'noPreviousCasesToCopy': 'Tidak ada kasus sebelumnya untuk disalin',
       'resumeIncompleteCase': 'Lanjutkan Kasus Belum Selesai?',
-      'unsavedDraftRestore': 'Draf belum disimpan ditemukan. Apakah Anda ingin memulihkannya?',
+      'unsavedDraftRestore':
+          'Draf belum disimpan ditemukan. Apakah Anda ingin memulihkannya?',
       'discardAction': 'Hapus',
       'restoreAction': 'Pulihkan',
       'caseUpdated': 'Kasus diperbarui',
@@ -4966,29 +5400,37 @@ class AppLocalizations {
       'templateSavedMsg': 'Templat disimpan',
       'achievementUnlocked': 'Pencapaian Terbuka!',
       'etherlogReminder': 'Pengingat EtherLog',
-      'inactivityReminderBody': 'Ada kasus anestesi baru-baru ini? Jangan lupa mencatatnya di buku log!',
+      'inactivityReminderBody':
+          'Ada kasus anestesi baru-baru ini? Jangan lupa mencatatnya di buku log!',
       'incompleteCaseDraft': 'Draf Kasus Belum Lengkap',
       'incompleteDraftSaved': 'Draf tersimpan',
       'incompleteDraftSubtitle': 'Anda dapat melanjutkan pengisian nanti',
       'noCasesInDays': 'Tidak ada kasus dicatat selama {n} hari',
       'lastCaseOn': 'Kasus terakhir pada {date}',
       'timeForLogbookEntry': 'Saatnya memperbarui buku log Anda',
-      'pdfOptionsDescription': 'Atur informasi yang akan ditampilkan pada laporan PDF buku log Anda.',
-      'pdfExportFullExplanation': 'Kustomisasi kolom, tanda tangan pembimbing, dan tabel ringkasan spesialisasi.',
+      'pdfOptionsDescription':
+          'Atur informasi yang akan ditampilkan pada laporan PDF buku log Anda.',
+      'pdfExportFullExplanation':
+          'Kustomisasi kolom, tanda tangan pembimbing, dan tabel ringkasan spesialisasi.',
       'dateRangeExportSubtitle': 'Ekspor kasus dalam rentang tanggal tertentu',
       'hospitalNumbersSubtitle': 'Sertakan nomor rekam medis pasien',
-      'patientDetailsSubtitle': 'Sertakan usia, jenis kelamin, berat, tinggi, dan IMT',
+      'patientDetailsSubtitle':
+          'Sertakan usia, jenis kelamin, berat, tinggi, dan IMT',
       'anaesthesiaTimesSubtitle': 'Sertakan waktu mulai, selesai, dan durasi',
       'regionalSubtitle': 'Sertakan rincian blok regional dan kateter',
       'airwaySubtitle': 'Sertakan alat jalan napas dan derajat Cormack-Lehane',
       'invasiveSubtitle': 'Sertakan jalur arteri, CVC, dan monitor lanjutan',
-      'complicationsSubtitle': 'Sertakan catatan komplikasi dan kejadian tidak diinginkan',
-      'summaryTablesSubtitle': 'Sertakan tabel ringkasan per spesialisasi dan teknik',
-      'signatureSubtitle': 'Sertakan kolom tanda tangan dokter penanggung jawab / pembimbing',
+      'complicationsSubtitle':
+          'Sertakan catatan komplikasi dan kejadian tidak diinginkan',
+      'summaryTablesSubtitle':
+          'Sertakan tabel ringkasan per spesialisasi dan teknik',
+      'signatureSubtitle':
+          'Sertakan kolom tanda tangan dokter penanggung jawab / pembimbing',
       'inProgressLabel': 'Sedang Berjalan',
       'pendingFollowUp': 'Menunggu Visite',
       'tapToCompleteSwipeSkip': 'Ketuk untuk melengkapi • Geser untuk melewati',
-      'trialExpiredTapRenew': 'Masa uji coba berakhir. Ketuk untuk memperpanjang',
+      'trialExpiredTapRenew':
+          'Masa uji coba berakhir. Ketuk untuk memperpanjang',
       'patientDetails': 'Rincian Pasien',
       'anaesthesiaAndSurgeryTimes': 'Waktu Anestesi & Operasi',
       'previousYear': 'Tahun Sebelumnya',
@@ -4996,14 +5438,16 @@ class AppLocalizations {
       'yourYearInReview': 'Kilas Balik Tahun {year} Anda',
       'noCasesLoggedYearYet': 'Belum ada kasus yang dicatat pada tahun {year}',
       'activityHeatmap': 'Peta Panas Aktivitas',
-      'heatmapCaption': 'Setiap kotak mewakili satu hari. Semakin gelap = semakin banyak kasus dicatat',
+      'heatmapCaption':
+          'Setiap kotak mewakili satu hari. Semakin gelap = semakin banyak kasus dicatat',
       'monthlyCaseVolume': 'Volume Kasus Bulanan',
       'avgAnaesthesiaDurationMin': 'Rata-rata Durasi Anestesi (menit)',
       'percentUneventful': '% Lancar Tanpa Komplikasi',
       'percentDifficultAirway': '% Jalan Napas Sulit',
       'topSpecialties': 'Spesialisasi Bedah Terbanyak',
       'topRegionalBlocks': 'Blok Regional Terbanyak',
-      'noRegionalBlocksThisYear': 'Tidak ada blok regional yang dicatat tahun ini',
+      'noRegionalBlocksThisYear':
+          'Tidak ada blok regional yang dicatat tahun ini',
       'asaMix': 'Distribusi Derajat ASA',
       'topTechniques': 'Teknik Anestesi Terbanyak',
       'avgDuration': 'Rata-rata Durasi',
@@ -5011,12 +5455,7 @@ class AppLocalizations {
       'diffAirwayMini': 'Jalan Napas Sulit',
       'achievementsBadges': 'Pencapaian & Lencana',
       'noAchievementsInFilter': 'Tidak ada pencapaian dalam filter ini',
-
-
-
-
-
-      'appName': 'ETHERLOG',
+      'appName': 'EtherLog',
       'save': 'Simpan',
       'cancel': 'Batal',
       'delete': 'Hapus',
@@ -5078,6 +5517,7 @@ class AppLocalizations {
       'caseSaved': 'Kasus Berhasil Disimpan',
       'yourRole': 'Peran Anda',
       'performed': 'Mandiri (Operator)',
+      'supervised': 'Disupervisi',
       'assisted': 'Membantu (Asisten)',
       'observed': 'Mengamati (Observer)',
       'freeTrial': 'Uji Coba Gratis',
@@ -5089,7 +5529,8 @@ class AppLocalizations {
       'byCategory': 'BERDASARKAN KATEGORI',
       'byCase': 'BERDASARKAN KASUS',
       'profileCompletionBonus': 'Bonus Lengkapi Profil',
-      'includesProfileCompletionBonus': 'Termasuk +{n} bonus kelengkapan profil',
+      'includesProfileCompletionBonus':
+          'Termasuk +{n} bonus kelengkapan profil',
       'exportStatisticsPdf': 'Ekspor PDF Statistik',
       'noCasesYet': 'Belum ada kasus tercatat',
       'totalPoints': 'Total Poin',
@@ -5118,23 +5559,29 @@ class AppLocalizations {
       'caseDetails': 'Detail Kasus',
       'deleteCase': 'Hapus kasus ini?',
       'deleteCaseWarning': 'Tindakan ini tidak dapat dibatalkan.',
-      'shareCase': 'Tunjukkan kode QR ini kepada rekan dokter untuk mengimpor kasus ini langsung ke Etherlog mereka.',
+      'shareCase':
+          'Tunjukkan kode QR ini kepada rekan dokter untuk mengimpor kasus ini langsung ke Etherlog mereka.',
       'shareCaseQr': 'Bagikan Kasus (QR)',
       'importCaseQr': 'Impor Kasus (QR)',
       'importSharedCase': 'Impor kasus bersama?',
-      'importSharedCaseBody': 'Salinan akan disimpan di buku log Anda dengan peran Konsultan/Supervisor.',
+      'importSharedCaseBody':
+          'Salinan akan disimpan di buku log Anda dengan peran Konsultan/Supervisor.',
       'import': 'Impor',
       'caseImportedConsultant': 'Kasus berhasil diimpor sebagai Konsultan',
       'invalidCaseQr': 'Kode QR Etherlog tidak valid',
-      'subscriptionRequiredImport': 'Langganan aktif diperlukan untuk mengimpor kasus',
+      'subscriptionRequiredImport':
+          'Langganan aktif diperlukan untuk mengimpor kasus',
       'copyCaseData': 'Salin Data Kasus',
       'caseDataCopied': 'Data kasus berhasil disalin ke papan klip',
       'hideHospitalNumber': 'Sembunyikan No. Rekam Medis (RM)',
       'hideHospitalNumberHint': 'Disarankan untuk berbagi secara anonim',
-      'qrPayloadLarge': 'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
-      'shareCaseFooter': 'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
+      'qrPayloadLarge':
+          'This case payload is large. The QR may be hard to scan — use Copy and paste on the other phone, or shorten notes.',
+      'shareCaseFooter':
+          'Photos are not included in the QR code. Role is automatically changed to Consultant when the user imports the QR code.',
       'clipboardEmpty': 'Clipboard is empty',
-      'alignQrHint': 'Align the QR inside the frame or paste case data from the other phone',
+      'alignQrHint':
+          'Align the QR inside the frame or paste case data from the other phone',
       'importing': 'Importing…',
       'pointsEarnedThisCase': 'Poin yang diperoleh dari kasus ini',
       'caseTemplatesMenu': 'Templat Kasus',
@@ -5162,7 +5609,8 @@ class AppLocalizations {
       'rename': 'Ubah Nama',
       'templateName': 'Nama Templat',
       'noTemplatesSaved': 'Belum ada templat tersimpan',
-      'templatesEmptyHint': 'Di Kasus Baru, gunakan menu untuk menyimpan operasi rutin sebagai templat.',
+      'templatesEmptyHint':
+          'Di Kasus Baru, gunakan menu untuk menyimpan operasi rutin sebagai templat.',
       'insights': 'Wawasan Klinis',
       'less': 'Lebih Sedikit',
       'more': 'Lebih Banyak',
@@ -5185,7 +5633,8 @@ class AppLocalizations {
       'dateOfBirth': 'Tanggal Lahir',
       'selectDateOfBirth': 'Pilih tanggal lahir',
       'notSpecified': 'Belum ditentukan',
-      'profileBonusHint': 'Lengkapi nama dan rumah sakit untuk mendapatkan +10 poin bonus.',
+      'profileBonusHint':
+          'Lengkapi nama dan rumah sakit untuk mendapatkan +10 poin bonus.',
       'saveProfile': 'Simpan Profil',
       'profileSaved': 'Profil dokter berhasil disimpan',
       'appTheme': 'Tema Tampilan Aplikasi',
@@ -5202,9 +5651,11 @@ class AppLocalizations {
       'surgicalRose': 'Mawar Bedah',
       'amberGold': 'Emas Amber',
       'idleAnimation': 'Animasi Saat Diam',
-      'idleAnimationSubtitle': 'Ikon anestesi melayang setelah 30 detik tanpa aktivitas',
+      'idleAnimationSubtitle':
+          'Ikon anestesi melayang setelah 30 detik tanpa aktivitas',
       'celebrationAnimation': 'Animasi Perayaan',
-      'celebrationAnimationSubtitle': 'Tampilkan animasi perayaan saat kasus ditandai tanpa komplikasi/lancar',
+      'celebrationAnimationSubtitle':
+          'Tampilkan animasi perayaan saat kasus ditandai tanpa komplikasi/lancar',
       'haptics': 'Umpan Balik Getar (Haptik)',
       'hapticsSubtitle': 'Getaran taktil saat menekan dan memilih opsi',
       'logbookReminders': 'PENGINGAT BUKU LOG',
@@ -5212,10 +5663,13 @@ class AppLocalizations {
       'off': 'Mati',
       'nDays': '{n} hari',
       'quietHours': 'Jam Tenang',
-      'quietHoursSubtitle': 'Senyapkan pengingat inaktivitas dari pukul 22.00 hingga 07.00',
+      'quietHoursSubtitle':
+          'Senyapkan pengingat inaktivitas dari pukul 22.00 hingga 07.00',
       'deleteAllCases': 'Hapus Semua Kasus',
-      'deleteAllCasesWarning': 'Memerlukan PIN. Menghapus seluruh buku log secara permanen.',
-      'deleteAllCasesBody': 'Tindakan ini akan menghapus semua kasus di buku log secara permanen.\n\nMasukkan PIN Anda untuk melanjutkan.',
+      'deleteAllCasesWarning':
+          'Memerlukan PIN. Menghapus seluruh buku log secara permanen.',
+      'deleteAllCasesBody':
+          'Tindakan ini akan menghapus semua kasus di buku log secara permanen.\n\nMasukkan PIN Anda untuk melanjutkan.',
       'continueText': 'Lanjutkan',
       'enterPinToConfirm': 'Masukkan PIN untuk konfirmasi',
       'incorrectPinCasesNotDeleted': 'PIN salah. Kasus tidak dihapus.',
@@ -5223,7 +5677,8 @@ class AppLocalizations {
       'logbookCleared': 'Buku log telah dikosongkan.',
       'fromDate': 'Dari Tanggal',
       'toDate': 'Sampai Tanggal',
-      'confidentialityBody': 'Anda bertanggung jawab menjaga kerahasiaan data medis pasien. Jangan mencatat nama lengkap pasien yang dapat diidentifikasi secara langsung.',
+      'confidentialityBody':
+          'Anda bertanggung jawab menjaga kerahasiaan data medis pasien. Jangan mencatat nama lengkap pasien yang dapat diidentifikasi secara langsung.',
       'iAgree': 'Saya setuju mematuhi standar kerahasiaan dan privasi medis.',
       'filterAll': 'Semua',
       'regionalBlock': 'Blok Regional',
@@ -5252,61 +5707,91 @@ class AppLocalizations {
       'operator': 'Operator',
       'value': 'Nilai',
       'backupRestore': 'Pencadangan & Pemulihan',
-      'backupDescription': 'Simpan semua kasus ke file JSON terenkripsi di perangkat atau cloud.',
-      'restoreDescription': 'Pulihkan kasus dari file cadangan JSON Etherlog sebelumnya.',
+      'backupDescription':
+          'Simpan semua kasus ke file JSON terenkripsi di perangkat atau cloud.',
+      'restoreDescription':
+          'Pulihkan kasus dari file cadangan JSON Etherlog sebelumnya.',
       'exportBackupFile': 'Buat Cadangan',
       'restoreFromBackup': 'Pulihkan Cadangan',
       'noCasesToBackup': 'Tidak ada kasus untuk dicadangkan',
       'backupSaved': 'Cadangan tersimpan: {name}',
       'restoredNCases': '{n} kasus berhasil dipulihkan',
       'noCasesImported': 'Tidak ada kasus yang diimpor (atau dibatalkan)',
-      'includeSupervisorSignature': 'Sertakan kolom tanda tangan pembimbing / konsultan',
-      'includeSpecialtySummary': 'Sertakan tabel ringkasan per spesialisasi bedah',
+      'includeSupervisorSignature':
+          'Sertakan kolom tanda tangan pembimbing / konsultan',
+      'includeSpecialtySummary':
+          'Sertakan tabel ringkasan per spesialisasi bedah',
       'columnsToInclude': 'Kolom tabel PDF',
       'helpTitle': 'Bantuan & Panduan',
       'helpIntroTitle': 'Cara Kerja Etherlog',
-      'helpIntroBody': 'Panduan praktis untuk setiap fitur. Data Anda tersimpan aman di perangkat ini secara mandiri.',
+      'helpIntroBody':
+          'Panduan praktis untuk setiap fitur. Data Anda tersimpan aman di perangkat ini secara mandiri.',
       'helpSecGettingStarted': 'Memulai',
-      'helpGs1': 'Buat 4 digit PIN atau aktifkan sidik jari saat pertama kali membuka aplikasi.',
-      'helpGs2': 'Lengkapi Profil Dokter Anda untuk keperluan ekspor berkas dan perolehan poin bonus.',
-      'helpGs3': 'Sesuaikan tema, warna, bahasa, dan getaran sesuai kenyamanan Anda.',
+      'helpGs1':
+          'Buat 4 digit PIN atau aktifkan sidik jari saat pertama kali membuka aplikasi.',
+      'helpGs2':
+          'Lengkapi Profil Dokter Anda untuk keperluan ekspor berkas dan perolehan poin bonus.',
+      'helpGs3':
+          'Sesuaikan tema, warna, bahasa, dan getaran sesuai kenyamanan Anda.',
       'helpSecLogging': 'Mencatat Kasus',
-      'helpLog1': 'Ketuk tombol + biru di layar utama untuk mencatat tindakan anestesi.',
-      'helpLog2': 'Waktu operasi secara otomatis berada dalam rentang waktu anestesi.',
-      'helpLog3': 'Untuk pasien dewasa gunakan tahun. Untuk bayi dan anak gunakan bulan atau hari.',
-      'helpLog4': 'Memilih anestesi spinal atau epidural akan otomatis mencentang blok regional terkait.',
-      'helpLog5': 'Opsi tata laksana jalan napas yang bertentangan akan difilter secara otomatis.',
-      'helpLog6': 'Tekan dan tahan kasus di daftar untuk menandainya sebagai kasus istimewa (bintang).',
-      'helpLog7': 'Aktifkan penandaan untuk pemantauan pascaoperasi di ruangan.',
+      'helpLog1':
+          'Ketuk tombol + biru di layar utama untuk mencatat tindakan anestesi.',
+      'helpLog2':
+          'Waktu operasi secara otomatis berada dalam rentang waktu anestesi.',
+      'helpLog3':
+          'Untuk pasien dewasa gunakan tahun. Untuk bayi dan anak gunakan bulan atau hari.',
+      'helpLog4':
+          'Memilih anestesi spinal atau epidural akan otomatis mencentang blok regional terkait.',
+      'helpLog5':
+          'Opsi tata laksana jalan napas yang bertentangan akan difilter secara otomatis.',
+      'helpLog6':
+          'Tekan dan tahan kasus di daftar untuk menandainya sebagai kasus istimewa (bintang).',
+      'helpLog7':
+          'Aktifkan penandaan untuk pemantauan pascaoperasi di ruangan.',
       'helpSecDashboard': 'Dashboard',
-      'helpDash1': 'Kartu atas menampilkan total kasus elektif, darurat, dan jalan napas sulit.',
-      'helpDash2': 'Gunakan kolom pencarian berdasarkan tindakan, diagnosis, atau nomor RM.',
-      'helpDash3': 'Filter cepat untuk darurat, blok regional, tanggal, dan bintang.',
-      'helpDash4': 'Tentukan rentang tanggal untuk periode stase atau residensi tertentu.',
+      'helpDash1':
+          'Kartu atas menampilkan total kasus elektif, darurat, dan jalan napas sulit.',
+      'helpDash2':
+          'Gunakan kolom pencarian berdasarkan tindakan, diagnosis, atau nomor RM.',
+      'helpDash3':
+          'Filter cepat untuk darurat, blok regional, tanggal, dan bintang.',
+      'helpDash4':
+          'Tentukan rentang tanggal untuk periode stase atau residensi tertentu.',
       'helpDash5': 'Ikon gembok mengunci aplikasi secara instan.',
-      'helpDash6': 'Kartu tindak lanjut mengingatkan jadwal visite pasien di bangsal.',
+      'helpDash6':
+          'Kartu tindak lanjut mengingatkan jadwal visite pasien di bangsal.',
       'helpSecCaseMix': 'Pembangun Case Mix',
-      'helpMix1': 'Buat kueri multi-kriteria untuk kebutuhan buku log residensi.',
-      'helpMix2': 'Filter berdasarkan ASA, teknik, atau divisi bedah untuk laporan portofolio.',
+      'helpMix1':
+          'Buat kueri multi-kriteria untuk kebutuhan buku log residensi.',
+      'helpMix2':
+          'Filter berdasarkan ASA, teknik, atau divisi bedah untuk laporan portofolio.',
       'helpMix3': 'Simpan kueri favorit Anda dengan ikon penanda.',
       'helpMix4': 'Ekspor ringkasan dalam format PDF resmi.',
-      'helpMix5': 'Sangat cocok untuk persiapan ujian kompetensi dan lamaran kerja.',
+      'helpMix5':
+          'Sangat cocok untuk persiapan ujian kompetensi dan lamaran kerja.',
       'helpMix6': 'Dapatkan bukti kompetensi klinis dalam hitungan detik.',
       'helpSecStats': 'Statistik & Analisis',
-      'helpStats1': 'Grafik komprehensif kelompok usia, BMI, blok regional, dan jalur invasif.',
-      'helpStats2': 'Ekspor PDF statistik untuk evaluasi berkala dan laporan divisi.',
-      'helpStats3': 'Tampilan Wawasan memperlihatkan beban kerja bulanan Anda sepanjang tahun.',
+      'helpStats1':
+          'Grafik komprehensif kelompok usia, BMI, blok regional, dan jalur invasif.',
+      'helpStats2':
+          'Ekspor PDF statistik untuk evaluasi berkala dan laporan divisi.',
+      'helpStats3':
+          'Tampilan Wawasan memperlihatkan beban kerja bulanan Anda sepanjang tahun.',
       'helpSecAchievements': 'Prestasi & Lencana',
-      'helpAch1': 'Dapatkan poin pengalaman berdasarkan kompleksitas kasus yang Anda tangani.',
+      'helpAch1':
+          'Dapatkan poin pengalaman berdasarkan kompleksitas kasus yang Anda tangani.',
       'helpAch2': 'Ketuk skor poin untuk melihat rincian perolehan.',
       'helpAch3': 'Buka lencana dari tingkat Tembaga hingga Berlian.',
       'helpAch4': 'Bagikan pencapaian kompetensi Anda kepada rekan sejawat.',
       'helpSecQr': 'Berbagi Kasus Tanpa Kuota (QR)',
-      'helpQr1': 'Buat kode QR terenkripsi untuk membagikan kasus kepada rekan satu tim.',
-      'helpQr2': 'Rekan Anda cukup memindai kode untuk menyimpan kasus secara instan.',
+      'helpQr1':
+          'Buat kode QR terenkripsi untuk membagikan kasus kepada rekan satu tim.',
+      'helpQr2':
+          'Rekan Anda cukup memindai kode untuk menyimpan kasus secara instan.',
       'helpQr3': 'Menghemat waktu pencatatan ganda di kamar operasi.',
       'helpSecPdf': 'PDF & Pencadangan',
-      'helpPdf1': 'Atur kolom dan tabel ringkasan pada buku log resmi PDF Anda.',
+      'helpPdf1':
+          'Atur kolom dan tabel ringkasan pada buku log resmi PDF Anda.',
       'helpPdf2': 'Lakukan pencadangan berkala dalam format JSON.',
       'helpPdf3': 'File cadangan tidak memuat PIN Anda demi keamanan.',
       'helpSecSub': 'Langganan',
@@ -5314,11 +5799,15 @@ class AppLocalizations {
       'helpSub2': 'Langganan membuka kemampuan mencatat kasus tanpa batas.',
       'helpSub3': 'Kelola paket Anda kapan saja di aplikasi.',
       'helpSecTips': 'Tips & Solusi Masalah',
-      'helpTip1': 'Tidak bisa menambah kasus? Periksa status masa aktif langganan Anda.',
+      'helpTip1':
+          'Tidak bisa menambah kasus? Periksa status masa aktif langganan Anda.',
       'helpTip2': 'Sidik jari gagal? Masuk menggunakan PIN cadangan Anda.',
-      'helpTip3': 'Ekspor cadangan JSON sebelum mengganti perangkat smartphone.',
-      'helpTip4': 'Gunakan Case Mix untuk memverifikasi target logbook spesialisasi Anda.',
-      'helpTip5': 'Mengubah bahasa tampilan tidak akan mengubah data klinis yang sudah tersimpan.',
+      'helpTip3':
+          'Ekspor cadangan JSON sebelum mengganti perangkat smartphone.',
+      'helpTip4':
+          'Gunakan Case Mix untuk memverifikasi target logbook spesialisasi Anda.',
+      'helpTip5':
+          'Mengubah bahasa tampilan tidak akan mengubah data klinis yang sudah tersimpan.',
       'helpFooter': 'Etherlog v2.8 · Buku Log Anestesi Mandiri',
       'helpMenu': 'Bantuan & Panduan',
     },
@@ -5341,4 +5830,3 @@ class _AppLocalizationsDelegate
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
-

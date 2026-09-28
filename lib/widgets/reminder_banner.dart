@@ -70,7 +70,9 @@ class _ReminderBannerState extends State<ReminderBanner> {
         if (info.showInactivity) _card(
           icon: Icons.notifications_active_outlined,
           color: const Color(0xFFF59E0B),
-          title: l10n.noCasesInDays(info.daysSinceLastCase),
+          title: info.thresholdDays == 1 && info.daysSinceLastCase <= 1
+              ? _noCasesIn24Hours(l10n)
+              : l10n.noCasesInDays(info.daysSinceLastCase),
           subtitle: info.lastCaseDate != null
               ? l10n.lastCaseOn(DateFormat('dd MMM yyyy').format(info.lastCaseDate!))
               : l10n.timeForLogbookEntry,
@@ -85,6 +87,21 @@ class _ReminderBannerState extends State<ReminderBanner> {
         ),
       ],
     );
+  }
+
+  String _noCasesIn24Hours(AppLocalizations l10n) {
+    switch (l10n.locale.languageCode) {
+      case 'es': return 'Sin casos en 24 horas';
+      case 'fr': return 'Aucun cas depuis 24 heures';
+      case 'de': return 'Keine Fälle seit 24 Stunden';
+      case 'pt': return 'Sem casos em 24 horas';
+      case 'zh': return '24小时内未记录病例';
+      case 'ar': return 'لا توجد حالات خلال 24 ساعة';
+      case 'ko': return '24시간 동안 기록된 케이스 없음';
+      case 'ja': return '24時間症例の登録がありません';
+      case 'id': return 'Tidak ada kasus dalam 24 jam';
+      default: return 'No cases in 24 hours';
+    }
   }
 
   Widget _card({

@@ -4,7 +4,6 @@ import '../theme/app_theme.dart';
 import '../services/template_storage.dart';
 import '../utils/app_haptics.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class TemplatesScreen extends StatefulWidget {
   const TemplatesScreen({super.key});

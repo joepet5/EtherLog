@@ -6,8 +6,9 @@ import '../theme/app_theme.dart';
 import '../services/case_share_service.dart';
 import '../services/case_storage.dart';
 import '../services/subscription_service.dart';
+import '../services/dops_service.dart';
 import '../utils/app_haptics.dart';
-import '../widgets/animated_gradient_background.dart';
+import 'dops_assessment_form_screen.dart';
 
 /// Stage 2: scan (or paste) a shared Etherlog case QR and save as Consultant.
 class CaseImportQrScreen extends StatefulWidget {
@@ -38,6 +39,25 @@ class _CaseImportQrScreenState extends State<CaseImportQrScreen> {
 
     final payload = CaseShareService.decodePayload(raw);
     if (payload == null) {
+      final dopsPayload = DopsService.decodePayload(raw);
+      if (dopsPayload != null && dopsPayload['type'] == DopsService.reqType) {
+        try {
+          await _controller.stop();
+        } catch (_) {}
+        if (!mounted) return;
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DopsAssessmentFormScreen(requestPayload: dopsPayload),
+          ),
+        );
+        setState(() => _handling = false);
+        try {
+          await _controller.start();
+        } catch (_) {}
+        return;
+      }
+
       await AppHaptics.heavy();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

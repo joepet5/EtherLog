@@ -17,6 +17,8 @@ class ProfileStorage {
   static const _glassmorphismKey = 'glassmorphism_enabled';
   static const _transitionKey = 'page_transition_style';
   static const _dobKey = 'doctor_dob';
+  static const _zenModeKey = 'zen_mode_enabled';
+  static const _verificationEnabledKey = 'clinical_verification_enabled';
 
   static Future<DoctorProfile> getProfile() async {
     final prefs = await SharedPreferences.getInstance();
@@ -32,8 +34,10 @@ class ProfileStorage {
       hospital: prefs.getString(_hospitalKey) ?? '',
       registrationNumber: prefs.getString(_registrationKey),
       accentKey: prefs.getString(_accentKey) ?? 'default',
-      idleAnimationEnabled: prefs.getBool(_idleAnimKey) ?? true,
+      zenMode: prefs.getBool(_zenModeKey) ?? false,
       dateOfBirth: dob,
+      clinicalVerificationEnabled:
+          prefs.getBool(_verificationEnabledKey) ?? false,
     );
   }
 
@@ -47,7 +51,9 @@ class ProfileStorage {
       await prefs.setString(_registrationKey, profile.registrationNumber!);
     }
     await prefs.setString(_accentKey, profile.accentKey);
-    await prefs.setBool(_idleAnimKey, profile.idleAnimationEnabled);
+    await prefs.setBool(_zenModeKey, profile.zenMode);
+    await prefs.setBool(
+        _verificationEnabledKey, profile.clinicalVerificationEnabled);
     if (profile.dateOfBirth != null) {
       await prefs.setString(_dobKey, profile.dateOfBirth!.toIso8601String());
     } else {
@@ -84,7 +90,8 @@ class ProfileStorage {
   }
 
   static Future<bool> isBunnyEnabled() => isCelebrationEnabled();
-  static Future<void> setBunnyEnabled(bool value) => setCelebrationEnabled(value);
+  static Future<void> setBunnyEnabled(bool value) =>
+      setCelebrationEnabled(value);
 
   static Future<bool> isDarkMode() async {
     final prefs = await SharedPreferences.getInstance();
@@ -119,7 +126,6 @@ class ProfileStorage {
     await prefs.setBool(_darkKey, effectiveKey == 'dark');
   }
 
-
   static Future<bool> isHapticsEnabled() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_hapticsKey) ?? true;
@@ -152,13 +158,24 @@ class ProfileStorage {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_languageKey, code);
   }
+
   static Future<bool> getGlassmorphism() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_glassmorphismKey) ?? true;
   }
 
-  static Future<void> setGlassmorphism(bool value) async {
+  static Future<void> setGlassmorphism(bool enabled) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_glassmorphismKey, value);
+    await prefs.setBool(_glassmorphismKey, enabled);
+  }
+
+  static Future<bool> isClinicalVerificationEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_verificationEnabledKey) ?? false;
+  }
+
+  static Future<void> setClinicalVerificationEnabled(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_verificationEnabledKey, value);
   }
 }

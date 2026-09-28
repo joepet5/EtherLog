@@ -31,7 +31,7 @@ class AchievementCard extends StatelessWidget {
     final iconColor = achievement.displayColor;
 
     Widget card = Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         gradient: achievement.isUnlocked
@@ -98,7 +98,7 @@ class AchievementCard extends StatelessWidget {
                 children: [
                   // HD Jewel Icon
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: achievement.isUnlocked
@@ -127,11 +127,11 @@ class AchievementCard extends StatelessWidget {
                     child: Icon(
                       achievement.icon,
                       color: achievement.isUnlocked ? iconColor : theme.colorScheme.onSurfaceVariant,
-                      size: 26,
+                      size: 22,
                     ).animate(target: achievement.isUnlocked ? 1 : 0)
                      .scaleXY(end: 1.1, curve: Curves.easeOutBack, duration: 300.ms),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class AchievementCard extends StatelessWidget {
                                 title,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   letterSpacing: 0.3,
                                   color: achievement.isUnlocked ? theme.colorScheme.onSurface : theme.colorScheme.onSurfaceVariant,
                                 ),
@@ -155,11 +155,11 @@ class AchievementCard extends StatelessWidget {
                             if (achievement.isUnlocked)
                               IconButton(
                                 padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
-                                icon: const Icon(Icons.ios_share_rounded, size: 18),
+                                constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+                                icon: const Icon(Icons.ios_share_rounded, size: 16),
                                 color: iconColor,
                                 tooltip: l10n.shareAchievement,
-                                onPressed: () => AchievementSharing.share(achievement),
+                                onPressed: () => AchievementSharing.share(context, achievement),
                               ),
                           ],
                         ),
@@ -167,12 +167,12 @@ class AchievementCard extends StatelessWidget {
                         Text(
                           description,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: theme.colorScheme.onSurfaceVariant,
                             height: 1.3,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 4),
                         // Progress bar for BOTH locked and unlocked
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
@@ -182,13 +182,13 @@ class AchievementCard extends StatelessWidget {
                             valueColor: AlwaysStoppedAnimation<Color>(
                               achievement.isUnlocked ? iconColor : iconColor.withValues(alpha: 0.4)
                             ),
-                            minHeight: 6,
+                            minHeight: 4,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   // Progress Text on far right
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,

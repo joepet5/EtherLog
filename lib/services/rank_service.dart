@@ -50,12 +50,12 @@ class RankService {
     {
       'name': 'Pre-Op Survivor',
       'subtitle': 'Navigating a sea of missing notes and incomplete drug charts.',
-      'threshold': 1000
+      'threshold': 1500
     },
     {
       'name': 'Coffee Room Regular',
       'subtitle': 'You\'ve finally memorised the exact schedule of the espresso machine.',
-      'threshold': 2000
+      'threshold': 2500
     },
     {
       'name': 'Break Relief Hero',
@@ -98,6 +98,13 @@ class RankService {
       'threshold': 100000
     },
   ];
+
+  static List<Map<String, dynamic>> get ranks => _ranks;
+
+  static int getThreshold(int rankIndex) {
+    if (rankIndex < 1 || rankIndex > _ranks.length) return 0;
+    return _ranks[rankIndex - 1]['threshold'] as int;
+  }
 
   static int calculateTotalPoints(List<Achievement> achievements) {
     int total = 0;

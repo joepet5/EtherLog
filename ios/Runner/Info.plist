@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Etherlog</string>
+	<string>EtherLog</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -66,5 +66,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to scan DOPS and peer transfer QR codes, and to capture clinical photo attachments for cases.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library access is required to attach clinical photos and documentation to your logbook cases.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Permission is required to save exported case reports and summary charts to your photo library.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Face ID is used to securely unlock EtherLog and protect your clinical logbook data.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

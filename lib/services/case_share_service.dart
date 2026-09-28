@@ -58,7 +58,11 @@ class CaseShareService {
         'outcome': c.outcome,
         'regionalBlocks': c.regionalBlocks,
         'catheterPlaced': c.catheterPlaced,
+        'pca': c.pca,
         'starred': false,
+        'verified': c.verified,
+        'verifiedBy': c.verifiedBy,
+        'verifiedAt': c.verifiedAt?.toIso8601String(),
       },
     };
   }

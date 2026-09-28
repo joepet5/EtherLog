@@ -3,8 +3,9 @@ import '../theme/app_theme.dart';
 import '../models/case_record.dart';
 import '../services/case_storage.dart';
 import '../services/follow_up_service.dart';
+import '../services/achievement_service.dart';
+import '../services/achievement_notification_service.dart';
 import '../utils/app_haptics.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class FollowUpScreen extends StatefulWidget {
   final CaseRecord caseRecord;
@@ -71,6 +72,15 @@ class _FollowUpScreenState extends State<FollowUpScreen> {
     setState(() => _saving = true);
     await AppHaptics.medium();
 
+    // 1. Fetch achievements before saving
+    final existingCases = await CaseStorage.getAllCases();
+    final previousAchievements =
+        await AchievementService.getAllAchievements(existingCases);
+    final previouslyUnlockedIds = previousAchievements
+        .where((a) => a.isUnlocked)
+        .map((a) => a.id)
+        .toSet();
+
     final updated = widget.caseRecord.copyWith(
       restPainScore: _restPain.round(),
       movementPainScore: _movementPain.round(),
@@ -85,7 +95,23 @@ class _FollowUpScreenState extends State<FollowUpScreen> {
     );
 
     await CaseStorage.saveCase(updated);
+
+    // 2. Fetch achievements after saving to detect newly unlocked ones
+    final updatedCases = await CaseStorage.getAllCases();
+    final currentAchievements =
+        await AchievementService.getAllAchievements(updatedCases);
+
     if (!mounted) return;
+
+    // 3. Queue ALL newly unlocked achievements
+    final newlyUnlocked = currentAchievements
+        .where((a) => a.isUnlocked && !previouslyUnlockedIds.contains(a.id))
+        .toList();
+
+    if (mounted && newlyUnlocked.isNotEmpty) {
+      AchievementNotificationService.showAll(context, newlyUnlocked);
+    }
+
     setState(() => _saving = false);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

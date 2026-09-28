@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,12 +14,25 @@ import 'services/notification_service.dart';
 import 'screens/lock_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/profile_screen.dart';
-import 'widgets/idle_animation_overlay.dart';
 import 'l10n/app_localizations.dart';
 import 'widgets/animated_gradient_background.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LicenseRegistry.addLicense(() async* {
+    yield const LicenseEntryWithLineBreaks(
+      ['flutter_body_atlas / Anatomical Vector Atlas'],
+      '''Anatomical muscle atlas vector illustrations based on work by Ryan Graves.
+Source: https://www.figma.com/community/file/1320468164820924031
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+
+Modified SVG structure and element IDs to enable interactive hit-testing and custom heatmap coloration.''',
+    );
+  });
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  } catch(e) {}
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -35,7 +51,6 @@ class EtherlogAppState extends State<EtherlogApp> {
   String _themeKey = 'dark';
   bool _isDark = true;
   String _accentKey = 'default';
-  bool _idleAnimationEnabled = true;
   bool _glassmorphismEnabled = true;
   bool _unlocked = false;
   bool _needsProfileSetup = false;
@@ -70,7 +85,6 @@ class EtherlogAppState extends State<EtherlogApp> {
       _themeKey = themeKey;
       _isDark = dark;
       _accentKey = profile.accentKey;
-      _idleAnimationEnabled = profile.idleAnimationEnabled;
       _needsConfidentiality = !agreed;
       _locale = Locale(langCode);
       _loading = false;
@@ -112,10 +126,6 @@ class EtherlogAppState extends State<EtherlogApp> {
     setState(() => _glassmorphismEnabled = value);
   }
 
-  void setIdleAnimationEnabled(bool value) {
-    setState(() => _idleAnimationEnabled = value);
-  }
-
   void setLocale(Locale locale) {
     setState(() => _locale = locale);
     ProfileStorage.setLanguageCode(locale.languageCode);
@@ -151,7 +161,7 @@ class EtherlogAppState extends State<EtherlogApp> {
 
     return MaterialApp(
       
-      title: 'ETHERLOG',
+      title: 'EtherLog',
       debugShowCheckedModeBanner: false,
       locale: _locale,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -176,11 +186,7 @@ class EtherlogAppState extends State<EtherlogApp> {
           ],
         );
 
-        final bool enableIdle = _idleAnimationEnabled && _unlocked && !_needsConfidentiality;
-          return IdleAnimationOverlay(
-            enabled: enableIdle,
-            child: content,
-          );
+        return content;
       },
       home: _needsConfidentiality
           ? ConfidentialityScreen(onAccepted: _completeConfidentiality)

@@ -142,13 +142,13 @@ class AchievementDetailDialog extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    AchievementSharing.share(achievement);
+                    AchievementSharing.share(context, achievement);
                   },
                   icon: const Icon(Icons.ios_share_rounded),
                   label: Text(l10n.shareAchievement, style: const TextStyle(fontWeight: FontWeight.bold)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: iconColor,
-                    foregroundColor: Colors.white,
+                    foregroundColor: achievement.tier == AchievementTier.silver ? Colors.blue.shade800 : Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     elevation: 5,
                     shadowColor: iconColor.withValues(alpha: 0.5),
@@ -168,7 +168,7 @@ class AchievementDetailDialog extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '%',
+                        '${achievement.maxProgress > 0 ? (achievement.currentProgress / achievement.maxProgress * 100).toInt() : 0}%',
                         style: theme.textTheme.labelMedium?.copyWith(
                           color: theme.colorScheme.primary,
                           fontWeight: FontWeight.bold,

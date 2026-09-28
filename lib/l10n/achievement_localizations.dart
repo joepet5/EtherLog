@@ -7,89 +7,282 @@ class AchievementLocalizations {
     }
     // Simplistic translation for tiers if needed, or just return english.
     // The previous implementation likely handled this via a map.
-    final Map<String, Map<String, String>> _tierTranslations = {
-      'es': {'copper': 'Cobre', 'bronze': 'Bronce', 'ruby': 'Rubi', 'silver': 'Plata', 'gold': 'Oro', 'platinum': 'Platino', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
-      'fr': {'copper': 'Cuivre', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Argent', 'gold': 'Or', 'platinum': 'Platine', 'obsidian': 'Obsidienne', 'diamond': 'Diamant'},
-      'de': {'copper': 'Kupfer', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Silber', 'gold': 'Gold', 'platinum': 'Platin', 'obsidian': 'Obsidian', 'diamond': 'Diamant'},
-      'pt': {'copper': 'Cobre', 'bronze': 'Bronze', 'ruby': 'Rubi', 'silver': 'Prata', 'gold': 'Ouro', 'platinum': 'Platina', 'obsidian': 'Obsidiana', 'diamond': 'Diamante'},
-      'zh': {'copper': '铜', 'bronze': '青铜', 'ruby': 'Rubi', 'silver': '银', 'gold': '金', 'platinum': '铂', 'obsidian': '黑曜石', 'diamond': '钻石'},
-      'ar': {'copper': 'نحاس', 'bronze': 'برونز', 'ruby': 'Rubi', 'silver': 'فضة', 'gold': 'ذهب', 'platinum': 'بلاتين', 'obsidian': 'سبج', 'diamond': 'ماس'},
-      'ko': {'copper': '구리', 'bronze': '청동', 'ruby': 'Rubi', 'silver': '은', 'gold': '금', 'platinum': '백금', 'obsidian': '흑요석', 'diamond': '다이아몬드'},
-      'ja': {'copper': '銅', 'bronze': '青銅', 'ruby': 'Rubi', 'silver': '銀', 'gold': '金', 'platinum': 'プラチナ', 'obsidian': '黒曜石', 'diamond': 'ダイヤモンド'},
-      'id': {'copper': 'Tembaga', 'bronze': 'Perunggu', 'ruby': 'Delima', 'silver': 'Perak', 'gold': 'Emas', 'platinum': 'Platina', 'obsidian': 'Obsidian', 'diamond': 'Berlian'}
+    final Map<String, Map<String, String>> tierTranslations = {
+      'es': {
+        'copper': 'Cobre',
+        'bronze': 'Bronce',
+        'ruby': 'Rubi',
+        'silver': 'Plata',
+        'gold': 'Oro',
+        'platinum': 'Platino',
+        'obsidian': 'Obsidiana',
+        'diamond': 'Diamante'
+      },
+      'fr': {
+        'copper': 'Cuivre',
+        'bronze': 'Bronze',
+        'ruby': 'Rubi',
+        'silver': 'Argent',
+        'gold': 'Or',
+        'platinum': 'Platine',
+        'obsidian': 'Obsidienne',
+        'diamond': 'Diamant'
+      },
+      'de': {
+        'copper': 'Kupfer',
+        'bronze': 'Bronze',
+        'ruby': 'Rubi',
+        'silver': 'Silber',
+        'gold': 'Gold',
+        'platinum': 'Platin',
+        'obsidian': 'Obsidian',
+        'diamond': 'Diamant'
+      },
+      'pt': {
+        'copper': 'Cobre',
+        'bronze': 'Bronze',
+        'ruby': 'Rubi',
+        'silver': 'Prata',
+        'gold': 'Ouro',
+        'platinum': 'Platina',
+        'obsidian': 'Obsidiana',
+        'diamond': 'Diamante'
+      },
+      'zh': {
+        'copper': '铜',
+        'bronze': '青铜',
+        'ruby': 'Rubi',
+        'silver': '银',
+        'gold': '金',
+        'platinum': '铂',
+        'obsidian': '黑曜石',
+        'diamond': '钻石'
+      },
+      'ar': {
+        'copper': 'نحاس',
+        'bronze': 'برونز',
+        'ruby': 'Rubi',
+        'silver': 'فضة',
+        'gold': 'ذهب',
+        'platinum': 'بلاتين',
+        'obsidian': 'سبج',
+        'diamond': 'ماس'
+      },
+      'ko': {
+        'copper': '구리',
+        'bronze': '청동',
+        'ruby': 'Rubi',
+        'silver': '은',
+        'gold': '금',
+        'platinum': '백금',
+        'obsidian': '흑요석',
+        'diamond': '다이아몬드'
+      },
+      'ja': {
+        'copper': '銅',
+        'bronze': '青銅',
+        'ruby': 'Rubi',
+        'silver': '銀',
+        'gold': '金',
+        'platinum': 'プラチナ',
+        'obsidian': '黒曜石',
+        'diamond': 'ダイヤモンド'
+      },
+      'id': {
+        'copper': 'Tembaga',
+        'bronze': 'Perunggu',
+        'ruby': 'Delima',
+        'silver': 'Perak',
+        'gold': 'Emas',
+        'platinum': 'Platina',
+        'obsidian': 'Obsidian',
+        'diamond': 'Berlian'
+      }
     };
-    return _tierTranslations[languageCode]?[name] ?? (name[0].toUpperCase() + name.substring(1));
+    return tierTranslations[languageCode]?[name] ??
+        (name[0].toUpperCase() + name.substring(1));
   }
 
   static String getCategoryName(String category, String languageCode) {
     if (languageCode == 'en') return category;
-    
-    final Map<String, Map<String, String>> _categoryTranslations = {
+
+    final Map<String, Map<String, String>> categoryTranslations = {
       'es': {
-        'Volume': 'Volumen', 'Time': 'Tiempo', 'Risk': 'Riesgo', 'Emergency': 'Emergencia',
-        'Specialties': 'Especialidades', 'Techniques': 'Técnicas', 'Airway': 'Vía Aérea',
-        'Regional': 'Regional', 'Monitoring': 'Monitorización', 'Demographics': 'Demografía',
-        'Safety': 'Seguridad', 'Power User': 'Usuario Avanzado', 'Subspecialties': 'Subespecialidades',
-        'Advanced Regional': 'Regional Avanzado', 'Complications': 'Complicaciones'
+        'Volume': 'Volumen',
+        'Time': 'Tiempo',
+        'Fatigue': 'Fatiga',
+        'Risk': 'Riesgo',
+        'Emergency': 'Emergencia',
+        'Specialties': 'Especialidades',
+        'Techniques': 'Técnicas',
+        'Airway': 'Vía Aérea',
+        'Regional': 'Regional',
+        'Monitoring': 'Monitorización',
+        'Demographics': 'Demografía',
+        'Safety': 'Seguridad',
+        'Power User': 'Usuario Avanzado',
+        'Subspecialties': 'Subespecialidades',
+        'Advanced Regional': 'Regional Avanzado',
+        'Complications': 'Complicaciones',
+        'PAC Clinic': 'Consulta Preanestésica',
       },
       'fr': {
-        'Volume': 'Volume', 'Time': 'Temps', 'Risk': 'Risque', 'Emergency': 'Urgence',
-        'Specialties': 'Spécialités', 'Techniques': 'Techniques', 'Airway': 'Voies Aériennes',
-        'Regional': 'Régional', 'Monitoring': 'Surveillance', 'Demographics': 'Démographie',
-        'Safety': 'Sécurité', 'Power User': 'Utilisateur Avancé', 'Subspecialties': 'Sous-spécialités',
-        'Advanced Regional': 'Régional Avancé', 'Complications': 'Complications'
+        'Volume': 'Volume',
+        'Time': 'Temps',
+        'Fatigue': 'Fatigue',
+        'Risk': 'Risque',
+        'Emergency': 'Urgence',
+        'Specialties': 'Spécialités',
+        'Techniques': 'Techniques',
+        'Airway': 'Voies Aériennes',
+        'Regional': 'Régional',
+        'Monitoring': 'Surveillance',
+        'Demographics': 'Démographie',
+        'Safety': 'Sécurité',
+        'Power User': 'Utilisateur Avancé',
+        'Subspecialties': 'Sous-spécialités',
+        'Advanced Regional': 'Régional Avancé',
+        'Complications': 'Complications',
+        'Post-Op & ERAS': 'Post-Op & ERAS',
+        'Mentorship': 'Mentorship',
+        'Portfolio': 'Portfolio',
+        'PAC Clinic': 'Consultation Pré-Anesthésique',
       },
       'de': {
-        'Volume': 'Volumen', 'Time': 'Zeit', 'Risk': 'Risiko', 'Emergency': 'Notfall',
-        'Specialties': 'Spezialitäten', 'Techniques': 'Techniken', 'Airway': 'Atemweg',
-        'Regional': 'Regional', 'Monitoring': 'Überwachung', 'Demographics': 'Demografie',
-        'Safety': 'Sicherheit', 'Power User': 'Power-User', 'Subspecialties': 'Subspezialitäten',
-        'Advanced Regional': 'Erweitert Regional', 'Complications': 'Komplikationen'
+        'Volume': 'Volumen',
+        'Time': 'Zeit',
+        'Fatigue': 'Müdigkeit',
+        'Risk': 'Risiko',
+        'Emergency': 'Notfall',
+        'Specialties': 'Spezialitäten',
+        'Techniques': 'Techniken',
+        'Airway': 'Atemweg',
+        'Regional': 'Regional',
+        'Monitoring': 'Überwachung',
+        'Demographics': 'Demografie',
+        'Safety': 'Sicherheit',
+        'Power User': 'Power-User',
+        'Subspecialties': 'Subspezialitäten',
+        'Advanced Regional': 'Erweitert Regional',
+        'Complications': 'Komplikationen',
+        'PAC Clinic': 'Präanästhesie-Ambulanz',
       },
       'pt': {
-        'Volume': 'Volume', 'Time': 'Tempo', 'Risk': 'Risco', 'Emergency': 'Emergência',
-        'Specialties': 'Especialidades', 'Techniques': 'Técnicas', 'Airway': 'Via Aérea',
-        'Regional': 'Regional', 'Monitoring': 'Monitoramento', 'Demographics': 'Demografia',
-        'Safety': 'Segurança', 'Power User': 'Usuário Avançado', 'Subspecialties': 'Subespecialidades',
-        'Advanced Regional': 'Regional Avançado', 'Complications': 'Complicações'
+        'Volume': 'Volume',
+        'Time': 'Tempo',
+        'Fatigue': 'Fadiga',
+        'Risk': 'Risco',
+        'Emergency': 'Emergência',
+        'Specialties': 'Especialidades',
+        'Techniques': 'Técnicas',
+        'Airway': 'Via Aérea',
+        'Regional': 'Regional',
+        'Monitoring': 'Monitoramento',
+        'Demographics': 'Demografia',
+        'Safety': 'Segurança',
+        'Power User': 'Usuário Avançado',
+        'Subspecialties': 'Subespecialidades',
+        'Advanced Regional': 'Regional Avançado',
+        'Complications': 'Complicações',
+        'PAC Clinic': 'Consulta Pré-Anestésica',
       },
       'zh': {
-        'Volume': '量', 'Time': '时间', 'Risk': '风险', 'Emergency': '紧急',
-        'Specialties': '专科', 'Techniques': '技术', 'Airway': '气道',
-        'Regional': '区域', 'Monitoring': '监测', 'Demographics': '人口统计',
-        'Safety': '安全', 'Power User': '高级用户', 'Subspecialties': '亚专科',
-        'Advanced Regional': '高级区域', 'Complications': '并发症'
+        'Volume': '量',
+        'Time': '时间',
+        'Fatigue': '疲劳',
+        'Risk': '风险',
+        'Emergency': '紧急',
+        'Specialties': '专科',
+        'Techniques': '技术',
+        'Airway': '气道',
+        'Regional': '区域',
+        'Monitoring': '监测',
+        'Demographics': '人口统计',
+        'Safety': '安全',
+        'Power User': '高级用户',
+        'Subspecialties': '亚专科',
+        'Advanced Regional': '高级区域',
+        'Complications': '并发症',
+        'PAC Clinic': '麻醉前访视门诊',
       },
       'ar': {
-        'Volume': 'حجم', 'Time': 'وقت', 'Risk': 'خطر', 'Emergency': 'طوارئ',
-        'Specialties': 'تخصصات', 'Techniques': 'تقنيات', 'Airway': 'مجرى الهواء',
-        'Regional': 'إقليمي', 'Monitoring': 'مراقبة', 'Demographics': 'الديموغرافيا',
-        'Safety': 'سلامة', 'Power User': 'مستخدم متقدم', 'Subspecialties': 'تخصصات دقيقة',
-        'Advanced Regional': 'إقليمي متقدم', 'Complications': 'مضاعفات'
+        'Volume': 'حجم',
+        'Time': 'وقت',
+        'Fatigue': 'إرهاق',
+        'Risk': 'خطر',
+        'Emergency': 'طوارئ',
+        'Specialties': 'تخصصات',
+        'Techniques': 'تقنيات',
+        'Airway': 'مجرى الهواء',
+        'Regional': 'إقليمي',
+        'Monitoring': 'مراقبة',
+        'Demographics': 'الديموغرافيا',
+        'Safety': 'سلامة',
+        'Power User': 'مستخدم متقدم',
+        'Subspecialties': 'تخصصات دقيقة',
+        'Advanced Regional': 'إقليمي متقدم',
+        'Complications': 'مضاعفات',
+        'PAC Clinic': 'عيادة التقييم قبل التخدير',
       },
       'ko': {
-        'Volume': '볼륨', 'Time': '시간', 'Risk': '위험', 'Emergency': '응급',
-        'Specialties': '전문 분야', 'Techniques': '기술', 'Airway': '기도',
-        'Regional': '지역', 'Monitoring': '모니터링', 'Demographics': '인구 통계',
-        'Safety': '안전', 'Power User': '파워 유저', 'Subspecialties': '세부 전문 분야',
-        'Advanced Regional': '고급 지역', 'Complications': '합병증'
+        'Volume': '볼륨',
+        'Time': '시간',
+        'Fatigue': '피로',
+        'Risk': '위험',
+        'Emergency': '응급',
+        'Specialties': '전문 분야',
+        'Techniques': '기술',
+        'Airway': '기도',
+        'Regional': '지역',
+        'Monitoring': '모니터링',
+        'Demographics': '인구 통계',
+        'Safety': '안전',
+        'Power User': '파워 유저',
+        'Subspecialties': '세부 전문 분야',
+        'Advanced Regional': '고급 지역',
+        'Complications': '합병증',
+        'PAC Clinic': '마취 전 평가 클리닉',
       },
       'ja': {
-        'Volume': 'ボリューム', 'Time': '時間', 'Risk': 'リスク', 'Emergency': '緊急',
-        'Specialties': '専門分野', 'Techniques': 'テクニック', 'Airway': '気道',
-        'Regional': '局所', 'Monitoring': 'モニタリング', 'Demographics': '人口統計',
-        'Safety': '安全', 'Power User': 'パワーユーザー', 'Subspecialties': 'サブスペシャリティ',
-        'Advanced Regional': '高度局所', 'Complications': '合併症'
+        'Volume': 'ボリューム',
+        'Time': '時間',
+        'Fatigue': '疲労',
+        'Risk': 'リスク',
+        'Emergency': '緊急',
+        'Specialties': '専門分野',
+        'Techniques': 'テクニック',
+        'Airway': '気道',
+        'Regional': '局所',
+        'Monitoring': 'モニタリング',
+        'Demographics': '人口統計',
+        'Safety': '安全',
+        'Power User': 'パワーユーザー',
+        'Subspecialties': 'サブスペシャリティ',
+        'Advanced Regional': '高度局所',
+        'Complications': '合併症',
+        'PAC Clinic': '麻酔前診察',
       },
       'id': {
-        'Volume': 'Volume', 'Time': 'Waktu', 'Risk': 'Risiko', 'Emergency': 'Darurat',
-        'Specialties': 'Spesialisasi', 'Techniques': 'Teknik', 'Airway': 'Jalan Napas',
-        'Regional': 'Regional', 'Monitoring': 'Pemantauan', 'Demographics': 'Demografi',
-        'Safety': 'Keamanan', 'Power User': 'Pengguna Mahir', 'Subspecialties': 'Sub-spesialisasi',
-        'Advanced Regional': 'Regional Lanjut', 'Complications': 'Komplikasi'
+        'Volume': 'Volume',
+        'Time': 'Waktu',
+        'Fatigue': 'Kelelahan',
+        'Risk': 'Risiko',
+        'Emergency': 'Darurat',
+        'Specialties': 'Spesialisasi',
+        'Techniques': 'Teknik',
+        'Airway': 'Jalan Napas',
+        'Regional': 'Regional',
+        'Monitoring': 'Pemantauan',
+        'Demographics': 'Demografi',
+        'Safety': 'Keamanan',
+        'Power User': 'Pengguna Mahir',
+        'Subspecialties': 'Sub-spesialisasi',
+        'Advanced Regional': 'Regional Lanjut',
+        'Complications': 'Komplikasi',
+        'PAC Clinic': 'Klinik Pra-Anestesi',
       }
     };
-    return _categoryTranslations[languageCode]?[category] ?? category;
+    return categoryTranslations[languageCode]?[category] ?? category;
   }
 
   static String getTitle(String id, String englishTitle, String languageCode) {
@@ -101,7 +294,9 @@ class AchievementLocalizations {
     }
     return englishTitle;
   }
-  static String getDescription(String id, String englishDesc, String languageCode) {
+
+  static String getDescription(
+      String id, String englishDesc, String languageCode) {
     if (languageCode == 'en') return englishDesc;
     if (_descMaps.containsKey(languageCode)) {
       if (_descMaps[languageCode]!.containsKey(id)) {
@@ -832,7 +1027,7 @@ class AchievementLocalizations {
       'ach_12': '''Deux décennies''',
       'ach_13': '''Quart de siècle''',
       'ach_14': '''Trente ans et prospère''',
-      'ach_15': '''Quarante clins d\'œil''',
+      'ach_15': '''Quarante clins d'œil''',
       'ach_16': '''Des mains stables''',
       'ach_17': '''soixante-deuxième''',
       'ach_18': '''soixante-quinzième''',
@@ -869,7 +1064,7 @@ class AchievementLocalizations {
       'ach_49': '''Maître du journal de bord''',
       'ach_50': '''Sieste rapide''',
       'ach_51': '''Sommeil profond''',
-      'ach_52': '''Le temps continue de s\'écouler''',
+      'ach_52': '''Le temps continue de s'écouler''',
       'ach_53': '''Travail posté''',
       'ach_54': '''Journée complète''',
       'ach_55': '''Deux jours de sommeil''',
@@ -888,7 +1083,7 @@ class AchievementLocalizations {
       'ach_68': '''Changement de cimetière''',
       'ach_69': '''Changement de vampire''',
       'ach_70': '''Lève-tôt''',
-      'ach_71': '''Patrouille de l\'aube''',
+      'ach_71': '''Patrouille de l'aube''',
       'ach_72': '''Guerrier du week-end''',
       'ach_73': '''Samedi soir en direct''',
       'ach_74': '''Pas de jours de congé''',
@@ -904,15 +1099,15 @@ class AchievementLocalizations {
       'ach_84': '''Sommeil synchronisé''',
       'ach_85': '''Quart de vacances''',
       'ach_86': '''Réveillon du Nouvel An''',
-      'ach_87': '''Changement d\'anniversaire''',
+      'ach_87': '''Changement d'anniversaire''',
       'ach_88': '''Départ santé''',
       'ach_89': '''Santé de premier ordre''',
-      'ach_90': '''S\'adapte comme un violon''',
+      'ach_90': '''S'adapte comme un violon''',
       'ach_91': '''Bien-être pur''',
       'ach_92': '''Maître ASA 1''',
       'ach_93': '''Légèrement systémique''',
       'ach_94': '''Problèmes mineurs''',
-      'ach_95': '''Terrain d\'entente''',
+      'ach_95': '''Terrain d'entente''',
       'ach_96': '''ASA 2 Régulier''',
       'ach_97': '''Vétéran ASA 2''',
       'ach_98': '''Systémique sévère''',
@@ -942,26 +1137,26 @@ class AchievementLocalizations {
       'ach_122': '''Intrépide''',
       'ach_123': '''Système résilient''',
       'ach_124': '''Lâchez tout''',
-      'ach_125': '''Montée d\'adrénaline''',
-      'ach_126': '''Accro à l\'adrénaline''',
+      'ach_125': '''Montée d'adrénaline''',
+      'ach_126': '''Accro à l'adrénaline''',
       'ach_127': '''Réponse rapide''',
       'ach_128': '''Gestionnaire de crise''',
       'ach_129': '''Expert en urgence''',
       'ach_130': '''Imperturbable''',
       'ach_131': '''Vétéran des traumatismes''',
-      'ach_132': '''Maître d\'urgence''',
+      'ach_132': '''Maître d'urgence''',
       'ach_133': '''Trauma Bay Régulier''',
       'ach_134': '''Double problème''',
       'ach_135': '''Scénario de cauchemar''',
       'ach_136': '''Calme sous pression''',
       'ach_137': '''Urgence régionale''',
-      'ach_138': '''Maître des blocs d\'urgence''',
+      'ach_138': '''Maître des blocs d'urgence''',
       'ach_139': '''Rapide et furieux''',
-      'ach_140': '''Réveil d\'urgence''',
-      'ach_141': '''Colonne vertébrale d\'urgence''',
-      'ach_142': '''Coeur d\'urgence''',
-      'ach_143': '''Bébé d\'urgence''',
-      'ach_144': '''Cerveau d\'urgence''',
+      'ach_140': '''Réveil d'urgence''',
+      'ach_141': '''Colonne vertébrale d'urgence''',
+      'ach_142': '''Coeur d'urgence''',
+      'ach_143': '''Bébé d'urgence''',
+      'ach_144': '''Cerveau d'urgence''',
       'ach_145': '''Le réparateur''',
       'ach_146': '''Urgence de minuit''',
       'ach_147': '''Urgence de vacances''',
@@ -973,7 +1168,7 @@ class AchievementLocalizations {
       'ach_153': '''Sauvé par le gong''',
       'ach_154': '''Crise non-stop''',
       'ach_155': '''Constitution de fer''',
-      'ach_156': '''Chef d\'équipe de traumatologie''',
+      'ach_156': '''Chef d'équipe de traumatologie''',
       'ach_157': '''Abdomen aigu''',
       'ach_158': '''Ruée vers les fractures osseuses''',
       'ach_159': '''Ruée vers une césarienne''',
@@ -981,7 +1176,7 @@ class AchievementLocalizations {
       'ach_161': '''Pince vasculaire''',
       'ach_162': '''Force imparable''',
       'ach_163': '''Maître du chaos''',
-      'ach_164': '''L\'homme de fer ultime''',
+      'ach_164': '''L'homme de fer ultime''',
       'ach_165': '''Généraliste''',
       'ach_166': '''Ombre du chirurgien général''',
       'ach_167': '''Maîtrise générale''',
@@ -989,7 +1184,7 @@ class AchievementLocalizations {
       'ach_169': '''Orthopédique Régulier''',
       'ach_170': '''Maître des os''',
       'ach_171': '''Livreur de bébé''',
-      'ach_172': '''L\'allié de l\'obstétricien''',
+      'ach_172': '''L'allié de l'obstétricien''',
       'ach_173': '''Légende du service de travail''',
       'ach_174': '''La santé des femmes''',
       'ach_175': '''Confiance cérébrale''',
@@ -1083,11 +1278,11 @@ class AchievementLocalizations {
       'ach_263': '''LMA Débutant''',
       'ach_264': '''LMA Régulier''',
       'ach_265': '''Passionné de LMA''',
-      'ach_266': '''Vétéran de l\'AML''',
+      'ach_266': '''Vétéran de l'AML''',
       'ach_267': '''Le strict minimum''',
-      'ach_268': '''Juste l\'ensachage''',
+      'ach_268': '''Juste l'ensachage''',
       'ach_269': '''Voies respiratoires chirurgicales''',
-      'ach_270': '''L\'équipe Trach''',
+      'ach_270': '''L'équipe Trach''',
       'ach_271': '''Haute pression''',
       'ach_272': '''Isolement des poumons''',
       'ach_273': '''Voies respiratoires thoraciques''',
@@ -1104,7 +1299,7 @@ class AchievementLocalizations {
       'ach_284': '''Navigateur nasal''',
       'ach_285': '''Expert nasal''',
       'ach_286': '''Sous le menton''',
-      'ach_287': '''Temps d\'écran''',
+      'ach_287': '''Temps d'écran''',
       'ach_288': '''Vidéo Débutant''',
       'ach_289': '''Étoile vidéo''',
       'ach_290': '''Maître vidéo''',
@@ -1140,7 +1335,7 @@ class AchievementLocalizations {
       'ach_320': '''Cormack 2e année''',
       'ach_321': '''Performeur à fibre optique éveillé''',
       'ach_322': '''Artiste à fibre optique endormi''',
-      'ach_323': '''As des voies respiratoires d\'urgence''',
+      'ach_323': '''As des voies respiratoires d'urgence''',
       'ach_324': '''Chercheur des voies respiratoires''',
       'ach_325': '''Légende des voies respiratoires''',
       'ach_326': '''Or liquide''',
@@ -1205,7 +1400,7 @@ class AchievementLocalizations {
       'ach_385': '''Le Dieu régional''',
       'ach_386': '''Voir rouge''',
       'ach_387': '''Ligne artistique débutant''',
-      'ach_388': '''Ligne d\'art régulière''',
+      'ach_388': '''Ligne d'art régulière''',
       'ach_389': '''As de la ligne artistique''',
       'ach_390': '''Maître de la ligne artistique''',
       'ach_391': '''Accès central''',
@@ -1218,7 +1413,7 @@ class AchievementLocalizations {
       'ach_398': '''Maître en échographie vasculaire''',
       'ach_399': '''Ondes cérébrales''',
       'ach_400': '''Moniteur de profondeur''',
-      'ach_401': '''Profondeur de l\'anesthésie''',
+      'ach_401': '''Profondeur de l'anesthésie''',
       'ach_402': '''Observateur du cerveau''',
       'ach_403': '''Oxygène cérébral''',
       'ach_404': '''Cerveau avancé''',
@@ -1250,9 +1445,9 @@ class AchievementLocalizations {
       'ach_430': '''Spécialiste du nourrisson''',
       'ach_431': '''Temps pour les tout-petits''',
       'ach_432': '''Professionnel Pédiatrique''',
-      'ach_433': '''Garde d\'enfants''',
+      'ach_433': '''Garde d'enfants''',
       'ach_434': '''Soins aux adolescents''',
-      'ach_435': '''Années d\'or''',
+      'ach_435': '''Années d'or''',
       'ach_436': '''Gardien gériatrique''',
       'ach_437': '''Protecteur âgé''',
       'ach_438': '''Spécialiste senior''',
@@ -1268,7 +1463,7 @@ class AchievementLocalizations {
       'ach_448': '''Poids plume''',
       'ach_449': '''Poids lourd''',
       'ach_450': '''Super-lourd''',
-      'ach_451': '''Spectre d\'âge''',
+      'ach_451': '''Spectre d'âge''',
       'ach_452': '''Spectre de taille''',
       'ach_453': '''Chirurgien pour tout-petits''',
       'ach_454': '''Responsable des soins aux personnes âgées''',
@@ -1288,7 +1483,7 @@ class AchievementLocalizations {
       'ach_468': '''Problèmes de ventre''',
       'ach_469': '''Chute de pression''',
       'ach_470': '''Poitrine serrée''',
-      'ach_471': '''Sauvetage à l\'oxygène''',
+      'ach_471': '''Sauvetage à l'oxygène''',
       'ach_472': '''Récupération sécurisée''',
       'ach_473': '''Identité vérifiée''',
       'ach_474': '''Scientifique des données''',
@@ -1325,7 +1520,7 @@ class AchievementLocalizations {
       'ach_505': '''Spécialiste RI''',
       'ach_506': '''Laboratoire de cathétérisme calme''',
       'ach_507': '''Journée du fil long''',
-      'ach_508': '''IR d\'urgence''',
+      'ach_508': '''IR d'urgence''',
       'ach_509': '''IR pédiatrique''',
       'ach_510': '''Equipe de nuit IR''',
       'ach_511': '''Téléporte-moi''',
@@ -1343,7 +1538,7 @@ class AchievementLocalizations {
       'ach_523': '''Spécialiste cardiaque Paeds''',
       'ach_524': '''Calme congénital''',
       'ach_525': '''Coeur néonatal''',
-      'ach_526': '''Prise en charge d\'un seul ventricule''',
+      'ach_526': '''Prise en charge d'un seul ventricule''',
       'ach_527': '''Soirée Cardiaque Paeds''',
       'ach_528': '''Contourner Buddy Jr''',
       'ach_529': '''Urgence dentaire''',
@@ -1359,7 +1554,7 @@ class AchievementLocalizations {
       'ach_539': '''Vétéran du fil de la mâchoire''',
       'ach_540': '''Plan des voies respiratoires bariatriques''',
       'ach_541': '''IR Lead Mode''',
-      'ach_542': '''Maître de l\'immobilité RT''',
+      'ach_542': '''Maître de l'immobilité RT''',
       'ach_543': '''Paeds Énergie de mentor cardiaque''',
       'ach_544': '''Chemin du siècle maxillo nasal''',
       'ach_545': '''Préférent LV bariatrique''',
@@ -1367,7 +1562,7 @@ class AchievementLocalizations {
       'ach_547': '''Série RT Paeds''',
       'ach_548': '''Série congénitale''',
       'ach_549': '''Combo bloc dentaire''',
-      'ach_550': '''Ligne d\'art bariatrique''',
+      'ach_550': '''Ligne d'art bariatrique''',
       'ach_551': '''Accès artériel IR''',
       'ach_552': '''État d’esprit RT MAC''',
       'ach_553': '''Lignes cardiaques Paeds''',
@@ -1402,7 +1597,7 @@ class AchievementLocalizations {
       'ach_582': '''Psoas USG''',
       'ach_583': '''Cathéter psoas''',
       'ach_584': '''Psoas effectué''',
-      'ach_585': '''Paire d\'avions''',
+      'ach_585': '''Paire d'avions''',
       'ach_586': '''Journée du plan des membres inférieurs''',
       'ach_587': '''Bloqueur NOF''',
       'ach_588': '''Duo Plan Profond''',
@@ -1413,19 +1608,19 @@ class AchievementLocalizations {
       'ach_593': '''Pic de pression''',
       'ach_594': '''Gestionnaire de pression''',
       'ach_595': '''Hypertension régulière''',
-      'ach_596': '''Spécialiste de l\'hypertension''',
+      'ach_596': '''Spécialiste de l'hypertension''',
       'ach_597': '''Levé du drapeau rouge''',
       'ach_598': '''Gestionnaire de saignement''',
       'ach_599': '''Saignement régulier''',
       'ach_600': '''Spécialiste des saignements''',
       'ach_601': '''Démarrage à froid''',
-      'ach_602': '''Gestionnaire d\'hypothermie''',
+      'ach_602': '''Gestionnaire d'hypothermie''',
       'ach_603': '''Hypothermie régulière''',
-      'ach_604': '''Spécialiste de l\'hypothermie''',
+      'ach_604': '''Spécialiste de l'hypothermie''',
       'ach_605': '''Vérification du rythme''',
-      'ach_606': '''Gestionnaire d\'arythmie''',
+      'ach_606': '''Gestionnaire d'arythmie''',
       'ach_607': '''Arythmie régulière''',
-      'ach_608': '''Spécialiste de l\'arythmie''',
+      'ach_608': '''Spécialiste de l'arythmie''',
       'ach_609': '''Air là où il ne devrait pas''',
       'ach_610': '''Gestionnaire de pneumothorax''',
       'ach_611': '''Pneumothorax régulier''',
@@ -1438,18 +1633,18 @@ class AchievementLocalizations {
       'ach_618': '''Gestionnaire de réaction''',
       'ach_619': '''Réaction régulière''',
       'ach_620': '''Spécialiste de la réaction''',
-      'ach_621': '''Alerte à l\'embolie aérienne''',
+      'ach_621': '''Alerte à l'embolie aérienne''',
       'ach_622': '''Gestionnaire VAE''',
       'ach_623': '''VAE Régulière''',
       'ach_624': '''Spécialiste VAE''',
-      'ach_625': '''Alerte d\'aspiration''',
-      'ach_626': '''Gestionnaire d\'aspiration''',
+      'ach_625': '''Alerte d'aspiration''',
+      'ach_626': '''Gestionnaire d'aspiration''',
       'ach_627': '''Aspiration régulière''',
       'ach_628': '''Spécialiste des aspirations''',
       'ach_629': '''Tube en échec''',
-      'ach_630': '''Échec du gestionnaire d\'intubation''',
-      'ach_631': '''Échec de l\'intubation régulière''',
-      'ach_632': '''Spécialiste de l\'intubation échouée''',
+      'ach_630': '''Échec du gestionnaire d'intubation''',
+      'ach_631': '''Échec de l'intubation régulière''',
+      'ach_632': '''Spécialiste de l'intubation échouée''',
       'ach_633': '''Problème de masque''',
       'ach_634': '''Gestionnaire DMV''',
       'ach_635': '''DMV régulier''',
@@ -1475,29 +1670,29 @@ class AchievementLocalizations {
       'ach_655': '''Adepte du protocole''',
       'ach_656': '''Chapitre sur la température''',
       'ach_657': '''Honnêteté de la ventilation''',
-      'ach_658': '''Conscient de l\'embolie''',
+      'ach_658': '''Conscient de l'embolie''',
       'ach_659': '''Champ rouge''',
       'ach_660': '''Chapitre sur la pression''',
       'ach_661': '''Piste de la légende du frisson''',
-      'ach_662': '''Légende de l\'hypertension''',
+      'ach_662': '''Légende de l'hypertension''',
       'ach_663': '''Légende du saignement''',
-      'ach_664': '''Légende de l\'hypothermie''',
-      'ach_665': '''Légende de l\'arythmie''',
+      'ach_664': '''Légende de l'hypothermie''',
+      'ach_665': '''Légende de l'arythmie''',
       'ach_666': '''Énergie anti-aspiration''',
       'ach_667': '''DMV vers le succès''',
-      'ach_668': '''Échec de la récupération de l\'intubation''',
+      'ach_668': '''Échec de la récupération de l'intubation''',
       'ach_669': '''Journée de vidange du pneumothorax''',
       'ach_670': '''Capitaine du MTP''',
       'ach_671': '''Protocoleiste de réaction''',
       'ach_672': '''VAE Neurochirurgie Adjacente''',
       'ach_673': '''Shiver PACU''',
-      'ach_674': '''Émergence d\'hypertension''',
+      'ach_674': '''Émergence d'hypertension''',
       'ach_675': '''Saignement aux soins intensifs''',
       'ach_676': '''Froid cardiaque''',
       'ach_677': '''Arythmie instable''',
       'ach_678': '''Événement des voies respiratoires composées''',
       'ach_679': '''Affaire triple menace''',
-      'ach_680': '''Mois d\'énergie sans complications''',
+      'ach_680': '''Mois d'énergie sans complications''',
       'ach_681': '''Connecté non masqué''',
       'ach_682': '''Nouveau kit de démarrage Comp''',
       'ach_683': '''Ensemble de composition critique''',
@@ -1510,8 +1705,8 @@ class AchievementLocalizations {
       'ach_690': '''Extension de sécurité 75''',
       'ach_691': '''Extension de sécurité 100''',
       'ach_692': '''Journal de bord honnête''',
-      'ach_693': '''Après l\'événement sans incident''',
-      'ach_694': '''Complication d\'urgence''',
+      'ach_693': '''Après l'événement sans incident''',
+      'ach_694': '''Complication d'urgence''',
       'ach_695': '''Complication du Paeds''',
       'ach_696': '''Complication chez les personnes âgées''',
       'ach_697': '''Complication bariatrique''',
@@ -6452,2820 +6647,5156 @@ class AchievementLocalizations {
 
   static final Map<String, Map<String, String>> _descMaps = {
     'es': {
-      'ach_0': '''Todo gran maestro alguna vez fue un residente aterrorizado. Trate de no dejar caer la jeringa.''',
-      'ach_1': '''Dos casos después. Has dejado de narrar la lista de verificación en voz alta. Progreso.''',
-      'ach_2': '''Tres casos. El teatro está empezando a sentirse menos como una situación de rehenes.''',
-      'ach_3': '''Cuatro casos. Puedes deletrear Sevoflurano sin revisar el frasco. Principalmente.''',
-      'ach_4': '''Cinco casos. Choca esos cinco con la máquina de anestesia: es el único que la recibe.''',
-      'ach_5': '''Seis casos. ETCO₂ se está convirtiendo en tu lenguaje de amor.''',
-      'ach_6': '''Siete casos. Que tu próxima vista sea grado 1 y tu cirujano a tiempo.''',
-      'ach_7': '''Ocho en el libro. El cuaderno de bitácora ya no es un rumor.''',
-      'ach_8': '''Nueve casos. A uno le faltan dos dígitos y una leve superioridad.''',
-      'ach_9': '''Diez casos. Oficialmente dejaste de disculparte con el portasueros cuando lo golpeas.''',
-      'ach_10': '''Trece casos. Mala suerte para algunos. Suave para ti, supuestamente.''',
-      'ach_11': '''Dieciséis casos. Dulce como una sevo inducción hasta que piden más relajación.''',
-      'ach_12': '''Veinte casos. Más horas en bata médica que en ropa civil. Clásico.''',
-      'ach_13': '''Veinticinco casos. Los cirujanos están empezando a recordar su nombre.''',
-      'ach_14': '''Treinta casos. La cafeína es copiloto y inotrópico primario.''',
-      'ach_15': '''Cuarenta casos. Irónicamente, eres el único en la habitación que no duerme.''',
-      'ach_16': '''Cincuenta casos. El pitido del pulsioxímetro es básicamente su nuevo ritmo de descanso.''',
-      'ach_17': '''Sesenta casos. Casi suficiente para intubar mientras se decide el almuerzo.''',
-      'ach_18': '''Setenta y cinco casos. Tres cuartos del camino hacia el club del siglo.''',
-      'ach_19': '''Ochenta y ocho casos. Número de la suerte. No lo desperdicies en una bujía perdida.''',
-      'ach_20': '''Noventa casos. Tan cerca podrás degustar el café de celebración post-convocatoria.''',
-      'ach_21': '''Cien casos. Lee el monitor antes de que el cirujano termine la pregunta.''',
-      'ach_22': '''Ciento veinticinco casos. Juzgar en silencio la técnica de taparse los ojos: desbloqueada.''',
-      'ach_23': '''Ciento cincuenta casos. El cuaderno de bitácora se está volviendo respetable. Tu sueño no lo es.''',
-      'ach_24': '''Ciento setenta y cinco casos. MAPA celebrado. Moral: compensada.''',
-      'ach_25': '''Doscientos casos. Es hora de enseñar a los novatos qué extremo del alcance está hacia arriba.''',
-      'ach_26': '''Doscientos veinticinco casos. El teatro sabe tu nombre, generalmente cuando la lista está llena.''',
-      'ach_27': '''Doscientos cincuenta casos. El propofol ya no se queda solo en la fila.''',
-      'ach_28': '''Trescientos casos. Impulsado por el café del salón y la fuerza de voluntad residual.''',
-      'ach_29': '''Trescientos cincuenta casos. Las vías respiratorias difíciles levantan una ceja, no un ritmo cardíaco.''',
-      'ach_30': '''Cuatrocientos casos. Ya no le temes al buscapersonas. El busca te teme.''',
-      'ach_31': '''Quinientos casos. Medio millar. Iluminación total de las vías respiratorias (con humildad ocasional).''',
-      'ach_32': '''Quinientos cincuenta casos. Otra muesca en el mango del laringoscopio de la vida.''',
-      'ach_33': '''Seiscientos casos. Poco te desconcierta, excepto el ventilador que se apaga durante la inducción.''',
-      'ach_34': '''Seiscientos cincuenta casos. Todavía por encima de la línea. Bastante bien.''',
-      'ach_35': '''Setecientos casos. Su PDF podría funcionar como un tope de puerta.''',
-      'ach_36': '''Setecientos cincuenta casos. Usted y el circulador se comunican ahora con puros gestos de asentimiento.''',
-      'ach_37': '''Ochocientos casos. La aplicación te debe una cena y un día libre.''',
-      'ach_38': '''Ochocientos cincuenta casos. Hito alcanzado. Neostigmina opcional.''',
-      'ach_39': '''Novecientos casos. Casi mil dólares. No maldigas a los próximos cien.''',
-      'ach_40': '''Novecientos cincuenta casos. Elite está a un buen mes y a un alcance ininterrumpido de distancia.''',
-      'ach_41': '''Mil casos. La máquina de anestesia acaba de pedirle consejo a *usted*.''',
-      'ach_42': '''Mil doscientos cincuenta casos. ¿Has pensado en encontrarte con el sol? ¿Socialmente?''',
-      'ach_43': '''Mil quinientos casos. La anestesia es una segunda naturaleza. El café sigue siendo lo primero.''',
-      'ach_44': '''Mil setecientos cincuenta casos. Fantasma de la energía del quirófano.''',
-      'ach_45': '''Dos mil casos. Has visto todos los "complementos rápidos". Dos veces. Antes del almuerzo.''',
-      'ach_46': '''Dos mil quinientos casos. Nombra un armario de suministros con el nombre de esta persona.''',
-      'ach_47': '''Tres mil casos. Nos estamos quedando sin títulos y anestésicos volátiles.''',
-      'ach_48': '''Cuatro mil casos. Miras fijamente a los pacientes y ellos consideran dormir voluntariamente.''',
-      'ach_49': '''Cinco mil casos. ¿Acabas de inventar un nuevo gas volátil?''',
-      'ach_50': '''Una hora de anestesia. Apenas una fracción MAC. Todavía cuenta.''',
-      'ach_51': '''Cinco horas acumuladas. Ellos durmieron. Tú monitoreaste. Comercio justo.''',
-      'ach_52': '''Diez horas. El reloj siempre gana. Simplemente mantén el MAP arriba.''',
-      'ach_53': '''Quince horas. Su ritmo circadiano ha presentado una denuncia formal.''',
-      'ach_54': '''Veinticuatro horas acumuladas. Un día completo de inconsciencia controlada.''',
+      'ach_0':
+          '''Todo gran maestro alguna vez fue un residente aterrorizado. Trate de no dejar caer la jeringa.''',
+      'ach_1':
+          '''Dos casos después. Has dejado de narrar la lista de verificación en voz alta. Progreso.''',
+      'ach_2':
+          '''Tres casos. El teatro está empezando a sentirse menos como una situación de rehenes.''',
+      'ach_3':
+          '''Cuatro casos. Puedes deletrear Sevoflurano sin revisar el frasco. Principalmente.''',
+      'ach_4':
+          '''Cinco casos. Choca esos cinco con la máquina de anestesia: es el único que la recibe.''',
+      'ach_5':
+          '''Seis casos. ETCO₂ se está convirtiendo en tu lenguaje de amor.''',
+      'ach_6':
+          '''Siete casos. Que tu próxima vista sea grado 1 y tu cirujano a tiempo.''',
+      'ach_7':
+          '''Ocho en el libro. El cuaderno de bitácora ya no es un rumor.''',
+      'ach_8':
+          '''Nueve casos. A uno le faltan dos dígitos y una leve superioridad.''',
+      'ach_9':
+          '''Diez casos. Oficialmente dejaste de disculparte con el portasueros cuando lo golpeas.''',
+      'ach_10':
+          '''Trece casos. Mala suerte para algunos. Suave para ti, supuestamente.''',
+      'ach_11':
+          '''Dieciséis casos. Dulce como una sevo inducción hasta que piden más relajación.''',
+      'ach_12':
+          '''Veinte casos. Más horas en bata médica que en ropa civil. Clásico.''',
+      'ach_13':
+          '''Veinticinco casos. Los cirujanos están empezando a recordar su nombre.''',
+      'ach_14':
+          '''Treinta casos. La cafeína es copiloto y inotrópico primario.''',
+      'ach_15':
+          '''Cuarenta casos. Irónicamente, eres el único en la habitación que no duerme.''',
+      'ach_16':
+          '''Cincuenta casos. El pitido del pulsioxímetro es básicamente su nuevo ritmo de descanso.''',
+      'ach_17':
+          '''Sesenta casos. Casi suficiente para intubar mientras se decide el almuerzo.''',
+      'ach_18':
+          '''Setenta y cinco casos. Tres cuartos del camino hacia el club del siglo.''',
+      'ach_19':
+          '''Ochenta y ocho casos. Número de la suerte. No lo desperdicies en una bujía perdida.''',
+      'ach_20':
+          '''Noventa casos. Tan cerca podrás degustar el café de celebración post-convocatoria.''',
+      'ach_21':
+          '''Cien casos. Lee el monitor antes de que el cirujano termine la pregunta.''',
+      'ach_22':
+          '''Ciento veinticinco casos. Juzgar en silencio la técnica de taparse los ojos: desbloqueada.''',
+      'ach_23':
+          '''Ciento cincuenta casos. El cuaderno de bitácora se está volviendo respetable. Tu sueño no lo es.''',
+      'ach_24':
+          '''Ciento setenta y cinco casos. MAPA celebrado. Moral: compensada.''',
+      'ach_25':
+          '''Doscientos casos. Es hora de enseñar a los novatos qué extremo del alcance está hacia arriba.''',
+      'ach_26':
+          '''Doscientos veinticinco casos. El teatro sabe tu nombre, generalmente cuando la lista está llena.''',
+      'ach_27':
+          '''Doscientos cincuenta casos. El propofol ya no se queda solo en la fila.''',
+      'ach_28':
+          '''Trescientos casos. Impulsado por el café del salón y la fuerza de voluntad residual.''',
+      'ach_29':
+          '''Trescientos cincuenta casos. Las vías respiratorias difíciles levantan una ceja, no un ritmo cardíaco.''',
+      'ach_30':
+          '''Cuatrocientos casos. Ya no le temes al buscapersonas. El busca te teme.''',
+      'ach_31':
+          '''Quinientos casos. Medio millar. Iluminación total de las vías respiratorias (con humildad ocasional).''',
+      'ach_32':
+          '''Quinientos cincuenta casos. Otra muesca en el mango del laringoscopio de la vida.''',
+      'ach_33':
+          '''Seiscientos casos. Poco te desconcierta, excepto el ventilador que se apaga durante la inducción.''',
+      'ach_34':
+          '''Seiscientos cincuenta casos. Todavía por encima de la línea. Bastante bien.''',
+      'ach_35':
+          '''Setecientos casos. Su PDF podría funcionar como un tope de puerta.''',
+      'ach_36':
+          '''Setecientos cincuenta casos. Usted y el circulador se comunican ahora con puros gestos de asentimiento.''',
+      'ach_37':
+          '''Ochocientos casos. La aplicación te debe una cena y un día libre.''',
+      'ach_38':
+          '''Ochocientos cincuenta casos. Hito alcanzado. Neostigmina opcional.''',
+      'ach_39':
+          '''Novecientos casos. Casi mil dólares. No maldigas a los próximos cien.''',
+      'ach_40':
+          '''Novecientos cincuenta casos. Elite está a un buen mes y a un alcance ininterrumpido de distancia.''',
+      'ach_41':
+          '''Mil casos. La máquina de anestesia acaba de pedirle consejo a *usted*.''',
+      'ach_42':
+          '''Mil doscientos cincuenta casos. ¿Has pensado en encontrarte con el sol? ¿Socialmente?''',
+      'ach_43':
+          '''Mil quinientos casos. La anestesia es una segunda naturaleza. El café sigue siendo lo primero.''',
+      'ach_44':
+          '''Mil setecientos cincuenta casos. Fantasma de la energía del quirófano.''',
+      'ach_45':
+          '''Dos mil casos. Has visto todos los "complementos rápidos". Dos veces. Antes del almuerzo.''',
+      'ach_46':
+          '''Dos mil quinientos casos. Nombra un armario de suministros con el nombre de esta persona.''',
+      'ach_47':
+          '''Tres mil casos. Nos estamos quedando sin títulos y anestésicos volátiles.''',
+      'ach_48':
+          '''Cuatro mil casos. Miras fijamente a los pacientes y ellos consideran dormir voluntariamente.''',
+      'ach_49':
+          '''Cinco mil casos. ¿Acabas de inventar un nuevo gas volátil?''',
+      'ach_50':
+          '''Una hora de anestesia. Apenas una fracción MAC. Todavía cuenta.''',
+      'ach_51':
+          '''Cinco horas acumuladas. Ellos durmieron. Tú monitoreaste. Comercio justo.''',
+      'ach_52':
+          '''Diez horas. El reloj siempre gana. Simplemente mantén el MAP arriba.''',
+      'ach_53':
+          '''Quince horas. Su ritmo circadiano ha presentado una denuncia formal.''',
+      'ach_54':
+          '''Veinticuatro horas acumuladas. Un día completo de inconsciencia controlada.''',
       'ach_55': '''Cuarenta y ocho horas. Dos días de ETCO₂ y paciencia.''',
-      'ach_56': '''Cincuenta horas. Un trabajo a tiempo parcial del que el paciente todavía puede intentar salir por arritmia.''',
-      'ach_57': '''Setenta y dos horas. Tu reloj ha visto más amaneceres que tu almohada.''',
+      'ach_56':
+          '''Cincuenta horas. Un trabajo a tiempo parcial del que el paciente todavía puede intentar salir por arritmia.''',
+      'ach_57':
+          '''Setenta y dos horas. Tu reloj ha visto más amaneceres que tu almohada.''',
       'ach_58': '''Cien horas. Un siglo de gas, no de chismes.''',
-      'ach_59': '''Ciento cincuenta horas. El tiempo vuela cuando estás dando marcha atrás.''',
-      'ach_60': '''Doscientas horas. Suficientemente volátil para perfumar una pequeña sala.''',
+      'ach_59':
+          '''Ciento cincuenta horas. El tiempo vuela cuando estás dando marcha atrás.''',
+      'ach_60':
+          '''Doscientas horas. Suficientemente volátil para perfumar una pequeña sala.''',
       'ach_61': '''Trescientas horas. Tus pies piden un regional para ellos.''',
-      'ach_62': '''Cuatrocientas horas. Todavía no hay horas extras tradicionales. Sólo gloria.''',
+      'ach_62':
+          '''Cuatrocientas horas. Todavía no hay horas extras tradicionales. Sólo gloria.''',
       'ach_63': '''Quinientas horas. A medio camino del insomnio mítico.''',
-      'ach_64': '''Setecientas cincuenta horas. Los casos largos fortalecen el carácter y la cifosis.''',
-      'ach_65': '''Mil horas. Élite. De alguna manera, las reuniones todavía parecen más largas.''',
-      'ach_66': '''Un caso que comenzó desde la medianoche hasta las 5 a.m. Porque dormir es para personas que no están de guardia.''',
-      'ach_67': '''Cinco comienzos nocturnos. Eres básicamente un vampiro que usa uniforme médico.''',
-      'ach_68': '''Diez comienzos nocturnos. El ritmo circadiano ha abandonado el chat.''',
-      'ach_69': '''Veinte comienzos nocturnos. La luz del día es un rumor preoperatorio.''',
-      'ach_70': '''Un comienzo de 6 a 7 a.m. Atrapando el gusano... o el primer retraso del día.''',
-      'ach_71': '''Diez salidas anticipadas. El café es copiloto y apoyo hemodinámico.''',
-      'ach_72': '''Un caso de fin de semana. Los sábados son para los chicos... y tareas de emergencia en el regazo.''',
-      'ach_73': '''Diez casos de fin de semana. ¿Qué es ese "brunch" del que hablas?''',
-      'ach_74': '''Cincuenta casos de fin de semana. Los amigos no médicos han dejado de invitarte.''',
-      'ach_75': '''Cirugía en menos de quince minutos. Siesta con propofol. ¡Próximo!''',
-      'ach_76': '''Diez cirugías ultrarrápidas. Cambias las habitaciones más rápido que el servicio de limpieza.''',
-      'ach_77': '''Anestesia durante cuatro horas. Es hora de hablar sobre fútbol de fantasía con el matorral.''',
-      'ach_78': '''Más de seis horas. Has memorizado todos los mosaicos de la pared del quirófano.''',
-      'ach_79': '''Más de ocho horas. Crecimiento de la barba desde la inducción: medible.''',
-      'ach_80': '''Más de diez horas. El paciente es prácticamente tu compañero de cuarto ahora.''',
-      'ach_81': '''Anestesia dentro de los quince minutos posteriores al momento de la cirugía. Extubado antes de que terminen de caer las cortinas.''',
-      'ach_82': '''Veinticinco pérdidas de balón apretadas. Usted y el cirujano comparten una célula cerebral. Hermoso.''',
-      'ach_83': '''Cincuenta emergencias perfectas. Despertarlos es un arte y tú eres Picasso.''',
-      'ach_84': '''Cien emergencias cronometradas. Te estamos buscando una máquina del tiempo.''',
-      'ach_85': '''Caso el 25 de diciembre o el 1 de enero. Ho, ho, espera el midazolam.''',
-      'ach_86': '''Caso del 31 de diciembre o 1 de enero. Laringoscopio en una mano, tranquilo optimismo en la otra.''',
-      'ach_87': '''Caso en tu cumpleaños. Feliz cumpleaños, aquí tienes una ex vuelta de emergencia.''',
+      'ach_64':
+          '''Setecientas cincuenta horas. Los casos largos fortalecen el carácter y la cifosis.''',
+      'ach_65':
+          '''Mil horas. Élite. De alguna manera, las reuniones todavía parecen más largas.''',
+      'ach_66':
+          '''Un caso que comenzó desde la medianoche hasta las 5 a.m. Porque dormir es para personas que no están de guardia.''',
+      'ach_67':
+          '''Cinco comienzos nocturnos. Eres básicamente un vampiro que usa uniforme médico.''',
+      'ach_68':
+          '''Diez comienzos nocturnos. El ritmo circadiano ha abandonado el chat.''',
+      'ach_69':
+          '''Veinte comienzos nocturnos. La luz del día es un rumor preoperatorio.''',
+      'ach_70':
+          '''Un comienzo de 6 a 7 a.m. Atrapando el gusano... o el primer retraso del día.''',
+      'ach_71':
+          '''Diez salidas anticipadas. El café es copiloto y apoyo hemodinámico.''',
+      'ach_72':
+          '''Un caso de fin de semana. Los sábados son para los chicos... y tareas de emergencia en el regazo.''',
+      'ach_73':
+          '''Diez casos de fin de semana. ¿Qué es ese "brunch" del que hablas?''',
+      'ach_74':
+          '''Cincuenta casos de fin de semana. Los amigos no médicos han dejado de invitarte.''',
+      'ach_75':
+          '''Cirugía en menos de quince minutos. Siesta con propofol. ¡Próximo!''',
+      'ach_76':
+          '''Diez cirugías ultrarrápidas. Cambias las habitaciones más rápido que el servicio de limpieza.''',
+      'ach_77':
+          '''Anestesia durante cuatro horas. Es hora de hablar sobre fútbol de fantasía con el matorral.''',
+      'ach_78':
+          '''Más de seis horas. Has memorizado todos los mosaicos de la pared del quirófano.''',
+      'ach_79':
+          '''Más de ocho horas. Crecimiento de la barba desde la inducción: medible.''',
+      'ach_80':
+          '''Más de diez horas. El paciente es prácticamente tu compañero de cuarto ahora.''',
+      'ach_81':
+          '''Anestesia dentro de los quince minutos posteriores al momento de la cirugía. Extubado antes de que terminen de caer las cortinas.''',
+      'ach_82':
+          '''Veinticinco pérdidas de balón apretadas. Usted y el cirujano comparten una célula cerebral. Hermoso.''',
+      'ach_83':
+          '''Cincuenta emergencias perfectas. Despertarlos es un arte y tú eres Picasso.''',
+      'ach_84':
+          '''Cien emergencias cronometradas. Te estamos buscando una máquina del tiempo.''',
+      'ach_85':
+          '''Caso el 25 de diciembre o el 1 de enero. Ho, ho, espera el midazolam.''',
+      'ach_86':
+          '''Caso del 31 de diciembre o 1 de enero. Laringoscopio en una mano, tranquilo optimismo en la otra.''',
+      'ach_87':
+          '''Caso en tu cumpleaños. Feliz cumpleaños, aquí tienes una ex vuelta de emergencia.''',
       'ach_88': '''ASA I. Tan sano que sigues buscando el truco escondido.''',
       'ach_89': '''Diez casos ASA I. ¿Qué hospital utópico es este?''',
       'ach_90': '''Veinticinco ASA Is. Seguramente solo listas de deportes.''',
-      'ach_91': '''Cincuenta ASA es. Los gráficos son sospechosamente escasos.''',
-      'ach_92': '''Cien ASA Is. Debe estar haciendo exclusivamente odontología ambulatoria.''',
-      'ach_93': '''ASAII. Porque casi nadie mayor de cuarenta años es verdaderamente ASA I.''',
+      'ach_91':
+          '''Cincuenta ASA es. Los gráficos son sospechosamente escasos.''',
+      'ach_92':
+          '''Cien ASA Is. Debe estar haciendo exclusivamente odontología ambulatoria.''',
+      'ach_93':
+          '''ASAII. Porque casi nadie mayor de cuarenta años es verdaderamente ASA I.''',
       'ach_94': '''Diez ASA II. Pan, mantequilla e hipertensión educada.''',
-      'ach_95': '''Veinticinco ASA II. El especial de cada día del quirófano.''',
-      'ach_96': '''Cincuenta ASA II. Dosis de inducción calculadas mientras duermes.''',
-      'ach_97': '''Cien ASA II. Podrías escribir el capítulo del libro de texto en una bahía preoperatoria.''',
+      'ach_95':
+          '''Veinticinco ASA II. El especial de cada día del quirófano.''',
+      'ach_96':
+          '''Cincuenta ASA II. Dosis de inducción calculadas mientras duermes.''',
+      'ach_97':
+          '''Cien ASA II. Podrías escribir el capítulo del libro de texto en una bahía preoperatoria.''',
       'ach_98': '''ASA III. Las cosas se pusieron un poco picantes.''',
       'ach_99': '''Diez ASA III. Gráfico más grueso que una guía telefónica.''',
       'ach_100': '''Veinticinco ASA III. Polifarmacia es su segundo nombre.''',
       'ach_101': '''Cincuenta ASA III. Comorbilidades para el desayuno.''',
       'ach_102': '''Cien ASA III. Comes listas de problemas y pides más.''',
-      'ach_103': '''ASA IV. La muerte está en la esquina: tienes epi en el cajón.''',
-      'ach_104': '''Cinco ASA IV. Su propia base de recursos humanos está actualmente negociando.''',
-      'ach_105': '''Quince ASA IV. Bienvenido al filo de la navaja fisiológica.''',
-      'ach_106': '''Veinticinco ASA IV. Te ríes cortésmente ante la fatalidad.''',
-      'ach_107': '''Cincuenta ASA IV. Hielo en las venas; sevo en el circuito.''',
+      'ach_103':
+          '''ASA IV. La muerte está en la esquina: tienes epi en el cajón.''',
+      'ach_104':
+          '''Cinco ASA IV. Su propia base de recursos humanos está actualmente negociando.''',
+      'ach_105':
+          '''Quince ASA IV. Bienvenido al filo de la navaja fisiológica.''',
+      'ach_106':
+          '''Veinticinco ASA IV. Te ríes cortésmente ante la fatalidad.''',
+      'ach_107':
+          '''Cincuenta ASA IV. Hielo en las venas; sevo en el circuito.''',
       'ach_108': '''ASA V. Ave María, llena de presores.''',
-      'ach_109': '''Tres ASA vs. En parte anestesista, en parte optimista y en parte nigromante.''',
+      'ach_109':
+          '''Tres ASA vs. En parte anestesista, en parte optimista y en parte nigromante.''',
       'ach_110': '''Cinco ASA vs. Preguntó la muerte. Dijiste que hoy no.''',
       'ach_111': '''Diez ASA vs. Capa opcional bajo el delantal de plomo.''',
       'ach_112': '''Veinte ASA vs. Los monitores se callan por respeto.''',
-      'ach_113': '''Cien casos ASA III-V. El riesgo se gestiona como un corredor tranquilo con mejores medicamentos.''',
-      'ach_114': '''ASA IV o V con alta de PACU sin incidentes. Admítelo, ¿hiciste trampa?''',
+      'ach_113':
+          '''Cien casos ASA III-V. El riesgo se gestiona como un corredor tranquilo con mejores medicamentos.''',
+      'ach_114':
+          '''ASA IV o V con alta de PACU sin incidentes. Admítelo, ¿hiciste trampa?''',
       'ach_115': '''ASA IV/V a UCI aún intubado. No pase GO. No extubar.''',
-      'ach_116': '''Diez casos consecutivos fáciles y sin incidentes. Disfrútala. No durará.''',
-      'ach_117': '''Veinticinco ASA I/II consecutivos sin incidentes. Un mes sospechosamente relajante.''',
-      'ach_118': '''Tres casos de ASA III+ en un día. Planifica la velada con cuidado.''',
-      'ach_119': '''Cinco ASA III+ en un día. Glándulas suprarrenales: totalmente aprovechadas.''',
-      'ach_120': '''Al menos uno de cada grado ASA 1 a 5. Los buenos, los malos y los intubados.''',
-      'ach_121': '''Cincuenta casos sin incidentes con alto ASA. Alto riesgo, cero pánico.''',
+      'ach_116':
+          '''Diez casos consecutivos fáciles y sin incidentes. Disfrútala. No durará.''',
+      'ach_117':
+          '''Veinticinco ASA I/II consecutivos sin incidentes. Un mes sospechosamente relajante.''',
+      'ach_118':
+          '''Tres casos de ASA III+ en un día. Planifica la velada con cuidado.''',
+      'ach_119':
+          '''Cinco ASA III+ en un día. Glándulas suprarrenales: totalmente aprovechadas.''',
+      'ach_120':
+          '''Al menos uno de cada grado ASA 1 a 5. Los buenos, los malos y los intubados.''',
+      'ach_121':
+          '''Cincuenta casos sin incidentes con alto ASA. Alto riesgo, cero pánico.''',
       'ach_122': '''Diez casos de ASA IV/V. Entras; el caos toma asiento.''',
-      'ach_123': '''Cien altas de PACU sin incidentes. Un martes más, una y otra vez.''',
-      'ach_124': '''Primera emergencia. Porque por supuesto se rompieron a las 16:55.''',
+      'ach_123':
+          '''Cien altas de PACU sin incidentes. Un martes más, una y otra vez.''',
+      'ach_124':
+          '''Primera emergencia. Porque por supuesto se rompieron a las 16:55.''',
       'ach_125': '''Cinco emergencias. ¿Quién necesita un gimnasio?''',
       'ach_126': '''Diez emergencias. El caos es tu cardio.''',
       'ach_127': '''Veinte emergencias. La FC en reposo ya no participa.''',
-      'ach_128': '''Cincuenta emergencias bajo presión. Prosperas cuando la lista se enciende.''',
-      'ach_129': '''Setenta y cinco llamadas de emergencia. La junta de trauma conoce tus pasos.''',
-      'ach_130': '''Cien emergencias. No impresionarse es una habilidad clínica.''',
-      'ach_131': '''Ciento cincuenta urgencias. Podrías hacer esto mientras duermes; por favor, no lo hagas.''',
-      'ach_132': '''Doscientas emergencias. El buscapersonas es el primero en estremecerse.''',
+      'ach_128':
+          '''Cincuenta emergencias bajo presión. Prosperas cuando la lista se enciende.''',
+      'ach_129':
+          '''Setenta y cinco llamadas de emergencia. La junta de trauma conoce tus pasos.''',
+      'ach_130':
+          '''Cien emergencias. No impresionarse es una habilidad clínica.''',
+      'ach_131':
+          '''Ciento cincuenta urgencias. Podrías hacer esto mientras duermes; por favor, no lo hagas.''',
+      'ach_132':
+          '''Doscientas emergencias. El buscapersonas es el primero en estremecerse.''',
       'ach_133': '''Cinco emergencias en un día. ¿Protocolo de luna llena?''',
-      'ach_134': '''Dos emergencias consecutivas. Reservado dos veces para actos heroicos.''',
-      'ach_135': '''Emergencia ASA V. Agarra la epi, di menos, empuja con cuidado.''',
-      'ach_136': '''Veinte casos de emergencia, PACU sin incidentes. Desastre sobre el papel; aburrido en la habitación.''',
-      'ach_137': '''Emergencia con regional realizado. Bloquea mientras la habitación entra en pánico. Enfoque máximo.''',
-      'ach_138': '''Se realizaron diez regionales de emergencia. Francotirador de la lista urgente.''',
-      'ach_139': '''Cirugía de urgencia ≤30 minutos. Entrar, arreglar, cerrar, salir: energía de parada.''',
-      'ach_140': '''Fibra óptica despierta de emergencia. Nervios de titanio.''',
-      'ach_141': '''Columna vertebral de emergencia. No te muevas. Tampoco debería hacerlo el tubo.''',
-      'ach_142': '''Emergencia cardiotorácica. Monitores grandes, sensaciones más grandes.''',
-      'ach_143': '''Obstetricia de emergencia. Dos pacientes, un plan de vía aérea, cero frío.''',
-      'ach_144': '''Neurocirugía de urgencia. Trate al cerebro como si pagara el alquiler.''',
-      'ach_145': '''Cincuenta emergencias. Cuando el tablero dice urgente, dices RSI.''',
-      'ach_146': '''Emergencia a partir de 00:00–04:00. Nada bueno empieza ahora, excepto manos competentes.''',
-      'ach_147': '''Emergencia el 25 de diciembre o el 1 de enero. Feliz Navidad: aquí hay una víscera rota.''',
-      'ach_148': '''Diez emergencias de fin de semana. Mantener el banco de sangre en funcionamiento.''',
-      'ach_149': '''Vía aérea difícil de urgencia. Los planes A-C fracasaron. Eres el Plan D.''',
-      'ach_150': '''ASA IV de emergencia con alta de PACU sin incidentes. Habitación en llamas; BP un ​​educado 120/80.''',
-      'ach_151': '''Emergencia menores de 18 años. Trae tu mejor trabajo y tu voz más tranquila.''',
-      'ach_152': '''Emergencia para mayores de 65 años. Trate como porcelana fina con un mejor seguimiento.''',
-      'ach_153': '''Final de emergencia de 08:00 a 08:30. Planes de cena: cancelados con honor.''',
+      'ach_134':
+          '''Dos emergencias consecutivas. Reservado dos veces para actos heroicos.''',
+      'ach_135':
+          '''Emergencia ASA V. Agarra la epi, di menos, empuja con cuidado.''',
+      'ach_136':
+          '''Veinte casos de emergencia, PACU sin incidentes. Desastre sobre el papel; aburrido en la habitación.''',
+      'ach_137':
+          '''Emergencia con regional realizado. Bloquea mientras la habitación entra en pánico. Enfoque máximo.''',
+      'ach_138':
+          '''Se realizaron diez regionales de emergencia. Francotirador de la lista urgente.''',
+      'ach_139':
+          '''Cirugía de urgencia ≤30 minutos. Entrar, arreglar, cerrar, salir: energía de parada.''',
+      'ach_140':
+          '''Fibra óptica despierta de emergencia. Nervios de titanio.''',
+      'ach_141':
+          '''Columna vertebral de emergencia. No te muevas. Tampoco debería hacerlo el tubo.''',
+      'ach_142':
+          '''Emergencia cardiotorácica. Monitores grandes, sensaciones más grandes.''',
+      'ach_143':
+          '''Obstetricia de emergencia. Dos pacientes, un plan de vía aérea, cero frío.''',
+      'ach_144':
+          '''Neurocirugía de urgencia. Trate al cerebro como si pagara el alquiler.''',
+      'ach_145':
+          '''Cincuenta emergencias. Cuando el tablero dice urgente, dices RSI.''',
+      'ach_146':
+          '''Emergencia a partir de 00:00–04:00. Nada bueno empieza ahora, excepto manos competentes.''',
+      'ach_147':
+          '''Emergencia el 25 de diciembre o el 1 de enero. Feliz Navidad: aquí hay una víscera rota.''',
+      'ach_148':
+          '''Diez emergencias de fin de semana. Mantener el banco de sangre en funcionamiento.''',
+      'ach_149':
+          '''Vía aérea difícil de urgencia. Los planes A-C fracasaron. Eres el Plan D.''',
+      'ach_150':
+          '''ASA IV de emergencia con alta de PACU sin incidentes. Habitación en llamas; BP un ​​educado 120/80.''',
+      'ach_151':
+          '''Emergencia menores de 18 años. Trae tu mejor trabajo y tu voz más tranquila.''',
+      'ach_152':
+          '''Emergencia para mayores de 65 años. Trate como porcelana fina con un mejor seguimiento.''',
+      'ach_153':
+          '''Final de emergencia de 08:00 a 08:30. Planes de cena: cancelados con honor.''',
       'ach_154': '''Tres emergencias en doce horas. Golpe médico al topo.''',
-      'ach_155': '''Diez altas de emergencia de la PACU sin incidentes. MTP es sólo otra receta.''',
-      'ach_156': '''Veinticinco casos de cirugía traumatológica de urgencia. Director de la orquesta de reanimación.''',
-      'ach_157': '''Veinte laparotomías de urgencia. Sepsis, presores y ese olor inconfundible.''',
-      'ach_158': '''Veinte casos de ortopedia de urgencia. Taladros, cemento y "BP por favor".''',
-      'ach_159': '''Veinte casos de urgencia obstétrica. Los de categoría y puro enfoque.''',
-      'ach_160': '''Diez neurocraneotomías de urgencia. Smooth BP es la única personalidad permitida.''',
-      'ach_161': '''Diez casos vasculares de urgencia. Se cierra con abrazaderas; calma en.''',
-      'ach_162': '''Trescientas emergencias. Caos solicitó la jubilación anticipada.''',
-      'ach_163': '''Diez casos de emergencia en especialidades únicas. Alcance bajo fuego.''',
-      'ach_164': '''Cinco emergencias en veinticuatro horas. 90% cafeína, 10% despecho.''',
-      'ach_165': '''Un caso de cirugía general. Pan y mantequilla: succión en espera.''',
-      'ach_166': '''Veinticinco casos de GS. Más intestino que un meme de lista de viernes.''',
-      'ach_167': '''Cien casos GS. Usted y el cirujano general tienen una relación MAC comprometida.''',
-      'ach_168': '''Un caso de orto. Bienvenido a taladros, tornillos y herramientas eléctricas como ruido blanco.''',
-      'ach_169': '''Veinticinco casos de orto. Orejas calibradas a la sierra.''',
-      'ach_170': '''Cien casos de orto. Tripulación esquelética, pero que sea anestésica.''',
-      'ach_171': '''Un caso de obstetricia. Pequeña logística humana con mucho en juego.''',
-      'ach_172': '''Veinticinco casos de observación. La sala de partos conoce tus pasos.''',
-      'ach_173': '''Cien casos de observación. Epidurales, de categoría y eternas "¿está plena?"''',
-      'ach_174': '''Veinticinco casos de ginecología. Trendelenburg y tenacidad.''',
-      'ach_175': '''Un caso de neurocirugía. Manéjelo con cuidado: el cerebro está observando.''',
-      'ach_176': '''Veinticinco casos neurológicos. La presión arterial suave es tu lenguaje de amor.''',
-      'ach_177': '''Cincuenta neurocasos. Territorio profundo. Se requieren manos firmes.''',
-      'ach_178': '''Un caso cardiotorácico. Monitores grandes, sensaciones más grandes.''',
-      'ach_179': '''Veinticinco casos de TC. Evitar la charla es ETCO₂ de fondo.''',
-      'ach_180': '''Cincuenta casos cardiotorácicos. La asistolia electiva sigue siendo una locura. Sigues siendo aburrido. Bien.''',
-      'ach_181': '''Veinticinco casos de otorrinolaringología. Vía aérea compartida: la caída definitiva de la confianza.''',
-      'ach_182': '''Veinticinco casos de urología. Enrojecimiento, concentración, silencio cortés.''',
-      'ach_183': '''Veinticinco cajas de plástico. Cosmesis para ellos; resistencia para ti.''',
-      'ach_184': '''Un caso de cirugía pediátrica. ETT pequeño, responsabilidad total.''',
-      'ach_185': '''Veinticinco casos de cirugía pediátrica. Hablas con fluidez el pánico de los padres.''',
-      'ach_186': '''Veinticinco casos de cirugía traumatológica. Cuando la junta dice politrauma, dices que está bien.''',
-      'ach_187': '''Veinticinco casos de oftalmología. La quietud es un deporte competitivo.''',
+      'ach_155':
+          '''Diez altas de emergencia de la PACU sin incidentes. MTP es sólo otra receta.''',
+      'ach_156':
+          '''Veinticinco casos de cirugía traumatológica de urgencia. Director de la orquesta de reanimación.''',
+      'ach_157':
+          '''Veinte laparotomías de urgencia. Sepsis, presores y ese olor inconfundible.''',
+      'ach_158':
+          '''Veinte casos de ortopedia de urgencia. Taladros, cemento y "BP por favor".''',
+      'ach_159':
+          '''Veinte casos de urgencia obstétrica. Los de categoría y puro enfoque.''',
+      'ach_160':
+          '''Diez neurocraneotomías de urgencia. Smooth BP es la única personalidad permitida.''',
+      'ach_161':
+          '''Diez casos vasculares de urgencia. Se cierra con abrazaderas; calma en.''',
+      'ach_162':
+          '''Trescientas emergencias. Caos solicitó la jubilación anticipada.''',
+      'ach_163':
+          '''Diez casos de emergencia en especialidades únicas. Alcance bajo fuego.''',
+      'ach_164':
+          '''Cinco emergencias en veinticuatro horas. 90% cafeína, 10% despecho.''',
+      'ach_165':
+          '''Un caso de cirugía general. Pan y mantequilla: succión en espera.''',
+      'ach_166':
+          '''Veinticinco casos de GS. Más intestino que un meme de lista de viernes.''',
+      'ach_167':
+          '''Cien casos GS. Usted y el cirujano general tienen una relación MAC comprometida.''',
+      'ach_168':
+          '''Un caso de orto. Bienvenido a taladros, tornillos y herramientas eléctricas como ruido blanco.''',
+      'ach_169':
+          '''Veinticinco casos de orto. Orejas calibradas a la sierra.''',
+      'ach_170':
+          '''Cien casos de orto. Tripulación esquelética, pero que sea anestésica.''',
+      'ach_171':
+          '''Un caso de obstetricia. Pequeña logística humana con mucho en juego.''',
+      'ach_172':
+          '''Veinticinco casos de observación. La sala de partos conoce tus pasos.''',
+      'ach_173':
+          '''Cien casos de observación. Epidurales, de categoría y eternas "¿está plena?"''',
+      'ach_174':
+          '''Veinticinco casos de ginecología. Trendelenburg y tenacidad.''',
+      'ach_175':
+          '''Un caso de neurocirugía. Manéjelo con cuidado: el cerebro está observando.''',
+      'ach_176':
+          '''Veinticinco casos neurológicos. La presión arterial suave es tu lenguaje de amor.''',
+      'ach_177':
+          '''Cincuenta neurocasos. Territorio profundo. Se requieren manos firmes.''',
+      'ach_178':
+          '''Un caso cardiotorácico. Monitores grandes, sensaciones más grandes.''',
+      'ach_179':
+          '''Veinticinco casos de TC. Evitar la charla es ETCO₂ de fondo.''',
+      'ach_180':
+          '''Cincuenta casos cardiotorácicos. La asistolia electiva sigue siendo una locura. Sigues siendo aburrido. Bien.''',
+      'ach_181':
+          '''Veinticinco casos de otorrinolaringología. Vía aérea compartida: la caída definitiva de la confianza.''',
+      'ach_182':
+          '''Veinticinco casos de urología. Enrojecimiento, concentración, silencio cortés.''',
+      'ach_183':
+          '''Veinticinco cajas de plástico. Cosmesis para ellos; resistencia para ti.''',
+      'ach_184':
+          '''Un caso de cirugía pediátrica. ETT pequeño, responsabilidad total.''',
+      'ach_185':
+          '''Veinticinco casos de cirugía pediátrica. Hablas con fluidez el pánico de los padres.''',
+      'ach_186':
+          '''Veinticinco casos de cirugía traumatológica. Cuando la junta dice politrauma, dices que está bien.''',
+      'ach_187':
+          '''Veinticinco casos de oftalmología. La quietud es un deporte competitivo.''',
       'ach_188': '''Un caso de columna. No te muevas. En realidad. No.''',
-      'ach_189': '''Veinticinco casos de columna. Prono, acolchado, filosóficamente alineado con la mesa.''',
-      'ach_190': '''Veinticinco casos de cabeza y cuello. Los bienes raíces de Airway tienen un precio superior.''',
-      'ach_191': '''Veinticinco casos de HPB. Operaciones largas, concentración más prolongada.''',
-      'ach_192': '''Veinticinco casos gastrointestinales superiores o colorrectales. El abdomen nunca se queda sin giros argumentales.''',
-      'ach_193': '''Diez casos endocrinos. Las hormonas escribieron el protocolo; lo haces cumplir.''',
-      'ach_194': '''Diez casos NORA/MRI/DSA. Sitio remoto, seguimiento creativo, piernas fuertes.''',
-      'ach_195': '''Diez casos de intervención del dolor. A veces la droga más amable es la local.''',
-      'ach_196': '''Cinco casos de la RMU. Teatro tranquilo, manos cuidadosas, salas esperanzadas.''',
-      'ach_197': '''Veinticinco casos de gineco-oncología. Patología pesada; manos firmes.''',
-      'ach_198': '''Veinticinco casos reconstructivos y de manos. Los milímetros importan más que el ego.''',
-      'ach_199': '''Diez casos de ortopedia pediátrica. Huesos en crecimiento, paciencia en crecimiento.''',
+      'ach_189':
+          '''Veinticinco casos de columna. Prono, acolchado, filosóficamente alineado con la mesa.''',
+      'ach_190':
+          '''Veinticinco casos de cabeza y cuello. Los bienes raíces de Airway tienen un precio superior.''',
+      'ach_191':
+          '''Veinticinco casos de HPB. Operaciones largas, concentración más prolongada.''',
+      'ach_192':
+          '''Veinticinco casos gastrointestinales superiores o colorrectales. El abdomen nunca se queda sin giros argumentales.''',
+      'ach_193':
+          '''Diez casos endocrinos. Las hormonas escribieron el protocolo; lo haces cumplir.''',
+      'ach_194':
+          '''Diez casos NORA/MRI/DSA. Sitio remoto, seguimiento creativo, piernas fuertes.''',
+      'ach_195':
+          '''Diez casos de intervención del dolor. A veces la droga más amable es la local.''',
+      'ach_196':
+          '''Cinco casos de la RMU. Teatro tranquilo, manos cuidadosas, salas esperanzadas.''',
+      'ach_197':
+          '''Veinticinco casos de gineco-oncología. Patología pesada; manos firmes.''',
+      'ach_198':
+          '''Veinticinco casos reconstructivos y de manos. Los milímetros importan más que el ego.''',
+      'ach_199':
+          '''Diez casos de ortopedia pediátrica. Huesos en crecimiento, paciencia en crecimiento.''',
       'ach_200': '''Cinco especialidades únicas. El alcance es flexible.''',
-      'ach_201': '''Diez especialidades únicas. Su cuaderno de bitácora tiene problemas de compromiso saludables.''',
-      'ach_202': '''Quince especialidades únicas. El GPS del cine te tiene en todas partes.''',
-      'ach_203': '''Veinticinco especialidades únicas. Da Vinci carecía de bomba TIVA. No lo haces.''',
-      'ach_204': '''Diez casos de especialidad \'Otros\'. Si no se ajusta a un menú desplegable, igualmente se ajusta a su libro.''',
-      'ach_205': '''Doscientos cincuenta casos de orto. Cinturón de título fabricado con cemento óseo.''',
-      'ach_206': '''Doscientos cincuenta casos de obstetricia o ginecología. Corona de parto, ligeramente manchada de sangre.''',
-      'ach_207': '''Cien casos neurológicos. El ICP es sólo otro número al que intimidas suavemente.''',
-      'ach_208': '''Cien casos de TC. Casos grandes, mayor resistencia, controles ACT interminables.''',
-      'ach_209': '''Cien casos de lomo. Tu propio lumbar ha archivado un Datix.''',
+      'ach_201':
+          '''Diez especialidades únicas. Su cuaderno de bitácora tiene problemas de compromiso saludables.''',
+      'ach_202':
+          '''Quince especialidades únicas. El GPS del cine te tiene en todas partes.''',
+      'ach_203':
+          '''Veinticinco especialidades únicas. Da Vinci carecía de bomba TIVA. No lo haces.''',
+      'ach_204':
+          '''Diez casos de especialidad 'Otros'. Si no se ajusta a un menú desplegable, igualmente se ajusta a su libro.''',
+      'ach_205':
+          '''Doscientos cincuenta casos de orto. Cinturón de título fabricado con cemento óseo.''',
+      'ach_206':
+          '''Doscientos cincuenta casos de obstetricia o ginecología. Corona de parto, ligeramente manchada de sangre.''',
+      'ach_207':
+          '''Cien casos neurológicos. El ICP es sólo otro número al que intimidas suavemente.''',
+      'ach_208':
+          '''Cien casos de TC. Casos grandes, mayor resistencia, controles ACT interminables.''',
+      'ach_209':
+          '''Cien casos de lomo. Tu propio lumbar ha archivado un Datix.''',
       'ach_210': '''Cien casos de urología. Maestro del riego suave.''',
-      'ach_211': '''Cien casos de otorrinolaringología. Zen de vía aérea compartida, ganado con esfuerzo.''',
-      'ach_212': '''Cien cajas de plástico. Estética o reconstructiva: la misma inducción constante.''',
-      'ach_213': '''Cien casos de cirugía pediátrica. Tubos pequeños, estado de leyenda grande.''',
-      'ach_214': '''Cien casos de oftalmología. Excelencia inmóvil, alma con cafeína.''',
-      'ach_215': '''Cincuenta casos colorrectales. Conoces una anastomosis como una forma de onda.''',
-      'ach_216': '''Cincuenta casos gastrointestinales superiores. Viajero frecuente desde la boca hasta el ligamento de Treitz.''',
-      'ach_217': '''Cincuenta casos de HPB. Operaciones largas; poca paciencia para la hipotensión misteriosa.''',
+      'ach_211':
+          '''Cien casos de otorrinolaringología. Zen de vía aérea compartida, ganado con esfuerzo.''',
+      'ach_212':
+          '''Cien cajas de plástico. Estética o reconstructiva: la misma inducción constante.''',
+      'ach_213':
+          '''Cien casos de cirugía pediátrica. Tubos pequeños, estado de leyenda grande.''',
+      'ach_214':
+          '''Cien casos de oftalmología. Excelencia inmóvil, alma con cafeína.''',
+      'ach_215':
+          '''Cincuenta casos colorrectales. Conoces una anastomosis como una forma de onda.''',
+      'ach_216':
+          '''Cincuenta casos gastrointestinales superiores. Viajero frecuente desde la boca hasta el ligamento de Treitz.''',
+      'ach_217':
+          '''Cincuenta casos de HPB. Operaciones largas; poca paciencia para la hipotensión misteriosa.''',
       'ach_218': '''Primera AG. Bienvenidos a la iglesia del vaporizador.''',
-      'ach_219': '''Cincuenta GA. Sevo es básicamente un rasgo de personalidad ahora.''',
+      'ach_219':
+          '''Cincuenta GA. Sevo es básicamente un rasgo de personalidad ahora.''',
       'ach_220': '''Doscientos GA. Puedes oler MAC desde el pasillo.''',
       'ach_221': '''Quinientos GA. Los diales saludan cuando entras.''',
       'ach_222': '''Primera TIVA. Propofol: la magia blanca original.''',
       'ach_223': '''Primer caso TIVA. Sin gasolina, toda clase.''',
-      'ach_224': '''Veinticinco TIVA. Objetivo controlado y emocionalmente estable.''',
-      'ach_225': '''Cincuenta TIVA. Las bombas zumban como un frigorífico satisfecho.''',
+      'ach_224':
+          '''Veinticinco TIVA. Objetivo controlado y emocionalmente estable.''',
+      'ach_225':
+          '''Cincuenta TIVA. Las bombas zumban como un frigorífico satisfecho.''',
       'ach_226': '''Cien TIVA. ¿Volátil quién?''',
-      'ach_227': '''Primer CSE. Lo mejor de ambos mundos, el doble de papeleo.''',
+      'ach_227':
+          '''Primer CSE. Lo mejor de ambos mundos, el doble de papeleo.''',
       'ach_228': '''Diez CSE. La pérdida de resistencia es tu cardio.''',
       'ach_229': '''Veinticinco CSE. Catéter y aguja en armonía.''',
       'ach_230': '''Primera primaria espinal. Brillo de LCR: el bueno.''',
       'ach_231': '''Cincuenta espinas. Gotear, soltar, bloquear.''',
-      'ach_232': '''Ciento cincuenta espinales. Podrías encontrar L3–4 en la oscuridad.''',
-      'ach_233': '''Primera primaria epidural. Cuelga la bolsa; mantener la fe.''',
-      'ach_234': '''Veinticinco epidurales. Espacio de mito, aguja de verdad.''',
+      'ach_232':
+          '''Ciento cincuenta espinales. Podrías encontrar L3–4 en la oscuridad.''',
+      'ach_233':
+          '''Primera primaria epidural. Cuelga la bolsa; mantener la fe.''',
+      'ach_234':
+          '''Veinticinco epidurales. Espacio de mito, aguja de verdad.''',
       'ach_235': '''Cincuenta epidurales. Delicadeza sobre fuerza. Siempre.''',
-      'ach_236': '''Primera sedación/MAC. Lo suficientemente consciente como para arrepentirse de la pequeña charla.''',
-      'ach_237': '''Veinticinco MAC. Suave como un cumplido controlado por el objetivo.''',
+      'ach_236':
+          '''Primera sedación/MAC. Lo suficientemente consciente como para arrepentirse de la pequeña charla.''',
+      'ach_237':
+          '''Veinticinco MAC. Suave como un cumplido controlado por el objetivo.''',
       'ach_238': '''Cincuenta MAC. Ellos duermen; charlas con el cirujano.''',
-      'ach_239': '''Primer caso exclusivamente local. Modo de espera: activado.''',
-      'ach_240': '''Veinte casos sólo locales. Heroísmo opcional; Presencia obligatoria.''',
-      'ach_241': '''Primer bloqueo de nervio periférico como primario. Twitch o shimmer: comprométete.''',
+      'ach_239':
+          '''Primer caso exclusivamente local. Modo de espera: activado.''',
+      'ach_240':
+          '''Veinte casos sólo locales. Heroísmo opcional; Presencia obligatoria.''',
+      'ach_241':
+          '''Primer bloqueo de nervio periférico como primario. Twitch o shimmer: comprométete.''',
       'ach_242': '''Veinticinco PNB. Nervios localizados; ego controlado.''',
       'ach_243': '''Primera caja de bomba TCI. El algoritmo es tu copiloto.''',
-      'ach_244': '''Veinticinco casos de TCI. Sueños de sitio de efecto, realidades plasmadas.''',
+      'ach_244':
+          '''Veinticinco casos de TCI. Sueños de sitio de efecto, realidades plasmadas.''',
       'ach_245': '''Cincuenta casos TCI. La bomba confía en ti. Extraño.''',
-      'ach_246': '''Siete o más técnicas primarias únicas. El rango es la flexión.''',
-      'ach_247': '''Espinal, epidural, CSE, PNB o local: paciente despierto, usted más agudo.''',
+      'ach_246':
+          '''Siete o más técnicas primarias únicas. El rango es la flexión.''',
+      'ach_247':
+          '''Espinal, epidural, CSE, PNB o local: paciente despierto, usted más agudo.''',
       'ach_248': '''Cien GA. Sueño profundo, excusas superficiales.''',
-      'ach_249': '''Doscientos cincuenta GA. Podrías enseñarle modales al vaporizador.''',
+      'ach_249':
+          '''Doscientos cincuenta GA. Podrías enseñarle modales al vaporizador.''',
       'ach_250': '''Quinientos GA. Energía legendaria de gasman/gaswoman.''',
-      'ach_251': '''Cien casos de tipo regional despierto. Agujas sobre boquillas.''',
-      'ach_252': '''Cien TIVA. Se confirma la membresía de la sociedad de línea blanca.''',
+      'ach_251':
+          '''Cien casos de tipo regional despierto. Agujas sobre boquillas.''',
+      'ach_252':
+          '''Cien TIVA. Se confirma la membresía de la sociedad de línea blanca.''',
       'ach_253': '''Trescientas espinas. Corona fabricada con introductores.''',
       'ach_254': '''Cien epidurales. Realeza en el espacio epidural.''',
-      'ach_255': '''Cien casos de MAC. Sedación tan suave que el cirujano olvida que está ahí.''',
-      'ach_256': '''Primer éxito de la ETT. Capnógrafo: el único aplauso que importa.''',
+      'ach_255':
+          '''Cien casos de MAC. Sedación tan suave que el cirujano olvida que está ahí.''',
+      'ach_256':
+          '''Primer éxito de la ETT. Capnógrafo: el único aplauso que importa.''',
       'ach_257': '''Diez ETT. Manos más firmes. El ego aún está supervisado.''',
-      'ach_258': '''Cincuenta ETT. El tubo está dentro; el almuerzo puede esperar.''',
+      'ach_258':
+          '''Cincuenta ETT. El tubo está dentro; el almuerzo puede esperar.''',
       'ach_259': '''Cien ETT. Usted y la tráquea se hablan.''',
-      'ach_260': '''Doscientos cincuenta ETT. Estilete opcional; No fanfarronear.''',
-      'ach_261': '''Quinientas intubaciones. Los cables se separan por cortesía profesional.''',
+      'ach_260':
+          '''Doscientos cincuenta ETT. Estilete opcional; No fanfarronear.''',
+      'ach_261':
+          '''Quinientas intubaciones. Los cables se separan por cortesía profesional.''',
       'ach_262': '''Primera LMA. Siéntalo como lo dices en serio.''',
-      'ach_263': '''Diez LMA. Gel, clásico o supremo: las cuestiones de compromiso son bienvenidas.''',
-      'ach_264': '''Cincuenta LMA. Se respeta el estado de ayuno; la mandíbula se respeta más.''',
+      'ach_263':
+          '''Diez LMA. Gel, clásico o supremo: las cuestiones de compromiso son bienvenidas.''',
+      'ach_264':
+          '''Cincuenta LMA. Se respeta el estado de ayuno; la mandíbula se respeta más.''',
       'ach_265': '''Cien LMA. La alternativa suave con opiniones fuertes.''',
-      'ach_266': '''Doscientos cincuenta LMA. Podrías colocar uno en mitad de la conversación.''',
-      'ach_267': '''Primer caso de uso exclusivo de mascarilla. A veces, menos tubo es más sabiduría.''',
-      'ach_268': '''Veinte casos de uso exclusivo de mascarillas. Ambubag cardio desbloqueado.''',
-      'ach_269': '''Primer soporte de traqueotomía. Cuando las habilidades blandas se encuentran con el plástico duro.''',
-      'ach_270': '''Cinco casos de traqueostomía. Deporte de equipo con reglas muy firmes.''',
-      'ach_271': '''Ventilación de primer chorro. Alta frecuencia, presión arterial más alta en la habitación.''',
-      'ach_272': '''Primera TRD. Dos lúmenes, una oración, colocación perfecta.''',
-      'ach_273': '''Veinte DLT. Izquierda, derecha y ocasionalmente "¿estamos seguros?"''',
-      'ach_274': '''Cincuenta DLT. La confirmación por fibra óptica es tu lenguaje de amor.''',
-      'ach_275': '''Primer bloqueador bronquial. Aislamiento sin el drama de una discusión DLT.''',
-      'ach_276': '''Diez bloqueadores bronquiales. Estacionamiento de precisión en el garaje de vías respiratorias.''',
-      'ach_277': '''LMA clásica veinte veces. Vieja escuela. Todavía funciona.''',
+      'ach_266':
+          '''Doscientos cincuenta LMA. Podrías colocar uno en mitad de la conversación.''',
+      'ach_267':
+          '''Primer caso de uso exclusivo de mascarilla. A veces, menos tubo es más sabiduría.''',
+      'ach_268':
+          '''Veinte casos de uso exclusivo de mascarillas. Ambubag cardio desbloqueado.''',
+      'ach_269':
+          '''Primer soporte de traqueotomía. Cuando las habilidades blandas se encuentran con el plástico duro.''',
+      'ach_270':
+          '''Cinco casos de traqueostomía. Deporte de equipo con reglas muy firmes.''',
+      'ach_271':
+          '''Ventilación de primer chorro. Alta frecuencia, presión arterial más alta en la habitación.''',
+      'ach_272':
+          '''Primera TRD. Dos lúmenes, una oración, colocación perfecta.''',
+      'ach_273':
+          '''Veinte DLT. Izquierda, derecha y ocasionalmente "¿estamos seguros?"''',
+      'ach_274':
+          '''Cincuenta DLT. La confirmación por fibra óptica es tu lenguaje de amor.''',
+      'ach_275':
+          '''Primer bloqueador bronquial. Aislamiento sin el drama de una discusión DLT.''',
+      'ach_276':
+          '''Diez bloqueadores bronquiales. Estacionamiento de precisión en el garaje de vías respiratorias.''',
+      'ach_277':
+          '''LMA clásica veinte veces. Vieja escuela. Todavía funciona.''',
       'ach_278': '''ProSeal veinte veces. Tubo de drenaje: el héroe anónimo.''',
-      'ach_279': '''i-gel veinte veces. Sin brazalete, no hay problema (normalmente).''',
-      'ach_280': '''LMA suprema veinte veces. El liderazgo es saber cuándo enmascarar.''',
+      'ach_279':
+          '''i-gel veinte veces. Sin brazalete, no hay problema (normalmente).''',
+      'ach_280':
+          '''LMA suprema veinte veces. El liderazgo es saber cuándo enmascarar.''',
       'ach_281': '''Ambu LMA diez veces. Desechable, no olvidable.''',
-      'ach_282': '''Flexible o Fastrach diez veces. Cuando la anatomía se vuelve creativa.''',
-      'ach_283': '''Primera intubación nasal. Suavemente, suavemente, a través de los cornetes.''',
+      'ach_282':
+          '''Flexible o Fastrach diez veces. Cuando la anatomía se vuelve creativa.''',
+      'ach_283':
+          '''Primera intubación nasal. Suavemente, suavemente, a través de los cornetes.''',
       'ach_284': '''Veinte intubaciones nasales. GPS para la nasofaringe.''',
-      'ach_285': '''Cincuenta intubaciones nasales. El vecino favorito de otorrinolaringólogo.''',
-      'ach_286': '''Intubación submental. Cuando la cara es el campo de batalla.''',
-      'ach_287': '''Primer videolaringoscopio. Netflix, pero que sea por cable.''',
-      'ach_288': '''VL diez veces. Tiempo frente a la pantalla que realmente ayuda a los pacientes.''',
+      'ach_285':
+          '''Cincuenta intubaciones nasales. El vecino favorito de otorrinolaringólogo.''',
+      'ach_286':
+          '''Intubación submental. Cuando la cara es el campo de batalla.''',
+      'ach_287':
+          '''Primer videolaringoscopio. Netflix, pero que sea por cable.''',
+      'ach_288':
+          '''VL diez veces. Tiempo frente a la pantalla que realmente ayuda a los pacientes.''',
       'ach_289': '''VL cincuenta veces. Espada, pantalla, éxito.''',
-      'ach_290': '''VL cien veces. La laringoscopia directa es para flashbacks.''',
-      'ach_291': '''Primera fibra óptica despierta. Paciente consciente; Eres hiperconsciente.''',
-      'ach_292': '''Cinco fibras ópticas despiertas. Nervios de titanio, actualidad de leyendas.''',
-      'ach_293': '''Quince fibras ópticas despiertas. El estándar de oro, perseguido con lidocaína.''',
-      'ach_294': '''Primera fibra óptica dormida. Primero el tubo, luego la arrogancia.''',
-      'ach_295': '''Diez fibras ópticas dormidas. Habilidades de alcance sin charlas de ánimo.''',
-      'ach_296': '''Veinticinco fibras ópticas en total. Amigo flexible, estándares rígidos.''',
-      'ach_297': '''Microcuff ETT diez veces. Tubo pequeño, responsabilidad de un adulto.''',
-      'ach_298': '''RAE o flexometálico veinte veces. La geometría es una habilidad clínica.''',
+      'ach_290':
+          '''VL cien veces. La laringoscopia directa es para flashbacks.''',
+      'ach_291':
+          '''Primera fibra óptica despierta. Paciente consciente; Eres hiperconsciente.''',
+      'ach_292':
+          '''Cinco fibras ópticas despiertas. Nervios de titanio, actualidad de leyendas.''',
+      'ach_293':
+          '''Quince fibras ópticas despiertas. El estándar de oro, perseguido con lidocaína.''',
+      'ach_294':
+          '''Primera fibra óptica dormida. Primero el tubo, luego la arrogancia.''',
+      'ach_295':
+          '''Diez fibras ópticas dormidas. Habilidades de alcance sin charlas de ánimo.''',
+      'ach_296':
+          '''Veinticinco fibras ópticas en total. Amigo flexible, estándares rígidos.''',
+      'ach_297':
+          '''Microcuff ETT diez veces. Tubo pequeño, responsabilidad de un adulto.''',
+      'ach_298':
+          '''RAE o flexometálico veinte veces. La geometría es una habilidad clínica.''',
       'ach_299': '''Primero Cormack-Lehane 3. La vista es una sugerencia.''',
-      'ach_300': '''Se lograron diez grados 3. Colección completa; frecuencia cardíaca opcional.''',
-      'ach_301': '''Primero Cormack-Lehane 4. Fe, bujía y buena iluminación en otros lugares.''',
-      'ach_302': '''Cinco grados 4 conquistados. Te has ganado la pegatina VL.''',
-      'ach_303': '''Primera vía aérea difícil señalizada. El plan A tenía un plan B. Sabio.''',
-      'ach_304': '''Cinco vías respiratorias difíciles. El aprendizaje se realizó bajo presión.''',
-      'ach_305': '''Diez vías respiratorias difíciles. El viaje continúa; los desats disminuyeron.''',
-      'ach_306': '''Veinticinco vías respiratorias difíciles. Modo experto: todavía humilde.''',
-      'ach_307': '''Cincuenta vías respiratorias difíciles. Silencioso, eficaz, ligeramente aterrador.''',
-      'ach_308': '''Vía aérea difícil en un solo intento. Energía de primer paso. El beso del chef.''',
-      'ach_309': '''Diez victorias en el primer intento de vía aérea difícil. Limpio como una patena, más afilado que uno.''',
-      'ach_310': '''Vía aérea difícil que necesita más de 3 intentos. Sobrevivió. Aprendió. Registrado.''',
-      'ach_311': '''Cincuenta LMA realizadas personalmente. Manos a la obra, no manos a la obra.''',
+      'ach_300':
+          '''Se lograron diez grados 3. Colección completa; frecuencia cardíaca opcional.''',
+      'ach_301':
+          '''Primero Cormack-Lehane 4. Fe, bujía y buena iluminación en otros lugares.''',
+      'ach_302':
+          '''Cinco grados 4 conquistados. Te has ganado la pegatina VL.''',
+      'ach_303':
+          '''Primera vía aérea difícil señalizada. El plan A tenía un plan B. Sabio.''',
+      'ach_304':
+          '''Cinco vías respiratorias difíciles. El aprendizaje se realizó bajo presión.''',
+      'ach_305':
+          '''Diez vías respiratorias difíciles. El viaje continúa; los desats disminuyeron.''',
+      'ach_306':
+          '''Veinticinco vías respiratorias difíciles. Modo experto: todavía humilde.''',
+      'ach_307':
+          '''Cincuenta vías respiratorias difíciles. Silencioso, eficaz, ligeramente aterrador.''',
+      'ach_308':
+          '''Vía aérea difícil en un solo intento. Energía de primer paso. El beso del chef.''',
+      'ach_309':
+          '''Diez victorias en el primer intento de vía aérea difícil. Limpio como una patena, más afilado que uno.''',
+      'ach_310':
+          '''Vía aérea difícil que necesita más de 3 intentos. Sobrevivió. Aprendió. Registrado.''',
+      'ach_311':
+          '''Cincuenta LMA realizadas personalmente. Manos a la obra, no manos a la obra.''',
       'ach_312': '''Se realizaron doscientas ETT. El tubo sabe tu nombre.''',
-      'ach_313': '''Cincuenta vías aéreas asistidas. El elenco de reparto sigue siendo crítico.''',
-      'ach_314': '''Se observaron cincuenta vías respiratorias. Observar es cómo comienzan las leyendas.''',
-      'ach_315': '''TET inferior a 4,0 en un recién nacido o lactante. Pequeño lumen, gran respeto.''',
-      'ach_316': '''Tamaño del TET ≥8,5. Gran energía de las vías respiratorias.''',
-      'ach_317': '''Los TET sin esposas se utilizan correctamente en pediatría. Viejas reglas, buen juicio.''',
-      'ach_318': '''Cien TET normales con esposas. Edición estándar, ejecución experta.''',
+      'ach_313':
+          '''Cincuenta vías aéreas asistidas. El elenco de reparto sigue siendo crítico.''',
+      'ach_314':
+          '''Se observaron cincuenta vías respiratorias. Observar es cómo comienzan las leyendas.''',
+      'ach_315':
+          '''TET inferior a 4,0 en un recién nacido o lactante. Pequeño lumen, gran respeto.''',
+      'ach_316':
+          '''Tamaño del TET ≥8,5. Gran energía de las vías respiratorias.''',
+      'ach_317':
+          '''Los TET sin esposas se utilizan correctamente en pediatría. Viejas reglas, buen juicio.''',
+      'ach_318':
+          '''Cien TET normales con esposas. Edición estándar, ejecución experta.''',
       'ach_319': '''Doscientas vistas de grado 1. Claro. No seas arrogante.''',
-      'ach_320': '''Cincuenta grados 2a/2b. Casi perfecto, todavía cuenta como habilidad.''',
-      'ach_321': '''Se realizaron diez fibras ópticas despiertos. Tópico, charla, tubo.''',
-      'ach_322': '''Se realizaron veinte fibras ópticas dormidas. Alcance mientras duermen; no lo haces.''',
-      'ach_323': '''Manejo urgente de vía aérea difícil. Cuando la habitación se queda en silencio, no lo haces.''',
-      'ach_324': '''Detalles de las vías respiratorias registrados en quinientos casos. Los datos son una especie de sabiduría.''',
-      'ach_325': '''Cada herramienta y modalidad tocada. El armamento completo. Respeto.''',
+      'ach_320':
+          '''Cincuenta grados 2a/2b. Casi perfecto, todavía cuenta como habilidad.''',
+      'ach_321':
+          '''Se realizaron diez fibras ópticas despiertos. Tópico, charla, tubo.''',
+      'ach_322':
+          '''Se realizaron veinte fibras ópticas dormidas. Alcance mientras duermen; no lo haces.''',
+      'ach_323':
+          '''Manejo urgente de vía aérea difícil. Cuando la habitación se queda en silencio, no lo haces.''',
+      'ach_324':
+          '''Detalles de las vías respiratorias registrados en quinientos casos. Los datos son una especie de sabiduría.''',
+      'ach_325':
+          '''Cada herramienta y modalidad tocada. El armamento completo. Respeto.''',
       'ach_326': '''Primera columna realizada. Brillo de LCR: el bueno.''',
       'ach_327': '''Diez espinas. Gotear, soltar, bloquear.''',
       'ach_328': '''Cincuenta espinas. L3–4 es el hogar.''',
       'ach_329': '''Cien espinas. Subaracnoideo es su código postal.''',
       'ach_330': '''Doscientas cincuenta espinales. Costura de élite.''',
       'ach_331': '''Primera epidural. Cuelga la bolsa; mantener la fe.''',
-      'ach_332': '''Veinticinco epidurales. La pérdida de resistencia es cardio.''',
-      'ach_333': '''Cincuenta epidurales con delicadeza. La fuerza es para aficionados.''',
+      'ach_332':
+          '''Veinticinco epidurales. La pérdida de resistencia es cardio.''',
+      'ach_333':
+          '''Cincuenta epidurales con delicadeza. La fuerza es para aficionados.''',
       'ach_334': '''Cien epidurales. Espacio encontrado, ego aparcado.''',
-      'ach_335': '''Primer bloqueo de nervio periférico. Contracción o brillo: elige un lado.''',
+      'ach_335':
+          '''Primer bloqueo de nervio periférico. Contracción o brillo: elige un lado.''',
       'ach_336': '''Diez PNB. Nervios localizados; café ganado.''',
-      'ach_337': '''Veinticinco PNB. El gel de ultrasonido es un grupo de alimentos.''',
+      'ach_337':
+          '''Veinticinco PNB. El gel de ultrasonido es un grupo de alimentos.''',
       'ach_338': '''Cincuenta PNB. Modo jefe: todavía marca la piel.''',
       'ach_339': '''Cien PNB. Experto significa que aún respetas la fascia.''',
-      'ach_340': '''Doscientos PNB. El dominio es un éxito silencioso y repetible.''',
-      'ach_341': '''Primera regional guiada por el Gobierno de los Estados Unidos. Aparece el nervio; también lo hace la confianza.''',
-      'ach_342': '''Orientación del USG veinticinco veces. Desbloqueo de habilidades de sonda.''',
-      'ach_343': '''USG cincuenta veces. Aguja brillante; mente más brillante.''',
+      'ach_340':
+          '''Doscientos PNB. El dominio es un éxito silencioso y repetible.''',
+      'ach_341':
+          '''Primera regional guiada por el Gobierno de los Estados Unidos. Aparece el nervio; también lo hace la confianza.''',
+      'ach_342':
+          '''Orientación del USG veinticinco veces. Desbloqueo de habilidades de sonda.''',
+      'ach_343':
+          '''USG cincuenta veces. Aguja brillante; mente más brillante.''',
       'ach_344': '''USG cien veces. Ves lo que otros palpan.''',
       'ach_345': '''USG doscientas cincuenta veces. Leyenda manchada de gel.''',
-      'ach_346': '''Se utiliza estimulador de nervios. Contracción de la vieja escuela, respeto de la nueva escuela.''',
-      'ach_347': '''Estimulador veinticinco veces. Miliamperios y memoria muscular.''',
-      'ach_348': '''Primer catéter regional. Infusión continua, virtud continua.''',
+      'ach_346':
+          '''Se utiliza estimulador de nervios. Contracción de la vieja escuela, respeto de la nueva escuela.''',
+      'ach_347':
+          '''Estimulador veinticinco veces. Miliamperios y memoria muscular.''',
+      'ach_348':
+          '''Primer catéter regional. Infusión continua, virtud continua.''',
       'ach_349': '''Diez catéteres de bloque. Campeón del tubo tunelizado.''',
       'ach_350': '''Veinticinco catéteres. Dolor con una correa.''',
-      'ach_351': '''Registro interescalénico, supra o axilar. Miembro superior, habilidad superior.''',
-      'ach_352': '''Veinte bloqueos del plexo braquial. Brazos abajo; estándares arriba.''',
-      'ach_353': '''Dominado femoral, ciático o poplíteo. Día de piernas, edición clínica.''',
-      'ach_354': '''Veinte bloques de miembros inferiores. Sáltate el gimnasio; hacer el bloque.''',
+      'ach_351':
+          '''Registro interescalénico, supra o axilar. Miembro superior, habilidad superior.''',
+      'ach_352':
+          '''Veinte bloqueos del plexo braquial. Brazos abajo; estándares arriba.''',
+      'ach_353':
+          '''Dominado femoral, ciático o poplíteo. Día de piernas, edición clínica.''',
+      'ach_354':
+          '''Veinte bloques de miembros inferiores. Sáltate el gimnasio; hacer el bloque.''',
       'ach_355': '''TAP, recto, QL o ESP. Fuerza central, edición con aguja.''',
-      'ach_356': '''Veinte bloqueos tronco/abdominales. Tratados de paz de línea media.''',
-      'ach_357': '''PECS o serrato. Pared torácica, protocolo de enfriamiento.''',
-      'ach_358': '''Diez paravertebrales. Cerca de la columna vertebral, más cerca de la experiencia.''',
-      'ach_359': '''Bloqueo del plexo cervical o del cuero cabelludo. Por encima de los hombros, por encima de la media.''',
+      'ach_356':
+          '''Veinte bloqueos tronco/abdominales. Tratados de paz de línea media.''',
+      'ach_357':
+          '''PECS o serrato. Pared torácica, protocolo de enfriamiento.''',
+      'ach_358':
+          '''Diez paravertebrales. Cerca de la columna vertebral, más cerca de la experiencia.''',
+      'ach_359':
+          '''Bloqueo del plexo cervical o del cuero cabelludo. Por encima de los hombros, por encima de la media.''',
       'ach_360': '''Diez caudales. Espaldas pequeñas, gran relieve.''',
-      'ach_361': '''Diez bloqueos de tobillo. El mejor amigo de la cirugía del pie.''',
+      'ach_361':
+          '''Diez bloqueos de tobillo. El mejor amigo de la cirugía del pie.''',
       'ach_362': '''Bloque féretro (IVRA). Técnica vintage, todavía acierta.''',
-      'ach_363': '''Cinco bloqueos del plexo lumbar o sacro. Bloqueos profundos, calma más profunda.''',
-      'ach_364': '''Diez tipos de bloques regionales diferentes. Tengo que pegarlos a todos.''',
-      'ach_365': '''Veinte tipos de bloques diferentes. Sumiller de anestesia local.''',
+      'ach_363':
+          '''Cinco bloqueos del plexo lumbar o sacro. Bloqueos profundos, calma más profunda.''',
+      'ach_364':
+          '''Diez tipos de bloques regionales diferentes. Tengo que pegarlos a todos.''',
+      'ach_365':
+          '''Veinte tipos de bloques diferentes. Sumiller de anestesia local.''',
       'ach_366': '''Quince interescalenos. Frénico opcional; habilidad no.''',
-      'ach_367': '''Veinticinco supraclaviculares. Realeza de bolsillo de esquina.''',
-      'ach_368': '''Quince infraclaviculares. Debajo de la clavícula, sobre el estandarte.''',
-      'ach_369': '''Quince bloques axilares. Camino clásico, resultados modernos.''',
+      'ach_367':
+          '''Veinticinco supraclaviculares. Realeza de bolsillo de esquina.''',
+      'ach_368':
+          '''Quince infraclaviculares. Debajo de la clavícula, sobre el estandarte.''',
+      'ach_369':
+          '''Quince bloques axilares. Camino clásico, resultados modernos.''',
       'ach_370': '''Veinte femorales. Muslo anterior, atención total.''',
-      'ach_371': '''Veinte canales de aductores. Protege el motor y salva la reputación.''',
+      'ach_371':
+          '''Veinte canales de aductores. Protege el motor y salva la reputación.''',
       'ach_372': '''Veinte ciáticos. Mucho valor, mayor respeto.''',
-      'ach_373': '''Quince ciáticos poplíteos. Detrás de la rodilla, delante del dolor.''',
+      'ach_373':
+          '''Quince ciáticos poplíteos. Detrás de la rodilla, delante del dolor.''',
       'ach_374': '''Treinta TAP. Avión encontrado, abdomen calmado.''',
       'ach_375': '''Quince vainas de rectos. Modales de línea media.''',
       'ach_376': '''Quince QL. Profundo, lateral, efectivo.''',
-      'ach_377': '''Quince ESP. Avión navegando a lo largo de la columna vertebral.''',
+      'ach_377':
+          '''Quince ESP. Avión navegando a lo largo de la columna vertebral.''',
       'ach_378': '''Quince PECS I/II. Diplomacia de la pared torácica.''',
-      'ach_379': '''Diez bloques de serrato anterior. Pecho lateral, pensamiento lateral.''',
-      'ach_380': '''Diez bloqueos del plexo cervical. Trabajo de cuello, manos cuidadosas.''',
-      'ach_381': '''Diez bloqueos del cuero cabelludo. Paquete de confort craneal.''',
-      'ach_382': '''Veinticinco caudales pediátricos. Pequeño espacio, gran diferencia.''',
+      'ach_379':
+          '''Diez bloques de serrato anterior. Pecho lateral, pensamiento lateral.''',
+      'ach_380':
+          '''Diez bloqueos del plexo cervical. Trabajo de cuello, manos cuidadosas.''',
+      'ach_381':
+          '''Diez bloqueos del cuero cabelludo. Paquete de confort craneal.''',
+      'ach_382':
+          '''Veinticinco caudales pediátricos. Pequeño espacio, gran diferencia.''',
       'ach_383': '''Cinco IVRA. Torniquete arriba; nostalgia activada.''',
-      'ach_384': '''Dos regionales diferentes en un mismo caso. Técnica mixta, edición clínica.''',
-      'ach_385': '''Quinientos regionales en total. Estado de deidad, todavía se lava las manos.''',
-      'ach_386': '''Primera línea arterial. Forma de onda: la única señal de alerta que te gusta.''',
+      'ach_384':
+          '''Dos regionales diferentes en un mismo caso. Técnica mixta, edición clínica.''',
+      'ach_385':
+          '''Quinientos regionales en total. Estado de deidad, todavía se lava las manos.''',
+      'ach_386':
+          '''Primera línea arterial. Forma de onda: la única señal de alerta que te gusta.''',
       'ach_387': '''Diez líneas de arte. Agente inmobiliario radial.''',
-      'ach_388': '''Veinticinco líneas de arte. Las huellas humedecidas le ofenden personalmente.''',
+      'ach_388':
+          '''Veinticinco líneas de arte. Las huellas humedecidas le ofenden personalmente.''',
       'ach_389': '''Cincuenta líneas de arte. As de espadas, as de arterias.''',
-      'ach_390': '''Cien líneas de arte. Maestro de los continuos chismes de BP.''',
+      'ach_390':
+          '''Cien líneas de arte. Maestro de los continuos chismes de BP.''',
       'ach_391': '''Primer CVC. Línea central, importancia central.''',
       'ach_392': '''Cinco CVC. Alambre, dilatador, humildad.''',
       'ach_393': '''Quince CVC. IJ o subclavia: ahora tienes preferencias.''',
       'ach_394': '''Veinticinco CVC. Comanda el lumen.''',
       'ach_395': '''Cincuenta CVC. El acceso central es un estilo de vida.''',
-      'ach_396': '''USG para CVC o línea artística. Los ojos puestos en el premio, no en el mito histórico.''',
-      'ach_397': '''USG vascular veinticinco veces. Indague hacia arriba, complicaciones hacia abajo.''',
-      'ach_398': '''USG vascular setenta y cinco veces. Las paredes del vaso temen su sonda.''',
-      'ach_399': '''Primer BIS/Entropía. Porque "parece dormido" no es un número.''',
-      'ach_400': '''BIS/Entropía veinticinco veces. Cargas de profundidad para la conciencia.''',
+      'ach_396':
+          '''USG para CVC o línea artística. Los ojos puestos en el premio, no en el mito histórico.''',
+      'ach_397':
+          '''USG vascular veinticinco veces. Indague hacia arriba, complicaciones hacia abajo.''',
+      'ach_398':
+          '''USG vascular setenta y cinco veces. Las paredes del vaso temen su sonda.''',
+      'ach_399':
+          '''Primer BIS/Entropía. Porque "parece dormido" no es un número.''',
+      'ach_400':
+          '''BIS/Entropía veinticinco veces. Cargas de profundidad para la conciencia.''',
       'ach_401': '''BIS/Entropía cincuenta veces. Números sobre vibraciones.''',
       'ach_402': '''BIS/Entropía cien veces. Gorila cortical.''',
       'ach_403': '''NIRS diez veces. Brain O₂: ahora en tendencia.''',
-      'ach_404': '''Masimo SedLine diez veces. Ondas elegantes para casos elegantes.''',
-      'ach_405': '''Catéter ETE o PA cinco veces. Secretos del corazón, decodificados.''',
+      'ach_404':
+          '''Masimo SedLine diez veces. Ondas elegantes para casos elegantes.''',
+      'ach_405':
+          '''Catéter ETE o PA cinco veces. Secretos del corazón, decodificados.''',
       'ach_406': '''PiCCO cinco veces. El flujo importa. Lo mides.''',
-      'ach_407': '''Drenaje subaracnoideo lumbar cinco veces. Manejo del LCR, nivel avanzado.''',
-      'ach_408': '''Tres monitores invasivos a la vez. Tablero completamente iluminado.''',
-      'ach_409': '''Cuatro o más monitores invasivos. Control de misión, edición OR.''',
-      'ach_410': '''Se utilizan cinco tipos diferentes de línea/monitor. Tengo que canularlos a todos.''',
-      'ach_411': '''Cincuenta líneas de arte realizadas. Comerciante práctico de formas de onda.''',
+      'ach_407':
+          '''Drenaje subaracnoideo lumbar cinco veces. Manejo del LCR, nivel avanzado.''',
+      'ach_408':
+          '''Tres monitores invasivos a la vez. Tablero completamente iluminado.''',
+      'ach_409':
+          '''Cuatro o más monitores invasivos. Control de misión, edición OR.''',
+      'ach_410':
+          '''Se utilizan cinco tipos diferentes de línea/monitor. Tengo que canularlos a todos.''',
+      'ach_411':
+          '''Cincuenta líneas de arte realizadas. Comerciante práctico de formas de onda.''',
       'ach_412': '''Se realizaron treinta CVC. Susurrador de cables.''',
-      'ach_413': '''Veinte líneas de arte asistieron. Apoyando al equipo rojo.''',
-      'ach_414': '''Veinte CVC asistieron. Segundo par de manos, ayuda de primera.''',
-      'ach_415': '''BIS/Entropía de forma independiente cincuenta veces. Sin ruedas de entrenamiento.''',
-      'ach_416': '''SedLine de forma independiente veinte veces. Vigilancia cerebral en solitario.''',
-      'ach_417': '''TCI de forma independiente cincuenta veces. Bomba y circunstancia.''',
-      'ach_418': '''NIRS de forma independiente veinte veces. Vuelo cerebral en solitario.''',
-      'ach_419': '''PiCCO de forma independiente diez veces. Salida sin acompañante.''',
-      'ach_420': '''ETE observado diez veces en cardíaco. Ver el corazón trabajar horas extras.''',
-      'ach_421': '''Catéter PA observado diez veces. Siga flotando, observador.''',
+      'ach_413':
+          '''Veinte líneas de arte asistieron. Apoyando al equipo rojo.''',
+      'ach_414':
+          '''Veinte CVC asistieron. Segundo par de manos, ayuda de primera.''',
+      'ach_415':
+          '''BIS/Entropía de forma independiente cincuenta veces. Sin ruedas de entrenamiento.''',
+      'ach_416':
+          '''SedLine de forma independiente veinte veces. Vigilancia cerebral en solitario.''',
+      'ach_417':
+          '''TCI de forma independiente cincuenta veces. Bomba y circunstancia.''',
+      'ach_418':
+          '''NIRS de forma independiente veinte veces. Vuelo cerebral en solitario.''',
+      'ach_419':
+          '''PiCCO de forma independiente diez veces. Salida sin acompañante.''',
+      'ach_420':
+          '''ETE observado diez veces en cardíaco. Ver el corazón trabajar horas extras.''',
+      'ach_421':
+          '''Catéter PA observado diez veces. Siga flotando, observador.''',
       'ach_422': '''Se lograron diez drenajes lumbares. Política de presión.''',
-      'ach_423': '''Cien casos con seguimiento de líneas de arte. Experto en la argumentación continua de BP.''',
-      'ach_424': '''Cincuenta casos con acceso central. Veterano del alambre.''',
-      'ach_425': '''Todas las opciones de monitorización invasiva se tocaron. Espacio libre completo en cabina.''',
-      'ach_426': '''Primer neonato (<28 días). Pequeño humano, protocolo completo.''',
-      'ach_427': '''Cinco neonatos. Regular en la sala más pequeña con las apuestas más grandes.''',
-      'ach_428': '''Quince recién nacidos lograron sobrevivir de forma segura. Guardián del microcircuito.''',
-      'ach_429': '''Primer bebé (29 días-1 año). Creciendo rápidamente; su precaución más rápido.''',
-      'ach_430': '''Veinte bebés. Especialista en tubos diminutos y ojos grandes.''',
-      'ach_431': '''Veinte niños pequeños. Premedicamento opcional; paciencia obligatoria.''',
-      'ach_432': '''Cincuenta casos de bebés o niños pequeños. Profesional en prevención de distracciones y desaturaciones.''',
-      'ach_433': '''Veinticinco niños (3-12). Las pegatinas siguen siendo una droga válida.''',
-      'ach_434': '''Veinte adolescentes (12-18). Casi adultos, todavía no filósofos sin fines de lucro.''',
-      'ach_435': '''Primeros ancianos (≥65 años). Cuidado estándar de oro para los años dorados.''',
-      'ach_436': '''Veinticinco casos de ancianos. Guardián contra las sorpresas de la polifarmacia.''',
-      'ach_437': '''Cincuenta casos de ancianos. Protege el MAP como si fuera una familia.''',
-      'ach_438': '''Cien casos de ancianos. Especialista en inducción suave y juicio agudo.''',
-      'ach_439': '''Paciente ≥80. Trátelo como porcelana fina con mejor acceso arterial.''',
-      'ach_440': '''Diez pacientes ≥80. Membresía del club: se requiere respeto.''',
-      'ach_441': '''Paciente ≥100. Raro como un verdadero ASA I de cuarenta años.''',
+      'ach_423':
+          '''Cien casos con seguimiento de líneas de arte. Experto en la argumentación continua de BP.''',
+      'ach_424':
+          '''Cincuenta casos con acceso central. Veterano del alambre.''',
+      'ach_425':
+          '''Todas las opciones de monitorización invasiva se tocaron. Espacio libre completo en cabina.''',
+      'ach_426':
+          '''Primer neonato (<28 días). Pequeño humano, protocolo completo.''',
+      'ach_427':
+          '''Cinco neonatos. Regular en la sala más pequeña con las apuestas más grandes.''',
+      'ach_428':
+          '''Quince recién nacidos lograron sobrevivir de forma segura. Guardián del microcircuito.''',
+      'ach_429':
+          '''Primer bebé (29 días-1 año). Creciendo rápidamente; su precaución más rápido.''',
+      'ach_430':
+          '''Veinte bebés. Especialista en tubos diminutos y ojos grandes.''',
+      'ach_431':
+          '''Veinte niños pequeños. Premedicamento opcional; paciencia obligatoria.''',
+      'ach_432':
+          '''Cincuenta casos de bebés o niños pequeños. Profesional en prevención de distracciones y desaturaciones.''',
+      'ach_433':
+          '''Veinticinco niños (3-12). Las pegatinas siguen siendo una droga válida.''',
+      'ach_434':
+          '''Veinte adolescentes (12-18). Casi adultos, todavía no filósofos sin fines de lucro.''',
+      'ach_435':
+          '''Primeros ancianos (≥65 años). Cuidado estándar de oro para los años dorados.''',
+      'ach_436':
+          '''Veinticinco casos de ancianos. Guardián contra las sorpresas de la polifarmacia.''',
+      'ach_437':
+          '''Cincuenta casos de ancianos. Protege el MAP como si fuera una familia.''',
+      'ach_438':
+          '''Cien casos de ancianos. Especialista en inducción suave y juicio agudo.''',
+      'ach_439':
+          '''Paciente ≥80. Trátelo como porcelana fina con mejor acceso arterial.''',
+      'ach_440':
+          '''Diez pacientes ≥80. Membresía del club: se requiere respeto.''',
+      'ach_441':
+          '''Paciente ≥100. Raro como un verdadero ASA I de cuarenta años.''',
       'ach_442': '''IMC 30–34,9. El posicionamiento es un deporte de equipo.''',
-      'ach_443': '''Diez casos de obesidad clase I. Regular en la lista incrementada.''',
-      'ach_444': '''Veinte clase II (IMC 35–39,9). Especialista en aerovías y aritmética.''',
-      'ach_445': '''Primer IMC ≥40. Plan A, B y una preoxigenación más larga.''',
+      'ach_443':
+          '''Diez casos de obesidad clase I. Regular en la lista incrementada.''',
+      'ach_444':
+          '''Veinte clase II (IMC 35–39,9). Especialista en aerovías y aritmética.''',
+      'ach_445':
+          '''Primer IMC ≥40. Plan A, B y una preoxigenación más larga.''',
       'ach_446': '''Diez IMC ≥40. Los superlativos se ganaron por las malas.''',
       'ach_447': '''IMC <18,5. Cuerpo ligero, mucha atención a las dosis.''',
       'ach_448': '''Adulto menor de 40 kg. Peso pluma, protocolo completo.''',
-      'ach_449': '''Más de 100 kg. Pelea de peso pesado; Estás en la esquina con el VL.''',
-      'ach_450': '''Más de 130 kilos. Rondas de campeonato. Se recomienda rampa.''',
-      'ach_451': '''Se registraron todos los grupos de edad. Desde recién nacidos hasta ancianos: todo un arcoíris.''',
-      'ach_452': '''Cada banda de IMC registrada. La lista de reproducción antropométrica completa.''',
-      'ach_453': '''Cincuenta casos pediátricos menores de 12 años. Totalmente en serio con los niños.''',
-      'ach_454': '''Doscientos cincuenta casos de ancianos. El liderazgo es un MAP estable.''',
+      'ach_449':
+          '''Más de 100 kg. Pelea de peso pesado; Estás en la esquina con el VL.''',
+      'ach_450':
+          '''Más de 130 kilos. Rondas de campeonato. Se recomienda rampa.''',
+      'ach_451':
+          '''Se registraron todos los grupos de edad. Desde recién nacidos hasta ancianos: todo un arcoíris.''',
+      'ach_452':
+          '''Cada banda de IMC registrada. La lista de reproducción antropométrica completa.''',
+      'ach_453':
+          '''Cincuenta casos pediátricos menores de 12 años. Totalmente en serio con los niños.''',
+      'ach_454':
+          '''Doscientos cincuenta casos de ancianos. El liderazgo es un MAP estable.''',
       'ach_455': '''Cincuenta IMC ≥30 casos. Campeón de la rampa y del plan.''',
-      'ach_456': '''Quince casos de bajo peso. Experto en menos masa, más cuidado.''',
-      'ach_457': '''Se registraron tanto neonatos como centenarios. La edad es sólo un número preoperatorio.''',
-      'ach_458': '''Bajo peso y súper obesidad en la misma semana. Día de campo en el gimnasio de antropometría.''',
-      'ach_459': '''Vía aérea difícil en neonatos o lactantes manejados. As de la vía aérea pequeña.''',
-      'ach_460': '''Vía aérea difícil superior a 80 gestionada. Ace con respeto por los dientes frágiles y el cuello rígido.''',
-      'ach_461': '''Primero, ninguno/sin incidentes. Aburrirse es el mayor cumplido.''',
-      'ach_462': '''Diez consecutivos sin incidentes. Manos seguras; superstición en aumento.''',
-      'ach_463': '''Veinticinco consecutivos sin incidentes. No digas la palabra Q.''',
-      'ach_464': '''Cien sin incidentes en total. La seguridad es una racha y un sistema.''',
-      'ach_465': '''Doscientos cincuenta sin incidentes. A prueba de balas es una metáfora. Principalmente.''',
-      'ach_466': '''Anestesia dentro de los diez minutos posteriores al tiempo de la cirugía. Emergencia como arte cronometrado.''',
-      'ach_467': '''Despertar rápido cincuenta veces. Eficiencia sin tomar atajos ni cables.''',
+      'ach_456':
+          '''Quince casos de bajo peso. Experto en menos masa, más cuidado.''',
+      'ach_457':
+          '''Se registraron tanto neonatos como centenarios. La edad es sólo un número preoperatorio.''',
+      'ach_458':
+          '''Bajo peso y súper obesidad en la misma semana. Día de campo en el gimnasio de antropometría.''',
+      'ach_459':
+          '''Vía aérea difícil en neonatos o lactantes manejados. As de la vía aérea pequeña.''',
+      'ach_460':
+          '''Vía aérea difícil superior a 80 gestionada. Ace con respeto por los dientes frágiles y el cuello rígido.''',
+      'ach_461':
+          '''Primero, ninguno/sin incidentes. Aburrirse es el mayor cumplido.''',
+      'ach_462':
+          '''Diez consecutivos sin incidentes. Manos seguras; superstición en aumento.''',
+      'ach_463':
+          '''Veinticinco consecutivos sin incidentes. No digas la palabra Q.''',
+      'ach_464':
+          '''Cien sin incidentes en total. La seguridad es una racha y un sistema.''',
+      'ach_465':
+          '''Doscientos cincuenta sin incidentes. A prueba de balas es una metáfora. Principalmente.''',
+      'ach_466':
+          '''Anestesia dentro de los diez minutos posteriores al tiempo de la cirugía. Emergencia como arte cronometrado.''',
+      'ach_467':
+          '''Despertar rápido cincuenta veces. Eficiencia sin tomar atajos ni cables.''',
       'ach_468': '''PONV gestionado. Ondansetrón es un lenguaje de amor.''',
-      'ach_469': '''Se controló la hipotensión intraoperatoria. Fluidos, presores, compostura.''',
-      'ach_470': '''Se maneja broncoespasmo o laringoespasmo. Pecho apretado; cabeza clara.''',
-      'ach_471': '''Desaturación gestionada. FiO₂ arriba, voz abajo, problema resuelto.''',
-      'ach_472': '''Cien altas de PACU sin incidentes. Recuperación: la tranquila vuelta de la victoria.''',
-      'ach_473': '''Perfil completo. +10 puntos y un raro golpe de dopamina administrativa.''',
-      'ach_474': '''PDF de estadísticas exportado. Números: finalmente útiles fuera del examen.''',
-      'ach_475': '''Primer caso o cuaderno de bitácora en PDF. El hospital sin papel puede mirar hacia otro lado por un segundo.''',
-      'ach_476': '''Diez exportaciones de PDF. El futuro tú en la tasación te debe un café al presente.''',
-      'ach_477': '''Primera copia de seguridad JSON. La paranoia es simplemente una buena evaluación preoperatoria.''',
-      'ach_478': '''Cinco copias de seguridad JSON. Redundancia: el único plan verdadero de ASA I.''',
-      'ach_479': '''Cien puntos. La aplicación te está calificando como un viva.''',
-      'ach_480': '''Mil puntos. Energía del personaje principal, todavía graduada en las vías respiratorias.''',
-      'ach_481': '''Cinco mil puntos. Aspecto de prestigio no incluido, solo gloria.''',
-      'ach_482': '''Diez mil puntos. Se nos acabaron los adjetivos sobrios y el anestésico volátil.''',
-      'ach_483': '''Primer caso odontológico/maxilofacial. Boca abierta, plan de vía aérea más fuerte.''',
+      'ach_469':
+          '''Se controló la hipotensión intraoperatoria. Fluidos, presores, compostura.''',
+      'ach_470':
+          '''Se maneja broncoespasmo o laringoespasmo. Pecho apretado; cabeza clara.''',
+      'ach_471':
+          '''Desaturación gestionada. FiO₂ arriba, voz abajo, problema resuelto.''',
+      'ach_472':
+          '''Cien altas de PACU sin incidentes. Recuperación: la tranquila vuelta de la victoria.''',
+      'ach_473':
+          '''Perfil completo. +10 puntos y un raro golpe de dopamina administrativa.''',
+      'ach_474':
+          '''PDF de estadísticas exportado. Números: finalmente útiles fuera del examen.''',
+      'ach_475':
+          '''Primer caso o cuaderno de bitácora en PDF. El hospital sin papel puede mirar hacia otro lado por un segundo.''',
+      'ach_476':
+          '''Diez exportaciones de PDF. El futuro tú en la tasación te debe un café al presente.''',
+      'ach_477':
+          '''Primera copia de seguridad JSON. La paranoia es simplemente una buena evaluación preoperatoria.''',
+      'ach_478':
+          '''Cinco copias de seguridad JSON. Redundancia: el único plan verdadero de ASA I.''',
+      'ach_479':
+          '''Cien puntos. La aplicación te está calificando como un viva.''',
+      'ach_480':
+          '''Mil puntos. Energía del personaje principal, todavía graduada en las vías respiratorias.''',
+      'ach_481':
+          '''Cinco mil puntos. Aspecto de prestigio no incluido, solo gloria.''',
+      'ach_482':
+          '''Diez mil puntos. Se nos acabaron los adjetivos sobrios y el anestésico volátil.''',
+      'ach_483':
+          '''Primer caso odontológico/maxilofacial. Boca abierta, plan de vía aérea más fuerte.''',
       'ach_484': '''Cinco casos dentales/maxilo. La succión es tu copiloto.''',
-      'ach_485': '''Diez casos dentales/maxilo. Vía aérea compartida, estrés compartido, gloria compartida.''',
-      'ach_486': '''Veinticinco casos dentales/maxilo. Usted y el cirujano oral ahora se comunican mediante clics de succión.''',
-      'ach_487': '''Cincuenta casos dentales/maxilo. Las mandíbulas con alambre no le asustan, la extubación no planificada sí lo asusta.''',
-      'ach_488': '''Cien casos odontológicos/maxilo. Los rostros cambian; Tu plan B se queda.''',
-      'ach_489': '''Diez casos de maxilo con intubación nasal. La nariz sabe más: cuando la boca es el campo de batalla.''',
-      'ach_490': '''Cinco casos de maxilo que terminaron sin incidentes. Cables adentro; drama.''',
-      'ach_491': '''Emergencia dental/maxillo fuera de horario. Fijación intermaxilar y cafeína intermaxilar.''',
-      'ach_492': '''Veinte casos de maxilo de vía aérea compartida. Diplomacia con laringoscopio.''',
-      'ach_493': '''Primer caso de cirugía bariátrica. Rampar, preoxigenar, respetar la fisiología.''',
-      'ach_494': '''Cinco casos de cirugía bariátrica. El posicionamiento es un deporte de equipo.''',
-      'ach_495': '''Quince casos de cirugía bariátrica. Mide la circunferencia del cuello como un sastre.''',
-      'ach_496': '''Treinta casos de cirugía bariátrica. Especialista en rampas, VL y paciencia.''',
-      'ach_497': '''Cincuenta casos de cirugía bariátrica. Cirugía metabólica, enfoque metabólico.''',
-      'ach_498': '''Cien casos de cirugía bariátrica. Título de peso pesado, ego de peso ligero.''',
-      'ach_499': '''Vía aérea difícil en un caso bariátrico. Plan A, B y un preox más largo.''',
-      'ach_500': '''Veinte casos bariátricos, ninguno/sin incidentes. Aburrido es el objetivo.''',
-      'ach_501': '''Primer caso de radiología intervencionista. Luces apagadas, estándares elevados.''',
-      'ach_502': '''Cinco casos de IR. Lleva la moda del delantal, para siempre.''',
-      'ach_503': '''Quince casos de IR. Ahora puedes tomar una siesta con los ojos abiertos; por favor, no lo hagas.''',
-      'ach_504': '''Veinticinco casos de RI. Alejado del teatro, cerca del tranvía de urgencia.''',
-      'ach_505': '''Cincuenta casos de IR. Especialista en habitaciones silenciosas y monitores ruidosos.''',
-      'ach_506': '''Diez casos de IR terminaron sin incidentes. La calma es contagiosa; también lo es el contraste.''',
-      'ach_507': '''Caso de IR durante tres horas de anestesia. El tiempo de cable es tu tiempo.''',
-      'ach_508': '''Radiología intervencionista de urgencia. Vaso sangrante, manos firmes.''',
-      'ach_509': '''Caso IR menores de 18 años. Embarcaciones pequeñas, atención total.''',
-      'ach_510': '''Caso IR que comienza después de medianoche. Fluoroscopia y cuestiones existenciales.''',
-      'ach_511': '''Primer anestésico de radioterapia. La quietud es la receta.''',
-      'ach_512': '''Cinco casos de radioterapia. El movimiento es el enemigo; tú eres el tratado de paz.''',
-      'ach_513': '''Diez casos de radioterapia. Dispositivos de inmovilización, máxima vigilancia.''',
-      'ach_514': '''Veinticinco casos de radioterapia. Especialista en casos cortos y concentración larga.''',
-      'ach_515': '''Radioterapia para menores de 18 años. Pequeños humanos valientes, grandes planes cuidadosos.''',
-      'ach_516': '''Quince casos de radioterapia, ninguno/sin incidentes. Se logra la quietud.''',
-      'ach_517': '''Diez anestésicos de radioterapia repetidos por la misma vía. Rostros familiares, mismos estándares.''',
-      'ach_518': '''Radioterapia con mentalidad de monitorización remota. Ojos en el paciente, siempre.''',
-      'ach_519': '''Primer caso de cirugía cardíaca pediátrica. Corazón pequeño, lista de verificación grande.''',
-      'ach_520': '''Tres casos cardíacos pediátricos. Eco, líneas y humildad.''',
-      'ach_521': '''Diez casos cardíacos pediátricos. Circuitos del tamaño de joyas, apuestas del tamaño de la vida.''',
-      'ach_522': '''Veinte casos cardíacos pediátricos. Regular en la lista de congénitos.''',
-      'ach_523': '''Cuarenta casos cardíacos pediátricos. Especialista en cánulas diminutas y responsabilidad gigante.''',
-      'ach_524': '''Quince casos cardíacos pediátricos, ninguno/sin incidentes. La calma es una habilidad clínica.''',
-      'ach_525': '''Caso cardiaco pediátrico en un neonato. Microhumano, macroenfoque.''',
-      'ach_526': '''Cinco casos congénitos complejos. Anatomía opcional; preparación obligatoria.''',
-      'ach_527': '''Cardíaco pediátrico fuera de horario. Se cancela el sueño; los estándares no lo son.''',
-      'ach_528': '''Diez casos de CEC pediátrica. La máquina de bypass zumba; no estás tarareando.''',
-      'ach_529': '''Emergencia dental/maxilo. Hinchazón, trismo y tu mejor VL.''',
-      'ach_530': '''Caso bariátrico de emergencia. Primero la fisiología, luego la heroicidad.''',
-      'ach_531': '''IR para embolización traumática. Intervencionista, intencional.''',
-      'ach_532': '''Maxilo y columna vertebral ambos registrados. Diferentes huesos, mismo respeto de las vías respiratorias.''',
-      'ach_533': '''Caso bariátrico con regional realizado. Bloquear cuando sea posible; vía aérea siempre lista.''',
-      'ach_534': '''Cardíaco pediátrico más un caso neonatal separado. Espectro de edad, energía de la misma noche.''',
-      'ach_535': '''Se registró Dental/Maxillo, Bariátrico, IR, Radioterapia y Pediatría cardíaca al menos una vez. Colección completa.''',
-      'ach_536': '''Al menos un caso en cada uno de los cinco nuevos carriles especializados. Insignia de explorador desbloqueada.''',
-      'ach_537': '''Se registraron tanto IR como radioterapia. Radiaciones ionizantes, calma no ionizante.''',
-      'ach_538': '''Cincuenta casos en odontología/maxilar y cabeza y cuello combinados. Alumnos de vía aérea compartida.''',
-      'ach_539': '''Treinta casos dentales/maxilo. El FMI es apenas el martes.''',
-      'ach_540': '''Veinte casos bariátricos con energía de plan de vía aérea documentada. Plan escrito; ego no.''',
-      'ach_541': '''Treinta casos de IR. Tu columna agradece el liderazgo. Tal vez.''',
-      'ach_542': '''Cuarenta casos de radioterapia. Podrías ganar un concurso de miradas con un simulador de TC.''',
-      'ach_543': '''Cincuenta casos cardíacos pediátricos. Listo para enseñar; Todavía listo para aprender.''',
-      'ach_544': '''Veinte intubaciones nasales en maxilo. Viajero frecuente de la ruta de la nariz.''',
-      'ach_545': '''Quince casos bariátricos con videolaringoscopia. Tiempo frente a la pantalla, buen momento.''',
-      'ach_546': '''Veinte casos de IR sin incidentes. El contraste no es una personalidad.''',
-      'ach_547': '''Diez casos de radioterapia pediátrica. Quietud para los más pequeños.''',
+      'ach_485':
+          '''Diez casos dentales/maxilo. Vía aérea compartida, estrés compartido, gloria compartida.''',
+      'ach_486':
+          '''Veinticinco casos dentales/maxilo. Usted y el cirujano oral ahora se comunican mediante clics de succión.''',
+      'ach_487':
+          '''Cincuenta casos dentales/maxilo. Las mandíbulas con alambre no le asustan, la extubación no planificada sí lo asusta.''',
+      'ach_488':
+          '''Cien casos odontológicos/maxilo. Los rostros cambian; Tu plan B se queda.''',
+      'ach_489':
+          '''Diez casos de maxilo con intubación nasal. La nariz sabe más: cuando la boca es el campo de batalla.''',
+      'ach_490':
+          '''Cinco casos de maxilo que terminaron sin incidentes. Cables adentro; drama.''',
+      'ach_491':
+          '''Emergencia dental/maxillo fuera de horario. Fijación intermaxilar y cafeína intermaxilar.''',
+      'ach_492':
+          '''Veinte casos de maxilo de vía aérea compartida. Diplomacia con laringoscopio.''',
+      'ach_493':
+          '''Primer caso de cirugía bariátrica. Rampar, preoxigenar, respetar la fisiología.''',
+      'ach_494':
+          '''Cinco casos de cirugía bariátrica. El posicionamiento es un deporte de equipo.''',
+      'ach_495':
+          '''Quince casos de cirugía bariátrica. Mide la circunferencia del cuello como un sastre.''',
+      'ach_496':
+          '''Treinta casos de cirugía bariátrica. Especialista en rampas, VL y paciencia.''',
+      'ach_497':
+          '''Cincuenta casos de cirugía bariátrica. Cirugía metabólica, enfoque metabólico.''',
+      'ach_498':
+          '''Cien casos de cirugía bariátrica. Título de peso pesado, ego de peso ligero.''',
+      'ach_499':
+          '''Vía aérea difícil en un caso bariátrico. Plan A, B y un preox más largo.''',
+      'ach_500':
+          '''Veinte casos bariátricos, ninguno/sin incidentes. Aburrido es el objetivo.''',
+      'ach_501':
+          '''Primer caso de radiología intervencionista. Luces apagadas, estándares elevados.''',
+      'ach_502':
+          '''Cinco casos de IR. Lleva la moda del delantal, para siempre.''',
+      'ach_503':
+          '''Quince casos de IR. Ahora puedes tomar una siesta con los ojos abiertos; por favor, no lo hagas.''',
+      'ach_504':
+          '''Veinticinco casos de RI. Alejado del teatro, cerca del tranvía de urgencia.''',
+      'ach_505':
+          '''Cincuenta casos de IR. Especialista en habitaciones silenciosas y monitores ruidosos.''',
+      'ach_506':
+          '''Diez casos de IR terminaron sin incidentes. La calma es contagiosa; también lo es el contraste.''',
+      'ach_507':
+          '''Caso de IR durante tres horas de anestesia. El tiempo de cable es tu tiempo.''',
+      'ach_508':
+          '''Radiología intervencionista de urgencia. Vaso sangrante, manos firmes.''',
+      'ach_509':
+          '''Caso IR menores de 18 años. Embarcaciones pequeñas, atención total.''',
+      'ach_510':
+          '''Caso IR que comienza después de medianoche. Fluoroscopia y cuestiones existenciales.''',
+      'ach_511':
+          '''Primer anestésico de radioterapia. La quietud es la receta.''',
+      'ach_512':
+          '''Cinco casos de radioterapia. El movimiento es el enemigo; tú eres el tratado de paz.''',
+      'ach_513':
+          '''Diez casos de radioterapia. Dispositivos de inmovilización, máxima vigilancia.''',
+      'ach_514':
+          '''Veinticinco casos de radioterapia. Especialista en casos cortos y concentración larga.''',
+      'ach_515':
+          '''Radioterapia para menores de 18 años. Pequeños humanos valientes, grandes planes cuidadosos.''',
+      'ach_516':
+          '''Quince casos de radioterapia, ninguno/sin incidentes. Se logra la quietud.''',
+      'ach_517':
+          '''Diez anestésicos de radioterapia repetidos por la misma vía. Rostros familiares, mismos estándares.''',
+      'ach_518':
+          '''Radioterapia con mentalidad de monitorización remota. Ojos en el paciente, siempre.''',
+      'ach_519':
+          '''Primer caso de cirugía cardíaca pediátrica. Corazón pequeño, lista de verificación grande.''',
+      'ach_520':
+          '''Tres casos cardíacos pediátricos. Eco, líneas y humildad.''',
+      'ach_521':
+          '''Diez casos cardíacos pediátricos. Circuitos del tamaño de joyas, apuestas del tamaño de la vida.''',
+      'ach_522':
+          '''Veinte casos cardíacos pediátricos. Regular en la lista de congénitos.''',
+      'ach_523':
+          '''Cuarenta casos cardíacos pediátricos. Especialista en cánulas diminutas y responsabilidad gigante.''',
+      'ach_524':
+          '''Quince casos cardíacos pediátricos, ninguno/sin incidentes. La calma es una habilidad clínica.''',
+      'ach_525':
+          '''Caso cardiaco pediátrico en un neonato. Microhumano, macroenfoque.''',
+      'ach_526':
+          '''Cinco casos congénitos complejos. Anatomía opcional; preparación obligatoria.''',
+      'ach_527':
+          '''Cardíaco pediátrico fuera de horario. Se cancela el sueño; los estándares no lo son.''',
+      'ach_528':
+          '''Diez casos de CEC pediátrica. La máquina de bypass zumba; no estás tarareando.''',
+      'ach_529':
+          '''Emergencia dental/maxilo. Hinchazón, trismo y tu mejor VL.''',
+      'ach_530':
+          '''Caso bariátrico de emergencia. Primero la fisiología, luego la heroicidad.''',
+      'ach_531':
+          '''IR para embolización traumática. Intervencionista, intencional.''',
+      'ach_532':
+          '''Maxilo y columna vertebral ambos registrados. Diferentes huesos, mismo respeto de las vías respiratorias.''',
+      'ach_533':
+          '''Caso bariátrico con regional realizado. Bloquear cuando sea posible; vía aérea siempre lista.''',
+      'ach_534':
+          '''Cardíaco pediátrico más un caso neonatal separado. Espectro de edad, energía de la misma noche.''',
+      'ach_535':
+          '''Se registró Dental/Maxillo, Bariátrico, IR, Radioterapia y Pediatría cardíaca al menos una vez. Colección completa.''',
+      'ach_536':
+          '''Al menos un caso en cada uno de los cinco nuevos carriles especializados. Insignia de explorador desbloqueada.''',
+      'ach_537':
+          '''Se registraron tanto IR como radioterapia. Radiaciones ionizantes, calma no ionizante.''',
+      'ach_538':
+          '''Cincuenta casos en odontología/maxilar y cabeza y cuello combinados. Alumnos de vía aérea compartida.''',
+      'ach_539':
+          '''Treinta casos dentales/maxilo. El FMI es apenas el martes.''',
+      'ach_540':
+          '''Veinte casos bariátricos con energía de plan de vía aérea documentada. Plan escrito; ego no.''',
+      'ach_541':
+          '''Treinta casos de IR. Tu columna agradece el liderazgo. Tal vez.''',
+      'ach_542':
+          '''Cuarenta casos de radioterapia. Podrías ganar un concurso de miradas con un simulador de TC.''',
+      'ach_543':
+          '''Cincuenta casos cardíacos pediátricos. Listo para enseñar; Todavía listo para aprender.''',
+      'ach_544':
+          '''Veinte intubaciones nasales en maxilo. Viajero frecuente de la ruta de la nariz.''',
+      'ach_545':
+          '''Quince casos bariátricos con videolaringoscopia. Tiempo frente a la pantalla, buen momento.''',
+      'ach_546':
+          '''Veinte casos de IR sin incidentes. El contraste no es una personalidad.''',
+      'ach_547':
+          '''Diez casos de radioterapia pediátrica. Quietud para los más pequeños.''',
       'ach_548': '''Veinticinco casos cardíacos pediátricos. Serie regular.''',
       'ach_549': '''Dental/maxillo con adjunto regional. Local donde cuenta.''',
-      'ach_550': '''Caso bariátrico con vía arterial. Forma de onda en una gran fisiología.''',
-      'ach_551': '''Caso IR con monitorización arterial. El rojo es un idioma.''',
-      'ach_552': '''Radioterapia bajo MAC/vía de sedación registrada. Toque ligero, mucha atención.''',
-      'ach_553': '''Cardíaco pediátrico con monitorización invasiva. Líneas antes del bypass.''',
-      'ach_554': '''Bandera de vía aérea difícil en un caso de maxilo. El trismo se encuentra con el entrenamiento.''',
-      'ach_555': '''Desaturación manejada en un caso bariátrico. Rescate sin drama.''',
-      'ach_556': '''Anestesia IR durante cuatro horas. Maratón de fluoroscopia.''',
-      'ach_557': '''La radioterapia comienza antes de las 07:00. Haz en punto.''',
-      'ach_558': '''Emergencia cardiaca pediátrica. Adrenalina opcional; sistemas obligatorios.''',
-      'ach_559': '''Se registraron ocho especialidades quirúrgicas distintas, incluida al menos una nueva especialidad. Políglota de la lista.''',
-      'ach_560': '''Cincuenta casos combinados en el nuevo conjunto de especialidades. Explorador habitual.''',
-      'ach_561': '''Setenta y cinco casos dentales/maxilo. Historial en la liga de boca y vías respiratorias.''',
-      'ach_562': '''Setenta y cinco casos de cirugía bariátrica. Historial en la rampa.''',
+      'ach_550':
+          '''Caso bariátrico con vía arterial. Forma de onda en una gran fisiología.''',
+      'ach_551':
+          '''Caso IR con monitorización arterial. El rojo es un idioma.''',
+      'ach_552':
+          '''Radioterapia bajo MAC/vía de sedación registrada. Toque ligero, mucha atención.''',
+      'ach_553':
+          '''Cardíaco pediátrico con monitorización invasiva. Líneas antes del bypass.''',
+      'ach_554':
+          '''Bandera de vía aérea difícil en un caso de maxilo. El trismo se encuentra con el entrenamiento.''',
+      'ach_555':
+          '''Desaturación manejada en un caso bariátrico. Rescate sin drama.''',
+      'ach_556':
+          '''Anestesia IR durante cuatro horas. Maratón de fluoroscopia.''',
+      'ach_557':
+          '''La radioterapia comienza antes de las 07:00. Haz en punto.''',
+      'ach_558':
+          '''Emergencia cardiaca pediátrica. Adrenalina opcional; sistemas obligatorios.''',
+      'ach_559':
+          '''Se registraron ocho especialidades quirúrgicas distintas, incluida al menos una nueva especialidad. Políglota de la lista.''',
+      'ach_560':
+          '''Cincuenta casos combinados en el nuevo conjunto de especialidades. Explorador habitual.''',
+      'ach_561':
+          '''Setenta y cinco casos dentales/maxilo. Historial en la liga de boca y vías respiratorias.''',
+      'ach_562':
+          '''Setenta y cinco casos de cirugía bariátrica. Historial en la rampa.''',
       'ach_563': '''Setenta y cinco casos de RI. Leyenda del cuarto oscuro.''',
-      'ach_564': '''Setenta y cinco casos cardíacos pediátricos. Título pesado, manos ligeras.''',
+      'ach_564':
+          '''Setenta y cinco casos cardíacos pediátricos. Título pesado, manos ligeras.''',
       'ach_565': '''Cincuenta casos de radioterapia. Pesado en quietud.''',
-      'ach_566': '''Veinticinco casos de nuevas especialidades combinados. Progreso fronterizo.''',
-      'ach_567': '''Cien casos en nuevas especialidades combinadas. Frontera asentada.''',
-      'ach_568': '''Cuarenta casos dentales/maxilo. Aliado del cirujano bucal, guardián de la trompa.''',
-      'ach_569': '''Bloqueo del primer plano de la fascia iliaca. Avión encontrado; dolor archivado en "más tarde".''',
-      'ach_570': '''Cinco bloques de fascia iliaca. Las fracturas de cadera te lo agradecen en silencio.''',
-      'ach_571': '''Quince bloques de fascia iliaca. Regular en la lista #NOF.''',
-      'ach_572': '''Treinta bloques de fascia iliaca. Especialista en aviones y paciencia.''',
-      'ach_573': '''Cincuenta bloques de fascia iliaca. Maestro del susurro ilíaco.''',
-      'ach_574': '''Diez bloqueos de fascia iliaca guiados por USG. Gel, sonda, paz.''',
-      'ach_575': '''Fascia iliaca con catéter colocado. Paquete de confort continuo.''',
-      'ach_576': '''Se realizaron veinte bloqueos de fascia iliaca (no solo observados). Trabajo práctico en avión.''',
-      'ach_577': '''Bloque estilo primer compartimento psoas/psoas. Plano profundo, calma más profunda.''',
-      'ach_578': '''Cinco bloqueos del plano subfascial del psoas. Subfascial, no deficiente.''',
-      'ach_579': '''Quince bloqueos del plano subfascial del psoas. Regular en el fondo.''',
-      'ach_580': '''Treinta bloqueos del plano subfascial del psoas. Especialista donde los hitos temen pisar.''',
-      'ach_581': '''Cincuenta bloqueos del plano subfascial del psoas. Maestro de la energía de abordaje posterior.''',
-      'ach_582': '''Diez bloqueos del plano del psoas guiados por USG. Ver el avión; ser el avión.''',
-      'ach_583': '''Bloqueo del plano del psoas con catéter. Infusión para la victoria.''',
-      'ach_584': '''Se realizaron veinte bloqueos del plano del psoas. Costura acreditada.''',
-      'ach_585': '''Se registraron bloqueos de la fascia iliaca y del plano del psoas. Coleccionista de aviones.''',
-      'ach_586': '''Fascia iliaca o psoas en un caso de ortotraumatismo. Aviones para el dolor, no para el espectáculo.''',
-      'ach_587': '''Diez bloqueos de fascia iliaca para las vías de fractura de cadera. El mejor amigo de #NOF.''',
-      'ach_588': '''Cinco casos con fascia o psoas más otro bloqueo de miembro inferior. Modo dúo.''',
-      'ach_589': '''Primeros escalofríos registrados y controlados. Diplomacia del termostato.''',
-      'ach_590': '''Se lograron cinco episodios de escalofríos. El calor es una droga.''',
-      'ach_591': '''Quince episodios de escalofríos. Especialista en mantas y paciencia.''',
-      'ach_592': '''Se lograron treinta episodios de escalofríos. Maestro del temblor postoperatorio.''',
-      'ach_593': '''Primera hipertensión intraoperatoria manejada. MAPA arriba; te mantuviste nivelado.''',
-      'ach_594': '''Se gestionaron cinco episodios de hipertensión. Presionadores opcionales; Pensado obligatorio.''',
-      'ach_595': '''Quince eventos de hipertensión. Regular en la parte alta del puño.''',
-      'ach_596': '''Se gestionaron treinta eventos de hipertensión. Especialista en por qué y qué sigue.''',
-      'ach_597': '''Se registró la primera complicación hemorrágica. Succión encendida; cerebro encendido.''',
-      'ach_598': '''Se gestionaron cinco eventos hemorrágicos. Productos sanguíneos y presión arterial.''',
+      'ach_566':
+          '''Veinticinco casos de nuevas especialidades combinados. Progreso fronterizo.''',
+      'ach_567':
+          '''Cien casos en nuevas especialidades combinadas. Frontera asentada.''',
+      'ach_568':
+          '''Cuarenta casos dentales/maxilo. Aliado del cirujano bucal, guardián de la trompa.''',
+      'ach_569':
+          '''Bloqueo del primer plano de la fascia iliaca. Avión encontrado; dolor archivado en "más tarde".''',
+      'ach_570':
+          '''Cinco bloques de fascia iliaca. Las fracturas de cadera te lo agradecen en silencio.''',
+      'ach_571':
+          '''Quince bloques de fascia iliaca. Regular en la lista #NOF.''',
+      'ach_572':
+          '''Treinta bloques de fascia iliaca. Especialista en aviones y paciencia.''',
+      'ach_573':
+          '''Cincuenta bloques de fascia iliaca. Maestro del susurro ilíaco.''',
+      'ach_574':
+          '''Diez bloqueos de fascia iliaca guiados por USG. Gel, sonda, paz.''',
+      'ach_575':
+          '''Fascia iliaca con catéter colocado. Paquete de confort continuo.''',
+      'ach_576':
+          '''Se realizaron veinte bloqueos de fascia iliaca (no solo observados). Trabajo práctico en avión.''',
+      'ach_577':
+          '''Bloque estilo primer compartimento psoas/psoas. Plano profundo, calma más profunda.''',
+      'ach_578':
+          '''Cinco bloqueos del plano subfascial del psoas. Subfascial, no deficiente.''',
+      'ach_579':
+          '''Quince bloqueos del plano subfascial del psoas. Regular en el fondo.''',
+      'ach_580':
+          '''Treinta bloqueos del plano subfascial del psoas. Especialista donde los hitos temen pisar.''',
+      'ach_581':
+          '''Cincuenta bloqueos del plano subfascial del psoas. Maestro de la energía de abordaje posterior.''',
+      'ach_582':
+          '''Diez bloqueos del plano del psoas guiados por USG. Ver el avión; ser el avión.''',
+      'ach_583':
+          '''Bloqueo del plano del psoas con catéter. Infusión para la victoria.''',
+      'ach_584':
+          '''Se realizaron veinte bloqueos del plano del psoas. Costura acreditada.''',
+      'ach_585':
+          '''Se registraron bloqueos de la fascia iliaca y del plano del psoas. Coleccionista de aviones.''',
+      'ach_586':
+          '''Fascia iliaca o psoas en un caso de ortotraumatismo. Aviones para el dolor, no para el espectáculo.''',
+      'ach_587':
+          '''Diez bloqueos de fascia iliaca para las vías de fractura de cadera. El mejor amigo de #NOF.''',
+      'ach_588':
+          '''Cinco casos con fascia o psoas más otro bloqueo de miembro inferior. Modo dúo.''',
+      'ach_589':
+          '''Primeros escalofríos registrados y controlados. Diplomacia del termostato.''',
+      'ach_590':
+          '''Se lograron cinco episodios de escalofríos. El calor es una droga.''',
+      'ach_591':
+          '''Quince episodios de escalofríos. Especialista en mantas y paciencia.''',
+      'ach_592':
+          '''Se lograron treinta episodios de escalofríos. Maestro del temblor postoperatorio.''',
+      'ach_593':
+          '''Primera hipertensión intraoperatoria manejada. MAPA arriba; te mantuviste nivelado.''',
+      'ach_594':
+          '''Se gestionaron cinco episodios de hipertensión. Presionadores opcionales; Pensado obligatorio.''',
+      'ach_595':
+          '''Quince eventos de hipertensión. Regular en la parte alta del puño.''',
+      'ach_596':
+          '''Se gestionaron treinta eventos de hipertensión. Especialista en por qué y qué sigue.''',
+      'ach_597':
+          '''Se registró la primera complicación hemorrágica. Succión encendida; cerebro encendido.''',
+      'ach_598':
+          '''Se gestionaron cinco eventos hemorrágicos. Productos sanguíneos y presión arterial.''',
       'ach_599': '''Quince eventos hemorrágicos. Regular en rojo.''',
-      'ach_600': '''Se gestionaron treinta eventos hemorrágicos. Especialista cuando el campo se vuelve carmesí.''',
-      'ach_601': '''Primera hipotermia registrada. Calienta al paciente, no las excusas.''',
-      'ach_602': '''Cinco eventos de hipotermia. El aire forzado es un lenguaje de amor.''',
-      'ach_603': '''Se gestionaron quince eventos de hipotermia. La temperatura es un factor vital.''',
-      'ach_604': '''Treinta eventos de hipotermia. Especialista en grados y detalles.''',
+      'ach_600':
+          '''Se gestionaron treinta eventos hemorrágicos. Especialista cuando el campo se vuelve carmesí.''',
+      'ach_601':
+          '''Primera hipotermia registrada. Calienta al paciente, no las excusas.''',
+      'ach_602':
+          '''Cinco eventos de hipotermia. El aire forzado es un lenguaje de amor.''',
+      'ach_603':
+          '''Se gestionaron quince eventos de hipotermia. La temperatura es un factor vital.''',
+      'ach_604':
+          '''Treinta eventos de hipotermia. Especialista en grados y detalles.''',
       'ach_605': '''Primera arritmia manejada. El ECG no es música de fondo.''',
       'ach_606': '''Se gestionaron cinco arritmias. Ritmo, ritmo, respuesta.''',
       'ach_607': '''Quince arritmias. Regular en los garabatos.''',
-      'ach_608': '''Se gestionaron treinta arritmias. Especialista cuando la línea se vuelve abstracta.''',
+      'ach_608':
+          '''Se gestionaron treinta arritmias. Especialista cuando la línea se vuelve abstracta.''',
       'ach_609': '''Primer neumotórax manejado. Aguja, drenaje, calma.''',
-      'ach_610': '''Tres eventos de neumotórax. Prefieres aire sólo en el circuito.''',
-      'ach_611': '''Se gestionaron cinco eventos de neumotórax. Regular ante lo inesperado.''',
-      'ach_612': '''Diez eventos de neumotórax. Especialista en mal aire, buenas decisiones.''',
-      'ach_613': '''Primera vía de pérdida masiva de sangre. MTP no es un artículo teórico.''',
-      'ach_614': '''Se gestionaron tres eventos de pérdida masiva de sangre. Activar temprano; Piensa con claridad.''',
-      'ach_615': '''Cinco eventos de pérdida masiva de sangre. Regular cuando canta el salva celular.''',
-      'ach_616': '''Se gestionaron diez eventos de pérdida masiva de sangre. Especialista en ratios y moderación.''',
-      'ach_617': '''Se logró la primera reacción transfusional. Detén la fila; iniciar el protocolo.''',
-      'ach_618': '''Tres reacciones transfusionales. Los protocolos existen por una razón.''',
-      'ach_619': '''Se gestionaron cinco reacciones transfusionales. Regular en los raros días malos.''',
-      'ach_620': '''Diez reacciones transfusionales. Especialista cuando la sangre se porta mal.''',
-      'ach_621': '''Se logró la primera embolia aérea venosa. Lateral izquierdo opcional; cerebro obligatorio.''',
-      'ach_622': '''Se gestionaron tres eventos VAE. El aire no es una droga.''',
+      'ach_610':
+          '''Tres eventos de neumotórax. Prefieres aire sólo en el circuito.''',
+      'ach_611':
+          '''Se gestionaron cinco eventos de neumotórax. Regular ante lo inesperado.''',
+      'ach_612':
+          '''Diez eventos de neumotórax. Especialista en mal aire, buenas decisiones.''',
+      'ach_613':
+          '''Primera vía de pérdida masiva de sangre. MTP no es un artículo teórico.''',
+      'ach_614':
+          '''Se gestionaron tres eventos de pérdida masiva de sangre. Activar temprano; Piensa con claridad.''',
+      'ach_615':
+          '''Cinco eventos de pérdida masiva de sangre. Regular cuando canta el salva celular.''',
+      'ach_616':
+          '''Se gestionaron diez eventos de pérdida masiva de sangre. Especialista en ratios y moderación.''',
+      'ach_617':
+          '''Se logró la primera reacción transfusional. Detén la fila; iniciar el protocolo.''',
+      'ach_618':
+          '''Tres reacciones transfusionales. Los protocolos existen por una razón.''',
+      'ach_619':
+          '''Se gestionaron cinco reacciones transfusionales. Regular en los raros días malos.''',
+      'ach_620':
+          '''Diez reacciones transfusionales. Especialista cuando la sangre se porta mal.''',
+      'ach_621':
+          '''Se logró la primera embolia aérea venosa. Lateral izquierdo opcional; cerebro obligatorio.''',
+      'ach_622':
+          '''Se gestionaron tres eventos VAE. El aire no es una droga.''',
       'ach_623': '''Cinco eventos VAE. Regular en el peor de los casos.''',
-      'ach_624': '''Diez eventos VAE gestionados. Especialista cuando las burbujas se convierten en la trama.''',
-      'ach_625': '''Primer evento de aspiración gestionado. Succión, oxígeno, humildad.''',
-      'ach_626': '''Tres aspiraciones logradas. Proteja las vías respiratorias que ya aseguró.''',
+      'ach_624':
+          '''Diez eventos VAE gestionados. Especialista cuando las burbujas se convierten en la trama.''',
+      'ach_625':
+          '''Primer evento de aspiración gestionado. Succión, oxígeno, humildad.''',
+      'ach_626':
+          '''Tres aspiraciones logradas. Proteja las vías respiratorias que ya aseguró.''',
       'ach_627': '''Cinco aspiraciones. Regular en lo no planificado.''',
-      'ach_628': '''Diez aspiraciones logradas. Especialista tras lo impensable.''',
-      'ach_629': '''Se registró la primera intubación fallida. El plan B es la razón por la que entrenaste.''',
-      'ach_630': '''Se lograron tres intubaciones fallidas. Declarar temprano; oxígeno siempre.''',
-      'ach_631': '''Cinco intubaciones fallidas. Regular en honestidad bajo presión.''',
-      'ach_632': '''Se gestionaron diez intubaciones fallidas. Especialista en no convertirse en la complicación.''',
-      'ach_633': '''Se registró la primera ventilación difícil con mascarilla. Dos manos, un plan.''',
-      'ach_634': '''Cinco eventos difíciles de ventilación con mascarilla. OPA/NPA son amigos.''',
-      'ach_635': '''Quince eventos difíciles de ventilación con mascarilla. Regular cuando la bolsa se defiende.''',
-      'ach_636': '''Se gestionaron treinta eventos difíciles de ventilación con mascarilla. Especialista en la habilidad olvidada.''',
-      'ach_637': '''Se registraron cinco nuevos tipos diferentes de complicaciones. Coleccionista de momentos de enseñanza.''',
-      'ach_638': '''Se registraron ocho nuevos tipos de complicaciones diferentes. Conocedor del caos contenido.''',
-      'ach_639': '''Registró las doce nuevas categorías de complicaciones al menos una vez. Plan de estudios completo.''',
-      'ach_640': '''Veinte eventos en total en el nuevo conjunto de complicaciones. Catálogo de compostura.''',
-      'ach_641': '''Se gestionaron un total de cincuenta eventos de nuevas complicaciones. Volumen con virtud.''',
-      'ach_642': '''Todavía prefiero nada o sin incidentes, pero usted inició sesión y aprendió del resto. Balance.''',
-      'ach_643': '''Tanto los escalofríos como la hipertensión se controlaron en todos los casos. Archivos fríos y calientes.''',
-      'ach_644': '''Se controlaron tanto el sangrado como la hipotermia. Lecciones rojas y azules.''',
-      'ach_645': '''Manejo de aspiración, VAE o neumotórax. Cuando el aire se porta mal.''',
-      'ach_646': '''Se registraron intubación fallida y ventilación con máscara difícil. Insignia de honestidad en las vías respiratorias.''',
-      'ach_647': '''Se registraron una pérdida masiva de sangre y una reacción a la transfusión. Capítulo de sangre completo.''',
-      'ach_648': '''Se controlaron la arritmia y la hipertensión. Subtrama cardiovascular.''',
-      'ach_649': '''Cualquier nueva complicación después de medianoche. Escuela nocturna, edición clínica.''',
-      'ach_650': '''Nueva complicación manejada en ASA IV+. Alto riesgo, alto nivel.''',
-      'ach_651': '''Se registró la complicación pero el resultado fue sin incidentes en la PACU. Crisis evitada, de verdad.''',
-      'ach_652': '''Caso con dos o más complicaciones distintas registradas. Caso ocupado, cabeza despejada.''',
-      'ach_653': '''Diez complicaciones manejadas en todas las categorías. Momentos de enseñanza acumulados.''',
-      'ach_654': '''Treinta eventos gestionados a través de nuevas complicaciones. La red se amplió.''',
-      'ach_655': '''Reacción transfusional o vía MTP respetada en el registro. El protocolo es personalidad.''',
-      'ach_656': '''Tanto los escalofríos como la hipotermia se controlaron. La temperatura no es opcional.''',
-      'ach_657': '''DMV más honestidad de intubación fallida en el libro de registro. La honestidad salva vidas.''',
-      'ach_658': '''VAE gestionado y registrado. La conciencia es la mitad de la batalla; la acción es el resto.''',
-      'ach_659': '''Sangrado o pérdida masiva de sangre gestionada diez veces combinadas. Veterano del campo rojo.''',
-      'ach_660': '''La hipertensión se controló veinte veces. Presión, manejada.''',
-      'ach_661': '''Se lograron cincuenta episodios de escalofríos. Compre a la institución un calentador mejor.''',
-      'ach_662': '''Se gestionaron cincuenta eventos de hipertensión. Historias de MAP durante días.''',
-      'ach_663': '''Se gestionaron cincuenta eventos hemorrágicos. Biografía de succión.''',
-      'ach_664': '''Se gestionaron cincuenta eventos de hipotermia. Biografía de temperatura.''',
+      'ach_628':
+          '''Diez aspiraciones logradas. Especialista tras lo impensable.''',
+      'ach_629':
+          '''Se registró la primera intubación fallida. El plan B es la razón por la que entrenaste.''',
+      'ach_630':
+          '''Se lograron tres intubaciones fallidas. Declarar temprano; oxígeno siempre.''',
+      'ach_631':
+          '''Cinco intubaciones fallidas. Regular en honestidad bajo presión.''',
+      'ach_632':
+          '''Se gestionaron diez intubaciones fallidas. Especialista en no convertirse en la complicación.''',
+      'ach_633':
+          '''Se registró la primera ventilación difícil con mascarilla. Dos manos, un plan.''',
+      'ach_634':
+          '''Cinco eventos difíciles de ventilación con mascarilla. OPA/NPA son amigos.''',
+      'ach_635':
+          '''Quince eventos difíciles de ventilación con mascarilla. Regular cuando la bolsa se defiende.''',
+      'ach_636':
+          '''Se gestionaron treinta eventos difíciles de ventilación con mascarilla. Especialista en la habilidad olvidada.''',
+      'ach_637':
+          '''Se registraron cinco nuevos tipos diferentes de complicaciones. Coleccionista de momentos de enseñanza.''',
+      'ach_638':
+          '''Se registraron ocho nuevos tipos de complicaciones diferentes. Conocedor del caos contenido.''',
+      'ach_639':
+          '''Registró las doce nuevas categorías de complicaciones al menos una vez. Plan de estudios completo.''',
+      'ach_640':
+          '''Veinte eventos en total en el nuevo conjunto de complicaciones. Catálogo de compostura.''',
+      'ach_641':
+          '''Se gestionaron un total de cincuenta eventos de nuevas complicaciones. Volumen con virtud.''',
+      'ach_642':
+          '''Todavía prefiero nada o sin incidentes, pero usted inició sesión y aprendió del resto. Balance.''',
+      'ach_643':
+          '''Tanto los escalofríos como la hipertensión se controlaron en todos los casos. Archivos fríos y calientes.''',
+      'ach_644':
+          '''Se controlaron tanto el sangrado como la hipotermia. Lecciones rojas y azules.''',
+      'ach_645':
+          '''Manejo de aspiración, VAE o neumotórax. Cuando el aire se porta mal.''',
+      'ach_646':
+          '''Se registraron intubación fallida y ventilación con máscara difícil. Insignia de honestidad en las vías respiratorias.''',
+      'ach_647':
+          '''Se registraron una pérdida masiva de sangre y una reacción a la transfusión. Capítulo de sangre completo.''',
+      'ach_648':
+          '''Se controlaron la arritmia y la hipertensión. Subtrama cardiovascular.''',
+      'ach_649':
+          '''Cualquier nueva complicación después de medianoche. Escuela nocturna, edición clínica.''',
+      'ach_650':
+          '''Nueva complicación manejada en ASA IV+. Alto riesgo, alto nivel.''',
+      'ach_651':
+          '''Se registró la complicación pero el resultado fue sin incidentes en la PACU. Crisis evitada, de verdad.''',
+      'ach_652':
+          '''Caso con dos o más complicaciones distintas registradas. Caso ocupado, cabeza despejada.''',
+      'ach_653':
+          '''Diez complicaciones manejadas en todas las categorías. Momentos de enseñanza acumulados.''',
+      'ach_654':
+          '''Treinta eventos gestionados a través de nuevas complicaciones. La red se amplió.''',
+      'ach_655':
+          '''Reacción transfusional o vía MTP respetada en el registro. El protocolo es personalidad.''',
+      'ach_656':
+          '''Tanto los escalofríos como la hipotermia se controlaron. La temperatura no es opcional.''',
+      'ach_657':
+          '''DMV más honestidad de intubación fallida en el libro de registro. La honestidad salva vidas.''',
+      'ach_658':
+          '''VAE gestionado y registrado. La conciencia es la mitad de la batalla; la acción es el resto.''',
+      'ach_659':
+          '''Sangrado o pérdida masiva de sangre gestionada diez veces combinadas. Veterano del campo rojo.''',
+      'ach_660':
+          '''La hipertensión se controló veinte veces. Presión, manejada.''',
+      'ach_661':
+          '''Se lograron cincuenta episodios de escalofríos. Compre a la institución un calentador mejor.''',
+      'ach_662':
+          '''Se gestionaron cincuenta eventos de hipertensión. Historias de MAP durante días.''',
+      'ach_663':
+          '''Se gestionaron cincuenta eventos hemorrágicos. Biografía de succión.''',
+      'ach_664':
+          '''Se gestionaron cincuenta eventos de hipotermia. Biografía de temperatura.''',
       'ach_665': '''Se gestionaron cincuenta arritmias. Novela de ECG.''',
-      'ach_666': '''Después de gestionar la aspiración, diez casos posteriores sin incidentes. Lección aplicada.''',
-      'ach_667': '''Ventilación con mascarilla difícil seguida de vía aérea definitiva exitosa en el mismo caso. La secuencia importa.''',
-      'ach_668': '''Caso de intubación fallida que termina sin muerte en la mesa. La recuperación es el punto.''',
-      'ach_669': '''Neumotórax manejado con energía de intervención definitiva. Aire afuera, cálmate.''',
-      'ach_670': '''Cinco eventos de nivel MTP en los que permaneciste como capitán. Rango obtenido.''',
-      'ach_671': '''Cinco reacciones transfusionales con energía de protocolo. Detener, evaluar, tratar.''',
-      'ach_672': '''VAE en una energía de caso sentada o en posición de riesgo. Riesgo de posición, respetado.''',
-      'ach_673': '''Los escalofríos se controlaron con buenos resultados en la PACU. Cálido y despierto.''',
-      'ach_674': '''Hipertensión al emerger controlada. Tubo fuera, presión civil.''',
-      'ach_675': '''Se registró una complicación hemorrágica con la vía de traslado a la UCI. Lugar correcto, momento correcto.''',
-      'ach_676': '''Hipotermia en un caso cardíaco o mayor manejado. Calentar el circuito de cuidados.''',
-      'ach_677': '''Energía de arritmia inestable gestionada. Electricidad opcional; Pensé que no.''',
-      'ach_678': '''La ventilación con mascarilla difícil y las vías respiratorias difíciles son ciertas en un caso. Programa de estudios completo sobre vías respiratorias en una sola sesión.''',
-      'ach_679': '''Tres tipos diferentes de complicaciones en un solo caso. Todavía aquí. Todavía registrando.''',
-      'ach_680': '''Tras una complicación, vuelve a la racha de diez sin incidentes. Resiliencia.''',
-      'ach_681': '''Se registraron veinte complicaciones en lugar de minimizarlas. Cultura de honestidad.''',
-      'ach_682': '''Primero de cada: escalofríos, hipertensión, sangrado. Juego inicial completo.''',
-      'ach_683': '''La pérdida masiva de sangre, la VAE y la intubación fallida se registraron una vez. Conjunto crítico.''',
-      'ach_684': '''Aspiración, intubación fallida, DMV cada uno registrado. Trifecta de complicaciones de las vías respiratorias.''',
-      'ach_685': '''Temblores e hipotermia cinco cada uno. Alfabetización térmica.''',
-      'ach_686': '''Sangrado y pérdida masiva de sangre cinco por cada vía combinada. Alfabetización hemo.''',
-      'ach_687': '''Hipertensión y arritmia diez por cada vía. Alfabetización sobre complicaciones cardiovasculares.''',
-      'ach_688': '''Diez eventos de nuevas complicaciones en total. Ampliación en marcha.''',
-      'ach_689': '''Veinticinco eventos de nuevas complicaciones en total. Expansión real.''',
-      'ach_690': '''Setenta y cinco eventos de nuevas complicaciones en total. Expansión institucional.''',
-      'ach_691': '''Se gestionaron un total de cien eventos de nuevas complicaciones. Ampliación completa.''',
-      'ach_692': '''Cincuenta complicaciones de cualquier tipo registradas a lo largo de la carrera en la aplicación. Métrica de honestidad.''',
-      'ach_693': '''Caso de complicaciones seguido más tarde por una racha de veinticinco sin incidentes. Curso corregido.''',
-      'ach_694': '''Nueva complicación durante un caso de emergencia. Presión sobre presión.''',
-      'ach_695': '''Nueva complicación en paciente menor de 18 años. Paciente pequeño, protocolo completo.''',
-      'ach_696': '''Nueva complicación en paciente ≥65 años. Fisiología frágil, planes firmes.''',
-      'ach_697': '''Nueva complicación en un caso de cirugía bariátrica. Fisiología al cuadrado.''',
-      'ach_698': '''Nueva complicación en odontología/maxilo. Subtrama de vía aérea compartida.''',
-      'ach_699': '''Nueva complicación en IR. Cuarto oscuro, pensamiento brillante.''',
-      'ach_700': '''Nueva complicación en cardiopatía pediátrica. Aula de lo más alto en juego.''',
-      'ach_701': '''Se registraron suficientes detalles de complicaciones que el PDF podría enseñar. La documentación como legado.''',
+      'ach_666':
+          '''Después de gestionar la aspiración, diez casos posteriores sin incidentes. Lección aplicada.''',
+      'ach_667':
+          '''Ventilación con mascarilla difícil seguida de vía aérea definitiva exitosa en el mismo caso. La secuencia importa.''',
+      'ach_668':
+          '''Caso de intubación fallida que termina sin muerte en la mesa. La recuperación es el punto.''',
+      'ach_669':
+          '''Neumotórax manejado con energía de intervención definitiva. Aire afuera, cálmate.''',
+      'ach_670':
+          '''Cinco eventos de nivel MTP en los que permaneciste como capitán. Rango obtenido.''',
+      'ach_671':
+          '''Cinco reacciones transfusionales con energía de protocolo. Detener, evaluar, tratar.''',
+      'ach_672':
+          '''VAE en una energía de caso sentada o en posición de riesgo. Riesgo de posición, respetado.''',
+      'ach_673':
+          '''Los escalofríos se controlaron con buenos resultados en la PACU. Cálido y despierto.''',
+      'ach_674':
+          '''Hipertensión al emerger controlada. Tubo fuera, presión civil.''',
+      'ach_675':
+          '''Se registró una complicación hemorrágica con la vía de traslado a la UCI. Lugar correcto, momento correcto.''',
+      'ach_676':
+          '''Hipotermia en un caso cardíaco o mayor manejado. Calentar el circuito de cuidados.''',
+      'ach_677':
+          '''Energía de arritmia inestable gestionada. Electricidad opcional; Pensé que no.''',
+      'ach_678':
+          '''La ventilación con mascarilla difícil y las vías respiratorias difíciles son ciertas en un caso. Programa de estudios completo sobre vías respiratorias en una sola sesión.''',
+      'ach_679':
+          '''Tres tipos diferentes de complicaciones en un solo caso. Todavía aquí. Todavía registrando.''',
+      'ach_680':
+          '''Tras una complicación, vuelve a la racha de diez sin incidentes. Resiliencia.''',
+      'ach_681':
+          '''Se registraron veinte complicaciones en lugar de minimizarlas. Cultura de honestidad.''',
+      'ach_682':
+          '''Primero de cada: escalofríos, hipertensión, sangrado. Juego inicial completo.''',
+      'ach_683':
+          '''La pérdida masiva de sangre, la VAE y la intubación fallida se registraron una vez. Conjunto crítico.''',
+      'ach_684':
+          '''Aspiración, intubación fallida, DMV cada uno registrado. Trifecta de complicaciones de las vías respiratorias.''',
+      'ach_685':
+          '''Temblores e hipotermia cinco cada uno. Alfabetización térmica.''',
+      'ach_686':
+          '''Sangrado y pérdida masiva de sangre cinco por cada vía combinada. Alfabetización hemo.''',
+      'ach_687':
+          '''Hipertensión y arritmia diez por cada vía. Alfabetización sobre complicaciones cardiovasculares.''',
+      'ach_688':
+          '''Diez eventos de nuevas complicaciones en total. Ampliación en marcha.''',
+      'ach_689':
+          '''Veinticinco eventos de nuevas complicaciones en total. Expansión real.''',
+      'ach_690':
+          '''Setenta y cinco eventos de nuevas complicaciones en total. Expansión institucional.''',
+      'ach_691':
+          '''Se gestionaron un total de cien eventos de nuevas complicaciones. Ampliación completa.''',
+      'ach_692':
+          '''Cincuenta complicaciones de cualquier tipo registradas a lo largo de la carrera en la aplicación. Métrica de honestidad.''',
+      'ach_693':
+          '''Caso de complicaciones seguido más tarde por una racha de veinticinco sin incidentes. Curso corregido.''',
+      'ach_694':
+          '''Nueva complicación durante un caso de emergencia. Presión sobre presión.''',
+      'ach_695':
+          '''Nueva complicación en paciente menor de 18 años. Paciente pequeño, protocolo completo.''',
+      'ach_696':
+          '''Nueva complicación en paciente ≥65 años. Fisiología frágil, planes firmes.''',
+      'ach_697':
+          '''Nueva complicación en un caso de cirugía bariátrica. Fisiología al cuadrado.''',
+      'ach_698':
+          '''Nueva complicación en odontología/maxilo. Subtrama de vía aérea compartida.''',
+      'ach_699':
+          '''Nueva complicación en IR. Cuarto oscuro, pensamiento brillante.''',
+      'ach_700':
+          '''Nueva complicación en cardiopatía pediátrica. Aula de lo más alto en juego.''',
+      'ach_701':
+          '''Se registraron suficientes detalles de complicaciones que el PDF podría enseñar. La documentación como legado.''',
     },
     'fr': {
-      'ach_0': '''Chaque grand maître était autrefois un résident terrifié. Essayez de ne pas laisser tomber la seringue.''',
-      'ach_1': '''Deux cas. Vous avez arrêté de raconter la liste de contrôle à voix haute. Progrès.''',
-      'ach_2': '''Trois cas. Le théâtre commence à ressembler moins à une prise d’otages.''',
-      'ach_3': '''Quatre cas. Vous pouvez épeler Sevoflurane sans vérifier la bouteille. Surtout.''',
-      'ach_4': '''Cinq cas. Bravo à l\'appareil d\'anesthésie, c\'est le seul à l\'avoir.''',
-      'ach_5': '''Six cas. ETCO₂ devient votre langage d\'amour.''',
-      'ach_6': '''Sept cas. Que votre prochaine vue soit de grade 1 et que votre chirurgien soit à l\'heure.''',
-      'ach_7': '''Huit dans le livre. Le journal de bord n\'est plus une rumeur.''',
-      'ach_8': '''Neuf cas. Il manque un chiffre à deux chiffres et une légère supériorité.''',
-      'ach_9': '''Dix cas. Vous avez officiellement arrêté de vous excuser auprès de la perche à perfusion lorsque vous la cognez.''',
-      'ach_10': '''Treize cas. Pas de chance pour certains. Doux pour vous – apparemment.''',
-      'ach_11': '''Seize cas. Doux comme une induction sévo jusqu\'à ce qu\'ils demandent plus de détente.''',
-      'ach_12': '''Une vingtaine de cas. Plus d\'heures en blouse qu\'en civil. Classique.''',
-      'ach_13': '''Vingt-cinq cas. Les chirurgiens commencent à mémoriser votre prénom.''',
+      'ach_0':
+          '''Chaque grand maître était autrefois un résident terrifié. Essayez de ne pas laisser tomber la seringue.''',
+      'ach_1':
+          '''Deux cas. Vous avez arrêté de raconter la liste de contrôle à voix haute. Progrès.''',
+      'ach_2':
+          '''Trois cas. Le théâtre commence à ressembler moins à une prise d’otages.''',
+      'ach_3':
+          '''Quatre cas. Vous pouvez épeler Sevoflurane sans vérifier la bouteille. Surtout.''',
+      'ach_4':
+          '''Cinq cas. Bravo à l'appareil d'anesthésie, c'est le seul à l'avoir.''',
+      'ach_5': '''Six cas. ETCO₂ devient votre langage d'amour.''',
+      'ach_6':
+          '''Sept cas. Que votre prochaine vue soit de grade 1 et que votre chirurgien soit à l'heure.''',
+      'ach_7':
+          '''Huit dans le livre. Le journal de bord n'est plus une rumeur.''',
+      'ach_8':
+          '''Neuf cas. Il manque un chiffre à deux chiffres et une légère supériorité.''',
+      'ach_9':
+          '''Dix cas. Vous avez officiellement arrêté de vous excuser auprès de la perche à perfusion lorsque vous la cognez.''',
+      'ach_10':
+          '''Treize cas. Pas de chance pour certains. Doux pour vous – apparemment.''',
+      'ach_11':
+          '''Seize cas. Doux comme une induction sévo jusqu'à ce qu'ils demandent plus de détente.''',
+      'ach_12':
+          '''Une vingtaine de cas. Plus d'heures en blouse qu'en civil. Classique.''',
+      'ach_13':
+          '''Vingt-cinq cas. Les chirurgiens commencent à mémoriser votre prénom.''',
       'ach_14': '''Trente cas. La caféine est copilote et inotrope primaire.''',
-      'ach_15': '''Quarante cas. Ironiquement, vous êtes le seul dans la pièce à ne pas dormir.''',
-      'ach_16': '''Cinquante cas. Le bip du pouls est essentiellement votre nouveau rythme de repos.''',
-      'ach_17': '''Soixante cas. Presque assez pour intuber tout en décidant du déjeuner.''',
-      'ach_18': '''Soixante-quinze cas. Les trois quarts du chemin vers le club du siècle.''',
-      'ach_19': '''Quatre-vingt-huit cas. Numéro porte-bonheur. Ne le gaspillez pas avec une bougie manquante.''',
-      'ach_20': '''Quatre-vingt-dix cas. Si près que vous pourrez déguster le café de célébration après l\'appel.''',
-      'ach_21': '''Cent cas. Vous lisez le moniteur avant que le chirurgien ne termine la question.''',
-      'ach_22': '''Cent vingt-cinq cas. Juger silencieusement la technique du eye-tapeping : débloqué.''',
-      'ach_23': '''Cent cinquante cas. Le journal de bord devient respectable. Votre sommeil ne l’est pas.''',
+      'ach_15':
+          '''Quarante cas. Ironiquement, vous êtes le seul dans la pièce à ne pas dormir.''',
+      'ach_16':
+          '''Cinquante cas. Le bip du pouls est essentiellement votre nouveau rythme de repos.''',
+      'ach_17':
+          '''Soixante cas. Presque assez pour intuber tout en décidant du déjeuner.''',
+      'ach_18':
+          '''Soixante-quinze cas. Les trois quarts du chemin vers le club du siècle.''',
+      'ach_19':
+          '''Quatre-vingt-huit cas. Numéro porte-bonheur. Ne le gaspillez pas avec une bougie manquante.''',
+      'ach_20':
+          '''Quatre-vingt-dix cas. Si près que vous pourrez déguster le café de célébration après l'appel.''',
+      'ach_21':
+          '''Cent cas. Vous lisez le moniteur avant que le chirurgien ne termine la question.''',
+      'ach_22':
+          '''Cent vingt-cinq cas. Juger silencieusement la technique du eye-tapeping : débloqué.''',
+      'ach_23':
+          '''Cent cinquante cas. Le journal de bord devient respectable. Votre sommeil ne l’est pas.''',
       'ach_24': '''Cent soixante-quinze cas. MAP tenue. Moral : compensé.''',
-      'ach_25': '''Deux cents cas. Il est temps d\'apprendre aux débutants quelle extrémité de la portée est terminée.''',
-      'ach_26': '''Deux cent vingt-cinq cas. Le théâtre connaît votre nom – généralement lorsque la liste dépasse.''',
-      'ach_27': '''Deux cent cinquante cas. Le propofol ne circule plus seulement dans la file d\'attente.''',
-      'ach_28': '''Trois cents cas. Alimenté par le café lounge et la volonté résiduelle.''',
-      'ach_29': '''Trois cent cinquante cas. Les difficultés respiratoires soulèvent un sourcil, pas une fréquence cardiaque.''',
-      'ach_30': '''Quatre cents cas. Vous n\'avez plus peur du téléavertisseur. Le téléavertisseur vous craint.''',
-      'ach_31': '''Cinq cents cas. Un demi-millier. Illumination totale des voies respiratoires (avec humilité occasionnelle).''',
-      'ach_32': '''Cinq cent cinquante cas. Une autre encoche sur le manche du laryngoscope de la vie.''',
-      'ach_33': '''Six cents cas. Peu de choses vous dérangent, à l\'exception du ventilateur qui s\'éteint à l\'induction.''',
-      'ach_34': '''Six cent cinquante cas. Toujours au-dessus de la ligne. Suffisant.''',
+      'ach_25':
+          '''Deux cents cas. Il est temps d'apprendre aux débutants quelle extrémité de la portée est terminée.''',
+      'ach_26':
+          '''Deux cent vingt-cinq cas. Le théâtre connaît votre nom – généralement lorsque la liste dépasse.''',
+      'ach_27':
+          '''Deux cent cinquante cas. Le propofol ne circule plus seulement dans la file d'attente.''',
+      'ach_28':
+          '''Trois cents cas. Alimenté par le café lounge et la volonté résiduelle.''',
+      'ach_29':
+          '''Trois cent cinquante cas. Les difficultés respiratoires soulèvent un sourcil, pas une fréquence cardiaque.''',
+      'ach_30':
+          '''Quatre cents cas. Vous n'avez plus peur du téléavertisseur. Le téléavertisseur vous craint.''',
+      'ach_31':
+          '''Cinq cents cas. Un demi-millier. Illumination totale des voies respiratoires (avec humilité occasionnelle).''',
+      'ach_32':
+          '''Cinq cent cinquante cas. Une autre encoche sur le manche du laryngoscope de la vie.''',
+      'ach_33':
+          '''Six cents cas. Peu de choses vous dérangent, à l'exception du ventilateur qui s'éteint à l'induction.''',
+      'ach_34':
+          '''Six cent cinquante cas. Toujours au-dessus de la ligne. Suffisant.''',
       'ach_35': '''Sept cents cas. Votre PDF pourrait servir de cale-porte.''',
-      'ach_36': '''Sept cent cinquante cas. Vous et le circulateur communiquez désormais par de purs hochements de tête.''',
-      'ach_37': '''Huit cents cas. L\'application vous doit un dîner et un jour de congé.''',
-      'ach_38': '''Huit cent cinquante cas. Jalon atteint. Néostigmine en option.''',
-      'ach_39': '''Neuf cents cas. Presque un millier. Ne portez pas de sort aux cent prochaines.''',
-      'ach_40': '''Neuf cent cinquante cas. Elite est à un bon mois et à une portée ininterrompue.''',
-      'ach_41': '''Mille cas. L’appareil d’anesthésie vient de vous demander conseil.''',
-      'ach_42': '''Douze cent cinquante cas. Avez-vous pensé à rencontrer le soleil ? Socialement?''',
-      'ach_43': '''Mille cinq cents cas. L\'anesthésie est une seconde nature. Le café est toujours en premier.''',
-      'ach_44': '''Dix-sept cent cinquante cas. Fantôme de l’énergie du bloc opératoire.''',
-      'ach_45': '''Deux mille cas. Vous avez vu tous les « modules complémentaires rapides ». Deux fois. Avant le déjeuner.''',
-      'ach_46': '''Vingt mille cinq cents cas. Donnez à une armoire à fournitures le nom de cette personne.''',
-      'ach_47': '''Trois mille cas. Nous sommes activement à court de titres et d’anesthésiques volatils.''',
-      'ach_48': '''Quatre mille cas. Vous regardez les patients et ils envisagent de dormir volontairement.''',
-      'ach_49': '''Cinq mille cas. Vous venez d\'inventer un nouveau gaz volatil ?''',
-      'ach_50': '''Une heure d\'anesthésie. À peine une fraction MAC. Ça compte toujours.''',
-      'ach_51': '''Cinq heures cumulées. Ils ont dormi. Vous avez surveillé. Commerce équitable.''',
-      'ach_52': '''Dix heures. L\'horloge gagne toujours. Vous gardez simplement la MAP en place.''',
-      'ach_53': '''Quinze heures. Votre rythme circadien a déposé une plainte officielle.''',
-      'ach_54': '''Vingt-quatre heures cumulées. Une journée complète d’inconscience contrôlée.''',
-      'ach_55': '''Quarante-huit heures. Deux jours d\'ETCO₂ et de patience.''',
-      'ach_56': '''Cinquante heures. Un travail à temps partiel où le patient peut encore tenter de quitter son emploi en raison d\'arythmies.''',
-      'ach_57': '''Soixante-douze heures. Votre montre a vu plus de levers de soleil que votre oreiller.''',
+      'ach_36':
+          '''Sept cent cinquante cas. Vous et le circulateur communiquez désormais par de purs hochements de tête.''',
+      'ach_37':
+          '''Huit cents cas. L'application vous doit un dîner et un jour de congé.''',
+      'ach_38':
+          '''Huit cent cinquante cas. Jalon atteint. Néostigmine en option.''',
+      'ach_39':
+          '''Neuf cents cas. Presque un millier. Ne portez pas de sort aux cent prochaines.''',
+      'ach_40':
+          '''Neuf cent cinquante cas. Elite est à un bon mois et à une portée ininterrompue.''',
+      'ach_41':
+          '''Mille cas. L’appareil d’anesthésie vient de vous demander conseil.''',
+      'ach_42':
+          '''Douze cent cinquante cas. Avez-vous pensé à rencontrer le soleil ? Socialement?''',
+      'ach_43':
+          '''Mille cinq cents cas. L'anesthésie est une seconde nature. Le café est toujours en premier.''',
+      'ach_44':
+          '''Dix-sept cent cinquante cas. Fantôme de l’énergie du bloc opératoire.''',
+      'ach_45':
+          '''Deux mille cas. Vous avez vu tous les « modules complémentaires rapides ». Deux fois. Avant le déjeuner.''',
+      'ach_46':
+          '''Vingt mille cinq cents cas. Donnez à une armoire à fournitures le nom de cette personne.''',
+      'ach_47':
+          '''Trois mille cas. Nous sommes activement à court de titres et d’anesthésiques volatils.''',
+      'ach_48':
+          '''Quatre mille cas. Vous regardez les patients et ils envisagent de dormir volontairement.''',
+      'ach_49':
+          '''Cinq mille cas. Vous venez d'inventer un nouveau gaz volatil ?''',
+      'ach_50':
+          '''Une heure d'anesthésie. À peine une fraction MAC. Ça compte toujours.''',
+      'ach_51':
+          '''Cinq heures cumulées. Ils ont dormi. Vous avez surveillé. Commerce équitable.''',
+      'ach_52':
+          '''Dix heures. L'horloge gagne toujours. Vous gardez simplement la MAP en place.''',
+      'ach_53':
+          '''Quinze heures. Votre rythme circadien a déposé une plainte officielle.''',
+      'ach_54':
+          '''Vingt-quatre heures cumulées. Une journée complète d’inconscience contrôlée.''',
+      'ach_55': '''Quarante-huit heures. Deux jours d'ETCO₂ et de patience.''',
+      'ach_56':
+          '''Cinquante heures. Un travail à temps partiel où le patient peut encore tenter de quitter son emploi en raison d'arythmies.''',
+      'ach_57':
+          '''Soixante-douze heures. Votre montre a vu plus de levers de soleil que votre oreiller.''',
       'ach_58': '''Cent heures. Un siècle de gaz, pas de ragots.''',
-      'ach_59': '''Cent cinquante heures. Le temps passe vite quand on fait marche arrière.''',
-      'ach_60': '''Deux cents heures. Assez volatile pour parfumer une petite salle.''',
-      'ach_61': '''Trois cents heures. Vos pieds réclament un régional pour eux-mêmes.''',
-      'ach_62': '''Quatre cents heures. Toujours pas d’heures supplémentaires traditionnelles. Seule la gloire.''',
-      'ach_63': '''Cinq cents heures. A mi-chemin vers l\'insomnie mythique.''',
-      'ach_64': '''Sept cent cinquante heures. Les cas longs forgent le caractère et la cyphose.''',
-      'ach_65': '''Mille heures. Élite. D’une manière ou d’une autre, les réunions semblent encore plus longues.''',
-      'ach_66': '''Un cas commençant de minuit à 5 heures du matin. Parce que le sommeil est réservé aux personnes qui ne sont pas de garde.''',
-      'ach_67': '''Cinq nuits commencent. Vous êtes essentiellement un vampire en blouse.''',
-      'ach_68': '''Dix nuits commencent. Le rythme circadien a quitté le débat.''',
-      'ach_69': '''Vingt nuits commencent. Daylight est une rumeur préopératoire.''',
-      'ach_70': '''Un départ de 6h à 7h. Attraper le ver – ou le premier retard de la journée.''',
-      'ach_71': '''Dix départs anticipés. Le café est un copilote et un support hémodynamique.''',
-      'ach_72': '''Un cas de week-end. Les samedis sont pour les garçons… et les courses d\'urgence.''',
-      'ach_73': '''Dix cas de week-end. C\'est quoi ce "brunch" dont tu parles ?''',
-      'ach_74': '''Cinquante cas du week-end. Les amis non médecins ont cessé de vous inviter.''',
-      'ach_75': '''Chirurgie en moins de quinze minutes. Sieste au propofol. Suivant!''',
-      'ach_76': '''Dix opérations ultra-rapides. Vous transformez les pièces plus rapidement que le ménage.''',
-      'ach_77': '''Anesthésie pendant quatre heures. Il est temps de discuter de football fantastique avec le gommage.''',
-      'ach_78': '''Plus de six heures. Vous avez mémorisé chaque carreau du mur de la salle d\'opération.''',
-      'ach_79': '''Plus de huit heures. Croissance de la barbe depuis l\'induction : mesurable.''',
-      'ach_80': '''Plus de dix heures. Le patient est pratiquement votre colocataire maintenant.''',
-      'ach_81': '''Anesthésie dans les quinze minutes suivant l\'intervention chirurgicale. Extubé avant que les rideaux finissent de tomber.''',
-      'ach_82': '''Vingt-cinq revirements serrés. Vous et le chirurgien partagez une seule cellule cérébrale. Beau.''',
-      'ach_83': '''Cinquante émergences parfaites. Les réveiller est un art, et vous êtes Picasso.''',
-      'ach_84': '''Cent émergences chronométrées. Nous recherchons une machine à voyager dans le temps.''',
-      'ach_85': '''Cas le 25 décembre ou le 1er janvier. Ho, ho, prends le midazolam.''',
-      'ach_86': '''Cas le 31 décembre ou le 1er janvier. Laryngoscope dans une main, optimisme tranquille dans l\'autre.''',
-      'ach_87': '''Affaire le jour de ton anniversaire. Joyeux anniversaire - voici un ex-tour d\'urgence.''',
-      'ach_88': '''ASA I. Tellement en bonne santé que vous continuez à chercher le piège caché.''',
-      'ach_89': '''Dix cas ASA I. De quel hôpital utopique s\'agit-il ?''',
-      'ach_90': '''Vingt-cinq ASA Is. Des listes de sport uniquement, sûrement.''',
-      'ach_91': '''Cinquante ASA sont. Les graphiques sont étrangement minces.''',
-      'ach_92': '''Cent ASA est. Vous devez pratiquer exclusivement des soins dentaires de jour.''',
-      'ach_93': '''ASA II. Parce que presque personne de plus de quarante ans n’est vraiment ASA I.''',
+      'ach_59':
+          '''Cent cinquante heures. Le temps passe vite quand on fait marche arrière.''',
+      'ach_60':
+          '''Deux cents heures. Assez volatile pour parfumer une petite salle.''',
+      'ach_61':
+          '''Trois cents heures. Vos pieds réclament un régional pour eux-mêmes.''',
+      'ach_62':
+          '''Quatre cents heures. Toujours pas d’heures supplémentaires traditionnelles. Seule la gloire.''',
+      'ach_63': '''Cinq cents heures. A mi-chemin vers l'insomnie mythique.''',
+      'ach_64':
+          '''Sept cent cinquante heures. Les cas longs forgent le caractère et la cyphose.''',
+      'ach_65':
+          '''Mille heures. Élite. D’une manière ou d’une autre, les réunions semblent encore plus longues.''',
+      'ach_66':
+          '''Un cas commençant de minuit à 5 heures du matin. Parce que le sommeil est réservé aux personnes qui ne sont pas de garde.''',
+      'ach_67':
+          '''Cinq nuits commencent. Vous êtes essentiellement un vampire en blouse.''',
+      'ach_68':
+          '''Dix nuits commencent. Le rythme circadien a quitté le débat.''',
+      'ach_69':
+          '''Vingt nuits commencent. Daylight est une rumeur préopératoire.''',
+      'ach_70':
+          '''Un départ de 6h à 7h. Attraper le ver – ou le premier retard de la journée.''',
+      'ach_71':
+          '''Dix départs anticipés. Le café est un copilote et un support hémodynamique.''',
+      'ach_72':
+          '''Un cas de week-end. Les samedis sont pour les garçons… et les courses d'urgence.''',
+      'ach_73':
+          '''Dix cas de week-end. C'est quoi ce "brunch" dont tu parles ?''',
+      'ach_74':
+          '''Cinquante cas du week-end. Les amis non médecins ont cessé de vous inviter.''',
+      'ach_75':
+          '''Chirurgie en moins de quinze minutes. Sieste au propofol. Suivant!''',
+      'ach_76':
+          '''Dix opérations ultra-rapides. Vous transformez les pièces plus rapidement que le ménage.''',
+      'ach_77':
+          '''Anesthésie pendant quatre heures. Il est temps de discuter de football fantastique avec le gommage.''',
+      'ach_78':
+          '''Plus de six heures. Vous avez mémorisé chaque carreau du mur de la salle d'opération.''',
+      'ach_79':
+          '''Plus de huit heures. Croissance de la barbe depuis l'induction : mesurable.''',
+      'ach_80':
+          '''Plus de dix heures. Le patient est pratiquement votre colocataire maintenant.''',
+      'ach_81':
+          '''Anesthésie dans les quinze minutes suivant l'intervention chirurgicale. Extubé avant que les rideaux finissent de tomber.''',
+      'ach_82':
+          '''Vingt-cinq revirements serrés. Vous et le chirurgien partagez une seule cellule cérébrale. Beau.''',
+      'ach_83':
+          '''Cinquante émergences parfaites. Les réveiller est un art, et vous êtes Picasso.''',
+      'ach_84':
+          '''Cent émergences chronométrées. Nous recherchons une machine à voyager dans le temps.''',
+      'ach_85':
+          '''Cas le 25 décembre ou le 1er janvier. Ho, ho, prends le midazolam.''',
+      'ach_86':
+          '''Cas le 31 décembre ou le 1er janvier. Laryngoscope dans une main, optimisme tranquille dans l'autre.''',
+      'ach_87':
+          '''Affaire le jour de ton anniversaire. Joyeux anniversaire - voici un ex-tour d'urgence.''',
+      'ach_88':
+          '''ASA I. Tellement en bonne santé que vous continuez à chercher le piège caché.''',
+      'ach_89': '''Dix cas ASA I. De quel hôpital utopique s'agit-il ?''',
+      'ach_90':
+          '''Vingt-cinq ASA Is. Des listes de sport uniquement, sûrement.''',
+      'ach_91':
+          '''Cinquante ASA sont. Les graphiques sont étrangement minces.''',
+      'ach_92':
+          '''Cent ASA est. Vous devez pratiquer exclusivement des soins dentaires de jour.''',
+      'ach_93':
+          '''ASA II. Parce que presque personne de plus de quarante ans n’est vraiment ASA I.''',
       'ach_94': '''Dix ASA II. Pain, beurre et hypertension polie.''',
       'ach_95': '''Vingt-cinq ASA II. Le plat du jour du bloc opératoire.''',
-      'ach_96': '''Cinquante ASA II. Doses d\'induction calculées pendant votre sommeil.''',
-      'ach_97': '''Cent ASA II. Vous pourriez écrire le chapitre du manuel dans une baie préopératoire.''',
+      'ach_96':
+          '''Cinquante ASA II. Doses d'induction calculées pendant votre sommeil.''',
+      'ach_97':
+          '''Cent ASA II. Vous pourriez écrire le chapitre du manuel dans une baie préopératoire.''',
       'ach_98': '''ASA III. Les choses sont devenues un peu épicées.''',
-      'ach_99': '''Dix ASA III. Un tableau plus épais qu\'un annuaire téléphonique.''',
-      'ach_100': '''Vingt-cinq ASA III. La polypharmacie est votre deuxième prénom.''',
+      'ach_99':
+          '''Dix ASA III. Un tableau plus épais qu'un annuaire téléphonique.''',
+      'ach_100':
+          '''Vingt-cinq ASA III. La polypharmacie est votre deuxième prénom.''',
       'ach_101': '''Cinquante ASA III. Comorbidités pour le petit-déjeuner.''',
-      'ach_102': '''Cent ASA III. Vous mangez des listes de problèmes et demandez des secondes.''',
-      'ach_103': '''ASA IV. La faucheuse est dans le coin – vous avez de l\'épi dans le tiroir.''',
-      'ach_104': '''Cinq ASA IV. Votre propre RH de base est en train de négocier.''',
-      'ach_105': '''Quinze ASA IV. Bienvenue sur le fil du couteau physiologique.''',
+      'ach_102':
+          '''Cent ASA III. Vous mangez des listes de problèmes et demandez des secondes.''',
+      'ach_103':
+          '''ASA IV. La faucheuse est dans le coin – vous avez de l'épi dans le tiroir.''',
+      'ach_104':
+          '''Cinq ASA IV. Votre propre RH de base est en train de négocier.''',
+      'ach_105':
+          '''Quinze ASA IV. Bienvenue sur le fil du couteau physiologique.''',
       'ach_106': '''Vingt-cinq ASA IV. Vous riez poliment face au malheur.''',
-      'ach_107': '''Cinquante ASA IV. Glace dans les veines ; sevo dans le circuit.''',
+      'ach_107':
+          '''Cinquante ASA IV. Glace dans les veines ; sevo dans le circuit.''',
       'ach_108': '''ASA V. Je vous salue Marie, plein de presseurs.''',
-      'ach_109': '''Trois ASA contre. En partie anesthésiste, en partie optimiste, en partie nécromancien.''',
-      'ach_110': '''Cinq ASA contre. » demanda la Mort. Vous avez dit pas aujourd\'hui.''',
+      'ach_109':
+          '''Trois ASA contre. En partie anesthésiste, en partie optimiste, en partie nécromancien.''',
+      'ach_110':
+          '''Cinq ASA contre. » demanda la Mort. Vous avez dit pas aujourd'hui.''',
       'ach_111': '''Dix ASA contre. Cape en option sous le tablier de plomb.''',
-      'ach_112': '''Vingt ASA contre. Les observateurs se taisent par respect.''',
-      'ach_113': '''Cent cas ASA III-V. Risque géré comme un courtier calme avec de meilleurs médicaments.''',
-      'ach_114': '''ASA IV ou V avec décharge sans incident de la PACU. Admettez-le, avez-vous triché ?''',
-      'ach_115': '''ASA IV/V aux soins intensifs toujours intubé. Ne passez pas GO. Ne pas extuber.''',
-      'ach_116': '''Dix cas consécutifs faciles et sans incident. Profitez-en. Cela ne durera pas.''',
-      'ach_117': '''Vingt-cinq ASA I/II consécutifs sans incident. Un mois étrangement relaxant.''',
-      'ach_118': '''Trois cas ASA III+ en une journée. Planifiez soigneusement la soirée.''',
-      'ach_119': '''Cinq ASA III+ en une journée. Glandes surrénales : entièrement taraudées.''',
-      'ach_120': '''Au moins un sur chaque grade ASA 1 à 5. Les bons, les mauvais et les intubés.''',
-      'ach_121': '''Cinquante cas sans incident avec un taux d\'ASA élevé. Risque élevé, zéro panique.''',
+      'ach_112':
+          '''Vingt ASA contre. Les observateurs se taisent par respect.''',
+      'ach_113':
+          '''Cent cas ASA III-V. Risque géré comme un courtier calme avec de meilleurs médicaments.''',
+      'ach_114':
+          '''ASA IV ou V avec décharge sans incident de la PACU. Admettez-le, avez-vous triché ?''',
+      'ach_115':
+          '''ASA IV/V aux soins intensifs toujours intubé. Ne passez pas GO. Ne pas extuber.''',
+      'ach_116':
+          '''Dix cas consécutifs faciles et sans incident. Profitez-en. Cela ne durera pas.''',
+      'ach_117':
+          '''Vingt-cinq ASA I/II consécutifs sans incident. Un mois étrangement relaxant.''',
+      'ach_118':
+          '''Trois cas ASA III+ en une journée. Planifiez soigneusement la soirée.''',
+      'ach_119':
+          '''Cinq ASA III+ en une journée. Glandes surrénales : entièrement taraudées.''',
+      'ach_120':
+          '''Au moins un sur chaque grade ASA 1 à 5. Les bons, les mauvais et les intubés.''',
+      'ach_121':
+          '''Cinquante cas sans incident avec un taux d'ASA élevé. Risque élevé, zéro panique.''',
       'ach_122': '''Dix cas ASA IV/V. Vous entrez; le chaos prend place.''',
-      'ach_123': '''Cent décharges de PACU sans incident. Juste un autre mardi, en répétition.''',
-      'ach_124': '''Première urgence. Car bien sûr ils se sont rompus à 16h55.''',
+      'ach_123':
+          '''Cent décharges de PACU sans incident. Juste un autre mardi, en répétition.''',
+      'ach_124':
+          '''Première urgence. Car bien sûr ils se sont rompus à 16h55.''',
       'ach_125': '''Cinq urgences. Qui a besoin d’une salle de sport ?''',
       'ach_126': '''Dix urgences. Le chaos est votre cardio.''',
-      'ach_127': '''Une vingtaine d\'urgences. Les RH au repos ne participent plus.''',
-      'ach_128': '''Cinquante urgences sous pression. Vous prospérez lorsque la liste prend feu.''',
-      'ach_129': '''Soixante-quinze appels d\'urgence. Le comité de traumatologie connaît vos traces.''',
-      'ach_130': '''Cent urgences. Ne pas être impressionné est une compétence clinique.''',
-      'ach_131': '''Cent cinquante urgences. Vous pourriez faire cela pendant votre sommeil – s\'il vous plaît, ne le faites pas.''',
-      'ach_132': '''Deux cents urgences. Le téléavertisseur sursaute le premier.''',
+      'ach_127':
+          '''Une vingtaine d'urgences. Les RH au repos ne participent plus.''',
+      'ach_128':
+          '''Cinquante urgences sous pression. Vous prospérez lorsque la liste prend feu.''',
+      'ach_129':
+          '''Soixante-quinze appels d'urgence. Le comité de traumatologie connaît vos traces.''',
+      'ach_130':
+          '''Cent urgences. Ne pas être impressionné est une compétence clinique.''',
+      'ach_131':
+          '''Cent cinquante urgences. Vous pourriez faire cela pendant votre sommeil – s'il vous plaît, ne le faites pas.''',
+      'ach_132':
+          '''Deux cents urgences. Le téléavertisseur sursaute le premier.''',
       'ach_133': '''Cinq urgences en une journée. Protocole de pleine lune ?''',
-      'ach_134': '''Deux urgences coup sur coup. Double réservation pour l\'héroïsme.''',
-      'ach_135': '''Urgence ASA V. Prenez l\'épi, dites moins, poussez prudemment.''',
-      'ach_136': '''Vingt cas d\'urgence, PACU sans incident. Catastrophe sur papier ; ennuyeux dans la pièce.''',
-      'ach_137': '''Urgence avec un régional effectué. Bloquez-vous pendant que la pièce panique. Mise au point maximale.''',
-      'ach_138': '''Dix régions d’urgence effectuées. Tireur d\'élite de la liste urgente.''',
-      'ach_139': '''Chirurgie d\'urgence ≤ 30 minutes. Entrer, réparer, fermer, sortir – énergie d’arrêt au stand.''',
+      'ach_134':
+          '''Deux urgences coup sur coup. Double réservation pour l'héroïsme.''',
+      'ach_135':
+          '''Urgence ASA V. Prenez l'épi, dites moins, poussez prudemment.''',
+      'ach_136':
+          '''Vingt cas d'urgence, PACU sans incident. Catastrophe sur papier ; ennuyeux dans la pièce.''',
+      'ach_137':
+          '''Urgence avec un régional effectué. Bloquez-vous pendant que la pièce panique. Mise au point maximale.''',
+      'ach_138':
+          '''Dix régions d’urgence effectuées. Tireur d'élite de la liste urgente.''',
+      'ach_139':
+          '''Chirurgie d'urgence ≤ 30 minutes. Entrer, réparer, fermer, sortir – énergie d’arrêt au stand.''',
       'ach_140': '''Fibre optique réveillée en urgence. Nerfs de titane.''',
-      'ach_141': '''Colonne vertébrale d\'urgence. Ne bouge pas. Le tube non plus.''',
-      'ach_142': '''Cardiothoracique d\'urgence. De grands moniteurs, des sensations plus grandes.''',
-      'ach_143': '''Obstétrique d\'urgence. Deux patients, un plan de voies respiratoires, zéro refroidissement.''',
-      'ach_144': '''Neurochirurgie d\'urgence. Traitez le cerveau comme s’il payait le loyer.''',
-      'ach_145': '''Cinquante urgences. Quand le conseil dit urgent, vous dites RSI.''',
-      'ach_146': '''Urgence commençant de 00h00 à 04h00. Rien de bon ne commence maintenant, sauf des mains compétentes.''',
-      'ach_147': '''Urgence le 25 décembre ou le 1er janvier. Joyeux Noël — voici une rupture de viscère.''',
-      'ach_148': '''Dix urgences du week-end. Maintenir la banque de sang en activité.''',
-      'ach_149': '''Voies aériennes difficiles en urgence. Les plans A à C ont échoué. Vous êtes le Plan D.''',
-      'ach_150': '''ASA IV d\'urgence avec sortie de PACU sans incident. Chambre en feu ; BP un ​​poli 120/80.''',
-      'ach_151': '''Urgence pour les moins de 18 ans. Apportez votre meilleur travail et votre voix la plus calme.''',
-      'ach_152': '''Urgence de plus de 65 ans. Traitez comme de la porcelaine fine avec un meilleur suivi.''',
-      'ach_153': '''Fin d’urgence de 8h00 à 8h30. Forfaits dîner : annulés avec honneur.''',
-      'ach_154': '''Trois urgences en douze heures. C\'est une connerie médicale.''',
-      'ach_155': '''Dix décharges d\'urgence sans incident de la PACU. MTP n\'est qu\'une autre recette.''',
-      'ach_156': '''Vingt-cinq cas de chirurgie traumatologique d’urgence. Chef d\'orchestre de l\'orchestre de réanimation.''',
-      'ach_157': '''Vingt laparotomies d\'urgence. Sepsis, vasopresseurs et cette odeur incomparable.''',
-      'ach_158': '''Vingt cas ortho d’urgence. Forets, ciment et "BP s\'il vous plaît".''',
-      'ach_159': '''Vingt cas d’urgence obstétricale. Catégories et concentration pure.''',
-      'ach_160': '''Dix neurocraniotomies d\'urgence. Smooth BP est la seule personnalité autorisée.''',
+      'ach_141':
+          '''Colonne vertébrale d'urgence. Ne bouge pas. Le tube non plus.''',
+      'ach_142':
+          '''Cardiothoracique d'urgence. De grands moniteurs, des sensations plus grandes.''',
+      'ach_143':
+          '''Obstétrique d'urgence. Deux patients, un plan de voies respiratoires, zéro refroidissement.''',
+      'ach_144':
+          '''Neurochirurgie d'urgence. Traitez le cerveau comme s’il payait le loyer.''',
+      'ach_145':
+          '''Cinquante urgences. Quand le conseil dit urgent, vous dites RSI.''',
+      'ach_146':
+          '''Urgence commençant de 00h00 à 04h00. Rien de bon ne commence maintenant, sauf des mains compétentes.''',
+      'ach_147':
+          '''Urgence le 25 décembre ou le 1er janvier. Joyeux Noël — voici une rupture de viscère.''',
+      'ach_148':
+          '''Dix urgences du week-end. Maintenir la banque de sang en activité.''',
+      'ach_149':
+          '''Voies aériennes difficiles en urgence. Les plans A à C ont échoué. Vous êtes le Plan D.''',
+      'ach_150':
+          '''ASA IV d'urgence avec sortie de PACU sans incident. Chambre en feu ; BP un ​​poli 120/80.''',
+      'ach_151':
+          '''Urgence pour les moins de 18 ans. Apportez votre meilleur travail et votre voix la plus calme.''',
+      'ach_152':
+          '''Urgence de plus de 65 ans. Traitez comme de la porcelaine fine avec un meilleur suivi.''',
+      'ach_153':
+          '''Fin d’urgence de 8h00 à 8h30. Forfaits dîner : annulés avec honneur.''',
+      'ach_154':
+          '''Trois urgences en douze heures. C'est une connerie médicale.''',
+      'ach_155':
+          '''Dix décharges d'urgence sans incident de la PACU. MTP n'est qu'une autre recette.''',
+      'ach_156':
+          '''Vingt-cinq cas de chirurgie traumatologique d’urgence. Chef d'orchestre de l'orchestre de réanimation.''',
+      'ach_157':
+          '''Vingt laparotomies d'urgence. Sepsis, vasopresseurs et cette odeur incomparable.''',
+      'ach_158':
+          '''Vingt cas ortho d’urgence. Forets, ciment et "BP s'il vous plaît".''',
+      'ach_159':
+          '''Vingt cas d’urgence obstétricale. Catégories et concentration pure.''',
+      'ach_160':
+          '''Dix neurocraniotomies d'urgence. Smooth BP est la seule personnalité autorisée.''',
       'ach_161': '''Dix cas vasculaires d’urgence. Se clipse ; calme-toi.''',
-      'ach_162': '''Trois cents urgences. Le chaos a demandé une retraite anticipée.''',
-      'ach_163': '''Dix cas d’urgence dans des spécialités uniques. Champ de tir sous le feu.''',
-      'ach_164': '''Cinq urgences en vingt-quatre heures. 90% de caféine, 10% de dépit.''',
-      'ach_165': '''Un cas de chirurgie générale. Pain et beurre — aspiration en veille.''',
-      'ach_166': '''Vingt-cinq cas GS. Plus d\'intestins qu\'un mème de liste du vendredi.''',
-      'ach_167': '''Cent caisses GS. Vous et la chirurgie générale êtes dans une relation MAC engagée.''',
-      'ach_168': '''Un cas ortho. Bienvenue dans les perceuses, les vis et les outils électriques sous forme de bruit blanc.''',
+      'ach_162':
+          '''Trois cents urgences. Le chaos a demandé une retraite anticipée.''',
+      'ach_163':
+          '''Dix cas d’urgence dans des spécialités uniques. Champ de tir sous le feu.''',
+      'ach_164':
+          '''Cinq urgences en vingt-quatre heures. 90% de caféine, 10% de dépit.''',
+      'ach_165':
+          '''Un cas de chirurgie générale. Pain et beurre — aspiration en veille.''',
+      'ach_166':
+          '''Vingt-cinq cas GS. Plus d'intestins qu'un mème de liste du vendredi.''',
+      'ach_167':
+          '''Cent caisses GS. Vous et la chirurgie générale êtes dans une relation MAC engagée.''',
+      'ach_168':
+          '''Un cas ortho. Bienvenue dans les perceuses, les vis et les outils électriques sous forme de bruit blanc.''',
       'ach_169': '''Vingt-cinq cas ortho. Oreilles calibrées à la scie.''',
-      'ach_170': '''Cent cas ortho. Équipage squelette, mais rendez-le anesthésique.''',
-      'ach_171': '''Un cas d\'obstétrique. Une petite logistique humaine aux enjeux élevés.''',
-      'ach_172': '''Vingt-cinq cas d\'observation. La salle de travail connaît vos traces.''',
-      'ach_173': '''Cent cas d\'observation. Péridurales, catégories 1, et éternel "est-elle pleinement ?"''',
-      'ach_174': '''Vingt-cinq cas gynécologiques. Trendelenburg et ténacité.''',
-      'ach_175': '''Un cas de neurochirurgie. Manipulez-le avec précaution : le cerveau vous observe.''',
-      'ach_176': '''Vingt-cinq cas neurologiques. Une tension artérielle douce est votre langage d’amour.''',
-      'ach_177': '''Cinquante cas neurologiques. Territoire profond. Mains stables requises.''',
-      'ach_178': '''Un cas cardiothoracique. De grands moniteurs, des sensations plus grandes.''',
-      'ach_179': '''Vingt-cinq cas de CT. Le bavardage de contournement est un ETCO₂ de fond.''',
-      'ach_180': '''Cinquante cas cardiothoraciques. L\'asystolie élective est encore sauvage. Vous restez ennuyeux. Bien.''',
-      'ach_181': '''Vingt-cinq cas ORL. Voies aériennes partagées : la chute ultime de la confiance.''',
-      'ach_182': '''Vingt-cinq cas d\'urologie. Rougeur, concentration, silence poli.''',
-      'ach_183': '''Vingt-cinq caisses en plastique. Cosmésis pour eux ; l\'endurance pour vous.''',
-      'ach_184': '''Un cas de chirurgie pédiatrique. Petit ETT, responsabilité à grande échelle.''',
-      'ach_185': '''Vingt-cinq cas de chirurgie pédiatrique. Vous parlez couramment la panique parentale.''',
-      'ach_186': '''Vingt-cinq cas de chirurgie traumatologique. Quand la commission dit polytraumatisme, vous dites d’accord.''',
-      'ach_187': '''Vingt-cinq cas d\'ophtalmologie. L\'immobilité est un sport de compétition.''',
-      'ach_188': '''Un cas de colonne vertébrale. Ne bouge pas. Vraiment. Ne le faites pas.''',
-      'ach_189': '''Vingt-cinq cas de colonne vertébrale. Couché, rembourré, philosophiquement aligné avec la table.''',
-      'ach_190': '''Vingt-cinq cas de tête et de cou. L’immobilier aérien coûte cher.''',
-      'ach_191': '''Vingt-cinq cas HPB. Opérations longues, concentration plus longue.''',
-      'ach_192': '''Vingt-cinq cas gastro-intestinaux supérieurs ou colorectaux. L’abdomen ne manque jamais de rebondissements.''',
-      'ach_193': '''Dix cas endocriniens. Les hormones ont écrit le protocole ; vous l\'appliquez.''',
-      'ach_194': '''Dix cas NORA/MRI/DSA. Site distant, veille créative, jambes solides.''',
-      'ach_195': '''Dix cas d\'intervention contre la douleur. Parfois, la drogue la plus douce est locale.''',
-      'ach_196': '''Cinq cas RMU. Théâtre calme, mains soignées, salles pleines d’espoir.''',
-      'ach_197': '''Vingt-cinq cas de gynéco-oncologie. Pathologie lourde ; des mains fermes.''',
-      'ach_198': '''Vingt-cinq cas manuels et reconstructifs. Les millimètres comptent plus que l’ego.''',
-      'ach_199': '''Dix cas ortho pédiatriques. Des os en croissance, une patience croissante.''',
+      'ach_170':
+          '''Cent cas ortho. Équipage squelette, mais rendez-le anesthésique.''',
+      'ach_171':
+          '''Un cas d'obstétrique. Une petite logistique humaine aux enjeux élevés.''',
+      'ach_172':
+          '''Vingt-cinq cas d'observation. La salle de travail connaît vos traces.''',
+      'ach_173':
+          '''Cent cas d'observation. Péridurales, catégories 1, et éternel "est-elle pleinement ?"''',
+      'ach_174':
+          '''Vingt-cinq cas gynécologiques. Trendelenburg et ténacité.''',
+      'ach_175':
+          '''Un cas de neurochirurgie. Manipulez-le avec précaution : le cerveau vous observe.''',
+      'ach_176':
+          '''Vingt-cinq cas neurologiques. Une tension artérielle douce est votre langage d’amour.''',
+      'ach_177':
+          '''Cinquante cas neurologiques. Territoire profond. Mains stables requises.''',
+      'ach_178':
+          '''Un cas cardiothoracique. De grands moniteurs, des sensations plus grandes.''',
+      'ach_179':
+          '''Vingt-cinq cas de CT. Le bavardage de contournement est un ETCO₂ de fond.''',
+      'ach_180':
+          '''Cinquante cas cardiothoraciques. L'asystolie élective est encore sauvage. Vous restez ennuyeux. Bien.''',
+      'ach_181':
+          '''Vingt-cinq cas ORL. Voies aériennes partagées : la chute ultime de la confiance.''',
+      'ach_182':
+          '''Vingt-cinq cas d'urologie. Rougeur, concentration, silence poli.''',
+      'ach_183':
+          '''Vingt-cinq caisses en plastique. Cosmésis pour eux ; l'endurance pour vous.''',
+      'ach_184':
+          '''Un cas de chirurgie pédiatrique. Petit ETT, responsabilité à grande échelle.''',
+      'ach_185':
+          '''Vingt-cinq cas de chirurgie pédiatrique. Vous parlez couramment la panique parentale.''',
+      'ach_186':
+          '''Vingt-cinq cas de chirurgie traumatologique. Quand la commission dit polytraumatisme, vous dites d’accord.''',
+      'ach_187':
+          '''Vingt-cinq cas d'ophtalmologie. L'immobilité est un sport de compétition.''',
+      'ach_188':
+          '''Un cas de colonne vertébrale. Ne bouge pas. Vraiment. Ne le faites pas.''',
+      'ach_189':
+          '''Vingt-cinq cas de colonne vertébrale. Couché, rembourré, philosophiquement aligné avec la table.''',
+      'ach_190':
+          '''Vingt-cinq cas de tête et de cou. L’immobilier aérien coûte cher.''',
+      'ach_191':
+          '''Vingt-cinq cas HPB. Opérations longues, concentration plus longue.''',
+      'ach_192':
+          '''Vingt-cinq cas gastro-intestinaux supérieurs ou colorectaux. L’abdomen ne manque jamais de rebondissements.''',
+      'ach_193':
+          '''Dix cas endocriniens. Les hormones ont écrit le protocole ; vous l'appliquez.''',
+      'ach_194':
+          '''Dix cas NORA/MRI/DSA. Site distant, veille créative, jambes solides.''',
+      'ach_195':
+          '''Dix cas d'intervention contre la douleur. Parfois, la drogue la plus douce est locale.''',
+      'ach_196':
+          '''Cinq cas RMU. Théâtre calme, mains soignées, salles pleines d’espoir.''',
+      'ach_197':
+          '''Vingt-cinq cas de gynéco-oncologie. Pathologie lourde ; des mains fermes.''',
+      'ach_198':
+          '''Vingt-cinq cas manuels et reconstructifs. Les millimètres comptent plus que l’ego.''',
+      'ach_199':
+          '''Dix cas ortho pédiatriques. Des os en croissance, une patience croissante.''',
       'ach_200': '''Cinq spécialités uniques. La gamme est un flex.''',
-      'ach_201': '''Dix spécialités uniques. Votre journal de bord présente des problèmes d’engagement sains.''',
-      'ach_202': '''Quinze spécialités uniques. Le GPS du théâtre vous accompagne partout.''',
-      'ach_203': '''Vingt-cinq spécialités uniques. Da Vinci n\'avait pas de pompe TIVA. Ce n\'est pas le cas.''',
-      'ach_204': '''Dix cas spécialisés « Autres ». S\'il ne rentre pas dans une liste déroulante, il s\'adapte toujours à votre livre.''',
-      'ach_205': '''Deux cent cinquante cas ortho. Ceinture de titre en ciment osseux.''',
-      'ach_206': '''Deux cent cinquante cas obstétricaux ou gynécologiques. Couronne de travail, légèrement tachée de sang.''',
-      'ach_207': '''Une centaine de cas neurologiques. L\'ICP n\'est qu\'un autre numéro que vous intimidez doucement.''',
-      'ach_208': '''Cent cas de CT. De gros dossiers, une plus grande endurance, des contrôles ACT sans fin.''',
-      'ach_209': '''Cent cas de colonne vertébrale. Votre propre lombaire a déposé un Datix.''',
-      'ach_210': '''Une centaine de cas d\'urologie. Maître de l\'irrigation douce.''',
-      'ach_211': '''Une centaine de cas ORL. Le zen des voies respiratoires partagées, durement gagné.''',
-      'ach_212': '''Une centaine de caisses en plastique. Esthétique ou reconstructif – même induction constante.''',
-      'ach_213': '''Cent cas de chirurgie pédiatrique. Petits tubes, grand statut de légende.''',
-      'ach_214': '''Une centaine de cas d\'ophtalmologie. Excellence immobile, âme caféinée.''',
-      'ach_215': '''Cinquante cas colorectaux. Vous connaissez une anastomose comme une forme d’onde.''',
-      'ach_216': '''Cinquante cas gastro-intestinaux supérieurs. Voyageur fréquent de la bouche au ligament de Treitz.''',
-      'ach_217': '''Cinquante cas HPB. Opérations longues ; peu de patience pour une hypotension mystérieuse.''',
-      'ach_218': '''Première AG. Bienvenue à l\'église du vaporisateur.''',
-      'ach_219': '''Cinquante AG. Sevo est désormais fondamentalement un trait de personnalité.''',
+      'ach_201':
+          '''Dix spécialités uniques. Votre journal de bord présente des problèmes d’engagement sains.''',
+      'ach_202':
+          '''Quinze spécialités uniques. Le GPS du théâtre vous accompagne partout.''',
+      'ach_203':
+          '''Vingt-cinq spécialités uniques. Da Vinci n'avait pas de pompe TIVA. Ce n'est pas le cas.''',
+      'ach_204':
+          '''Dix cas spécialisés « Autres ». S'il ne rentre pas dans une liste déroulante, il s'adapte toujours à votre livre.''',
+      'ach_205':
+          '''Deux cent cinquante cas ortho. Ceinture de titre en ciment osseux.''',
+      'ach_206':
+          '''Deux cent cinquante cas obstétricaux ou gynécologiques. Couronne de travail, légèrement tachée de sang.''',
+      'ach_207':
+          '''Une centaine de cas neurologiques. L'ICP n'est qu'un autre numéro que vous intimidez doucement.''',
+      'ach_208':
+          '''Cent cas de CT. De gros dossiers, une plus grande endurance, des contrôles ACT sans fin.''',
+      'ach_209':
+          '''Cent cas de colonne vertébrale. Votre propre lombaire a déposé un Datix.''',
+      'ach_210':
+          '''Une centaine de cas d'urologie. Maître de l'irrigation douce.''',
+      'ach_211':
+          '''Une centaine de cas ORL. Le zen des voies respiratoires partagées, durement gagné.''',
+      'ach_212':
+          '''Une centaine de caisses en plastique. Esthétique ou reconstructif – même induction constante.''',
+      'ach_213':
+          '''Cent cas de chirurgie pédiatrique. Petits tubes, grand statut de légende.''',
+      'ach_214':
+          '''Une centaine de cas d'ophtalmologie. Excellence immobile, âme caféinée.''',
+      'ach_215':
+          '''Cinquante cas colorectaux. Vous connaissez une anastomose comme une forme d’onde.''',
+      'ach_216':
+          '''Cinquante cas gastro-intestinaux supérieurs. Voyageur fréquent de la bouche au ligament de Treitz.''',
+      'ach_217':
+          '''Cinquante cas HPB. Opérations longues ; peu de patience pour une hypotension mystérieuse.''',
+      'ach_218': '''Première AG. Bienvenue à l'église du vaporisateur.''',
+      'ach_219':
+          '''Cinquante AG. Sevo est désormais fondamentalement un trait de personnalité.''',
       'ach_220': '''Deux cents AG. Vous pouvez sentir MAC depuis le couloir.''',
       'ach_221': '''Cinq cents AG. Les cadrans saluent lorsque vous entrez.''',
       'ach_222': '''Premier TIVA. Propofol : la magie blanche originelle.''',
-      'ach_223': '''Premier cas TIVA. Pas d\'essence, toute la classe.''',
-      'ach_224': '''Vingt-cinq TIVA. Cible contrôlée et émotionnellement stable.''',
-      'ach_225': '''Cinquante TIVA. Les pompes bourdonnent comme un réfrigérateur content.''',
+      'ach_223': '''Premier cas TIVA. Pas d'essence, toute la classe.''',
+      'ach_224':
+          '''Vingt-cinq TIVA. Cible contrôlée et émotionnellement stable.''',
+      'ach_225':
+          '''Cinquante TIVA. Les pompes bourdonnent comme un réfrigérateur content.''',
       'ach_226': '''Cent TIVA. Volatil qui ?''',
-      'ach_227': '''Premier CSE. Le meilleur des deux mondes, deux fois moins de paperasse.''',
+      'ach_227':
+          '''Premier CSE. Le meilleur des deux mondes, deux fois moins de paperasse.''',
       'ach_228': '''Dix CSE. La perte de résistance est votre cardio.''',
-      'ach_229': '''Vingt-cinq CSE. Cathéter et aiguille en mariage harmonieux.''',
-      'ach_230': '''Première primaire vertébrale. Paillettes CSF : du bon genre.''',
-      'ach_231': '''Cinquante vertèbres. Goutte à goutte, goutte à goutte, bloque.''',
-      'ach_232': '''Cent cinquante vertèbres. Vous pourriez trouver L3-4 dans le noir.''',
-      'ach_233': '''Première primaire péridurale. Accrochez le sac ; gardez la foi.''',
-      'ach_234': '''Vingt-cinq péridurales. Espace de mythe, aiguille de vérité.''',
-      'ach_235': '''Cinquante péridurales. La finesse plutôt que la force. Toujours.''',
-      'ach_236': '''Première sédation/MAC. Assez conscient pour regretter la petite conversation.''',
-      'ach_237': '''Vingt-cinq MAC. Doux comme un compliment contrôlé par la cible.''',
-      'ach_238': '''Cinquante MAC. Ils font la sieste ; tu dragues le chirurgien.''',
+      'ach_229':
+          '''Vingt-cinq CSE. Cathéter et aiguille en mariage harmonieux.''',
+      'ach_230':
+          '''Première primaire vertébrale. Paillettes CSF : du bon genre.''',
+      'ach_231':
+          '''Cinquante vertèbres. Goutte à goutte, goutte à goutte, bloque.''',
+      'ach_232':
+          '''Cent cinquante vertèbres. Vous pourriez trouver L3-4 dans le noir.''',
+      'ach_233':
+          '''Première primaire péridurale. Accrochez le sac ; gardez la foi.''',
+      'ach_234':
+          '''Vingt-cinq péridurales. Espace de mythe, aiguille de vérité.''',
+      'ach_235':
+          '''Cinquante péridurales. La finesse plutôt que la force. Toujours.''',
+      'ach_236':
+          '''Première sédation/MAC. Assez conscient pour regretter la petite conversation.''',
+      'ach_237':
+          '''Vingt-cinq MAC. Doux comme un compliment contrôlé par la cible.''',
+      'ach_238':
+          '''Cinquante MAC. Ils font la sieste ; tu dragues le chirurgien.''',
       'ach_239': '''Premier cas uniquement local. Mode veille : activé.''',
-      'ach_240': '''Vingt cas uniquement locaux. Héroïsme facultatif ; présence obligatoire.''',
-      'ach_241': '''Premier bloc nerveux périphérique comme primaire. Twitch ou chatoyant – engagez-vous.''',
+      'ach_240':
+          '''Vingt cas uniquement locaux. Héroïsme facultatif ; présence obligatoire.''',
+      'ach_241':
+          '''Premier bloc nerveux périphérique comme primaire. Twitch ou chatoyant – engagez-vous.''',
       'ach_242': '''Vingt-cinq PNB. Nerfs localisés ; ego vérifié.''',
-      'ach_243': '''Premier carter de pompe TCI. L\'algorithme est votre copilote.''',
-      'ach_244': '''Vingt-cinq cas TCI. Rêves de sites d\'effets, réalités plasmatiques.''',
+      'ach_243':
+          '''Premier carter de pompe TCI. L'algorithme est votre copilote.''',
+      'ach_244':
+          '''Vingt-cinq cas TCI. Rêves de sites d'effets, réalités plasmatiques.''',
       'ach_245': '''Cinquante cas TCI. La pompe vous fait confiance. Rare.''',
-      'ach_246': '''Sept techniques primaires uniques ou plus. La portée est le flex.''',
-      'ach_247': '''Spinal, péridural, CSE, PNB ou local – patient éveillé, vous êtes plus vif.''',
+      'ach_246':
+          '''Sept techniques primaires uniques ou plus. La portée est le flex.''',
+      'ach_247':
+          '''Spinal, péridural, CSE, PNB ou local – patient éveillé, vous êtes plus vif.''',
       'ach_248': '''Cent AG. Un sommeil profond, des excuses superficielles.''',
-      'ach_249': '''Deux cent cinquante AG. Vous pourriez enseigner les bonnes manières du vaporisateur.''',
+      'ach_249':
+          '''Deux cent cinquante AG. Vous pourriez enseigner les bonnes manières du vaporisateur.''',
       'ach_250': '''Cinq cents AG. Énergie légendaire de gasman/gaswoman.''',
-      'ach_251': '''Cent cas éveillés de type régional. Aiguilles sur les buses.''',
-      'ach_252': '''Cent TIVA. L\'adhésion à la société de la ligne blanche est confirmée.''',
-      'ach_253': '''Trois cents vertèbres. Couronne composée d\'introducteurs.''',
-      'ach_254': '''Cent péridurales. Royauté dans l\'espace péridural.''',
-      'ach_255': '''Cent cas MAC. Sédation si douce que le chirurgien oublie votre présence.''',
-      'ach_256': '''Premier succès ETT. Capnographe : les seuls applaudissements qui comptent.''',
+      'ach_251':
+          '''Cent cas éveillés de type régional. Aiguilles sur les buses.''',
+      'ach_252':
+          '''Cent TIVA. L'adhésion à la société de la ligne blanche est confirmée.''',
+      'ach_253':
+          '''Trois cents vertèbres. Couronne composée d'introducteurs.''',
+      'ach_254': '''Cent péridurales. Royauté dans l'espace péridural.''',
+      'ach_255':
+          '''Cent cas MAC. Sédation si douce que le chirurgien oublie votre présence.''',
+      'ach_256':
+          '''Premier succès ETT. Capnographe : les seuls applaudissements qui comptent.''',
       'ach_257': '''Dix ETT. Des mains plus stables. Ego toujours surveillé.''',
-      'ach_258': '''Cinquante ETT. Le tube est branché ; le déjeuner peut attendre.''',
+      'ach_258':
+          '''Cinquante ETT. Le tube est branché ; le déjeuner peut attendre.''',
       'ach_259': '''Cent ETT. Vous et la trachée êtes en bons termes.''',
-      'ach_260': '''Deux cent cinquante ETT. Stylet en option ; ne vous vantez pas.''',
-      'ach_261': '''Cinq cents intubations. Les cordons se séparent par courtoisie professionnelle.''',
+      'ach_260':
+          '''Deux cent cinquante ETT. Stylet en option ; ne vous vantez pas.''',
+      'ach_261':
+          '''Cinq cents intubations. Les cordons se séparent par courtoisie professionnelle.''',
       'ach_262': '''Première LMA. Asseyez-le comme vous le pensez.''',
-      'ach_263': '''Dix LMA. Gel, classique ou suprême – les problèmes d\'engagement sont les bienvenus.''',
-      'ach_264': '''Cinquante LMA. Statut de jeûne respecté ; mâchoire plus respectée.''',
-      'ach_265': '''Une centaine de LMA. L\'alternative douce avec des opinions bien arrêtées.''',
-      'ach_266': '''Deux cent cinquante LMA. Vous pouvez en placer une à mi-conversation.''',
-      'ach_267': '''Premier cas de masque uniquement. Parfois, moins de tubes signifie plus de sagesse.''',
-      'ach_268': '''Vingt cas portant uniquement des masques. Ambubag cardio débloqué.''',
-      'ach_269': '''Premier support de trachéotomie. Quand les compétences générales rencontrent le plastique dur.''',
-      'ach_270': '''Cinq cas trachéaux. Sport d\'équipe avec des règles très fermes.''',
-      'ach_271': '''Première ventilation à jet. Haute fréquence, pression artérielle plus élevée dans la pièce.''',
-      'ach_272': '''Premier DLT. Deux lumières, une prière, placement parfait.''',
-      'ach_273': '''Vingt DLT. Gauche, droite et parfois « en sommes-nous sûrs ? »''',
-      'ach_274': '''Cinquante DLT. La confirmation par fibre optique est votre langage d\'amour.''',
-      'ach_275': '''Premier bloqueur bronchique. Isolement sans le drame d’une dispute DLT.''',
-      'ach_276': '''Dix bloqueurs bronchiques. Stationnement de précision dans le garage des voies respiratoires.''',
-      'ach_277': '''LMA classique vingt fois. Vieille école. Fonctionne toujours.''',
+      'ach_263':
+          '''Dix LMA. Gel, classique ou suprême – les problèmes d'engagement sont les bienvenus.''',
+      'ach_264':
+          '''Cinquante LMA. Statut de jeûne respecté ; mâchoire plus respectée.''',
+      'ach_265':
+          '''Une centaine de LMA. L'alternative douce avec des opinions bien arrêtées.''',
+      'ach_266':
+          '''Deux cent cinquante LMA. Vous pouvez en placer une à mi-conversation.''',
+      'ach_267':
+          '''Premier cas de masque uniquement. Parfois, moins de tubes signifie plus de sagesse.''',
+      'ach_268':
+          '''Vingt cas portant uniquement des masques. Ambubag cardio débloqué.''',
+      'ach_269':
+          '''Premier support de trachéotomie. Quand les compétences générales rencontrent le plastique dur.''',
+      'ach_270':
+          '''Cinq cas trachéaux. Sport d'équipe avec des règles très fermes.''',
+      'ach_271':
+          '''Première ventilation à jet. Haute fréquence, pression artérielle plus élevée dans la pièce.''',
+      'ach_272':
+          '''Premier DLT. Deux lumières, une prière, placement parfait.''',
+      'ach_273':
+          '''Vingt DLT. Gauche, droite et parfois « en sommes-nous sûrs ? »''',
+      'ach_274':
+          '''Cinquante DLT. La confirmation par fibre optique est votre langage d'amour.''',
+      'ach_275':
+          '''Premier bloqueur bronchique. Isolement sans le drame d’une dispute DLT.''',
+      'ach_276':
+          '''Dix bloqueurs bronchiques. Stationnement de précision dans le garage des voies respiratoires.''',
+      'ach_277':
+          '''LMA classique vingt fois. Vieille école. Fonctionne toujours.''',
       'ach_278': '''ProSeal vingt fois. Tube de vidange : le héros méconnu.''',
-      'ach_279': '''i-gel vingt fois. Pas de brassard, pas de problème (généralement).''',
-      'ach_280': '''Suprême LMA vingt fois. Le leadership, c\'est savoir quand se masquer.''',
+      'ach_279':
+          '''i-gel vingt fois. Pas de brassard, pas de problème (généralement).''',
+      'ach_280':
+          '''Suprême LMA vingt fois. Le leadership, c'est savoir quand se masquer.''',
       'ach_281': '''Ambu LMA dix fois. Jetable, pas oubliable.''',
-      'ach_282': '''Flexible ou Fastrach dix fois. Quand l’anatomie devient créative.''',
-      'ach_283': '''Première intubation nasale. Doucement, doucement, à travers les cornets.''',
+      'ach_282':
+          '''Flexible ou Fastrach dix fois. Quand l’anatomie devient créative.''',
+      'ach_283':
+          '''Première intubation nasale. Doucement, doucement, à travers les cornets.''',
       'ach_284': '''Vingt intubations nasales. GPS pour le nasopharynx.''',
-      'ach_285': '''Cinquante intubations nasales. Le voisin préféré des ORL.''',
-      'ach_286': '''Intubation sous-mentonnière. Quand le visage est le champ de bataille.''',
-      'ach_287': '''Premier vidéo-laryngoscope. Netflix, mais faites-en des cordes.''',
-      'ach_288': '''VL dix fois. Du temps d’écran qui aide réellement les patients.''',
+      'ach_285':
+          '''Cinquante intubations nasales. Le voisin préféré des ORL.''',
+      'ach_286':
+          '''Intubation sous-mentonnière. Quand le visage est le champ de bataille.''',
+      'ach_287':
+          '''Premier vidéo-laryngoscope. Netflix, mais faites-en des cordes.''',
+      'ach_288':
+          '''VL dix fois. Du temps d’écran qui aide réellement les patients.''',
       'ach_289': '''VL cinquante fois. Lame, écran, succès.''',
-      'ach_290': '''VL cent fois. La laryngoscopie directe est destinée aux flashbacks.''',
-      'ach_291': '''Première fibre optique réveillée. Patient conscient ; tu es hyper-conscient.''',
-      'ach_292': '''Cinq fibres optiques réveillées. Nerfs de titane, actualité de légendes.''',
-      'ach_293': '''Quinze fibres optiques éveillées. L\'étalon-or, chassé avec de la lidocaïne.''',
-      'ach_294': '''Première fibre optique endormie. Le tube d\'abord, le fanfaronnade ensuite.''',
-      'ach_295': '''Dix fibres optiques endormies. Étendez les compétences sans discours d’encouragement.''',
-      'ach_296': '''Vingt-cinq fibres optiques au total. Ami flexible, normes rigides.''',
-      'ach_297': '''Micro-brassard ETT dix fois. Petit tube, responsabilité adulte.''',
-      'ach_298': '''RAE ou flexométallique vingt fois. La géométrie est une compétence clinique.''',
+      'ach_290':
+          '''VL cent fois. La laryngoscopie directe est destinée aux flashbacks.''',
+      'ach_291':
+          '''Première fibre optique réveillée. Patient conscient ; tu es hyper-conscient.''',
+      'ach_292':
+          '''Cinq fibres optiques réveillées. Nerfs de titane, actualité de légendes.''',
+      'ach_293':
+          '''Quinze fibres optiques éveillées. L'étalon-or, chassé avec de la lidocaïne.''',
+      'ach_294':
+          '''Première fibre optique endormie. Le tube d'abord, le fanfaronnade ensuite.''',
+      'ach_295':
+          '''Dix fibres optiques endormies. Étendez les compétences sans discours d’encouragement.''',
+      'ach_296':
+          '''Vingt-cinq fibres optiques au total. Ami flexible, normes rigides.''',
+      'ach_297':
+          '''Micro-brassard ETT dix fois. Petit tube, responsabilité adulte.''',
+      'ach_298':
+          '''RAE ou flexométallique vingt fois. La géométrie est une compétence clinique.''',
       'ach_299': '''Premier Cormack-Lehane 3. La vue est une suggestion.''',
-      'ach_300': '''Dix classes de 3e année gérées. Collection terminée; fréquence cardiaque en option.''',
-      'ach_301': '''Premier Cormack-Lehane 4. Foi, bougie et bon éclairage ailleurs.''',
-      'ach_302': '''Cinq élèves de 4e année conquis. Vous avez gagné l\'autocollant VL.''',
-      'ach_303': '''Première voie aérienne difficile signalée. Le plan A avait un plan B. Sage.''',
-      'ach_304': '''Cinq voies respiratoires difficiles. L\'apprentissage s\'est fait sous pression.''',
-      'ach_305': '''Dix voies respiratoires difficiles. Le voyage continue ; les désats ont diminué.''',
-      'ach_306': '''Vingt-cinq voies respiratoires difficiles. Mode expert : toujours humble.''',
-      'ach_307': '''Cinquante voies respiratoires difficiles. Silencieux, efficace, légèrement terrifiant.''',
-      'ach_308': '''Voies respiratoires difficiles en une seule tentative. Énergie de premier passage. Le baiser du chef.''',
-      'ach_309': '''Dix victoires difficiles en matière de voies respiratoires dès la première tentative. Propre comme un sifflet, plus aigu qu\'un.''',
-      'ach_310': '''Voies respiratoires difficiles nécessitant plus de 3 tentatives. A survécu. Savant. Connecté.''',
-      'ach_311': '''Cinquante LMA se sont produits personnellement. Pratique, pas de près.''',
+      'ach_300':
+          '''Dix classes de 3e année gérées. Collection terminée; fréquence cardiaque en option.''',
+      'ach_301':
+          '''Premier Cormack-Lehane 4. Foi, bougie et bon éclairage ailleurs.''',
+      'ach_302':
+          '''Cinq élèves de 4e année conquis. Vous avez gagné l'autocollant VL.''',
+      'ach_303':
+          '''Première voie aérienne difficile signalée. Le plan A avait un plan B. Sage.''',
+      'ach_304':
+          '''Cinq voies respiratoires difficiles. L'apprentissage s'est fait sous pression.''',
+      'ach_305':
+          '''Dix voies respiratoires difficiles. Le voyage continue ; les désats ont diminué.''',
+      'ach_306':
+          '''Vingt-cinq voies respiratoires difficiles. Mode expert : toujours humble.''',
+      'ach_307':
+          '''Cinquante voies respiratoires difficiles. Silencieux, efficace, légèrement terrifiant.''',
+      'ach_308':
+          '''Voies respiratoires difficiles en une seule tentative. Énergie de premier passage. Le baiser du chef.''',
+      'ach_309':
+          '''Dix victoires difficiles en matière de voies respiratoires dès la première tentative. Propre comme un sifflet, plus aigu qu'un.''',
+      'ach_310':
+          '''Voies respiratoires difficiles nécessitant plus de 3 tentatives. A survécu. Savant. Connecté.''',
+      'ach_311':
+          '''Cinquante LMA se sont produits personnellement. Pratique, pas de près.''',
       'ach_312': '''Deux cents ETT effectués. Le tube connaît votre nom.''',
-      'ach_313': '''Cinquante voies aériennes assistées. Un casting de soutien, toujours critique.''',
-      'ach_314': '''Cinquante voies respiratoires observées. Regarder, c’est ainsi que commencent les légendes.''',
-      'ach_315': '''ETT inférieur à 4,0 chez un nouveau-né ou un nourrisson. Petite lumière, grand respect.''',
+      'ach_313':
+          '''Cinquante voies aériennes assistées. Un casting de soutien, toujours critique.''',
+      'ach_314':
+          '''Cinquante voies respiratoires observées. Regarder, c’est ainsi que commencent les légendes.''',
+      'ach_315':
+          '''ETT inférieur à 4,0 chez un nouveau-né ou un nourrisson. Petite lumière, grand respect.''',
       'ach_316': '''Taille ETT ≥8,5. Grande énergie des voies respiratoires.''',
-      'ach_317': '''ETT sans ballonnet utilisés correctement dans les pédiatres. Vieilles règles, bon jugement.''',
-      'ach_318': '''Cent ETT à ballonnet réguliers. Édition standard, exécution experte.''',
-      'ach_319': '''Deux cents vues de niveau 1. Limpide. Ne soyez pas arrogant.''',
-      'ach_320': '''Cinquante grades 2a/2b. Presque parfait – cela compte toujours comme une compétence.''',
-      'ach_321': '''Dix fibres optiques éveillées ont été réalisées. Actualité, talk, tube.''',
-      'ach_322': '''Vingt fibroscopes endormis ont été réalisés. Portée pendant qu\'ils dorment ; tu ne le fais pas.''',
-      'ach_323': '''Gestion des voies respiratoires difficiles en urgence. Quand la pièce devient silencieuse, ce n\'est pas le cas.''',
-      'ach_324': '''Détails des voies respiratoires enregistrés dans cinq cents cas. Les données sont une sorte de sagesse.''',
-      'ach_325': '''Chaque outil et modalité touché. L\'arsenal complet. Respect.''',
-      'ach_326': '''Première colonne vertébrale réalisée. Paillettes CSF : du bon genre.''',
+      'ach_317':
+          '''ETT sans ballonnet utilisés correctement dans les pédiatres. Vieilles règles, bon jugement.''',
+      'ach_318':
+          '''Cent ETT à ballonnet réguliers. Édition standard, exécution experte.''',
+      'ach_319':
+          '''Deux cents vues de niveau 1. Limpide. Ne soyez pas arrogant.''',
+      'ach_320':
+          '''Cinquante grades 2a/2b. Presque parfait – cela compte toujours comme une compétence.''',
+      'ach_321':
+          '''Dix fibres optiques éveillées ont été réalisées. Actualité, talk, tube.''',
+      'ach_322':
+          '''Vingt fibroscopes endormis ont été réalisés. Portée pendant qu'ils dorment ; tu ne le fais pas.''',
+      'ach_323':
+          '''Gestion des voies respiratoires difficiles en urgence. Quand la pièce devient silencieuse, ce n'est pas le cas.''',
+      'ach_324':
+          '''Détails des voies respiratoires enregistrés dans cinq cents cas. Les données sont une sorte de sagesse.''',
+      'ach_325':
+          '''Chaque outil et modalité touché. L'arsenal complet. Respect.''',
+      'ach_326':
+          '''Première colonne vertébrale réalisée. Paillettes CSF : du bon genre.''',
       'ach_327': '''Dix vertèbres. Goutte à goutte, goutte à goutte, bloque.''',
       'ach_328': '''Cinquante vertèbres. L3-4 est la maison.''',
-      'ach_329': '''Cent vertèbres. Le sous-arachnoïde est votre code postal.''',
-      'ach_330': '''Deux cent cinquante vertèbres. Travaux d\'aiguille d\'élite.''',
+      'ach_329':
+          '''Cent vertèbres. Le sous-arachnoïde est votre code postal.''',
+      'ach_330':
+          '''Deux cent cinquante vertèbres. Travaux d'aiguille d'élite.''',
       'ach_331': '''Première péridurale. Accrochez le sac ; gardez la foi.''',
-      'ach_332': '''Vingt-cinq péridurales. La perte de résistance est cardio.''',
-      'ach_333': '''Cinquante péridurales tout en finesse. La force est pour les amateurs.''',
+      'ach_332':
+          '''Vingt-cinq péridurales. La perte de résistance est cardio.''',
+      'ach_333':
+          '''Cinquante péridurales tout en finesse. La force est pour les amateurs.''',
       'ach_334': '''Cent péridurales. Espace trouvé, ego garé.''',
-      'ach_335': '''Premier bloc nerveux périphérique. Twitch ou chatoyant – choisissez un côté.''',
+      'ach_335':
+          '''Premier bloc nerveux périphérique. Twitch ou chatoyant – choisissez un côté.''',
       'ach_336': '''Dix PNB. Nerfs localisés ; café gagné.''',
-      'ach_337': '''Vingt-cinq PNB. Le gel à ultrasons est un groupe alimentaire.''',
+      'ach_337':
+          '''Vingt-cinq PNB. Le gel à ultrasons est un groupe alimentaire.''',
       'ach_338': '''Cinquante PNB. Mode Boss : marque toujours la peau.''',
-      'ach_339': '''Une centaine de PNB. Expert signifie que vous respectez toujours le fascia.''',
-      'ach_340': '''Deux cents PNB. La maîtrise est un succès tranquille et reproductible.''',
-      'ach_341': '''Premier régional guidé par l\'USG. Le nerf apparaît ; la confiance aussi.''',
-      'ach_342': '''Conseils du gouvernement américain vingt-cinq fois. Déverrouillage des compétences de sonde.''',
-      'ach_343': '''USG cinquante fois. Aiguille brillante ; l\'esprit plus brillant.''',
+      'ach_339':
+          '''Une centaine de PNB. Expert signifie que vous respectez toujours le fascia.''',
+      'ach_340':
+          '''Deux cents PNB. La maîtrise est un succès tranquille et reproductible.''',
+      'ach_341':
+          '''Premier régional guidé par l'USG. Le nerf apparaît ; la confiance aussi.''',
+      'ach_342':
+          '''Conseils du gouvernement américain vingt-cinq fois. Déverrouillage des compétences de sonde.''',
+      'ach_343':
+          '''USG cinquante fois. Aiguille brillante ; l'esprit plus brillant.''',
       'ach_344': '''USG cent fois. Vous voyez ce que les autres recherchent.''',
       'ach_345': '''USG deux cent cinquante fois. Légende tachée de gel.''',
-      'ach_346': '''Stimulateur nerveux utilisé. Twitch de la vieille école, respect de la nouvelle école.''',
-      'ach_347': '''Stimulateur vingt-cinq fois. Milliampères et mémoire musculaire.''',
-      'ach_348': '''Premier cathéter régional. Infusion continue, vertu continue.''',
+      'ach_346':
+          '''Stimulateur nerveux utilisé. Twitch de la vieille école, respect de la nouvelle école.''',
+      'ach_347':
+          '''Stimulateur vingt-cinq fois. Milliampères et mémoire musculaire.''',
+      'ach_348':
+          '''Premier cathéter régional. Infusion continue, vertu continue.''',
       'ach_349': '''Dix cathéters blocs. Champion du tube tunnelisé.''',
       'ach_350': '''Vingt-cinq cathéters. Douleur en laisse.''',
-      'ach_351': '''Interscalène, supra ou axillaire connecté. Membre supérieur, compétence supérieure.''',
-      'ach_352': '''Vingt blocs du plexus brachial. Bras baissés ; normes plus élevées.''',
-      'ach_353': '''Maîtrisé fémoral, sciatique ou poplité. Jour de jambe, édition clinique.''',
-      'ach_354': '''Vingt blocs des membres inférieurs. Évitez la salle de sport ; faire le bloc.''',
+      'ach_351':
+          '''Interscalène, supra ou axillaire connecté. Membre supérieur, compétence supérieure.''',
+      'ach_352':
+          '''Vingt blocs du plexus brachial. Bras baissés ; normes plus élevées.''',
+      'ach_353':
+          '''Maîtrisé fémoral, sciatique ou poplité. Jour de jambe, édition clinique.''',
+      'ach_354':
+          '''Vingt blocs des membres inférieurs. Évitez la salle de sport ; faire le bloc.''',
       'ach_355': '''TAP, droit, QL ou ESP. Force de base, édition aiguille.''',
-      'ach_356': '''Vingt blocs tronc/abdominaux. Traités de paix à mi-parcours.''',
-      'ach_357': '''PECS ou dentelé. Paroi thoracique, protocole de refroidissement.''',
-      'ach_358': '''Dix paravertébraux. Au plus près de la colonne vertébrale, au plus près de l\'expertise.''',
-      'ach_359': '''Bloc du plexus cervical ou du cuir chevelu. Au dessus des épaules, au dessus de la moyenne.''',
+      'ach_356':
+          '''Vingt blocs tronc/abdominaux. Traités de paix à mi-parcours.''',
+      'ach_357':
+          '''PECS ou dentelé. Paroi thoracique, protocole de refroidissement.''',
+      'ach_358':
+          '''Dix paravertébraux. Au plus près de la colonne vertébrale, au plus près de l'expertise.''',
+      'ach_359':
+          '''Bloc du plexus cervical ou du cuir chevelu. Au dessus des épaules, au dessus de la moyenne.''',
       'ach_360': '''Dix caudales. Petits dos, gros relief.''',
-      'ach_361': '''Dix blocs de cheville. Le meilleur ami de la chirurgie du pied.''',
-      'ach_362': '''Bloc de bière (IVRA). Technique vintage, qui fait toujours mouche.''',
-      'ach_363': '''Cinq blocs du plexus lombaire ou sacré. Des blocages profonds, un calme plus profond.''',
-      'ach_364': '''Dix types de blocs régionaux différents. Je dois tous les coller.''',
-      'ach_365': '''Vingt types de blocs différents. Sommelier d\'anesthésie locale.''',
-      'ach_366': '''Quinze interscalènes. Phrénique facultatif ; compétence non.''',
+      'ach_361':
+          '''Dix blocs de cheville. Le meilleur ami de la chirurgie du pied.''',
+      'ach_362':
+          '''Bloc de bière (IVRA). Technique vintage, qui fait toujours mouche.''',
+      'ach_363':
+          '''Cinq blocs du plexus lombaire ou sacré. Des blocages profonds, un calme plus profond.''',
+      'ach_364':
+          '''Dix types de blocs régionaux différents. Je dois tous les coller.''',
+      'ach_365':
+          '''Vingt types de blocs différents. Sommelier d'anesthésie locale.''',
+      'ach_366':
+          '''Quinze interscalènes. Phrénique facultatif ; compétence non.''',
       'ach_367': '''Vingt-cinq supraclaviculaires. Royauté de poche de coin.''',
-      'ach_368': '''Quinze sous-claviculaires. Sous la clavicule, au-dessus de l\'étendard.''',
-      'ach_369': '''Quinze blocs axillaires. Parcours classique, résultats modernes.''',
-      'ach_370': '''Vingt fémorales. Antérieur de la cuisse, pleine attention.''',
-      'ach_371': '''Vingt canaux adducteurs. Économise le moteur et sauve la réputation.''',
+      'ach_368':
+          '''Quinze sous-claviculaires. Sous la clavicule, au-dessus de l'étendard.''',
+      'ach_369':
+          '''Quinze blocs axillaires. Parcours classique, résultats modernes.''',
+      'ach_370':
+          '''Vingt fémorales. Antérieur de la cuisse, pleine attention.''',
+      'ach_371':
+          '''Vingt canaux adducteurs. Économise le moteur et sauve la réputation.''',
       'ach_372': '''Vingt sciatiques. Gros courage, plus grand respect.''',
-      'ach_373': '''Quinze sciatiques poplitées. Derrière le genou, devant la douleur.''',
+      'ach_373':
+          '''Quinze sciatiques poplitées. Derrière le genou, devant la douleur.''',
       'ach_374': '''Trente TAP. Avion retrouvé, abdomen calmé.''',
       'ach_375': '''Quinze gaines de droits. Manières médianes.''',
       'ach_376': '''Quinze QL. Profond, latéral, efficace.''',
-      'ach_377': '''Quinze ESP. Avion naviguant le long de la colonne vertébrale.''',
+      'ach_377':
+          '''Quinze ESP. Avion naviguant le long de la colonne vertébrale.''',
       'ach_378': '''Quinze PECS I/II. Diplomatie de la paroi thoracique.''',
-      'ach_379': '''Dix blocs antérieurs serratus. Poitrine latérale, pensée latérale.''',
-      'ach_380': '''Dix blocs du plexus cervical. Travail du cou, mains soignées.''',
+      'ach_379':
+          '''Dix blocs antérieurs serratus. Poitrine latérale, pensée latérale.''',
+      'ach_380':
+          '''Dix blocs du plexus cervical. Travail du cou, mains soignées.''',
       'ach_381': '''Dix blocs de cuir chevelu. Forfait confort crânien.''',
-      'ach_382': '''Vingt-cinq caudales pédiatriques. Petit espace, énorme différence.''',
+      'ach_382':
+          '''Vingt-cinq caudales pédiatriques. Petit espace, énorme différence.''',
       'ach_383': '''Cinq IVRA. Garrot relevé ; nostalgie activée.''',
-      'ach_384': '''Deux régionales différentes dans un seul cas. Technique mixte, édition clinique.''',
-      'ach_385': '''Cinq cents régionales au total. Statut de divinité, se lave toujours les mains.''',
-      'ach_386': '''Première ligne artérielle. Forme d\'onde : le seul signal d\'alarme que vous aimez.''',
+      'ach_384':
+          '''Deux régionales différentes dans un seul cas. Technique mixte, édition clinique.''',
+      'ach_385':
+          '''Cinq cents régionales au total. Statut de divinité, se lave toujours les mains.''',
+      'ach_386':
+          '''Première ligne artérielle. Forme d'onde : le seul signal d'alarme que vous aimez.''',
       'ach_387': '''Dix lignes artistiques. Agent immobilier radial.''',
-      'ach_388': '''Vingt-cinq lignes d\'art. Les traces amorties vous offensent personnellement.''',
-      'ach_389': '''Cinquante lignes d\'art. As de pique, as des artères.''',
-      'ach_390': '''Cent lignes d\'art. Maître des potins continus sur BP.''',
+      'ach_388':
+          '''Vingt-cinq lignes d'art. Les traces amorties vous offensent personnellement.''',
+      'ach_389': '''Cinquante lignes d'art. As de pique, as des artères.''',
+      'ach_390': '''Cent lignes d'art. Maître des potins continus sur BP.''',
       'ach_391': '''Premier CVC. Ligne centrale, importance centrale.''',
       'ach_392': '''Cinq CVC. Fil, dilatateur, humilité.''',
-      'ach_393': '''Quinze CVC. IJ ou sous-clavière – vous avez maintenant des préférences.''',
+      'ach_393':
+          '''Quinze CVC. IJ ou sous-clavière – vous avez maintenant des préférences.''',
       'ach_394': '''Vingt-cinq CVC. Commandez la lumière.''',
-      'ach_395': '''Cinquante CVC. L\'accès central est un style de vie.''',
-      'ach_396': '''USG pour CVC ou ligne artistique. Les yeux rivés sur le prix, pas sur le mythe historique.''',
-      'ach_397': '''USG vasculaire vingt-cinq fois. Sondez, les complications diminuent.''',
-      'ach_398': '''USG vasculaire soixante-quinze fois. Les parois des vaisseaux craignent votre sonde.''',
-      'ach_399': '''Premier BIS/Entropie. Parce que « a l’air endormi » n’est pas un chiffre.''',
-      'ach_400': '''BIS/Entropie vingt-cinq fois. Charges de profondeur pour la sensibilisation.''',
-      'ach_401': '''BIS/Entropie cinquante fois. Les chiffres plutôt que les vibrations.''',
+      'ach_395': '''Cinquante CVC. L'accès central est un style de vie.''',
+      'ach_396':
+          '''USG pour CVC ou ligne artistique. Les yeux rivés sur le prix, pas sur le mythe historique.''',
+      'ach_397':
+          '''USG vasculaire vingt-cinq fois. Sondez, les complications diminuent.''',
+      'ach_398':
+          '''USG vasculaire soixante-quinze fois. Les parois des vaisseaux craignent votre sonde.''',
+      'ach_399':
+          '''Premier BIS/Entropie. Parce que « a l’air endormi » n’est pas un chiffre.''',
+      'ach_400':
+          '''BIS/Entropie vingt-cinq fois. Charges de profondeur pour la sensibilisation.''',
+      'ach_401':
+          '''BIS/Entropie cinquante fois. Les chiffres plutôt que les vibrations.''',
       'ach_402': '''BIS/Entropie cent fois. Videur cortical.''',
       'ach_403': '''NIRS dix fois. Brain O₂ : désormais tendance.''',
-      'ach_404': '''Masimo SedLine dix fois. Des vagues fantaisie pour des cas fantaisie.''',
+      'ach_404':
+          '''Masimo SedLine dix fois. Des vagues fantaisie pour des cas fantaisie.''',
       'ach_405': '''Cathéter TEE ou PA cinq fois. Secrets de cœur, décodés.''',
       'ach_406': '''PiCCO cinq fois. Le flux compte. Vous le mesurez.''',
-      'ach_407': '''Drainage sous-arachnoïdien lombaire cinq fois. Gestion CSF, niveau avancé.''',
-      'ach_408': '''Trois moniteurs invasifs à la fois. Tableau de bord entièrement éclairé.''',
-      'ach_409': '''Quatre moniteurs invasifs ou plus. Contrôle de mission, édition OR.''',
-      'ach_410': '''Cinq types de ligne/moniteur différents utilisés. Je dois tous les canuler.''',
-      'ach_411': '''Cinquante lignes artistiques réalisées. Marchand de formes d\'onde pratique.''',
+      'ach_407':
+          '''Drainage sous-arachnoïdien lombaire cinq fois. Gestion CSF, niveau avancé.''',
+      'ach_408':
+          '''Trois moniteurs invasifs à la fois. Tableau de bord entièrement éclairé.''',
+      'ach_409':
+          '''Quatre moniteurs invasifs ou plus. Contrôle de mission, édition OR.''',
+      'ach_410':
+          '''Cinq types de ligne/moniteur différents utilisés. Je dois tous les canuler.''',
+      'ach_411':
+          '''Cinquante lignes artistiques réalisées. Marchand de formes d'onde pratique.''',
       'ach_412': '''Trente CVC réalisés. Chuchoteur de fil.''',
-      'ach_413': '''Vingt lignes d\'art ont été assistées. Soutenir l\'équipe rouge.''',
-      'ach_414': '''Une vingtaine de CVC ont été aidés. Deuxième paire de mains, aide de premier ordre.''',
-      'ach_415': '''BIS/Entropie indépendamment cinquante fois. Pas de roues d\'entraînement.''',
-      'ach_416': '''SedLine indépendamment vingt fois. Surveillance cérébrale en solo.''',
-      'ach_417': '''TCI indépendamment cinquante fois. Pompe et circonstance.''',
+      'ach_413':
+          '''Vingt lignes d'art ont été assistées. Soutenir l'équipe rouge.''',
+      'ach_414':
+          '''Une vingtaine de CVC ont été aidés. Deuxième paire de mains, aide de premier ordre.''',
+      'ach_415':
+          '''BIS/Entropie indépendamment cinquante fois. Pas de roues d'entraînement.''',
+      'ach_416':
+          '''SedLine indépendamment vingt fois. Surveillance cérébrale en solo.''',
+      'ach_417':
+          '''TCI indépendamment cinquante fois. Pompe et circonstance.''',
       'ach_418': '''NIRS indépendamment vingt fois. Vol cérébral en solo.''',
-      'ach_419': '''PiCCO indépendamment dix fois. Sortie sans accompagnateur.''',
-      'ach_420': '''TEE observé dix fois en cardiaque. Regarder le cœur faire des heures supplémentaires.''',
+      'ach_419':
+          '''PiCCO indépendamment dix fois. Sortie sans accompagnateur.''',
+      'ach_420':
+          '''TEE observé dix fois en cardiaque. Regarder le cœur faire des heures supplémentaires.''',
       'ach_421': '''Cathéter PA observé dix fois. Flottez, observateur.''',
-      'ach_422': '''Dix drains lombaires gérés. Faire pression sur la politique.''',
-      'ach_423': '''Cent caisses avec suivi des lignes artistiques. Expert dans l’argumentation continue de BP.''',
+      'ach_422':
+          '''Dix drains lombaires gérés. Faire pression sur la politique.''',
+      'ach_423':
+          '''Cent caisses avec suivi des lignes artistiques. Expert dans l’argumentation continue de BP.''',
       'ach_424': '''Cinquante caisses avec accès central. Vétéran du fil.''',
-      'ach_425': '''Toutes les options de surveillance invasive touchées. Dégagement complet du cockpit.''',
-      'ach_426': '''Premier nouveau-né (<28 jours). Petit humain, protocole complet.''',
-      'ach_427': '''Cinq nouveau-nés. Régulier dans la plus petite salle avec les plus gros enjeux.''',
-      'ach_428': '''Quinze nouveau-nés ont été gérés en toute sécurité. Gardien du micro-circuit.''',
-      'ach_429': '''Premier nourrisson (29 jours – 1 an). Croissance rapide ; votre prudence plus rapidement.''',
-      'ach_430': '''Vingt nourrissons. Spécialiste des petits tubes et des grands yeux.''',
-      'ach_431': '''Une vingtaine de bambins. Premed facultatif ; patience obligatoire.''',
-      'ach_432': '''Cinquante cas de nourrissons ou de jeunes enfants. Pro de la prévention des distractions et de la désaturation.''',
-      'ach_433': '''Vingt-cinq enfants (3-12). Les autocollants restent une drogue valable.''',
-      'ach_434': '''Vingt adolescents (12-18 ans). Presque des adultes, toujours pas des philosophes des OBNL.''',
-      'ach_435': '''Première personne âgée (≥65). Des soins de référence pour les années d’or.''',
-      'ach_436': '''Vingt-cinq cas âgés. Gardien contre les surprises de la polypharmacie.''',
-      'ach_437': '''Cinquante cas âgés. Protégez le MAP comme si c\'était sa famille.''',
-      'ach_438': '''Une centaine de cas âgés. Spécialiste de l\'induction douce et du jugement pointu.''',
-      'ach_439': '''Patient ≥80. Traitez comme de la porcelaine fine avec un meilleur accès artériel.''',
+      'ach_425':
+          '''Toutes les options de surveillance invasive touchées. Dégagement complet du cockpit.''',
+      'ach_426':
+          '''Premier nouveau-né (<28 jours). Petit humain, protocole complet.''',
+      'ach_427':
+          '''Cinq nouveau-nés. Régulier dans la plus petite salle avec les plus gros enjeux.''',
+      'ach_428':
+          '''Quinze nouveau-nés ont été gérés en toute sécurité. Gardien du micro-circuit.''',
+      'ach_429':
+          '''Premier nourrisson (29 jours – 1 an). Croissance rapide ; votre prudence plus rapidement.''',
+      'ach_430':
+          '''Vingt nourrissons. Spécialiste des petits tubes et des grands yeux.''',
+      'ach_431':
+          '''Une vingtaine de bambins. Premed facultatif ; patience obligatoire.''',
+      'ach_432':
+          '''Cinquante cas de nourrissons ou de jeunes enfants. Pro de la prévention des distractions et de la désaturation.''',
+      'ach_433':
+          '''Vingt-cinq enfants (3-12). Les autocollants restent une drogue valable.''',
+      'ach_434':
+          '''Vingt adolescents (12-18 ans). Presque des adultes, toujours pas des philosophes des OBNL.''',
+      'ach_435':
+          '''Première personne âgée (≥65). Des soins de référence pour les années d’or.''',
+      'ach_436':
+          '''Vingt-cinq cas âgés. Gardien contre les surprises de la polypharmacie.''',
+      'ach_437':
+          '''Cinquante cas âgés. Protégez le MAP comme si c'était sa famille.''',
+      'ach_438':
+          '''Une centaine de cas âgés. Spécialiste de l'induction douce et du jugement pointu.''',
+      'ach_439':
+          '''Patient ≥80. Traitez comme de la porcelaine fine avec un meilleur accès artériel.''',
       'ach_440': '''Dix patients ≥80. Adhésion au club : respect requis.''',
-      'ach_441': '''Patient ≥100. Rare comme un vrai ASA I d\'une quarantaine d\'années.''',
-      'ach_442': '''IMC 30-34,9. Le positionnement est un sport d\'équipe.''',
-      'ach_443': '''Dix cas d’obésité de classe I. Régulier sur la liste rampée.''',
-      'ach_444': '''Vingt classe II (IMC 35-39,9). Spécialiste des voies respiratoires et de l\'arithmétique.''',
-      'ach_445': '''Premier IMC ≥40. Plan A, B et une pré-oxygénation plus longue.''',
+      'ach_441':
+          '''Patient ≥100. Rare comme un vrai ASA I d'une quarantaine d'années.''',
+      'ach_442': '''IMC 30-34,9. Le positionnement est un sport d'équipe.''',
+      'ach_443':
+          '''Dix cas d’obésité de classe I. Régulier sur la liste rampée.''',
+      'ach_444':
+          '''Vingt classe II (IMC 35-39,9). Spécialiste des voies respiratoires et de l'arithmétique.''',
+      'ach_445':
+          '''Premier IMC ≥40. Plan A, B et une pré-oxygénation plus longue.''',
       'ach_446': '''Dix IMC ≥40. Les superlatifs se gagnent à la dure.''',
       'ach_447': '''IMC <18,5. Corps léger, grande attention aux doses.''',
-      'ach_448': '''Adulte de moins de 40 kg. Poids plume, protocole complet.''',
-      'ach_449': '''Plus de 100 kg. Combat poids lourd ; toi dans le coin avec le VL.''',
+      'ach_448':
+          '''Adulte de moins de 40 kg. Poids plume, protocole complet.''',
+      'ach_449':
+          '''Plus de 100 kg. Combat poids lourd ; toi dans le coin avec le VL.''',
       'ach_450': '''Plus de 130 kg. Tours de championnat. Rampe recommandée.''',
-      'ach_451': '''Chaque tranche d\'âge enregistrée. Du nouveau-né aux personnes âgées – arc-en-ciel complet.''',
-      'ach_452': '''Chaque bande d\'IMC enregistrée. La playlist anthropométrique complète.''',
-      'ach_453': '''Cinquante cas pédiatriques de moins de 12 ans. Totalement sérieux pour les tout-petits.''',
-      'ach_454': '''Deux cent cinquante cas âgés. Le leadership est un MAP stable.''',
-      'ach_455': '''Cinquante cas d\'IMC ≥30. Champion de la rampe et du plan.''',
-      'ach_456': '''Quinze cas d\'insuffisance pondérale. Expert en moins de masse, plus de soins.''',
-      'ach_457': '''Nouveau-né et centenaire tous deux connectés. L\'âge n\'est qu\'un chiffre préopératoire.''',
-      'ach_458': '''Insuffisance pondérale et super-obésité dans la même semaine. Journée de range à la salle d\'anthropométrie.''',
-      'ach_459': '''Prise en charge des voies respiratoires difficiles chez le nouveau-né ou le nourrisson. As des petites voies respiratoires.''',
-      'ach_460': '''Voies respiratoires difficiles au-dessus de 80 gérées. Ace dans le respect des dents fragiles et des torticolis.''',
-      'ach_461': '''D’abord aucun/sans incident. L’ennui est le plus grand compliment.''',
-      'ach_462': '''Dix années consécutives sans incident. Mains en sécurité ; la superstition monte.''',
-      'ach_463': '''Vingt-cinq années consécutives sans incident. Ne dites pas le mot Q.''',
-      'ach_464': '''Une centaine au total sans incident. La sécurité est une tendance et un système.''',
-      'ach_465': '''Deux cent cinquante sans incident. Bulletproof est une métaphore. Surtout.''',
-      'ach_466': '''Anesthésie dans les dix minutes suivant l\'intervention chirurgicale. Émergence comme art chronométré.''',
-      'ach_467': '''Réveil rapide cinquante fois. Efficacité sans couper les coins ronds ni les cordons.''',
-      'ach_468': '''PONV géré. L\'ondansétron est un langage d\'amour.''',
-      'ach_469': '''Hypotension peropératoire gérée. Fluides, presseurs, calme.''',
-      'ach_470': '''Bronchospasme ou laryngospasme géré. Poitrine serrée ; la tête claire.''',
-      'ach_471': '''Désaturation gérée. FiO₂ en haut, voix basse, problème résolu.''',
-      'ach_472': '''Cent décharges de PACU sans incident. Reprise : le tour tranquille de la victoire.''',
-      'ach_473': '''Profil terminé. +10 points et un rare coup de dopamine administrative.''',
-      'ach_474': '''Statistiques PDF exportées. Les chiffres : enfin utiles en dehors de l\'examen.''',
-      'ach_475': '''Premier cas ou journal de bord PDF. L’hôpital sans papier peut détourner le regard une seconde.''',
-      'ach_476': '''Dix exportations PDF. A l\'avenir, vous devez vous présenter un café lors de l\'évaluation.''',
-      'ach_477': '''Première sauvegarde JSON. La paranoïa n\'est qu\'une bonne évaluation préopératoire.''',
-      'ach_478': '''Cinq sauvegardes JSON. Redondance : le seul véritable plan ASA que je planifie.''',
-      'ach_479': '''Cent points. L\'application vous marque comme un viva.''',
-      'ach_480': '''Mille points. L\'énergie du personnage principal, toujours classée selon les voies respiratoires.''',
-      'ach_481': '''Cinq mille points. Skin Prestige non inclus – seulement la gloire.''',
-      'ach_482': '''Dix mille points. Nous avons manqué d’adjectifs sobres et d’anesthésiques volatils.''',
-      'ach_483': '''Premier cas dentaire/maxillo-facial. Bouche ouverte, plan des voies respiratoires plus fort.''',
-      'ach_484': '''Cinq cas dentaires/maxillo. L\'aspiration est votre copilote.''',
-      'ach_485': '''Dix cas dentaires/maxillo. Voies respiratoires partagées, stress partagé, gloire partagée.''',
-      'ach_486': '''Vingt-cinq cas dentaires/maxillo. Vous et le chirurgien buccal communiquez désormais par clics d\'aspiration.''',
-      'ach_487': '''Cinquante cas dentaires/maxillo. Les mâchoires filaires ne vous font pas peur, contrairement à une extubation non planifiée.''',
-      'ach_488': '''Cent cas dentaires/maxillo. Les visages changent ; votre plan B reste.''',
-      'ach_489': '''Dix cas maxillo avec intubation nasale. Le nez sait mieux quand la bouche est le champ de bataille.''',
-      'ach_490': '''Cinq cas maxillo se terminant sans incident. Fils entrants ; drame.''',
-      'ach_491': '''Urgence dentaire/maxillo après les heures d\'ouverture. Fixation intermaxillaire et caféine intermaxillaire.''',
-      'ach_492': '''Vingt cas de maxillo voies respiratoires partagées. Diplomatie avec un laryngoscope.''',
-      'ach_493': '''Premier cas de chirurgie bariatrique. Ramper, pré-oxygéner, respecter la physiologie.''',
-      'ach_494': '''Cinq cas de chirurgie bariatrique. Le positionnement est un sport d\'équipe.''',
-      'ach_495': '''Quinze cas de chirurgie bariatrique. Vous mesurez le tour de cou comme un tailleur.''',
-      'ach_496': '''Trente cas de chirurgie bariatrique. Spécialiste des rampes, VL et patience.''',
-      'ach_497': '''Cinquante cas de chirurgie bariatrique. Chirurgie métabolique, focus métabolique.''',
-      'ach_498': '''Cent cas de chirurgie bariatrique. Titre poids lourd, ego léger.''',
-      'ach_499': '''Voies respiratoires difficiles dans un cas bariatrique. Plan A, B et un pré-ox plus long.''',
-      'ach_500': '''Vingt cas bariatriques, aucun/sans incident. L’ennui est le but.''',
-      'ach_501': '''Premier cas de radiologie interventionnelle. Lumières éteintes, normes élevées.''',
+      'ach_451':
+          '''Chaque tranche d'âge enregistrée. Du nouveau-né aux personnes âgées – arc-en-ciel complet.''',
+      'ach_452':
+          '''Chaque bande d'IMC enregistrée. La playlist anthropométrique complète.''',
+      'ach_453':
+          '''Cinquante cas pédiatriques de moins de 12 ans. Totalement sérieux pour les tout-petits.''',
+      'ach_454':
+          '''Deux cent cinquante cas âgés. Le leadership est un MAP stable.''',
+      'ach_455':
+          '''Cinquante cas d'IMC ≥30. Champion de la rampe et du plan.''',
+      'ach_456':
+          '''Quinze cas d'insuffisance pondérale. Expert en moins de masse, plus de soins.''',
+      'ach_457':
+          '''Nouveau-né et centenaire tous deux connectés. L'âge n'est qu'un chiffre préopératoire.''',
+      'ach_458':
+          '''Insuffisance pondérale et super-obésité dans la même semaine. Journée de range à la salle d'anthropométrie.''',
+      'ach_459':
+          '''Prise en charge des voies respiratoires difficiles chez le nouveau-né ou le nourrisson. As des petites voies respiratoires.''',
+      'ach_460':
+          '''Voies respiratoires difficiles au-dessus de 80 gérées. Ace dans le respect des dents fragiles et des torticolis.''',
+      'ach_461':
+          '''D’abord aucun/sans incident. L’ennui est le plus grand compliment.''',
+      'ach_462':
+          '''Dix années consécutives sans incident. Mains en sécurité ; la superstition monte.''',
+      'ach_463':
+          '''Vingt-cinq années consécutives sans incident. Ne dites pas le mot Q.''',
+      'ach_464':
+          '''Une centaine au total sans incident. La sécurité est une tendance et un système.''',
+      'ach_465':
+          '''Deux cent cinquante sans incident. Bulletproof est une métaphore. Surtout.''',
+      'ach_466':
+          '''Anesthésie dans les dix minutes suivant l'intervention chirurgicale. Émergence comme art chronométré.''',
+      'ach_467':
+          '''Réveil rapide cinquante fois. Efficacité sans couper les coins ronds ni les cordons.''',
+      'ach_468': '''PONV géré. L'ondansétron est un langage d'amour.''',
+      'ach_469':
+          '''Hypotension peropératoire gérée. Fluides, presseurs, calme.''',
+      'ach_470':
+          '''Bronchospasme ou laryngospasme géré. Poitrine serrée ; la tête claire.''',
+      'ach_471':
+          '''Désaturation gérée. FiO₂ en haut, voix basse, problème résolu.''',
+      'ach_472':
+          '''Cent décharges de PACU sans incident. Reprise : le tour tranquille de la victoire.''',
+      'ach_473':
+          '''Profil terminé. +10 points et un rare coup de dopamine administrative.''',
+      'ach_474':
+          '''Statistiques PDF exportées. Les chiffres : enfin utiles en dehors de l'examen.''',
+      'ach_475':
+          '''Premier cas ou journal de bord PDF. L’hôpital sans papier peut détourner le regard une seconde.''',
+      'ach_476':
+          '''Dix exportations PDF. A l'avenir, vous devez vous présenter un café lors de l'évaluation.''',
+      'ach_477':
+          '''Première sauvegarde JSON. La paranoïa n'est qu'une bonne évaluation préopératoire.''',
+      'ach_478':
+          '''Cinq sauvegardes JSON. Redondance : le seul véritable plan ASA que je planifie.''',
+      'ach_479': '''Cent points. L'application vous marque comme un viva.''',
+      'ach_480':
+          '''Mille points. L'énergie du personnage principal, toujours classée selon les voies respiratoires.''',
+      'ach_481':
+          '''Cinq mille points. Skin Prestige non inclus – seulement la gloire.''',
+      'ach_482':
+          '''Dix mille points. Nous avons manqué d’adjectifs sobres et d’anesthésiques volatils.''',
+      'ach_483':
+          '''Premier cas dentaire/maxillo-facial. Bouche ouverte, plan des voies respiratoires plus fort.''',
+      'ach_484':
+          '''Cinq cas dentaires/maxillo. L'aspiration est votre copilote.''',
+      'ach_485':
+          '''Dix cas dentaires/maxillo. Voies respiratoires partagées, stress partagé, gloire partagée.''',
+      'ach_486':
+          '''Vingt-cinq cas dentaires/maxillo. Vous et le chirurgien buccal communiquez désormais par clics d'aspiration.''',
+      'ach_487':
+          '''Cinquante cas dentaires/maxillo. Les mâchoires filaires ne vous font pas peur, contrairement à une extubation non planifiée.''',
+      'ach_488':
+          '''Cent cas dentaires/maxillo. Les visages changent ; votre plan B reste.''',
+      'ach_489':
+          '''Dix cas maxillo avec intubation nasale. Le nez sait mieux quand la bouche est le champ de bataille.''',
+      'ach_490':
+          '''Cinq cas maxillo se terminant sans incident. Fils entrants ; drame.''',
+      'ach_491':
+          '''Urgence dentaire/maxillo après les heures d'ouverture. Fixation intermaxillaire et caféine intermaxillaire.''',
+      'ach_492':
+          '''Vingt cas de maxillo voies respiratoires partagées. Diplomatie avec un laryngoscope.''',
+      'ach_493':
+          '''Premier cas de chirurgie bariatrique. Ramper, pré-oxygéner, respecter la physiologie.''',
+      'ach_494':
+          '''Cinq cas de chirurgie bariatrique. Le positionnement est un sport d'équipe.''',
+      'ach_495':
+          '''Quinze cas de chirurgie bariatrique. Vous mesurez le tour de cou comme un tailleur.''',
+      'ach_496':
+          '''Trente cas de chirurgie bariatrique. Spécialiste des rampes, VL et patience.''',
+      'ach_497':
+          '''Cinquante cas de chirurgie bariatrique. Chirurgie métabolique, focus métabolique.''',
+      'ach_498':
+          '''Cent cas de chirurgie bariatrique. Titre poids lourd, ego léger.''',
+      'ach_499':
+          '''Voies respiratoires difficiles dans un cas bariatrique. Plan A, B et un pré-ox plus long.''',
+      'ach_500':
+          '''Vingt cas bariatriques, aucun/sans incident. L’ennui est le but.''',
+      'ach_501':
+          '''Premier cas de radiologie interventionnelle. Lumières éteintes, normes élevées.''',
       'ach_502': '''Cinq cas IR. Menez la mode des tabliers, pour toujours.''',
-      'ach_503': '''Quinze dossiers IR. Vous pouvez maintenant faire une sieste les yeux ouverts – s’il vous plaît, ne le faites pas.''',
-      'ach_504': '''Vingt-cinq cas IR. Éloigné du théâtre, à proximité du chariot de secours.''',
-      'ach_505': '''Cinquante cas IR. Spécialiste des pièces calmes et des moniteurs bruyants.''',
-      'ach_506': '''Dix dossiers IR se terminant sans incident. Le calme est contagieux ; le contraste aussi.''',
-      'ach_507': '''Cas IR sur trois heures d\'anesthésie. Le temps du fil est votre temps.''',
-      'ach_508': '''Radiologie interventionnelle d\'urgence. Vaisseau saignant, mains fermes.''',
-      'ach_509': '''Cas IR de moins de 18 ans. Petits navires, toute votre attention.''',
-      'ach_510': '''Cas IR commençant après minuit. Fluoroscopie et questions existentielles.''',
-      'ach_511': '''Première anesthésie par radiothérapie. Le calme est la prescription.''',
-      'ach_512': '''Cinq cas de radiothérapie. Le mouvement est l’ennemi ; vous êtes le traité de paix.''',
-      'ach_513': '''Dix cas de radiothérapie. Dispositifs d\'immobilisation, vigilance maximale.''',
-      'ach_514': '''Vingt-cinq cas de radiothérapie. Spécialiste des cas courts et de concentration longue.''',
-      'ach_515': '''Radiothérapie pour les moins de 18 ans. Petits humains courageux, grands projets prudents.''',
-      'ach_516': '''Quinze cas de radiothérapie, aucun/sans incident. Calme atteint.''',
-      'ach_517': '''Dix anesthésiques de radiothérapie répétés pour le même parcours. Visages familiers, mêmes standards.''',
-      'ach_518': '''Radiothérapie avec un état d\'esprit de surveillance à distance. Les yeux tournés vers le patient, toujours.''',
-      'ach_519': '''Premier cas de chirurgie cardiaque pédiatrique. Petit cœur, grande liste de contrôle.''',
-      'ach_520': '''Trois cas cardiaques pédiatriques. Écho, lignes et humilité.''',
-      'ach_521': '''Dix cas cardiaques pédiatriques. Des circuits dimensionnés comme des bijoux, des enjeux dimensionnés comme la vie.''',
-      'ach_522': '''Vingt cas cardiaques pédiatriques. Régulier sur la liste congénitale.''',
-      'ach_523': '''Quarante cas cardiaques pédiatriques. Spécialiste des canules minuscules et des responsabilités géantes.''',
-      'ach_524': '''Quinze cas cardiaques pédiatriques, aucun/sans incident. Le calme est une compétence clinique.''',
-      'ach_525': '''Cas cardiaque pédiatrique chez un nouveau-né. Micro-humain, macro-focus.''',
-      'ach_526': '''Cinq cas congénitaux complexes. Anatomie facultative ; préparation obligatoire.''',
-      'ach_527': '''Cardiaque pédiatrique après les heures d\'ouverture. Le sommeil est annulé ; les normes ne le sont pas.''',
-      'ach_528': '''Dix cas pédiatriques de CPB. Bourdonnement de la machine de contournement ; tu ne fredonnes pas.''',
-      'ach_529': '''Urgence dentaire/maxillo. Gonflement, trismus et votre meilleure CV.''',
-      'ach_530': '''Cas bariatrique d’urgence. La physiologie d’abord, l’héroïsme ensuite.''',
-      'ach_531': '''IR pour l\'embolisation traumatique. Interventionnel, intentionnel.''',
-      'ach_532': '''Maxillo et colonne vertébrale tous deux connectés. Des os différents, le même respect des voies respiratoires.''',
-      'ach_533': '''Cas bariatrique avec un régional réalisé. Bloquer si possible ; voies respiratoires toujours prêtes.''',
-      'ach_534': '''Cardiaque pédiatrique plus un cas distinct de nouveau-né. Spectre d’âge, même énergie nocturne.''',
-      'ach_535': '''Enregistré dentaire/maxillo, bariatrique, IR, radiothérapie et cardiaque cardiaque au moins une fois. Collecte terminée.''',
-      'ach_536': '''Au moins une caisse dans chacune des cinq nouvelles voies spécialisées. Badge Explorateur débloqué.''',
-      'ach_537': '''IR et radiothérapie enregistrés. Rayonnement ionisant, calme non ionisant.''',
-      'ach_538': '''Cinquante cas combinés dans les domaines dentaire/maxillaire et tête et cou. Anciens élèves des voies respiratoires partagées.''',
-      'ach_539': '''Trente cas dentaires/maxillo. Le FMI n\'est que mardi.''',
-      'ach_540': '''Vingt cas bariatriques avec une énergie de plan des voies respiratoires documentée. Plan rédigé ; ego pas.''',
-      'ach_541': '''Trente cas IR. Votre colonne vertébrale remercie le plomb. Peut être.''',
-      'ach_542': '''Quarante cas de radiothérapie. Vous pourriez gagner un concours de regard avec un simulateur CT.''',
-      'ach_543': '''Cinquante cas cardiaques pédiatriques. Prêt à enseigner ; toujours prêt à apprendre.''',
-      'ach_544': '''Vingt intubations nasales au maxillo. Voyageur fréquent de la route du nez.''',
-      'ach_545': '''Quinze cas bariatriques avec vidéo-laryngoscopie. Le temps passé devant un écran, du bon temps.''',
-      'ach_546': '''Vingt cas IR sans incident. Le contraste n\'est pas une personnalité.''',
-      'ach_547': '''Dix cas de radiothérapie pédiatrique. Calme pour les plus petits.''',
+      'ach_503':
+          '''Quinze dossiers IR. Vous pouvez maintenant faire une sieste les yeux ouverts – s’il vous plaît, ne le faites pas.''',
+      'ach_504':
+          '''Vingt-cinq cas IR. Éloigné du théâtre, à proximité du chariot de secours.''',
+      'ach_505':
+          '''Cinquante cas IR. Spécialiste des pièces calmes et des moniteurs bruyants.''',
+      'ach_506':
+          '''Dix dossiers IR se terminant sans incident. Le calme est contagieux ; le contraste aussi.''',
+      'ach_507':
+          '''Cas IR sur trois heures d'anesthésie. Le temps du fil est votre temps.''',
+      'ach_508':
+          '''Radiologie interventionnelle d'urgence. Vaisseau saignant, mains fermes.''',
+      'ach_509':
+          '''Cas IR de moins de 18 ans. Petits navires, toute votre attention.''',
+      'ach_510':
+          '''Cas IR commençant après minuit. Fluoroscopie et questions existentielles.''',
+      'ach_511':
+          '''Première anesthésie par radiothérapie. Le calme est la prescription.''',
+      'ach_512':
+          '''Cinq cas de radiothérapie. Le mouvement est l’ennemi ; vous êtes le traité de paix.''',
+      'ach_513':
+          '''Dix cas de radiothérapie. Dispositifs d'immobilisation, vigilance maximale.''',
+      'ach_514':
+          '''Vingt-cinq cas de radiothérapie. Spécialiste des cas courts et de concentration longue.''',
+      'ach_515':
+          '''Radiothérapie pour les moins de 18 ans. Petits humains courageux, grands projets prudents.''',
+      'ach_516':
+          '''Quinze cas de radiothérapie, aucun/sans incident. Calme atteint.''',
+      'ach_517':
+          '''Dix anesthésiques de radiothérapie répétés pour le même parcours. Visages familiers, mêmes standards.''',
+      'ach_518':
+          '''Radiothérapie avec un état d'esprit de surveillance à distance. Les yeux tournés vers le patient, toujours.''',
+      'ach_519':
+          '''Premier cas de chirurgie cardiaque pédiatrique. Petit cœur, grande liste de contrôle.''',
+      'ach_520':
+          '''Trois cas cardiaques pédiatriques. Écho, lignes et humilité.''',
+      'ach_521':
+          '''Dix cas cardiaques pédiatriques. Des circuits dimensionnés comme des bijoux, des enjeux dimensionnés comme la vie.''',
+      'ach_522':
+          '''Vingt cas cardiaques pédiatriques. Régulier sur la liste congénitale.''',
+      'ach_523':
+          '''Quarante cas cardiaques pédiatriques. Spécialiste des canules minuscules et des responsabilités géantes.''',
+      'ach_524':
+          '''Quinze cas cardiaques pédiatriques, aucun/sans incident. Le calme est une compétence clinique.''',
+      'ach_525':
+          '''Cas cardiaque pédiatrique chez un nouveau-né. Micro-humain, macro-focus.''',
+      'ach_526':
+          '''Cinq cas congénitaux complexes. Anatomie facultative ; préparation obligatoire.''',
+      'ach_527':
+          '''Cardiaque pédiatrique après les heures d'ouverture. Le sommeil est annulé ; les normes ne le sont pas.''',
+      'ach_528':
+          '''Dix cas pédiatriques de CPB. Bourdonnement de la machine de contournement ; tu ne fredonnes pas.''',
+      'ach_529':
+          '''Urgence dentaire/maxillo. Gonflement, trismus et votre meilleure CV.''',
+      'ach_530':
+          '''Cas bariatrique d’urgence. La physiologie d’abord, l’héroïsme ensuite.''',
+      'ach_531':
+          '''IR pour l'embolisation traumatique. Interventionnel, intentionnel.''',
+      'ach_532':
+          '''Maxillo et colonne vertébrale tous deux connectés. Des os différents, le même respect des voies respiratoires.''',
+      'ach_533':
+          '''Cas bariatrique avec un régional réalisé. Bloquer si possible ; voies respiratoires toujours prêtes.''',
+      'ach_534':
+          '''Cardiaque pédiatrique plus un cas distinct de nouveau-né. Spectre d’âge, même énergie nocturne.''',
+      'ach_535':
+          '''Enregistré dentaire/maxillo, bariatrique, IR, radiothérapie et cardiaque cardiaque au moins une fois. Collecte terminée.''',
+      'ach_536':
+          '''Au moins une caisse dans chacune des cinq nouvelles voies spécialisées. Badge Explorateur débloqué.''',
+      'ach_537':
+          '''IR et radiothérapie enregistrés. Rayonnement ionisant, calme non ionisant.''',
+      'ach_538':
+          '''Cinquante cas combinés dans les domaines dentaire/maxillaire et tête et cou. Anciens élèves des voies respiratoires partagées.''',
+      'ach_539': '''Trente cas dentaires/maxillo. Le FMI n'est que mardi.''',
+      'ach_540':
+          '''Vingt cas bariatriques avec une énergie de plan des voies respiratoires documentée. Plan rédigé ; ego pas.''',
+      'ach_541':
+          '''Trente cas IR. Votre colonne vertébrale remercie le plomb. Peut être.''',
+      'ach_542':
+          '''Quarante cas de radiothérapie. Vous pourriez gagner un concours de regard avec un simulateur CT.''',
+      'ach_543':
+          '''Cinquante cas cardiaques pédiatriques. Prêt à enseigner ; toujours prêt à apprendre.''',
+      'ach_544':
+          '''Vingt intubations nasales au maxillo. Voyageur fréquent de la route du nez.''',
+      'ach_545':
+          '''Quinze cas bariatriques avec vidéo-laryngoscopie. Le temps passé devant un écran, du bon temps.''',
+      'ach_546':
+          '''Vingt cas IR sans incident. Le contraste n'est pas une personnalité.''',
+      'ach_547':
+          '''Dix cas de radiothérapie pédiatrique. Calme pour les plus petits.''',
       'ach_548': '''Vingt-cinq cas cardiaques pédiatriques. Série régulière.''',
-      'ach_549': '''Dentaire/maxillo avec complément régional. Local là où ça compte.''',
-      'ach_550': '''Cas bariatrique avec ligne artérielle. Forme d\'onde dans une grande physiologie.''',
-      'ach_551': '''Boîtier IR avec surveillance artérielle. Le rouge est une langue.''',
-      'ach_552': '''Radiothérapie sous voie MAC/sédation enregistrée. Touche légère, grande attention.''',
-      'ach_553': '''Cardiaque pédiatrique avec surveillance invasive. Lignes avant contournement.''',
-      'ach_554': '''Drapeau des voies aériennes difficiles sur un cas maxillo. Trismus rencontre la formation.''',
-      'ach_555': '''Désaturation gérée dans un cas bariatrique. Sauvetage sans drame.''',
-      'ach_556': '''Anesthésie IR sur quatre heures. Marathon de fluoroscopie.''',
-      'ach_557': '''La radiothérapie commence avant 07h00. Heure du faisceau.''',
-      'ach_558': '''Cardiaque pédiatrique d’urgence. Adrénaline en option ; systèmes obligatoires.''',
-      'ach_559': '''Huit spécialités chirurgicales distinctes enregistrées dont au moins une nouvelle spécialité. Polyglotte de la liste.''',
-      'ach_560': '''Cinquante cas combinés dans le nouvel ensemble de spécialités. Explorateur régulier.''',
-      'ach_561': '''Soixante-quinze cas dentaires/maxillo. Antécédents dans la ligue bouche et voies respiratoires.''',
-      'ach_562': '''Soixante quinze cas de chirurgie bariatrique. Bilan sur la rampe.''',
+      'ach_549':
+          '''Dentaire/maxillo avec complément régional. Local là où ça compte.''',
+      'ach_550':
+          '''Cas bariatrique avec ligne artérielle. Forme d'onde dans une grande physiologie.''',
+      'ach_551':
+          '''Boîtier IR avec surveillance artérielle. Le rouge est une langue.''',
+      'ach_552':
+          '''Radiothérapie sous voie MAC/sédation enregistrée. Touche légère, grande attention.''',
+      'ach_553':
+          '''Cardiaque pédiatrique avec surveillance invasive. Lignes avant contournement.''',
+      'ach_554':
+          '''Drapeau des voies aériennes difficiles sur un cas maxillo. Trismus rencontre la formation.''',
+      'ach_555':
+          '''Désaturation gérée dans un cas bariatrique. Sauvetage sans drame.''',
+      'ach_556':
+          '''Anesthésie IR sur quatre heures. Marathon de fluoroscopie.''',
+      'ach_557':
+          '''La radiothérapie commence avant 07h00. Heure du faisceau.''',
+      'ach_558':
+          '''Cardiaque pédiatrique d’urgence. Adrénaline en option ; systèmes obligatoires.''',
+      'ach_559':
+          '''Huit spécialités chirurgicales distinctes enregistrées dont au moins une nouvelle spécialité. Polyglotte de la liste.''',
+      'ach_560':
+          '''Cinquante cas combinés dans le nouvel ensemble de spécialités. Explorateur régulier.''',
+      'ach_561':
+          '''Soixante-quinze cas dentaires/maxillo. Antécédents dans la ligue bouche et voies respiratoires.''',
+      'ach_562':
+          '''Soixante quinze cas de chirurgie bariatrique. Bilan sur la rampe.''',
       'ach_563': '''Soixante-quinze cas IR. Légende de la chambre noire.''',
-      'ach_564': '''Soixante-quinze cas cardiaques pédiatriques. Titre lourd, mains légères.''',
+      'ach_564':
+          '''Soixante-quinze cas cardiaques pédiatriques. Titre lourd, mains légères.''',
       'ach_565': '''Cinquante cas de radiothérapie. Lourd sur le calme.''',
-      'ach_566': '''Vingt-cinq cas dans de nouvelles spécialités combinées. Progrès frontalier.''',
-      'ach_567': '''Cent cas dans de nouvelles spécialités confondues. La frontière est réglée.''',
-      'ach_568': '''Quarante cas dentaires/maxillo. Allié du chirurgien buccal, gardien du tube.''',
-      'ach_569': '''Premier bloc plan fascia iliaque. Avion retrouvé ; douleur classée sous « plus tard ».''',
-      'ach_570': '''Cinq blocs du fascia iliaque. Les fractures de la hanche vous remercient en silence.''',
+      'ach_566':
+          '''Vingt-cinq cas dans de nouvelles spécialités combinées. Progrès frontalier.''',
+      'ach_567':
+          '''Cent cas dans de nouvelles spécialités confondues. La frontière est réglée.''',
+      'ach_568':
+          '''Quarante cas dentaires/maxillo. Allié du chirurgien buccal, gardien du tube.''',
+      'ach_569':
+          '''Premier bloc plan fascia iliaque. Avion retrouvé ; douleur classée sous « plus tard ».''',
+      'ach_570':
+          '''Cinq blocs du fascia iliaque. Les fractures de la hanche vous remercient en silence.''',
       'ach_571': '''Quinze blocs fascia-iliaque. Régulier sur la liste #NOF.''',
-      'ach_572': '''Trente blocs fascia-iliaque. Spécialiste des avions et de la patience.''',
-      'ach_573': '''Cinquante blocs fascia-iliaque. Maître du murmure iliaque.''',
-      'ach_574': '''Dix blocs fascia-iliaque guidés par l’USG. Gel, sonde, paix.''',
-      'ach_575': '''Fascia iliaque avec cathéter placé. Pack confort continu.''',
-      'ach_576': '''Vingt blocs fascia-iliaque réalisés (pas seulement observés). Travail pratique sur avion.''',
-      'ach_577': '''Premier bloc style compartiment psoas/psoas. Plan profond, calme plus profond.''',
-      'ach_578': '''Cinq blocs du plan sous-fascial du psoas. Subfascial, pas de qualité inférieure.''',
-      'ach_579': '''Quinze blocs du plan sous-fascial du psoas. Régulier dans le grand bain.''',
-      'ach_580': '''Trente blocs du plan sous-fascial du psoas. Spécialiste là où les monuments ont peur de marcher.''',
-      'ach_581': '''Cinquante blocs du plan sous-fascial du psoas. Maître de l\'énergie d\'approche postérieure.''',
-      'ach_582': '''Dix blocs d\'avion psoas guidés par l\'USG. Voir l\'avion; être l\'avion.''',
-      'ach_583': '''Bloc plan psoas avec cathéter. Infusion pour la victoire.''',
-      'ach_584': '''Vingt blocs de plan psoas réalisés. Travaux d\'aiguille crédités.''',
-      'ach_585': '''Blocs du fascia iliaque et du plan psoas enregistrés. Collectionneur d\'avions.''',
-      'ach_586': '''Fascia iliaque ou psoas sur un cas ortho traumatique. Des avions pour la douleur, pas pour le spectacle.''',
-      'ach_587': '''Dix blocs fascia-iliaque pour les voies de fracture de la hanche. Le meilleur ami de #NOF.''',
-      'ach_588': '''Cinq cas avec fascia ou psoas plus un autre bloc des membres inférieurs. Mode Duo.''',
-      'ach_589': '''Premiers frissons enregistrés et gérés. Diplomatie des thermostats.''',
-      'ach_590': '''Cinq événements frissonnants réussis. La chaleur est une drogue.''',
-      'ach_591': '''Quinze événements frissonnants. Spécialiste des couvertures et de la patience.''',
-      'ach_592': '''Trente événements frissonnants réussis. Maître du tremblement post-opératoire.''',
-      'ach_593': '''Première hypertension intra-opératoire prise en charge. CARTE vers le haut ; tu es resté à niveau.''',
-      'ach_594': '''Cinq épisodes d\'hypertension gérés. Presseurs en option ; pensé obligatoire.''',
-      'ach_595': '''Quinze événements d’hypertension. Régulier sur le côté haut du poignet.''',
-      'ach_596': '''Trente événements d\'hypertension gérés. Spécialiste du pourquoi et de la suite.''',
-      'ach_597': '''Première complication hémorragique enregistrée. Aspiration activée ; cerveau allumé.''',
-      'ach_598': '''Cinq événements hémorragiques gérés. Produits sanguins et tension artérielle.''',
+      'ach_572':
+          '''Trente blocs fascia-iliaque. Spécialiste des avions et de la patience.''',
+      'ach_573':
+          '''Cinquante blocs fascia-iliaque. Maître du murmure iliaque.''',
+      'ach_574':
+          '''Dix blocs fascia-iliaque guidés par l’USG. Gel, sonde, paix.''',
+      'ach_575':
+          '''Fascia iliaque avec cathéter placé. Pack confort continu.''',
+      'ach_576':
+          '''Vingt blocs fascia-iliaque réalisés (pas seulement observés). Travail pratique sur avion.''',
+      'ach_577':
+          '''Premier bloc style compartiment psoas/psoas. Plan profond, calme plus profond.''',
+      'ach_578':
+          '''Cinq blocs du plan sous-fascial du psoas. Subfascial, pas de qualité inférieure.''',
+      'ach_579':
+          '''Quinze blocs du plan sous-fascial du psoas. Régulier dans le grand bain.''',
+      'ach_580':
+          '''Trente blocs du plan sous-fascial du psoas. Spécialiste là où les monuments ont peur de marcher.''',
+      'ach_581':
+          '''Cinquante blocs du plan sous-fascial du psoas. Maître de l'énergie d'approche postérieure.''',
+      'ach_582':
+          '''Dix blocs d'avion psoas guidés par l'USG. Voir l'avion; être l'avion.''',
+      'ach_583':
+          '''Bloc plan psoas avec cathéter. Infusion pour la victoire.''',
+      'ach_584':
+          '''Vingt blocs de plan psoas réalisés. Travaux d'aiguille crédités.''',
+      'ach_585':
+          '''Blocs du fascia iliaque et du plan psoas enregistrés. Collectionneur d'avions.''',
+      'ach_586':
+          '''Fascia iliaque ou psoas sur un cas ortho traumatique. Des avions pour la douleur, pas pour le spectacle.''',
+      'ach_587':
+          '''Dix blocs fascia-iliaque pour les voies de fracture de la hanche. Le meilleur ami de #NOF.''',
+      'ach_588':
+          '''Cinq cas avec fascia ou psoas plus un autre bloc des membres inférieurs. Mode Duo.''',
+      'ach_589':
+          '''Premiers frissons enregistrés et gérés. Diplomatie des thermostats.''',
+      'ach_590':
+          '''Cinq événements frissonnants réussis. La chaleur est une drogue.''',
+      'ach_591':
+          '''Quinze événements frissonnants. Spécialiste des couvertures et de la patience.''',
+      'ach_592':
+          '''Trente événements frissonnants réussis. Maître du tremblement post-opératoire.''',
+      'ach_593':
+          '''Première hypertension intra-opératoire prise en charge. CARTE vers le haut ; tu es resté à niveau.''',
+      'ach_594':
+          '''Cinq épisodes d'hypertension gérés. Presseurs en option ; pensé obligatoire.''',
+      'ach_595':
+          '''Quinze événements d’hypertension. Régulier sur le côté haut du poignet.''',
+      'ach_596':
+          '''Trente événements d'hypertension gérés. Spécialiste du pourquoi et de la suite.''',
+      'ach_597':
+          '''Première complication hémorragique enregistrée. Aspiration activée ; cerveau allumé.''',
+      'ach_598':
+          '''Cinq événements hémorragiques gérés. Produits sanguins et tension artérielle.''',
       'ach_599': '''Quinze événements hémorragiques. Régulier dans le rouge.''',
-      'ach_600': '''Trente événements hémorragiques gérés. Spécialiste lorsque le champ devient cramoisi.''',
-      'ach_601': '''Première hypothermie enregistrée. Réchauffez le patient, pas les excuses.''',
-      'ach_602': '''Cinq événements d\'hypothermie. L\'air pulsé est un langage d\'amour.''',
-      'ach_603': '''Quinze événements d\'hypothermie gérés. La température est un élément vital.''',
-      'ach_604': '''Trente événements d\'hypothermie. Spécialiste des diplômes et des détails.''',
-      'ach_605': '''Première arythmie gérée. L\'ECG n\'est pas une musique de fond.''',
+      'ach_600':
+          '''Trente événements hémorragiques gérés. Spécialiste lorsque le champ devient cramoisi.''',
+      'ach_601':
+          '''Première hypothermie enregistrée. Réchauffez le patient, pas les excuses.''',
+      'ach_602':
+          '''Cinq événements d'hypothermie. L'air pulsé est un langage d'amour.''',
+      'ach_603':
+          '''Quinze événements d'hypothermie gérés. La température est un élément vital.''',
+      'ach_604':
+          '''Trente événements d'hypothermie. Spécialiste des diplômes et des détails.''',
+      'ach_605':
+          '''Première arythmie gérée. L'ECG n'est pas une musique de fond.''',
       'ach_606': '''Cinq arythmies gérées. Rythme, rythme, réponse.''',
       'ach_607': '''Quinze arythmies. Régulier aux gribouillis.''',
-      'ach_608': '''Trente arythmies gérées. Spécialiste quand la ligne devient abstraite.''',
+      'ach_608':
+          '''Trente arythmies gérées. Spécialiste quand la ligne devient abstraite.''',
       'ach_609': '''Premier pneumothorax géré. Aiguille, vidange, calme.''',
-      'ach_610': '''Trois événements de pneumothorax. Vous préférez l\'air dans le circuit uniquement.''',
-      'ach_611': '''Cinq événements de pneumothorax gérés. Régulier à l\'inattendu.''',
-      'ach_612': '''Dix événements de pneumothorax. Spécialiste du mauvais air, des bonnes décisions.''',
-      'ach_613': '''Première voie de perte massive de sang. MTP n\'est pas un document théorique.''',
-      'ach_614': '''Trois pertes de sang massives ont été gérées. Activez tôt ; pense clairement.''',
-      'ach_615': '''Cinq événements de perte de sang massive. Régulier quand l\'économiseur de cellule chante.''',
-      'ach_616': '''Dix événements de perte de sang massive ont été gérés. Spécialiste des ratios et de la retenue.''',
-      'ach_617': '''Première réaction transfusionnelle gérée. Arrêtez la ligne ; démarrer le protocole.''',
-      'ach_618': '''Trois réactions transfusionnelles. Les protocoles existent pour une raison.''',
-      'ach_619': '''Cinq réactions transfusionnelles gérées. Régulier lors de rares mauvais jours.''',
-      'ach_620': '''Dix réactions transfusionnelles. Spécialiste lorsque le sang se comporte mal.''',
-      'ach_621': '''Première embolie gazeuse veineuse gérée. Latéral gauche en option ; cerveau obligatoire.''',
-      'ach_622': '''Trois événements VAE gérés. L\'air n\'est pas une drogue.''',
+      'ach_610':
+          '''Trois événements de pneumothorax. Vous préférez l'air dans le circuit uniquement.''',
+      'ach_611':
+          '''Cinq événements de pneumothorax gérés. Régulier à l'inattendu.''',
+      'ach_612':
+          '''Dix événements de pneumothorax. Spécialiste du mauvais air, des bonnes décisions.''',
+      'ach_613':
+          '''Première voie de perte massive de sang. MTP n'est pas un document théorique.''',
+      'ach_614':
+          '''Trois pertes de sang massives ont été gérées. Activez tôt ; pense clairement.''',
+      'ach_615':
+          '''Cinq événements de perte de sang massive. Régulier quand l'économiseur de cellule chante.''',
+      'ach_616':
+          '''Dix événements de perte de sang massive ont été gérés. Spécialiste des ratios et de la retenue.''',
+      'ach_617':
+          '''Première réaction transfusionnelle gérée. Arrêtez la ligne ; démarrer le protocole.''',
+      'ach_618':
+          '''Trois réactions transfusionnelles. Les protocoles existent pour une raison.''',
+      'ach_619':
+          '''Cinq réactions transfusionnelles gérées. Régulier lors de rares mauvais jours.''',
+      'ach_620':
+          '''Dix réactions transfusionnelles. Spécialiste lorsque le sang se comporte mal.''',
+      'ach_621':
+          '''Première embolie gazeuse veineuse gérée. Latéral gauche en option ; cerveau obligatoire.''',
+      'ach_622':
+          '''Trois événements VAE gérés. L'air n'est pas une drogue.''',
       'ach_623': '''Cinq événements VAE. Régulier au pire whoosh.''',
-      'ach_624': '''Dix événements VAE gérés. Spécialiste lorsque les bulles deviennent l\'intrigue.''',
-      'ach_625': '''Premier événement d’aspiration géré. Aspiration, oxygène, humilité.''',
-      'ach_626': '''Trois aspirations réussies. Protégez les voies respiratoires que vous avez déjà sécurisées.''',
-      'ach_627': '''Cinq aspirations. Du régulier à l\'imprévu.''',
-      'ach_628': '''Dix aspirations réalisées. Spécialiste après l\'impensable.''',
-      'ach_629': '''Premier échec d\'intubation enregistré. Le plan B est la raison pour laquelle vous vous êtes entraîné.''',
-      'ach_630': '''Trois intubations échouées. Déclarez tôt; toujours de l\'oxygène.''',
-      'ach_631': '''Cinq intubations échouées. Régulier et honnêteté sous pression.''',
-      'ach_632': '''Dix intubations ont échoué. Spécialiste pour ne pas devenir la complication.''',
-      'ach_633': '''Première ventilation au masque difficile enregistrée. Deux mains, un plan.''',
-      'ach_634': '''Cinq événements difficiles de ventilation au masque. OPA/NPA sont amis.''',
-      'ach_635': '''Quinze événements difficiles de ventilation au masque. Régulier quand le sac riposte.''',
-      'ach_636': '''Trente événements difficiles de ventilation au masque ont été gérés. Spécialiste du savoir-faire oublié.''',
-      'ach_637': '''Enregistrement de cinq nouveaux types de complications différents. Collectionneur de moments enseignables.''',
-      'ach_638': '''Enregistré huit nouveaux types de complications différents. Connaisseur du chaos contenu.''',
-      'ach_639': '''J\'ai enregistré les douze nouvelles catégories de complications au moins une fois. Programme complet.''',
-      'ach_640': '''Vingt événements au total dans le nouvel ensemble de complications. Catalogue de calme.''',
-      'ach_641': '''Au total, cinquante nouveaux événements de complications ont été gérés. Volume avec vertu.''',
-      'ach_642': '''Préférez toujours aucun/sans incident – mais vous vous êtes connecté et avez appris du reste. Équilibre.''',
-      'ach_643': '''Les frissons et l’hypertension ont été pris en charge dans tous les cas. Fichiers chauds et froids.''',
-      'ach_644': '''Les saignements et l\'hypothermie ont été gérés. Cours rouges et bleus.''',
-      'ach_645': '''Aspiration, VAE ou pneumothorax gérés. Quand l’air se comporte mal.''',
-      'ach_646': '''Échec de l’intubation et ventilation difficile au masque tous deux enregistrés. Insigne d\'honnêteté des voies respiratoires.''',
-      'ach_647': '''Une perte de sang massive et une réaction transfusionnelle ont toutes deux été enregistrées. Chapitre sur le sang terminé.''',
-      'ach_648': '''L\'arythmie et l\'hypertension ont toutes deux été gérées. Sous-intrigue cardio.''',
-      'ach_649': '''Toute nouvelle complication après minuit. École du soir, édition clinique.''',
-      'ach_650': '''Nouvelle complication prise en charge en ASA IV+. Risque élevé, niveau élevé.''',
-      'ach_651': '''Complication enregistrée mais résultat PACU sans incident. Crise évitée, vraiment.''',
-      'ach_652': '''Cas avec deux ou plusieurs complications distinctes enregistrées. Affaire chargée, tête claire.''',
-      'ach_653': '''Dix complications gérées dans toutes les catégories. Moments d’enseignement mis en banque.''',
-      'ach_654': '''Trente événements gérés sur de nouvelles complications. Filet élargi.''',
-      'ach_655': '''Réaction transfusionnelle ou voie MTP respectée dans le journal. Le protocole est la personnalité.''',
-      'ach_656': '''Les frissons et l’hypothermie sont tous deux gérés. La température n\'est pas facultative.''',
-      'ach_657': '''DMV plus honnêteté d\'intubation échouée dans le journal de bord. L\'honnêteté sauve des vies.''',
-      'ach_658': '''VAE gérée et journalisée. La prise de conscience représente la moitié de la bataille ; l\'action est le reste.''',
-      'ach_659': '''Saignement ou perte de sang massive géré dix fois au total. Vétéran du champ rouge.''',
-      'ach_660': '''L\'hypertension a été gérée vingt fois. Pression, gérée.''',
-      'ach_661': '''Cinquante événements frissonnants réussis. Achetez à l\'institution un meilleur réchauffeur.''',
-      'ach_662': '''Cinquante événements d’hypertension gérés. Des histoires MAP pendant des jours.''',
-      'ach_663': '''Cinquante événements hémorragiques gérés. Biographie d\'aspiration.''',
-      'ach_664': '''Cinquante événements d\'hypothermie gérés. Biographie de la température.''',
+      'ach_624':
+          '''Dix événements VAE gérés. Spécialiste lorsque les bulles deviennent l'intrigue.''',
+      'ach_625':
+          '''Premier événement d’aspiration géré. Aspiration, oxygène, humilité.''',
+      'ach_626':
+          '''Trois aspirations réussies. Protégez les voies respiratoires que vous avez déjà sécurisées.''',
+      'ach_627': '''Cinq aspirations. Du régulier à l'imprévu.''',
+      'ach_628':
+          '''Dix aspirations réalisées. Spécialiste après l'impensable.''',
+      'ach_629':
+          '''Premier échec d'intubation enregistré. Le plan B est la raison pour laquelle vous vous êtes entraîné.''',
+      'ach_630':
+          '''Trois intubations échouées. Déclarez tôt; toujours de l'oxygène.''',
+      'ach_631':
+          '''Cinq intubations échouées. Régulier et honnêteté sous pression.''',
+      'ach_632':
+          '''Dix intubations ont échoué. Spécialiste pour ne pas devenir la complication.''',
+      'ach_633':
+          '''Première ventilation au masque difficile enregistrée. Deux mains, un plan.''',
+      'ach_634':
+          '''Cinq événements difficiles de ventilation au masque. OPA/NPA sont amis.''',
+      'ach_635':
+          '''Quinze événements difficiles de ventilation au masque. Régulier quand le sac riposte.''',
+      'ach_636':
+          '''Trente événements difficiles de ventilation au masque ont été gérés. Spécialiste du savoir-faire oublié.''',
+      'ach_637':
+          '''Enregistrement de cinq nouveaux types de complications différents. Collectionneur de moments enseignables.''',
+      'ach_638':
+          '''Enregistré huit nouveaux types de complications différents. Connaisseur du chaos contenu.''',
+      'ach_639':
+          '''J'ai enregistré les douze nouvelles catégories de complications au moins une fois. Programme complet.''',
+      'ach_640':
+          '''Vingt événements au total dans le nouvel ensemble de complications. Catalogue de calme.''',
+      'ach_641':
+          '''Au total, cinquante nouveaux événements de complications ont été gérés. Volume avec vertu.''',
+      'ach_642':
+          '''Préférez toujours aucun/sans incident – mais vous vous êtes connecté et avez appris du reste. Équilibre.''',
+      'ach_643':
+          '''Les frissons et l’hypertension ont été pris en charge dans tous les cas. Fichiers chauds et froids.''',
+      'ach_644':
+          '''Les saignements et l'hypothermie ont été gérés. Cours rouges et bleus.''',
+      'ach_645':
+          '''Aspiration, VAE ou pneumothorax gérés. Quand l’air se comporte mal.''',
+      'ach_646':
+          '''Échec de l’intubation et ventilation difficile au masque tous deux enregistrés. Insigne d'honnêteté des voies respiratoires.''',
+      'ach_647':
+          '''Une perte de sang massive et une réaction transfusionnelle ont toutes deux été enregistrées. Chapitre sur le sang terminé.''',
+      'ach_648':
+          '''L'arythmie et l'hypertension ont toutes deux été gérées. Sous-intrigue cardio.''',
+      'ach_649':
+          '''Toute nouvelle complication après minuit. École du soir, édition clinique.''',
+      'ach_650':
+          '''Nouvelle complication prise en charge en ASA IV+. Risque élevé, niveau élevé.''',
+      'ach_651':
+          '''Complication enregistrée mais résultat PACU sans incident. Crise évitée, vraiment.''',
+      'ach_652':
+          '''Cas avec deux ou plusieurs complications distinctes enregistrées. Affaire chargée, tête claire.''',
+      'ach_653':
+          '''Dix complications gérées dans toutes les catégories. Moments d’enseignement mis en banque.''',
+      'ach_654':
+          '''Trente événements gérés sur de nouvelles complications. Filet élargi.''',
+      'ach_655':
+          '''Réaction transfusionnelle ou voie MTP respectée dans le journal. Le protocole est la personnalité.''',
+      'ach_656':
+          '''Les frissons et l’hypothermie sont tous deux gérés. La température n'est pas facultative.''',
+      'ach_657':
+          '''DMV plus honnêteté d'intubation échouée dans le journal de bord. L'honnêteté sauve des vies.''',
+      'ach_658':
+          '''VAE gérée et journalisée. La prise de conscience représente la moitié de la bataille ; l'action est le reste.''',
+      'ach_659':
+          '''Saignement ou perte de sang massive géré dix fois au total. Vétéran du champ rouge.''',
+      'ach_660': '''L'hypertension a été gérée vingt fois. Pression, gérée.''',
+      'ach_661':
+          '''Cinquante événements frissonnants réussis. Achetez à l'institution un meilleur réchauffeur.''',
+      'ach_662':
+          '''Cinquante événements d’hypertension gérés. Des histoires MAP pendant des jours.''',
+      'ach_663':
+          '''Cinquante événements hémorragiques gérés. Biographie d'aspiration.''',
+      'ach_664':
+          '''Cinquante événements d'hypothermie gérés. Biographie de la température.''',
       'ach_665': '''Cinquante arythmies gérées. Nouvelle ECG.''',
-      'ach_666': '''Après avoir géré l\'aspiration, dix cas ultérieurs sans incident. Leçon appliquée.''',
-      'ach_667': '''Ventilation difficile au masque suivie d\'une ventilation définitive réussie dans le même cas. La séquence compte.''',
-      'ach_668': '''Cas d\'intubation échoué se terminant sans décès sur table. La récupération est le point important.''',
-      'ach_669': '''Pneumothorax géré avec une énergie d\'intervention définitive. Aérez, rentrez au calme.''',
-      'ach_670': '''Cinq événements de niveau MTP où vous êtes resté capitaine. Rang gagné.''',
-      'ach_671': '''Cinq réactions transfusionnelles avec énergie protocolaire. Arrêter, évaluer, traiter.''',
-      'ach_672': '''VAE en position assise ou à risque cas énergie. Position risque, respectée.''',
-      'ach_673': '''Frissons gérés avec de bons résultats en PACU. Chaud et éveillé.''',
-      'ach_674': '''Hypertension à l\'émergence prise en charge. Sortez le tube, faites pression civile.''',
-      'ach_675': '''Complication hémorragique avec voie de transfert en USI enregistrée. Au bon endroit, au bon moment.''',
-      'ach_676': '''Hypothermie en cas de cas cardiaque ou majeur pris en charge. Réchauffer le circuit de soins.''',
-      'ach_677': '''Énergie d\'arythmie instable gérée. Électricité en option; je ne le pensais pas.''',
-      'ach_678': '''Une ventilation difficile au masque et des voies respiratoires difficiles sont toutes deux vraies dans un cas. Programme complet des voies respiratoires en une seule séance.''',
-      'ach_679': '''Trois types de complications différents dans un cas. Toujours là. Toujours en cours de journalisation.''',
-      'ach_680': '''Après une complication, retour à une séquence de dix sans incident. Résilience.''',
-      'ach_681': '''Vingt complications enregistrées au lieu d\'être minimisées. Culture d\'honnêteté.''',
-      'ach_682': '''Premier de chaque : frissons, hypertension, saignements. Kit de démarrage complet.''',
-      'ach_683': '''Une perte de sang massive, une VAE et un échec d\'intubation ont chacun été enregistrés une fois. Ensemble critique.''',
-      'ach_684': '''Aspiration, échec d\'intubation, DMV chacun enregistré. Le trio des complications des voies respiratoires.''',
-      'ach_685': '''Frissons et hypothermie cinq chacun. Alphabétisation thermique.''',
-      'ach_686': '''Saignement et perte de sang massive cinq dans chaque chemin combiné. Alphabétisation hémo.''',
-      'ach_687': '''L\'hypertension et l\'arythmie sont dix dans chaque voie. Alphabétisation des complications cardio.''',
-      'ach_688': '''Dix événements de nouvelles complications au total. Agrandissement en cours.''',
-      'ach_689': '''Vingt-cinq événements de nouvelles complications au total. Expansion réelle.''',
-      'ach_690': '''Soixante-quinze événements de nouvelles complications au total. Expansion institutionnelle.''',
-      'ach_691': '''Au total, une centaine d’événements de nouvelles complications ont été gérés. Agrandissement terminé.''',
-      'ach_692': '''Cinquante complications de toute nature enregistrées au cours de votre carrière dans l\'application. Métrique d\'honnêteté.''',
-      'ach_693': '''Cas de complications suivi plus tard par une séquence de vingt-cinq sans incident. Cours corrigé.''',
-      'ach_694': '''Nouvelle complication lors d\'un cas d\'urgence. Pression sur pression.''',
-      'ach_695': '''Nouvelle complication chez un patient de moins de 18 ans. Petit patient, protocole complet.''',
-      'ach_696': '''Nouvelle complication chez le patient ≥65 ans. Physiologie fragile, projets fermes.''',
-      'ach_697': '''Nouvelle complication dans un cas de chirurgie bariatrique. Physiologie au carré.''',
-      'ach_698': '''Nouvelle complication dentaire/maxillo. Sous-parcelle des voies respiratoires partagées.''',
-      'ach_699': '''Nouvelle complication en IR. Pièce sombre, pensée lumineuse.''',
-      'ach_700': '''Nouvelle complication en cardiologie pédiatrique. Salle de classe aux enjeux les plus élevés.''',
-      'ach_701': '''Suffisamment de détails de complications enregistrés pour que le PDF puisse enseigner. La documentation comme héritage.''',
+      'ach_666':
+          '''Après avoir géré l'aspiration, dix cas ultérieurs sans incident. Leçon appliquée.''',
+      'ach_667':
+          '''Ventilation difficile au masque suivie d'une ventilation définitive réussie dans le même cas. La séquence compte.''',
+      'ach_668':
+          '''Cas d'intubation échoué se terminant sans décès sur table. La récupération est le point important.''',
+      'ach_669':
+          '''Pneumothorax géré avec une énergie d'intervention définitive. Aérez, rentrez au calme.''',
+      'ach_670':
+          '''Cinq événements de niveau MTP où vous êtes resté capitaine. Rang gagné.''',
+      'ach_671':
+          '''Cinq réactions transfusionnelles avec énergie protocolaire. Arrêter, évaluer, traiter.''',
+      'ach_672':
+          '''VAE en position assise ou à risque cas énergie. Position risque, respectée.''',
+      'ach_673':
+          '''Frissons gérés avec de bons résultats en PACU. Chaud et éveillé.''',
+      'ach_674':
+          '''Hypertension à l'émergence prise en charge. Sortez le tube, faites pression civile.''',
+      'ach_675':
+          '''Complication hémorragique avec voie de transfert en USI enregistrée. Au bon endroit, au bon moment.''',
+      'ach_676':
+          '''Hypothermie en cas de cas cardiaque ou majeur pris en charge. Réchauffer le circuit de soins.''',
+      'ach_677':
+          '''Énergie d'arythmie instable gérée. Électricité en option; je ne le pensais pas.''',
+      'ach_678':
+          '''Une ventilation difficile au masque et des voies respiratoires difficiles sont toutes deux vraies dans un cas. Programme complet des voies respiratoires en une seule séance.''',
+      'ach_679':
+          '''Trois types de complications différents dans un cas. Toujours là. Toujours en cours de journalisation.''',
+      'ach_680':
+          '''Après une complication, retour à une séquence de dix sans incident. Résilience.''',
+      'ach_681':
+          '''Vingt complications enregistrées au lieu d'être minimisées. Culture d'honnêteté.''',
+      'ach_682':
+          '''Premier de chaque : frissons, hypertension, saignements. Kit de démarrage complet.''',
+      'ach_683':
+          '''Une perte de sang massive, une VAE et un échec d'intubation ont chacun été enregistrés une fois. Ensemble critique.''',
+      'ach_684':
+          '''Aspiration, échec d'intubation, DMV chacun enregistré. Le trio des complications des voies respiratoires.''',
+      'ach_685':
+          '''Frissons et hypothermie cinq chacun. Alphabétisation thermique.''',
+      'ach_686':
+          '''Saignement et perte de sang massive cinq dans chaque chemin combiné. Alphabétisation hémo.''',
+      'ach_687':
+          '''L'hypertension et l'arythmie sont dix dans chaque voie. Alphabétisation des complications cardio.''',
+      'ach_688':
+          '''Dix événements de nouvelles complications au total. Agrandissement en cours.''',
+      'ach_689':
+          '''Vingt-cinq événements de nouvelles complications au total. Expansion réelle.''',
+      'ach_690':
+          '''Soixante-quinze événements de nouvelles complications au total. Expansion institutionnelle.''',
+      'ach_691':
+          '''Au total, une centaine d’événements de nouvelles complications ont été gérés. Agrandissement terminé.''',
+      'ach_692':
+          '''Cinquante complications de toute nature enregistrées au cours de votre carrière dans l'application. Métrique d'honnêteté.''',
+      'ach_693':
+          '''Cas de complications suivi plus tard par une séquence de vingt-cinq sans incident. Cours corrigé.''',
+      'ach_694':
+          '''Nouvelle complication lors d'un cas d'urgence. Pression sur pression.''',
+      'ach_695':
+          '''Nouvelle complication chez un patient de moins de 18 ans. Petit patient, protocole complet.''',
+      'ach_696':
+          '''Nouvelle complication chez le patient ≥65 ans. Physiologie fragile, projets fermes.''',
+      'ach_697':
+          '''Nouvelle complication dans un cas de chirurgie bariatrique. Physiologie au carré.''',
+      'ach_698':
+          '''Nouvelle complication dentaire/maxillo. Sous-parcelle des voies respiratoires partagées.''',
+      'ach_699':
+          '''Nouvelle complication en IR. Pièce sombre, pensée lumineuse.''',
+      'ach_700':
+          '''Nouvelle complication en cardiologie pédiatrique. Salle de classe aux enjeux les plus élevés.''',
+      'ach_701':
+          '''Suffisamment de détails de complications enregistrés pour que le PDF puisse enseigner. La documentation comme héritage.''',
     },
     'de': {
-      'ach_0': '''Jeder Großmeister war einmal ein verängstigter Bewohner. Versuchen Sie, die Spritze nicht fallen zu lassen.''',
-      'ach_1': '''Zwei Fälle. Sie haben aufgehört, die Checkliste laut vorzutragen. Fortschritt.''',
-      'ach_2': '''Drei Fälle. Das Theater fühlt sich immer weniger wie eine Geiselnahme an.''',
-      'ach_3': '''Vier Fälle. Sie können Sevofluran buchstabieren, ohne die Flasche zu überprüfen. Meistens.''',
-      'ach_4': '''Fünf Fälle. High-Five, das Narkosegerät – es ist der Einzige, der es versteht.''',
+      'ach_0':
+          '''Jeder Großmeister war einmal ein verängstigter Bewohner. Versuchen Sie, die Spritze nicht fallen zu lassen.''',
+      'ach_1':
+          '''Zwei Fälle. Sie haben aufgehört, die Checkliste laut vorzutragen. Fortschritt.''',
+      'ach_2':
+          '''Drei Fälle. Das Theater fühlt sich immer weniger wie eine Geiselnahme an.''',
+      'ach_3':
+          '''Vier Fälle. Sie können Sevofluran buchstabieren, ohne die Flasche zu überprüfen. Meistens.''',
+      'ach_4':
+          '''Fünf Fälle. High-Five, das Narkosegerät – es ist der Einzige, der es versteht.''',
       'ach_5': '''Sechs Fälle. ETCO₂ wird zu Ihrer Liebessprache.''',
-      'ach_6': '''Sieben Fälle. Möge Ihre nächste Untersuchung Grad 1 sein und Ihr Chirurg pünktlich sein.''',
+      'ach_6':
+          '''Sieben Fälle. Möge Ihre nächste Untersuchung Grad 1 sein und Ihr Chirurg pünktlich sein.''',
       'ach_7': '''Acht im Buch. Das Fahrtenbuch ist kein Gerücht mehr.''',
-      'ach_8': '''Neun Fälle. Eine Zahl weniger als zweistellig und leichte Überlegenheit.''',
-      'ach_9': '''Zehn Fälle. Sie haben offiziell aufgehört, sich beim Infusionsständer zu entschuldigen, wenn Sie dagegen stoßen.''',
-      'ach_10': '''Dreizehn Fälle. Für manche ein Pech. Reibungslos für Sie – angeblich.''',
-      'ach_11': '''Sechzehn Fälle. Süß wie eine Sevo-Einleitung, bis sie nach mehr Entspannung verlangen.''',
-      'ach_12': '''Zwanzig Fälle. Mehr Stunden im Kittel als in Zivil. Klassiker.''',
-      'ach_13': '''Fünfundzwanzig Fälle. Die Chirurgen beginnen sich Ihren Vornamen zu merken.''',
-      'ach_14': '''Dreißig Fälle. Koffein ist Co-Pilot und primäres Inotropikum.''',
-      'ach_15': '''Vierzig Fälle. Ironischerweise bist du der Einzige im Raum, der nicht schläft.''',
-      'ach_16': '''Fünfzig Fälle. Der Pulsochsen-Piepton ist im Grunde Ihr neuer Ruherhythmus.''',
-      'ach_17': '''Sechzig Fälle. Fast genug, um beim Mittagessen zu intubieren.''',
+      'ach_8':
+          '''Neun Fälle. Eine Zahl weniger als zweistellig und leichte Überlegenheit.''',
+      'ach_9':
+          '''Zehn Fälle. Sie haben offiziell aufgehört, sich beim Infusionsständer zu entschuldigen, wenn Sie dagegen stoßen.''',
+      'ach_10':
+          '''Dreizehn Fälle. Für manche ein Pech. Reibungslos für Sie – angeblich.''',
+      'ach_11':
+          '''Sechzehn Fälle. Süß wie eine Sevo-Einleitung, bis sie nach mehr Entspannung verlangen.''',
+      'ach_12':
+          '''Zwanzig Fälle. Mehr Stunden im Kittel als in Zivil. Klassiker.''',
+      'ach_13':
+          '''Fünfundzwanzig Fälle. Die Chirurgen beginnen sich Ihren Vornamen zu merken.''',
+      'ach_14':
+          '''Dreißig Fälle. Koffein ist Co-Pilot und primäres Inotropikum.''',
+      'ach_15':
+          '''Vierzig Fälle. Ironischerweise bist du der Einzige im Raum, der nicht schläft.''',
+      'ach_16':
+          '''Fünfzig Fälle. Der Pulsochsen-Piepton ist im Grunde Ihr neuer Ruherhythmus.''',
+      'ach_17':
+          '''Sechzig Fälle. Fast genug, um beim Mittagessen zu intubieren.''',
       'ach_18': '''75 Fälle. Dreiviertel des Weges zum Century Club.''',
-      'ach_19': '''Achtundachtzig Fälle. Glückszahl. Verschwenden Sie es nicht mit einem fehlenden Bougie.''',
-      'ach_20': '''Neunzig Fälle. So nah, dass Sie den Feierkaffee nach dem Anruf genießen können.''',
-      'ach_21': '''Einhundert Fälle. Sie lesen den Monitor, bevor der Chirurg die Frage beendet hat.''',
-      'ach_22': '''Einhundertfünfundzwanzig Fälle. Stille Beurteilung der Eye-Taping-Technik: nicht gesperrt.''',
-      'ach_23': '''Einhundertfünfzig Fälle. Das Logbuch wird ansehnlich. Dein Schlaf ist es nicht.''',
-      'ach_24': '''Einhundertfünfundsiebzig Fälle. MAP gehalten. Moral: entschädigt.''',
-      'ach_25': '''Zweihundert Fälle. Zeit, den Neulingen beizubringen, welches Ende des Zielfernrohrs oben liegt.''',
-      'ach_26': '''Zweihundertfünfundzwanzig Fälle. Das Theater kennt Ihren Namen – normalerweise, wenn die Liste überfüllt ist.''',
-      'ach_27': '''Zweihundertfünfzig Fälle. Propofol läuft nicht mehr einfach so von der Hand.''',
-      'ach_28': '''Dreihundert Fälle. Angetrieben von Lounge-Kaffee und restlicher Willenskraft.''',
-      'ach_29': '''Dreihundertfünfzig Fälle. Schwierige Atemwege lassen eine Augenbraue hochziehen, nicht einen Herzschlag.''',
-      'ach_30': '''Vierhundert Fälle. Sie haben keine Angst mehr vor dem Pager. Der Pager hat Angst vor dir.''',
-      'ach_31': '''Fünfhundert Fälle. Ein halbes Tausend. Völlige Aufklärung der Atemwege (mit gelegentlicher Demut).''',
-      'ach_32': '''Fünfhundertfünfzig Fälle. Eine weitere Kerbe am Laryngoskopgriff des Lebens.''',
-      'ach_33': '''Sechshundert Fälle. Es gibt kaum etwas, das Sie aus der Fassung bringt – außer dem Beatmungsgerät, das bei der Einleitung abschaltet.''',
-      'ach_34': '''Sechshundertfünfzig Fälle. Immer noch über der Linie. Gut genug.''',
-      'ach_35': '''Siebenhundert Fälle. Ihr PDF könnte als Türstopper dienen.''',
-      'ach_36': '''Siebenhundertfünfzig Fälle. Sie und der Zirkulator kommunizieren jetzt in reinem Nicken.''',
-      'ach_37': '''Achthundert Fälle. Die App schuldet Ihnen ein Abendessen und einen freien Tag.''',
-      'ach_38': '''Achthundertfünfzig Fälle. Meilenstein erreicht. Neostigmin optional.''',
-      'ach_39': '''Neunhundert Fälle. Fast ein Grand. Verhexen Sie nicht die nächsten Hundert.''',
-      'ach_40': '''Neunhundertfünfzig Fälle. Elite ist noch einen guten Monat und einen ununterbrochenen Umfang entfernt.''',
-      'ach_41': '''Tausend Fälle. Das Anästhesiegerät hat *Sie* gerade um Rat gefragt.''',
-      'ach_42': '''Zwölfhundertfünfzig Fälle. Haben Sie darüber nachgedacht, der Sonne zu begegnen? Sozial?''',
-      'ach_43': '''Fünfzehnhundert Fälle. Anästhesie ist eine Selbstverständlichkeit. Kaffee steht immer noch an erster Stelle.''',
+      'ach_19':
+          '''Achtundachtzig Fälle. Glückszahl. Verschwenden Sie es nicht mit einem fehlenden Bougie.''',
+      'ach_20':
+          '''Neunzig Fälle. So nah, dass Sie den Feierkaffee nach dem Anruf genießen können.''',
+      'ach_21':
+          '''Einhundert Fälle. Sie lesen den Monitor, bevor der Chirurg die Frage beendet hat.''',
+      'ach_22':
+          '''Einhundertfünfundzwanzig Fälle. Stille Beurteilung der Eye-Taping-Technik: nicht gesperrt.''',
+      'ach_23':
+          '''Einhundertfünfzig Fälle. Das Logbuch wird ansehnlich. Dein Schlaf ist es nicht.''',
+      'ach_24':
+          '''Einhundertfünfundsiebzig Fälle. MAP gehalten. Moral: entschädigt.''',
+      'ach_25':
+          '''Zweihundert Fälle. Zeit, den Neulingen beizubringen, welches Ende des Zielfernrohrs oben liegt.''',
+      'ach_26':
+          '''Zweihundertfünfundzwanzig Fälle. Das Theater kennt Ihren Namen – normalerweise, wenn die Liste überfüllt ist.''',
+      'ach_27':
+          '''Zweihundertfünfzig Fälle. Propofol läuft nicht mehr einfach so von der Hand.''',
+      'ach_28':
+          '''Dreihundert Fälle. Angetrieben von Lounge-Kaffee und restlicher Willenskraft.''',
+      'ach_29':
+          '''Dreihundertfünfzig Fälle. Schwierige Atemwege lassen eine Augenbraue hochziehen, nicht einen Herzschlag.''',
+      'ach_30':
+          '''Vierhundert Fälle. Sie haben keine Angst mehr vor dem Pager. Der Pager hat Angst vor dir.''',
+      'ach_31':
+          '''Fünfhundert Fälle. Ein halbes Tausend. Völlige Aufklärung der Atemwege (mit gelegentlicher Demut).''',
+      'ach_32':
+          '''Fünfhundertfünfzig Fälle. Eine weitere Kerbe am Laryngoskopgriff des Lebens.''',
+      'ach_33':
+          '''Sechshundert Fälle. Es gibt kaum etwas, das Sie aus der Fassung bringt – außer dem Beatmungsgerät, das bei der Einleitung abschaltet.''',
+      'ach_34':
+          '''Sechshundertfünfzig Fälle. Immer noch über der Linie. Gut genug.''',
+      'ach_35':
+          '''Siebenhundert Fälle. Ihr PDF könnte als Türstopper dienen.''',
+      'ach_36':
+          '''Siebenhundertfünfzig Fälle. Sie und der Zirkulator kommunizieren jetzt in reinem Nicken.''',
+      'ach_37':
+          '''Achthundert Fälle. Die App schuldet Ihnen ein Abendessen und einen freien Tag.''',
+      'ach_38':
+          '''Achthundertfünfzig Fälle. Meilenstein erreicht. Neostigmin optional.''',
+      'ach_39':
+          '''Neunhundert Fälle. Fast ein Grand. Verhexen Sie nicht die nächsten Hundert.''',
+      'ach_40':
+          '''Neunhundertfünfzig Fälle. Elite ist noch einen guten Monat und einen ununterbrochenen Umfang entfernt.''',
+      'ach_41':
+          '''Tausend Fälle. Das Anästhesiegerät hat *Sie* gerade um Rat gefragt.''',
+      'ach_42':
+          '''Zwölfhundertfünfzig Fälle. Haben Sie darüber nachgedacht, der Sonne zu begegnen? Sozial?''',
+      'ach_43':
+          '''Fünfzehnhundert Fälle. Anästhesie ist eine Selbstverständlichkeit. Kaffee steht immer noch an erster Stelle.''',
       'ach_44': '''Siebzehnhundertfünfzig Fälle. Phantom der OP-Energie.''',
-      'ach_45': '''Zweitausend Fälle. Sie haben jedes „schnelle Add-on“ gesehen. Zweimal. Vor dem Mittagessen.''',
-      'ach_46': '''2500 Fälle. Benennen Sie einen Vorratsschrank nach dieser Person.''',
-      'ach_47': '''Dreitausend Fälle. Uns gehen die Titel und flüchtigen Anästhetika langsam aus.''',
-      'ach_48': '''Viertausend Fälle. Sie starren Patienten an und sie denken darüber nach, freiwillig zu schlafen.''',
-      'ach_49': '''Fünftausend Fälle. Haben Sie gerade ein neues flüchtiges Gas erfunden?''',
-      'ach_50': '''Eine Stunde Narkosezeit. Kaum ein MAC-Anteil. Zählt immer noch.''',
-      'ach_51': '''Fünf kumulierte Stunden. Sie haben geschlafen. Du hast überwacht. Fairer Handel.''',
-      'ach_52': '''Zehn Stunden. Die Uhr gewinnt immer. Halten Sie einfach die MAP aufrecht.''',
-      'ach_53': '''Fünfzehn Stunden. Ihr zirkadianer Rhythmus hat eine formelle Beschwerde eingereicht.''',
-      'ach_54': '''Insgesamt vierundzwanzig Stunden. Ein ganzer Tag kontrollierter Bewusstlosigkeit.''',
+      'ach_45':
+          '''Zweitausend Fälle. Sie haben jedes „schnelle Add-on“ gesehen. Zweimal. Vor dem Mittagessen.''',
+      'ach_46':
+          '''2500 Fälle. Benennen Sie einen Vorratsschrank nach dieser Person.''',
+      'ach_47':
+          '''Dreitausend Fälle. Uns gehen die Titel und flüchtigen Anästhetika langsam aus.''',
+      'ach_48':
+          '''Viertausend Fälle. Sie starren Patienten an und sie denken darüber nach, freiwillig zu schlafen.''',
+      'ach_49':
+          '''Fünftausend Fälle. Haben Sie gerade ein neues flüchtiges Gas erfunden?''',
+      'ach_50':
+          '''Eine Stunde Narkosezeit. Kaum ein MAC-Anteil. Zählt immer noch.''',
+      'ach_51':
+          '''Fünf kumulierte Stunden. Sie haben geschlafen. Du hast überwacht. Fairer Handel.''',
+      'ach_52':
+          '''Zehn Stunden. Die Uhr gewinnt immer. Halten Sie einfach die MAP aufrecht.''',
+      'ach_53':
+          '''Fünfzehn Stunden. Ihr zirkadianer Rhythmus hat eine formelle Beschwerde eingereicht.''',
+      'ach_54':
+          '''Insgesamt vierundzwanzig Stunden. Ein ganzer Tag kontrollierter Bewusstlosigkeit.''',
       'ach_55': '''Achtundvierzig Stunden. Zwei Tage ETCO₂ und Geduld.''',
-      'ach_56': '''Fünfzig Stunden. Ein Teilzeitjob, bei dem der Patient immer noch versuchen kann, wegen Herzrhythmusstörungen zu gehen.''',
-      'ach_57': '''Zweiundsiebzig Stunden. Ihre Uhr hat mehr Sonnenaufgänge gesehen als Ihr Kissen.''',
+      'ach_56':
+          '''Fünfzig Stunden. Ein Teilzeitjob, bei dem der Patient immer noch versuchen kann, wegen Herzrhythmusstörungen zu gehen.''',
+      'ach_57':
+          '''Zweiundsiebzig Stunden. Ihre Uhr hat mehr Sonnenaufgänge gesehen als Ihr Kissen.''',
       'ach_58': '''Einhundert Stunden. Ein Jahrhundert Benzin, kein Klatsch.''',
-      'ach_59': '''Einhundertfünfzig Stunden. Beim Rückwärtsfahren vergeht die Zeit wie im Flug.''',
-      'ach_60': '''Zweihundert Stunden. Genug flüchtig, um einen kleinen Mündel zu parfümieren.''',
-      'ach_61': '''Dreihundert Stunden. Ihre Füße fordern etwas Regionales für sich.''',
-      'ach_62': '''Vierhundert Stunden. Immer noch keine traditionellen Überstunden. Nur Ruhm.''',
-      'ach_63': '''Fünfhundert Stunden. Auf halbem Weg zur mythischen Schlaflosigkeit.''',
-      'ach_64': '''Siebenhundertfünfzig Stunden. Lange Fälle bauen Charakter und Kyphose auf.''',
-      'ach_65': '''Tausend Stunden. Elite. Meetings fühlen sich irgendwie immer noch länger an.''',
-      'ach_66': '''Ein Fall von Mitternacht bis 5 Uhr morgens. Denn Schlaf ist etwas für Menschen, die nicht auf Abruf sind.''',
-      'ach_67': '''Fünf Nächte beginnen. Du bist im Grunde ein Vampir, der einen Kittel trägt.''',
-      'ach_68': '''Zehn Nächte beginnen. Der zirkadiane Rhythmus hat den Chat verlassen.''',
-      'ach_69': '''Zwanzig Nächte beginnen. Daylight ist ein präoperatives Gerücht.''',
-      'ach_70': '''Ein Start um 6–7 Uhr. Den Wurm fangen – oder die erste Verzögerung des Tages.''',
-      'ach_71': '''Zehn Frühstarts. Kaffee ist Co-Pilot und hämodynamische Unterstützung.''',
-      'ach_72': '''Ein Wochenendfall. Die Samstage sind für die Jungs … und die Notfall-Schoner.''',
-      'ach_73': '''Zehn Wochenendfälle. Was ist das für ein „Brunch“, von dem Sie sprechen?''',
-      'ach_74': '''Fünfzig Wochenendfälle. Nichtmedizinische Freunde laden Sie nicht mehr ein.''',
-      'ach_75': '''Chirurgie in weniger als fünfzehn Minuten. Propofol-Nickerchen. Nächste!''',
-      'ach_76': '''Zehn ultraschnelle Operationen. Sie verwandeln Räume schneller als das Housekeeping.''',
-      'ach_77': '''Anästhesie über vier Stunden. Zeit, mit dem Gestrüpp über Fantasy-Football zu diskutieren.''',
-      'ach_78': '''Über sechs Stunden. Sie haben sich jede Kachel an der OP-Wand gemerkt.''',
+      'ach_59':
+          '''Einhundertfünfzig Stunden. Beim Rückwärtsfahren vergeht die Zeit wie im Flug.''',
+      'ach_60':
+          '''Zweihundert Stunden. Genug flüchtig, um einen kleinen Mündel zu parfümieren.''',
+      'ach_61':
+          '''Dreihundert Stunden. Ihre Füße fordern etwas Regionales für sich.''',
+      'ach_62':
+          '''Vierhundert Stunden. Immer noch keine traditionellen Überstunden. Nur Ruhm.''',
+      'ach_63':
+          '''Fünfhundert Stunden. Auf halbem Weg zur mythischen Schlaflosigkeit.''',
+      'ach_64':
+          '''Siebenhundertfünfzig Stunden. Lange Fälle bauen Charakter und Kyphose auf.''',
+      'ach_65':
+          '''Tausend Stunden. Elite. Meetings fühlen sich irgendwie immer noch länger an.''',
+      'ach_66':
+          '''Ein Fall von Mitternacht bis 5 Uhr morgens. Denn Schlaf ist etwas für Menschen, die nicht auf Abruf sind.''',
+      'ach_67':
+          '''Fünf Nächte beginnen. Du bist im Grunde ein Vampir, der einen Kittel trägt.''',
+      'ach_68':
+          '''Zehn Nächte beginnen. Der zirkadiane Rhythmus hat den Chat verlassen.''',
+      'ach_69':
+          '''Zwanzig Nächte beginnen. Daylight ist ein präoperatives Gerücht.''',
+      'ach_70':
+          '''Ein Start um 6–7 Uhr. Den Wurm fangen – oder die erste Verzögerung des Tages.''',
+      'ach_71':
+          '''Zehn Frühstarts. Kaffee ist Co-Pilot und hämodynamische Unterstützung.''',
+      'ach_72':
+          '''Ein Wochenendfall. Die Samstage sind für die Jungs … und die Notfall-Schoner.''',
+      'ach_73':
+          '''Zehn Wochenendfälle. Was ist das für ein „Brunch“, von dem Sie sprechen?''',
+      'ach_74':
+          '''Fünfzig Wochenendfälle. Nichtmedizinische Freunde laden Sie nicht mehr ein.''',
+      'ach_75':
+          '''Chirurgie in weniger als fünfzehn Minuten. Propofol-Nickerchen. Nächste!''',
+      'ach_76':
+          '''Zehn ultraschnelle Operationen. Sie verwandeln Räume schneller als das Housekeeping.''',
+      'ach_77':
+          '''Anästhesie über vier Stunden. Zeit, mit dem Gestrüpp über Fantasy-Football zu diskutieren.''',
+      'ach_78':
+          '''Über sechs Stunden. Sie haben sich jede Kachel an der OP-Wand gemerkt.''',
       'ach_79': '''Über acht Stunden. Bartwachstum seit Einführung: messbar.''',
-      'ach_80': '''Über zehn Stunden. Der Patient ist jetzt praktisch Ihr Mitbewohner.''',
-      'ach_81': '''Anästhesie innerhalb von fünfzehn Minuten nach der Operation. Extubiert, bevor die Vorhänge zu Ende fallen.''',
-      'ach_82': '''Fünfundzwanzig knappe Ballverluste. Sie und der Chirurg teilen sich eine Gehirnzelle. Schön.''',
-      'ach_83': '''Fünfzig perfekte Emergenzen. Sie aufzuwecken ist eine Kunst, und du bist Picasso.''',
-      'ach_84': '''Einhundert zeitgesteuerte Notfälle. Wir überprüfen Sie auf eine Zeitmaschine.''',
-      'ach_85': '''Fall am 25. Dezember oder 1. Januar. Ho, ho, halt das Midazolam.''',
-      'ach_86': '''Fall am 31. Dez. oder 1. Jan. Laryngoskop in der einen Hand, ruhiger Optimismus in der anderen.''',
-      'ach_87': '''Fall an deinem Geburtstag. Alles Gute zum Geburtstag – hier ist eine Notfall-Ex-Runde.''',
-      'ach_88': '''ASA I. So gesund, dass du ständig nach dem versteckten Haken suchst.''',
+      'ach_80':
+          '''Über zehn Stunden. Der Patient ist jetzt praktisch Ihr Mitbewohner.''',
+      'ach_81':
+          '''Anästhesie innerhalb von fünfzehn Minuten nach der Operation. Extubiert, bevor die Vorhänge zu Ende fallen.''',
+      'ach_82':
+          '''Fünfundzwanzig knappe Ballverluste. Sie und der Chirurg teilen sich eine Gehirnzelle. Schön.''',
+      'ach_83':
+          '''Fünfzig perfekte Emergenzen. Sie aufzuwecken ist eine Kunst, und du bist Picasso.''',
+      'ach_84':
+          '''Einhundert zeitgesteuerte Notfälle. Wir überprüfen Sie auf eine Zeitmaschine.''',
+      'ach_85':
+          '''Fall am 25. Dezember oder 1. Januar. Ho, ho, halt das Midazolam.''',
+      'ach_86':
+          '''Fall am 31. Dez. oder 1. Jan. Laryngoskop in der einen Hand, ruhiger Optimismus in der anderen.''',
+      'ach_87':
+          '''Fall an deinem Geburtstag. Alles Gute zum Geburtstag – hier ist eine Notfall-Ex-Runde.''',
+      'ach_88':
+          '''ASA I. So gesund, dass du ständig nach dem versteckten Haken suchst.''',
       'ach_89': '''Zehn ASA-I-Fälle. Welches utopische Krankenhaus ist das?''',
       'ach_90': '''Fünfundzwanzig ASA-Is. Sicherlich nur Sportlisten.''',
       'ach_91': '''Fünfzig ASA ist. Die Diagramme sind verdächtig dünn.''',
-      'ach_92': '''Einhundert ASA Is. Sie müssen ausschließlich Tageszahnheilkunde betreiben.''',
-      'ach_93': '''ASA II. Denn fast niemand über vierzig ist wirklich ASA I.''',
+      'ach_92':
+          '''Einhundert ASA Is. Sie müssen ausschließlich Tageszahnheilkunde betreiben.''',
+      'ach_93':
+          '''ASA II. Denn fast niemand über vierzig ist wirklich ASA I.''',
       'ach_94': '''Zehn ASA II. Brot, Butter und höflicher Bluthochdruck.''',
       'ach_95': '''Fünfundzwanzig ASA II. Das Alltagsangebot des OP.''',
       'ach_96': '''Fünfzig ASA II. Im Schlaf berechnete Induktionsdosen.''',
-      'ach_97': '''Einhundert ASA II. Sie könnten das Lehrbuchkapitel in einem Vorbereitungsraum schreiben.''',
+      'ach_97':
+          '''Einhundert ASA II. Sie könnten das Lehrbuchkapitel in einem Vorbereitungsraum schreiben.''',
       'ach_98': '''ASA III. Es ist gerade etwas scharf geworden.''',
       'ach_99': '''Zehn ASA III. Diagramm dicker als ein Telefonbuch.''',
-      'ach_100': '''Fünfundzwanzig ASA III. Polypharmazie ist Ihr zweiter Vorname.''',
+      'ach_100':
+          '''Fünfundzwanzig ASA III. Polypharmazie ist Ihr zweiter Vorname.''',
       'ach_101': '''Fünfzig ASA III. Begleiterkrankungen beim Frühstück.''',
-      'ach_102': '''Einhundert ASA III. Sie essen Problemlisten und fragen nach Sekunden.''',
-      'ach_103': '''ASA IV. Der Reaper steht in der Ecke – du hast Epi in der Schublade.''',
+      'ach_102':
+          '''Einhundert ASA III. Sie essen Problemlisten und fragen nach Sekunden.''',
+      'ach_103':
+          '''ASA IV. Der Reaper steht in der Ecke – du hast Epi in der Schublade.''',
       'ach_104': '''Fünf ASA IVs. Ihre eigene Basis-HR verhandelt derzeit.''',
-      'ach_105': '''Fünfzehn ASA IVs. Willkommen auf der physiologischen Messers Schneide.''',
+      'ach_105':
+          '''Fünfzehn ASA IVs. Willkommen auf der physiologischen Messers Schneide.''',
       'ach_106': '''25 ASA IVs. Du lachst höflich angesichts des Untergangs.''',
       'ach_107': '''Fünfzig ASA IVs. Eis in den Adern; Sevo im Stromkreis.''',
       'ach_108': '''ASA V. Gegrüßet seist du, Maria, voller Unterdrücker.''',
-      'ach_109': '''Drei ASA vs. Teils Anästhesist, teils Optimist, teils Nekromant.''',
+      'ach_109':
+          '''Drei ASA vs. Teils Anästhesist, teils Optimist, teils Nekromant.''',
       'ach_110': '''Fünf ASA vs. fragte der Tod. Du hast heute nicht gesagt.''',
       'ach_111': '''Zehn ASA vs. Umhang optional unter der Leinenschürze.''',
       'ach_112': '''Zwanzig ASA vs. Aus Respekt schweigen die Beobachter.''',
-      'ach_113': '''Einhundert ASA III–V-Fälle. Das Risiko wurde wie ein ruhiger Makler mit besseren Medikamenten gemanagt.''',
-      'ach_114': '''ASA IV oder V mit ereignisloser PACU-Entlassung. Gib es zu – hast du betrogen?''',
-      'ach_115': '''ASA IV/V auf die Intensivstation, immer noch intubiert. Gehen Sie nicht an GO vorbei. Nicht extubieren.''',
-      'ach_116': '''Zehn aufeinanderfolgende einfache, ereignislose Fälle. Genießen Sie es. Es wird nicht von Dauer sein.''',
-      'ach_117': '''25 aufeinanderfolgende ASA I/II ereignislos. Ein verdächtig erholsamer Monat.''',
-      'ach_118': '''Drei ASA III+-Fälle an einem Tag. Planen Sie den Abend sorgfältig.''',
-      'ach_119': '''Fünf ASA III+ an einem Tag. Nebennieren: vollständig erschlossen.''',
-      'ach_120': '''Mindestens einer von jeder ASA-Klasse 1–5. Das Gute, das Schlechte und das Intubierte.''',
-      'ach_121': '''Fünfzig ereignislose Fälle mit hohem ASA-Wert. Hohes Risiko, keine Panik.''',
+      'ach_113':
+          '''Einhundert ASA III–V-Fälle. Das Risiko wurde wie ein ruhiger Makler mit besseren Medikamenten gemanagt.''',
+      'ach_114':
+          '''ASA IV oder V mit ereignisloser PACU-Entlassung. Gib es zu – hast du betrogen?''',
+      'ach_115':
+          '''ASA IV/V auf die Intensivstation, immer noch intubiert. Gehen Sie nicht an GO vorbei. Nicht extubieren.''',
+      'ach_116':
+          '''Zehn aufeinanderfolgende einfache, ereignislose Fälle. Genießen Sie es. Es wird nicht von Dauer sein.''',
+      'ach_117':
+          '''25 aufeinanderfolgende ASA I/II ereignislos. Ein verdächtig erholsamer Monat.''',
+      'ach_118':
+          '''Drei ASA III+-Fälle an einem Tag. Planen Sie den Abend sorgfältig.''',
+      'ach_119':
+          '''Fünf ASA III+ an einem Tag. Nebennieren: vollständig erschlossen.''',
+      'ach_120':
+          '''Mindestens einer von jeder ASA-Klasse 1–5. Das Gute, das Schlechte und das Intubierte.''',
+      'ach_121':
+          '''Fünfzig ereignislose Fälle mit hohem ASA-Wert. Hohes Risiko, keine Panik.''',
       'ach_122': '''Zehn ASA IV/V-Fälle. Du gehst hinein; Chaos nimmt Platz.''',
-      'ach_123': '''Einhundert ereignislose PACU-Entladungen. Nur ein weiterer Dienstag, der sich wiederholt.''',
-      'ach_124': '''Erster Notfall. Denn natürlich brachen sie um 16:55 Uhr auf.''',
+      'ach_123':
+          '''Einhundert ereignislose PACU-Entladungen. Nur ein weiterer Dienstag, der sich wiederholt.''',
+      'ach_124':
+          '''Erster Notfall. Denn natürlich brachen sie um 16:55 Uhr auf.''',
       'ach_125': '''Fünf Notfälle. Wer braucht ein Fitnessstudio?''',
       'ach_126': '''Zehn Notfälle. Chaos ist dein Cardio.''',
-      'ach_127': '''Zwanzig Notfälle. Ruhende Personalabteilung nimmt nicht mehr teil.''',
-      'ach_128': '''Fünfzig Notfälle unter Druck. Sie sind erfolgreich, wenn die Liste Feuer fängt.''',
+      'ach_127':
+          '''Zwanzig Notfälle. Ruhende Personalabteilung nimmt nicht mehr teil.''',
+      'ach_128':
+          '''Fünfzig Notfälle unter Druck. Sie sind erfolgreich, wenn die Liste Feuer fängt.''',
       'ach_129': '''75 Notrufe. Das Trauma-Board kennt Ihre Schritte.''',
-      'ach_130': '''Hundert Notfälle. Unbeeindruckt ist eine klinische Fähigkeit.''',
-      'ach_131': '''Einhundertfünfzig Notfälle. Sie könnten dies im Schlaf tun – bitte nicht.''',
+      'ach_130':
+          '''Hundert Notfälle. Unbeeindruckt ist eine klinische Fähigkeit.''',
+      'ach_131':
+          '''Einhundertfünfzig Notfälle. Sie könnten dies im Schlaf tun – bitte nicht.''',
       'ach_132': '''Zweihundert Notfälle. Der Pager zuckt zuerst zusammen.''',
       'ach_133': '''Fünf Notfälle an einem Tag. Vollmondprotokoll?''',
-      'ach_134': '''Zwei Notfälle hintereinander. Doppelt gebucht für Heldentaten.''',
-      'ach_135': '''Notfall-ASA V. Schnappen Sie sich das Epi, sagen Sie weniger, drücken Sie vorsichtig.''',
-      'ach_136': '''Zwanzig Notfälle, ereignislose PACU. Katastrophe auf dem Papier; langweilig im Raum.''',
-      'ach_137': '''Notfall mit einem durchgeführten regionalen. Blockieren Sie, während der Raum in Panik gerät. Spitzenfokus.''',
-      'ach_138': '''Es wurden zehn regionale Notfalleinsätze durchgeführt. Scharfschütze der dringenden Liste.''',
-      'ach_139': '''Notoperation ≤30 Minuten. Rein, reparieren, schließen, raus – Boxenstopp-Energie.''',
+      'ach_134':
+          '''Zwei Notfälle hintereinander. Doppelt gebucht für Heldentaten.''',
+      'ach_135':
+          '''Notfall-ASA V. Schnappen Sie sich das Epi, sagen Sie weniger, drücken Sie vorsichtig.''',
+      'ach_136':
+          '''Zwanzig Notfälle, ereignislose PACU. Katastrophe auf dem Papier; langweilig im Raum.''',
+      'ach_137':
+          '''Notfall mit einem durchgeführten regionalen. Blockieren Sie, während der Raum in Panik gerät. Spitzenfokus.''',
+      'ach_138':
+          '''Es wurden zehn regionale Notfalleinsätze durchgeführt. Scharfschütze der dringenden Liste.''',
+      'ach_139':
+          '''Notoperation ≤30 Minuten. Rein, reparieren, schließen, raus – Boxenstopp-Energie.''',
       'ach_140': '''Notfall-Wach-Glasfaser. Nerven aus Titan.''',
-      'ach_141': '''Notfall-Wirbelsäule. Beweg dich nicht. Das gilt auch für die Röhre.''',
+      'ach_141':
+          '''Notfall-Wirbelsäule. Beweg dich nicht. Das gilt auch für die Röhre.''',
       'ach_142': '''Herz-Thorax-Notfall. Große Monitore, größere Gefühle.''',
-      'ach_143': '''Notfall-Geburtshilfe. Zwei Patienten, ein Atemwegsplan, keine Kälte.''',
-      'ach_144': '''Notfall-Neurochirurgie. Behandeln Sie das Gehirn so, als ob es die Miete zahlt.''',
-      'ach_145': '''Fünfzig Notfälle. Wenn der Vorstand dringend sagt, sagen Sie RSI.''',
-      'ach_146': '''Notruf ab 00:00–04:00 Uhr. Jetzt beginnt nichts Gutes – außer kompetenten Händen.''',
-      'ach_147': '''Notfall am 25. Dezember oder 1. Januar. Frohe Weihnachten – hier ist ein gerissener Eingeweide.''',
-      'ach_148': '''Zehn Notfälle am Wochenende. Die Blutbank im Geschäft halten.''',
-      'ach_149': '''Notfall schwierige Atemwege. Die Pläne A–C scheiterten. Du bist Plan D.''',
-      'ach_150': '''Notfall-ASA IV mit ereignisloser PACU-Entlassung. Zimmer brennt; BP höfliche 120/80.''',
-      'ach_151': '''Notfall unter 18 Jahren. Bringen Sie Ihre beste Arbeit und Ihre ruhigste Stimme mit.''',
-      'ach_152': '''Notfall über 65. Mit besserer Überwachung wie feines Porzellan behandeln.''',
-      'ach_153': '''Notfallende 08:00–08:30 Uhr. Abendessenpläne: ehrenhaft abgesagt.''',
-      'ach_154': '''Drei Notfälle in zwölf Stunden. Medizinischer Volltreffer.''',
-      'ach_155': '''Zehn ereignislose Notfallentladungen aus der PACU. MTP ist nur ein weiteres Rezept.''',
-      'ach_156': '''25 Fälle von Notfall-Unfallchirurgie. Dirigent des Wiederbelebungsorchesters.''',
-      'ach_157': '''Zwanzig Notfalllaparotomien. Sepsis, Pressoren und dieser unverwechselbare Geruch.''',
-      'ach_158': '''Zwanzig orthopädische Notfallfälle. Bohrer, Zement und „BP bitte.“''',
-      'ach_159': '''Zwanzig geburtshilfliche Notfallfälle. Kategorie eins und reiner Fokus.''',
-      'ach_160': '''Zehn Notfall-Neurokraniotomien. Smooth BP ist die einzige zulässige Persönlichkeit.''',
-      'ach_161': '''Zehn vaskuläre Notfallfälle. Klemmt heraus; beruhige dich.''',
+      'ach_143':
+          '''Notfall-Geburtshilfe. Zwei Patienten, ein Atemwegsplan, keine Kälte.''',
+      'ach_144':
+          '''Notfall-Neurochirurgie. Behandeln Sie das Gehirn so, als ob es die Miete zahlt.''',
+      'ach_145':
+          '''Fünfzig Notfälle. Wenn der Vorstand dringend sagt, sagen Sie RSI.''',
+      'ach_146':
+          '''Notruf ab 00:00–04:00 Uhr. Jetzt beginnt nichts Gutes – außer kompetenten Händen.''',
+      'ach_147':
+          '''Notfall am 25. Dezember oder 1. Januar. Frohe Weihnachten – hier ist ein gerissener Eingeweide.''',
+      'ach_148':
+          '''Zehn Notfälle am Wochenende. Die Blutbank im Geschäft halten.''',
+      'ach_149':
+          '''Notfall schwierige Atemwege. Die Pläne A–C scheiterten. Du bist Plan D.''',
+      'ach_150':
+          '''Notfall-ASA IV mit ereignisloser PACU-Entlassung. Zimmer brennt; BP höfliche 120/80.''',
+      'ach_151':
+          '''Notfall unter 18 Jahren. Bringen Sie Ihre beste Arbeit und Ihre ruhigste Stimme mit.''',
+      'ach_152':
+          '''Notfall über 65. Mit besserer Überwachung wie feines Porzellan behandeln.''',
+      'ach_153':
+          '''Notfallende 08:00–08:30 Uhr. Abendessenpläne: ehrenhaft abgesagt.''',
+      'ach_154':
+          '''Drei Notfälle in zwölf Stunden. Medizinischer Volltreffer.''',
+      'ach_155':
+          '''Zehn ereignislose Notfallentladungen aus der PACU. MTP ist nur ein weiteres Rezept.''',
+      'ach_156':
+          '''25 Fälle von Notfall-Unfallchirurgie. Dirigent des Wiederbelebungsorchesters.''',
+      'ach_157':
+          '''Zwanzig Notfalllaparotomien. Sepsis, Pressoren und dieser unverwechselbare Geruch.''',
+      'ach_158':
+          '''Zwanzig orthopädische Notfallfälle. Bohrer, Zement und „BP bitte.“''',
+      'ach_159':
+          '''Zwanzig geburtshilfliche Notfallfälle. Kategorie eins und reiner Fokus.''',
+      'ach_160':
+          '''Zehn Notfall-Neurokraniotomien. Smooth BP ist die einzige zulässige Persönlichkeit.''',
+      'ach_161':
+          '''Zehn vaskuläre Notfallfälle. Klemmt heraus; beruhige dich.''',
       'ach_162': '''Dreihundert Notfälle. Chaos beantragte den Vorruhestand.''',
-      'ach_163': '''Zehn Notfallfälle in einzigartigen Fachgebieten. Schießstand unter Beschuss.''',
+      'ach_163':
+          '''Zehn Notfallfälle in einzigartigen Fachgebieten. Schießstand unter Beschuss.''',
       'ach_164': '''Fünf Notfälle in 24 Stunden. 90 % Koffein, 10 % Trotz.''',
-      'ach_165': '''Ein allgemeinchirurgischer Fall. Brot und Butter – Absaugung im Standby-Modus.''',
+      'ach_165':
+          '''Ein allgemeinchirurgischer Fall. Brot und Butter – Absaugung im Standby-Modus.''',
       'ach_166': '''25 GS-Fälle. Mehr Darm als ein Freitagslisten-Meme.''',
-      'ach_167': '''Einhundert GS-Koffer. Sie und die Allgemeinchirurgie stehen in einer engagierten MAC-Beziehung.''',
-      'ach_168': '''Ein Ortho-Fall. Willkommen bei Bohrern, Schrauben und Elektrowerkzeugen als weißes Rauschen.''',
+      'ach_167':
+          '''Einhundert GS-Koffer. Sie und die Allgemeinchirurgie stehen in einer engagierten MAC-Beziehung.''',
+      'ach_168':
+          '''Ein Ortho-Fall. Willkommen bei Bohrern, Schrauben und Elektrowerkzeugen als weißes Rauschen.''',
       'ach_169': '''25 Ortho-Fälle. Ohren auf die Säge abgestimmt.''',
-      'ach_170': '''Einhundert Ortho-Fälle. Skelettbesatzung, aber mach es betäubend.''',
-      'ach_171': '''Ein geburtshilflicher Fall. Winzige menschliche Logistik mit hohem Einsatz.''',
-      'ach_172': '''25 Obs-Fälle. Die Entbindungsstation kennt Ihre Schritte.''',
-      'ach_173': '''Hundert Obs-Fälle. Epiduralanästhesie, Kategorieeins und ewiges „Ist sie vollständig?“''',
+      'ach_170':
+          '''Einhundert Ortho-Fälle. Skelettbesatzung, aber mach es betäubend.''',
+      'ach_171':
+          '''Ein geburtshilflicher Fall. Winzige menschliche Logistik mit hohem Einsatz.''',
+      'ach_172':
+          '''25 Obs-Fälle. Die Entbindungsstation kennt Ihre Schritte.''',
+      'ach_173':
+          '''Hundert Obs-Fälle. Epiduralanästhesie, Kategorieeins und ewiges „Ist sie vollständig?“''',
       'ach_174': '''25 Gynäkologiefälle. Trendelenburg und Hartnäckigkeit.''',
-      'ach_175': '''Ein neurochirurgischer Fall. Gehen Sie vorsichtig damit um – das Gehirn schaut zu.''',
-      'ach_176': '''25 Neurofälle. Sanfter Blutdruck ist deine Liebessprache.''',
-      'ach_177': '''Fünfzig Neurofälle. Tiefes Territorium. Ruhige Hände erforderlich.''',
-      'ach_178': '''Ein kardiothorakaler Fall. Große Monitore, größere Gefühle.''',
+      'ach_175':
+          '''Ein neurochirurgischer Fall. Gehen Sie vorsichtig damit um – das Gehirn schaut zu.''',
+      'ach_176':
+          '''25 Neurofälle. Sanfter Blutdruck ist deine Liebessprache.''',
+      'ach_177':
+          '''Fünfzig Neurofälle. Tiefes Territorium. Ruhige Hände erforderlich.''',
+      'ach_178':
+          '''Ein kardiothorakaler Fall. Große Monitore, größere Gefühle.''',
       'ach_179': '''25 CT-Fälle. Bypass-Chatter ist Hintergrund-ETCO₂.''',
-      'ach_180': '''Fünfzig kardiothorakale Fälle. Wahlasystolie ist immer noch wild. Du bleibst langweilig. Gut.''',
-      'ach_181': '''25 HNO-Fälle. Gemeinsame Atemwege: der ultimative Vertrauensverlust.''',
-      'ach_182': '''25 urologische Fälle. Erröten, konzentriert, höfliches Schweigen.''',
-      'ach_183': '''25 Kunststoffkoffer. Kosmetik für sie; Ausdauer für Dich.''',
-      'ach_184': '''Ein Fall einer Kinderchirurgie. Kleines ETT, volle Verantwortung.''',
-      'ach_185': '''25 Fälle von Kinderchirurgie. Du sprichst fließend elterliche Panik.''',
-      'ach_186': '''25 Fälle unfallchirurgischer Eingriffe. Wenn auf der Tafel Polytrauma steht, sagen Sie okay.''',
-      'ach_187': '''25 Fälle in der Augenheilkunde. Stille ist ein Wettkampfsport.''',
+      'ach_180':
+          '''Fünfzig kardiothorakale Fälle. Wahlasystolie ist immer noch wild. Du bleibst langweilig. Gut.''',
+      'ach_181':
+          '''25 HNO-Fälle. Gemeinsame Atemwege: der ultimative Vertrauensverlust.''',
+      'ach_182':
+          '''25 urologische Fälle. Erröten, konzentriert, höfliches Schweigen.''',
+      'ach_183':
+          '''25 Kunststoffkoffer. Kosmetik für sie; Ausdauer für Dich.''',
+      'ach_184':
+          '''Ein Fall einer Kinderchirurgie. Kleines ETT, volle Verantwortung.''',
+      'ach_185':
+          '''25 Fälle von Kinderchirurgie. Du sprichst fließend elterliche Panik.''',
+      'ach_186':
+          '''25 Fälle unfallchirurgischer Eingriffe. Wenn auf der Tafel Polytrauma steht, sagen Sie okay.''',
+      'ach_187':
+          '''25 Fälle in der Augenheilkunde. Stille ist ein Wettkampfsport.''',
       'ach_188': '''Ein Rückenetui. Beweg dich nicht. Wirklich. Nicht.''',
-      'ach_189': '''Fünfundzwanzig Wirbelsäulenfälle. Bauchliegend, gepolstert, philosophisch auf den Tisch ausgerichtet.''',
-      'ach_190': '''Fünfundzwanzig Kopf- und Halsfälle. Airway-Immobilien sind zu Premiumpreisen erhältlich.''',
+      'ach_189':
+          '''Fünfundzwanzig Wirbelsäulenfälle. Bauchliegend, gepolstert, philosophisch auf den Tisch ausgerichtet.''',
+      'ach_190':
+          '''Fünfundzwanzig Kopf- und Halsfälle. Airway-Immobilien sind zu Premiumpreisen erhältlich.''',
       'ach_191': '''25 HPB-Fälle. Lange Operationen, längere Konzentration.''',
-      'ach_192': '''25 Fälle im oberen Gastrointestinaltrakt oder im Darm. Dem Bauch gehen nie die Wendungen in der Handlung aus.''',
-      'ach_193': '''Zehn endokrine Fälle. Hormone haben das Protokoll geschrieben; du erzwingst es.''',
-      'ach_194': '''Zehn NORA/MRT/DSA-Fälle. Abgelegener Standort, kreative Überwachung, starke Beine.''',
-      'ach_195': '''Zehn Fälle von Schmerzinterventionen. Manchmal ist die freundlichste Droge lokal.''',
-      'ach_196': '''Fünf RMU-Fälle. Ruhiges Theater, sorgfältige Hände, hoffnungsvolle Räume.''',
-      'ach_197': '''25 gynäonkologische Fälle. Schwere Pathologie; ruhige Hände.''',
-      'ach_198': '''25 hand- und rekonstruktive Fälle. Millimeter zählen mehr als das Ego.''',
-      'ach_199': '''Zehn pädiatrische Orthopädie-Fälle. Wachsende Knochen, wachsende Geduld.''',
-      'ach_200': '''Fünf einzigartige Spezialitäten. Reichweite ist ein Flex.''',
-      'ach_201': '''Zehn einzigartige Spezialitäten. Ihr Logbuch weist gesunde Bindungsprobleme auf.''',
-      'ach_202': '''Fünfzehn einzigartige Spezialitäten. Theater-GPS bringt Sie überall hin.''',
-      'ach_203': '''25 einzigartige Spezialitäten. Da Vinci fehlte eine TIVA-Pumpe. Das tust du nicht.''',
-      'ach_204': '''Zehn „Andere“ Spezialfälle. Wenn es nicht in ein Dropdown-Menü passt, passt es trotzdem zu Ihrem Buch.''',
-      'ach_205': '''Zweihundertfünfzig orthopädische Fälle. Titelgürtel aus Knochenzement.''',
-      'ach_206': '''Zweihundertfünfzig Geburts- und Gynäkologiefälle. Wehenkrone, leicht blutverschmiert.''',
-      'ach_207': '''Hundert Neurofälle. ICP ist nur eine weitere Nummer, die Sie sanft schikanieren.''',
-      'ach_208': '''Einhundert CT-Fälle. Große Fälle, größeres Durchhaltevermögen, endlose ACT-Kontrollen.''',
-      'ach_209': '''Hundert Rückentaschen. Ihre eigene Lendenwirbelsäule hat einen Datix abgelegt.''',
-      'ach_210': '''Hundert urologische Fälle. Meister der sanften Bewässerung.''',
-      'ach_211': '''Hundert HNO-Fälle. Zen der gemeinsamen Atemwege, hart erkämpft.''',
-      'ach_212': '''Einhundert Plastikkoffer. Ästhetisch oder rekonstruktiv – die gleiche stetige Induktion.''',
-      'ach_213': '''Einhundert Fälle von Kinderchirurgie. Kleine Röhren, großer Legendenstatus.''',
-      'ach_214': '''Einhundert Fälle in der Augenheilkunde. Bewegungslose Exzellenz, koffeinhaltige Seele.''',
-      'ach_215': '''Fünfzig kolorektale Fälle. Sie kennen eine Anastomose wie eine Wellenform.''',
-      'ach_216': '''Fünfzig Fälle im oberen Gastrointestinaltrakt. Vielflieger vom Mund zum Treitzband.''',
-      'ach_217': '''Fünfzig HPB-Fälle. Lange Ops; Kurze Geduld wegen mysteriöser Hypotonie.''',
+      'ach_192':
+          '''25 Fälle im oberen Gastrointestinaltrakt oder im Darm. Dem Bauch gehen nie die Wendungen in der Handlung aus.''',
+      'ach_193':
+          '''Zehn endokrine Fälle. Hormone haben das Protokoll geschrieben; du erzwingst es.''',
+      'ach_194':
+          '''Zehn NORA/MRT/DSA-Fälle. Abgelegener Standort, kreative Überwachung, starke Beine.''',
+      'ach_195':
+          '''Zehn Fälle von Schmerzinterventionen. Manchmal ist die freundlichste Droge lokal.''',
+      'ach_196':
+          '''Fünf RMU-Fälle. Ruhiges Theater, sorgfältige Hände, hoffnungsvolle Räume.''',
+      'ach_197':
+          '''25 gynäonkologische Fälle. Schwere Pathologie; ruhige Hände.''',
+      'ach_198':
+          '''25 hand- und rekonstruktive Fälle. Millimeter zählen mehr als das Ego.''',
+      'ach_199':
+          '''Zehn pädiatrische Orthopädie-Fälle. Wachsende Knochen, wachsende Geduld.''',
+      'ach_200':
+          '''Fünf einzigartige Spezialitäten. Reichweite ist ein Flex.''',
+      'ach_201':
+          '''Zehn einzigartige Spezialitäten. Ihr Logbuch weist gesunde Bindungsprobleme auf.''',
+      'ach_202':
+          '''Fünfzehn einzigartige Spezialitäten. Theater-GPS bringt Sie überall hin.''',
+      'ach_203':
+          '''25 einzigartige Spezialitäten. Da Vinci fehlte eine TIVA-Pumpe. Das tust du nicht.''',
+      'ach_204':
+          '''Zehn „Andere“ Spezialfälle. Wenn es nicht in ein Dropdown-Menü passt, passt es trotzdem zu Ihrem Buch.''',
+      'ach_205':
+          '''Zweihundertfünfzig orthopädische Fälle. Titelgürtel aus Knochenzement.''',
+      'ach_206':
+          '''Zweihundertfünfzig Geburts- und Gynäkologiefälle. Wehenkrone, leicht blutverschmiert.''',
+      'ach_207':
+          '''Hundert Neurofälle. ICP ist nur eine weitere Nummer, die Sie sanft schikanieren.''',
+      'ach_208':
+          '''Einhundert CT-Fälle. Große Fälle, größeres Durchhaltevermögen, endlose ACT-Kontrollen.''',
+      'ach_209':
+          '''Hundert Rückentaschen. Ihre eigene Lendenwirbelsäule hat einen Datix abgelegt.''',
+      'ach_210':
+          '''Hundert urologische Fälle. Meister der sanften Bewässerung.''',
+      'ach_211':
+          '''Hundert HNO-Fälle. Zen der gemeinsamen Atemwege, hart erkämpft.''',
+      'ach_212':
+          '''Einhundert Plastikkoffer. Ästhetisch oder rekonstruktiv – die gleiche stetige Induktion.''',
+      'ach_213':
+          '''Einhundert Fälle von Kinderchirurgie. Kleine Röhren, großer Legendenstatus.''',
+      'ach_214':
+          '''Einhundert Fälle in der Augenheilkunde. Bewegungslose Exzellenz, koffeinhaltige Seele.''',
+      'ach_215':
+          '''Fünfzig kolorektale Fälle. Sie kennen eine Anastomose wie eine Wellenform.''',
+      'ach_216':
+          '''Fünfzig Fälle im oberen Gastrointestinaltrakt. Vielflieger vom Mund zum Treitzband.''',
+      'ach_217':
+          '''Fünfzig HPB-Fälle. Lange Ops; Kurze Geduld wegen mysteriöser Hypotonie.''',
       'ach_218': '''Erster GA. Willkommen in der Kirche des Verdampfers.''',
-      'ach_219': '''Fünfzig GAs. Sevo ist mittlerweile im Grunde ein Persönlichkeitsmerkmal.''',
+      'ach_219':
+          '''Fünfzig GAs. Sevo ist mittlerweile im Grunde ein Persönlichkeitsmerkmal.''',
       'ach_220': '''Zweihundert GAs. Vom Flur aus kann man MAC riechen.''',
-      'ach_221': '''Fünfhundert GAs. Die Zifferblätter grüßen, wenn Sie eintreten.''',
+      'ach_221':
+          '''Fünfhundert GAs. Die Zifferblätter grüßen, wenn Sie eintreten.''',
       'ach_222': '''Erste TIVA. Propofol: die ursprüngliche weiße Magie.''',
       'ach_223': '''Erster TIVA-Fall. Kein Benzin, alles Klasse.''',
-      'ach_224': '''Fünfundzwanzig TIVAs. Zielgesteuert und emotional stabil.''',
-      'ach_225': '''Fünfzig TIVAs. Pumpen summen wie ein zufriedener Kühlschrank.''',
+      'ach_224':
+          '''Fünfundzwanzig TIVAs. Zielgesteuert und emotional stabil.''',
+      'ach_225':
+          '''Fünfzig TIVAs. Pumpen summen wie ein zufriedener Kühlschrank.''',
       'ach_226': '''Einhundert TIVAs. Volatile wer?''',
-      'ach_227': '''Erster CSE. Das Beste aus beiden Welten, doppelter Papierkram.''',
+      'ach_227':
+          '''Erster CSE. Das Beste aus beiden Welten, doppelter Papierkram.''',
       'ach_228': '''Zehn CSEs. Widerstandsverlust ist Ihr Herz.''',
-      'ach_229': '''Fünfundzwanzig CSEs. Katheter und Nadel in harmonischer Verbindung.''',
-      'ach_230': '''Erste primäre Wirbelsäulenuntersuchung. CSF-Glitzer: die gute Sorte.''',
+      'ach_229':
+          '''Fünfundzwanzig CSEs. Katheter und Nadel in harmonischer Verbindung.''',
+      'ach_230':
+          '''Erste primäre Wirbelsäulenuntersuchung. CSF-Glitzer: die gute Sorte.''',
       'ach_231': '''Fünfzig Wirbelsäulen. Tropfen, fallenlassen, blockieren.''',
-      'ach_232': '''Einhundertfünfzig Wirbelsäulen. Sie können L3–4 im Dunkeln finden.''',
-      'ach_233': '''Erste epidurale Grundversorgung. Hängen Sie die Tasche auf; Halte den Glauben fest.''',
-      'ach_234': '''Fünfundzwanzig PDAs. Raum des Mythos, Nadel der Wahrheit.''',
+      'ach_232':
+          '''Einhundertfünfzig Wirbelsäulen. Sie können L3–4 im Dunkeln finden.''',
+      'ach_233':
+          '''Erste epidurale Grundversorgung. Hängen Sie die Tasche auf; Halte den Glauben fest.''',
+      'ach_234':
+          '''Fünfundzwanzig PDAs. Raum des Mythos, Nadel der Wahrheit.''',
       'ach_235': '''Fünfzig PDAs. Finesse statt Gewalt. Stets.''',
-      'ach_236': '''Erste Sedierung/MAC. Bewusst genug, um den Smalltalk zu bereuen.''',
-      'ach_237': '''Fünfundzwanzig MACs. Sanft wie ein zielgerichtetes Kompliment.''',
+      'ach_236':
+          '''Erste Sedierung/MAC. Bewusst genug, um den Smalltalk zu bereuen.''',
+      'ach_237':
+          '''Fünfundzwanzig MACs. Sanft wie ein zielgerichtetes Kompliment.''',
       'ach_238': '''Fünfzig MACs. Sie dösen; Du beschimpfst den Chirurgen.''',
       'ach_239': '''Erster nur lokaler Fall. Standby-Modus: aktiviert.''',
-      'ach_240': '''Zwanzig ausschließlich lokale Fälle. Heldentum optional; Anwesenheitspflicht.''',
-      'ach_241': '''Erste primäre periphere Nervenblockade. Zucken oder schimmern – festlegen.''',
+      'ach_240':
+          '''Zwanzig ausschließlich lokale Fälle. Heldentum optional; Anwesenheitspflicht.''',
+      'ach_241':
+          '''Erste primäre periphere Nervenblockade. Zucken oder schimmern – festlegen.''',
       'ach_242': '''Fünfundzwanzig PNBs. Nerven lokalisiert; Ego überprüft.''',
-      'ach_243': '''Erstes TCI-Pumpengehäuse. Der Algorithmus ist Ihr Co-Pilot.''',
+      'ach_243':
+          '''Erstes TCI-Pumpengehäuse. Der Algorithmus ist Ihr Co-Pilot.''',
       'ach_244': '''25 TCI-Fälle. Träume vom Wirkungsort, Plasma-Realitäten.''',
       'ach_245': '''Fünfzig TCI-Fälle. Die Pumpe vertraut Ihnen. Selten.''',
-      'ach_246': '''Sieben oder mehr einzigartige Primärtechniken. Die Reichweite ist der Flex.''',
-      'ach_247': '''Spinal, epidural, CSE, PNB oder lokal – der Patient ist wach, Sie sind schärfer.''',
+      'ach_246':
+          '''Sieben oder mehr einzigartige Primärtechniken. Die Reichweite ist der Flex.''',
+      'ach_247':
+          '''Spinal, epidural, CSE, PNB oder lokal – der Patient ist wach, Sie sind schärfer.''',
       'ach_248': '''Einhundert GAs. Tiefer Schlaf, oberflächliche Ausreden.''',
-      'ach_249': '''Zweihundertfünfzig GAs. Du könntest dem Verdampfer Manieren beibringen.''',
+      'ach_249':
+          '''Zweihundertfünfzig GAs. Du könntest dem Verdampfer Manieren beibringen.''',
       'ach_250': '''Fünfhundert GAs. Legendäre Gasmann-/Gasfrau-Energie.''',
-      'ach_251': '''Einhundert Fälle vom wachen regionalen Typ. Nadeln über Düsen.''',
-      'ach_252': '''Einhundert TIVAs. Mitgliedschaft in der White Line Society bestätigt.''',
+      'ach_251':
+          '''Einhundert Fälle vom wachen regionalen Typ. Nadeln über Düsen.''',
+      'ach_252':
+          '''Einhundert TIVAs. Mitgliedschaft in der White Line Society bestätigt.''',
       'ach_253': '''Dreihundert Wirbelsäulen. Krone aus Einführhilfen.''',
       'ach_254': '''Einhundert PDAs. Königtum im Epiduralraum.''',
-      'ach_255': '''Einhundert MAC-Fälle. Die Sedierung ist so sanft, dass der Chirurg vergisst, dass Sie da sind.''',
-      'ach_256': '''Erster ETT-Erfolg. Kapnograph: der einzige Applaus, der zählt.''',
+      'ach_255':
+          '''Einhundert MAC-Fälle. Die Sedierung ist so sanft, dass der Chirurg vergisst, dass Sie da sind.''',
+      'ach_256':
+          '''Erster ETT-Erfolg. Kapnograph: der einzige Applaus, der zählt.''',
       'ach_257': '''Zehn ETTs. Hände ruhiger. Ego überwacht immer noch.''',
-      'ach_258': '''Fünfzig ETTs. Rohr ist drin; Das Mittagessen kann warten.''',
-      'ach_259': '''Einhundert ETTs. Sie und die Luftröhre sprechen miteinander.''',
-      'ach_260': '''Zweihundertfünfzig ETTs. Stilett optional; Prahlerei nicht.''',
-      'ach_261': '''Fünfhundert Intubationen. Die Kabel werden aus professioneller Höflichkeit getrennt.''',
+      'ach_258':
+          '''Fünfzig ETTs. Rohr ist drin; Das Mittagessen kann warten.''',
+      'ach_259':
+          '''Einhundert ETTs. Sie und die Luftröhre sprechen miteinander.''',
+      'ach_260':
+          '''Zweihundertfünfzig ETTs. Stilett optional; Prahlerei nicht.''',
+      'ach_261':
+          '''Fünfhundert Intubationen. Die Kabel werden aus professioneller Höflichkeit getrennt.''',
       'ach_262': '''Erste LMA. Setzen Sie es so, wie Sie es meinen.''',
-      'ach_263': '''Zehn LMAs. Gel, klassisch oder hochwertig – Engagement-Themen sind willkommen.''',
-      'ach_264': '''Fünfzig LMAs. Der Fastenstatus wird respektiert; Kiefer mehr respektiert.''',
-      'ach_265': '''Einhundert LMAs. Die sanfte Alternative mit starken Meinungen.''',
-      'ach_266': '''Zweihundertfünfzig LMAs. Sie könnten einen mitten im Gespräch platzieren.''',
-      'ach_267': '''Erster Fall nur für Gesichtsmasken. Manchmal ist weniger Schlauch mehr Weisheit.''',
-      'ach_268': '''Zwanzig Fälle nur mit Gesichtsmaske. Ambubag Cardio freigeschaltet.''',
-      'ach_269': '''Erste Tracheotomieunterstützung. Wenn Soft Skills auf Hartplastik treffen.''',
-      'ach_270': '''Fünf Trach-Fälle. Mannschaftssport mit sehr strengen Regeln.''',
-      'ach_271': '''Erste Strahlbelüftung. Hohe Frequenz, höherer Blutdruck im Raum.''',
+      'ach_263':
+          '''Zehn LMAs. Gel, klassisch oder hochwertig – Engagement-Themen sind willkommen.''',
+      'ach_264':
+          '''Fünfzig LMAs. Der Fastenstatus wird respektiert; Kiefer mehr respektiert.''',
+      'ach_265':
+          '''Einhundert LMAs. Die sanfte Alternative mit starken Meinungen.''',
+      'ach_266':
+          '''Zweihundertfünfzig LMAs. Sie könnten einen mitten im Gespräch platzieren.''',
+      'ach_267':
+          '''Erster Fall nur für Gesichtsmasken. Manchmal ist weniger Schlauch mehr Weisheit.''',
+      'ach_268':
+          '''Zwanzig Fälle nur mit Gesichtsmaske. Ambubag Cardio freigeschaltet.''',
+      'ach_269':
+          '''Erste Tracheotomieunterstützung. Wenn Soft Skills auf Hartplastik treffen.''',
+      'ach_270':
+          '''Fünf Trach-Fälle. Mannschaftssport mit sehr strengen Regeln.''',
+      'ach_271':
+          '''Erste Strahlbelüftung. Hohe Frequenz, höherer Blutdruck im Raum.''',
       'ach_272': '''Erstes DLT. Zwei Lumen, ein Gebet, perfekte Platzierung.''',
-      'ach_273': '''Zwanzig DLTs. Links, rechts und gelegentlich „Sind wir sicher?“''',
-      'ach_274': '''Fünfzig DLTs. Glasfaserbestätigung ist Ihre Liebessprache.''',
-      'ach_275': '''Erster Bronchialblocker. Isolation ohne das Drama eines DLT-Streits.''',
-      'ach_276': '''Zehn Bronchialblocker. Präzises Parken in der Airway-Garage.''',
-      'ach_277': '''Zwanzig Mal klassische LMA. Alte Schule. Funktioniert immer noch.''',
+      'ach_273':
+          '''Zwanzig DLTs. Links, rechts und gelegentlich „Sind wir sicher?“''',
+      'ach_274':
+          '''Fünfzig DLTs. Glasfaserbestätigung ist Ihre Liebessprache.''',
+      'ach_275':
+          '''Erster Bronchialblocker. Isolation ohne das Drama eines DLT-Streits.''',
+      'ach_276':
+          '''Zehn Bronchialblocker. Präzises Parken in der Airway-Garage.''',
+      'ach_277':
+          '''Zwanzig Mal klassische LMA. Alte Schule. Funktioniert immer noch.''',
       'ach_278': '''ProSeal zwanzigmal. Abflussrohr: der unbesungene Held.''',
-      'ach_279': '''i-gel zwanzigmal. Keine Manschette, kein Problem (normalerweise).''',
-      'ach_280': '''Zwanzig Mal Supreme LMA. Führung bedeutet zu wissen, wann man sich maskieren muss.''',
+      'ach_279':
+          '''i-gel zwanzigmal. Keine Manschette, kein Problem (normalerweise).''',
+      'ach_280':
+          '''Zwanzig Mal Supreme LMA. Führung bedeutet zu wissen, wann man sich maskieren muss.''',
       'ach_281': '''Zehnmal Ambu LMA. Wegwerfbar, unvergesslich.''',
-      'ach_282': '''Flexibel oder Fastrach zehnmal. Wenn die Anatomie kreativ wird.''',
-      'ach_283': '''Erste nasale Intubation. Leise, leise, durch die Nasenmuscheln.''',
+      'ach_282':
+          '''Flexibel oder Fastrach zehnmal. Wenn die Anatomie kreativ wird.''',
+      'ach_283':
+          '''Erste nasale Intubation. Leise, leise, durch die Nasenmuscheln.''',
       'ach_284': '''Zwanzig Nasenintubationen. GPS für den Nasopharynx.''',
       'ach_285': '''Fünfzig Nasenintubationen. Der Lieblingsnachbar von HNO.''',
-      'ach_286': '''Submentale Intubation. Wenn das Gesicht das Schlachtfeld ist.''',
-      'ach_287': '''Erstes Videolaryngoskop. Netflix, aber machen Sie es mit Kabeln.''',
-      'ach_288': '''VL zehnmal. Bildschirmzeit, die den Patienten tatsächlich hilft.''',
+      'ach_286':
+          '''Submentale Intubation. Wenn das Gesicht das Schlachtfeld ist.''',
+      'ach_287':
+          '''Erstes Videolaryngoskop. Netflix, aber machen Sie es mit Kabeln.''',
+      'ach_288':
+          '''VL zehnmal. Bildschirmzeit, die den Patienten tatsächlich hilft.''',
       'ach_289': '''VL fünfzig Mal. Klinge, Schirm, Erfolg.''',
-      'ach_290': '''VL hundertmal. Die direkte Laryngoskopie ist für Flashbacks gedacht.''',
-      'ach_291': '''Erstes waches Glasfaserkabel. Patientenbewusst; Du bist hyperbewusst.''',
-      'ach_292': '''Fünf wache Glasfasern. Nerven aus Titan, aktuell von Legenden.''',
-      'ach_293': '''Fünfzehn wache Glasfaserleiter. Der Goldstandard, verfolgt mit Lidocain.''',
-      'ach_294': '''Erstmal Glasfaser eingeschlafen. Zuerst Tube, dann Swagger.''',
-      'ach_295': '''Zehn schlafende Glasfaserkabel. Scope-Fähigkeiten ohne aufmunternde Worte.''',
-      'ach_296': '''Insgesamt 25 Glasfaserkabel. Flexibler Freund, starre Standards.''',
-      'ach_297': '''Mikromanschetten-ETT zehnmal. Kleine Röhre, Verantwortung für Erwachsene.''',
-      'ach_298': '''RAE oder Flexometallic zwanzigmal. Geometrie ist eine klinische Fähigkeit.''',
+      'ach_290':
+          '''VL hundertmal. Die direkte Laryngoskopie ist für Flashbacks gedacht.''',
+      'ach_291':
+          '''Erstes waches Glasfaserkabel. Patientenbewusst; Du bist hyperbewusst.''',
+      'ach_292':
+          '''Fünf wache Glasfasern. Nerven aus Titan, aktuell von Legenden.''',
+      'ach_293':
+          '''Fünfzehn wache Glasfaserleiter. Der Goldstandard, verfolgt mit Lidocain.''',
+      'ach_294':
+          '''Erstmal Glasfaser eingeschlafen. Zuerst Tube, dann Swagger.''',
+      'ach_295':
+          '''Zehn schlafende Glasfaserkabel. Scope-Fähigkeiten ohne aufmunternde Worte.''',
+      'ach_296':
+          '''Insgesamt 25 Glasfaserkabel. Flexibler Freund, starre Standards.''',
+      'ach_297':
+          '''Mikromanschetten-ETT zehnmal. Kleine Röhre, Verantwortung für Erwachsene.''',
+      'ach_298':
+          '''RAE oder Flexometallic zwanzigmal. Geometrie ist eine klinische Fähigkeit.''',
       'ach_299': '''Erster Cormack-Lehane 3. Die Ansicht ist ein Vorschlag.''',
-      'ach_300': '''Zehn Schüler der 3. Klasse haben es geschafft. Sammlung vollständig; Herzfrequenz optional.''',
-      'ach_301': '''Erster Cormack-Lehane 4. Vertrauen, Bougie und gute Beleuchtung anderswo.''',
-      'ach_302': '''Fünf Klassen 4 erobert. Du hast dir den VL-Aufkleber verdient.''',
-      'ach_303': '''Erster schwieriger Atemweg markiert. Plan A hatte einen Plan B. Klug.''',
-      'ach_304': '''Fünf schwierige Atemwege. Die Lehre wurde unter Druck abgeleistet.''',
-      'ach_305': '''Zehn schwierige Atemwege. Die Reise geht weiter; desats lehnte ab.''',
-      'ach_306': '''25 schwierige Atemwege. Expertenmodus: immer noch bescheiden.''',
-      'ach_307': '''Fünfzig schwierige Atemwege. Leise, effektiv, leicht erschreckend.''',
-      'ach_308': '''Schwierige Atemwege bei einem Versuch. Energie im ersten Durchgang. Der Kuss des Chefkochs.''',
-      'ach_309': '''Zehn Siege bei schwierigen Atemwegen im ersten Versuch. Sauber wie eine Pfeife, schärfer als einer.''',
-      'ach_310': '''Schwieriger Atemweg, der mehr als 3 Versuche erfordert. Überlebt. Gelernt. Geloggt.''',
-      'ach_311': '''Fünfzig LMAs persönlich durchgeführt. Hands-on, nicht handnah.''',
-      'ach_312': '''Zweihundert ETTs durchgeführt. Die Tube kennt deinen Namen.''',
-      'ach_313': '''Fünfzig Atemwege halfen. Nebendarsteller, immer noch kritisch.''',
-      'ach_314': '''Fünfzig Atemwege beobachtet. Zuschauen ist der Ursprung von Legenden.''',
-      'ach_315': '''ETT unter 4,0 bei einem Neugeborenen oder Kleinkind. Kleines Lumen, großer Respekt.''',
+      'ach_300':
+          '''Zehn Schüler der 3. Klasse haben es geschafft. Sammlung vollständig; Herzfrequenz optional.''',
+      'ach_301':
+          '''Erster Cormack-Lehane 4. Vertrauen, Bougie und gute Beleuchtung anderswo.''',
+      'ach_302':
+          '''Fünf Klassen 4 erobert. Du hast dir den VL-Aufkleber verdient.''',
+      'ach_303':
+          '''Erster schwieriger Atemweg markiert. Plan A hatte einen Plan B. Klug.''',
+      'ach_304':
+          '''Fünf schwierige Atemwege. Die Lehre wurde unter Druck abgeleistet.''',
+      'ach_305':
+          '''Zehn schwierige Atemwege. Die Reise geht weiter; desats lehnte ab.''',
+      'ach_306':
+          '''25 schwierige Atemwege. Expertenmodus: immer noch bescheiden.''',
+      'ach_307':
+          '''Fünfzig schwierige Atemwege. Leise, effektiv, leicht erschreckend.''',
+      'ach_308':
+          '''Schwierige Atemwege bei einem Versuch. Energie im ersten Durchgang. Der Kuss des Chefkochs.''',
+      'ach_309':
+          '''Zehn Siege bei schwierigen Atemwegen im ersten Versuch. Sauber wie eine Pfeife, schärfer als einer.''',
+      'ach_310':
+          '''Schwieriger Atemweg, der mehr als 3 Versuche erfordert. Überlebt. Gelernt. Geloggt.''',
+      'ach_311':
+          '''Fünfzig LMAs persönlich durchgeführt. Hands-on, nicht handnah.''',
+      'ach_312':
+          '''Zweihundert ETTs durchgeführt. Die Tube kennt deinen Namen.''',
+      'ach_313':
+          '''Fünfzig Atemwege halfen. Nebendarsteller, immer noch kritisch.''',
+      'ach_314':
+          '''Fünfzig Atemwege beobachtet. Zuschauen ist der Ursprung von Legenden.''',
+      'ach_315':
+          '''ETT unter 4,0 bei einem Neugeborenen oder Kleinkind. Kleines Lumen, großer Respekt.''',
       'ach_316': '''ETT-Größe ≥8,5. Große Atemwegsenergie.''',
-      'ach_317': '''Korrekte Anwendung von ETTs ohne Manschette bei Kindern. Alte Regeln, gutes Urteilsvermögen.''',
-      'ach_318': '''Einhundert ETTs mit normaler Manschette. Standardausgabe, fachmännische Ausführung.''',
-      'ach_319': '''Zweihundert Aufrufe der Klasse 1. Kristallklar. Werden Sie nicht übermütig.''',
-      'ach_320': '''Fünfzig Klasse 2a/2b. Fast perfekt – zählt immer noch als Können.''',
-      'ach_321': '''Zehn Wach-Fiberoptiken durchgeführt. Aktuell, Talk, Tube.''',
-      'ach_322': '''Zwanzig schlafende Glasfasern durchgeführt. Scope, während sie schlafen; das tust du nicht.''',
-      'ach_323': '''Notfallbewältigung schwieriger Atemwege. Wenn es im Raum still wird, ist das nicht der Fall.''',
-      'ach_324': '''Atemwegsdetails wurden in fünfhundert Fällen protokolliert. Daten sind eine Art Weisheit.''',
-      'ach_325': '''Jedes Werkzeug und jede Modalität berührt. Das komplette Rüstzeug. Respektieren.''',
-      'ach_326': '''Erste Wirbelsäulenoperation durchgeführt. CSF-Glitzer: die gute Sorte.''',
+      'ach_317':
+          '''Korrekte Anwendung von ETTs ohne Manschette bei Kindern. Alte Regeln, gutes Urteilsvermögen.''',
+      'ach_318':
+          '''Einhundert ETTs mit normaler Manschette. Standardausgabe, fachmännische Ausführung.''',
+      'ach_319':
+          '''Zweihundert Aufrufe der Klasse 1. Kristallklar. Werden Sie nicht übermütig.''',
+      'ach_320':
+          '''Fünfzig Klasse 2a/2b. Fast perfekt – zählt immer noch als Können.''',
+      'ach_321':
+          '''Zehn Wach-Fiberoptiken durchgeführt. Aktuell, Talk, Tube.''',
+      'ach_322':
+          '''Zwanzig schlafende Glasfasern durchgeführt. Scope, während sie schlafen; das tust du nicht.''',
+      'ach_323':
+          '''Notfallbewältigung schwieriger Atemwege. Wenn es im Raum still wird, ist das nicht der Fall.''',
+      'ach_324':
+          '''Atemwegsdetails wurden in fünfhundert Fällen protokolliert. Daten sind eine Art Weisheit.''',
+      'ach_325':
+          '''Jedes Werkzeug und jede Modalität berührt. Das komplette Rüstzeug. Respektieren.''',
+      'ach_326':
+          '''Erste Wirbelsäulenoperation durchgeführt. CSF-Glitzer: die gute Sorte.''',
       'ach_327': '''Zehn Wirbelsäulen. Tropfen, fallenlassen, blockieren.''',
       'ach_328': '''Fünfzig Wirbelsäulen. L3–4 ist zu Hause.''',
-      'ach_329': '''Einhundert Wirbelsäulen. Subarachnoidale ist Ihre Postleitzahl.''',
+      'ach_329':
+          '''Einhundert Wirbelsäulen. Subarachnoidale ist Ihre Postleitzahl.''',
       'ach_330': '''Zweihundertfünfzig Wirbelsäulen. Elite-Handarbeit.''',
-      'ach_331': '''Erste Epiduralanästhesie. Hängen Sie die Tasche auf; Halte den Glauben fest.''',
+      'ach_331':
+          '''Erste Epiduralanästhesie. Hängen Sie die Tasche auf; Halte den Glauben fest.''',
       'ach_332': '''Fünfundzwanzig PDAs. Widerstandsverlust ist Cardio.''',
       'ach_333': '''Fünfzig PDAs mit Finesse. Gewalt ist etwas für Amateure.''',
       'ach_334': '''Einhundert PDAs. Platz gefunden, Ego geparkt.''',
-      'ach_335': '''Erste periphere Nervenblockade. Zucken oder schimmern – wählen Sie eine Seite.''',
+      'ach_335':
+          '''Erste periphere Nervenblockade. Zucken oder schimmern – wählen Sie eine Seite.''',
       'ach_336': '''Zehn PNBs. Nerven lokalisiert; Kaffee verdient.''',
-      'ach_337': '''Fünfundzwanzig PNBs. Ultraschallgel ist eine Lebensmittelgruppe.''',
+      'ach_337':
+          '''Fünfundzwanzig PNBs. Ultraschallgel ist eine Lebensmittelgruppe.''',
       'ach_338': '''Fünfzig PNBs. Boss-Modus: Markiert immer noch die Haut.''',
-      'ach_339': '''Einhundert PNBs. Experte bedeutet, dass Sie die Faszien immer noch respektieren.''',
-      'ach_340': '''Zweihundert PNBs. Meisterschaft ist wiederholbarer, stiller Erfolg.''',
-      'ach_341': '''Erste von der USG geführte Region. Der Nerv erscheint; das gilt auch für das Selbstvertrauen.''',
-      'ach_342': '''USG-Anleitung fünfundzwanzig Mal. Freischalten von Sondenfähigkeiten.''',
+      'ach_339':
+          '''Einhundert PNBs. Experte bedeutet, dass Sie die Faszien immer noch respektieren.''',
+      'ach_340':
+          '''Zweihundert PNBs. Meisterschaft ist wiederholbarer, stiller Erfolg.''',
+      'ach_341':
+          '''Erste von der USG geführte Region. Der Nerv erscheint; das gilt auch für das Selbstvertrauen.''',
+      'ach_342':
+          '''USG-Anleitung fünfundzwanzig Mal. Freischalten von Sondenfähigkeiten.''',
       'ach_343': '''USG fünfzig Mal. Nadel hell; Geist heller.''',
       'ach_344': '''USG hundertmal. Sie sehen, wonach andere tasten.''',
       'ach_345': '''USG zweihundertfünfzig Mal. Legende mit Gelflecken.''',
-      'ach_346': '''Nervenstimulator verwendet. Zucken der alten Schule, Respekt der neuen Schule.''',
-      'ach_347': '''Stimulator fünfundzwanzig Mal. Milliampere und Muskelgedächtnis.''',
-      'ach_348': '''Erster Regionalkatheter. Kontinuierliche Infusion, kontinuierliche Tugend.''',
+      'ach_346':
+          '''Nervenstimulator verwendet. Zucken der alten Schule, Respekt der neuen Schule.''',
+      'ach_347':
+          '''Stimulator fünfundzwanzig Mal. Milliampere und Muskelgedächtnis.''',
+      'ach_348':
+          '''Erster Regionalkatheter. Kontinuierliche Infusion, kontinuierliche Tugend.''',
       'ach_349': '''Zehn Blockkatheter. Champion der Tunnelröhre.''',
       'ach_350': '''Fünfundzwanzig Katheter. Schmerz an der Leine.''',
-      'ach_351': '''Interskalenär, supra oder axillär protokolliert. Obere Extremität, obere Geschicklichkeit.''',
-      'ach_352': '''Zwanzig Blockaden des Plexus brachialis. Arme nach unten; Standards erhöhen.''',
-      'ach_353': '''Femoral, Ischias oder Popliteal beherrscht. Beintag, klinische Ausgabe.''',
-      'ach_354': '''Zwanzig Blockaden der unteren Gliedmaßen. Überspringen Sie das Fitnessstudio; Mach den Block.''',
+      'ach_351':
+          '''Interskalenär, supra oder axillär protokolliert. Obere Extremität, obere Geschicklichkeit.''',
+      'ach_352':
+          '''Zwanzig Blockaden des Plexus brachialis. Arme nach unten; Standards erhöhen.''',
+      'ach_353':
+          '''Femoral, Ischias oder Popliteal beherrscht. Beintag, klinische Ausgabe.''',
+      'ach_354':
+          '''Zwanzig Blockaden der unteren Gliedmaßen. Überspringen Sie das Fitnessstudio; Mach den Block.''',
       'ach_355': '''TAP, Rectus, QL oder ESP. Kernstärke, Nadelauflage.''',
-      'ach_356': '''Zwanzig Rumpf-/Bauchblockaden. Friedensverträge der Mittellinie.''',
+      'ach_356':
+          '''Zwanzig Rumpf-/Bauchblockaden. Friedensverträge der Mittellinie.''',
       'ach_357': '''PECS oder Serratus. Brustwand, Chill-Protokoll.''',
-      'ach_358': '''Zehn Paravertebrale. Nah an der Wirbelsäule, näher am Fachwissen.''',
-      'ach_359': '''Zervikaler Plexus oder Kopfhautblockade. Über den Schultern, überdurchschnittlich.''',
+      'ach_358':
+          '''Zehn Paravertebrale. Nah an der Wirbelsäule, näher am Fachwissen.''',
+      'ach_359':
+          '''Zervikaler Plexus oder Kopfhautblockade. Über den Schultern, überdurchschnittlich.''',
       'ach_360': '''Zehn Schwanzflossen. Kleine Rücken, große Erleichterung.''',
       'ach_361': '''Zehn Knöchelblöcke. Der beste Freund der Fußchirurgie.''',
       'ach_362': '''Bierblock (IVRA). Vintage-Technik, immer noch Hits.''',
-      'ach_363': '''Fünf lumbale oder sakrale Plexusblöcke. Tiefe Blockaden, tiefere Ruhe.''',
-      'ach_364': '''Zehn verschiedene regionale Blocktypen. Ich muss sie alle festhalten.''',
-      'ach_365': '''Zwanzig verschiedene Blocktypen. Sommelier für Lokalanästhesie.''',
-      'ach_366': '''Fünfzehn Interskalenen. Phrenic optional; Geschicklichkeit nicht.''',
+      'ach_363':
+          '''Fünf lumbale oder sakrale Plexusblöcke. Tiefe Blockaden, tiefere Ruhe.''',
+      'ach_364':
+          '''Zehn verschiedene regionale Blocktypen. Ich muss sie alle festhalten.''',
+      'ach_365':
+          '''Zwanzig verschiedene Blocktypen. Sommelier für Lokalanästhesie.''',
+      'ach_366':
+          '''Fünfzehn Interskalenen. Phrenic optional; Geschicklichkeit nicht.''',
       'ach_367': '''Fünfundzwanzig Supraklavikula. Ecktaschen-Königsklasse.''',
-      'ach_368': '''Fünfzehn Infraklavikulare. Unter dem Schlüsselbein, über dem Standarte.''',
-      'ach_369': '''Fünfzehn Achselblöcke. Klassischer Weg, moderne Ergebnisse.''',
-      'ach_370': '''Zwanzig Oberschenkelknochen. Vorderer Oberschenkel, volle Aufmerksamkeit.''',
+      'ach_368':
+          '''Fünfzehn Infraklavikulare. Unter dem Schlüsselbein, über dem Standarte.''',
+      'ach_369':
+          '''Fünfzehn Achselblöcke. Klassischer Weg, moderne Ergebnisse.''',
+      'ach_370':
+          '''Zwanzig Oberschenkelknochen. Vorderer Oberschenkel, volle Aufmerksamkeit.''',
       'ach_371': '''Zwanzig Adduktorenkanäle. Motorschonend, rufschonend.''',
-      'ach_372': '''Zwanzig Ischiasbeschwerden. Großer Nerv, größerer Respekt.''',
-      'ach_373': '''Fünfzehn Ischiasbeschwerden im Kniekehlenbereich. Hinter dem Knie, vor Schmerzen.''',
+      'ach_372':
+          '''Zwanzig Ischiasbeschwerden. Großer Nerv, größerer Respekt.''',
+      'ach_373':
+          '''Fünfzehn Ischiasbeschwerden im Kniekehlenbereich. Hinter dem Knie, vor Schmerzen.''',
       'ach_374': '''Dreißig TAPs. Flugzeug gefunden, Bauch beruhigt.''',
       'ach_375': '''Fünfzehn Rektusscheiden. Mittlere Manieren.''',
       'ach_376': '''Fünfzehn QLs. Tiefgründig, seitlich, wirkungsvoll.''',
       'ach_377': '''Fünfzehn ESPs. Flugzeug segelt entlang der Wirbelsäule.''',
       'ach_378': '''Fünfzehn PECS I/II. Brustwanddiplomatie.''',
-      'ach_379': '''Zehn Serratus-anterior-Blöcke. Seitliche Brust, seitliches Denken.''',
-      'ach_380': '''Zehn Halsplexusblockaden. Nackenarbeit, sorgfältige Hände.''',
+      'ach_379':
+          '''Zehn Serratus-anterior-Blöcke. Seitliche Brust, seitliches Denken.''',
+      'ach_380':
+          '''Zehn Halsplexusblockaden. Nackenarbeit, sorgfältige Hände.''',
       'ach_381': '''Zehn Kopfhautblöcke. Schädel-Komfort-Paket.''',
       'ach_382': '''25 Kinderkaudalen. Kleiner Raum, großer Unterschied.''',
       'ach_383': '''Fünf IVRAs. Tourniquet hoch; Nostalgie aktiviert.''',
-      'ach_384': '''Zwei verschiedene Regionals in einem Fall. Mixed Media, klinische Ausgabe.''',
-      'ach_385': '''Insgesamt fünfhundert Regionals. Gottheitsstatus, wäscht sich immer noch die Hände.''',
-      'ach_386': '''Erste Arterienlinie. Wellenform: das einzige Warnsignal, das Ihnen gefällt.''',
+      'ach_384':
+          '''Zwei verschiedene Regionals in einem Fall. Mixed Media, klinische Ausgabe.''',
+      'ach_385':
+          '''Insgesamt fünfhundert Regionals. Gottheitsstatus, wäscht sich immer noch die Hände.''',
+      'ach_386':
+          '''Erste Arterienlinie. Wellenform: das einzige Warnsignal, das Ihnen gefällt.''',
       'ach_387': '''Zehn Kunstlinien. Radialer Immobilienmakler.''',
-      'ach_388': '''Fünfundzwanzig Kunstlinien. Gedämpfte Spuren beleidigen Sie persönlich.''',
+      'ach_388':
+          '''Fünfundzwanzig Kunstlinien. Gedämpfte Spuren beleidigen Sie persönlich.''',
       'ach_389': '''Fünfzig Kunstlinien. Pik-Ass, Arterien-Ass.''',
-      'ach_390': '''Einhundert Kunstlinien. Meister des kontinuierlichen BP-Klatsches.''',
+      'ach_390':
+          '''Einhundert Kunstlinien. Meister des kontinuierlichen BP-Klatsches.''',
       'ach_391': '''Erster CVC. Zentrale Linie, zentrale Bedeutung.''',
       'ach_392': '''Fünf CVCs. Draht, Dilatator, Demut.''',
-      'ach_393': '''Fünfzehn CVCs. IJ oder Subclavia – Sie haben jetzt Ihre Präferenzen.''',
+      'ach_393':
+          '''Fünfzehn CVCs. IJ oder Subclavia – Sie haben jetzt Ihre Präferenzen.''',
       'ach_394': '''Fünfundzwanzig CVCs. Beherrsche das Lumen.''',
       'ach_395': '''Fünfzig CVCs. Zentraler Zugang ist ein Lebensstil.''',
-      'ach_396': '''USG für CVC oder Art Line. Der Fokus liegt auf dem Preis, nicht auf dem bahnbrechenden Mythos.''',
-      'ach_397': '''USG vaskulär fünfundzwanzigmal. Sonde hoch, Komplikationen runter.''',
-      'ach_398': '''USG vaskulär fünfundsiebzigmal. Gefäßwände fürchten Ihre Sonde.''',
-      'ach_399': '''Erste BIS/Entropie. Denn „sieht schlafend aus“ ist keine Zahl.''',
-      'ach_400': '''BIS/Entropie fünfundzwanzig Mal. Tiefengebühren für Aufklärung.''',
+      'ach_396':
+          '''USG für CVC oder Art Line. Der Fokus liegt auf dem Preis, nicht auf dem bahnbrechenden Mythos.''',
+      'ach_397':
+          '''USG vaskulär fünfundzwanzigmal. Sonde hoch, Komplikationen runter.''',
+      'ach_398':
+          '''USG vaskulär fünfundsiebzigmal. Gefäßwände fürchten Ihre Sonde.''',
+      'ach_399':
+          '''Erste BIS/Entropie. Denn „sieht schlafend aus“ ist keine Zahl.''',
+      'ach_400':
+          '''BIS/Entropie fünfundzwanzig Mal. Tiefengebühren für Aufklärung.''',
       'ach_401': '''BIS/Entropie fünfzig Mal. Zahlen statt Stimmung.''',
       'ach_402': '''BIS/Entropie hundertmal. Kortikaler Türsteher.''',
       'ach_403': '''NIRS zehnmal. Brain O₂: jetzt im Trend.''',
-      'ach_404': '''Masimo SedLine zehnmal. Ausgefallene Wellen für ausgefallene Hüllen.''',
-      'ach_405': '''Fünfmal TEE- oder PA-Katheter. Herzgeheimnisse, entschlüsselt.''',
+      'ach_404':
+          '''Masimo SedLine zehnmal. Ausgefallene Wellen für ausgefallene Hüllen.''',
+      'ach_405':
+          '''Fünfmal TEE- oder PA-Katheter. Herzgeheimnisse, entschlüsselt.''',
       'ach_406': '''PiCCO fünfmal. Der Fluss ist wichtig. Sie messen es.''',
-      'ach_407': '''Fünfmalige lumbale Subarachnoidaldrainage. CSF-Management, fortgeschrittene Stufe.''',
-      'ach_408': '''Drei invasive Monitore gleichzeitig. Armaturenbrett vollständig beleuchtet.''',
-      'ach_409': '''Vier oder mehr invasive Monitore. Mission Control, OR-Ausgabe.''',
-      'ach_410': '''Es werden fünf verschiedene Leitungs-/Monitortypen verwendet. Ich muss sie alle kanülieren.''',
-      'ach_411': '''Fünfzig Kunstlinien aufgeführt. Praktischer Wellenform-Händler.''',
+      'ach_407':
+          '''Fünfmalige lumbale Subarachnoidaldrainage. CSF-Management, fortgeschrittene Stufe.''',
+      'ach_408':
+          '''Drei invasive Monitore gleichzeitig. Armaturenbrett vollständig beleuchtet.''',
+      'ach_409':
+          '''Vier oder mehr invasive Monitore. Mission Control, OR-Ausgabe.''',
+      'ach_410':
+          '''Es werden fünf verschiedene Leitungs-/Monitortypen verwendet. Ich muss sie alle kanülieren.''',
+      'ach_411':
+          '''Fünfzig Kunstlinien aufgeführt. Praktischer Wellenform-Händler.''',
       'ach_412': '''Es wurden 30 CVCs durchgeführt. Drahtflüsterer.''',
-      'ach_413': '''Zwanzig Kunstlinien wurden unterstützt. Unterstützung des roten Teams.''',
+      'ach_413':
+          '''Zwanzig Kunstlinien wurden unterstützt. Unterstützung des roten Teams.''',
       'ach_414': '''Zwanzig CVCs halfen. Zweite Hände, erstklassige Hilfe.''',
       'ach_415': '''BIS/Entropie unabhängig fünfzig Mal. Keine Stützräder.''',
       'ach_416': '''SedLine unabhängig zwanzig Mal. Solo-Gehirnüberwachung.''',
       'ach_417': '''TCI unabhängig fünfzig Mal. Pumpe und Umstände.''',
-      'ach_418': '''NIRS zwanzigmal unabhängig voneinander. Zerebraler Alleinflug.''',
+      'ach_418':
+          '''NIRS zwanzigmal unabhängig voneinander. Zerebraler Alleinflug.''',
       'ach_419': '''PiCCO unabhängig zehnmal. Ausgang ohne Begleitperson.''',
-      'ach_420': '''TEE wurde zehnmal im Herzen beobachtet. Beobachten, wie das Herz Überstunden macht.''',
-      'ach_421': '''PA-Katheter zehnmal beobachtet. Schwebe weiter, Beobachter.''',
+      'ach_420':
+          '''TEE wurde zehnmal im Herzen beobachtet. Beobachten, wie das Herz Überstunden macht.''',
+      'ach_421':
+          '''PA-Katheter zehnmal beobachtet. Schwebe weiter, Beobachter.''',
       'ach_422': '''Zehn Lumbaldrainagen wurden durchgeführt. Druckpolitik.''',
-      'ach_423': '''Einhundert Fälle mit Art-Line-Tracking. Experte für die kontinuierliche Argumentation von BP.''',
-      'ach_424': '''Fünfzig Fälle mit zentralem Zugriff. Veteran des Drahtes.''',
-      'ach_425': '''Alle invasiven Überwachungsoptionen berührt. Volle Cockpitfreiheit.''',
-      'ach_426': '''Erstes Neugeborenes (<28 Tage). Kleiner Mensch, vollständiges Protokoll.''',
-      'ach_427': '''Fünf Neugeborene. Regelmäßig im kleinsten Raum mit den größten Einsätzen.''',
-      'ach_428': '''Fünfzehn Neugeborene kamen sicher zurecht. Wächter des Mikroschaltkreises.''',
-      'ach_429': '''Erstes Kind (29 Tage–1 Jahr). Schnell wachsend; Ihre Vorsicht schneller.''',
-      'ach_430': '''Zwanzig Kleinkinder. Spezialist für kleine Tuben und große Augen.''',
-      'ach_431': '''Zwanzig Kleinkinder. Premed optional; Geduld ist Pflicht.''',
-      'ach_432': '''Fünfzig Fälle für Säuglinge oder Kleinkinder. Profi im Bereich Ablenkung und Entsättigungsprävention.''',
-      'ach_433': '''25 Kinder (3–12). Aufkleber bleiben ein gültiges Medikament.''',
-      'ach_434': '''Zwanzig Jugendliche (12–18). Fast erwachsen, immer noch keine NPO-Philosophen.''',
-      'ach_435': '''Erste ältere Menschen (≥65). Goldstandard-Pflege für goldene Jahre.''',
-      'ach_436': '''25 ältere Fälle. Wächter gegen Polypharmazie-Überraschungen.''',
-      'ach_437': '''Fünfzig ältere Fälle. Schützen Sie die MAP wie ihre Familie.''',
-      'ach_438': '''Hundert ältere Fälle. Spezialist für sanfte Einleitung und scharfes Urteilsvermögen.''',
-      'ach_439': '''Patient ≥80. Behandeln Sie es wie feines Porzellan mit besserem arteriellen Zugang.''',
-      'ach_440': '''Zehn Patienten ≥80. Clubmitgliedschaft: Respekt erforderlich.''',
+      'ach_423':
+          '''Einhundert Fälle mit Art-Line-Tracking. Experte für die kontinuierliche Argumentation von BP.''',
+      'ach_424':
+          '''Fünfzig Fälle mit zentralem Zugriff. Veteran des Drahtes.''',
+      'ach_425':
+          '''Alle invasiven Überwachungsoptionen berührt. Volle Cockpitfreiheit.''',
+      'ach_426':
+          '''Erstes Neugeborenes (<28 Tage). Kleiner Mensch, vollständiges Protokoll.''',
+      'ach_427':
+          '''Fünf Neugeborene. Regelmäßig im kleinsten Raum mit den größten Einsätzen.''',
+      'ach_428':
+          '''Fünfzehn Neugeborene kamen sicher zurecht. Wächter des Mikroschaltkreises.''',
+      'ach_429':
+          '''Erstes Kind (29 Tage–1 Jahr). Schnell wachsend; Ihre Vorsicht schneller.''',
+      'ach_430':
+          '''Zwanzig Kleinkinder. Spezialist für kleine Tuben und große Augen.''',
+      'ach_431':
+          '''Zwanzig Kleinkinder. Premed optional; Geduld ist Pflicht.''',
+      'ach_432':
+          '''Fünfzig Fälle für Säuglinge oder Kleinkinder. Profi im Bereich Ablenkung und Entsättigungsprävention.''',
+      'ach_433':
+          '''25 Kinder (3–12). Aufkleber bleiben ein gültiges Medikament.''',
+      'ach_434':
+          '''Zwanzig Jugendliche (12–18). Fast erwachsen, immer noch keine NPO-Philosophen.''',
+      'ach_435':
+          '''Erste ältere Menschen (≥65). Goldstandard-Pflege für goldene Jahre.''',
+      'ach_436':
+          '''25 ältere Fälle. Wächter gegen Polypharmazie-Überraschungen.''',
+      'ach_437':
+          '''Fünfzig ältere Fälle. Schützen Sie die MAP wie ihre Familie.''',
+      'ach_438':
+          '''Hundert ältere Fälle. Spezialist für sanfte Einleitung und scharfes Urteilsvermögen.''',
+      'ach_439':
+          '''Patient ≥80. Behandeln Sie es wie feines Porzellan mit besserem arteriellen Zugang.''',
+      'ach_440':
+          '''Zehn Patienten ≥80. Clubmitgliedschaft: Respekt erforderlich.''',
       'ach_441': '''Patient ≥100. Selten als echter ASA-I-Vierzigjähriger.''',
       'ach_442': '''BMI 30–34,9. Positionieren ist ein Mannschaftssport.''',
-      'ach_443': '''Zehn Fälle von Adipositas der Klasse I. Regelmäßig auf der Rampenliste.''',
-      'ach_444': '''Zwanzig Klasse II (BMI 35–39,9). Spezialist für Atemwege und Arithmetik.''',
-      'ach_445': '''Erster BMI ≥40. Plan A, B und eine längere Voroxygenierung.''',
+      'ach_443':
+          '''Zehn Fälle von Adipositas der Klasse I. Regelmäßig auf der Rampenliste.''',
+      'ach_444':
+          '''Zwanzig Klasse II (BMI 35–39,9). Spezialist für Atemwege und Arithmetik.''',
+      'ach_445':
+          '''Erster BMI ≥40. Plan A, B und eine längere Voroxygenierung.''',
       'ach_446': '''Zehn BMI ≥40. Superlative müssen hart verdient werden.''',
-      'ach_447': '''BMI <18,5. Leichter Körper, große Aufmerksamkeit auf die Dosierung.''',
-      'ach_448': '''Erwachsener unter 40 kg. Federleicht, vollständiges Protokoll.''',
-      'ach_449': '''Über 100 kg. Schwergewichtskampf; Du in der Ecke mit der VL.''',
+      'ach_447':
+          '''BMI <18,5. Leichter Körper, große Aufmerksamkeit auf die Dosierung.''',
+      'ach_448':
+          '''Erwachsener unter 40 kg. Federleicht, vollständiges Protokoll.''',
+      'ach_449':
+          '''Über 100 kg. Schwergewichtskampf; Du in der Ecke mit der VL.''',
       'ach_450': '''Über 130 kg. Meisterschaftsrunden. Rampen empfohlen.''',
-      'ach_451': '''Jede Altersgruppe hat sich angemeldet. Vom Neugeborenen bis zum Senioren – voller Regenbogen.''',
-      'ach_452': '''Jedes BMI-Band wurde protokolliert. Die komplette anthropometrische Playlist.''',
-      'ach_453': '''Fünfzig pädiatrische Fälle unter 12 Jahren. Das mit Kleinkindern ist absolut ernst.''',
-      'ach_454': '''Zweihundertfünfzig ältere Fälle. Führung ist eine stabile MAP.''',
-      'ach_455': '''Fünfzig BMI ≥30 Fälle. Verfechter der Rampe und des Plans.''',
-      'ach_456': '''Fünfzehn Fälle von Untergewicht. Experte für weniger Masse, mehr Pflege.''',
-      'ach_457': '''Neugeborene und Hundertjährige sind beide angemeldet. Das Alter ist nur eine präoperative Zahl.''',
-      'ach_458': '''Untergewicht und Superfettleibigkeit in derselben Woche. Range-Tag im Anthropometrie-Fitnessstudio.''',
-      'ach_459': '''Schwierige Atemwege bei Neugeborenen oder Säuglingen werden behandelt. Ass der kleinen Atemwege.''',
-      'ach_460': '''Schwierige Atemwege über 80 bewältigt. Ass aus Respekt vor brüchigen Zähnen und steifen Hälsen.''',
-      'ach_461': '''Zunächst keine/ereignislose. Langweilig ist das höchste Kompliment.''',
-      'ach_462': '''Zehn aufeinanderfolgende ereignislose Ereignisse. Hände sicher; Aberglaube steigt.''',
-      'ach_463': '''Fünfundzwanzig aufeinanderfolgende ereignislose Ereignisse. Sagen Sie nicht das Q-Wort.''',
-      'ach_464': '''Insgesamt einhundert ereignislose Ereignisse. Sicherheit ist ein Streben und ein System.''',
-      'ach_465': '''Zweihundertfünfzig ereignislos. Kugelsicher ist eine Metapher. Meistens.''',
-      'ach_466': '''Anästhesie innerhalb von zehn Minuten nach der Operation. Entstehung als zeitgesteuerte Kunst.''',
-      'ach_467': '''Fünfzig Mal schnell aufgeweckt. Effizienz ohne Abstriche – oder Kabel.''',
+      'ach_451':
+          '''Jede Altersgruppe hat sich angemeldet. Vom Neugeborenen bis zum Senioren – voller Regenbogen.''',
+      'ach_452':
+          '''Jedes BMI-Band wurde protokolliert. Die komplette anthropometrische Playlist.''',
+      'ach_453':
+          '''Fünfzig pädiatrische Fälle unter 12 Jahren. Das mit Kleinkindern ist absolut ernst.''',
+      'ach_454':
+          '''Zweihundertfünfzig ältere Fälle. Führung ist eine stabile MAP.''',
+      'ach_455':
+          '''Fünfzig BMI ≥30 Fälle. Verfechter der Rampe und des Plans.''',
+      'ach_456':
+          '''Fünfzehn Fälle von Untergewicht. Experte für weniger Masse, mehr Pflege.''',
+      'ach_457':
+          '''Neugeborene und Hundertjährige sind beide angemeldet. Das Alter ist nur eine präoperative Zahl.''',
+      'ach_458':
+          '''Untergewicht und Superfettleibigkeit in derselben Woche. Range-Tag im Anthropometrie-Fitnessstudio.''',
+      'ach_459':
+          '''Schwierige Atemwege bei Neugeborenen oder Säuglingen werden behandelt. Ass der kleinen Atemwege.''',
+      'ach_460':
+          '''Schwierige Atemwege über 80 bewältigt. Ass aus Respekt vor brüchigen Zähnen und steifen Hälsen.''',
+      'ach_461':
+          '''Zunächst keine/ereignislose. Langweilig ist das höchste Kompliment.''',
+      'ach_462':
+          '''Zehn aufeinanderfolgende ereignislose Ereignisse. Hände sicher; Aberglaube steigt.''',
+      'ach_463':
+          '''Fünfundzwanzig aufeinanderfolgende ereignislose Ereignisse. Sagen Sie nicht das Q-Wort.''',
+      'ach_464':
+          '''Insgesamt einhundert ereignislose Ereignisse. Sicherheit ist ein Streben und ein System.''',
+      'ach_465':
+          '''Zweihundertfünfzig ereignislos. Kugelsicher ist eine Metapher. Meistens.''',
+      'ach_466':
+          '''Anästhesie innerhalb von zehn Minuten nach der Operation. Entstehung als zeitgesteuerte Kunst.''',
+      'ach_467':
+          '''Fünfzig Mal schnell aufgeweckt. Effizienz ohne Abstriche – oder Kabel.''',
       'ach_468': '''PONV verwaltet. Ondansetron ist eine Liebessprache.''',
-      'ach_469': '''Intraoperative Hypotonie behandelt. Flüssigkeiten, Druck, Gelassenheit.''',
-      'ach_470': '''Bronchospasmus oder Laryngospasmus behandelt. Brust eng; Kopf frei.''',
-      'ach_471': '''Entsättigung verwaltet. FiO₂ hoch, Stimme runter, Problem gelöst.''',
-      'ach_472': '''Einhundert ereignislose PACU-Entladungen. Erholung: die stille Siegesrunde.''',
-      'ach_473': '''Profil vollständig. +10 Punkte und ein seltener Schuss administratives Dopamin.''',
-      'ach_474': '''Statistik-PDF exportiert. Zahlen: Endlich nützlich außerhalb der Prüfung.''',
-      'ach_475': '''Erster Fall oder Logbuch PDF. Das papierlose Krankenhaus kann für eine Sekunde wegschauen.''',
-      'ach_476': '''Zehn PDF-Exporte. Der Zukunfts-Du bei der Beurteilung schuldet dem Gegenwarts-Dir einen Kaffee.''',
-      'ach_477': '''Erstes JSON-Backup. Paranoia ist nur eine gute präoperative Beurteilung.''',
-      'ach_478': '''Fünf JSON-Backups. Redundanz: die einzig wahre ASA, die ich plane.''',
+      'ach_469':
+          '''Intraoperative Hypotonie behandelt. Flüssigkeiten, Druck, Gelassenheit.''',
+      'ach_470':
+          '''Bronchospasmus oder Laryngospasmus behandelt. Brust eng; Kopf frei.''',
+      'ach_471':
+          '''Entsättigung verwaltet. FiO₂ hoch, Stimme runter, Problem gelöst.''',
+      'ach_472':
+          '''Einhundert ereignislose PACU-Entladungen. Erholung: die stille Siegesrunde.''',
+      'ach_473':
+          '''Profil vollständig. +10 Punkte und ein seltener Schuss administratives Dopamin.''',
+      'ach_474':
+          '''Statistik-PDF exportiert. Zahlen: Endlich nützlich außerhalb der Prüfung.''',
+      'ach_475':
+          '''Erster Fall oder Logbuch PDF. Das papierlose Krankenhaus kann für eine Sekunde wegschauen.''',
+      'ach_476':
+          '''Zehn PDF-Exporte. Der Zukunfts-Du bei der Beurteilung schuldet dem Gegenwarts-Dir einen Kaffee.''',
+      'ach_477':
+          '''Erstes JSON-Backup. Paranoia ist nur eine gute präoperative Beurteilung.''',
+      'ach_478':
+          '''Fünf JSON-Backups. Redundanz: die einzig wahre ASA, die ich plane.''',
       'ach_479': '''Einhundert Punkte. Die App punktet Sie wie ein Viva.''',
-      'ach_480': '''Tausend Punkte. Die Energie der Hauptfigur, immer noch auf die Atemwege ausgerichtet.''',
-      'ach_481': '''Fünftausend Punkte. Prestige-Skin nicht enthalten – nur Ruhm.''',
-      'ach_482': '''Zehntausend Punkte. Uns gingen die nüchternen Adjektive und das flüchtige Anästhetikum aus.''',
-      'ach_483': '''Erster zahnärztlicher/kieferchirurgischer Fall. Mund offen, Atemwegsplan lauter.''',
+      'ach_480':
+          '''Tausend Punkte. Die Energie der Hauptfigur, immer noch auf die Atemwege ausgerichtet.''',
+      'ach_481':
+          '''Fünftausend Punkte. Prestige-Skin nicht enthalten – nur Ruhm.''',
+      'ach_482':
+          '''Zehntausend Punkte. Uns gingen die nüchternen Adjektive und das flüchtige Anästhetikum aus.''',
+      'ach_483':
+          '''Erster zahnärztlicher/kieferchirurgischer Fall. Mund offen, Atemwegsplan lauter.''',
       'ach_484': '''Fünf Zahn-/Kiefer-Fälle. Der Sauger ist Ihr Co-Pilot.''',
-      'ach_485': '''Zehn Zahn-/Kiefer-Fälle. Gemeinsamer Atemweg, gemeinsamer Stress, gemeinsamer Ruhm.''',
-      'ach_486': '''25 Fälle im Zahn-/Kieferbereich. Sie und der Kieferchirurg kommunizieren jetzt in Saugklicks.''',
-      'ach_487': '''Fünfzig Zahn-/Kiefer-Fälle. Drahtgebundene Kiefer machen Ihnen keine Angst – eine ungeplante Extubation schon.''',
-      'ach_488': '''Einhundert Zahn-/Kieferfälle. Gesichter verändern sich; Ihr Plan B bleibt bestehen.''',
-      'ach_489': '''Zehn Oberkieferfälle mit nasaler Intubation. Die Nase weiß es am besten – wenn der Mund das Schlachtfeld ist.''',
-      'ach_490': '''Fünf Oberkieferfälle endeten ereignislos. Drähte hinein; Drama aus.''',
-      'ach_491': '''Notfall-Zahn-/Kiefer-Notaufnahme außerhalb der Geschäftszeiten. Intermaxilläre Fixierung und intermaxilläres Koffein.''',
-      'ach_492': '''Zwanzig Fälle mit geteilten Atemwegen im Oberkiefer. Diplomatie mit einem Laryngoskop.''',
-      'ach_493': '''Erster Fall einer bariatrischen Operation. Steigern Sie, versorgen Sie sich mit Sauerstoff, respektieren Sie die Physiologie.''',
-      'ach_494': '''Fünf Fälle bariatrischer Chirurgie. Positionieren ist ein Mannschaftssport.''',
-      'ach_495': '''Fünfzehn Fälle bariatrischer Chirurgie. Sie messen den Halsumfang wie ein Schneider.''',
-      'ach_496': '''Dreißig Fälle bariatrischer Chirurgie. Spezialist für Rampen, VL und Geduld.''',
-      'ach_497': '''Fünfzig Fälle bariatrischer Chirurgie. Stoffwechselchirurgie, Stoffwechselschwerpunkt.''',
-      'ach_498': '''Einhundert Fälle bariatrischer Chirurgie. Schwergewichtstitel, leichtes Ego.''',
-      'ach_499': '''Schwierige Atemwege bei einem bariatrischen Fall. Plan A, B und ein längeres Pre-Ox.''',
-      'ach_500': '''Zwanzig bariatrische Fälle, keiner/ereignislos. Langweilig ist das Ziel.''',
-      'ach_501': '''Erster Fall in der interventionellen Radiologie. Licht aus, Standards hoch.''',
+      'ach_485':
+          '''Zehn Zahn-/Kiefer-Fälle. Gemeinsamer Atemweg, gemeinsamer Stress, gemeinsamer Ruhm.''',
+      'ach_486':
+          '''25 Fälle im Zahn-/Kieferbereich. Sie und der Kieferchirurg kommunizieren jetzt in Saugklicks.''',
+      'ach_487':
+          '''Fünfzig Zahn-/Kiefer-Fälle. Drahtgebundene Kiefer machen Ihnen keine Angst – eine ungeplante Extubation schon.''',
+      'ach_488':
+          '''Einhundert Zahn-/Kieferfälle. Gesichter verändern sich; Ihr Plan B bleibt bestehen.''',
+      'ach_489':
+          '''Zehn Oberkieferfälle mit nasaler Intubation. Die Nase weiß es am besten – wenn der Mund das Schlachtfeld ist.''',
+      'ach_490':
+          '''Fünf Oberkieferfälle endeten ereignislos. Drähte hinein; Drama aus.''',
+      'ach_491':
+          '''Notfall-Zahn-/Kiefer-Notaufnahme außerhalb der Geschäftszeiten. Intermaxilläre Fixierung und intermaxilläres Koffein.''',
+      'ach_492':
+          '''Zwanzig Fälle mit geteilten Atemwegen im Oberkiefer. Diplomatie mit einem Laryngoskop.''',
+      'ach_493':
+          '''Erster Fall einer bariatrischen Operation. Steigern Sie, versorgen Sie sich mit Sauerstoff, respektieren Sie die Physiologie.''',
+      'ach_494':
+          '''Fünf Fälle bariatrischer Chirurgie. Positionieren ist ein Mannschaftssport.''',
+      'ach_495':
+          '''Fünfzehn Fälle bariatrischer Chirurgie. Sie messen den Halsumfang wie ein Schneider.''',
+      'ach_496':
+          '''Dreißig Fälle bariatrischer Chirurgie. Spezialist für Rampen, VL und Geduld.''',
+      'ach_497':
+          '''Fünfzig Fälle bariatrischer Chirurgie. Stoffwechselchirurgie, Stoffwechselschwerpunkt.''',
+      'ach_498':
+          '''Einhundert Fälle bariatrischer Chirurgie. Schwergewichtstitel, leichtes Ego.''',
+      'ach_499':
+          '''Schwierige Atemwege bei einem bariatrischen Fall. Plan A, B und ein längeres Pre-Ox.''',
+      'ach_500':
+          '''Zwanzig bariatrische Fälle, keiner/ereignislos. Langweilig ist das Ziel.''',
+      'ach_501':
+          '''Erster Fall in der interventionellen Radiologie. Licht aus, Standards hoch.''',
       'ach_502': '''Fünf IR-Fälle. Führende Schürzenmode für immer.''',
-      'ach_503': '''Fünfzehn IR-Fälle. Sie können jetzt mit offenen Augen schlafen – bitte nicht.''',
-      'ach_504': '''25 IR-Fälle. Abseits vom Theater, in der Nähe des Notfallwagens.''',
-      'ach_505': '''Fünfzig IR-Fälle. Spezialist für ruhige Räume und laute Monitore.''',
-      'ach_506': '''Zehn IR-Fälle endeten ereignislos. Ruhe ist ansteckend; Das gilt auch für den Kontrast.''',
-      'ach_507': '''IR-Fall über drei Stunden Anästhesiezeit. Drahtzeit ist Ihre Zeit.''',
-      'ach_508': '''Notfallinterventionelle Radiologie. Blutendes Gefäß, ruhige Hände.''',
-      'ach_509': '''IR-Fall unter 18 Jahren. Kleine Gefäße, volle Aufmerksamkeit.''',
-      'ach_510': '''IR-Fall beginnt nach Mitternacht. Durchleuchtung und existenzielle Fragen.''',
-      'ach_511': '''Erste Strahlentherapie-Anästhesie. Stille ist das Rezept.''',
-      'ach_512': '''Fünf Strahlentherapiefälle. Bewegung ist der Feind; Du bist der Friedensvertrag.''',
-      'ach_513': '''Zehn Strahlentherapiefälle. Immobilisierungsgeräte, maximale Wachsamkeit.''',
-      'ach_514': '''25 Strahlentherapiefälle. Spezialist für kurze Fälle und lange Konzentration.''',
-      'ach_515': '''Strahlentherapie unter 18 Jahren. Mutige kleine Menschen, sorgfältige große Pläne.''',
-      'ach_516': '''Fünfzehn Strahlentherapiefälle, keine/ereignislos. Stille erreicht.''',
-      'ach_517': '''Zehn wiederholte Strahlentherapieanästhetika für denselben Pfad. Bekannte Gesichter, gleiche Standards.''',
-      'ach_518': '''Strahlentherapie mit Fernüberwachungsmentalität. Der Patient ist immer im Blick.''',
-      'ach_519': '''Erster Fall einer Herzoperation bei Kindern. Kleines Herz, große Checkliste.''',
+      'ach_503':
+          '''Fünfzehn IR-Fälle. Sie können jetzt mit offenen Augen schlafen – bitte nicht.''',
+      'ach_504':
+          '''25 IR-Fälle. Abseits vom Theater, in der Nähe des Notfallwagens.''',
+      'ach_505':
+          '''Fünfzig IR-Fälle. Spezialist für ruhige Räume und laute Monitore.''',
+      'ach_506':
+          '''Zehn IR-Fälle endeten ereignislos. Ruhe ist ansteckend; Das gilt auch für den Kontrast.''',
+      'ach_507':
+          '''IR-Fall über drei Stunden Anästhesiezeit. Drahtzeit ist Ihre Zeit.''',
+      'ach_508':
+          '''Notfallinterventionelle Radiologie. Blutendes Gefäß, ruhige Hände.''',
+      'ach_509':
+          '''IR-Fall unter 18 Jahren. Kleine Gefäße, volle Aufmerksamkeit.''',
+      'ach_510':
+          '''IR-Fall beginnt nach Mitternacht. Durchleuchtung und existenzielle Fragen.''',
+      'ach_511':
+          '''Erste Strahlentherapie-Anästhesie. Stille ist das Rezept.''',
+      'ach_512':
+          '''Fünf Strahlentherapiefälle. Bewegung ist der Feind; Du bist der Friedensvertrag.''',
+      'ach_513':
+          '''Zehn Strahlentherapiefälle. Immobilisierungsgeräte, maximale Wachsamkeit.''',
+      'ach_514':
+          '''25 Strahlentherapiefälle. Spezialist für kurze Fälle und lange Konzentration.''',
+      'ach_515':
+          '''Strahlentherapie unter 18 Jahren. Mutige kleine Menschen, sorgfältige große Pläne.''',
+      'ach_516':
+          '''Fünfzehn Strahlentherapiefälle, keine/ereignislos. Stille erreicht.''',
+      'ach_517':
+          '''Zehn wiederholte Strahlentherapieanästhetika für denselben Pfad. Bekannte Gesichter, gleiche Standards.''',
+      'ach_518':
+          '''Strahlentherapie mit Fernüberwachungsmentalität. Der Patient ist immer im Blick.''',
+      'ach_519':
+          '''Erster Fall einer Herzoperation bei Kindern. Kleines Herz, große Checkliste.''',
       'ach_520': '''Drei pädiatrische Herzfälle. Echo, Linien und Demut.''',
-      'ach_521': '''Zehn pädiatrische Herzfälle. Schaltkreise so groß wie Schmuck, Pfähle so groß wie Leben.''',
-      'ach_522': '''Zwanzig pädiatrische Herzfälle. Regelmäßig auf der Liste der angeborenen Krankheiten.''',
-      'ach_523': '''Vierzig pädiatrische Herzfälle. Spezialist für winzige Kanülen und große Verantwortung.''',
-      'ach_524': '''Fünfzehn pädiatrische Herzfälle, keiner/ereignislos. Ruhe ist eine klinische Fähigkeit.''',
-      'ach_525': '''Pädiatrischer Herzfall bei einem Neugeborenen. Mikro-Mensch, Makro-Fokus.''',
-      'ach_526': '''Fünf komplexe angeborene Fälle. Anatomie optional; Vorbereitung obligatorisch.''',
-      'ach_527': '''Kinderherz nach Stunden. Der Schlaf wird abgebrochen; Standards sind es nicht.''',
-      'ach_528': '''Zehn pädiatrische CPB-Fälle. Brummen der Bypass-Maschine; Du summest nicht.''',
-      'ach_529': '''Notfallzahn-/Kieferchirurgie. Schwellung, Trismus und Ihr bester VL.''',
-      'ach_530': '''Adipositas-Notfall. Zuerst die Physiologie, dann das Heldentum.''',
-      'ach_531': '''IR zur Trauma-Embolisation. Interventionell, absichtlich.''',
-      'ach_532': '''Oberkiefer und Wirbelsäule sind beide abgeholzt. Andere Knochen, gleicher Respekt für die Atemwege.''',
-      'ach_533': '''Bariatrischer Fall mit durchgeführter Regionaluntersuchung. Wo möglich blockieren; Atemwege immer bereit.''',
-      'ach_534': '''Kinderkardiologie plus ein separater Fall für Neugeborene. Altersspektrum, gleiche Nachtenergie.''',
-      'ach_535': '''Mindestens einmal wurden Zahn-/Kiefer-, Bariatrie-, IR-, Strahlentherapie- und Kinder-Herzerkrankungen protokolliert. Sammlung vollständig.''',
-      'ach_536': '''Mindestens ein Fall in jeder der fünf neuen Spezialspuren. Explorer-Abzeichen freigeschaltet.''',
-      'ach_537': '''Sowohl IR als auch Strahlentherapie werden protokolliert. Ionisierende Strahlung, nichtionisierende Ruhe.''',
-      'ach_538': '''Fünfzig Fälle in den Bereichen Zahn-/Kieferbereich und Kopf-Hals-Bereich zusammen. Gemeinsame Airway-Alumni.''',
+      'ach_521':
+          '''Zehn pädiatrische Herzfälle. Schaltkreise so groß wie Schmuck, Pfähle so groß wie Leben.''',
+      'ach_522':
+          '''Zwanzig pädiatrische Herzfälle. Regelmäßig auf der Liste der angeborenen Krankheiten.''',
+      'ach_523':
+          '''Vierzig pädiatrische Herzfälle. Spezialist für winzige Kanülen und große Verantwortung.''',
+      'ach_524':
+          '''Fünfzehn pädiatrische Herzfälle, keiner/ereignislos. Ruhe ist eine klinische Fähigkeit.''',
+      'ach_525':
+          '''Pädiatrischer Herzfall bei einem Neugeborenen. Mikro-Mensch, Makro-Fokus.''',
+      'ach_526':
+          '''Fünf komplexe angeborene Fälle. Anatomie optional; Vorbereitung obligatorisch.''',
+      'ach_527':
+          '''Kinderherz nach Stunden. Der Schlaf wird abgebrochen; Standards sind es nicht.''',
+      'ach_528':
+          '''Zehn pädiatrische CPB-Fälle. Brummen der Bypass-Maschine; Du summest nicht.''',
+      'ach_529':
+          '''Notfallzahn-/Kieferchirurgie. Schwellung, Trismus und Ihr bester VL.''',
+      'ach_530':
+          '''Adipositas-Notfall. Zuerst die Physiologie, dann das Heldentum.''',
+      'ach_531':
+          '''IR zur Trauma-Embolisation. Interventionell, absichtlich.''',
+      'ach_532':
+          '''Oberkiefer und Wirbelsäule sind beide abgeholzt. Andere Knochen, gleicher Respekt für die Atemwege.''',
+      'ach_533':
+          '''Bariatrischer Fall mit durchgeführter Regionaluntersuchung. Wo möglich blockieren; Atemwege immer bereit.''',
+      'ach_534':
+          '''Kinderkardiologie plus ein separater Fall für Neugeborene. Altersspektrum, gleiche Nachtenergie.''',
+      'ach_535':
+          '''Mindestens einmal wurden Zahn-/Kiefer-, Bariatrie-, IR-, Strahlentherapie- und Kinder-Herzerkrankungen protokolliert. Sammlung vollständig.''',
+      'ach_536':
+          '''Mindestens ein Fall in jeder der fünf neuen Spezialspuren. Explorer-Abzeichen freigeschaltet.''',
+      'ach_537':
+          '''Sowohl IR als auch Strahlentherapie werden protokolliert. Ionisierende Strahlung, nichtionisierende Ruhe.''',
+      'ach_538':
+          '''Fünfzig Fälle in den Bereichen Zahn-/Kieferbereich und Kopf-Hals-Bereich zusammen. Gemeinsame Airway-Alumni.''',
       'ach_539': '''Dreißig Zahn-/Kiefer-Fälle. Der IWF ist erst Dienstag.''',
-      'ach_540': '''Zwanzig bariatrische Fälle mit dokumentierter Atemwegsplanenergie. Plan geschrieben; Ego nicht.''',
-      'ach_541': '''Dreißig IR-Fälle. Ihre Wirbelsäule dankt es dem Blei. Vielleicht.''',
-      'ach_542': '''Vierzig Strahlentherapiefälle. Mit einem CT-Simulator könnten Sie einen Starrwettbewerb gewinnen.''',
-      'ach_543': '''Fünfzig pädiatrische Herzfälle. Bereit zum Unterrichten; immer noch bereit zu lernen.''',
-      'ach_544': '''Zwanzig Nasenintubationen im Oberkiefer. Vielflieger mit Nasenroute.''',
-      'ach_545': '''Fünfzehn bariatrische Fälle mit Videolaryngoskopie. Bildschirmzeit, gute Zeit.''',
-      'ach_546': '''Zwanzig IR-Fälle ereignislos. Kontrast ist keine Persönlichkeit.''',
-      'ach_547': '''Zehn pädiatrische Strahlentherapiefälle. Stille für die Kleinsten.''',
+      'ach_540':
+          '''Zwanzig bariatrische Fälle mit dokumentierter Atemwegsplanenergie. Plan geschrieben; Ego nicht.''',
+      'ach_541':
+          '''Dreißig IR-Fälle. Ihre Wirbelsäule dankt es dem Blei. Vielleicht.''',
+      'ach_542':
+          '''Vierzig Strahlentherapiefälle. Mit einem CT-Simulator könnten Sie einen Starrwettbewerb gewinnen.''',
+      'ach_543':
+          '''Fünfzig pädiatrische Herzfälle. Bereit zum Unterrichten; immer noch bereit zu lernen.''',
+      'ach_544':
+          '''Zwanzig Nasenintubationen im Oberkiefer. Vielflieger mit Nasenroute.''',
+      'ach_545':
+          '''Fünfzehn bariatrische Fälle mit Videolaryngoskopie. Bildschirmzeit, gute Zeit.''',
+      'ach_546':
+          '''Zwanzig IR-Fälle ereignislos. Kontrast ist keine Persönlichkeit.''',
+      'ach_547':
+          '''Zehn pädiatrische Strahlentherapiefälle. Stille für die Kleinsten.''',
       'ach_548': '''25 Herzerkrankungen bei Kindern. Serie regelmäßig.''',
-      'ach_549': '''Zahn-/Kieferzahnarzt mit regionaler Zusatzausbildung. Lokal, wo es darauf ankommt.''',
-      'ach_550': '''Bariatrischer Fall mit arteriellem Zugang. Wellenform in einer großen Physiologie.''',
-      'ach_551': '''IR-Gehäuse mit arterieller Überwachung. Rot ist eine Sprache.''',
-      'ach_552': '''Strahlentherapie unter MAC/Sedierungspfad protokolliert. Leichte Berührung, starke Aufmerksamkeit.''',
-      'ach_553': '''Kinderkardiologie mit invasiver Überwachung. Leitungen vor der Umgehung.''',
-      'ach_554': '''Schwierige Atemwegsmarkierung bei einem Oberkieferfall. Trismus trifft auf Training.''',
-      'ach_555': '''Entsättigung in einem bariatrischen Fall bewältigt. Rettung ohne Drama.''',
-      'ach_556': '''IR-Anästhesie über vier Stunden. Durchleuchtungsmarathon.''',
+      'ach_549':
+          '''Zahn-/Kieferzahnarzt mit regionaler Zusatzausbildung. Lokal, wo es darauf ankommt.''',
+      'ach_550':
+          '''Bariatrischer Fall mit arteriellem Zugang. Wellenform in einer großen Physiologie.''',
+      'ach_551':
+          '''IR-Gehäuse mit arterieller Überwachung. Rot ist eine Sprache.''',
+      'ach_552':
+          '''Strahlentherapie unter MAC/Sedierungspfad protokolliert. Leichte Berührung, starke Aufmerksamkeit.''',
+      'ach_553':
+          '''Kinderkardiologie mit invasiver Überwachung. Leitungen vor der Umgehung.''',
+      'ach_554':
+          '''Schwierige Atemwegsmarkierung bei einem Oberkieferfall. Trismus trifft auf Training.''',
+      'ach_555':
+          '''Entsättigung in einem bariatrischen Fall bewältigt. Rettung ohne Drama.''',
+      'ach_556':
+          '''IR-Anästhesie über vier Stunden. Durchleuchtungsmarathon.''',
       'ach_557': '''Die Strahlentherapie beginnt vor 07:00 Uhr. Strahluhr.''',
-      'ach_558': '''Kinderherz-Notfall. Adrenalin optional; Systeme verpflichtend.''',
-      'ach_559': '''Acht verschiedene chirurgische Fachgebiete protokolliert, darunter mindestens ein neues Fachgebiet. Polyglott der Liste.''',
-      'ach_560': '''Insgesamt 50 Fälle im neuen Spezialset. Regelmäßiger Entdecker.''',
-      'ach_561': '''75 Fälle im Zahn-/Kieferbereich. Erfolgsbilanz in der Mund- und Atemwegsliga.''',
-      'ach_562': '''75 Fälle bariatrischer Chirurgie. Erfolgsbilanz auf der Rampe.''',
+      'ach_558':
+          '''Kinderherz-Notfall. Adrenalin optional; Systeme verpflichtend.''',
+      'ach_559':
+          '''Acht verschiedene chirurgische Fachgebiete protokolliert, darunter mindestens ein neues Fachgebiet. Polyglott der Liste.''',
+      'ach_560':
+          '''Insgesamt 50 Fälle im neuen Spezialset. Regelmäßiger Entdecker.''',
+      'ach_561':
+          '''75 Fälle im Zahn-/Kieferbereich. Erfolgsbilanz in der Mund- und Atemwegsliga.''',
+      'ach_562':
+          '''75 Fälle bariatrischer Chirurgie. Erfolgsbilanz auf der Rampe.''',
       'ach_563': '''75 IR-Fälle. Legende über den dunklen Raum.''',
-      'ach_564': '''75 pädiatrische Herzerkrankungen. Schwerer Titel, leichte Hände.''',
+      'ach_564':
+          '''75 pädiatrische Herzerkrankungen. Schwerer Titel, leichte Hände.''',
       'ach_565': '''Fünfzig Strahlentherapiefälle. Schwer auf Stille.''',
-      'ach_566': '''Insgesamt 25 Fälle aus neuen Fachgebieten. Grenzfortschritt.''',
-      'ach_567': '''Insgesamt einhundert Fälle aus neuen Fachgebieten. Die Grenze ist geklärt.''',
-      'ach_568': '''Vierzig Zahn-/Kiefer-Fälle. Verbündeter des Kieferchirurgen, Hüter der Röhre.''',
-      'ach_569': '''Erster Block der Fascia iliaca plane. Flugzeug gefunden; Schmerz abgelegt unter „später“.''',
-      'ach_570': '''Fünf Fascia iliaca-Blöcke. Hüftfrakturen danken Ihnen im Stillen.''',
-      'ach_571': '''Fünfzehn Fascia iliaca-Blöcke. Regelmäßig auf der #NOF-Liste.''',
-      'ach_572': '''Dreißig Fascia iliaca-Blöcke. Spezialist für Flugzeuge und Geduld.''',
-      'ach_573': '''Fünfzig Fascia iliaca-Blöcke. Meister des Beckenflüsterns.''',
-      'ach_574': '''Zehn USG-geführte Fascia-iliaca-Blöcke. Gel, Sonde, Frieden.''',
-      'ach_575': '''Fascia iliaca mit platziertem Katheter. Durchgehendes Komfortpaket.''',
-      'ach_576': '''Zwanzig Fascia-iliaca-Blockaden wurden durchgeführt (nicht nur beobachtet). Praktische Arbeit am Flugzeug.''',
-      'ach_577': '''Erster Psoas-/Psoas-Kompartiment-Block. Tiefe Ebene, tiefere Ruhe.''',
-      'ach_578': '''Fünf subfasziale Ebenenblöcke des Psoas. Subfaszial, nicht minderwertig.''',
-      'ach_579': '''Fünfzehn subfasziale Psoas-Blockaden. Regelmäßig im Deep End.''',
-      'ach_580': '''Dreißig subfasziale Psoas-Blockaden. Spezialist dort, wo Sehenswürdigkeiten Angst haben zu betreten.''',
-      'ach_581': '''Fünfzig subfasziale Psoas-Blockaden. Meister der hinteren Ansatzenergie.''',
-      'ach_582': '''Zehn USG-geführte Psoas-Plane-Blöcke. Sehen Sie sich das Flugzeug an; sei das Flugzeug.''',
+      'ach_566':
+          '''Insgesamt 25 Fälle aus neuen Fachgebieten. Grenzfortschritt.''',
+      'ach_567':
+          '''Insgesamt einhundert Fälle aus neuen Fachgebieten. Die Grenze ist geklärt.''',
+      'ach_568':
+          '''Vierzig Zahn-/Kiefer-Fälle. Verbündeter des Kieferchirurgen, Hüter der Röhre.''',
+      'ach_569':
+          '''Erster Block der Fascia iliaca plane. Flugzeug gefunden; Schmerz abgelegt unter „später“.''',
+      'ach_570':
+          '''Fünf Fascia iliaca-Blöcke. Hüftfrakturen danken Ihnen im Stillen.''',
+      'ach_571':
+          '''Fünfzehn Fascia iliaca-Blöcke. Regelmäßig auf der #NOF-Liste.''',
+      'ach_572':
+          '''Dreißig Fascia iliaca-Blöcke. Spezialist für Flugzeuge und Geduld.''',
+      'ach_573':
+          '''Fünfzig Fascia iliaca-Blöcke. Meister des Beckenflüsterns.''',
+      'ach_574':
+          '''Zehn USG-geführte Fascia-iliaca-Blöcke. Gel, Sonde, Frieden.''',
+      'ach_575':
+          '''Fascia iliaca mit platziertem Katheter. Durchgehendes Komfortpaket.''',
+      'ach_576':
+          '''Zwanzig Fascia-iliaca-Blockaden wurden durchgeführt (nicht nur beobachtet). Praktische Arbeit am Flugzeug.''',
+      'ach_577':
+          '''Erster Psoas-/Psoas-Kompartiment-Block. Tiefe Ebene, tiefere Ruhe.''',
+      'ach_578':
+          '''Fünf subfasziale Ebenenblöcke des Psoas. Subfaszial, nicht minderwertig.''',
+      'ach_579':
+          '''Fünfzehn subfasziale Psoas-Blockaden. Regelmäßig im Deep End.''',
+      'ach_580':
+          '''Dreißig subfasziale Psoas-Blockaden. Spezialist dort, wo Sehenswürdigkeiten Angst haben zu betreten.''',
+      'ach_581':
+          '''Fünfzig subfasziale Psoas-Blockaden. Meister der hinteren Ansatzenergie.''',
+      'ach_582':
+          '''Zehn USG-geführte Psoas-Plane-Blöcke. Sehen Sie sich das Flugzeug an; sei das Flugzeug.''',
       'ach_583': '''Psoas-Plane-Block mit Katheter. Aufguss für den Sieg.''',
-      'ach_584': '''Zwanzig Psoas-Plane-Blockaden wurden durchgeführt. Handarbeiten gutgeschrieben.''',
-      'ach_585': '''Sowohl Fascia iliaca- als auch Psoas-Plane-Blockaden wurden protokolliert. Flugzeugsammler.''',
-      'ach_586': '''Fascia iliaca oder Psoas bei einem Trauma-Ortho-Fall. Flugzeuge zum Schmerz, nicht zur Show.''',
-      'ach_587': '''Zehn Fascia iliaca-Blöcke für Hüftfrakturwege. #NOFs bester Freund.''',
-      'ach_588': '''Fünf Fälle mit entweder Faszie oder Psoas plus einer weiteren Blockade der unteren Extremitäten. Duo-Modus.''',
-      'ach_589': '''Erstes Zittern protokolliert und bewältigt. Thermostat-Diplomatie.''',
-      'ach_590': '''Fünf zitternde Ereignisse geschafft. Wärme ist eine Droge.''',
-      'ach_591': '''Fünfzehn schaurige Ereignisse. Spezialist für Decken und Geduld.''',
-      'ach_592': '''Dreißig zitternde Ereignisse gemeistert. Meister des postoperativen Zitterns.''',
-      'ach_593': '''Erster intraoperativer Bluthochdruck behandelt. KARTE nach oben; Du bist gerade geblieben.''',
-      'ach_594': '''Fünf Hypertonie-Episoden bewältigt. Pressoren optional; für obligatorisch gehalten.''',
-      'ach_595': '''Fünfzehn Bluthochdruckereignisse. Normale Passform an der hohen Seite des Bündchens.''',
-      'ach_596': '''30 Hypertonie-Ereignisse behandelt. Spezialist für Warum und Was als Nächstes.''',
-      'ach_597': '''Erste Blutungskomplikation protokolliert. Saugen an; Gehirn an.''',
-      'ach_598': '''Fünf Blutungsereignisse konnten behandelt werden. Blutprodukte und Blutdruck.''',
-      'ach_599': '''Fünfzehn Blutungsereignisse. Regelmäßig im roten Bereich.''',
-      'ach_600': '''30 Blutungsereignisse wurden behandelt. Spezialist, wenn das Feld purpurrot wird.''',
-      'ach_601': '''Erste Unterkühlung protokolliert. Wärmen Sie den Patienten, nicht die Ausreden.''',
-      'ach_602': '''Fünf Unterkühlungsereignisse. Zwangsluft ist eine Liebessprache.''',
-      'ach_603': '''Fünfzehn Unterkühlungsereignisse wurden bewältigt. Die Temperatur ist von entscheidender Bedeutung.''',
-      'ach_604': '''Dreißig Unterkühlungsereignisse. Spezialist für Abschlüsse und Details.''',
-      'ach_605': '''Erste Arrhythmie behandelt. EKG ist keine Hintergrundmusik.''',
-      'ach_606': '''Fünf Arrhythmien behandelt. Geschwindigkeit, Rhythmus, Reaktion.''',
+      'ach_584':
+          '''Zwanzig Psoas-Plane-Blockaden wurden durchgeführt. Handarbeiten gutgeschrieben.''',
+      'ach_585':
+          '''Sowohl Fascia iliaca- als auch Psoas-Plane-Blockaden wurden protokolliert. Flugzeugsammler.''',
+      'ach_586':
+          '''Fascia iliaca oder Psoas bei einem Trauma-Ortho-Fall. Flugzeuge zum Schmerz, nicht zur Show.''',
+      'ach_587':
+          '''Zehn Fascia iliaca-Blöcke für Hüftfrakturwege. #NOFs bester Freund.''',
+      'ach_588':
+          '''Fünf Fälle mit entweder Faszie oder Psoas plus einer weiteren Blockade der unteren Extremitäten. Duo-Modus.''',
+      'ach_589':
+          '''Erstes Zittern protokolliert und bewältigt. Thermostat-Diplomatie.''',
+      'ach_590':
+          '''Fünf zitternde Ereignisse geschafft. Wärme ist eine Droge.''',
+      'ach_591':
+          '''Fünfzehn schaurige Ereignisse. Spezialist für Decken und Geduld.''',
+      'ach_592':
+          '''Dreißig zitternde Ereignisse gemeistert. Meister des postoperativen Zitterns.''',
+      'ach_593':
+          '''Erster intraoperativer Bluthochdruck behandelt. KARTE nach oben; Du bist gerade geblieben.''',
+      'ach_594':
+          '''Fünf Hypertonie-Episoden bewältigt. Pressoren optional; für obligatorisch gehalten.''',
+      'ach_595':
+          '''Fünfzehn Bluthochdruckereignisse. Normale Passform an der hohen Seite des Bündchens.''',
+      'ach_596':
+          '''30 Hypertonie-Ereignisse behandelt. Spezialist für Warum und Was als Nächstes.''',
+      'ach_597':
+          '''Erste Blutungskomplikation protokolliert. Saugen an; Gehirn an.''',
+      'ach_598':
+          '''Fünf Blutungsereignisse konnten behandelt werden. Blutprodukte und Blutdruck.''',
+      'ach_599':
+          '''Fünfzehn Blutungsereignisse. Regelmäßig im roten Bereich.''',
+      'ach_600':
+          '''30 Blutungsereignisse wurden behandelt. Spezialist, wenn das Feld purpurrot wird.''',
+      'ach_601':
+          '''Erste Unterkühlung protokolliert. Wärmen Sie den Patienten, nicht die Ausreden.''',
+      'ach_602':
+          '''Fünf Unterkühlungsereignisse. Zwangsluft ist eine Liebessprache.''',
+      'ach_603':
+          '''Fünfzehn Unterkühlungsereignisse wurden bewältigt. Die Temperatur ist von entscheidender Bedeutung.''',
+      'ach_604':
+          '''Dreißig Unterkühlungsereignisse. Spezialist für Abschlüsse und Details.''',
+      'ach_605':
+          '''Erste Arrhythmie behandelt. EKG ist keine Hintergrundmusik.''',
+      'ach_606':
+          '''Fünf Arrhythmien behandelt. Geschwindigkeit, Rhythmus, Reaktion.''',
       'ach_607': '''Fünfzehn Arrhythmien. Regelmäßig bei den Kringeln.''',
-      'ach_608': '''Dreißig Herzrhythmusstörungen behandelt. Spezialist, wenn die Linie abstrakt wird.''',
+      'ach_608':
+          '''Dreißig Herzrhythmusstörungen behandelt. Spezialist, wenn die Linie abstrakt wird.''',
       'ach_609': '''Erster Pneumothorax behandelt. Nadel, Abfluss, Ruhe.''',
-      'ach_610': '''Drei Pneumothorax-Ereignisse. Sie bevorzugen nur Luft im Kreislauf.''',
-      'ach_611': '''Fünf Pneumothorax-Ereignisse behandelt. Regelmäßig im Unerwarteten.''',
-      'ach_612': '''Zehn Pneumothorax-Ereignisse. Spezialist für schlechte Luft, gute Entscheidungen.''',
-      'ach_613': '''Erster Weg mit massivem Blutverlust. MTP ist keine Theoriearbeit.''',
-      'ach_614': '''Drei Ereignisse mit massivem Blutverlust wurden bewältigt. Frühzeitig aktivieren; klar denken.''',
-      'ach_615': '''Fünf Ereignisse mit massivem Blutverlust. Regelmäßig, wenn der Zellsparer singt.''',
-      'ach_616': '''Zehn Ereignisse mit massivem Blutverlust wurden bewältigt. Spezialist für Verhältnisse und Zurückhaltung.''',
-      'ach_617': '''Erste Transfusionsreaktion gemeistert. Stoppen Sie die Schlange; Starten Sie das Protokoll.''',
-      'ach_618': '''Drei Transfusionsreaktionen. Protokolle existieren aus einem bestimmten Grund.''',
-      'ach_619': '''Fünf Transfusionsreaktionen konnten bewältigt werden. Regelmäßig an seltenen schlechten Tagen.''',
-      'ach_620': '''Zehn Transfusionsreaktionen. Spezialist, wenn Blut sich daneben benimmt.''',
-      'ach_621': '''Erste venöse Luftembolie behandelt. Links seitlich optional; Gehirn zwingend erforderlich.''',
+      'ach_610':
+          '''Drei Pneumothorax-Ereignisse. Sie bevorzugen nur Luft im Kreislauf.''',
+      'ach_611':
+          '''Fünf Pneumothorax-Ereignisse behandelt. Regelmäßig im Unerwarteten.''',
+      'ach_612':
+          '''Zehn Pneumothorax-Ereignisse. Spezialist für schlechte Luft, gute Entscheidungen.''',
+      'ach_613':
+          '''Erster Weg mit massivem Blutverlust. MTP ist keine Theoriearbeit.''',
+      'ach_614':
+          '''Drei Ereignisse mit massivem Blutverlust wurden bewältigt. Frühzeitig aktivieren; klar denken.''',
+      'ach_615':
+          '''Fünf Ereignisse mit massivem Blutverlust. Regelmäßig, wenn der Zellsparer singt.''',
+      'ach_616':
+          '''Zehn Ereignisse mit massivem Blutverlust wurden bewältigt. Spezialist für Verhältnisse und Zurückhaltung.''',
+      'ach_617':
+          '''Erste Transfusionsreaktion gemeistert. Stoppen Sie die Schlange; Starten Sie das Protokoll.''',
+      'ach_618':
+          '''Drei Transfusionsreaktionen. Protokolle existieren aus einem bestimmten Grund.''',
+      'ach_619':
+          '''Fünf Transfusionsreaktionen konnten bewältigt werden. Regelmäßig an seltenen schlechten Tagen.''',
+      'ach_620':
+          '''Zehn Transfusionsreaktionen. Spezialist, wenn Blut sich daneben benimmt.''',
+      'ach_621':
+          '''Erste venöse Luftembolie behandelt. Links seitlich optional; Gehirn zwingend erforderlich.''',
       'ach_622': '''Drei VAE-Ereignisse verwaltet. Luft ist keine Droge.''',
-      'ach_623': '''Fünf VAE-Events. Regelmäßig im schlimmsten Fall, schwups.''',
-      'ach_624': '''Zehn VAE-Ereignisse verwaltet. Spezialist, wenn Blasen zur Handlung werden.''',
-      'ach_625': '''Erste Aspirationsveranstaltung geschafft. Sog, Sauerstoff, Demut.''',
-      'ach_626': '''Drei Ziele erreicht. Schützen Sie die bereits gesicherten Atemwege.''',
+      'ach_623':
+          '''Fünf VAE-Events. Regelmäßig im schlimmsten Fall, schwups.''',
+      'ach_624':
+          '''Zehn VAE-Ereignisse verwaltet. Spezialist, wenn Blasen zur Handlung werden.''',
+      'ach_625':
+          '''Erste Aspirationsveranstaltung geschafft. Sog, Sauerstoff, Demut.''',
+      'ach_626':
+          '''Drei Ziele erreicht. Schützen Sie die bereits gesicherten Atemwege.''',
       'ach_627': '''Fünf Wünsche. Regelmäßig im Ungeplanten.''',
       'ach_628': '''Zehn Ziele erreicht. Spezialist nach dem Undenkbaren.''',
-      'ach_629': '''Erste fehlgeschlagene Intubation protokolliert. Plan B ist der Grund, warum Sie trainiert haben.''',
-      'ach_630': '''Drei fehlgeschlagene Intubationen wurden geschafft. Frühzeitig anmelden; Sauerstoff immer.''',
-      'ach_631': '''Fünf fehlgeschlagene Intubationen. Regelmäßig und ehrlich unter Druck.''',
-      'ach_632': '''Zehn fehlgeschlagene Intubationen wurden geschafft. Spezialist dafür, nicht zur Komplikation zu werden.''',
-      'ach_633': '''Erste schwierige Maskenbeatmung protokolliert. Zwei Hände, ein Plan.''',
-      'ach_634': '''Fünf schwierige Maskenbeatmungsereignisse. OPA/NPA sind Freunde.''',
-      'ach_635': '''Fünfzehn schwierige Ereignisse zur Maskenbeatmung. Regelmäßig, wenn sich die Tasche wehrt.''',
-      'ach_636': '''30 schwierige Maskenbeatmungsereignisse bewältigt. Spezialist für die vergessene Fähigkeit.''',
-      'ach_637': '''Fünf verschiedene neue Komplikationstypen protokolliert. Sammler lehrreicher Momente.''',
-      'ach_638': '''Acht verschiedene neue Komplikationstypen protokolliert. Kenner des enthaltenen Chaos.''',
-      'ach_639': '''Alle zwölf neuen Komplikationskategorien mindestens einmal protokolliert. Vollständiger Lehrplan.''',
-      'ach_640': '''Insgesamt zwanzig Ereignisse im neuen Komplikationsset. Katalog der Gelassenheit.''',
-      'ach_641': '''Insgesamt wurden 50 Neukomplikationsereignisse verwaltet. Volumen mit Tugend.''',
-      'ach_642': '''Ich bevorzuge immer noch keinen/ereignislosen Verlauf – aber Sie haben sich angemeldet und von den anderen gelernt. Gleichgewicht.''',
-      'ach_643': '''Sowohl Schüttelfrost als auch Bluthochdruck konnten in allen Fällen behandelt werden. Heiße und kalte Dateien.''',
-      'ach_644': '''Sowohl Blutungen als auch Unterkühlung konnten behandelt werden. Roter und blauer Unterricht.''',
-      'ach_645': '''Aspiration, VAE oder Pneumothorax behandelt. Wenn sich die Luft schlecht verhält.''',
-      'ach_646': '''Fehlgeschlagene Intubation und schwierige Maskenbeatmung wurden beide protokolliert. Abzeichen für die Ehrlichkeit der Atemwege.''',
-      'ach_647': '''Massiver Blutverlust und Transfusionsreaktion wurden beide protokolliert. Kapitel „Blut“ abgeschlossen.''',
-      'ach_648': '''Arrhythmie und Bluthochdruck konnten beide behandelt werden. Cardio-Nebenhandlung.''',
-      'ach_649': '''Jede neue Komplikation nach Mitternacht. Abendschule, klinische Ausgabe.''',
-      'ach_650': '''Neue Komplikation mit ASS IV+ behandelt. Hohes Risiko, hoher Standard.''',
-      'ach_651': '''Komplikationen protokolliert, aber ereignisloses Ergebnis. PACU. Die Krise ist tatsächlich abgewendet.''',
-      'ach_652': '''Fall mit zwei oder mehr unterschiedlichen protokollierten Komplikationen. Beschäftigt, klarer Kopf.''',
-      'ach_653': '''Zehn behandelte Komplikationen in allen Kategorien. Gespeicherte Unterrichtsmomente.''',
-      'ach_654': '''Dreißig verwaltete Ereignisse mit neuen Komplikationen. Netz erweitert.''',
-      'ach_655': '''Transfusionsreaktion oder MTP-Weg im Protokoll berücksichtigt. Protokoll ist Persönlichkeit.''',
-      'ach_656': '''Sowohl das Zittern als auch die Unterkühlung waren in Ordnung. Die Temperatur ist nicht optional.''',
-      'ach_657': '''DMV plus fehlgeschlagene Intubationsehrlichkeit im Logbuch. Ehrlichkeit rettet Leben.''',
-      'ach_658': '''VAE verwaltet und protokolliert. Bewusstsein ist die halbe Miete; Aktion ist der Rest.''',
-      'ach_659': '''Blutungen oder massiver Blutverlust konnten insgesamt zehnmal bewältigt werden. Veteran des Roten Feldes.''',
-      'ach_660': '''Der Bluthochdruck wurde zwanzigmal behandelt. Druck, gehandhabt.''',
-      'ach_661': '''Fünfzig zitternde Ereignisse geschafft. Kaufen Sie der Einrichtung einen besseren Wärmer.''',
-      'ach_662': '''50 Hypertonie-Ereignisse behandelt. MAP-Geschichten seit Tagen.''',
-      'ach_663': '''Es wurden 50 Blutungsereignisse behandelt. Saugbiografie.''',
-      'ach_664': '''50 Unterkühlungsereignisse bewältigt. Temperaturbiographie.''',
+      'ach_629':
+          '''Erste fehlgeschlagene Intubation protokolliert. Plan B ist der Grund, warum Sie trainiert haben.''',
+      'ach_630':
+          '''Drei fehlgeschlagene Intubationen wurden geschafft. Frühzeitig anmelden; Sauerstoff immer.''',
+      'ach_631':
+          '''Fünf fehlgeschlagene Intubationen. Regelmäßig und ehrlich unter Druck.''',
+      'ach_632':
+          '''Zehn fehlgeschlagene Intubationen wurden geschafft. Spezialist dafür, nicht zur Komplikation zu werden.''',
+      'ach_633':
+          '''Erste schwierige Maskenbeatmung protokolliert. Zwei Hände, ein Plan.''',
+      'ach_634':
+          '''Fünf schwierige Maskenbeatmungsereignisse. OPA/NPA sind Freunde.''',
+      'ach_635':
+          '''Fünfzehn schwierige Ereignisse zur Maskenbeatmung. Regelmäßig, wenn sich die Tasche wehrt.''',
+      'ach_636':
+          '''30 schwierige Maskenbeatmungsereignisse bewältigt. Spezialist für die vergessene Fähigkeit.''',
+      'ach_637':
+          '''Fünf verschiedene neue Komplikationstypen protokolliert. Sammler lehrreicher Momente.''',
+      'ach_638':
+          '''Acht verschiedene neue Komplikationstypen protokolliert. Kenner des enthaltenen Chaos.''',
+      'ach_639':
+          '''Alle zwölf neuen Komplikationskategorien mindestens einmal protokolliert. Vollständiger Lehrplan.''',
+      'ach_640':
+          '''Insgesamt zwanzig Ereignisse im neuen Komplikationsset. Katalog der Gelassenheit.''',
+      'ach_641':
+          '''Insgesamt wurden 50 Neukomplikationsereignisse verwaltet. Volumen mit Tugend.''',
+      'ach_642':
+          '''Ich bevorzuge immer noch keinen/ereignislosen Verlauf – aber Sie haben sich angemeldet und von den anderen gelernt. Gleichgewicht.''',
+      'ach_643':
+          '''Sowohl Schüttelfrost als auch Bluthochdruck konnten in allen Fällen behandelt werden. Heiße und kalte Dateien.''',
+      'ach_644':
+          '''Sowohl Blutungen als auch Unterkühlung konnten behandelt werden. Roter und blauer Unterricht.''',
+      'ach_645':
+          '''Aspiration, VAE oder Pneumothorax behandelt. Wenn sich die Luft schlecht verhält.''',
+      'ach_646':
+          '''Fehlgeschlagene Intubation und schwierige Maskenbeatmung wurden beide protokolliert. Abzeichen für die Ehrlichkeit der Atemwege.''',
+      'ach_647':
+          '''Massiver Blutverlust und Transfusionsreaktion wurden beide protokolliert. Kapitel „Blut“ abgeschlossen.''',
+      'ach_648':
+          '''Arrhythmie und Bluthochdruck konnten beide behandelt werden. Cardio-Nebenhandlung.''',
+      'ach_649':
+          '''Jede neue Komplikation nach Mitternacht. Abendschule, klinische Ausgabe.''',
+      'ach_650':
+          '''Neue Komplikation mit ASS IV+ behandelt. Hohes Risiko, hoher Standard.''',
+      'ach_651':
+          '''Komplikationen protokolliert, aber ereignisloses Ergebnis. PACU. Die Krise ist tatsächlich abgewendet.''',
+      'ach_652':
+          '''Fall mit zwei oder mehr unterschiedlichen protokollierten Komplikationen. Beschäftigt, klarer Kopf.''',
+      'ach_653':
+          '''Zehn behandelte Komplikationen in allen Kategorien. Gespeicherte Unterrichtsmomente.''',
+      'ach_654':
+          '''Dreißig verwaltete Ereignisse mit neuen Komplikationen. Netz erweitert.''',
+      'ach_655':
+          '''Transfusionsreaktion oder MTP-Weg im Protokoll berücksichtigt. Protokoll ist Persönlichkeit.''',
+      'ach_656':
+          '''Sowohl das Zittern als auch die Unterkühlung waren in Ordnung. Die Temperatur ist nicht optional.''',
+      'ach_657':
+          '''DMV plus fehlgeschlagene Intubationsehrlichkeit im Logbuch. Ehrlichkeit rettet Leben.''',
+      'ach_658':
+          '''VAE verwaltet und protokolliert. Bewusstsein ist die halbe Miete; Aktion ist der Rest.''',
+      'ach_659':
+          '''Blutungen oder massiver Blutverlust konnten insgesamt zehnmal bewältigt werden. Veteran des Roten Feldes.''',
+      'ach_660':
+          '''Der Bluthochdruck wurde zwanzigmal behandelt. Druck, gehandhabt.''',
+      'ach_661':
+          '''Fünfzig zitternde Ereignisse geschafft. Kaufen Sie der Einrichtung einen besseren Wärmer.''',
+      'ach_662':
+          '''50 Hypertonie-Ereignisse behandelt. MAP-Geschichten seit Tagen.''',
+      'ach_663':
+          '''Es wurden 50 Blutungsereignisse behandelt. Saugbiografie.''',
+      'ach_664':
+          '''50 Unterkühlungsereignisse bewältigt. Temperaturbiographie.''',
       'ach_665': '''Fünfzig Herzrhythmusstörungen behandelt. EKG-Novelle.''',
-      'ach_666': '''Nach der Bewältigung der Aspiration zehn weitere ereignislose Fälle. Lektion angewendet.''',
-      'ach_667': '''Schwierige Maskenbeatmung, gefolgt von erfolgreicher definitiver Atemwegsbeatmung im selben Fall. Reihenfolge ist wichtig.''',
-      'ach_668': '''Fall einer fehlgeschlagenen Intubation endete, ohne dass ein Todesfall auf dem Tisch lag. Erholung ist der Punkt.''',
-      'ach_669': '''Pneumothorax mit definitiver Interventionsenergie behandelt. Luft raus, Ruhe rein.''',
-      'ach_670': '''Fünf Events auf MTP-Niveau, bei denen Sie der Kapitän geblieben sind. Rang erreicht.''',
-      'ach_671': '''Fünf Transfusionsreaktionen mit Protokollenergie. Anhalten, beurteilen, behandeln.''',
-      'ach_672': '''VAE in sitzender oder riskanter Körperhaltung. Positionsrisiko, respektiert.''',
-      'ach_673': '''Zittern mit gutem PACU-Ergebnis bewältigt. Warm und wach.''',
-      'ach_674': '''Hypertonie im Notfall behandelt. Schlauch raus, Druck zivil.''',
-      'ach_675': '''Blutungskomplikation mit protokolliertem Transferweg auf die Intensivstation. Richtiger Ort, richtige Zeit.''',
-      'ach_676': '''Hypothermie in einem Herz- oder schweren Fall behandelt. Erwärmen Sie den Pflegekreislauf.''',
-      'ach_677': '''Instabile Arrhythmie-Energie verwaltet. Strom optional; Dachte nicht.''',
-      'ach_678': '''In einem Fall traf dies auf eine schwierige Maskenbeatmung und einen schwierigen Atemweg zu. Vollständiger Atemwegslehrplan in einer Sitzung.''',
-      'ach_679': '''Drei verschiedene Komplikationstypen in einem Fall. Immer noch hier. Protokolliert immer noch.''',
-      'ach_680': '''Nach einer Komplikation kehren Sie zur ereignislosen Zehnerserie zurück. Widerstandsfähigkeit.''',
-      'ach_681': '''Zwanzig Komplikationen protokolliert statt minimiert. Kultur der Ehrlichkeit.''',
-      'ach_682': '''Zunächst einmal: Frösteln, Bluthochdruck, Blutungen. Starterset komplett.''',
-      'ach_683': '''Massiver Blutverlust, VAE und fehlgeschlagene Intubation wurden jeweils einmal protokolliert. Kritischer Satz.''',
-      'ach_684': '''Aspiration, fehlgeschlagene Intubation, DMV jeweils protokolliert. Trifecta der Atemwegskomplikation.''',
+      'ach_666':
+          '''Nach der Bewältigung der Aspiration zehn weitere ereignislose Fälle. Lektion angewendet.''',
+      'ach_667':
+          '''Schwierige Maskenbeatmung, gefolgt von erfolgreicher definitiver Atemwegsbeatmung im selben Fall. Reihenfolge ist wichtig.''',
+      'ach_668':
+          '''Fall einer fehlgeschlagenen Intubation endete, ohne dass ein Todesfall auf dem Tisch lag. Erholung ist der Punkt.''',
+      'ach_669':
+          '''Pneumothorax mit definitiver Interventionsenergie behandelt. Luft raus, Ruhe rein.''',
+      'ach_670':
+          '''Fünf Events auf MTP-Niveau, bei denen Sie der Kapitän geblieben sind. Rang erreicht.''',
+      'ach_671':
+          '''Fünf Transfusionsreaktionen mit Protokollenergie. Anhalten, beurteilen, behandeln.''',
+      'ach_672':
+          '''VAE in sitzender oder riskanter Körperhaltung. Positionsrisiko, respektiert.''',
+      'ach_673':
+          '''Zittern mit gutem PACU-Ergebnis bewältigt. Warm und wach.''',
+      'ach_674':
+          '''Hypertonie im Notfall behandelt. Schlauch raus, Druck zivil.''',
+      'ach_675':
+          '''Blutungskomplikation mit protokolliertem Transferweg auf die Intensivstation. Richtiger Ort, richtige Zeit.''',
+      'ach_676':
+          '''Hypothermie in einem Herz- oder schweren Fall behandelt. Erwärmen Sie den Pflegekreislauf.''',
+      'ach_677':
+          '''Instabile Arrhythmie-Energie verwaltet. Strom optional; Dachte nicht.''',
+      'ach_678':
+          '''In einem Fall traf dies auf eine schwierige Maskenbeatmung und einen schwierigen Atemweg zu. Vollständiger Atemwegslehrplan in einer Sitzung.''',
+      'ach_679':
+          '''Drei verschiedene Komplikationstypen in einem Fall. Immer noch hier. Protokolliert immer noch.''',
+      'ach_680':
+          '''Nach einer Komplikation kehren Sie zur ereignislosen Zehnerserie zurück. Widerstandsfähigkeit.''',
+      'ach_681':
+          '''Zwanzig Komplikationen protokolliert statt minimiert. Kultur der Ehrlichkeit.''',
+      'ach_682':
+          '''Zunächst einmal: Frösteln, Bluthochdruck, Blutungen. Starterset komplett.''',
+      'ach_683':
+          '''Massiver Blutverlust, VAE und fehlgeschlagene Intubation wurden jeweils einmal protokolliert. Kritischer Satz.''',
+      'ach_684':
+          '''Aspiration, fehlgeschlagene Intubation, DMV jeweils protokolliert. Trifecta der Atemwegskomplikation.''',
       'ach_685': '''Frösteln und Unterkühlung je fünf. Wärmekompetenz.''',
-      'ach_686': '''Blutungen und massiver Blutverlust fünf in jedem kombinierten Pfad. Hämokompetenz.''',
-      'ach_687': '''Hypertonie und Herzrhythmusstörungen sind jeweils zehn Jahre alt. Kompetenz zu Herz-Kreislauf-Komplikationen.''',
-      'ach_688': '''Insgesamt zehn neue Komplikationsereignisse. Erweiterung im Gange.''',
+      'ach_686':
+          '''Blutungen und massiver Blutverlust fünf in jedem kombinierten Pfad. Hämokompetenz.''',
+      'ach_687':
+          '''Hypertonie und Herzrhythmusstörungen sind jeweils zehn Jahre alt. Kompetenz zu Herz-Kreislauf-Komplikationen.''',
+      'ach_688':
+          '''Insgesamt zehn neue Komplikationsereignisse. Erweiterung im Gange.''',
       'ach_689': '''Insgesamt 25 neue Komplikationen. Erweiterung real.''',
-      'ach_690': '''Insgesamt 75 neue Komplikationen. Institutionelle Expansion.''',
-      'ach_691': '''Insgesamt wurden 100 Neukomplikationsereignisse verwaltet. Erweiterung abgeschlossen.''',
-      'ach_692': '''Fünfzig Komplikationen jeglicher Art, die im Laufe der Karriere in der App erfasst wurden. Ehrlichkeitsmetrik.''',
-      'ach_693': '''Ein Komplikationsfall, dem später eine ereignislose Serie von 25 Jahren folgte. Kurs korrigiert.''',
-      'ach_694': '''Neue Komplikation während eines Notfalls. Druck auf Druck.''',
-      'ach_695': '''Neue Komplikation bei einem Patienten unter 18 Jahren. Kleiner Patient, vollständiges Protokoll.''',
-      'ach_696': '''Neue Komplikation bei Patient ≥65. Fragile Physiologie, feste Pläne.''',
-      'ach_697': '''Neue Komplikation bei einem Fall einer bariatrischen Operation. Physiologie im Quadrat.''',
-      'ach_698': '''Neue Komplikation im Zahn-/Kieferbereich. Nebenhandlung über gemeinsame Atemwege.''',
+      'ach_690':
+          '''Insgesamt 75 neue Komplikationen. Institutionelle Expansion.''',
+      'ach_691':
+          '''Insgesamt wurden 100 Neukomplikationsereignisse verwaltet. Erweiterung abgeschlossen.''',
+      'ach_692':
+          '''Fünfzig Komplikationen jeglicher Art, die im Laufe der Karriere in der App erfasst wurden. Ehrlichkeitsmetrik.''',
+      'ach_693':
+          '''Ein Komplikationsfall, dem später eine ereignislose Serie von 25 Jahren folgte. Kurs korrigiert.''',
+      'ach_694':
+          '''Neue Komplikation während eines Notfalls. Druck auf Druck.''',
+      'ach_695':
+          '''Neue Komplikation bei einem Patienten unter 18 Jahren. Kleiner Patient, vollständiges Protokoll.''',
+      'ach_696':
+          '''Neue Komplikation bei Patient ≥65. Fragile Physiologie, feste Pläne.''',
+      'ach_697':
+          '''Neue Komplikation bei einem Fall einer bariatrischen Operation. Physiologie im Quadrat.''',
+      'ach_698':
+          '''Neue Komplikation im Zahn-/Kieferbereich. Nebenhandlung über gemeinsame Atemwege.''',
       'ach_699': '''Neue Komplikation im IR. Dunkler Raum, helles Denken.''',
-      'ach_700': '''Neue Komplikation bei pädiatrischer Herzerkrankung. Klassenzimmer mit den höchsten Einsätzen.''',
-      'ach_701': '''Genügend Komplikationsdetails protokolliert, die das PDF lehren könnte. Dokumentation als Vermächtnis.''',
+      'ach_700':
+          '''Neue Komplikation bei pädiatrischer Herzerkrankung. Klassenzimmer mit den höchsten Einsätzen.''',
+      'ach_701':
+          '''Genügend Komplikationsdetails protokolliert, die das PDF lehren könnte. Dokumentation als Vermächtnis.''',
     },
     'pt': {
-      'ach_0': '''Todo grande mestre já foi um residente aterrorizado. Tente não deixar cair a seringa.''',
-      'ach_1': '''Dois casos depois. Você parou de narrar a lista de verificação em voz alta. Progresso.''',
-      'ach_2': '''Três casos. O teatro está começando a parecer menos uma situação de reféns.''',
-      'ach_3': '''Quatro casos. Você pode soletrar Sevoflurano sem verificar o frasco. Majoritariamente.''',
-      'ach_4': '''Cinco casos. Dê um tapinha na máquina de anestesia - é o único que consegue.''',
+      'ach_0':
+          '''Todo grande mestre já foi um residente aterrorizado. Tente não deixar cair a seringa.''',
+      'ach_1':
+          '''Dois casos depois. Você parou de narrar a lista de verificação em voz alta. Progresso.''',
+      'ach_2':
+          '''Três casos. O teatro está começando a parecer menos uma situação de reféns.''',
+      'ach_3':
+          '''Quatro casos. Você pode soletrar Sevoflurano sem verificar o frasco. Majoritariamente.''',
+      'ach_4':
+          '''Cinco casos. Dê um tapinha na máquina de anestesia - é o único que consegue.''',
       'ach_5': '''Seis casos. ETCO₂ está se tornando sua linguagem de amor.''',
-      'ach_6': '''Sete casos. Que sua próxima visualização seja de grau 1 e seu cirurgião na hora certa.''',
+      'ach_6':
+          '''Sete casos. Que sua próxima visualização seja de grau 1 e seu cirurgião na hora certa.''',
       'ach_7': '''Oito no livro. O diário de bordo não é mais um boato.''',
-      'ach_8': '''Nove casos. Um a menos de dois dígitos e leve superioridade.''',
-      'ach_9': '''Dez casos. Você parou oficialmente de se desculpar com o suporte intravenoso quando bateu nele.''',
-      'ach_10': '''Treze casos. Azar para alguns. Suave para você - supostamente.''',
-      'ach_11': '''Dezesseis casos. Doce como uma indução sevo até que peçam mais relaxamento.''',
-      'ach_12': '''Vinte casos. Mais horas de uniforme do que à paisana. Clássico.''',
-      'ach_13': '''Vinte e cinco casos. Os cirurgiões estão começando a lembrar do seu primeiro nome.''',
+      'ach_8':
+          '''Nove casos. Um a menos de dois dígitos e leve superioridade.''',
+      'ach_9':
+          '''Dez casos. Você parou oficialmente de se desculpar com o suporte intravenoso quando bateu nele.''',
+      'ach_10':
+          '''Treze casos. Azar para alguns. Suave para você - supostamente.''',
+      'ach_11':
+          '''Dezesseis casos. Doce como uma indução sevo até que peçam mais relaxamento.''',
+      'ach_12':
+          '''Vinte casos. Mais horas de uniforme do que à paisana. Clássico.''',
+      'ach_13':
+          '''Vinte e cinco casos. Os cirurgiões estão começando a lembrar do seu primeiro nome.''',
       'ach_14': '''Trinta casos. A cafeína é copiloto e inotrópico primário.''',
-      'ach_15': '''Quarenta casos. Ironicamente, você é o único no quarto que não está dormindo.''',
-      'ach_16': '''Cinquenta casos. O sinal sonoro do boi de pulso é basicamente o seu novo ritmo de descanso.''',
-      'ach_17': '''Sessenta casos. Quase o suficiente para entubar enquanto decide o almoço.''',
-      'ach_18': '''Setenta e cinco casos. Três quartos do caminho para o clube do século.''',
-      'ach_19': '''Oitenta e oito casos. Número da sorte. Não o desperdice com um bougie desaparecido.''',
-      'ach_20': '''Noventa casos. Tão perto que você pode saborear o café de comemoração pós-atendimento.''',
-      'ach_21': '''Cem casos. Você lê o monitor antes que o cirurgião termine a pergunta.''',
-      'ach_22': '''Cento e vinte e cinco casos. Julgando silenciosamente a técnica de tapar os olhos: desbloqueada.''',
-      'ach_23': '''Cento e cinquenta casos. O diário de bordo está ficando respeitável. Seu sono não é.''',
-      'ach_24': '''Cento e setenta e cinco casos. MAP retido. Moral: compensado.''',
-      'ach_25': '''Duzentos casos. É hora de ensinar aos novatos qual é o fim do escopo.''',
-      'ach_26': '''Duzentos e vinte e cinco casos. O teatro sabe o seu nome - geralmente quando a lista ultrapassa o limite.''',
-      'ach_27': '''Duzentos e cinquenta casos. Propofol não funciona mais apenas na fila.''',
-      'ach_28': '''Trezentos casos. Alimentado por café lounge e força de vontade residual.''',
-      'ach_29': '''Trezentos e cinquenta casos. As vias aéreas difíceis levantam uma sobrancelha, não uma frequência cardíaca.''',
-      'ach_30': '''Quatrocentos casos. Você não tem mais medo do pager. O pager teme você.''',
-      'ach_31': '''Quinhentos casos. Meio milhar. Iluminação total das vias aéreas (com humildade ocasional).''',
-      'ach_32': '''Quinhentos e cinquenta casos. Mais um entalhe no cabo do laringoscópio da vida.''',
-      'ach_33': '''Seiscentos casos. Pouco o incomoda – exceto o ventilador que morre na indução.''',
-      'ach_34': '''Seiscentos e cinquenta casos. Ainda acima da linha. Bom o suficiente.''',
-      'ach_35': '''Setecentos casos. Seu PDF pode funcionar como um batente de porta.''',
-      'ach_36': '''Setecentos e cinquenta casos. Você e o circulador agora se comunicam com acenos puros.''',
-      'ach_37': '''Oitocentos casos. O aplicativo lhe deve um jantar e um dia de folga.''',
-      'ach_38': '''Oitocentos e cinquenta casos. Marco alcançado. Neostigmina opcional.''',
-      'ach_39': '''Novecentos casos. Quase um milhar. Não azare os próximos cem.''',
-      'ach_40': '''Novecentos e cinquenta casos. Elite está a um bom mês e a um escopo ininterrupto de distância.''',
-      'ach_41': '''Mil casos. A máquina de anestesia acabou de pedir conselhos a *você*.''',
-      'ach_42': '''Mil duzentos e cinquenta casos. Você já pensou em conhecer o sol? Socialmente?''',
-      'ach_43': '''Mil e quinhentos casos. A anestesia é uma segunda natureza. O café ainda está em primeiro lugar.''',
-      'ach_44': '''Mil e setecentos e cinquenta casos. Fantasma da energia da sala de operações.''',
-      'ach_45': '''Dois mil casos. Você já viu todos os "complementos rápidos". Duas vezes. Antes do almoço.''',
-      'ach_46': '''Dois mil e quinhentos casos. Nomeie um armário de suprimentos com o nome dessa pessoa.''',
-      'ach_47': '''Três mil casos. Estamos ativamente ficando sem títulos e anestésicos voláteis.''',
-      'ach_48': '''Quatro mil casos. Você olha para os pacientes e eles pensam em dormir voluntariamente.''',
-      'ach_49': '''Cinco mil casos. Você acabou de inventar um novo gás volátil?''',
+      'ach_15':
+          '''Quarenta casos. Ironicamente, você é o único no quarto que não está dormindo.''',
+      'ach_16':
+          '''Cinquenta casos. O sinal sonoro do boi de pulso é basicamente o seu novo ritmo de descanso.''',
+      'ach_17':
+          '''Sessenta casos. Quase o suficiente para entubar enquanto decide o almoço.''',
+      'ach_18':
+          '''Setenta e cinco casos. Três quartos do caminho para o clube do século.''',
+      'ach_19':
+          '''Oitenta e oito casos. Número da sorte. Não o desperdice com um bougie desaparecido.''',
+      'ach_20':
+          '''Noventa casos. Tão perto que você pode saborear o café de comemoração pós-atendimento.''',
+      'ach_21':
+          '''Cem casos. Você lê o monitor antes que o cirurgião termine a pergunta.''',
+      'ach_22':
+          '''Cento e vinte e cinco casos. Julgando silenciosamente a técnica de tapar os olhos: desbloqueada.''',
+      'ach_23':
+          '''Cento e cinquenta casos. O diário de bordo está ficando respeitável. Seu sono não é.''',
+      'ach_24':
+          '''Cento e setenta e cinco casos. MAP retido. Moral: compensado.''',
+      'ach_25':
+          '''Duzentos casos. É hora de ensinar aos novatos qual é o fim do escopo.''',
+      'ach_26':
+          '''Duzentos e vinte e cinco casos. O teatro sabe o seu nome - geralmente quando a lista ultrapassa o limite.''',
+      'ach_27':
+          '''Duzentos e cinquenta casos. Propofol não funciona mais apenas na fila.''',
+      'ach_28':
+          '''Trezentos casos. Alimentado por café lounge e força de vontade residual.''',
+      'ach_29':
+          '''Trezentos e cinquenta casos. As vias aéreas difíceis levantam uma sobrancelha, não uma frequência cardíaca.''',
+      'ach_30':
+          '''Quatrocentos casos. Você não tem mais medo do pager. O pager teme você.''',
+      'ach_31':
+          '''Quinhentos casos. Meio milhar. Iluminação total das vias aéreas (com humildade ocasional).''',
+      'ach_32':
+          '''Quinhentos e cinquenta casos. Mais um entalhe no cabo do laringoscópio da vida.''',
+      'ach_33':
+          '''Seiscentos casos. Pouco o incomoda – exceto o ventilador que morre na indução.''',
+      'ach_34':
+          '''Seiscentos e cinquenta casos. Ainda acima da linha. Bom o suficiente.''',
+      'ach_35':
+          '''Setecentos casos. Seu PDF pode funcionar como um batente de porta.''',
+      'ach_36':
+          '''Setecentos e cinquenta casos. Você e o circulador agora se comunicam com acenos puros.''',
+      'ach_37':
+          '''Oitocentos casos. O aplicativo lhe deve um jantar e um dia de folga.''',
+      'ach_38':
+          '''Oitocentos e cinquenta casos. Marco alcançado. Neostigmina opcional.''',
+      'ach_39':
+          '''Novecentos casos. Quase um milhar. Não azare os próximos cem.''',
+      'ach_40':
+          '''Novecentos e cinquenta casos. Elite está a um bom mês e a um escopo ininterrupto de distância.''',
+      'ach_41':
+          '''Mil casos. A máquina de anestesia acabou de pedir conselhos a *você*.''',
+      'ach_42':
+          '''Mil duzentos e cinquenta casos. Você já pensou em conhecer o sol? Socialmente?''',
+      'ach_43':
+          '''Mil e quinhentos casos. A anestesia é uma segunda natureza. O café ainda está em primeiro lugar.''',
+      'ach_44':
+          '''Mil e setecentos e cinquenta casos. Fantasma da energia da sala de operações.''',
+      'ach_45':
+          '''Dois mil casos. Você já viu todos os "complementos rápidos". Duas vezes. Antes do almoço.''',
+      'ach_46':
+          '''Dois mil e quinhentos casos. Nomeie um armário de suprimentos com o nome dessa pessoa.''',
+      'ach_47':
+          '''Três mil casos. Estamos ativamente ficando sem títulos e anestésicos voláteis.''',
+      'ach_48':
+          '''Quatro mil casos. Você olha para os pacientes e eles pensam em dormir voluntariamente.''',
+      'ach_49':
+          '''Cinco mil casos. Você acabou de inventar um novo gás volátil?''',
       'ach_50': '''Uma hora de anestesia. Quase uma fração MAC. Ainda conta.''',
-      'ach_51': '''Cinco horas acumuladas. Eles dormiram. Você monitorou. Feira comercial.''',
-      'ach_52': '''Dez horas. O relógio sempre vence. Você apenas mantém o MAP ativo.''',
-      'ach_53': '''Quinze horas. O seu ritmo circadiano apresentou uma queixa formal.''',
-      'ach_54': '''Vinte e quatro horas acumuladas. Um dia inteiro de inconsciência controlada.''',
+      'ach_51':
+          '''Cinco horas acumuladas. Eles dormiram. Você monitorou. Feira comercial.''',
+      'ach_52':
+          '''Dez horas. O relógio sempre vence. Você apenas mantém o MAP ativo.''',
+      'ach_53':
+          '''Quinze horas. O seu ritmo circadiano apresentou uma queixa formal.''',
+      'ach_54':
+          '''Vinte e quatro horas acumuladas. Um dia inteiro de inconsciência controlada.''',
       'ach_55': '''Quarenta e oito horas. Dois dias de ETCO₂ e paciência.''',
-      'ach_56': '''Cinquenta horas. Um trabalho de meio período onde o paciente ainda pode tentar sair por arritmia.''',
-      'ach_57': '''Setenta e duas horas. Seu relógio viu mais nascer do sol do que seu travesseiro.''',
+      'ach_56':
+          '''Cinquenta horas. Um trabalho de meio período onde o paciente ainda pode tentar sair por arritmia.''',
+      'ach_57':
+          '''Setenta e duas horas. Seu relógio viu mais nascer do sol do que seu travesseiro.''',
       'ach_58': '''Cem horas. Um século de gás, não de fofoca.''',
-      'ach_59': '''Cento e cinquenta horas. O tempo voa quando você está dando ré.''',
-      'ach_60': '''Duzentas horas. Volátil o suficiente para perfumar uma pequena enfermaria.''',
-      'ach_61': '''Trezentas horas. Seus pés estão solicitando um regional para si.''',
-      'ach_62': '''Quatrocentas horas. Ainda não há horas extras tradicionais. Apenas glória.''',
+      'ach_59':
+          '''Cento e cinquenta horas. O tempo voa quando você está dando ré.''',
+      'ach_60':
+          '''Duzentas horas. Volátil o suficiente para perfumar uma pequena enfermaria.''',
+      'ach_61':
+          '''Trezentas horas. Seus pés estão solicitando um regional para si.''',
+      'ach_62':
+          '''Quatrocentas horas. Ainda não há horas extras tradicionais. Apenas glória.''',
       'ach_63': '''Quinhentas horas. A meio caminho da insônia mítica.''',
-      'ach_64': '''Setecentas e cinquenta horas. Casos longos constroem caráter e cifose.''',
-      'ach_65': '''Mil horas. Elite. De alguma forma, as reuniões ainda parecem mais longas.''',
-      'ach_66': '''Um caso começando da meia-noite às 5h. Porque dormir é para quem não está de plantão.''',
-      'ach_67': '''Cinco noites começam. Você é basicamente um vampiro vestindo uniforme.''',
+      'ach_64':
+          '''Setecentas e cinquenta horas. Casos longos constroem caráter e cifose.''',
+      'ach_65':
+          '''Mil horas. Elite. De alguma forma, as reuniões ainda parecem mais longas.''',
+      'ach_66':
+          '''Um caso começando da meia-noite às 5h. Porque dormir é para quem não está de plantão.''',
+      'ach_67':
+          '''Cinco noites começam. Você é basicamente um vampiro vestindo uniforme.''',
       'ach_68': '''Dez noites começam. O ritmo circadiano saiu do chat.''',
-      'ach_69': '''Vinte noites começam. A luz do dia é um boato pré-operatório.''',
-      'ach_70': '''Uma largada das 6h às 7h. Pegando o verme – ou o primeiro atraso do dia.''',
-      'ach_71': '''Dez partidas antecipadas. O café é copiloto e suporte hemodinâmico.''',
-      'ach_72': '''Um caso de fim de semana. Os sábados são para os meninos… e para os colos de emergência.''',
-      'ach_73': '''Dez casos de fim de semana. O que é esse “brunch” de que você fala?''',
-      'ach_74': '''Cinquenta casos de fim de semana. Amigos não médicos pararam de convidar você.''',
-      'ach_75': '''Cirurgia menos de quinze minutos. Cochilo de propofol. Próximo!''',
-      'ach_76': '''Dez cirurgias ultrarrápidas. Você transforma os quartos mais rápido do que a limpeza.''',
-      'ach_77': '''Anestesia durante quatro horas. É hora de discutir futebol fantástico com o matador.''',
-      'ach_78': '''Mais de seis horas. Você memorizou todos os ladrilhos da parede da sala de cirurgia.''',
-      'ach_79': '''Mais de oito horas. Crescimento da barba desde a indução: mensurável.''',
-      'ach_80': '''Mais de dez horas. O paciente é praticamente seu colega de quarto agora.''',
-      'ach_81': '''Anestesia dentro de quinze minutos após a cirurgia. Extubado antes que as cortinas acabem de cair.''',
-      'ach_82': '''Vinte e cinco reviravoltas apertadas. Você e o cirurgião estão compartilhando uma célula cerebral. Lindo.''',
-      'ach_83': '''Cinquenta emergências perfeitas. Acordá-los é uma arte e você é Picasso.''',
-      'ach_84': '''Cem emergências cronometradas. Estamos verificando se você tem uma máquina do tempo.''',
-      'ach_85': '''Caso em 25 de dezembro ou 1º de janeiro. Ho, ho, espere o midazolam.''',
-      'ach_86': '''Caso em 31 de dezembro ou 1º de janeiro. Laringoscópio em uma mão, otimismo tranquilo na outra.''',
-      'ach_87': '''Caso no seu aniversário. Feliz aniversário - aqui está um ex-colo de emergência.''',
-      'ach_88': '''ASA I. Tão saudável que você continua procurando a captura escondida.''',
+      'ach_69':
+          '''Vinte noites começam. A luz do dia é um boato pré-operatório.''',
+      'ach_70':
+          '''Uma largada das 6h às 7h. Pegando o verme – ou o primeiro atraso do dia.''',
+      'ach_71':
+          '''Dez partidas antecipadas. O café é copiloto e suporte hemodinâmico.''',
+      'ach_72':
+          '''Um caso de fim de semana. Os sábados são para os meninos… e para os colos de emergência.''',
+      'ach_73':
+          '''Dez casos de fim de semana. O que é esse “brunch” de que você fala?''',
+      'ach_74':
+          '''Cinquenta casos de fim de semana. Amigos não médicos pararam de convidar você.''',
+      'ach_75':
+          '''Cirurgia menos de quinze minutos. Cochilo de propofol. Próximo!''',
+      'ach_76':
+          '''Dez cirurgias ultrarrápidas. Você transforma os quartos mais rápido do que a limpeza.''',
+      'ach_77':
+          '''Anestesia durante quatro horas. É hora de discutir futebol fantástico com o matador.''',
+      'ach_78':
+          '''Mais de seis horas. Você memorizou todos os ladrilhos da parede da sala de cirurgia.''',
+      'ach_79':
+          '''Mais de oito horas. Crescimento da barba desde a indução: mensurável.''',
+      'ach_80':
+          '''Mais de dez horas. O paciente é praticamente seu colega de quarto agora.''',
+      'ach_81':
+          '''Anestesia dentro de quinze minutos após a cirurgia. Extubado antes que as cortinas acabem de cair.''',
+      'ach_82':
+          '''Vinte e cinco reviravoltas apertadas. Você e o cirurgião estão compartilhando uma célula cerebral. Lindo.''',
+      'ach_83':
+          '''Cinquenta emergências perfeitas. Acordá-los é uma arte e você é Picasso.''',
+      'ach_84':
+          '''Cem emergências cronometradas. Estamos verificando se você tem uma máquina do tempo.''',
+      'ach_85':
+          '''Caso em 25 de dezembro ou 1º de janeiro. Ho, ho, espere o midazolam.''',
+      'ach_86':
+          '''Caso em 31 de dezembro ou 1º de janeiro. Laringoscópio em uma mão, otimismo tranquilo na outra.''',
+      'ach_87':
+          '''Caso no seu aniversário. Feliz aniversário - aqui está um ex-colo de emergência.''',
+      'ach_88':
+          '''ASA I. Tão saudável que você continua procurando a captura escondida.''',
       'ach_89': '''Dez casos ASA I. Que hospital utópico é esse?''',
-      'ach_90': '''Vinte e cinco ASA Is. Apenas listas de esportes, certamente.''',
+      'ach_90':
+          '''Vinte e cinco ASA Is. Apenas listas de esportes, certamente.''',
       'ach_91': '''Cinquenta ASA é. Os gráficos são suspeitamente escassos.''',
-      'ach_92': '''Cem ASA é. Você deve fazer exclusivamente odontologia ambulatorial.''',
-      'ach_93': '''ASA II. Porque quase ninguém com mais de quarenta anos é verdadeiramente ASA I.''',
+      'ach_92':
+          '''Cem ASA é. Você deve fazer exclusivamente odontologia ambulatorial.''',
+      'ach_93':
+          '''ASA II. Porque quase ninguém com mais de quarenta anos é verdadeiramente ASA I.''',
       'ach_94': '''Dez ASA II. Pão, manteiga e hipertensão educada.''',
-      'ach_95': '''Vinte e cinco ASA IIs. O especial do dia a dia da sala de cirurgia.''',
-      'ach_96': '''Cinquenta ASA II. Doses de indução calculadas durante o sono.''',
-      'ach_97': '''Cem ASA II. Você poderia escrever o capítulo do livro em uma área pré-operatória.''',
+      'ach_95':
+          '''Vinte e cinco ASA IIs. O especial do dia a dia da sala de cirurgia.''',
+      'ach_96':
+          '''Cinquenta ASA II. Doses de indução calculadas durante o sono.''',
+      'ach_97':
+          '''Cem ASA II. Você poderia escrever o capítulo do livro em uma área pré-operatória.''',
       'ach_98': '''ASA III. As coisas ficaram um pouco picantes.''',
-      'ach_99': '''Dez ASA III. Gráfico mais grosso que uma lista telefônica.''',
+      'ach_99':
+          '''Dez ASA III. Gráfico mais grosso que uma lista telefônica.''',
       'ach_100': '''Vinte e cinco ASA III. Polifarmácia é seu nome do meio.''',
       'ach_101': '''Cinquenta ASA III. Comorbidades no café da manhã.''',
-      'ach_102': '''Cem ASA III. Você come listas de problemas e pede segundos.''',
-      'ach_103': '''ASA IV. O ceifador está no canto – você tem epi na gaveta.''',
-      'ach_104': '''Cinco ASA IV. Seu próprio RH básico está atualmente em negociação.''',
+      'ach_102':
+          '''Cem ASA III. Você come listas de problemas e pede segundos.''',
+      'ach_103':
+          '''ASA IV. O ceifador está no canto – você tem epi na gaveta.''',
+      'ach_104':
+          '''Cinco ASA IV. Seu próprio RH básico está atualmente em negociação.''',
       'ach_105': '''Quinze ASA IV. Bem-vindo ao fio da faca fisiológico.''',
-      'ach_106': '''Vinte e cinco ASA IV. Você ri educadamente diante da desgraça.''',
+      'ach_106':
+          '''Vinte e cinco ASA IV. Você ri educadamente diante da desgraça.''',
       'ach_107': '''Cinquenta ASA IV. Gelo nas veias; sevo no circuito.''',
       'ach_108': '''ASA V. Ave Maria, cheia de pressores.''',
-      'ach_109': '''Três ASA vs. Parte anestesista, parte otimista, parte necromante.''',
-      'ach_110': '''Cinco ASA vs. A morte perguntou. Você disse que não hoje.''',
+      'ach_109':
+          '''Três ASA vs. Parte anestesista, parte otimista, parte necromante.''',
+      'ach_110':
+          '''Cinco ASA vs. A morte perguntou. Você disse que não hoje.''',
       'ach_111': '''Dez ASA vs. Capa opcional sob o avental de chumbo.''',
       'ach_112': '''Vinte ASA vs. Os monitores silenciam-se por respeito.''',
-      'ach_113': '''Cem casos ASA III–V. Risco gerenciado como um corretor calmo com medicamentos melhores.''',
-      'ach_114': '''ASA IV ou V com alta da SRPA sem intercorrências. Admita - você trapaceou?''',
-      'ach_115': '''ASA IV/V para UTI ainda intubado. Não passe GO. Não extubar.''',
-      'ach_116': '''Dez casos consecutivos fáceis e sem intercorrências. Apreciá-lo. Não vai durar.''',
-      'ach_117': '''Vinte e cinco ASA I/II consecutivos sem intercorrências. Um mês suspeitamente relaxante.''',
-      'ach_118': '''Três casos ASA III+ em um dia. Planeje a noite com cuidado.''',
-      'ach_119': '''Cinco ASA III+ em um dia. Glândulas supra-renais: totalmente tapadas.''',
-      'ach_120': '''Pelo menos um de cada grau ASA 1–5. Os bons, os ruins e os entubados.''',
-      'ach_121': '''Cinquenta casos de alto ASA sem intercorrências. Alto risco, zero pânico.''',
+      'ach_113':
+          '''Cem casos ASA III–V. Risco gerenciado como um corretor calmo com medicamentos melhores.''',
+      'ach_114':
+          '''ASA IV ou V com alta da SRPA sem intercorrências. Admita - você trapaceou?''',
+      'ach_115':
+          '''ASA IV/V para UTI ainda intubado. Não passe GO. Não extubar.''',
+      'ach_116':
+          '''Dez casos consecutivos fáceis e sem intercorrências. Apreciá-lo. Não vai durar.''',
+      'ach_117':
+          '''Vinte e cinco ASA I/II consecutivos sem intercorrências. Um mês suspeitamente relaxante.''',
+      'ach_118':
+          '''Três casos ASA III+ em um dia. Planeje a noite com cuidado.''',
+      'ach_119':
+          '''Cinco ASA III+ em um dia. Glândulas supra-renais: totalmente tapadas.''',
+      'ach_120':
+          '''Pelo menos um de cada grau ASA 1–5. Os bons, os ruins e os entubados.''',
+      'ach_121':
+          '''Cinquenta casos de alto ASA sem intercorrências. Alto risco, zero pânico.''',
       'ach_122': '''Dez casos ASA IV/V. Você entra; o caos se instala.''',
-      'ach_123': '''Cem descargas da SRPA sem intercorrências. Apenas mais uma terça-feira, repetindo.''',
-      'ach_124': '''Primeira emergência. Porque é claro que eles romperam às 16h55.''',
+      'ach_123':
+          '''Cem descargas da SRPA sem intercorrências. Apenas mais uma terça-feira, repetindo.''',
+      'ach_124':
+          '''Primeira emergência. Porque é claro que eles romperam às 16h55.''',
       'ach_125': '''Cinco emergências. Quem precisa de uma academia?''',
       'ach_126': '''Dez emergências. O caos é o seu cardio.''',
       'ach_127': '''Vinte emergências. O RH em repouso não participa mais.''',
-      'ach_128': '''Cinquenta emergências sob pressão. Você prospera quando a lista pega fogo.''',
-      'ach_129': '''Setenta e cinco chamadas de emergência. O quadro de trauma conhece seus passos.''',
-      'ach_130': '''Cem emergências. Não impressionado é uma habilidade clínica.''',
-      'ach_131': '''Cento e cinquenta emergências. Você poderia fazer isso enquanto dorme - por favor, não faça isso.''',
+      'ach_128':
+          '''Cinquenta emergências sob pressão. Você prospera quando a lista pega fogo.''',
+      'ach_129':
+          '''Setenta e cinco chamadas de emergência. O quadro de trauma conhece seus passos.''',
+      'ach_130':
+          '''Cem emergências. Não impressionado é uma habilidade clínica.''',
+      'ach_131':
+          '''Cento e cinquenta emergências. Você poderia fazer isso enquanto dorme - por favor, não faça isso.''',
       'ach_132': '''Duzentas emergências. O pager estremece primeiro.''',
       'ach_133': '''Cinco emergências em um dia. Protocolo de lua cheia?''',
-      'ach_134': '''Duas emergências consecutivas. Reserva dupla para heroísmo.''',
-      'ach_135': '''Emergência ASA V. Pegue o epi, fale menos, empurre com cuidado.''',
-      'ach_136': '''Vinte casos de emergência, SRPA sem intercorrências. Desastre no papel; chato na sala.''',
-      'ach_137': '''Emergência com regional realizada. Bloqueie enquanto a sala entra em pânico. Foco máximo.''',
-      'ach_138': '''Dez regionais de emergência realizadas. Atirador da lista urgente.''',
-      'ach_139': '''Cirurgia de emergência ≤30 minutos. Dentro, conserte, feche, saia – energia de pit stop.''',
+      'ach_134':
+          '''Duas emergências consecutivas. Reserva dupla para heroísmo.''',
+      'ach_135':
+          '''Emergência ASA V. Pegue o epi, fale menos, empurre com cuidado.''',
+      'ach_136':
+          '''Vinte casos de emergência, SRPA sem intercorrências. Desastre no papel; chato na sala.''',
+      'ach_137':
+          '''Emergência com regional realizada. Bloqueie enquanto a sala entra em pânico. Foco máximo.''',
+      'ach_138':
+          '''Dez regionais de emergência realizadas. Atirador da lista urgente.''',
+      'ach_139':
+          '''Cirurgia de emergência ≤30 minutos. Dentro, conserte, feche, saia – energia de pit stop.''',
       'ach_140': '''Fibra óptica de emergência. Nervos de titânio.''',
       'ach_141': '''Coluna de emergência. Não se mova. Nem o tubo deveria.''',
-      'ach_142': '''Emergência cardiotorácica. Grandes monitores, maiores sentimentos.''',
-      'ach_143': '''Obstetrícia de emergência. Dois pacientes, um plano de vias aéreas, zero frio.''',
-      'ach_144': '''Neurocirurgia de emergência. Trate o cérebro como se ele pagasse o aluguel.''',
-      'ach_145': '''Cinquenta emergências. Quando o conselho diz urgente, você diz RSI.''',
-      'ach_146': '''Início de emergência das 00h00 às 04h00. Nada de bom começa agora – exceto mãos competentes.''',
-      'ach_147': '''Emergência em 25 de dezembro ou 1º de janeiro. Feliz Natal - aqui está uma víscera rompida.''',
-      'ach_148': '''Dez emergências de fim de semana. Manter o banco de sangue em funcionamento.''',
-      'ach_149': '''Via aérea difícil de emergência. Os planos A – C falharam. Você é o Plano D.''',
-      'ach_150': '''Emergência ASA IV com alta da SRPA sem intercorrências. Sala em chamas; BP um educado 120/80.''',
-      'ach_151': '''Emergência menores de 18 anos. Traga seu melhor trabalho e sua voz mais calma.''',
-      'ach_152': '''Emergência acima de 65 anos. Trate como porcelana fina com melhor monitoramento.''',
-      'ach_153': '''Fim de emergência das 08h00 às 08h30. Planos de jantar: cancelados com honra.''',
+      'ach_142':
+          '''Emergência cardiotorácica. Grandes monitores, maiores sentimentos.''',
+      'ach_143':
+          '''Obstetrícia de emergência. Dois pacientes, um plano de vias aéreas, zero frio.''',
+      'ach_144':
+          '''Neurocirurgia de emergência. Trate o cérebro como se ele pagasse o aluguel.''',
+      'ach_145':
+          '''Cinquenta emergências. Quando o conselho diz urgente, você diz RSI.''',
+      'ach_146':
+          '''Início de emergência das 00h00 às 04h00. Nada de bom começa agora – exceto mãos competentes.''',
+      'ach_147':
+          '''Emergência em 25 de dezembro ou 1º de janeiro. Feliz Natal - aqui está uma víscera rompida.''',
+      'ach_148':
+          '''Dez emergências de fim de semana. Manter o banco de sangue em funcionamento.''',
+      'ach_149':
+          '''Via aérea difícil de emergência. Os planos A – C falharam. Você é o Plano D.''',
+      'ach_150':
+          '''Emergência ASA IV com alta da SRPA sem intercorrências. Sala em chamas; BP um educado 120/80.''',
+      'ach_151':
+          '''Emergência menores de 18 anos. Traga seu melhor trabalho e sua voz mais calma.''',
+      'ach_152':
+          '''Emergência acima de 65 anos. Trate como porcelana fina com melhor monitoramento.''',
+      'ach_153':
+          '''Fim de emergência das 08h00 às 08h30. Planos de jantar: cancelados com honra.''',
       'ach_154': '''Três emergências em doze horas. Golpe médico.''',
-      'ach_155': '''Dez descargas de emergência da SRPA sem intercorrências. MTP é apenas mais uma receita.''',
-      'ach_156': '''Vinte e cinco casos de cirurgia de trauma de emergência. Maestro da orquestra de reanimação.''',
-      'ach_157': '''Vinte laparotomias de emergência. Sepse, pressores e aquele cheiro inconfundível.''',
-      'ach_158': '''Vinte casos ortopédicos de emergência. Brocas, cimento e "BP, por favor".''',
-      'ach_159': '''Vinte casos de emergência obstétrica. Categoria uns e foco puro.''',
-      'ach_160': '''Dez neurocraniotomias de emergência. Smooth BP é a única personalidade permitida.''',
+      'ach_155':
+          '''Dez descargas de emergência da SRPA sem intercorrências. MTP é apenas mais uma receita.''',
+      'ach_156':
+          '''Vinte e cinco casos de cirurgia de trauma de emergência. Maestro da orquestra de reanimação.''',
+      'ach_157':
+          '''Vinte laparotomias de emergência. Sepse, pressores e aquele cheiro inconfundível.''',
+      'ach_158':
+          '''Vinte casos ortopédicos de emergência. Brocas, cimento e "BP, por favor".''',
+      'ach_159':
+          '''Vinte casos de emergência obstétrica. Categoria uns e foco puro.''',
+      'ach_160':
+          '''Dez neurocraniotomias de emergência. Smooth BP é a única personalidade permitida.''',
       'ach_161': '''Dez casos vasculares de emergência. Aperta; acalme-se.''',
-      'ach_162': '''Trezentas emergências. O caos pediu aposentadoria antecipada.''',
-      'ach_163': '''Dez casos de emergência em especialidades únicas. Alcance sob fogo.''',
-      'ach_164': '''Cinco emergências em vinte e quatro horas. 90% de cafeína, 10% de rancor.''',
-      'ach_165': '''Um caso de cirurgia geral. Pão com manteiga – sucção em espera.''',
-      'ach_166': '''Vinte e cinco casos de GS. Mais intestino do que um meme de lista de sexta-feira.''',
-      'ach_167': '''Cem casos GS. Você e a cirurgia geral estão em um relacionamento MAC comprometido.''',
-      'ach_168': '''Um caso orto. Bem-vindo às furadeiras, parafusos e ferramentas elétricas como ruído branco.''',
-      'ach_169': '''Vinte e cinco casos orto. Orelhas calibradas para a serra.''',
-      'ach_170': '''Cem casos orto. Tripulação de esqueleto, mas deixe-a anestésica.''',
-      'ach_171': '''Um caso de obstetrícia. Logística humana minúscula com riscos elevados.''',
-      'ach_172': '''Vinte e cinco casos obs. A ala do trabalho conhece seus passos.''',
-      'ach_173': '''Cem casos obs. Epidurais, categorias e eterno "ela está plena?"''',
-      'ach_174': '''Vinte e cinco casos de ginecomastia. Trendelenburg e tenacidade.''',
-      'ach_175': '''Um caso de neurocirurgia. Manuseie com cuidado – o cérebro está observando.''',
-      'ach_176': '''Vinte e cinco casos neurológicos. A pressão arterial suave é a sua linguagem do amor.''',
-      'ach_177': '''Cinquenta casos neurológicos. Território profundo. São necessárias mãos firmes.''',
-      'ach_178': '''Um caso cardiotorácico. Grandes monitores, maiores sentimentos.''',
-      'ach_179': '''Vinte e cinco casos de TC. A conversa de desvio é ETCO₂ de fundo.''',
-      'ach_180': '''Cinquenta casos cardiotorácicos. A assistolia eletiva ainda é selvagem. Você continua chato. Bom.''',
-      'ach_181': '''Vinte e cinco casos otorrinolaringológicos. Via aérea compartilhada: a queda definitiva da confiança.''',
-      'ach_182': '''Vinte e cinco casos urológicos. Flush, foco, silêncio educado.''',
-      'ach_183': '''Vinte e cinco caixas de plástico. Cosmesis para eles; resistência para você.''',
-      'ach_184': '''Um caso de cirurgia pediátrica. ETT pequeno, responsabilidade em grande escala.''',
-      'ach_185': '''Vinte e cinco casos de cirurgia pediátrica. Você fala fluentemente sobre pânico parental.''',
-      'ach_186': '''Vinte e cinco casos de cirurgia de trauma. Quando o conselho diz politrauma, você diz ok.''',
-      'ach_187': '''Vinte e cinco casos de oftalmologia. A quietude é um esporte competitivo.''',
-      'ach_188': '''Um caso de coluna vertebral. Não se mova. Realmente. Não.''',
-      'ach_189': '''Vinte e cinco casos de coluna. Deitado, acolchoado, filosoficamente alinhado com a mesa.''',
-      'ach_190': '''Vinte e cinco casos de cabeça e pescoço. Os imóveis da Airway têm preços premium.''',
-      'ach_191': '''Vinte e cinco casos de HPB. Operações longas, concentração mais longa.''',
-      'ach_192': '''Vinte e cinco casos gastrointestinais superiores ou colorretais. O abdômen nunca fica sem reviravoltas na trama.''',
-      'ach_193': '''Dez casos endócrinos. Os hormônios escreveram o protocolo; você aplica isso.''',
-      'ach_194': '''Dez casos NORA/MRI/DSA. Site remoto, monitoramento criativo, pernas fortes.''',
-      'ach_195': '''Dez casos de intervenção em dor. Às vezes, a droga mais gentil é a local.''',
-      'ach_196': '''Cinco casos de RMU. Teatro tranquilo, mãos cuidadosas, salas esperançosas.''',
-      'ach_197': '''Vinte e cinco casos de ginecologia. Patologia pesada; mãos firmes.''',
-      'ach_198': '''Vinte e cinco casos manuais e reconstrutivos. Milímetros importam mais do que ego.''',
-      'ach_199': '''Dez casos de ortopedia pediátrica. Crescendo ossos, aumentando a paciência.''',
+      'ach_162':
+          '''Trezentas emergências. O caos pediu aposentadoria antecipada.''',
+      'ach_163':
+          '''Dez casos de emergência em especialidades únicas. Alcance sob fogo.''',
+      'ach_164':
+          '''Cinco emergências em vinte e quatro horas. 90% de cafeína, 10% de rancor.''',
+      'ach_165':
+          '''Um caso de cirurgia geral. Pão com manteiga – sucção em espera.''',
+      'ach_166':
+          '''Vinte e cinco casos de GS. Mais intestino do que um meme de lista de sexta-feira.''',
+      'ach_167':
+          '''Cem casos GS. Você e a cirurgia geral estão em um relacionamento MAC comprometido.''',
+      'ach_168':
+          '''Um caso orto. Bem-vindo às furadeiras, parafusos e ferramentas elétricas como ruído branco.''',
+      'ach_169':
+          '''Vinte e cinco casos orto. Orelhas calibradas para a serra.''',
+      'ach_170':
+          '''Cem casos orto. Tripulação de esqueleto, mas deixe-a anestésica.''',
+      'ach_171':
+          '''Um caso de obstetrícia. Logística humana minúscula com riscos elevados.''',
+      'ach_172':
+          '''Vinte e cinco casos obs. A ala do trabalho conhece seus passos.''',
+      'ach_173':
+          '''Cem casos obs. Epidurais, categorias e eterno "ela está plena?"''',
+      'ach_174':
+          '''Vinte e cinco casos de ginecomastia. Trendelenburg e tenacidade.''',
+      'ach_175':
+          '''Um caso de neurocirurgia. Manuseie com cuidado – o cérebro está observando.''',
+      'ach_176':
+          '''Vinte e cinco casos neurológicos. A pressão arterial suave é a sua linguagem do amor.''',
+      'ach_177':
+          '''Cinquenta casos neurológicos. Território profundo. São necessárias mãos firmes.''',
+      'ach_178':
+          '''Um caso cardiotorácico. Grandes monitores, maiores sentimentos.''',
+      'ach_179':
+          '''Vinte e cinco casos de TC. A conversa de desvio é ETCO₂ de fundo.''',
+      'ach_180':
+          '''Cinquenta casos cardiotorácicos. A assistolia eletiva ainda é selvagem. Você continua chato. Bom.''',
+      'ach_181':
+          '''Vinte e cinco casos otorrinolaringológicos. Via aérea compartilhada: a queda definitiva da confiança.''',
+      'ach_182':
+          '''Vinte e cinco casos urológicos. Flush, foco, silêncio educado.''',
+      'ach_183':
+          '''Vinte e cinco caixas de plástico. Cosmesis para eles; resistência para você.''',
+      'ach_184':
+          '''Um caso de cirurgia pediátrica. ETT pequeno, responsabilidade em grande escala.''',
+      'ach_185':
+          '''Vinte e cinco casos de cirurgia pediátrica. Você fala fluentemente sobre pânico parental.''',
+      'ach_186':
+          '''Vinte e cinco casos de cirurgia de trauma. Quando o conselho diz politrauma, você diz ok.''',
+      'ach_187':
+          '''Vinte e cinco casos de oftalmologia. A quietude é um esporte competitivo.''',
+      'ach_188':
+          '''Um caso de coluna vertebral. Não se mova. Realmente. Não.''',
+      'ach_189':
+          '''Vinte e cinco casos de coluna. Deitado, acolchoado, filosoficamente alinhado com a mesa.''',
+      'ach_190':
+          '''Vinte e cinco casos de cabeça e pescoço. Os imóveis da Airway têm preços premium.''',
+      'ach_191':
+          '''Vinte e cinco casos de HPB. Operações longas, concentração mais longa.''',
+      'ach_192':
+          '''Vinte e cinco casos gastrointestinais superiores ou colorretais. O abdômen nunca fica sem reviravoltas na trama.''',
+      'ach_193':
+          '''Dez casos endócrinos. Os hormônios escreveram o protocolo; você aplica isso.''',
+      'ach_194':
+          '''Dez casos NORA/MRI/DSA. Site remoto, monitoramento criativo, pernas fortes.''',
+      'ach_195':
+          '''Dez casos de intervenção em dor. Às vezes, a droga mais gentil é a local.''',
+      'ach_196':
+          '''Cinco casos de RMU. Teatro tranquilo, mãos cuidadosas, salas esperançosas.''',
+      'ach_197':
+          '''Vinte e cinco casos de ginecologia. Patologia pesada; mãos firmes.''',
+      'ach_198':
+          '''Vinte e cinco casos manuais e reconstrutivos. Milímetros importam mais do que ego.''',
+      'ach_199':
+          '''Dez casos de ortopedia pediátrica. Crescendo ossos, aumentando a paciência.''',
       'ach_200': '''Cinco especialidades únicas. O alcance é flexível.''',
-      'ach_201': '''Dez especialidades únicas. Seu diário de bordo apresenta problemas de comprometimento saudáveis.''',
-      'ach_202': '''Quinze especialidades únicas. O Theatre GPS leva você a todos os lugares.''',
-      'ach_203': '''Vinte e cinco especialidades únicas. Da Vinci não tinha uma bomba TIVA. Você não.''',
-      'ach_204': '''Dez casos especiais \'Outros\'. Se não couber em um menu suspenso, ainda cabe no seu livro.''',
-      'ach_205': '''Duzentos e cinquenta casos orto. Cinto de título feito de cimento ósseo.''',
-      'ach_206': '''Duzentos e cinquenta casos de obstetrícia ou ginecologia. Coroa da enfermaria de parto, ligeiramente manchada de sangue.''',
-      'ach_207': '''Cem casos neurológicos. ICP é apenas mais um número que você intimida suavemente.''',
-      'ach_208': '''Cem casos de tomografia computadorizada. Casos grandes, maior resistência, verificações intermináveis ​​do ACT.''',
-      'ach_209': '''Cem casos de coluna vertebral. Sua própria lombar apresentou um Datix.''',
+      'ach_201':
+          '''Dez especialidades únicas. Seu diário de bordo apresenta problemas de comprometimento saudáveis.''',
+      'ach_202':
+          '''Quinze especialidades únicas. O Theatre GPS leva você a todos os lugares.''',
+      'ach_203':
+          '''Vinte e cinco especialidades únicas. Da Vinci não tinha uma bomba TIVA. Você não.''',
+      'ach_204':
+          '''Dez casos especiais 'Outros'. Se não couber em um menu suspenso, ainda cabe no seu livro.''',
+      'ach_205':
+          '''Duzentos e cinquenta casos orto. Cinto de título feito de cimento ósseo.''',
+      'ach_206':
+          '''Duzentos e cinquenta casos de obstetrícia ou ginecologia. Coroa da enfermaria de parto, ligeiramente manchada de sangue.''',
+      'ach_207':
+          '''Cem casos neurológicos. ICP é apenas mais um número que você intimida suavemente.''',
+      'ach_208':
+          '''Cem casos de tomografia computadorizada. Casos grandes, maior resistência, verificações intermináveis ​​do ACT.''',
+      'ach_209':
+          '''Cem casos de coluna vertebral. Sua própria lombar apresentou um Datix.''',
       'ach_210': '''Cem casos de urologia. Mestre da irrigação suave.''',
-      'ach_211': '''Cem casos otorrinolaringológicos. Zen das vias aéreas compartilhadas, conquistado com dificuldade.''',
-      'ach_212': '''Cem caixas de plástico. Estético ou reconstrutivo — a mesma indução constante.''',
-      'ach_213': '''Cem casos de cirurgia pediátrica. Tubos pequenos, status de legenda grande.''',
-      'ach_214': '''Cem casos de oftalmologia. Excelência imóvel, alma cafeinada.''',
-      'ach_215': '''Cinquenta casos colorretais. Você conhece uma anastomose como uma forma de onda.''',
-      'ach_216': '''Cinquenta casos gastrointestinais superiores. Passageiro frequente da boca ao ligamento de Treitz.''',
-      'ach_217': '''Cinquenta casos de HPB. Operações longas; pouca paciência para hipotensão misteriosa.''',
+      'ach_211':
+          '''Cem casos otorrinolaringológicos. Zen das vias aéreas compartilhadas, conquistado com dificuldade.''',
+      'ach_212':
+          '''Cem caixas de plástico. Estético ou reconstrutivo — a mesma indução constante.''',
+      'ach_213':
+          '''Cem casos de cirurgia pediátrica. Tubos pequenos, status de legenda grande.''',
+      'ach_214':
+          '''Cem casos de oftalmologia. Excelência imóvel, alma cafeinada.''',
+      'ach_215':
+          '''Cinquenta casos colorretais. Você conhece uma anastomose como uma forma de onda.''',
+      'ach_216':
+          '''Cinquenta casos gastrointestinais superiores. Passageiro frequente da boca ao ligamento de Treitz.''',
+      'ach_217':
+          '''Cinquenta casos de HPB. Operações longas; pouca paciência para hipotensão misteriosa.''',
       'ach_218': '''Primeiro GA. Bem-vindo à igreja do vaporizador.''',
-      'ach_219': '''Cinquenta GAs. Sevo é basicamente um traço de personalidade agora.''',
-      'ach_220': '''Duzentos GAs. Você pode sentir o cheiro do MAC no corredor.''',
+      'ach_219':
+          '''Cinquenta GAs. Sevo é basicamente um traço de personalidade agora.''',
+      'ach_220':
+          '''Duzentos GAs. Você pode sentir o cheiro do MAC no corredor.''',
       'ach_221': '''Quinhentos GAs. Os mostradores saúdam quando você entra.''',
       'ach_222': '''Primeira TIVA. Propofol: a magia branca original.''',
       'ach_223': '''Primeiro caso TIVA. Sem gás, toda classe.''',
-      'ach_224': '''Vinte e cinco TIVAs. Alvo controlado e emocionalmente estável.''',
-      'ach_225': '''Cinquenta TIVAs. Bombas zumbindo como uma geladeira satisfeita.''',
+      'ach_224':
+          '''Vinte e cinco TIVAs. Alvo controlado e emocionalmente estável.''',
+      'ach_225':
+          '''Cinquenta TIVAs. Bombas zumbindo como uma geladeira satisfeita.''',
       'ach_226': '''Cem TIVAs. Volátil quem?''',
-      'ach_227': '''Primeiro CSE. O melhor dos dois mundos, o dobro da papelada.''',
+      'ach_227':
+          '''Primeiro CSE. O melhor dos dois mundos, o dobro da papelada.''',
       'ach_228': '''Dez CSEs. A perda de resistência é o seu cardio.''',
-      'ach_229': '''Vinte e cinco CSEs. Cateter e agulha num casamento harmonioso.''',
+      'ach_229':
+          '''Vinte e cinco CSEs. Cateter e agulha num casamento harmonioso.''',
       'ach_230': '''Primeiro primário espinhal. Brilho do LCR: o tipo bom.''',
       'ach_231': '''Cinquenta espinhas. Gotejamento, queda, bloqueio.''',
-      'ach_232': '''Cento e cinquenta espinhais. Você poderia encontrar L3–4 no escuro.''',
-      'ach_233': '''Primeira peridural primária. Pendure a bolsa; mantenha a fé.''',
-      'ach_234': '''Vinte e cinco epidurais. Espaço do mito, agulha da verdade.''',
+      'ach_232':
+          '''Cento e cinquenta espinhais. Você poderia encontrar L3–4 no escuro.''',
+      'ach_233':
+          '''Primeira peridural primária. Pendure a bolsa; mantenha a fé.''',
+      'ach_234':
+          '''Vinte e cinco epidurais. Espaço do mito, agulha da verdade.''',
       'ach_235': '''Cinquenta epidurais. Finesse acima da força. Sempre.''',
-      'ach_236': '''Primeira sedação/MAC. Consciente o suficiente para se arrepender da conversa fiada.''',
-      'ach_237': '''Vinte e cinco MACs. Suave como um elogio direcionado ao alvo.''',
-      'ach_238': '''Cinquenta MACs. Eles cochilam; você conversa com o cirurgião.''',
+      'ach_236':
+          '''Primeira sedação/MAC. Consciente o suficiente para se arrepender da conversa fiada.''',
+      'ach_237':
+          '''Vinte e cinco MACs. Suave como um elogio direcionado ao alvo.''',
+      'ach_238':
+          '''Cinquenta MACs. Eles cochilam; você conversa com o cirurgião.''',
       'ach_239': '''Primeiro caso apenas local. Modo de espera: ativado.''',
-      'ach_240': '''Vinte casos apenas locais. Heroísmo opcional; presença obrigatória.''',
-      'ach_241': '''Primeiro bloqueio de nervo periférico como primário. Twitch ou shimmer – comprometa-se.''',
+      'ach_240':
+          '''Vinte casos apenas locais. Heroísmo opcional; presença obrigatória.''',
+      'ach_241':
+          '''Primeiro bloqueio de nervo periférico como primário. Twitch ou shimmer – comprometa-se.''',
       'ach_242': '''Vinte e cinco PNBs. Nervos localizados; ego verificado.''',
-      'ach_243': '''Primeira caixa de bomba TCI. O algoritmo é o seu copiloto.''',
-      'ach_244': '''Vinte e cinco casos de TCI. Sonhos no local de efeito, realidades de plasma.''',
+      'ach_243':
+          '''Primeira caixa de bomba TCI. O algoritmo é o seu copiloto.''',
+      'ach_244':
+          '''Vinte e cinco casos de TCI. Sonhos no local de efeito, realidades de plasma.''',
       'ach_245': '''Cinquenta casos de TCI. A bomba confia em você. Cru.''',
-      'ach_246': '''Sete ou mais técnicas primárias exclusivas. O alcance é o flexível.''',
-      'ach_247': '''Espinhal, epidural, CSE, PNB ou local – paciente acordado, você mais perspicaz.''',
+      'ach_246':
+          '''Sete ou mais técnicas primárias exclusivas. O alcance é o flexível.''',
+      'ach_247':
+          '''Espinhal, epidural, CSE, PNB ou local – paciente acordado, você mais perspicaz.''',
       'ach_248': '''Cem GAs. Sono profundo, desculpas superficiais.''',
-      'ach_249': '''Duzentos e cinquenta GAs. Você poderia ensinar boas maneiras ao vaporizador.''',
+      'ach_249':
+          '''Duzentos e cinquenta GAs. Você poderia ensinar boas maneiras ao vaporizador.''',
       'ach_250': '''Quinhentos GAs. Energia lendária do gasman/gaswoman.''',
-      'ach_251': '''Cem casos do tipo regional acordado. Agulhas sobre bicos.''',
-      'ach_252': '''Cem TIVAs. A adesão à sociedade da linha branca foi confirmada.''',
+      'ach_251':
+          '''Cem casos do tipo regional acordado. Agulhas sobre bicos.''',
+      'ach_252':
+          '''Cem TIVAs. A adesão à sociedade da linha branca foi confirmada.''',
       'ach_253': '''Trezentas espinhas. Coroa feita de introdutores.''',
       'ach_254': '''Cem epidurais. Realeza no espaço peridural.''',
-      'ach_255': '''Cem casos MAC. Sedação tão suave que o cirurgião esquece que você está ali.''',
-      'ach_256': '''Primeiro sucesso do ETT. Capnógrafo: o único aplauso que importa.''',
+      'ach_255':
+          '''Cem casos MAC. Sedação tão suave que o cirurgião esquece que você está ali.''',
+      'ach_256':
+          '''Primeiro sucesso do ETT. Capnógrafo: o único aplauso que importa.''',
       'ach_257': '''Dez ETTs. Mãos mais firmes. Ego ainda supervisionado.''',
-      'ach_258': '''Cinquenta ETTs. O tubo está inserido; o almoço pode esperar.''',
+      'ach_258':
+          '''Cinquenta ETTs. O tubo está inserido; o almoço pode esperar.''',
       'ach_259': '''Cem ETTs. Você e a traqueia estão se falando.''',
-      'ach_260': '''Duzentos e cinquenta ETTs. Estilete opcional; não se arroje.''',
-      'ach_261': '''Quinhentas intubações. Os cabos se separam por cortesia profissional.''',
+      'ach_260':
+          '''Duzentos e cinquenta ETTs. Estilete opcional; não se arroje.''',
+      'ach_261':
+          '''Quinhentas intubações. Os cabos se separam por cortesia profissional.''',
       'ach_262': '''Primeiro LMA. Sente-o como se quisesse.''',
-      'ach_263': '''Dez LMAs. Gel, clássico ou supremo – questões de compromisso são bem-vindas.''',
-      'ach_264': '''Cinquenta LMAs. Status de jejum respeitado; mandíbula respeitada mais.''',
+      'ach_263':
+          '''Dez LMAs. Gel, clássico ou supremo – questões de compromisso são bem-vindas.''',
+      'ach_264':
+          '''Cinquenta LMAs. Status de jejum respeitado; mandíbula respeitada mais.''',
       'ach_265': '''Cem LMAs. A alternativa gentil com opiniões fortes.''',
-      'ach_266': '''Duzentos e cinquenta LMAs. Você pode colocar um no meio da conversa.''',
-      'ach_267': '''Primeiro caso apenas com máscara facial. Às vezes, menos tubo é mais sabedoria.''',
-      'ach_268': '''Vinte casos apenas com máscara facial. Ambubag cardio desbloqueado.''',
-      'ach_269': '''Primeiro suporte de traqueostomia. Quando as habilidades interpessoais encontram o plástico rígido.''',
-      'ach_270': '''Cinco casos de traque. Esporte coletivo com regras muito firmes.''',
-      'ach_271': '''Primeira ventilação a jato. Alta frequência, pressão arterial mais alta na sala.''',
-      'ach_272': '''Primeiro DLT. Dois lúmens, uma oração, posicionamento perfeito.''',
-      'ach_273': '''Vinte DLTs. Esquerda, direita e ocasionalmente "temos certeza?"''',
-      'ach_274': '''Cinquenta DLTs. A confirmação por fibra óptica é a sua linguagem de amor.''',
-      'ach_275': '''Primeiro bloqueador brônquico. Isolamento sem o drama de uma discussão DLT.''',
-      'ach_276': '''Dez bloqueadores brônquicos. Estacionamento de precisão na garagem de vias aéreas.''',
+      'ach_266':
+          '''Duzentos e cinquenta LMAs. Você pode colocar um no meio da conversa.''',
+      'ach_267':
+          '''Primeiro caso apenas com máscara facial. Às vezes, menos tubo é mais sabedoria.''',
+      'ach_268':
+          '''Vinte casos apenas com máscara facial. Ambubag cardio desbloqueado.''',
+      'ach_269':
+          '''Primeiro suporte de traqueostomia. Quando as habilidades interpessoais encontram o plástico rígido.''',
+      'ach_270':
+          '''Cinco casos de traque. Esporte coletivo com regras muito firmes.''',
+      'ach_271':
+          '''Primeira ventilação a jato. Alta frequência, pressão arterial mais alta na sala.''',
+      'ach_272':
+          '''Primeiro DLT. Dois lúmens, uma oração, posicionamento perfeito.''',
+      'ach_273':
+          '''Vinte DLTs. Esquerda, direita e ocasionalmente "temos certeza?"''',
+      'ach_274':
+          '''Cinquenta DLTs. A confirmação por fibra óptica é a sua linguagem de amor.''',
+      'ach_275':
+          '''Primeiro bloqueador brônquico. Isolamento sem o drama de uma discussão DLT.''',
+      'ach_276':
+          '''Dez bloqueadores brônquicos. Estacionamento de precisão na garagem de vias aéreas.''',
       'ach_277': '''LMA clássico vinte vezes. Velha escola. Ainda funciona.''',
-      'ach_278': '''ProSeal vinte vezes. Tubo de drenagem: o herói desconhecido.''',
-      'ach_279': '''i-gel vinte vezes. Sem manguito, sem problema (geralmente).''',
-      'ach_280': '''Supremo LMA vinte vezes. Liderança é saber quando mascarar.''',
+      'ach_278':
+          '''ProSeal vinte vezes. Tubo de drenagem: o herói desconhecido.''',
+      'ach_279':
+          '''i-gel vinte vezes. Sem manguito, sem problema (geralmente).''',
+      'ach_280':
+          '''Supremo LMA vinte vezes. Liderança é saber quando mascarar.''',
       'ach_281': '''Ambu LMA dez vezes. Descartável, não esquecível.''',
-      'ach_282': '''Flexível ou Fastrach dez vezes. Quando a anatomia se torna criativa.''',
-      'ach_283': '''Primeira intubação nasal. Suavemente, suavemente, através dos cornetos.''',
+      'ach_282':
+          '''Flexível ou Fastrach dez vezes. Quando a anatomia se torna criativa.''',
+      'ach_283':
+          '''Primeira intubação nasal. Suavemente, suavemente, através dos cornetos.''',
       'ach_284': '''Vinte intubações nasais. GPS para nasofaringe.''',
       'ach_285': '''Cinquenta intubações nasais. O vizinho favorito do ENT.''',
-      'ach_286': '''Intubação submentoniana. Quando o rosto é o campo de batalha.''',
+      'ach_286':
+          '''Intubação submentoniana. Quando o rosto é o campo de batalha.''',
       'ach_287': '''Primeiro videolaringoscópio. Netflix, mas faça cabos.''',
-      'ach_288': '''VL dez vezes. Tempo de tela que realmente ajuda os pacientes.''',
+      'ach_288':
+          '''VL dez vezes. Tempo de tela que realmente ajuda os pacientes.''',
       'ach_289': '''VL cinquenta vezes. Lâmina, tela, sucesso.''',
       'ach_290': '''VL cem vezes. A laringoscopia direta é para flashbacks.''',
-      'ach_291': '''Primeiro acorde de fibra óptica. Paciente consciente; você hiperconsciente.''',
-      'ach_292': '''Cinco fibras ópticas acordadas. Nervos de titânio, tópicos de lendas.''',
-      'ach_293': '''Quinze fibras ópticas acordadas. O padrão-ouro, perseguido pela lidocaína.''',
-      'ach_294': '''Primeira fibra óptica adormecida. Tubo primeiro, arrogância depois.''',
-      'ach_295': '''Dez fibras ópticas adormecidas. Habilidades de escopo sem conversa estimulante.''',
-      'ach_296': '''Vinte e cinco fibras ópticas no total. Amigo flexível, padrões rígidos.''',
-      'ach_297': '''Microcuff ETT dez vezes. Tubo pequeno, responsabilidade dos adultos.''',
-      'ach_298': '''RAE ou flexometálico vinte vezes. A geometria é uma habilidade clínica.''',
+      'ach_291':
+          '''Primeiro acorde de fibra óptica. Paciente consciente; você hiperconsciente.''',
+      'ach_292':
+          '''Cinco fibras ópticas acordadas. Nervos de titânio, tópicos de lendas.''',
+      'ach_293':
+          '''Quinze fibras ópticas acordadas. O padrão-ouro, perseguido pela lidocaína.''',
+      'ach_294':
+          '''Primeira fibra óptica adormecida. Tubo primeiro, arrogância depois.''',
+      'ach_295':
+          '''Dez fibras ópticas adormecidas. Habilidades de escopo sem conversa estimulante.''',
+      'ach_296':
+          '''Vinte e cinco fibras ópticas no total. Amigo flexível, padrões rígidos.''',
+      'ach_297':
+          '''Microcuff ETT dez vezes. Tubo pequeno, responsabilidade dos adultos.''',
+      'ach_298':
+          '''RAE ou flexometálico vinte vezes. A geometria é uma habilidade clínica.''',
       'ach_299': '''Primeiro Cormack-Lehane 3. A vista é uma sugestão.''',
-      'ach_300': '''Dez alunos do 3º ano conseguiram. Coleção completa; frequência cardíaca opcional.''',
-      'ach_301': '''Primeiro Cormack-Lehane 4. Fé, bougie e boa iluminação em outros lugares.''',
+      'ach_300':
+          '''Dez alunos do 3º ano conseguiram. Coleção completa; frequência cardíaca opcional.''',
+      'ach_301':
+          '''Primeiro Cormack-Lehane 4. Fé, bougie e boa iluminação em outros lugares.''',
       'ach_302': '''Cinco séries 4 conquistadas. Você ganhou o adesivo VL.''',
-      'ach_303': '''Primeira via aérea difícil sinalizada. O plano A tinha um plano B. Sábio.''',
-      'ach_304': '''Cinco vias aéreas difíceis. O aprendizado serviu sob pressão.''',
-      'ach_305': '''Dez vias aéreas difíceis. A jornada continua; os desats diminuíram.''',
-      'ach_306': '''Vinte e cinco vias aéreas difíceis. Modo especialista: ainda humilde.''',
-      'ach_307': '''Cinquenta vias aéreas difíceis. Silencioso, eficaz, um pouco assustador.''',
-      'ach_308': '''Via aérea difícil em uma tentativa. Energia de primeira passagem. Beijo do chef.''',
-      'ach_309': '''Dez vitórias em vias aéreas difíceis na primeira tentativa. Limpo como um apito, mais nítido que um.''',
-      'ach_310': '''Via aérea difícil necessitando de mais de 3 tentativas. Sobreviveu. Aprendido. Registrado.''',
-      'ach_311': '''Cinquenta LMAs realizados pessoalmente. Prática, não próxima.''',
+      'ach_303':
+          '''Primeira via aérea difícil sinalizada. O plano A tinha um plano B. Sábio.''',
+      'ach_304':
+          '''Cinco vias aéreas difíceis. O aprendizado serviu sob pressão.''',
+      'ach_305':
+          '''Dez vias aéreas difíceis. A jornada continua; os desats diminuíram.''',
+      'ach_306':
+          '''Vinte e cinco vias aéreas difíceis. Modo especialista: ainda humilde.''',
+      'ach_307':
+          '''Cinquenta vias aéreas difíceis. Silencioso, eficaz, um pouco assustador.''',
+      'ach_308':
+          '''Via aérea difícil em uma tentativa. Energia de primeira passagem. Beijo do chef.''',
+      'ach_309':
+          '''Dez vitórias em vias aéreas difíceis na primeira tentativa. Limpo como um apito, mais nítido que um.''',
+      'ach_310':
+          '''Via aérea difícil necessitando de mais de 3 tentativas. Sobreviveu. Aprendido. Registrado.''',
+      'ach_311':
+          '''Cinquenta LMAs realizados pessoalmente. Prática, não próxima.''',
       'ach_312': '''Duzentos ETTs realizados. O tubo sabe seu nome.''',
-      'ach_313': '''Cinquenta companhias aéreas atendidas. Elenco de apoio, ainda crítico.''',
-      'ach_314': '''Cinqüenta vias aéreas observadas. Observar é como as lendas começam.''',
-      'ach_315': '''TET abaixo de 4,0 em neonatos ou bebês. Lúmen pequeno, grande respeito.''',
+      'ach_313':
+          '''Cinquenta companhias aéreas atendidas. Elenco de apoio, ainda crítico.''',
+      'ach_314':
+          '''Cinqüenta vias aéreas observadas. Observar é como as lendas começam.''',
+      'ach_315':
+          '''TET abaixo de 4,0 em neonatos ou bebês. Lúmen pequeno, grande respeito.''',
       'ach_316': '''Tamanho do ETT ≥8,5. Grande energia das vias aéreas.''',
-      'ach_317': '''ETTs sem algema usados corretamente em pacientes. Regras antigas, bom senso.''',
-      'ach_318': '''Cem ETTs normais com manguito. Edição padrão, execução especializada.''',
-      'ach_319': '''Duzentas visualizações de grau 1. Cristalino. Não seja arrogante.''',
-      'ach_320': '''Cinquenta série 2a/2b. Quase perfeito – ainda conta como habilidade.''',
-      'ach_321': '''Dez fibras ópticas acordadas realizadas. Tópico, conversa, tubo.''',
-      'ach_322': '''Vinte fibras ópticas adormecidas foram realizadas. Escopo enquanto eles dormem; você não.''',
-      'ach_323': '''Via aérea difícil de emergência gerenciada. Quando a sala fica silenciosa, você não faz isso.''',
-      'ach_324': '''Detalhes das vias aéreas registrados em quinhentos casos. Os dados são uma espécie de sabedoria.''',
-      'ach_325': '''Cada ferramenta e modalidade tocada. O arsenal completo. Respeito.''',
-      'ach_326': '''Primeira coluna vertebral realizada. Brilho do LCR: o tipo bom.''',
+      'ach_317':
+          '''ETTs sem algema usados corretamente em pacientes. Regras antigas, bom senso.''',
+      'ach_318':
+          '''Cem ETTs normais com manguito. Edição padrão, execução especializada.''',
+      'ach_319':
+          '''Duzentas visualizações de grau 1. Cristalino. Não seja arrogante.''',
+      'ach_320':
+          '''Cinquenta série 2a/2b. Quase perfeito – ainda conta como habilidade.''',
+      'ach_321':
+          '''Dez fibras ópticas acordadas realizadas. Tópico, conversa, tubo.''',
+      'ach_322':
+          '''Vinte fibras ópticas adormecidas foram realizadas. Escopo enquanto eles dormem; você não.''',
+      'ach_323':
+          '''Via aérea difícil de emergência gerenciada. Quando a sala fica silenciosa, você não faz isso.''',
+      'ach_324':
+          '''Detalhes das vias aéreas registrados em quinhentos casos. Os dados são uma espécie de sabedoria.''',
+      'ach_325':
+          '''Cada ferramenta e modalidade tocada. O arsenal completo. Respeito.''',
+      'ach_326':
+          '''Primeira coluna vertebral realizada. Brilho do LCR: o tipo bom.''',
       'ach_327': '''Dez espinhais. Gotejamento, queda, bloqueio.''',
       'ach_328': '''Cinquenta espinhas. L3–4 está em casa.''',
       'ach_329': '''Cem espinhas. Subaracnóide é o seu código postal.''',
       'ach_330': '''Duzentos e cinquenta espinhais. Bordado de elite.''',
       'ach_331': '''Primeira epidural. Pendure a bolsa; mantenha a fé.''',
-      'ach_332': '''Vinte e cinco epidurais. A perda de resistência é cardio.''',
-      'ach_333': '''Cinquenta epidurais com delicadeza. Força é para amadores.''',
+      'ach_332':
+          '''Vinte e cinco epidurais. A perda de resistência é cardio.''',
+      'ach_333':
+          '''Cinquenta epidurais com delicadeza. Força é para amadores.''',
       'ach_334': '''Cem epidurais. Espaço encontrado, ego estacionado.''',
-      'ach_335': '''Primeiro bloqueio de nervo periférico. Twitch ou shimmer – escolha um lado.''',
+      'ach_335':
+          '''Primeiro bloqueio de nervo periférico. Twitch ou shimmer – escolha um lado.''',
       'ach_336': '''Dez PNBs. Nervos localizados; café ganho.''',
-      'ach_337': '''Vinte e cinco PNBs. O gel de ultrassom é um grupo de alimentos.''',
+      'ach_337':
+          '''Vinte e cinco PNBs. O gel de ultrassom é um grupo de alimentos.''',
       'ach_338': '''Cinquenta PNBs. Modo Boss: ainda marca a pele.''',
-      'ach_339': '''Cem PNBs. Especialista significa que você ainda respeita a fáscia.''',
-      'ach_340': '''Duzentos PNBs. Maestria é um sucesso silencioso e repetível.''',
-      'ach_341': '''Primeira regional guiada pelos EUA. O nervo aparece; o mesmo acontece com a confiança.''',
-      'ach_342': '''Orientação do USG vinte e cinco vezes. Desbloqueio de habilidades de sondagem.''',
-      'ach_343': '''USG cinquenta vezes. Agulha brilhante; mente mais brilhante.''',
+      'ach_339':
+          '''Cem PNBs. Especialista significa que você ainda respeita a fáscia.''',
+      'ach_340':
+          '''Duzentos PNBs. Maestria é um sucesso silencioso e repetível.''',
+      'ach_341':
+          '''Primeira regional guiada pelos EUA. O nervo aparece; o mesmo acontece com a confiança.''',
+      'ach_342':
+          '''Orientação do USG vinte e cinco vezes. Desbloqueio de habilidades de sondagem.''',
+      'ach_343':
+          '''USG cinquenta vezes. Agulha brilhante; mente mais brilhante.''',
       'ach_344': '''USG cem vezes. Você vê o que os outros procuram.''',
       'ach_345': '''USG duzentas e cinquenta vezes. Lenda manchada de gel.''',
-      'ach_346': '''Estimulador nervoso usado. Contração da velha escola, respeito da nova escola.''',
-      'ach_347': '''Estimulador vinte e cinco vezes. Miliamperes e memória muscular.''',
-      'ach_348': '''Primeiro cateter regional. Infusão contínua, virtude contínua.''',
+      'ach_346':
+          '''Estimulador nervoso usado. Contração da velha escola, respeito da nova escola.''',
+      'ach_347':
+          '''Estimulador vinte e cinco vezes. Miliamperes e memória muscular.''',
+      'ach_348':
+          '''Primeiro cateter regional. Infusão contínua, virtude contínua.''',
       'ach_349': '''Dez cateteres de bloqueio. Campeão do tubo tunelizado.''',
       'ach_350': '''Vinte e cinco cateteres. Dor na coleira.''',
-      'ach_351': '''Registrado interescalênico, supra ou axilar. Membro superior, habilidade superior.''',
-      'ach_352': '''Vinte bloqueios do plexo braquial. Braços para baixo; padrões para cima.''',
-      'ach_353': '''Dominado femoral, ciático ou poplíteo. Leg day, edição clínica.''',
-      'ach_354': '''Vinte bloqueios de membros inferiores. Pule a academia; faça o bloco.''',
+      'ach_351':
+          '''Registrado interescalênico, supra ou axilar. Membro superior, habilidade superior.''',
+      'ach_352':
+          '''Vinte bloqueios do plexo braquial. Braços para baixo; padrões para cima.''',
+      'ach_353':
+          '''Dominado femoral, ciático ou poplíteo. Leg day, edição clínica.''',
+      'ach_354':
+          '''Vinte bloqueios de membros inferiores. Pule a academia; faça o bloco.''',
       'ach_355': '''TAP, reto, QL ou ESP. Força central, edição de agulha.''',
-      'ach_356': '''Vinte bloqueios de tronco/abdominais. Tratados de paz intermediários.''',
+      'ach_356':
+          '''Vinte bloqueios de tronco/abdominais. Tratados de paz intermediários.''',
       'ach_357': '''PECS ou serrátil. Parede torácica, protocolo de frio.''',
-      'ach_358': '''Dez paravertebrais. Perto da coluna vertebral, mais perto da experiência.''',
-      'ach_359': '''Bloqueio do plexo cervical ou couro cabeludo. Acima dos ombros, acima da média.''',
+      'ach_358':
+          '''Dez paravertebrais. Perto da coluna vertebral, mais perto da experiência.''',
+      'ach_359':
+          '''Bloqueio do plexo cervical ou couro cabeludo. Acima dos ombros, acima da média.''',
       'ach_360': '''Dez caudais. Costas pequenas, grande alívio.''',
-      'ach_361': '''Dez bloqueios de tornozelo. O melhor amigo da cirurgia no pé.''',
+      'ach_361':
+          '''Dez bloqueios de tornozelo. O melhor amigo da cirurgia no pé.''',
       'ach_362': '''Bloco de cerveja (IVRA). Técnica vintage, ainda acerta.''',
-      'ach_363': '''Cinco bloqueios do plexo lombar ou sacral. Bloqueios profundos, calma mais profunda.''',
-      'ach_364': '''Dez tipos diferentes de blocos regionais. Tenho que colar todos eles.''',
-      'ach_365': '''Vinte tipos de blocos diferentes. Sommelier de anestésicos locais.''',
-      'ach_366': '''Quinze interescalênicos. Frênico opcional; habilidade não.''',
-      'ach_367': '''Vinte e cinco supraclaviculares. Realeza de bolso de canto.''',
-      'ach_368': '''Quinze infraclaviculares. Sob a clavícula, acima do estandarte.''',
-      'ach_369': '''Quinze bloqueios axilares. Caminho clássico, resultados modernos.''',
+      'ach_363':
+          '''Cinco bloqueios do plexo lombar ou sacral. Bloqueios profundos, calma mais profunda.''',
+      'ach_364':
+          '''Dez tipos diferentes de blocos regionais. Tenho que colar todos eles.''',
+      'ach_365':
+          '''Vinte tipos de blocos diferentes. Sommelier de anestésicos locais.''',
+      'ach_366':
+          '''Quinze interescalênicos. Frênico opcional; habilidade não.''',
+      'ach_367':
+          '''Vinte e cinco supraclaviculares. Realeza de bolso de canto.''',
+      'ach_368':
+          '''Quinze infraclaviculares. Sob a clavícula, acima do estandarte.''',
+      'ach_369':
+          '''Quinze bloqueios axilares. Caminho clássico, resultados modernos.''',
       'ach_370': '''Vinte femorais. Parte anterior da coxa, atenção total.''',
-      'ach_371': '''Vinte canais adutores. Poupa o motor e salva a reputação.''',
+      'ach_371':
+          '''Vinte canais adutores. Poupa o motor e salva a reputação.''',
       'ach_372': '''Vinte ciáticos. Grande coragem, maior respeito.''',
-      'ach_373': '''Quinze ciáticos poplíteos. Atrás do joelho, à frente da dor.''',
+      'ach_373':
+          '''Quinze ciáticos poplíteos. Atrás do joelho, à frente da dor.''',
       'ach_374': '''Trinta TAPs. Avião encontrado, abdômen acalmado.''',
       'ach_375': '''Quinze bainhas retos. Maneiras de linha média.''',
       'ach_376': '''Quinze QLs. Profundo, lateral, eficaz.''',
       'ach_377': '''Quinze ESPs. Avião navegando ao longo da espinha.''',
       'ach_378': '''Quinze PECS I/II. Diplomacia da parede torácica.''',
-      'ach_379': '''Dez bloqueios do serrátil anterior. Peito lateral, pensamento lateral.''',
-      'ach_380': '''Dez bloqueios do plexo cervical. Trabalho de pescoço, mãos cuidadosas.''',
-      'ach_381': '''Dez blocos de couro cabeludo. Pacote de conforto craniano.''',
-      'ach_382': '''Vinte e cinco caudais pediátricos. Espaço minúsculo, diferença enorme.''',
+      'ach_379':
+          '''Dez bloqueios do serrátil anterior. Peito lateral, pensamento lateral.''',
+      'ach_380':
+          '''Dez bloqueios do plexo cervical. Trabalho de pescoço, mãos cuidadosas.''',
+      'ach_381':
+          '''Dez blocos de couro cabeludo. Pacote de conforto craniano.''',
+      'ach_382':
+          '''Vinte e cinco caudais pediátricos. Espaço minúsculo, diferença enorme.''',
       'ach_383': '''Cinco IVRAs. Torniquete para cima; nostalgia ativada.''',
-      'ach_384': '''Duas regionais diferentes em um caso. Mídia mista, edição clínica.''',
-      'ach_385': '''Quinhentos regionais no total. Status de divindade, ainda lava as mãos.''',
-      'ach_386': '''Primeira linha arterial. Forma de onda: a única bandeira vermelha que você gosta.''',
+      'ach_384':
+          '''Duas regionais diferentes em um caso. Mídia mista, edição clínica.''',
+      'ach_385':
+          '''Quinhentos regionais no total. Status de divindade, ainda lava as mãos.''',
+      'ach_386':
+          '''Primeira linha arterial. Forma de onda: a única bandeira vermelha que você gosta.''',
       'ach_387': '''Dez linhas de arte. Corretor de imóveis Radial.''',
-      'ach_388': '''Vinte e cinco linhas de arte. Traços amortecidos ofendem você pessoalmente.''',
+      'ach_388':
+          '''Vinte e cinco linhas de arte. Traços amortecidos ofendem você pessoalmente.''',
       'ach_389': '''Cinquenta linhas de arte. Ás de espadas, ás de artérias.''',
       'ach_390': '''Cem linhas de arte. Mestre da fofoca contínua da BP.''',
       'ach_391': '''Primeiro CVC. Linha central, importância central.''',
       'ach_392': '''Cinco CVC. Arame, dilatador, humildade.''',
-      'ach_393': '''Quinze CVCs. IJ ou subclávia – você tem preferências agora.''',
+      'ach_393':
+          '''Quinze CVCs. IJ ou subclávia – você tem preferências agora.''',
       'ach_394': '''Vinte e cinco CVCs. Comande o lúmen.''',
       'ach_395': '''Cinquenta CVCs. O acesso central é um estilo de vida.''',
-      'ach_396': '''USG para CVC ou linha artística. Olhos no prêmio, não no mito histórico.''',
-      'ach_397': '''USG vascular vinte e cinco vezes. Investigue, diminua as complicações.''',
-      'ach_398': '''USG vascular setenta e cinco vezes. As paredes da nave temem a sua sonda.''',
-      'ach_399': '''Primeiro BIS/Entropia. Porque “parece adormecido” não é um número.''',
-      'ach_400': '''BIS/Entropia vinte e cinco vezes. Cargas de profundidade pela consciência.''',
-      'ach_401': '''BIS/Entropia cinquenta vezes. Números acima de vibrações.''',
+      'ach_396':
+          '''USG para CVC ou linha artística. Olhos no prêmio, não no mito histórico.''',
+      'ach_397':
+          '''USG vascular vinte e cinco vezes. Investigue, diminua as complicações.''',
+      'ach_398':
+          '''USG vascular setenta e cinco vezes. As paredes da nave temem a sua sonda.''',
+      'ach_399':
+          '''Primeiro BIS/Entropia. Porque “parece adormecido” não é um número.''',
+      'ach_400':
+          '''BIS/Entropia vinte e cinco vezes. Cargas de profundidade pela consciência.''',
+      'ach_401':
+          '''BIS/Entropia cinquenta vezes. Números acima de vibrações.''',
       'ach_402': '''BIS/Entropia cem vezes. Segurança cortical.''',
       'ach_403': '''NIRS dez vezes. Brain O₂: agora tendência.''',
-      'ach_404': '''Masimo SedLine dez vezes. Ondas extravagantes para casos sofisticados.''',
-      'ach_405': '''Cateter TEE ou PA cinco vezes. Segredos do coração, decodificados.''',
+      'ach_404':
+          '''Masimo SedLine dez vezes. Ondas extravagantes para casos sofisticados.''',
+      'ach_405':
+          '''Cateter TEE ou PA cinco vezes. Segredos do coração, decodificados.''',
       'ach_406': '''PiCCO cinco vezes. O fluxo é importante. Você mede isso.''',
-      'ach_407': '''Dreno subaracnóideo lombar cinco vezes. Gerenciamento de LCR, nível avançado.''',
-      'ach_408': '''Três monitores invasivos ao mesmo tempo. Painel totalmente iluminado.''',
-      'ach_409': '''Quatro ou mais monitores invasivos. Controle de missão, edição OR.''',
-      'ach_410': '''Cinco tipos diferentes de linha/monitor usados. Tenho que canular todos eles.''',
-      'ach_411': '''Cinquenta linhas de arte executadas. Comerciante prático de formas de onda.''',
+      'ach_407':
+          '''Dreno subaracnóideo lombar cinco vezes. Gerenciamento de LCR, nível avançado.''',
+      'ach_408':
+          '''Três monitores invasivos ao mesmo tempo. Painel totalmente iluminado.''',
+      'ach_409':
+          '''Quatro ou mais monitores invasivos. Controle de missão, edição OR.''',
+      'ach_410':
+          '''Cinco tipos diferentes de linha/monitor usados. Tenho que canular todos eles.''',
+      'ach_411':
+          '''Cinquenta linhas de arte executadas. Comerciante prático de formas de onda.''',
       'ach_412': '''Foram realizados trinta CVCs. Sussurrador de arame.''',
-      'ach_413': '''Vinte linhas de arte assistidas. Apoiando o time vermelho.''',
-      'ach_414': '''Vinte CVCs atendidos. Segundo par de mãos, ajuda de primeira.''',
-      'ach_415': '''BIS/Entropia independentemente cinquenta vezes. Sem rodinhas.''',
-      'ach_416': '''SedLine de forma independente vinte vezes. Vigilância cerebral individual.''',
-      'ach_417': '''TCI de forma independente cinquenta vezes. Bomba e circunstância.''',
-      'ach_418': '''NIRS de forma independente vinte vezes. Voo solo cerebral.''',
-      'ach_419': '''PiCCO de forma independente dez vezes. Saída sem acompanhante.''',
-      'ach_420': '''ETE observado dez vezes em cardíaco. Observando o coração trabalhar horas extras.''',
+      'ach_413':
+          '''Vinte linhas de arte assistidas. Apoiando o time vermelho.''',
+      'ach_414':
+          '''Vinte CVCs atendidos. Segundo par de mãos, ajuda de primeira.''',
+      'ach_415':
+          '''BIS/Entropia independentemente cinquenta vezes. Sem rodinhas.''',
+      'ach_416':
+          '''SedLine de forma independente vinte vezes. Vigilância cerebral individual.''',
+      'ach_417':
+          '''TCI de forma independente cinquenta vezes. Bomba e circunstância.''',
+      'ach_418':
+          '''NIRS de forma independente vinte vezes. Voo solo cerebral.''',
+      'ach_419':
+          '''PiCCO de forma independente dez vezes. Saída sem acompanhante.''',
+      'ach_420':
+          '''ETE observado dez vezes em cardíaco. Observando o coração trabalhar horas extras.''',
       'ach_421': '''Cateter PA observado dez vezes. Flutue, observador.''',
       'ach_422': '''Dez drenos lombares administrados. Política de pressão.''',
-      'ach_423': '''Cem casos com rastreamento de linha de arte. Especialista na argumentação contínua da BP.''',
+      'ach_423':
+          '''Cem casos com rastreamento de linha de arte. Especialista na argumentação contínua da BP.''',
       'ach_424': '''Cinquenta caixas com acesso central. Veterano do fio.''',
-      'ach_425': '''Todas as opções de monitoramento invasivo foram tocadas. Liberação total da cabine.''',
-      'ach_426': '''Primeiro neonato (<28 dias). Humano pequeno, protocolo completo.''',
-      'ach_427': '''Cinco neonatos. Regular na menor sala com as maiores apostas.''',
-      'ach_428': '''Quinze neonatos conseguiram sobreviver com segurança. Guardião do microcircuito.''',
-      'ach_429': '''Primeiro filho (29 dias – 1 ano). Crescendo rapidamente; sua cautela mais rápido.''',
-      'ach_430': '''Vinte bebês. Especialista em tubos minúsculos e olhos grandes.''',
+      'ach_425':
+          '''Todas as opções de monitoramento invasivo foram tocadas. Liberação total da cabine.''',
+      'ach_426':
+          '''Primeiro neonato (<28 dias). Humano pequeno, protocolo completo.''',
+      'ach_427':
+          '''Cinco neonatos. Regular na menor sala com as maiores apostas.''',
+      'ach_428':
+          '''Quinze neonatos conseguiram sobreviver com segurança. Guardião do microcircuito.''',
+      'ach_429':
+          '''Primeiro filho (29 dias – 1 ano). Crescendo rapidamente; sua cautela mais rápido.''',
+      'ach_430':
+          '''Vinte bebês. Especialista em tubos minúsculos e olhos grandes.''',
       'ach_431': '''Vinte crianças. Premed opcional; paciência obrigatória.''',
-      'ach_432': '''Cinquenta casos de bebês ou crianças pequenas. Pró em distração e prevenção de dessaturação.''',
-      'ach_433': '''Vinte e cinco crianças (3–12). Os adesivos continuam sendo uma droga válida.''',
-      'ach_434': '''Vinte adolescentes (12–18). Quase adultos, ainda não são filósofos de ONGs.''',
-      'ach_435': '''Primeiro idoso (≥65). Cuidado padrão ouro para anos dourados.''',
-      'ach_436': '''Vinte e cinco casos de idosos. Guardião contra surpresas da polifarmácia.''',
-      'ach_437': '''Cinquenta casos de idosos. Proteja o MAP como se fosse uma família.''',
-      'ach_438': '''Cem casos de idosos. Especialista em indução suave e julgamento aguçado.''',
-      'ach_439': '''Paciente ≥80. Trate como porcelana fina com melhor acesso arterial.''',
-      'ach_440': '''Dez pacientes ≥80. Afiliação ao clube: respeito necessário.''',
-      'ach_441': '''Paciente ≥100. Raro como um verdadeiro ASA I de quarenta anos.''',
+      'ach_432':
+          '''Cinquenta casos de bebês ou crianças pequenas. Pró em distração e prevenção de dessaturação.''',
+      'ach_433':
+          '''Vinte e cinco crianças (3–12). Os adesivos continuam sendo uma droga válida.''',
+      'ach_434':
+          '''Vinte adolescentes (12–18). Quase adultos, ainda não são filósofos de ONGs.''',
+      'ach_435':
+          '''Primeiro idoso (≥65). Cuidado padrão ouro para anos dourados.''',
+      'ach_436':
+          '''Vinte e cinco casos de idosos. Guardião contra surpresas da polifarmácia.''',
+      'ach_437':
+          '''Cinquenta casos de idosos. Proteja o MAP como se fosse uma família.''',
+      'ach_438':
+          '''Cem casos de idosos. Especialista em indução suave e julgamento aguçado.''',
+      'ach_439':
+          '''Paciente ≥80. Trate como porcelana fina com melhor acesso arterial.''',
+      'ach_440':
+          '''Dez pacientes ≥80. Afiliação ao clube: respeito necessário.''',
+      'ach_441':
+          '''Paciente ≥100. Raro como um verdadeiro ASA I de quarenta anos.''',
       'ach_442': '''IMC 30–34,9. O posicionamento é um esporte de equipe.''',
-      'ach_443': '''Dez casos de obesidade classe I. Regular na lista aumentada.''',
-      'ach_444': '''Vinte classe II (IMC 35–39,9). Especialista em vias aéreas e aritmética.''',
-      'ach_445': '''Primeiro IMC ≥40. Plano A, B e uma pré-oxigenação mais longa.''',
-      'ach_446': '''Dez IMC ≥40. Superlativos conquistados da maneira mais difícil.''',
+      'ach_443':
+          '''Dez casos de obesidade classe I. Regular na lista aumentada.''',
+      'ach_444':
+          '''Vinte classe II (IMC 35–39,9). Especialista em vias aéreas e aritmética.''',
+      'ach_445':
+          '''Primeiro IMC ≥40. Plano A, B e uma pré-oxigenação mais longa.''',
+      'ach_446':
+          '''Dez IMC ≥40. Superlativos conquistados da maneira mais difícil.''',
       'ach_447': '''IMC <18,5. Corpo leve, muita atenção às doses.''',
-      'ach_448': '''Adulto com menos de 40 kg. Peso pena, protocolo completo.''',
-      'ach_449': '''Mais de 100kg. Luta de peso pesado; você no canto com o VL.''',
+      'ach_448':
+          '''Adulto com menos de 40 kg. Peso pena, protocolo completo.''',
+      'ach_449':
+          '''Mais de 100kg. Luta de peso pesado; você no canto com o VL.''',
       'ach_450': '''Mais de 130kg. Rodadas do campeonato. Rampa recomendada.''',
-      'ach_451': '''Cada faixa etária registrada. Do recém-nascido ao idoso – arco-íris completo.''',
-      'ach_452': '''Cada faixa de IMC registrada. A playlist antropométrica completa.''',
-      'ach_453': '''Cinquenta casos pediátricos com menos de 12 anos. Totalmente sério sobre os pequenos.''',
-      'ach_454': '''Duzentos e cinquenta casos de idosos. A liderança é um MAP estável.''',
+      'ach_451':
+          '''Cada faixa etária registrada. Do recém-nascido ao idoso – arco-íris completo.''',
+      'ach_452':
+          '''Cada faixa de IMC registrada. A playlist antropométrica completa.''',
+      'ach_453':
+          '''Cinquenta casos pediátricos com menos de 12 anos. Totalmente sério sobre os pequenos.''',
+      'ach_454':
+          '''Duzentos e cinquenta casos de idosos. A liderança é um MAP estável.''',
       'ach_455': '''Cinquenta casos de IMC ≥30. Campeão da rampa e do plano.''',
-      'ach_456': '''Quinze casos de baixo peso. Especialista em menos massa, mais cuidado.''',
-      'ach_457': '''Recém-nascido e centenário ambos registrados. A idade é apenas um número pré-operatório.''',
-      'ach_458': '''Abaixo do peso e superobeso na mesma semana. Dia de treino na academia de antropometria.''',
-      'ach_459': '''Manejo de via aérea difícil em neonatos ou bebês. Ás das pequenas vias aéreas.''',
-      'ach_460': '''Via aérea difícil acima de 80 anos gerenciada. Aceite o respeito pelos dentes frágeis e pescoços rígidos.''',
-      'ach_461': '''Primeiro, nenhum/sem intercorrências. Chato é o maior elogio.''',
-      'ach_462': '''Dez consecutivas sem intercorrências. Mãos seguras; superstição aumentando.''',
-      'ach_463': '''Vinte e cinco consecutivos sem intercorrências. Não diga a palavra Q.''',
-      'ach_464': '''Cem no total sem intercorrências. A segurança é uma linha e um sistema.''',
-      'ach_465': '''Duzentos e cinquenta sem intercorrências. À prova de balas é uma metáfora. Majoritariamente.''',
-      'ach_466': '''Anestesia dentro de dez minutos após a cirurgia. Emergência como arte cronometrada.''',
-      'ach_467': '''Despertar rápido cinquenta vezes. Eficiência sem cortar atalhos — ou cabos.''',
+      'ach_456':
+          '''Quinze casos de baixo peso. Especialista em menos massa, mais cuidado.''',
+      'ach_457':
+          '''Recém-nascido e centenário ambos registrados. A idade é apenas um número pré-operatório.''',
+      'ach_458':
+          '''Abaixo do peso e superobeso na mesma semana. Dia de treino na academia de antropometria.''',
+      'ach_459':
+          '''Manejo de via aérea difícil em neonatos ou bebês. Ás das pequenas vias aéreas.''',
+      'ach_460':
+          '''Via aérea difícil acima de 80 anos gerenciada. Aceite o respeito pelos dentes frágeis e pescoços rígidos.''',
+      'ach_461':
+          '''Primeiro, nenhum/sem intercorrências. Chato é o maior elogio.''',
+      'ach_462':
+          '''Dez consecutivas sem intercorrências. Mãos seguras; superstição aumentando.''',
+      'ach_463':
+          '''Vinte e cinco consecutivos sem intercorrências. Não diga a palavra Q.''',
+      'ach_464':
+          '''Cem no total sem intercorrências. A segurança é uma linha e um sistema.''',
+      'ach_465':
+          '''Duzentos e cinquenta sem intercorrências. À prova de balas é uma metáfora. Majoritariamente.''',
+      'ach_466':
+          '''Anestesia dentro de dez minutos após a cirurgia. Emergência como arte cronometrada.''',
+      'ach_467':
+          '''Despertar rápido cinquenta vezes. Eficiência sem cortar atalhos — ou cabos.''',
       'ach_468': '''PONV gerenciado. Ondansetron é uma linguagem de amor.''',
-      'ach_469': '''Hipotensão intra-operatória controlada. Fluidos, pressores, compostura.''',
-      'ach_470': '''Broncoespasmo ou laringoespasmo controlado. Peito apertado; cabeça limpa.''',
-      'ach_471': '''Dessaturação gerenciada. FiO₂ para cima, voz para baixo, problema resolvido.''',
-      'ach_472': '''Cem descargas da SRPA sem intercorrências. Recuperação: a tranquila volta da vitória.''',
-      'ach_473': '''Perfil concluído. +10 pontos e uma rara dose de dopamina administrativa.''',
-      'ach_474': '''Estatísticas em PDF exportadas. Números: finalmente úteis fora do exame.''',
-      'ach_475': '''Primeiro caso ou diário de bordo em PDF. O hospital sem papel pode desviar o olhar por um segundo.''',
-      'ach_476': '''Dez exportações de PDF. O futuro você na avaliação deve um café para você.''',
-      'ach_477': '''Primeiro backup JSON. A paranóia é apenas uma boa avaliação pré-operatória.''',
-      'ach_478': '''Cinco backups JSON. Redundância: o único verdadeiro plano ASA I.''',
-      'ach_479': '''Cem pontos. O aplicativo está marcando você como um viva.''',
-      'ach_480': '''Mil pontos. Energia do personagem principal, ainda classificada nas vias aéreas.''',
-      'ach_481': '''Cinco mil pontos. Skin de prestígio não incluída – apenas glória.''',
-      'ach_482': '''Dez mil pontos. Ficamos sem adjetivos sóbrios e anestésicos voláteis.''',
-      'ach_483': '''Primeiro caso odontológico/maxilofacial. Boca aberta, plano de vias aéreas mais alto.''',
+      'ach_469':
+          '''Hipotensão intra-operatória controlada. Fluidos, pressores, compostura.''',
+      'ach_470':
+          '''Broncoespasmo ou laringoespasmo controlado. Peito apertado; cabeça limpa.''',
+      'ach_471':
+          '''Dessaturação gerenciada. FiO₂ para cima, voz para baixo, problema resolvido.''',
+      'ach_472':
+          '''Cem descargas da SRPA sem intercorrências. Recuperação: a tranquila volta da vitória.''',
+      'ach_473':
+          '''Perfil concluído. +10 pontos e uma rara dose de dopamina administrativa.''',
+      'ach_474':
+          '''Estatísticas em PDF exportadas. Números: finalmente úteis fora do exame.''',
+      'ach_475':
+          '''Primeiro caso ou diário de bordo em PDF. O hospital sem papel pode desviar o olhar por um segundo.''',
+      'ach_476':
+          '''Dez exportações de PDF. O futuro você na avaliação deve um café para você.''',
+      'ach_477':
+          '''Primeiro backup JSON. A paranóia é apenas uma boa avaliação pré-operatória.''',
+      'ach_478':
+          '''Cinco backups JSON. Redundância: o único verdadeiro plano ASA I.''',
+      'ach_479':
+          '''Cem pontos. O aplicativo está marcando você como um viva.''',
+      'ach_480':
+          '''Mil pontos. Energia do personagem principal, ainda classificada nas vias aéreas.''',
+      'ach_481':
+          '''Cinco mil pontos. Skin de prestígio não incluída – apenas glória.''',
+      'ach_482':
+          '''Dez mil pontos. Ficamos sem adjetivos sóbrios e anestésicos voláteis.''',
+      'ach_483':
+          '''Primeiro caso odontológico/maxilofacial. Boca aberta, plano de vias aéreas mais alto.''',
       'ach_484': '''Cinco casos dentários/maxilo. A sucção é o seu copiloto.''',
-      'ach_485': '''Dez casos dentários/maxilo. Via aérea compartilhada, estresse compartilhado, glória compartilhada.''',
-      'ach_486': '''Vinte e cinco casos dentários/maxilo. Você e o cirurgião-dentista agora se comunicam por meio de cliques de sucção.''',
-      'ach_487': '''Cinquenta casos dentários/maxilo. Mandíbulas com arame não assustam você – a extubação não planejada, sim.''',
-      'ach_488': '''Cem casos dentários/maxilo. Os rostos mudam; seu plano B permanece.''',
-      'ach_489': '''Dez casos de maxilos com intubação nasal. O nariz sabe melhor – quando a boca é o campo de batalha.''',
-      'ach_490': '''Cinco casos de maxilo terminando sem intercorrências. Fios inseridos; drama fora.''',
-      'ach_491': '''Emergência odontológica/maxilo após o expediente. Fixação intermaxilar e cafeína intermaxilar.''',
-      'ach_492': '''Vinte casos de maxilo com via aérea compartilhada. Diplomacia com laringoscópio.''',
-      'ach_493': '''Primeiro caso de cirurgia bariátrica. Rampa, pré-oxigenar, respeitar a fisiologia.''',
-      'ach_494': '''Cinco casos de cirurgia bariátrica. O posicionamento é um esporte de equipe.''',
-      'ach_495': '''Quinze casos de cirurgia bariátrica. Você mede a circunferência do pescoço como um alfaiate.''',
-      'ach_496': '''Trinta casos de cirurgia bariátrica. Especialista em rampas, VL e paciência.''',
-      'ach_497': '''Cinquenta casos de cirurgia bariátrica. Cirurgia metabólica, foco metabólico.''',
-      'ach_498': '''Cem casos de cirurgia bariátrica. Título peso-pesado, ego leve.''',
-      'ach_499': '''Via aérea difícil em caso bariátrico. Plano A, B e um pré-ox mais longo.''',
-      'ach_500': '''Vinte casos bariátricos, nenhum/sem intercorrências. Chato é o objetivo.''',
-      'ach_501': '''Primeiro caso de radiologia intervencionista. Luzes apagadas, padrões elevados.''',
-      'ach_502': '''Cinco casos de RI. Lidere a moda dos aventais, para sempre.''',
-      'ach_503': '''Quinze casos de IR. Agora você pode tirar uma soneca com os olhos abertos – por favor, não faça isso.''',
-      'ach_504': '''Vinte e cinco casos de RI. Longe do teatro, perto do carrinho de emergência.''',
-      'ach_505': '''Cinquenta casos de IR. Especialista em salas silenciosas e monitores barulhentos.''',
-      'ach_506': '''Dez casos de RI terminaram sem intercorrências. A calma é contagiante; o contraste também.''',
-      'ach_507': '''Caso de IR durante três horas de anestesia. A hora do fio é a sua hora.''',
-      'ach_508': '''Radiologia intervencionista de emergência. Vaso sangrando, mãos firmes.''',
-      'ach_509': '''Caso IR menor de 18 anos. Embarcações pequenas, atenção total.''',
-      'ach_510': '''Caso de IR começando depois da meia-noite. Fluoroscopia e questões existenciais.''',
-      'ach_511': '''Primeiro anestésico de radioterapia. A quietude é a receita.''',
-      'ach_512': '''Cinco casos de radioterapia. O movimento é o inimigo; você é o tratado de paz.''',
-      'ach_513': '''Dez casos de radioterapia. Dispositivos de imobilização, vigilância máxima.''',
-      'ach_514': '''Vinte e cinco casos de radioterapia. Especialista em casos curtos e de longa concentração.''',
-      'ach_515': '''Radioterapia com menos de 18 anos. Pequenos humanos corajosos, grandes planos cuidadosos.''',
-      'ach_516': '''Quinze casos de radioterapia, nenhum/sem intercorrências. Quietude alcançada.''',
-      'ach_517': '''Dez anestésicos de radioterapia repetidos para a mesma via. Rostos familiares, mesmos padrões.''',
-      'ach_518': '''Radioterapia com mentalidade de monitoramento remoto. Olhos no paciente, sempre.''',
-      'ach_519': '''Primeiro caso de cirurgia cardíaca pediátrica. Coração pequeno, lista de verificação grande.''',
-      'ach_520': '''Três casos cardíacos pediátricos. Eco, linhas e humildade.''',
-      'ach_521': '''Dez casos cardíacos pediátricos. Circuitos do tamanho de joias, estacas do tamanho da vida.''',
-      'ach_522': '''Vinte casos cardíacos pediátricos. Regular na lista congênita.''',
-      'ach_523': '''Quarenta casos cardíacos pediátricos. Especialista em cânulas minúsculas e responsabilidade gigante.''',
-      'ach_524': '''Quinze casos cardíacos pediátricos, nenhum/sem intercorrências. A calma é uma habilidade clínica.''',
-      'ach_525': '''Caso cardíaco pediátrico em neonato. Micro-humano, foco macro.''',
-      'ach_526': '''Cinco casos congênitos complexos. Anatomia opcional; preparação obrigatória.''',
-      'ach_527': '''Cardíaco pediátrico após o expediente. O sono é cancelado; os padrões não são.''',
-      'ach_528': '''Dez casos pediátricos de CEC. Ignorar o zumbido da máquina; você não está cantarolando.''',
-      'ach_529': '''Emergência odontológica/maxilo. Inchaço, trismo e sua melhor LV.''',
-      'ach_530': '''Caso bariátrico de emergência. Fisiologia em primeiro lugar, heroísmo em segundo.''',
-      'ach_531': '''IR para embolização de trauma. Intervencionista, intencional.''',
-      'ach_532': '''Maxilo e coluna vertebral ambos registrados. Ossos diferentes, mesmo respeito às vias aéreas.''',
-      'ach_533': '''Caso bariátrico com regional realizada. Bloqueie sempre que possível; via aérea sempre pronta.''',
-      'ach_534': '''Cardíaco pediátrico mais um caso neonatal separado. Espectro de idade, mesma energia noturna.''',
-      'ach_535': '''Registrado Odontologia/Maxilo, Bariátrico, IR, Radioterapia e Paeds cardíaco pelo menos uma vez. Coleção completa.''',
-      'ach_536': '''Pelo menos um caso em cada uma das cinco novas faixas de especialidades. Distintivo de explorador desbloqueado.''',
-      'ach_537': '''Tanto IR quanto Radioterapia registrados. Radiação ionizante, calma não ionizante.''',
-      'ach_538': '''Cinquenta casos combinados dentais/maxilo e cabeça e pescoço. Ex-alunos de vias aéreas compartilhadas.''',
+      'ach_485':
+          '''Dez casos dentários/maxilo. Via aérea compartilhada, estresse compartilhado, glória compartilhada.''',
+      'ach_486':
+          '''Vinte e cinco casos dentários/maxilo. Você e o cirurgião-dentista agora se comunicam por meio de cliques de sucção.''',
+      'ach_487':
+          '''Cinquenta casos dentários/maxilo. Mandíbulas com arame não assustam você – a extubação não planejada, sim.''',
+      'ach_488':
+          '''Cem casos dentários/maxilo. Os rostos mudam; seu plano B permanece.''',
+      'ach_489':
+          '''Dez casos de maxilos com intubação nasal. O nariz sabe melhor – quando a boca é o campo de batalha.''',
+      'ach_490':
+          '''Cinco casos de maxilo terminando sem intercorrências. Fios inseridos; drama fora.''',
+      'ach_491':
+          '''Emergência odontológica/maxilo após o expediente. Fixação intermaxilar e cafeína intermaxilar.''',
+      'ach_492':
+          '''Vinte casos de maxilo com via aérea compartilhada. Diplomacia com laringoscópio.''',
+      'ach_493':
+          '''Primeiro caso de cirurgia bariátrica. Rampa, pré-oxigenar, respeitar a fisiologia.''',
+      'ach_494':
+          '''Cinco casos de cirurgia bariátrica. O posicionamento é um esporte de equipe.''',
+      'ach_495':
+          '''Quinze casos de cirurgia bariátrica. Você mede a circunferência do pescoço como um alfaiate.''',
+      'ach_496':
+          '''Trinta casos de cirurgia bariátrica. Especialista em rampas, VL e paciência.''',
+      'ach_497':
+          '''Cinquenta casos de cirurgia bariátrica. Cirurgia metabólica, foco metabólico.''',
+      'ach_498':
+          '''Cem casos de cirurgia bariátrica. Título peso-pesado, ego leve.''',
+      'ach_499':
+          '''Via aérea difícil em caso bariátrico. Plano A, B e um pré-ox mais longo.''',
+      'ach_500':
+          '''Vinte casos bariátricos, nenhum/sem intercorrências. Chato é o objetivo.''',
+      'ach_501':
+          '''Primeiro caso de radiologia intervencionista. Luzes apagadas, padrões elevados.''',
+      'ach_502':
+          '''Cinco casos de RI. Lidere a moda dos aventais, para sempre.''',
+      'ach_503':
+          '''Quinze casos de IR. Agora você pode tirar uma soneca com os olhos abertos – por favor, não faça isso.''',
+      'ach_504':
+          '''Vinte e cinco casos de RI. Longe do teatro, perto do carrinho de emergência.''',
+      'ach_505':
+          '''Cinquenta casos de IR. Especialista em salas silenciosas e monitores barulhentos.''',
+      'ach_506':
+          '''Dez casos de RI terminaram sem intercorrências. A calma é contagiante; o contraste também.''',
+      'ach_507':
+          '''Caso de IR durante três horas de anestesia. A hora do fio é a sua hora.''',
+      'ach_508':
+          '''Radiologia intervencionista de emergência. Vaso sangrando, mãos firmes.''',
+      'ach_509':
+          '''Caso IR menor de 18 anos. Embarcações pequenas, atenção total.''',
+      'ach_510':
+          '''Caso de IR começando depois da meia-noite. Fluoroscopia e questões existenciais.''',
+      'ach_511':
+          '''Primeiro anestésico de radioterapia. A quietude é a receita.''',
+      'ach_512':
+          '''Cinco casos de radioterapia. O movimento é o inimigo; você é o tratado de paz.''',
+      'ach_513':
+          '''Dez casos de radioterapia. Dispositivos de imobilização, vigilância máxima.''',
+      'ach_514':
+          '''Vinte e cinco casos de radioterapia. Especialista em casos curtos e de longa concentração.''',
+      'ach_515':
+          '''Radioterapia com menos de 18 anos. Pequenos humanos corajosos, grandes planos cuidadosos.''',
+      'ach_516':
+          '''Quinze casos de radioterapia, nenhum/sem intercorrências. Quietude alcançada.''',
+      'ach_517':
+          '''Dez anestésicos de radioterapia repetidos para a mesma via. Rostos familiares, mesmos padrões.''',
+      'ach_518':
+          '''Radioterapia com mentalidade de monitoramento remoto. Olhos no paciente, sempre.''',
+      'ach_519':
+          '''Primeiro caso de cirurgia cardíaca pediátrica. Coração pequeno, lista de verificação grande.''',
+      'ach_520':
+          '''Três casos cardíacos pediátricos. Eco, linhas e humildade.''',
+      'ach_521':
+          '''Dez casos cardíacos pediátricos. Circuitos do tamanho de joias, estacas do tamanho da vida.''',
+      'ach_522':
+          '''Vinte casos cardíacos pediátricos. Regular na lista congênita.''',
+      'ach_523':
+          '''Quarenta casos cardíacos pediátricos. Especialista em cânulas minúsculas e responsabilidade gigante.''',
+      'ach_524':
+          '''Quinze casos cardíacos pediátricos, nenhum/sem intercorrências. A calma é uma habilidade clínica.''',
+      'ach_525':
+          '''Caso cardíaco pediátrico em neonato. Micro-humano, foco macro.''',
+      'ach_526':
+          '''Cinco casos congênitos complexos. Anatomia opcional; preparação obrigatória.''',
+      'ach_527':
+          '''Cardíaco pediátrico após o expediente. O sono é cancelado; os padrões não são.''',
+      'ach_528':
+          '''Dez casos pediátricos de CEC. Ignorar o zumbido da máquina; você não está cantarolando.''',
+      'ach_529':
+          '''Emergência odontológica/maxilo. Inchaço, trismo e sua melhor LV.''',
+      'ach_530':
+          '''Caso bariátrico de emergência. Fisiologia em primeiro lugar, heroísmo em segundo.''',
+      'ach_531':
+          '''IR para embolização de trauma. Intervencionista, intencional.''',
+      'ach_532':
+          '''Maxilo e coluna vertebral ambos registrados. Ossos diferentes, mesmo respeito às vias aéreas.''',
+      'ach_533':
+          '''Caso bariátrico com regional realizada. Bloqueie sempre que possível; via aérea sempre pronta.''',
+      'ach_534':
+          '''Cardíaco pediátrico mais um caso neonatal separado. Espectro de idade, mesma energia noturna.''',
+      'ach_535':
+          '''Registrado Odontologia/Maxilo, Bariátrico, IR, Radioterapia e Paeds cardíaco pelo menos uma vez. Coleção completa.''',
+      'ach_536':
+          '''Pelo menos um caso em cada uma das cinco novas faixas de especialidades. Distintivo de explorador desbloqueado.''',
+      'ach_537':
+          '''Tanto IR quanto Radioterapia registrados. Radiação ionizante, calma não ionizante.''',
+      'ach_538':
+          '''Cinquenta casos combinados dentais/maxilo e cabeça e pescoço. Ex-alunos de vias aéreas compartilhadas.''',
       'ach_539': '''Trinta casos dentários/maxilo. FMI é apenas terça-feira.''',
-      'ach_540': '''Vinte casos bariátricos com energia do plano de vias aéreas documentada. Plano escrito; ego não.''',
-      'ach_541': '''Trinta casos de RI. Sua coluna agradece a liderança. Talvez.''',
-      'ach_542': '''Quarenta casos de radioterapia. Você poderia ganhar uma competição de encarar com um simulador de tomografia computadorizada.''',
-      'ach_543': '''Cinquenta casos cardíacos pediátricos. Pronto para ensinar; ainda pronto para aprender.''',
-      'ach_544': '''Vinte intubações nasais em maxilo. Passageiro frequente da rota do nariz.''',
-      'ach_545': '''Quinze casos bariátricos com videolaringoscopia. Tempo de tela, bom momento.''',
-      'ach_546': '''Vinte casos de IR sem intercorrências. O contraste não é uma personalidade.''',
-      'ach_547': '''Dez casos de radioterapia pediátrica. Quietude para os mais pequenos.''',
-      'ach_548': '''Vinte e cinco casos cardíacos pediátricos. Série regular.''',
-      'ach_549': '''Dentário/maxilo com adjunto regional. Local onde é importante.''',
-      'ach_550': '''Caso bariátrico com linha arterial. Forma de onda em uma grande fisiologia.''',
-      'ach_551': '''Caso IR com monitorização arterial. Vermelho é uma linguagem.''',
-      'ach_552': '''Radioterapia sob via MAC/sedação registrada. Toque leve, atenção pesada.''',
-      'ach_553': '''Cardiologia pediátrica com monitorização invasiva. Linhas antes do desvio.''',
-      'ach_554': '''Bandeira de via aérea difícil em caso de maxilo. O trismo encontra o treinamento.''',
-      'ach_555': '''Dessaturação tratada em caso bariátrico. Resgate sem drama.''',
-      'ach_556': '''Anestesia IR durante quatro horas. Maratona de fluoroscopia.''',
+      'ach_540':
+          '''Vinte casos bariátricos com energia do plano de vias aéreas documentada. Plano escrito; ego não.''',
+      'ach_541':
+          '''Trinta casos de RI. Sua coluna agradece a liderança. Talvez.''',
+      'ach_542':
+          '''Quarenta casos de radioterapia. Você poderia ganhar uma competição de encarar com um simulador de tomografia computadorizada.''',
+      'ach_543':
+          '''Cinquenta casos cardíacos pediátricos. Pronto para ensinar; ainda pronto para aprender.''',
+      'ach_544':
+          '''Vinte intubações nasais em maxilo. Passageiro frequente da rota do nariz.''',
+      'ach_545':
+          '''Quinze casos bariátricos com videolaringoscopia. Tempo de tela, bom momento.''',
+      'ach_546':
+          '''Vinte casos de IR sem intercorrências. O contraste não é uma personalidade.''',
+      'ach_547':
+          '''Dez casos de radioterapia pediátrica. Quietude para os mais pequenos.''',
+      'ach_548':
+          '''Vinte e cinco casos cardíacos pediátricos. Série regular.''',
+      'ach_549':
+          '''Dentário/maxilo com adjunto regional. Local onde é importante.''',
+      'ach_550':
+          '''Caso bariátrico com linha arterial. Forma de onda em uma grande fisiologia.''',
+      'ach_551':
+          '''Caso IR com monitorização arterial. Vermelho é uma linguagem.''',
+      'ach_552':
+          '''Radioterapia sob via MAC/sedação registrada. Toque leve, atenção pesada.''',
+      'ach_553':
+          '''Cardiologia pediátrica com monitorização invasiva. Linhas antes do desvio.''',
+      'ach_554':
+          '''Bandeira de via aérea difícil em caso de maxilo. O trismo encontra o treinamento.''',
+      'ach_555':
+          '''Dessaturação tratada em caso bariátrico. Resgate sem drama.''',
+      'ach_556':
+          '''Anestesia IR durante quatro horas. Maratona de fluoroscopia.''',
       'ach_557': '''A radioterapia começa antes das 07:00. Hora do feixe.''',
-      'ach_558': '''Emergência cardíaca pediátrica. Adrenalina opcional; sistemas obrigatórios.''',
-      'ach_559': '''Oito especialidades cirúrgicas distintas registradas, incluindo pelo menos uma nova especialidade. Poliglota da lista.''',
-      'ach_560': '''Cinquenta caixas em todo o novo conjunto de especialidades combinadas. Explorador normal.''',
-      'ach_561': '''Setenta e cinco casos dentários/maxilo. Histórico na liga de boca e vias aéreas.''',
-      'ach_562': '''Setenta e cinco casos de cirurgia bariátrica. Histórico na rampa.''',
+      'ach_558':
+          '''Emergência cardíaca pediátrica. Adrenalina opcional; sistemas obrigatórios.''',
+      'ach_559':
+          '''Oito especialidades cirúrgicas distintas registradas, incluindo pelo menos uma nova especialidade. Poliglota da lista.''',
+      'ach_560':
+          '''Cinquenta caixas em todo o novo conjunto de especialidades combinadas. Explorador normal.''',
+      'ach_561':
+          '''Setenta e cinco casos dentários/maxilo. Histórico na liga de boca e vias aéreas.''',
+      'ach_562':
+          '''Setenta e cinco casos de cirurgia bariátrica. Histórico na rampa.''',
       'ach_563': '''Setenta e cinco casos de RI. Lenda do quarto escuro.''',
-      'ach_564': '''Setenta e cinco casos cardíacos pediátricos. Título pesado, mãos leves.''',
+      'ach_564':
+          '''Setenta e cinco casos cardíacos pediátricos. Título pesado, mãos leves.''',
       'ach_565': '''Cinquenta casos de radioterapia. Pesado na quietude.''',
-      'ach_566': '''Vinte e cinco casos em novas especialidades combinados. Progresso fronteiriço.''',
-      'ach_567': '''Cem casos em novas especialidades combinadas. Fronteira estabelecida.''',
-      'ach_568': '''Quarenta casos dentários/maxilo. Aliado do cirurgião-dentista, guardião da trompa.''',
-      'ach_569': '''Primeiro bloqueio do plano da fáscia ilíaca. Avião encontrado; dor arquivada em \'mais tarde\'.''',
-      'ach_570': '''Cinco bloqueios da fáscia ilíaca. Fraturas de quadril agradecem silenciosamente.''',
-      'ach_571': '''Quinze bloqueios de fáscia ilíaca. Regular na lista #NOF.''',
-      'ach_572': '''Trinta bloqueios de fáscia ilíaca. Especialista em aviões e paciência.''',
-      'ach_573': '''Cinquenta bloqueios de fáscia ilíaca. Mestre do sussurro ilíaco.''',
-      'ach_574': '''Dez bloqueios de fáscia ilíaca guiados por USG. Gel, sonda, paz.''',
-      'ach_575': '''Fáscia ilíaca com cateter colocado. Pacote de conforto contínuo.''',
-      'ach_576': '''Vinte bloqueios de fáscia ilíaca realizados (não apenas observados). Trabalho prático de avião.''',
-      'ach_577': '''Primeiro bloco estilo compartimento psoas/psoas. Plano profundo, calma mais profunda.''',
-      'ach_578': '''Cinco bloqueios do plano subfascial do psoas. Subfascial, não abaixo do padrão.''',
-      'ach_579': '''Quinze bloqueios do plano subfascial do psoas. Regular no fundo do poço.''',
-      'ach_580': '''Trinta bloqueios do plano subfascial do psoas. Especialista onde os marcos temem pisar.''',
-      'ach_581': '''Cinquenta bloqueios do plano subfascial do psoas. Mestre da energia de abordagem posterior.''',
-      'ach_582': '''Dez blocos planos de psoas guiados por USG. Veja o avião; seja o avião.''',
-      'ach_583': '''Bloqueio do plano do psoas com cateter. Infusão para a vitória.''',
-      'ach_584': '''Foram realizados 20 bloqueios do plano do psoas. Bordado creditado.''',
-      'ach_585': '''Bloqueios da fáscia ilíaca e do plano psoas registrados. Colecionador de aviões.''',
-      'ach_586': '''Fáscia ilíaca ou psoas em caso de trauma ortopédico. Aviões para dor, não para exibição.''',
-      'ach_587': '''Dez bloqueios de fáscia ilíaca para vias de fratura de quadril. O melhor amigo de #NOF.''',
-      'ach_588': '''Cinco casos com fáscia ou psoas, além de outro bloqueio de membro inferior. Modo duo.''',
-      'ach_589': '''Primeiro tremor registrado e gerenciado. Diplomacia do termostato.''',
-      'ach_590': '''Cinco eventos arrepiantes gerenciados. O calor é uma droga.''',
-      'ach_591': '''Quinze eventos arrepiantes. Especialista em cobertores e paciência.''',
-      'ach_592': '''Trinta eventos arrepiantes administrados. Mestre do tremor pós-operatório.''',
-      'ach_593': '''Primeira hipertensão intra-operatória controlada. MAPA para cima; você permaneceu nivelado.''',
-      'ach_594': '''Cinco episódios de hipertensão controlados. Pressores opcionais; considerado obrigatório.''',
-      'ach_595': '''Quinze eventos de hipertensão. Regular na parte alta do punho.''',
-      'ach_596': '''Trinta eventos de hipertensão gerenciados. Especialista em por que e o que vem a seguir.''',
-      'ach_597': '''Primeira complicação hemorrágica registrada. Sucção ativada; cérebro ligado.''',
-      'ach_598': '''Cinco eventos hemorrágicos controlados. Produtos sanguíneos e pressão arterial.''',
+      'ach_566':
+          '''Vinte e cinco casos em novas especialidades combinados. Progresso fronteiriço.''',
+      'ach_567':
+          '''Cem casos em novas especialidades combinadas. Fronteira estabelecida.''',
+      'ach_568':
+          '''Quarenta casos dentários/maxilo. Aliado do cirurgião-dentista, guardião da trompa.''',
+      'ach_569':
+          '''Primeiro bloqueio do plano da fáscia ilíaca. Avião encontrado; dor arquivada em 'mais tarde'.''',
+      'ach_570':
+          '''Cinco bloqueios da fáscia ilíaca. Fraturas de quadril agradecem silenciosamente.''',
+      'ach_571':
+          '''Quinze bloqueios de fáscia ilíaca. Regular na lista #NOF.''',
+      'ach_572':
+          '''Trinta bloqueios de fáscia ilíaca. Especialista em aviões e paciência.''',
+      'ach_573':
+          '''Cinquenta bloqueios de fáscia ilíaca. Mestre do sussurro ilíaco.''',
+      'ach_574':
+          '''Dez bloqueios de fáscia ilíaca guiados por USG. Gel, sonda, paz.''',
+      'ach_575':
+          '''Fáscia ilíaca com cateter colocado. Pacote de conforto contínuo.''',
+      'ach_576':
+          '''Vinte bloqueios de fáscia ilíaca realizados (não apenas observados). Trabalho prático de avião.''',
+      'ach_577':
+          '''Primeiro bloco estilo compartimento psoas/psoas. Plano profundo, calma mais profunda.''',
+      'ach_578':
+          '''Cinco bloqueios do plano subfascial do psoas. Subfascial, não abaixo do padrão.''',
+      'ach_579':
+          '''Quinze bloqueios do plano subfascial do psoas. Regular no fundo do poço.''',
+      'ach_580':
+          '''Trinta bloqueios do plano subfascial do psoas. Especialista onde os marcos temem pisar.''',
+      'ach_581':
+          '''Cinquenta bloqueios do plano subfascial do psoas. Mestre da energia de abordagem posterior.''',
+      'ach_582':
+          '''Dez blocos planos de psoas guiados por USG. Veja o avião; seja o avião.''',
+      'ach_583':
+          '''Bloqueio do plano do psoas com cateter. Infusão para a vitória.''',
+      'ach_584':
+          '''Foram realizados 20 bloqueios do plano do psoas. Bordado creditado.''',
+      'ach_585':
+          '''Bloqueios da fáscia ilíaca e do plano psoas registrados. Colecionador de aviões.''',
+      'ach_586':
+          '''Fáscia ilíaca ou psoas em caso de trauma ortopédico. Aviões para dor, não para exibição.''',
+      'ach_587':
+          '''Dez bloqueios de fáscia ilíaca para vias de fratura de quadril. O melhor amigo de #NOF.''',
+      'ach_588':
+          '''Cinco casos com fáscia ou psoas, além de outro bloqueio de membro inferior. Modo duo.''',
+      'ach_589':
+          '''Primeiro tremor registrado e gerenciado. Diplomacia do termostato.''',
+      'ach_590':
+          '''Cinco eventos arrepiantes gerenciados. O calor é uma droga.''',
+      'ach_591':
+          '''Quinze eventos arrepiantes. Especialista em cobertores e paciência.''',
+      'ach_592':
+          '''Trinta eventos arrepiantes administrados. Mestre do tremor pós-operatório.''',
+      'ach_593':
+          '''Primeira hipertensão intra-operatória controlada. MAPA para cima; você permaneceu nivelado.''',
+      'ach_594':
+          '''Cinco episódios de hipertensão controlados. Pressores opcionais; considerado obrigatório.''',
+      'ach_595':
+          '''Quinze eventos de hipertensão. Regular na parte alta do punho.''',
+      'ach_596':
+          '''Trinta eventos de hipertensão gerenciados. Especialista em por que e o que vem a seguir.''',
+      'ach_597':
+          '''Primeira complicação hemorrágica registrada. Sucção ativada; cérebro ligado.''',
+      'ach_598':
+          '''Cinco eventos hemorrágicos controlados. Produtos sanguíneos e pressão arterial.''',
       'ach_599': '''Quinze eventos hemorrágicos. Regular no vermelho.''',
-      'ach_600': '''Trinta eventos hemorrágicos gerenciados. Especialista quando o campo fica vermelho.''',
-      'ach_601': '''Primeira hipotermia registrada. Aqueça o paciente, não as desculpas.''',
-      'ach_602': '''Cinco eventos de hipotermia. O ar forçado é uma linguagem de amor.''',
-      'ach_603': '''Quinze eventos de hipotermia gerenciados. A temperatura é vital.''',
-      'ach_604': '''Trinta eventos de hipotermia. Especialista em graus e detalhes.''',
+      'ach_600':
+          '''Trinta eventos hemorrágicos gerenciados. Especialista quando o campo fica vermelho.''',
+      'ach_601':
+          '''Primeira hipotermia registrada. Aqueça o paciente, não as desculpas.''',
+      'ach_602':
+          '''Cinco eventos de hipotermia. O ar forçado é uma linguagem de amor.''',
+      'ach_603':
+          '''Quinze eventos de hipotermia gerenciados. A temperatura é vital.''',
+      'ach_604':
+          '''Trinta eventos de hipotermia. Especialista em graus e detalhes.''',
       'ach_605': '''Primeira arritmia controlada. ECG não é música de fundo.''',
       'ach_606': '''Cinco arritmias controladas. Taxa, ritmo, resposta.''',
       'ach_607': '''Quinze arritmias. Regular nos rabiscos.''',
-      'ach_608': '''Trinta arritmias controladas. Especialista quando a linha fica abstrata.''',
-      'ach_609': '''Primeiro pneumotórax gerenciado. Agulha, escorra, acalme-se.''',
-      'ach_610': '''Três eventos de pneumotórax. Você prefere ar apenas no circuito.''',
-      'ach_611': '''Cinco eventos de pneumotórax gerenciados. Regular no inesperado.''',
-      'ach_612': '''Dez eventos de pneumotórax. Especialista em ar ruim, boas decisões.''',
-      'ach_613': '''Primeira via de perda maciça de sangue. MTP não é um artigo teórico.''',
-      'ach_614': '''Três grandes eventos de perda de sangue foram gerenciados. Ative cedo; pense com clareza.''',
-      'ach_615': '''Cinco eventos massivos de perda de sangue. Regular quando o protetor de celular canta.''',
-      'ach_616': '''Dez eventos massivos de perda de sangue foram gerenciados. Especialista em proporções e contenção.''',
-      'ach_617': '''Primeira reação transfusional gerenciada. Pare a linha; iniciar o protocolo.''',
-      'ach_618': '''Três reações transfusionais. Os protocolos existem por uma razão.''',
-      'ach_619': '''Cinco reações transfusionais gerenciadas. Regular em raros dias ruins.''',
-      'ach_620': '''Dez reações transfusionais. Especialista quando o sangue se comporta mal.''',
-      'ach_621': '''Primeira embolia gasosa venosa controlada. Lateral esquerda opcional; cérebro obrigatório.''',
+      'ach_608':
+          '''Trinta arritmias controladas. Especialista quando a linha fica abstrata.''',
+      'ach_609':
+          '''Primeiro pneumotórax gerenciado. Agulha, escorra, acalme-se.''',
+      'ach_610':
+          '''Três eventos de pneumotórax. Você prefere ar apenas no circuito.''',
+      'ach_611':
+          '''Cinco eventos de pneumotórax gerenciados. Regular no inesperado.''',
+      'ach_612':
+          '''Dez eventos de pneumotórax. Especialista em ar ruim, boas decisões.''',
+      'ach_613':
+          '''Primeira via de perda maciça de sangue. MTP não é um artigo teórico.''',
+      'ach_614':
+          '''Três grandes eventos de perda de sangue foram gerenciados. Ative cedo; pense com clareza.''',
+      'ach_615':
+          '''Cinco eventos massivos de perda de sangue. Regular quando o protetor de celular canta.''',
+      'ach_616':
+          '''Dez eventos massivos de perda de sangue foram gerenciados. Especialista em proporções e contenção.''',
+      'ach_617':
+          '''Primeira reação transfusional gerenciada. Pare a linha; iniciar o protocolo.''',
+      'ach_618':
+          '''Três reações transfusionais. Os protocolos existem por uma razão.''',
+      'ach_619':
+          '''Cinco reações transfusionais gerenciadas. Regular em raros dias ruins.''',
+      'ach_620':
+          '''Dez reações transfusionais. Especialista quando o sangue se comporta mal.''',
+      'ach_621':
+          '''Primeira embolia gasosa venosa controlada. Lateral esquerda opcional; cérebro obrigatório.''',
       'ach_622': '''Três eventos VAE gerenciados. O ar não é uma droga.''',
       'ach_623': '''Cinco eventos VAE. Regular na pior das hipóteses.''',
-      'ach_624': '''Dez eventos VAE gerenciados. Especialista quando as bolhas se tornam o enredo.''',
-      'ach_625': '''Primeiro evento de aspiração gerenciado. Sucção, oxigênio, humildade.''',
-      'ach_626': '''Três aspirações gerenciadas. Proteja as vias aéreas que você já protegeu.''',
+      'ach_624':
+          '''Dez eventos VAE gerenciados. Especialista quando as bolhas se tornam o enredo.''',
+      'ach_625':
+          '''Primeiro evento de aspiração gerenciado. Sucção, oxigênio, humildade.''',
+      'ach_626':
+          '''Três aspirações gerenciadas. Proteja as vias aéreas que você já protegeu.''',
       'ach_627': '''Cinco aspirações. Regular no não planejado.''',
-      'ach_628': '''Dez aspirações gerenciadas. Especialista depois do impensável.''',
-      'ach_629': '''Primeira falha na intubação registrada. O plano B é o motivo pelo qual você treinou.''',
-      'ach_630': '''Três intubações malsucedidas foram gerenciadas. Declare com antecedência; oxigênio sempre.''',
-      'ach_631': '''Cinco intubações falhadas. Regular na honestidade sob pressão.''',
-      'ach_632': '''Dez intubações malsucedidas foram gerenciadas. Especialista em não se tornar a complicação.''',
-      'ach_633': '''Primeira ventilação com máscara difícil registrada. Duas mãos, um plano.''',
-      'ach_634': '''Cinco eventos difíceis de ventilação com máscara. OPA/NPA são amigos.''',
-      'ach_635': '''Quinze eventos difíceis de ventilação com máscara. Regular quando o saco revida.''',
-      'ach_636': '''Trinta eventos difíceis de ventilação com máscara gerenciados. Especialista na habilidade esquecida.''',
-      'ach_637': '''Registrados cinco novos tipos de complicações diferentes. Colecionador de momentos ensináveis.''',
-      'ach_638': '''Registrados oito novos tipos de complicações diferentes. Conhecedor do caos contido.''',
-      'ach_639': '''Registradas todas as doze novas categorias de complicações pelo menos uma vez. Programa completo.''',
-      'ach_640': '''Vinte eventos no total no novo conjunto de complicações. Catálogo de compostura.''',
-      'ach_641': '''Total de cinquenta eventos de novas complicações gerenciados. Volume com virtude.''',
-      'ach_642': '''Ainda prefiro nenhum/sem intercorrências - mas você registrou e aprendeu com o resto. Equilíbrio.''',
-      'ach_643': '''Tremores e hipertensão foram controlados em todos os casos. Arquivos quentes e frios.''',
-      'ach_644': '''Tanto o sangramento quanto a hipotermia foram controlados. Aulas de vermelho e azul.''',
-      'ach_645': '''Aspiração, VAE ou pneumotórax gerenciados. Quando o ar se comporta mal.''',
-      'ach_646': '''Falha na intubação e dificuldade na ventilação com máscara, ambas registradas. Distintivo de honestidade nas vias aéreas.''',
-      'ach_647': '''Grande perda de sangue e reação transfusional foram registradas. Capítulo de sangue concluído.''',
-      'ach_648': '''Arritmia e hipertensão controladas. Subtrama cardiovascular.''',
-      'ach_649': '''Qualquer nova complicação depois da meia-noite. Escola noturna, edição clínica.''',
-      'ach_650': '''Nova complicação tratada em ASA IV+. Alto risco, alto padrão.''',
-      'ach_651': '''Complicação registrada, mas resultado sem intercorrências na SRPA. Crise evitada, de verdade.''',
-      'ach_652': '''Caso com duas ou mais complicações distintas registradas. Caso ocupado, cabeça limpa.''',
-      'ach_653': '''Dez complicações gerenciadas em todas as categorias. Momentos de ensino acumulados.''',
-      'ach_654': '''Trinta eventos gerenciados em novas complicações. Rede ampliada.''',
-      'ach_655': '''Reação transfusional ou via MTP respeitada no registro. Protocolo é personalidade.''',
-      'ach_656': '''Tremores e hipotermia foram controlados. A temperatura não é opcional.''',
-      'ach_657': '''DMV mais honestidade de intubação falhada no diário de bordo. A honestidade salva vidas.''',
-      'ach_658': '''VAE gerenciado e registrado. A conscientização é metade da batalha; ação é o resto.''',
-      'ach_659': '''Sangramento ou perda maciça de sangue foram controlados dez vezes no total. Veterano do campo vermelho.''',
+      'ach_628':
+          '''Dez aspirações gerenciadas. Especialista depois do impensável.''',
+      'ach_629':
+          '''Primeira falha na intubação registrada. O plano B é o motivo pelo qual você treinou.''',
+      'ach_630':
+          '''Três intubações malsucedidas foram gerenciadas. Declare com antecedência; oxigênio sempre.''',
+      'ach_631':
+          '''Cinco intubações falhadas. Regular na honestidade sob pressão.''',
+      'ach_632':
+          '''Dez intubações malsucedidas foram gerenciadas. Especialista em não se tornar a complicação.''',
+      'ach_633':
+          '''Primeira ventilação com máscara difícil registrada. Duas mãos, um plano.''',
+      'ach_634':
+          '''Cinco eventos difíceis de ventilação com máscara. OPA/NPA são amigos.''',
+      'ach_635':
+          '''Quinze eventos difíceis de ventilação com máscara. Regular quando o saco revida.''',
+      'ach_636':
+          '''Trinta eventos difíceis de ventilação com máscara gerenciados. Especialista na habilidade esquecida.''',
+      'ach_637':
+          '''Registrados cinco novos tipos de complicações diferentes. Colecionador de momentos ensináveis.''',
+      'ach_638':
+          '''Registrados oito novos tipos de complicações diferentes. Conhecedor do caos contido.''',
+      'ach_639':
+          '''Registradas todas as doze novas categorias de complicações pelo menos uma vez. Programa completo.''',
+      'ach_640':
+          '''Vinte eventos no total no novo conjunto de complicações. Catálogo de compostura.''',
+      'ach_641':
+          '''Total de cinquenta eventos de novas complicações gerenciados. Volume com virtude.''',
+      'ach_642':
+          '''Ainda prefiro nenhum/sem intercorrências - mas você registrou e aprendeu com o resto. Equilíbrio.''',
+      'ach_643':
+          '''Tremores e hipertensão foram controlados em todos os casos. Arquivos quentes e frios.''',
+      'ach_644':
+          '''Tanto o sangramento quanto a hipotermia foram controlados. Aulas de vermelho e azul.''',
+      'ach_645':
+          '''Aspiração, VAE ou pneumotórax gerenciados. Quando o ar se comporta mal.''',
+      'ach_646':
+          '''Falha na intubação e dificuldade na ventilação com máscara, ambas registradas. Distintivo de honestidade nas vias aéreas.''',
+      'ach_647':
+          '''Grande perda de sangue e reação transfusional foram registradas. Capítulo de sangue concluído.''',
+      'ach_648':
+          '''Arritmia e hipertensão controladas. Subtrama cardiovascular.''',
+      'ach_649':
+          '''Qualquer nova complicação depois da meia-noite. Escola noturna, edição clínica.''',
+      'ach_650':
+          '''Nova complicação tratada em ASA IV+. Alto risco, alto padrão.''',
+      'ach_651':
+          '''Complicação registrada, mas resultado sem intercorrências na SRPA. Crise evitada, de verdade.''',
+      'ach_652':
+          '''Caso com duas ou mais complicações distintas registradas. Caso ocupado, cabeça limpa.''',
+      'ach_653':
+          '''Dez complicações gerenciadas em todas as categorias. Momentos de ensino acumulados.''',
+      'ach_654':
+          '''Trinta eventos gerenciados em novas complicações. Rede ampliada.''',
+      'ach_655':
+          '''Reação transfusional ou via MTP respeitada no registro. Protocolo é personalidade.''',
+      'ach_656':
+          '''Tremores e hipotermia foram controlados. A temperatura não é opcional.''',
+      'ach_657':
+          '''DMV mais honestidade de intubação falhada no diário de bordo. A honestidade salva vidas.''',
+      'ach_658':
+          '''VAE gerenciado e registrado. A conscientização é metade da batalha; ação é o resto.''',
+      'ach_659':
+          '''Sangramento ou perda maciça de sangue foram controlados dez vezes no total. Veterano do campo vermelho.''',
       'ach_660': '''Hipertensão controlada vinte vezes. Pressão, controlada.''',
-      'ach_661': '''Cinquenta eventos de tremores gerenciados. Compre para a instituição um aquecedor melhor.''',
-      'ach_662': '''Cinquenta eventos de hipertensão gerenciados. Histórias do MAP por dias.''',
-      'ach_663': '''Cinquenta eventos hemorrágicos gerenciados. Biografia de sucção.''',
-      'ach_664': '''Cinquenta eventos de hipotermia gerenciados. Biografia de temperatura.''',
+      'ach_661':
+          '''Cinquenta eventos de tremores gerenciados. Compre para a instituição um aquecedor melhor.''',
+      'ach_662':
+          '''Cinquenta eventos de hipertensão gerenciados. Histórias do MAP por dias.''',
+      'ach_663':
+          '''Cinquenta eventos hemorrágicos gerenciados. Biografia de sucção.''',
+      'ach_664':
+          '''Cinquenta eventos de hipotermia gerenciados. Biografia de temperatura.''',
       'ach_665': '''Cinquenta arritmias controladas. Novela de ECG.''',
-      'ach_666': '''Depois de gerenciar a aspiração, dez casos subsequentes sem intercorrências. Lição aplicada.''',
-      'ach_667': '''Ventilação difícil com máscara seguida de via aérea definitiva bem-sucedida no mesmo caso. A sequência é importante.''',
-      'ach_668': '''Caso de intubação falhada terminando sem óbito na mesa. A recuperação é o ponto.''',
-      'ach_669': '''Pneumotórax tratado com energia de intervenção definitiva. Areje, acalme-se.''',
-      'ach_670': '''Cinco eventos de nível MTP onde você permaneceu como capitão. Classificação obtida.''',
-      'ach_671': '''Cinco reações transfusionais com energia de protocolo. Pare, avalie, trate.''',
-      'ach_672': '''VAE em um caso de energia sentado ou em posição de risco. Risco de posição, respeitado.''',
-      'ach_673': '''Tremores controlados com bom resultado na SRPA. Quente e acordado.''',
-      'ach_674': '''Hipertensão ao despertar controlada. Tubo para fora, pressão civil.''',
-      'ach_675': '''Complicação hemorrágica com via de transferência para UTI registrada. Lugar certo, hora certa.''',
-      'ach_676': '''Hipotermia em um caso cardíaco ou grave gerenciado. Aqueça o circuito de cuidado.''',
-      'ach_677': '''Energia de arritmia instável gerenciada. Eletricidade opcional; pensei que não.''',
-      'ach_678': '''Ventilação difícil com máscara e via aérea difícil são verdadeiras em um caso. Programa completo sobre vias aéreas em uma sessão.''',
-      'ach_679': '''Três tipos diferentes de complicações em um caso. Ainda aqui. Ainda registrando.''',
-      'ach_680': '''Após uma complicação, retorne à seqüência de dez sem intercorrências. Resiliência.''',
-      'ach_681': '''Vinte complicações registradas em vez de minimizadas. Cultura de honestidade.''',
-      'ach_682': '''Primeiro de cada: tremores, hipertensão, sangramento. Conjunto inicial completo.''',
-      'ach_683': '''Perda maciça de sangue, VAE e falha na intubação foram registradas uma vez. Conjunto crítico.''',
-      'ach_684': '''Aspiração, falha na intubação, DMV cada registrado. Complicação tripla das vias aéreas.''',
+      'ach_666':
+          '''Depois de gerenciar a aspiração, dez casos subsequentes sem intercorrências. Lição aplicada.''',
+      'ach_667':
+          '''Ventilação difícil com máscara seguida de via aérea definitiva bem-sucedida no mesmo caso. A sequência é importante.''',
+      'ach_668':
+          '''Caso de intubação falhada terminando sem óbito na mesa. A recuperação é o ponto.''',
+      'ach_669':
+          '''Pneumotórax tratado com energia de intervenção definitiva. Areje, acalme-se.''',
+      'ach_670':
+          '''Cinco eventos de nível MTP onde você permaneceu como capitão. Classificação obtida.''',
+      'ach_671':
+          '''Cinco reações transfusionais com energia de protocolo. Pare, avalie, trate.''',
+      'ach_672':
+          '''VAE em um caso de energia sentado ou em posição de risco. Risco de posição, respeitado.''',
+      'ach_673':
+          '''Tremores controlados com bom resultado na SRPA. Quente e acordado.''',
+      'ach_674':
+          '''Hipertensão ao despertar controlada. Tubo para fora, pressão civil.''',
+      'ach_675':
+          '''Complicação hemorrágica com via de transferência para UTI registrada. Lugar certo, hora certa.''',
+      'ach_676':
+          '''Hipotermia em um caso cardíaco ou grave gerenciado. Aqueça o circuito de cuidado.''',
+      'ach_677':
+          '''Energia de arritmia instável gerenciada. Eletricidade opcional; pensei que não.''',
+      'ach_678':
+          '''Ventilação difícil com máscara e via aérea difícil são verdadeiras em um caso. Programa completo sobre vias aéreas em uma sessão.''',
+      'ach_679':
+          '''Três tipos diferentes de complicações em um caso. Ainda aqui. Ainda registrando.''',
+      'ach_680':
+          '''Após uma complicação, retorne à seqüência de dez sem intercorrências. Resiliência.''',
+      'ach_681':
+          '''Vinte complicações registradas em vez de minimizadas. Cultura de honestidade.''',
+      'ach_682':
+          '''Primeiro de cada: tremores, hipertensão, sangramento. Conjunto inicial completo.''',
+      'ach_683':
+          '''Perda maciça de sangue, VAE e falha na intubação foram registradas uma vez. Conjunto crítico.''',
+      'ach_684':
+          '''Aspiração, falha na intubação, DMV cada registrado. Complicação tripla das vias aéreas.''',
       'ach_685': '''Tremores e hipotermia cinco cada. Alfabetização térmica.''',
-      'ach_686': '''Sangramento e perda maciça de sangue cinco em cada caminho combinado. Alfabetização hemo.''',
-      'ach_687': '''Hipertensão e arritmia dez em cada via. Alfabetização em complicações cardiovasculares.''',
-      'ach_688': '''Dez eventos de novas complicações no total. Expansão em andamento.''',
-      'ach_689': '''Vinte e cinco eventos de novas complicações no total. Expansão de verdade.''',
-      'ach_690': '''Setenta e cinco eventos de novas complicações no total. Expansão institucional.''',
-      'ach_691': '''Um total de cem eventos de novas complicações gerenciados. Expansão concluída.''',
-      'ach_692': '''Cinquenta complicações de qualquer tipo registradas na carreira no aplicativo. Métrica de honestidade.''',
-      'ach_693': '''Caso de complicação seguido posteriormente por uma sequência sem intercorrências de vinte e cinco. Curso corrigido.''',
-      'ach_694': '''Nova complicação durante um caso de emergência. Pressão sobre pressão.''',
-      'ach_695': '''Nova complicação em paciente menor de 18 anos. Paciente pequeno, protocolo completo.''',
-      'ach_696': '''Nova complicação em paciente ≥65. Fisiologia frágil, planos firmes.''',
-      'ach_697': '''Nova complicação em caso de cirurgia bariátrica. Fisiologia ao quadrado.''',
-      'ach_698': '''Nova complicação em dentária/maxilo. Subtrama de vias aéreas compartilhadas.''',
-      'ach_699': '''Nova complicação em RI. Quarto escuro, pensamento brilhante.''',
-      'ach_700': '''Nova complicação em cardiologia pediátrica. Sala de aula de maior risco.''',
-      'ach_701': '''Foram registrados detalhes de complicações suficientes para que o PDF pudesse ensinar. Documentação como legado.''',
+      'ach_686':
+          '''Sangramento e perda maciça de sangue cinco em cada caminho combinado. Alfabetização hemo.''',
+      'ach_687':
+          '''Hipertensão e arritmia dez em cada via. Alfabetização em complicações cardiovasculares.''',
+      'ach_688':
+          '''Dez eventos de novas complicações no total. Expansão em andamento.''',
+      'ach_689':
+          '''Vinte e cinco eventos de novas complicações no total. Expansão de verdade.''',
+      'ach_690':
+          '''Setenta e cinco eventos de novas complicações no total. Expansão institucional.''',
+      'ach_691':
+          '''Um total de cem eventos de novas complicações gerenciados. Expansão concluída.''',
+      'ach_692':
+          '''Cinquenta complicações de qualquer tipo registradas na carreira no aplicativo. Métrica de honestidade.''',
+      'ach_693':
+          '''Caso de complicação seguido posteriormente por uma sequência sem intercorrências de vinte e cinco. Curso corrigido.''',
+      'ach_694':
+          '''Nova complicação durante um caso de emergência. Pressão sobre pressão.''',
+      'ach_695':
+          '''Nova complicação em paciente menor de 18 anos. Paciente pequeno, protocolo completo.''',
+      'ach_696':
+          '''Nova complicação em paciente ≥65. Fisiologia frágil, planos firmes.''',
+      'ach_697':
+          '''Nova complicação em caso de cirurgia bariátrica. Fisiologia ao quadrado.''',
+      'ach_698':
+          '''Nova complicação em dentária/maxilo. Subtrama de vias aéreas compartilhadas.''',
+      'ach_699':
+          '''Nova complicação em RI. Quarto escuro, pensamento brilhante.''',
+      'ach_700':
+          '''Nova complicação em cardiologia pediátrica. Sala de aula de maior risco.''',
+      'ach_701':
+          '''Foram registrados detalhes de complicações suficientes para que o PDF pudesse ensinar. Documentação como legado.''',
     },
     'zh': {
       'ach_0': '''每一位大师都曾经是一个受惊的居民。尽量不要让注射器掉落。''',
@@ -9975,221 +12506,343 @@ class AchievementLocalizations {
       'ach_0': '''كان كل أستاذ كبير مقيمًا مرعوبًا. حاول ألا تسقط المحقنة.''',
       'ach_1': '''حالتان. لقد توقفت عن سرد القائمة المرجعية بصوت عالٍ. تقدم.''',
       'ach_2': '''ثلاث حالات. بدأ المسرح يبدو أقل شبهاً بوضع الرهائن.''',
-      'ach_3': '''أربع حالات. يمكنك تهجئة سيفوفلوران دون التحقق من الزجاجة. في الغالب.''',
+      'ach_3':
+          '''أربع حالات. يمكنك تهجئة سيفوفلوران دون التحقق من الزجاجة. في الغالب.''',
       'ach_4': '''خمس حالات. تحية لآلة التخدير، فهي الوحيدة التي تحصل عليها.''',
       'ach_5': '''ست حالات. أصبحت ETCO₂ لغة الحب الخاصة بك.''',
-      'ach_6': '''سبع حالات. أتمنى أن تكون رؤيتك القادمة من الدرجة الأولى وجراحك في الوقت المحدد.''',
+      'ach_6':
+          '''سبع حالات. أتمنى أن تكون رؤيتك القادمة من الدرجة الأولى وجراحك في الوقت المحدد.''',
       'ach_7': '''ثمانية في الكتاب. السجل لم يعد شائعة.''',
       'ach_8': '''تسع حالات. واحد أقل من رقمين وتفوق معتدل.''',
-      'ach_9': '''عشر حالات. لقد توقفت رسميًا عن الاعتذار للقطب الوريدي عندما اصطدمت به.''',
-      'ach_10': '''ثلاث عشرة حالة. سيئ الحظ بالنسبة للبعض. سلس بالنسبة لك – كما يزعم.''',
-      'ach_11': '''ستة عشر حالة. حلو كتحريض سيفو حتى يطلبوا المزيد من الاسترخاء.''',
-      'ach_12': '''عشرين حالة. ساعات في الدعك أكثر من الملابس المدنية. كلاسيكي.''',
+      'ach_9':
+          '''عشر حالات. لقد توقفت رسميًا عن الاعتذار للقطب الوريدي عندما اصطدمت به.''',
+      'ach_10':
+          '''ثلاث عشرة حالة. سيئ الحظ بالنسبة للبعض. سلس بالنسبة لك – كما يزعم.''',
+      'ach_11':
+          '''ستة عشر حالة. حلو كتحريض سيفو حتى يطلبوا المزيد من الاسترخاء.''',
+      'ach_12':
+          '''عشرين حالة. ساعات في الدعك أكثر من الملابس المدنية. كلاسيكي.''',
       'ach_13': '''خمس وعشرون حالة. بدأ الجراحون يتذكرون اسمك الأول.''',
-      'ach_14': '''ثلاثون حالة. الكافيين هو الطيار المساعد ومؤثر التقلص العضلي الأساسي.''',
-      'ach_15': '''أربعون حالة. ومن المفارقات أنك الوحيد في الغرفة الذي لا ينام.''',
-      'ach_16': '''خمسون حالة. إن صوت نبض الثور هو في الأساس إيقاع الراحة الجديد الخاص بك.''',
-      'ach_17': '''ستين حالة. يكاد يكون كافياً للتنبيب أثناء اتخاذ قرار الغداء.''',
+      'ach_14':
+          '''ثلاثون حالة. الكافيين هو الطيار المساعد ومؤثر التقلص العضلي الأساسي.''',
+      'ach_15':
+          '''أربعون حالة. ومن المفارقات أنك الوحيد في الغرفة الذي لا ينام.''',
+      'ach_16':
+          '''خمسون حالة. إن صوت نبض الثور هو في الأساس إيقاع الراحة الجديد الخاص بك.''',
+      'ach_17':
+          '''ستين حالة. يكاد يكون كافياً للتنبيب أثناء اتخاذ قرار الغداء.''',
       'ach_18': '''خمس وسبعون حالة. ثلاثة أرباع الطريق إلى نادي القرن.''',
-      'ach_19': '''ثمانية وثمانون حالة. رقم الحظ. لا تضيعها على العربة المفقودة.''',
-      'ach_20': '''تسعون حالة. قريب جدًا بحيث يمكنك تذوق قهوة الاحتفال بعد المكالمة.''',
+      'ach_19':
+          '''ثمانية وثمانون حالة. رقم الحظ. لا تضيعها على العربة المفقودة.''',
+      'ach_20':
+          '''تسعون حالة. قريب جدًا بحيث يمكنك تذوق قهوة الاحتفال بعد المكالمة.''',
       'ach_21': '''مائة حالة. تقرأ الشاشة قبل أن ينهي الجراح السؤال.''',
-      'ach_22': '''مائة وخمسة وعشرون حالة. الحكم بصمت على تقنية تسجيل العين: غير مقفلة.''',
+      'ach_22':
+          '''مائة وخمسة وعشرون حالة. الحكم بصمت على تقنية تسجيل العين: غير مقفلة.''',
       'ach_23': '''مائة وخمسون حالة. السجل أصبح محترمًا. نومك ليس كذلك.''',
-      'ach_24': '''مائة وخمسة وسبعون حالة. عقدت خطة عمل البحر المتوسط. المعنوي : عوض .''',
-      'ach_25': '''مائتي حالة. حان الوقت لتعليم المبتدئين ما هو نهاية النطاق.''',
-      'ach_26': '''مائتان وخمسة وعشرون حالة. يعرف المسرح اسمك — عادة عندما تتجاوز القائمة.''',
-      'ach_27': '''مائتين وخمسين حالة. لم يعد البروبوفول موجودًا في الخط بعد الآن.''',
+      'ach_24':
+          '''مائة وخمسة وسبعون حالة. عقدت خطة عمل البحر المتوسط. المعنوي : عوض .''',
+      'ach_25':
+          '''مائتي حالة. حان الوقت لتعليم المبتدئين ما هو نهاية النطاق.''',
+      'ach_26':
+          '''مائتان وخمسة وعشرون حالة. يعرف المسرح اسمك — عادة عندما تتجاوز القائمة.''',
+      'ach_27':
+          '''مائتين وخمسين حالة. لم يعد البروبوفول موجودًا في الخط بعد الآن.''',
       'ach_28': '''ثلاثمائة حالة. تغذيها قهوة الصالة وقوة الإرادة المتبقية.''',
-      'ach_29': '''ثلاثمائة وخمسون حالة. الممرات الهوائية الصعبة ترفع الحاجب وليس معدل ضربات القلب.''',
-      'ach_30': '''أربعمائة حالة. لم تعد تخاف من جهاز النداء. النداء يخاف منك.''',
-      'ach_31': '''خمسمائة حالة. نصف ألف. التنوير الكامل للمجرى الهوائي (مع التواضع في بعض الأحيان).''',
-      'ach_32': '''خمسمائة وخمسون حالة. درجة أخرى على مقبض منظار الحنجرة للحياة.''',
-      'ach_33': '''ستمائة حالة. لا يزعجك سوى القليل، باستثناء جهاز التنفس الصناعي الذي يموت عند تحريضه.''',
-      'ach_34': '''ستمائة وخمسون حالة. لا يزال فوق الخط. جيد بما فيه الكفاية.''',
-      'ach_35': '''سبعمائة حالة. يمكن أن يكون ملف PDF الخاص بك بمثابة حاجز للباب.''',
-      'ach_36': '''سبعمائة وخمسون حالة. أنت والمتداول تتواصلان الآن في إيماءات نقية.''',
+      'ach_29':
+          '''ثلاثمائة وخمسون حالة. الممرات الهوائية الصعبة ترفع الحاجب وليس معدل ضربات القلب.''',
+      'ach_30':
+          '''أربعمائة حالة. لم تعد تخاف من جهاز النداء. النداء يخاف منك.''',
+      'ach_31':
+          '''خمسمائة حالة. نصف ألف. التنوير الكامل للمجرى الهوائي (مع التواضع في بعض الأحيان).''',
+      'ach_32':
+          '''خمسمائة وخمسون حالة. درجة أخرى على مقبض منظار الحنجرة للحياة.''',
+      'ach_33':
+          '''ستمائة حالة. لا يزعجك سوى القليل، باستثناء جهاز التنفس الصناعي الذي يموت عند تحريضه.''',
+      'ach_34':
+          '''ستمائة وخمسون حالة. لا يزال فوق الخط. جيد بما فيه الكفاية.''',
+      'ach_35':
+          '''سبعمائة حالة. يمكن أن يكون ملف PDF الخاص بك بمثابة حاجز للباب.''',
+      'ach_36':
+          '''سبعمائة وخمسون حالة. أنت والمتداول تتواصلان الآن في إيماءات نقية.''',
       'ach_37': '''ثمانمائة حالة. التطبيق مدين لك بالعشاء ويوم إجازة.''',
-      'ach_38': '''ثمانمائة وخمسون حالة. تم تحقيق الإنجاز. نيوستيجمين اختياري.''',
+      'ach_38':
+          '''ثمانمائة وخمسون حالة. تم تحقيق الإنجاز. نيوستيجمين اختياري.''',
       'ach_39': '''تسعمائة حالة. تقريبا الكبرى. لا تنحس المئة القادمة.''',
-      'ach_40': '''تسعمائة وخمسون حالة. النخبة هي شهر واحد جيد ونطاق واحد غير منقطع.''',
+      'ach_40':
+          '''تسعمائة وخمسون حالة. النخبة هي شهر واحد جيد ونطاق واحد غير منقطع.''',
       'ach_41': '''ألف حالة. آلة التخدير طلبت منك للتو النصيحة.''',
       'ach_42': '''مئتان وخمسون حالة. هل فكرت في لقاء الشمس؟ اجتماعيا؟''',
-      'ach_43': '''وخمسمائة حالة. التخدير هو الطبيعة الثانية. القهوة لا تزال في المقام الأول.''',
+      'ach_43':
+          '''وخمسمائة حالة. التخدير هو الطبيعة الثانية. القهوة لا تزال في المقام الأول.''',
       'ach_44': '''سبعمائة وخمسون حالة. شبح طاقة غرفة العمليات.''',
-      'ach_45': '''ألفين حالة. لقد رأيت كل "وظيفة إضافية سريعة". مرتين. قبل الغداء.''',
-      'ach_46': '''وخمسة وعشرون حالة. قم بتسمية خزانة الإمدادات باسم هذا الشخص.''',
-      'ach_47': '''ثلاثة آلاف حالة. لقد استنفدت العناوين وأدوية التخدير المتطايرة.''',
-      'ach_48': '''أربعة آلاف حالة. تحدق في المرضى وهم يفكرون في النوم طواعية.''',
+      'ach_45':
+          '''ألفين حالة. لقد رأيت كل "وظيفة إضافية سريعة". مرتين. قبل الغداء.''',
+      'ach_46':
+          '''وخمسة وعشرون حالة. قم بتسمية خزانة الإمدادات باسم هذا الشخص.''',
+      'ach_47':
+          '''ثلاثة آلاف حالة. لقد استنفدت العناوين وأدوية التخدير المتطايرة.''',
+      'ach_48':
+          '''أربعة آلاف حالة. تحدق في المرضى وهم يفكرون في النوم طواعية.''',
       'ach_49': '''خمسة آلاف حالة. هل اخترعت للتو غازًا متطايرًا جديدًا؟''',
-      'ach_50': '''ساعة واحدة من وقت التخدير. بالكاد جزء من MAC. لا يزال يهم.''',
+      'ach_50':
+          '''ساعة واحدة من وقت التخدير. بالكاد جزء من MAC. لا يزال يهم.''',
       'ach_51': '''خمس ساعات تراكمية. لقد ناموا. لقد رصدت. معرض تجاري.''',
-      'ach_52': '''عشر ساعات. الساعة تفوز دائما. ما عليك سوى الاحتفاظ بالخريطة.''',
+      'ach_52':
+          '''عشر ساعات. الساعة تفوز دائما. ما عليك سوى الاحتفاظ بالخريطة.''',
       'ach_53': '''خمسة عشر ساعة. لقد قدم إيقاعك اليومي شكوى رسمية.''',
-      'ach_54': '''أربع وعشرون ساعة تراكمية. يوم كامل من فقدان الوعي المسيطر عليه.''',
+      'ach_54':
+          '''أربع وعشرون ساعة تراكمية. يوم كامل من فقدان الوعي المسيطر عليه.''',
       'ach_55': '''ثمان وأربعون ساعة. يومين من ETCO₂ والصبر.''',
-      'ach_56': '''خمسون ساعة. وظيفة بدوام جزئي حيث لا يزال بإمكان المريض محاولة المغادرة بسبب عدم انتظام ضربات القلب.''',
-      'ach_57': '''اثنان وسبعون ساعة. لقد شهدت ساعتك شروق الشمس أكثر من وسادتك.''',
+      'ach_56':
+          '''خمسون ساعة. وظيفة بدوام جزئي حيث لا يزال بإمكان المريض محاولة المغادرة بسبب عدم انتظام ضربات القلب.''',
+      'ach_57':
+          '''اثنان وسبعون ساعة. لقد شهدت ساعتك شروق الشمس أكثر من وسادتك.''',
       'ach_58': '''مائة ساعة. قرن من الغاز، وليس القيل والقال.''',
       'ach_59': '''مائة وخمسون ساعة. الوقت يطير بسرعة عندما ترجع للخلف.''',
       'ach_60': '''مائتي ساعة. يكفي متطايراً لتعطير جناح صغير.''',
       'ach_61': '''ثلاثمائة ساعة. قدميك تطلب إقليميا لأنفسهم.''',
-      'ach_62': '''أربعمائة ساعة. لا يوجد حتى الآن العمل الإضافي التقليدي. المجد فقط.''',
+      'ach_62':
+          '''أربعمائة ساعة. لا يوجد حتى الآن العمل الإضافي التقليدي. المجد فقط.''',
       'ach_63': '''خمسمائة ساعة. في منتصف الطريق إلى الأرق الأسطوري.''',
-      'ach_64': '''سبعمائة وخمسون ساعة. الحالات الطويلة تبني الشخصية والحداب.''',
-      'ach_65': '''ألف ساعة. نخبة. الاجتماعات بطريقة أو بأخرى لا تزال تبدو أطول.''',
-      'ach_66': '''حالة واحدة تبدأ من منتصف الليل حتى الخامسة صباحًا. لأن النوم للأشخاص الذين ليسوا تحت الطلب.''',
+      'ach_64':
+          '''سبعمائة وخمسون ساعة. الحالات الطويلة تبني الشخصية والحداب.''',
+      'ach_65':
+          '''ألف ساعة. نخبة. الاجتماعات بطريقة أو بأخرى لا تزال تبدو أطول.''',
+      'ach_66':
+          '''حالة واحدة تبدأ من منتصف الليل حتى الخامسة صباحًا. لأن النوم للأشخاص الذين ليسوا تحت الطلب.''',
       'ach_67': '''تبدأ خمس ليال. أنت في الأساس مصاص دماء يرتدي المقشر.''',
-      'ach_68': '''تبدأ الليلة العاشرة. لقد غادر إيقاع الساعة البيولوجية الدردشة.''',
+      'ach_68':
+          '''تبدأ الليلة العاشرة. لقد غادر إيقاع الساعة البيولوجية الدردشة.''',
       'ach_69': '''تبدأ الليلة العشرين. ضوء النهار هو شائعة ما قبل العملية.''',
-      'ach_70': '''بداية واحدة من الساعة 6 إلى 7 صباحًا. اصطياد الدودة — أو أول تأخير في اليوم.''',
-      'ach_71': '''عشر بدايات مبكرة. القهوة هي مساعد طيار ودعم الدورة الدموية.''',
-      'ach_72': '''حالة واحدة في عطلة نهاية الأسبوع. أيام السبت مخصصة للأولاد... وحالات الطوارئ في الحضن.''',
-      'ach_73': '''عشر حالات نهاية الأسبوع. ما هو هذا "الغداء" الذي تتحدث عنه؟''',
-      'ach_74': '''خمسون حالة نهاية الأسبوع. لقد توقف الأصدقاء غير الطبيين عن دعوتك.''',
-      'ach_75': '''الجراحة في أقل من خمسة عشر دقيقة. قيلولة البروبوفول. التالي!''',
-      'ach_76': '''عشر عمليات جراحية فائقة السرعة. يمكنك تحويل الغرف بشكل أسرع من خدمة تنظيف الغرف.''',
-      'ach_77': '''التخدير على مدى أربع ساعات. حان الوقت لمناقشة كرة القدم الخيالية مع المقشر.''',
-      'ach_78': '''أكثر من ست ساعات. لقد حفظت كل بلاطة على جدار غرفة العمليات.''',
+      'ach_70':
+          '''بداية واحدة من الساعة 6 إلى 7 صباحًا. اصطياد الدودة — أو أول تأخير في اليوم.''',
+      'ach_71':
+          '''عشر بدايات مبكرة. القهوة هي مساعد طيار ودعم الدورة الدموية.''',
+      'ach_72':
+          '''حالة واحدة في عطلة نهاية الأسبوع. أيام السبت مخصصة للأولاد... وحالات الطوارئ في الحضن.''',
+      'ach_73':
+          '''عشر حالات نهاية الأسبوع. ما هو هذا "الغداء" الذي تتحدث عنه؟''',
+      'ach_74':
+          '''خمسون حالة نهاية الأسبوع. لقد توقف الأصدقاء غير الطبيين عن دعوتك.''',
+      'ach_75':
+          '''الجراحة في أقل من خمسة عشر دقيقة. قيلولة البروبوفول. التالي!''',
+      'ach_76':
+          '''عشر عمليات جراحية فائقة السرعة. يمكنك تحويل الغرف بشكل أسرع من خدمة تنظيف الغرف.''',
+      'ach_77':
+          '''التخدير على مدى أربع ساعات. حان الوقت لمناقشة كرة القدم الخيالية مع المقشر.''',
+      'ach_78':
+          '''أكثر من ست ساعات. لقد حفظت كل بلاطة على جدار غرفة العمليات.''',
       'ach_79': '''أكثر من ثماني ساعات. نمو اللحية منذ التحريض: قابل للقياس.''',
       'ach_80': '''أكثر من عشر ساعات. المريض عمليا هو زميلك في الغرفة الآن.''',
-      'ach_81': '''التخدير خلال خمسة عشر دقيقة من وقت الجراحة. تم نزع الأنبوب قبل أن تنتهي الستائر من السقوط.''',
-      'ach_82': '''خمسة وعشرون دورانًا ضيقًا. أنت والجراح تتشاركان خلية دماغية واحدة. جميل.''',
+      'ach_81':
+          '''التخدير خلال خمسة عشر دقيقة من وقت الجراحة. تم نزع الأنبوب قبل أن تنتهي الستائر من السقوط.''',
+      'ach_82':
+          '''خمسة وعشرون دورانًا ضيقًا. أنت والجراح تتشاركان خلية دماغية واحدة. جميل.''',
       'ach_83': '''خمسون ظهورًا مثاليًا. إيقاظهم هو فن، وأنت بيكاسو.''',
       'ach_84': '''مائة ظهور موقوت. نحن نتحقق منك بحثًا عن آلة الزمن.''',
       'ach_85': '''القضية في 25 ديسمبر أو 1 يناير. هو، هو، أمسك الميدازولام.''',
-      'ach_86': '''حالة بتاريخ 31 ديسمبر/كانون الأول أو 1 يناير/كانون الثاني. منظار الحنجرة بيد، والتفاؤل الهادئ باليد الأخرى.''',
-      'ach_87': '''حالة في عيد ميلادك. عيد ميلاد سعيد — إليك دورة طارئة سابقة.''',
+      'ach_86':
+          '''حالة بتاريخ 31 ديسمبر/كانون الأول أو 1 يناير/كانون الثاني. منظار الحنجرة بيد، والتفاؤل الهادئ باليد الأخرى.''',
+      'ach_87':
+          '''حالة في عيد ميلادك. عيد ميلاد سعيد — إليك دورة طارئة سابقة.''',
       'ach_88': '''ASA I. بصحة جيدة، تستمر في البحث عن الصيد المخفي.''',
       'ach_89': '''عشر حالات ASA I. أي مستشفى طوباوي هذا؟''',
       'ach_90': '''خمسة وعشرون ASA هو. القوائم الرياضية فقط، بالتأكيد.''',
       'ach_91': '''خمسون آسا هو. الرسوم البيانية رقيقة بشكل مثير للريبة.''',
       'ach_92': '''مائة ASA هو. يجب أن تقوم بطب الأسنان النهاري حصريًا.''',
-      'ach_93': '''آسا الثاني. لأنه لا يوجد أحد تقريبًا فوق الأربعين من العمر هو حقًا ASA I.''',
+      'ach_93':
+          '''آسا الثاني. لأنه لا يوجد أحد تقريبًا فوق الأربعين من العمر هو حقًا ASA I.''',
       'ach_94': '''عشرة ASA IIs. الخبز والزبدة وارتفاع ضغط الدم المهذب.''',
       'ach_95': '''خمسة وعشرون ASA IIs. اليومية الخاصة بغرفة العمليات.''',
       'ach_96': '''خمسون ASA IIs. الجرعات التحريضية تحسب أثناء نومك.''',
-      'ach_97': '''مائة ASA IIs. يمكنك كتابة فصل الكتاب المدرسي في منطقة ما قبل العملية.''',
+      'ach_97':
+          '''مائة ASA IIs. يمكنك كتابة فصل الكتاب المدرسي في منطقة ما قبل العملية.''',
       'ach_98': '''آسا الثالث. الأمور أصبحت حارة بعض الشيء.''',
       'ach_99': '''عشرة ASA IIIs. رسم بياني أكثر سمكًا من دليل الهاتف.''',
       'ach_100': '''خمسة وعشرون ASA IIIs. تعدد الأدوية هو اسمك الأوسط.''',
       'ach_101': '''خمسون ASA IIIs. الأمراض المصاحبة لتناول وجبة الإفطار.''',
       'ach_102': '''مائة ASA IIIs. تأكل قوائم المشاكل وتطلب ثواني.''',
-      'ach_103': '''آسا الرابع. حاصد الأرواح في الزاوية — لديك برنامج Epi في الدرج.''',
-      'ach_104': '''خمسة ASA IVs. يتم التفاوض حاليًا على خط الأساس الخاص بالموارد البشرية.''',
+      'ach_103':
+          '''آسا الرابع. حاصد الأرواح في الزاوية — لديك برنامج Epi في الدرج.''',
+      'ach_104':
+          '''خمسة ASA IVs. يتم التفاوض حاليًا على خط الأساس الخاص بالموارد البشرية.''',
       'ach_105': '''خمسة عشر ASA IVs. مرحبًا بكم في حافة السكين الفسيولوجية.''',
       'ach_106': '''خمسة وعشرون ASA IVs. تضحك بأدب في وجه العذاب.''',
       'ach_107': '''خمسون ASA IVs. الجليد في الأوردة. سيفو في الدائرة.''',
       'ach_108': '''ASA V. السلام عليك يا مريم، يا ممتلئ الضواغط.''',
-      'ach_109': '''ثلاثة ASA مقابل. جزء منه طبيب تخدير، وجزء متفائل، وجزء مستحضر الأرواح.''',
+      'ach_109':
+          '''ثلاثة ASA مقابل. جزء منه طبيب تخدير، وجزء متفائل، وجزء مستحضر الأرواح.''',
       'ach_110': '''خمسة ASA مقابل. سأل الموت. قلت ليس اليوم.''',
       'ach_111': '''عشرة ASA مقابل. الرأس اختياري تحت ساحة الرصاص.''',
       'ach_112': '''عشرين آسا مقابل. المراقبون يصمتون احتراما لهم.''',
-      'ach_113': '''مائة حالة ASA III – V. تتم إدارة المخاطر مثل وسيط هادئ بأدوية أفضل.''',
+      'ach_113':
+          '''مائة حالة ASA III – V. تتم إدارة المخاطر مثل وسيط هادئ بأدوية أفضل.''',
       'ach_114': '''ASA IV أو V مع تفريغ PACU هادئ. اعترف بذلك - هل غششت؟''',
-      'ach_115': '''ASA IV/V إلى وحدة العناية المركزة لا يزال يتم تنبيبه. لا تمر GO. لا تنفجر.''',
+      'ach_115':
+          '''ASA IV/V إلى وحدة العناية المركزة لا يزال يتم تنبيبه. لا تمر GO. لا تنفجر.''',
       'ach_116': '''عشر حالات متتالية سهلة هادئة. استمتع بها. لن يدوم.''',
-      'ach_117': '''خمسة وعشرون ASA I / II متتالية هادئة. شهر مريح بشكل مثير للريبة.''',
+      'ach_117':
+          '''خمسة وعشرون ASA I / II متتالية هادئة. شهر مريح بشكل مثير للريبة.''',
       'ach_118': '''ثلاث حالات ASA III+ في يوم واحد. خطط للمساء بعناية.''',
-      'ach_119': '''خمسة ASA III+ في يوم واحد. الغدد الكظرية: استغلالها بالكامل.''',
+      'ach_119':
+          '''خمسة ASA III+ في يوم واحد. الغدد الكظرية: استغلالها بالكامل.''',
       'ach_120': '''واحد على الأقل من كل ASA الصف 1-5. الخير والشر والمنبب.''',
       'ach_121': '''خمسون حالة هادئة عالية ASA. مخاطر عالية، صفر ذعر.''',
       'ach_122': '''عشر حالات ASA IV/V. أنت تدخل؛ الفوضى تأخذ مقعدا.''',
-      'ach_123': '''مائة عملية تفريغ هادئة لـ PACU. مجرد يوم ثلاثاء آخر، على تكرار.''',
+      'ach_123':
+          '''مائة عملية تفريغ هادئة لـ PACU. مجرد يوم ثلاثاء آخر، على تكرار.''',
       'ach_124': '''الطوارئ الأولى. لأنها بالطبع تمزقت في الساعة 16:55.''',
       'ach_125': '''خمس حالات طوارئ. من يحتاج إلى صالة الألعاب الرياضية؟''',
       'ach_126': '''عشر حالات طوارئ. الفوضى هي القلب الخاص بك.''',
       'ach_127': '''عشرين حالة طوارئ. لم تعد استراحة الموارد البشرية تشارك.''',
-      'ach_128': '''خمسون حالة طوارئ تحت الضغط. أنت تزدهر عندما تشتعل القائمة.''',
+      'ach_128':
+          '''خمسون حالة طوارئ تحت الضغط. أنت تزدهر عندما تشتعل القائمة.''',
       'ach_129': '''خمسة وسبعون مكالمة طوارئ. لوحة الصدمات تعرف خطواتك.''',
       'ach_130': '''مائة حالة طوارئ. عدم الإعجاب هو مهارة سريرية.''',
-      'ach_131': '''مائة وخمسون حالة طوارئ. يمكنك القيام بذلك أثناء نومك، من فضلك لا تفعل ذلك.''',
+      'ach_131':
+          '''مائة وخمسون حالة طوارئ. يمكنك القيام بذلك أثناء نومك، من فضلك لا تفعل ذلك.''',
       'ach_132': '''مائتي حالة طوارئ. يجفل جهاز النداء أولاً.''',
       'ach_133': '''خمس حالات طوارئ في يوم واحد. بروتوكول اكتمال القمر؟''',
       'ach_134': '''حالتين طوارئ العودة إلى الوراء. حجز مزدوج للبطولات.''',
-      'ach_135': '''الطوارئ ASA V. أمسك برنامج التحصين الموسع، قل أقل، ادفع بعناية.''',
-      'ach_136': '''عشرون حالة طوارئ، PACU هادئ. كارثة على الورق؛ مملة في الغرفة.''',
-      'ach_137': '''الطوارئ مع الإقليمية المنجزة. امنع الدخول بينما تشعر الغرفة بالذعر. ذروة التركيز.''',
+      'ach_135':
+          '''الطوارئ ASA V. أمسك برنامج التحصين الموسع، قل أقل، ادفع بعناية.''',
+      'ach_136':
+          '''عشرون حالة طوارئ، PACU هادئ. كارثة على الورق؛ مملة في الغرفة.''',
+      'ach_137':
+          '''الطوارئ مع الإقليمية المنجزة. امنع الدخول بينما تشعر الغرفة بالذعر. ذروة التركيز.''',
       'ach_138': '''تم تنفيذ عشرة مناطق طوارئ إقليمية. قناص القائمة العاجلة.''',
-      'ach_139': '''جراحة الطوارئ ≥30 دقيقة. للداخل، والإصلاح، والإغلاق، والخروج - طاقة التوقف.''',
-      'ach_140': '''مستيقظا في حالات الطوارئ الألياف الضوئية. أعصاب من التيتانيوم.''',
-      'ach_141': '''العمود الفقري في حالات الطوارئ. .لا تتحرك ولا ينبغي للأنبوب.''',
-      'ach_142': '''أمراض القلب والصدر في حالات الطوارئ. شاشات كبيرة، مشاعر أكبر.''',
-      'ach_143': '''طب التوليد في حالات الطوارئ. مريضان، خطة مجرى الهواء واحدة، البرد صفر.''',
+      'ach_139':
+          '''جراحة الطوارئ ≥30 دقيقة. للداخل، والإصلاح، والإغلاق، والخروج - طاقة التوقف.''',
+      'ach_140':
+          '''مستيقظا في حالات الطوارئ الألياف الضوئية. أعصاب من التيتانيوم.''',
+      'ach_141':
+          '''العمود الفقري في حالات الطوارئ. .لا تتحرك ولا ينبغي للأنبوب.''',
+      'ach_142':
+          '''أمراض القلب والصدر في حالات الطوارئ. شاشات كبيرة، مشاعر أكبر.''',
+      'ach_143':
+          '''طب التوليد في حالات الطوارئ. مريضان، خطة مجرى الهواء واحدة، البرد صفر.''',
       'ach_144': '''جراحة الأعصاب الطارئة. عامل دماغك كأنه يدفع الإيجار.''',
-      'ach_145': '''خمسون حالة طوارئ. عندما يقول المجلس عاجل، تقول مؤشر القوة النسبية.''',
-      'ach_146': '''تبدأ حالة الطوارئ من الساعة 00:00 إلى 04:00. لا شيء جيد يبدأ الآن، إلا الأيادي المختصة.''',
-      'ach_147': '''حالة الطوارئ في 25 ديسمبر أو 1 يناير. عيد ميلاد سعيد — هنا تمزق في الأحشاء.''',
-      'ach_148': '''عشر حالات طوارئ في نهاية الأسبوع. الحفاظ على بنك الدم في العمل.''',
-      'ach_149': '''مجرى الهواء الصعب في حالات الطوارئ. فشلت الخطط من أ إلى ج. أنت الخطة د.''',
-      'ach_150': '''الطوارئ ASA IV مع تفريغ PACU الهادئ. غرفة مشتعلة؛ ضغط الدم مؤدب 120/80.''',
+      'ach_145':
+          '''خمسون حالة طوارئ. عندما يقول المجلس عاجل، تقول مؤشر القوة النسبية.''',
+      'ach_146':
+          '''تبدأ حالة الطوارئ من الساعة 00:00 إلى 04:00. لا شيء جيد يبدأ الآن، إلا الأيادي المختصة.''',
+      'ach_147':
+          '''حالة الطوارئ في 25 ديسمبر أو 1 يناير. عيد ميلاد سعيد — هنا تمزق في الأحشاء.''',
+      'ach_148':
+          '''عشر حالات طوارئ في نهاية الأسبوع. الحفاظ على بنك الدم في العمل.''',
+      'ach_149':
+          '''مجرى الهواء الصعب في حالات الطوارئ. فشلت الخطط من أ إلى ج. أنت الخطة د.''',
+      'ach_150':
+          '''الطوارئ ASA IV مع تفريغ PACU الهادئ. غرفة مشتعلة؛ ضغط الدم مؤدب 120/80.''',
       'ach_151': '''الطوارئ تحت سن 18 عامًا. أحضر أفضل أعمالك وأهدأ صوتك.''',
       'ach_152': '''الطوارئ فوق 65. تعامل مثل الصين الجميلة مع مراقبة أفضل.''',
-      'ach_153': '''تنتهي حالة الطوارئ من الساعة 08:00 إلى 08:30. خطط العشاء: ألغيت بشرف.''',
+      'ach_153':
+          '''تنتهي حالة الطوارئ من الساعة 08:00 إلى 08:30. خطط العشاء: ألغيت بشرف.''',
       'ach_154': '''ثلاث حالات طوارئ في اثنتي عشرة ساعة. الضربة الطبية.''',
-      'ach_155': '''عشرة حالات طوارئ هادئة لتفريغ PACU. الخطة المتوسطة الأجل هي مجرد وصفة أخرى.''',
-      'ach_156': '''خمسة وعشرون حالة جراحة صدمات طارئة. قائد أوركسترا الإنعاش.''',
-      'ach_157': '''عشرون عملية فتح البطن في حالات الطوارئ. الإنتان، والضواغط، وتلك الرائحة التي لا لبس فيها.''',
-      'ach_158': '''عشرين حالة طوارئ العظام. التدريبات والأسمنت و"BP من فضلك".''',
+      'ach_155':
+          '''عشرة حالات طوارئ هادئة لتفريغ PACU. الخطة المتوسطة الأجل هي مجرد وصفة أخرى.''',
+      'ach_156':
+          '''خمسة وعشرون حالة جراحة صدمات طارئة. قائد أوركسترا الإنعاش.''',
+      'ach_157':
+          '''عشرون عملية فتح البطن في حالات الطوارئ. الإنتان، والضواغط، وتلك الرائحة التي لا لبس فيها.''',
+      'ach_158':
+          '''عشرين حالة طوارئ العظام. التدريبات والأسمنت و"BP من فضلك".''',
       'ach_159': '''عشرون حالة توليد طارئة. الفئة منها والتركيز النقي.''',
-      'ach_160': '''عشر عمليات جراحية لحج القحف العصبي في حالات الطوارئ. Smooth BP هي الشخصية الوحيدة المسموح بها.''',
+      'ach_160':
+          '''عشر عمليات جراحية لحج القحف العصبي في حالات الطوارئ. Smooth BP هي الشخصية الوحيدة المسموح بها.''',
       'ach_161': '''عشر حالات وعائية طارئة. المشابك خارج. الهدوء في.''',
       'ach_162': '''ثلاثمائة حالة طوارئ. تطبيق الفوضى للتقاعد المبكر.''',
       'ach_163': '''عشر حالات طارئة في تخصصات فريدة. المدى تحت النار.''',
-      'ach_164': '''خمس حالات طوارئ في أربع وعشرين ساعة. 90% كافيين، 10% حقد.''',
-      'ach_165': '''حالة واحدة من الجراحة العامة. الخبز والزبدة - الشفط في وضع الاستعداد.''',
-      'ach_166': '''خمسة وعشرون حالة من فئة GS. المزيد من الأمعاء من ميمي قائمة الجمعة.''',
-      'ach_167': '''مائة حالة من فئة GS. أنت والجراحة العامة في علاقة ملتزمة مع MAC.''',
-      'ach_168': '''حالة واحدة أورثو. مرحبًا بكم في المثاقب والمسامير والأدوات الكهربائية مثل الضوضاء البيضاء.''',
+      'ach_164':
+          '''خمس حالات طوارئ في أربع وعشرين ساعة. 90% كافيين، 10% حقد.''',
+      'ach_165':
+          '''حالة واحدة من الجراحة العامة. الخبز والزبدة - الشفط في وضع الاستعداد.''',
+      'ach_166':
+          '''خمسة وعشرون حالة من فئة GS. المزيد من الأمعاء من ميمي قائمة الجمعة.''',
+      'ach_167':
+          '''مائة حالة من فئة GS. أنت والجراحة العامة في علاقة ملتزمة مع MAC.''',
+      'ach_168':
+          '''حالة واحدة أورثو. مرحبًا بكم في المثاقب والمسامير والأدوات الكهربائية مثل الضوضاء البيضاء.''',
       'ach_169': '''خمسة وعشرون حالة أورثو. آذان معايرة للمنشار.''',
       'ach_170': '''مائة حالة أورثو. طاقم الهيكل العظمي، ولكن جعله مخدرا.''',
       'ach_171': '''حالة توليد واحدة. لوجستيات بشرية صغيرة ذات مخاطر عالية.''',
       'ach_172': '''خمسة وعشرون حالة طوارئ. جناح العمل يعرف خطواتك.''',
-      'ach_173': '''مائة حالة obs. فوق الجافية، فئة منها، والأبدية "هل هي كاملة؟"''',
+      'ach_173':
+          '''مائة حالة obs. فوق الجافية، فئة منها، والأبدية "هل هي كاملة؟"''',
       'ach_174': '''خمسة وعشرون حالة نسائية. Trendelenburg والمثابرة.''',
       'ach_175': '''حالة واحدة لجراحة الأعصاب. التعامل بحذر - الدماغ يراقب.''',
       'ach_176': '''خمسة وعشرون حالة عصبية. ضغط الدم السلس هو لغة حبك.''',
       'ach_177': '''خمسون حالة عصبية. منطقة عميقة. مطلوب أيدي ثابتة.''',
       'ach_178': '''حالة واحدة من أمراض القلب. شاشات كبيرة، مشاعر أكبر.''',
       'ach_179': '''خمسة وعشرون حالة CT. تجاوز الثرثرة هو الخلفية ETCO₂.''',
-      'ach_180': '''خمسون حالة قلب وصدر. لا يزال الانقباض الاختياري جامحًا. تبقى مملا. جيد.''',
-      'ach_181': '''خمسة وعشرون حالة أنف وأذن وحنجرة. مجرى الهواء المشترك: سقوط الثقة النهائي.''',
-      'ach_182': '''خمسة وعشرون حالة مسالك بولية. تدفق، والتركيز، والصمت المهذب.''',
-      'ach_183': '''خمسة وعشرون علبة بلاستيكية. الكون بالنسبة لهم. التحمل بالنسبة لك.''',
-      'ach_184': '''حالة واحدة لجراحة الأطفال. ETT الصغيرة، والمساءلة كاملة الحجم.''',
-      'ach_185': '''خمسة وعشرون حالة جراحة أطفال. أنت تتحدث بطلاقة ذعر الوالدين.''',
-      'ach_186': '''خمسة وعشرون حالة جراحة الصدمة. عندما يقول المجلس الصدمات المتعددة، تقول حسنا.''',
+      'ach_180':
+          '''خمسون حالة قلب وصدر. لا يزال الانقباض الاختياري جامحًا. تبقى مملا. جيد.''',
+      'ach_181':
+          '''خمسة وعشرون حالة أنف وأذن وحنجرة. مجرى الهواء المشترك: سقوط الثقة النهائي.''',
+      'ach_182':
+          '''خمسة وعشرون حالة مسالك بولية. تدفق، والتركيز، والصمت المهذب.''',
+      'ach_183':
+          '''خمسة وعشرون علبة بلاستيكية. الكون بالنسبة لهم. التحمل بالنسبة لك.''',
+      'ach_184':
+          '''حالة واحدة لجراحة الأطفال. ETT الصغيرة، والمساءلة كاملة الحجم.''',
+      'ach_185':
+          '''خمسة وعشرون حالة جراحة أطفال. أنت تتحدث بطلاقة ذعر الوالدين.''',
+      'ach_186':
+          '''خمسة وعشرون حالة جراحة الصدمة. عندما يقول المجلس الصدمات المتعددة، تقول حسنا.''',
       'ach_187': '''خمسة وعشرون حالة طب العيون. السكون هو رياضة تنافسية.''',
       'ach_188': '''حالة واحدة للعمود الفقري. .لا تتحرك حقًا. لا.''',
-      'ach_189': '''خمس وعشرون حالة عمود فقري. منبطحًا ومبطنًا ومتوافقًا فلسفيًا مع الطاولة.''',
-      'ach_190': '''خمسة وعشرون حالة للرأس والرقبة. عقارات إيرواي ذات أسعار ممتازة.''',
+      'ach_189':
+          '''خمس وعشرون حالة عمود فقري. منبطحًا ومبطنًا ومتوافقًا فلسفيًا مع الطاولة.''',
+      'ach_190':
+          '''خمسة وعشرون حالة للرأس والرقبة. عقارات إيرواي ذات أسعار ممتازة.''',
       'ach_191': '''خمسة وعشرون حالة HPB. عمليات طويلة، وتركيز أطول.''',
-      'ach_192': '''خمسة وعشرون حالة من حالات الجهاز الهضمي العلوي أو القولون والمستقيم. البطن لا ينفد أبدًا من تقلبات الحبكة.''',
-      'ach_193': '''عشر حالات غدد صماء. الهرمونات كتبت البروتوكول؛ أنت تطبقه.''',
-      'ach_194': '''عشر حالات NORA/MRI/DSA. موقع بعيد، مراقبة إبداعية، أرجل قوية.''',
-      'ach_195': '''عشر حالات تدخل الألم. في بعض الأحيان يكون الدواء اللطيف محليًا.''',
+      'ach_192':
+          '''خمسة وعشرون حالة من حالات الجهاز الهضمي العلوي أو القولون والمستقيم. البطن لا ينفد أبدًا من تقلبات الحبكة.''',
+      'ach_193':
+          '''عشر حالات غدد صماء. الهرمونات كتبت البروتوكول؛ أنت تطبقه.''',
+      'ach_194':
+          '''عشر حالات NORA/MRI/DSA. موقع بعيد، مراقبة إبداعية، أرجل قوية.''',
+      'ach_195':
+          '''عشر حالات تدخل الألم. في بعض الأحيان يكون الدواء اللطيف محليًا.''',
       'ach_196': '''خمس حالات RMU. مسرح هادئ، أيادي حذرة، غرف مفعمة بالأمل.''',
-      'ach_197': '''خمسة وعشرون حالة أورام نسائية. علم الأمراض الثقيلة. أيدي ثابتة.''',
-      'ach_198': '''خمسة وعشرون حالة يدوية وترميمية. المليمترات مهمة أكثر من الأنا.''',
-      'ach_199': '''عشر حالات تقويم العظام للأطفال. تنمو العظام، وينمو الصبر.''',
+      'ach_197':
+          '''خمسة وعشرون حالة أورام نسائية. علم الأمراض الثقيلة. أيدي ثابتة.''',
+      'ach_198':
+          '''خمسة وعشرون حالة يدوية وترميمية. المليمترات مهمة أكثر من الأنا.''',
+      'ach_199':
+          '''عشر حالات تقويم العظام للأطفال. تنمو العظام، وينمو الصبر.''',
       'ach_200': '''خمسة تخصصات فريدة من نوعها. النطاق مرن.''',
-      'ach_201': '''عشرة تخصصات فريدة من نوعها. يحتوي السجل الخاص بك على مشكلات التزام صحية.''',
+      'ach_201':
+          '''عشرة تخصصات فريدة من نوعها. يحتوي السجل الخاص بك على مشكلات التزام صحية.''',
       'ach_202': '''خمسة عشر تخصصًا فريدًا. مسرح GPS يوصلك إلى كل مكان.''',
-      'ach_203': '''خمسة وعشرون تخصصًا فريدًا. كان دافنشي يفتقر إلى مضخة TIVA. لم تكن.''',
-      'ach_204': '''عشر حالات تخصصية "أخرى". إذا لم يكن مناسبًا لقائمة منسدلة، فهو لا يزال يناسب كتابك.''',
-      'ach_205': '''مائتين وخمسين حالة أورثو. حزام العنوان مصنوع من الاسمنت العظمي.''',
-      'ach_206': '''مائتان وخمسون حالة ولادة أو أمراض نسائية. تاج جناح العمل ملطخ بالدم قليلاً.''',
-      'ach_207': '''مائة حالة عصبية. برنامج المقارنات الدولية هو مجرد رقم آخر تتنمر عليه بلطف.''',
-      'ach_208': '''مائة حالة CT. حالات كبيرة، قدرة أكبر على التحمل، فحوصات ACT لا نهاية لها.''',
+      'ach_203':
+          '''خمسة وعشرون تخصصًا فريدًا. كان دافنشي يفتقر إلى مضخة TIVA. لم تكن.''',
+      'ach_204':
+          '''عشر حالات تخصصية "أخرى". إذا لم يكن مناسبًا لقائمة منسدلة، فهو لا يزال يناسب كتابك.''',
+      'ach_205':
+          '''مائتين وخمسين حالة أورثو. حزام العنوان مصنوع من الاسمنت العظمي.''',
+      'ach_206':
+          '''مائتان وخمسون حالة ولادة أو أمراض نسائية. تاج جناح العمل ملطخ بالدم قليلاً.''',
+      'ach_207':
+          '''مائة حالة عصبية. برنامج المقارنات الدولية هو مجرد رقم آخر تتنمر عليه بلطف.''',
+      'ach_208':
+          '''مائة حالة CT. حالات كبيرة، قدرة أكبر على التحمل، فحوصات ACT لا نهاية لها.''',
       'ach_209': '''مائة حالة العمود الفقري. لقد قدم قطنك الخاص بك Datix.''',
       'ach_210': '''مائة حالة مسالك بولية. سيد الري اللطيف.''',
-      'ach_211': '''مائة حالة أنف وأذن وحنجرة. زن مجرى الهواء المشترك، الذي تم تحقيقه بشق الأنفس.''',
-      'ach_212': '''مائة حالة من البلاستيك. الجمالية أو الترميمية – نفس الحث الثابت.''',
+      'ach_211':
+          '''مائة حالة أنف وأذن وحنجرة. زن مجرى الهواء المشترك، الذي تم تحقيقه بشق الأنفس.''',
+      'ach_212':
+          '''مائة حالة من البلاستيك. الجمالية أو الترميمية – نفس الحث الثابت.''',
       'ach_213': '''مائة حالة جراحة أطفال. أنابيب صغيرة، حالة أسطورة كبيرة.''',
-      'ach_214': '''مائة حالة طب العيون. التميز بلا حراك، الروح المحتوية على الكافيين.''',
-      'ach_215': '''خمسون حالة القولون والمستقيم. أنت تعرف مفاغرة مثل الشكل الموجي.''',
-      'ach_216': '''خمسون حالة من الجهاز الهضمي العلوي. طائر متكرر من الفم إلى رباط تريتز.''',
-      'ach_217': '''خمسون حالة HPB. العمليات الطويلة؛ صبر قصير لانخفاض ضغط الدم الغامض.''',
+      'ach_214':
+          '''مائة حالة طب العيون. التميز بلا حراك، الروح المحتوية على الكافيين.''',
+      'ach_215':
+          '''خمسون حالة القولون والمستقيم. أنت تعرف مفاغرة مثل الشكل الموجي.''',
+      'ach_216':
+          '''خمسون حالة من الجهاز الهضمي العلوي. طائر متكرر من الفم إلى رباط تريتز.''',
+      'ach_217':
+          '''خمسون حالة HPB. العمليات الطويلة؛ صبر قصير لانخفاض ضغط الدم الغامض.''',
       'ach_218': '''أول جي ايه. مرحبا بكم في كنيسة المرذاذ.''',
       'ach_219': '''خمسون جي ايه. سيفو هي في الأساس سمة شخصية الآن.''',
       'ach_220': '''مائتي غاز. يمكنك شم رائحة MAC من الممر.''',
@@ -10199,27 +12852,36 @@ class AchievementLocalizations {
       'ach_224': '''خمسة وعشرون تيفا. الهدف متحكم فيه ومستقر عاطفيا.''',
       'ach_225': '''خمسون تيفا. مضخات طنين مثل الثلاجة قانعة.''',
       'ach_226': '''مائة تيفا. متقلبة من؟''',
-      'ach_227': '''أول محرك بحث خاص. أفضل ما في العالمين، ضعف الأعمال الورقية.''',
+      'ach_227':
+          '''أول محرك بحث خاص. أفضل ما في العالمين، ضعف الأعمال الورقية.''',
       'ach_228': '''عشرة محركات بحث مخصصة. فقدان المقاومة هو القلب الخاص بك.''',
-      'ach_229': '''خمسة وعشرون محرك بحث خاص. القسطرة والإبرة في الزواج المتناغم.''',
+      'ach_229':
+          '''خمسة وعشرون محرك بحث خاص. القسطرة والإبرة في الزواج المتناغم.''',
       'ach_230': '''أول العمود الفقري الابتدائي. لمعان CSF: النوع الجيد.''',
       'ach_231': '''خمسون شوكة. بالتنقيط، إسقاط، كتلة.''',
-      'ach_232': '''مائة وخمسون عموداً فقرياً. يمكنك العثور على L3–4 في الظلام.''',
+      'ach_232':
+          '''مائة وخمسون عموداً فقرياً. يمكنك العثور على L3–4 في الظلام.''',
       'ach_233': '''أول ابتدائي فوق الجافية. شنق الحقيبة؛ عقد الإيمان.''',
-      'ach_234': '''خمسة وعشرون حقنة فوق الجافية. مساحة الأسطورة، إبرة الحقيقة.''',
+      'ach_234':
+          '''خمسة وعشرون حقنة فوق الجافية. مساحة الأسطورة، إبرة الحقيقة.''',
       'ach_235': '''خمسون حقنة فوق الجافية. البراعة على القوة. دائماً.''',
-      'ach_236': '''التخدير الأول/MAC. واعية بما فيه الكفاية لتندم على الحديث الصغير.''',
-      'ach_237': '''خمسة وعشرون جهاز MAC. على نحو سلس كمجاملة تسيطر عليها الهدف.''',
+      'ach_236':
+          '''التخدير الأول/MAC. واعية بما فيه الكفاية لتندم على الحديث الصغير.''',
+      'ach_237':
+          '''خمسة وعشرون جهاز MAC. على نحو سلس كمجاملة تسيطر عليها الهدف.''',
       'ach_238': '''خمسون جهاز ماكينتوش. يغفون. أنت تثرثر بالجراح.''',
       'ach_239': '''أول حالة محلية فقط. وضع الاستعداد: مفعل.''',
       'ach_240': '''عشرين حالة محلية فقط. البطولة اختيارية؛ الحضور إلزامي.''',
       'ach_241': '''أول كتلة عصبية محيطية كأولية. نشل أو وميض - الالتزام.''',
       'ach_242': '''خمسة وعشرون PNB. الأعصاب الموجودة؛ فحص الأنا.''',
       'ach_243': '''أول حالة مضخة TCI. الخوارزمية هي مساعد الطيار الخاص بك.''',
-      'ach_244': '''خمسة وعشرون حالة من حالات TCI. أحلام موقع التأثير، وحقائق البلازما.''',
+      'ach_244':
+          '''خمسة وعشرون حالة من حالات TCI. أحلام موقع التأثير، وحقائق البلازما.''',
       'ach_245': '''خمسون حالة من حالات TCI. المضخة تثق بك. نادر.''',
-      'ach_246': '''سبعة أو أكثر من التقنيات الأساسية الفريدة. النطاق هو المرن.''',
-      'ach_247': '''العمود الفقري، أو فوق الجافية، أو CSE، أو PNB، أو الموضعي - المريض مستيقظ، أنت أكثر وضوحًا.''',
+      'ach_246':
+          '''سبعة أو أكثر من التقنيات الأساسية الفريدة. النطاق هو المرن.''',
+      'ach_247':
+          '''العمود الفقري، أو فوق الجافية، أو CSE، أو PNB، أو الموضعي - المريض مستيقظ، أنت أكثر وضوحًا.''',
       'ach_248': '''مائة جي ايه. نوم عميق، أعذار سطحية.''',
       'ach_249': '''مائتان وخمسون جي.اس. يمكنك تعليم آداب المرذاذ.''',
       'ach_250': '''خمسمائة غاز. طاقة رجل الغاز/امرأة الغاز الأسطورية.''',
@@ -10227,7 +12889,8 @@ class AchievementLocalizations {
       'ach_252': '''مائة تيفا. تم تأكيد عضوية جمعية الخط الأبيض.''',
       'ach_253': '''ثلاثمائة عمود فقري. التاج مصنوع من المقدمين.''',
       'ach_254': '''مائة فوق الجافية. الملوك في الفضاء فوق الجافية.''',
-      'ach_255': '''مائة حالة MAC. التخدير سلس للغاية لدرجة أن الجراح ينسى أنك هناك.''',
+      'ach_255':
+          '''مائة حالة MAC. التخدير سلس للغاية لدرجة أن الجراح ينسى أنك هناك.''',
       'ach_256': '''أول نجاح لـ ETT. كابنوغراف: التصفيق الوحيد الذي يهم.''',
       'ach_257': '''عشرة إتس. الأيدي أكثر ثباتا. الأنا لا تزال تحت الإشراف.''',
       'ach_258': '''خمسون إت. الأنبوب موجود؛ الغداء يمكن أن ينتظر.''',
@@ -10239,16 +12902,22 @@ class AchievementLocalizations {
       'ach_264': '''خمسون LMA. احترام مكانة الصيام؛ الفك يحترم أكثر.''',
       'ach_265': '''مائة LMAs. البديل اللطيف ذو الآراء القوية.''',
       'ach_266': '''مائتان وخمسون LMAs. يمكنك إجراء محادثة واحدة في منتصفها.''',
-      'ach_267': '''الحالة الأولى لقناع الوجه فقط. في بعض الأحيان يكون الأنبوب الأقل حكمة أكثر.''',
+      'ach_267':
+          '''الحالة الأولى لقناع الوجه فقط. في بعض الأحيان يكون الأنبوب الأقل حكمة أكثر.''',
       'ach_268': '''عشرون حالة كمامة فقط. تم فتح امبوباج كارديو.''',
-      'ach_269': '''الدعم الأول لفتح القصبة الهوائية. عندما تجتمع المهارات الناعمة مع البلاستيك الصلب.''',
-      'ach_270': '''خمس حالات القصبة الهوائية. رياضة جماعية ذات قواعد صارمة للغاية.''',
-      'ach_271': '''التهوية النفاثة الأولى. ارتفاع وتيرة ارتفاع ضغط الدم في الغرفة.''',
+      'ach_269':
+          '''الدعم الأول لفتح القصبة الهوائية. عندما تجتمع المهارات الناعمة مع البلاستيك الصلب.''',
+      'ach_270':
+          '''خمس حالات القصبة الهوائية. رياضة جماعية ذات قواعد صارمة للغاية.''',
+      'ach_271':
+          '''التهوية النفاثة الأولى. ارتفاع وتيرة ارتفاع ضغط الدم في الغرفة.''',
       'ach_272': '''أول DLT. لومين، صلاة واحدة، وضع مثالي.''',
       'ach_273': '''عشرين DLTs. اليسار واليمين، وأحيانا "هل نحن متأكدون؟"''',
-      'ach_274': '''خمسون DLTs. التأكيد باستخدام الألياف الضوئية هو لغة الحب الخاصة بك.''',
+      'ach_274':
+          '''خمسون DLTs. التأكيد باستخدام الألياف الضوئية هو لغة الحب الخاصة بك.''',
       'ach_275': '''أول مانع للشعب الهوائية. العزلة بدون دراما حجة DLT.''',
-      'ach_276': '''عشرة حاصرات الشعب الهوائية. وقوف السيارات بدقة في مرآب مجرى الهواء.''',
+      'ach_276':
+          '''عشرة حاصرات الشعب الهوائية. وقوف السيارات بدقة في مرآب مجرى الهواء.''',
       'ach_277': '''LMA الكلاسيكي عشرين مرة. المدرسة القديمة. لا يزال يعمل.''',
       'ach_278': '''ProSeal عشرين مرة. أنبوب الصرف: البطل المجهول''',
       'ach_279': '''جل عشرين مرة. لا يوجد صفعة ولا مشكلة (عادة).''',
@@ -10263,53 +12932,75 @@ class AchievementLocalizations {
       'ach_288': '''VL عشر مرات. وقت الشاشة الذي يساعد المرضى بالفعل''',
       'ach_289': '''VL خمسين مرة. الشفرة، الشاشة، النجاح.''',
       'ach_290': '''VL مائة مرة. تنظير الحنجرة المباشر مخصص لذكريات الماضي.''',
-      'ach_291': '''أول الألياف الضوئية مستيقظا. المريض واعي؛ أنت شديد الوعي.''',
-      'ach_292': '''خمسة ألياف بصرية مستيقظة. أعصاب من التيتانيوم، موضع الأساطير.''',
-      'ach_293': '''خمسة عشر من الألياف الضوئية المستيقظة. المعيار الذهبي، مطاردة مع يدوكائين.''',
+      'ach_291':
+          '''أول الألياف الضوئية مستيقظا. المريض واعي؛ أنت شديد الوعي.''',
+      'ach_292':
+          '''خمسة ألياف بصرية مستيقظة. أعصاب من التيتانيوم، موضع الأساطير.''',
+      'ach_293':
+          '''خمسة عشر من الألياف الضوئية المستيقظة. المعيار الذهبي، مطاردة مع يدوكائين.''',
       'ach_294': '''أول ألياف بصرية نائمة. الأنبوب أولاً، التباهي ثانياً.''',
-      'ach_295': '''عشرة ألياف بصرية نائمة. مهارات النطاق دون الحديث الحماسي.''',
+      'ach_295':
+          '''عشرة ألياف بصرية نائمة. مهارات النطاق دون الحديث الحماسي.''',
       'ach_296': '''إجمالي خمسة وعشرون ألياف بصرية. صديق مرن ومعايير صارمة.''',
       'ach_297': '''Microcuff ETT عشر مرات. أنبوب صغير، مسؤولية الكبار.''',
       'ach_298': '''RAE أو فليكسوميتالك عشرين مرة. الهندسة هي مهارة سريرية.''',
       'ach_299': '''أول كورماك ليهان 3. المنظر هو اقتراح.''',
-      'ach_300': '''تمكن عشرة الصف 3S. اكتملت المجموعة؛ معدل ضربات القلب اختياري.''',
-      'ach_301': '''أولًا كورماك-ليهان 4. الإيمان والبوجي والإضاءة الجيدة في أماكن أخرى.''',
+      'ach_300':
+          '''تمكن عشرة الصف 3S. اكتملت المجموعة؛ معدل ضربات القلب اختياري.''',
+      'ach_301':
+          '''أولًا كورماك-ليهان 4. الإيمان والبوجي والإضاءة الجيدة في أماكن أخرى.''',
       'ach_302': '''غزا خمسة الصف 4S. لقد حصلت على ملصق VL.''',
-      'ach_303': '''تم وضع علامة على أول مجرى هوائي صعب. كان للخطة (أ) خطة (ب) الحكيمة.''',
+      'ach_303':
+          '''تم وضع علامة على أول مجرى هوائي صعب. كان للخطة (أ) خطة (ب) الحكيمة.''',
       'ach_304': '''خمس مجاري هوائية صعبة. التلمذة الصناعية خدم تحت الضغط.''',
       'ach_305': '''عشرة ممرات هوائية صعبة. تستمر الرحلة؛ رفض desats.''',
-      'ach_306': '''خمسة وعشرون مجرى هوائي صعب. وضع الخبراء: لا يزال متواضعا.''',
+      'ach_306':
+          '''خمسة وعشرون مجرى هوائي صعب. وضع الخبراء: لا يزال متواضعا.''',
       'ach_307': '''خمسون ممرًا هوائيًا صعبًا. صامت وفعال ومرعب بعض الشيء.''',
-      'ach_308': '''مجرى الهواء الصعب في محاولة واحدة. طاقة المرور الأول. قبلة الشيف.''',
-      'ach_309': '''عشرة انتصارات في المحاولات الأولى في مجرى الهواء الصعب. نظيفة كالصافرة، وأحدة من واحدة.''',
-      'ach_310': '''مجرى هوائي صعب يحتاج إلى أكثر من 3 محاولات. نجا. تعلمت. تم تسجيل الدخول.''',
+      'ach_308':
+          '''مجرى الهواء الصعب في محاولة واحدة. طاقة المرور الأول. قبلة الشيف.''',
+      'ach_309':
+          '''عشرة انتصارات في المحاولات الأولى في مجرى الهواء الصعب. نظيفة كالصافرة، وأحدة من واحدة.''',
+      'ach_310':
+          '''مجرى هوائي صعب يحتاج إلى أكثر من 3 محاولات. نجا. تعلمت. تم تسجيل الدخول.''',
       'ach_311': '''تم أداء خمسين LMA شخصيًا. باليد وليس بالقرب.''',
       'ach_312': '''تم تنفيذ مائتي اختبار ETT. الأنبوب يعرف اسمك.''',
-      'ach_313': '''خمسون الخطوط الجوية ساعدت. دعم فريق الممثلين، لا يزال حرجا.''',
-      'ach_314': '''تمت ملاحظة خمسين خطوط جوية. المشاهدة هي كيف تبدأ الأساطير.''',
-      'ach_315': '''ETT أقل من 4.0 عند حديثي الولادة أو الرضيع. تجويف صغير، احترام كبير.''',
+      'ach_313':
+          '''خمسون الخطوط الجوية ساعدت. دعم فريق الممثلين، لا يزال حرجا.''',
+      'ach_314':
+          '''تمت ملاحظة خمسين خطوط جوية. المشاهدة هي كيف تبدأ الأساطير.''',
+      'ach_315':
+          '''ETT أقل من 4.0 عند حديثي الولادة أو الرضيع. تجويف صغير، احترام كبير.''',
       'ach_316': '''حجم إي تي تي ≥8.5. طاقة كبيرة في مجرى الهواء.''',
-      'ach_317': '''يتم استخدام ETTs غير المقيدة بشكل صحيح في الأقدام. القواعد القديمة، الحكم الجيد.''',
+      'ach_317':
+          '''يتم استخدام ETTs غير المقيدة بشكل صحيح في الأقدام. القواعد القديمة، الحكم الجيد.''',
       'ach_318': '''مائة ETTs مكبلة عادية. قضية قياسية، تنفيذ الخبراء.''',
-      'ach_319': '''مائتي مشاهدة من الدرجة الأولى. واضحة وضوح الشمس. لا تكن مغرورًا.''',
+      'ach_319':
+          '''مائتي مشاهدة من الدرجة الأولى. واضحة وضوح الشمس. لا تكن مغرورًا.''',
       'ach_320': '''خمسون درجة 2أ/2ب. مثالية تقريبًا - لا تزال تعتبر مهارة.''',
       'ach_321': '''تم تنفيذ عشرة ألياف ضوئية مستيقظة. موضعي، حديث، أنبوب.''',
-      'ach_322': '''تم إجراء عشرين من الألياف الضوئية النائمة. نطاق أثناء نومهم؛ لم تكن.''',
-      'ach_323': '''إدارة مجرى الهواء الصعب في حالات الطوارئ. عندما تصبح الغرفة هادئة، لا تفعل ذلك.''',
-      'ach_324': '''تم تسجيل تفاصيل مجرى الهواء عبر خمسمائة حالة. البيانات هي نوع من الحكمة.''',
+      'ach_322':
+          '''تم إجراء عشرين من الألياف الضوئية النائمة. نطاق أثناء نومهم؛ لم تكن.''',
+      'ach_323':
+          '''إدارة مجرى الهواء الصعب في حالات الطوارئ. عندما تصبح الغرفة هادئة، لا تفعل ذلك.''',
+      'ach_324':
+          '''تم تسجيل تفاصيل مجرى الهواء عبر خمسمائة حالة. البيانات هي نوع من الحكمة.''',
       'ach_325': '''تم لمس كل أداة وطريقة. التسليح الكامل. احترام.''',
       'ach_326': '''تم إجراء أول العمود الفقري. لمعان CSF: النوع الجيد.''',
       'ach_327': '''عشرة أشواك. بالتنقيط، إسقاط، كتلة.''',
       'ach_328': '''خمسون شوكة. L3–4 هو المنزل.''',
-      'ach_329': '''مائة عمود فقري. تحت العنكبوتية هو الرمز البريدي الخاص بك.''',
+      'ach_329':
+          '''مائة عمود فقري. تحت العنكبوتية هو الرمز البريدي الخاص بك.''',
       'ach_330': '''مائتان وخمسون شوكة. تطريز النخبة.''',
       'ach_331': '''أولًا فوق الجافية. شنق الحقيبة؛ عقد الإيمان.''',
-      'ach_332': '''خمسة وعشرون حقنة فوق الجافية. فقدان المقاومة هو أمراض القلب.''',
+      'ach_332':
+          '''خمسة وعشرون حقنة فوق الجافية. فقدان المقاومة هو أمراض القلب.''',
       'ach_333': '''خمسون حقنة فوق الجافية ببراعة. القوة للهواة.''',
       'ach_334': '''مائة فوق الجافية. تم العثور على مساحة، والأنا متوقفة.''',
       'ach_335': '''أول كتلة عصبية محيطية. نشل أو وميض - اختر جانبًا.''',
       'ach_336': '''عشرة بي إن بي. الأعصاب الموجودة؛ القهوة المكتسبة.''',
-      'ach_337': '''خمسة وعشرون PNB. هلام الموجات فوق الصوتية هو مجموعة غذائية.''',
+      'ach_337':
+          '''خمسة وعشرون PNB. هلام الموجات فوق الصوتية هو مجموعة غذائية.''',
       'ach_338': '''خمسون بي إن بي. وضع الرئيس: لا يزال يمثل الجلد.''',
       'ach_339': '''مائة PNBs. الخبير يعني أنك لا تزال تحترم اللفافة.''',
       'ach_340': '''مائتي PNB. الإتقان هو نجاح هادئ قابل للتكرار.''',
@@ -10318,25 +13009,35 @@ class AchievementLocalizations {
       'ach_343': '''USG خمسين مرة. إبرة مشرقة. العقل أكثر إشراقا.''',
       'ach_344': '''USG مائة مرة. ترى ما يشعر به الآخرون.''',
       'ach_345': '''USG مائتين وخمسين مرة. أسطورة ملطخة بالهلام.''',
-      'ach_346': '''يستخدم منشط للأعصاب. نشل المدرسة القديمة، واحترام المدرسة الجديدة.''',
+      'ach_346':
+          '''يستخدم منشط للأعصاب. نشل المدرسة القديمة، واحترام المدرسة الجديدة.''',
       'ach_347': '''منبه خمس وعشرون مرة. مللي أمبير وذاكرة العضلات.''',
       'ach_348': '''أول قسطرة إقليمية. التسريب المستمر، والفضيلة المستمرة.''',
       'ach_349': '''عشرة قسطرة كتلة. بطل الأنبوب النفقي.''',
       'ach_350': '''خمسة وعشرون قسطرة. ألم على المقود.''',
-      'ach_351': '''تم تسجيل Interscalene، أعلاه، أو الإبطي. الطرف العلوي، المهارة العليا.''',
-      'ach_352': '''عشرين كتلة من الضفيرة العضدية. الأسلحة إلى أسفل. رفع المعايير.''',
-      'ach_353': '''يتقن الفخذي أو الوركي أو المأبضي. يوم الساق، الطبعة السريرية.''',
-      'ach_354': '''عشرين كتلة من الأطراف السفلية. تخطي الصالة الرياضية. افعل الكتلة.''',
-      'ach_355': '''TAP أو المستقيمة أو QL أو ESP. القوة الأساسية، طبعة الإبرة.''',
+      'ach_351':
+          '''تم تسجيل Interscalene، أعلاه، أو الإبطي. الطرف العلوي، المهارة العليا.''',
+      'ach_352':
+          '''عشرين كتلة من الضفيرة العضدية. الأسلحة إلى أسفل. رفع المعايير.''',
+      'ach_353':
+          '''يتقن الفخذي أو الوركي أو المأبضي. يوم الساق، الطبعة السريرية.''',
+      'ach_354':
+          '''عشرين كتلة من الأطراف السفلية. تخطي الصالة الرياضية. افعل الكتلة.''',
+      'ach_355':
+          '''TAP أو المستقيمة أو QL أو ESP. القوة الأساسية، طبعة الإبرة.''',
       'ach_356': '''عشرين كتلة الجذع / البطن. معاهدات السلام المتوسطة.''',
       'ach_357': '''PECS أو serratus. جدار الصدر، بروتوكول البرد.''',
-      'ach_358': '''عشرة فقرات فقرية. قريب من العمود الفقري، أقرب إلى الخبرة.''',
-      'ach_359': '''الضفيرة العنقية أو كتلة فروة الرأس. فوق الكتفين، فوق المتوسط.''',
+      'ach_358':
+          '''عشرة فقرات فقرية. قريب من العمود الفقري، أقرب إلى الخبرة.''',
+      'ach_359':
+          '''الضفيرة العنقية أو كتلة فروة الرأس. فوق الكتفين، فوق المتوسط.''',
       'ach_360': '''عشرة ذيل. ظهورهم الصغيرة، راحة كبيرة.''',
       'ach_361': '''عشرة كتل الكاحل. أفضل صديق لجراحة القدم.''',
       'ach_362': '''كتلة البير (IVRA). تقنية قديمة، لا تزال ناجحة.''',
-      'ach_363': '''خمس كتل من الضفيرة القطنية أو العجزية. كتل عميقة، هدوء أعمق.''',
-      'ach_364': '''عشرة أنواع مختلفة من الكتل الإقليمية. فلدي التمسك بها جميعا.''',
+      'ach_363':
+          '''خمس كتل من الضفيرة القطنية أو العجزية. كتل عميقة، هدوء أعمق.''',
+      'ach_364':
+          '''عشرة أنواع مختلفة من الكتل الإقليمية. فلدي التمسك بها جميعا.''',
       'ach_365': '''عشرين نوعًا مختلفًا من الكتل. ساقي مخدر موضعي.''',
       'ach_366': '''خمسة عشر بين السكالينات. فرنك اختياري؛ مهارة لا.''',
       'ach_367': '''خمسة وعشرون فوق الترقوة. ملكية جيب الزاوية.''',
@@ -10356,21 +13057,30 @@ class AchievementLocalizations {
       'ach_381': '''عشر كتل من فروة الرأس. حزمة راحة الجمجمة.''',
       'ach_382': '''خمسة وعشرون ذيلًا للأطفال. مساحة صغيرة، فرق كبير.''',
       'ach_383': '''خمسة IVRAs. عاصبة لأعلى تم تفعيل الحنين.''',
-      'ach_384': '''منطقتان مختلفتان في حالة واحدة. وسائل الإعلام المختلطة، الطبعة السريرية''',
-      'ach_385': '''خمسمائة مجموع الإقليميين. حالة الإله، لا يزال يغسل اليدين.''',
-      'ach_386': '''الخط الشرياني الأول. الموجي: العلم الأحمر الوحيد الذي تفضله.''',
+      'ach_384':
+          '''منطقتان مختلفتان في حالة واحدة. وسائل الإعلام المختلطة، الطبعة السريرية''',
+      'ach_385':
+          '''خمسمائة مجموع الإقليميين. حالة الإله، لا يزال يغسل اليدين.''',
+      'ach_386':
+          '''الخط الشرياني الأول. الموجي: العلم الأحمر الوحيد الذي تفضله.''',
       'ach_387': '''عشرة خطوط فنية. شعاعي للوساطة العقارية.''',
       'ach_388': '''خمسة وعشرون خطًا فنيًا. الآثار المبللة تسيء إليك شخصيا.''',
       'ach_389': '''خمسون خطًا فنيًا. الآس البستوني، الآس الشرايين.''',
       'ach_390': '''مائة خط فني. سيد القيل والقال BP المستمر.''',
-      'ach_391': '''أول رمز التحقق من البطاقة (CVC). الخط المركزي، أهمية مركزية.''',
+      'ach_391':
+          '''أول رمز التحقق من البطاقة (CVC). الخط المركزي، أهمية مركزية.''',
       'ach_392': '''خمسة رموز التحقق من البطاقة (CVCs). سلك، موسع، التواضع.''',
-      'ach_393': '''خمسة عشر رمز التحقق من البطاقة (CVCs). IJ أو تحت الترقوة — لديك تفضيلات الآن.''',
+      'ach_393':
+          '''خمسة عشر رمز التحقق من البطاقة (CVCs). IJ أو تحت الترقوة — لديك تفضيلات الآن.''',
       'ach_394': '''خمسة وعشرون رمز التحقق من البطاقة (CVC). قيادة التجويف.''',
-      'ach_395': '''خمسون رمز التحقق من البطاقة (CVC). الوصول المركزي هو أسلوب حياة.''',
-      'ach_396': '''USG لـ CVC أو الخط الفني. العيون على الجائزة، وليس على الأسطورة التاريخية.''',
-      'ach_397': '''USG الأوعية الدموية خمسة وعشرين مرة. دقق في الأعلى، والمضاعفات في الأسفل.''',
-      'ach_398': '''USG الأوعية الدموية خمسة وسبعين مرة. جدران السفن تخشى مسبارك.''',
+      'ach_395':
+          '''خمسون رمز التحقق من البطاقة (CVC). الوصول المركزي هو أسلوب حياة.''',
+      'ach_396':
+          '''USG لـ CVC أو الخط الفني. العيون على الجائزة، وليس على الأسطورة التاريخية.''',
+      'ach_397':
+          '''USG الأوعية الدموية خمسة وعشرين مرة. دقق في الأعلى، والمضاعفات في الأسفل.''',
+      'ach_398':
+          '''USG الأوعية الدموية خمسة وسبعين مرة. جدران السفن تخشى مسبارك.''',
       'ach_399': '''أول BIS/الإنتروبيا. لأن "يبدو نائماً" ليس رقماً.''',
       'ach_400': '''BIS/الإنتروبيا خمسة وعشرون مرة. رسوم العمق للوعي.''',
       'ach_401': '''BIS/الإنتروبيا خمسين مرة. الأرقام فوق المشاعر.''',
@@ -10379,301 +13089,494 @@ class AchievementLocalizations {
       'ach_404': '''ماسيمو سيدلاين عشر مرات. موجات خيالية للحالات الفاخرة.''',
       'ach_405': '''قسطرة TEE أو PA خمس مرات. أسرار القلب، فكها.''',
       'ach_406': '''PiCCO خمس مرات. التدفق مهم. أنت تقيسه.''',
-      'ach_407': '''استنزاف المنطقة تحت العنكبوتية القطنية خمس مرات. إدارة CSF، المستوى المتقدم.''',
-      'ach_408': '''ثلاث شاشات الغازية في وقت واحد. لوحة القيادة مضاءة بالكامل.''',
-      'ach_409': '''أربعة أو أكثر من المراقبين الغازية. التحكم في المهمة، أو الطبعة.''',
-      'ach_410': '''يتم استخدام خمسة أنواع مختلفة من الخطوط/الشاشات. فلدي قنية \'م جميعا.''',
-      'ach_411': '''تم تنفيذ خمسين سطرًا فنيًا. التدريب العملي على التاجر الموجي.''',
-      'ach_412': '''تم إجراء ثلاثين عملية التحقق من البطاقة (CVC). همس الأسلاك.''',
+      'ach_407':
+          '''استنزاف المنطقة تحت العنكبوتية القطنية خمس مرات. إدارة CSF، المستوى المتقدم.''',
+      'ach_408':
+          '''ثلاث شاشات الغازية في وقت واحد. لوحة القيادة مضاءة بالكامل.''',
+      'ach_409':
+          '''أربعة أو أكثر من المراقبين الغازية. التحكم في المهمة، أو الطبعة.''',
+      'ach_410':
+          '''يتم استخدام خمسة أنواع مختلفة من الخطوط/الشاشات. فلدي قنية 'م جميعا.''',
+      'ach_411':
+          '''تم تنفيذ خمسين سطرًا فنيًا. التدريب العملي على التاجر الموجي.''',
+      'ach_412':
+          '''تم إجراء ثلاثين عملية التحقق من البطاقة (CVC). همس الأسلاك.''',
       'ach_413': '''ساعد عشرين خطًا فنيًا. دعم الفريق الأحمر.''',
-      'ach_414': '''تمت مساعدة عشرين من مراكز التحقق من البطاقة (CVCs). الزوج الثاني من الأيدي، مساعدة من الدرجة الأولى.''',
-      'ach_415': '''BIS/الإنتروبيا بشكل مستقل خمسين مرة. لا توجد عجلات التدريب.''',
+      'ach_414':
+          '''تمت مساعدة عشرين من مراكز التحقق من البطاقة (CVCs). الزوج الثاني من الأيدي، مساعدة من الدرجة الأولى.''',
+      'ach_415':
+          '''BIS/الإنتروبيا بشكل مستقل خمسين مرة. لا توجد عجلات التدريب.''',
       'ach_416': '''SedLine بشكل مستقل عشرين مرة. مراقبة الدماغ منفردا.''',
       'ach_417': '''جزر تركس وكايكوس بشكل مستقل خمسين مرة. المضخة والظروف.''',
       'ach_418': '''NIRS بشكل مستقل عشرين مرة. رحلة دماغية منفردة.''',
       'ach_419': '''PiCCO بشكل مستقل عشر مرات. الإخراج دون مرافقة.''',
-      'ach_420': '''لاحظ TEE عشر مرات في القلب. مشاهدة القلب يعمل ساعات إضافية.''',
-      'ach_421': '''لاحظت القسطرة السلطة الفلسطينية عشر مرات. تطفو على السطح أيها المراقب.''',
+      'ach_420':
+          '''لاحظ TEE عشر مرات في القلب. مشاهدة القلب يعمل ساعات إضافية.''',
+      'ach_421':
+          '''لاحظت القسطرة السلطة الفلسطينية عشر مرات. تطفو على السطح أيها المراقب.''',
       'ach_422': '''تمت إدارة عشرة مصارف قطنية. سياسة الضغط.''',
-      'ach_423': '''مائة حالة مع تتبع الخط الفني. خبير في الحجة المستمرة لشركة BP.''',
+      'ach_423':
+          '''مائة حالة مع تتبع الخط الفني. خبير في الحجة المستمرة لشركة BP.''',
       'ach_424': '''خمسون حالة مع الوصول المركزي. المخضرم من السلك.''',
-      'ach_425': '''تم لمس جميع خيارات المراقبة الغازية. تخليص قمرة القيادة بالكامل.''',
-      'ach_426': '''الوليد الأول (أقل من 28 يومًا). إنسان صغير، بروتوكول كامل.''',
+      'ach_425':
+          '''تم لمس جميع خيارات المراقبة الغازية. تخليص قمرة القيادة بالكامل.''',
+      'ach_426':
+          '''الوليد الأول (أقل من 28 يومًا). إنسان صغير، بروتوكول كامل.''',
       'ach_427': '''خمسة مواليد. منتظم في أصغر غرفة مع أكبر المخاطر.''',
-      'ach_428': '''تم شفاء خمسة عشر حديثي الولادة بأمان. حارس الدائرة الدقيقة.''',
-      'ach_429': '''الرضيع الأول (29 يومًا – سنة واحدة). تنمو بسرعة؛ الحذر الخاص بك بشكل أسرع.''',
+      'ach_428':
+          '''تم شفاء خمسة عشر حديثي الولادة بأمان. حارس الدائرة الدقيقة.''',
+      'ach_429':
+          '''الرضيع الأول (29 يومًا – سنة واحدة). تنمو بسرعة؛ الحذر الخاص بك بشكل أسرع.''',
       'ach_430': '''عشرين طفلاً. متخصص في الأنابيب الصغيرة والعيون الكبيرة.''',
       'ach_431': '''عشرين طفلاً صغيراً. مُجهز مسبقًا اختياري؛ الصبر إلزامي.''',
-      'ach_432': '''خمسون حالة للرضع أو الأطفال الصغار. برو في منع التشتيت وعدم التشبع.''',
+      'ach_432':
+          '''خمسون حالة للرضع أو الأطفال الصغار. برو في منع التشتيت وعدم التشبع.''',
       'ach_433': '''خمسة وعشرون طفلاً (3-12). تظل الملصقات دواءً صالحًا.''',
-      'ach_434': '''عشرون مراهقًا (12-18). بالغون تقريبًا، ولكنهم ليسوا فلاسفة من المنظمات غير الربحية.''',
-      'ach_435': '''كبار السن الأول (≥65). الرعاية القياسية الذهبية للسنوات الذهبية.''',
-      'ach_436': '''خمسة وعشرون حالة لكبار السن. الوصي ضد مفاجآت تعدد الأدوية.''',
+      'ach_434':
+          '''عشرون مراهقًا (12-18). بالغون تقريبًا، ولكنهم ليسوا فلاسفة من المنظمات غير الربحية.''',
+      'ach_435':
+          '''كبار السن الأول (≥65). الرعاية القياسية الذهبية للسنوات الذهبية.''',
+      'ach_436':
+          '''خمسة وعشرون حالة لكبار السن. الوصي ضد مفاجآت تعدد الأدوية.''',
       'ach_437': '''خمسون حالة من كبار السن. قم بحماية MAP وكأنها عائلة.''',
       'ach_438': '''مائة حالة مسنين. متخصص في الحث اللطيف والحكم الحاد.''',
-      'ach_439': '''المريض ≥80. تعامل مثل الخزف الصيني الفاخر مع وصول أفضل للشرايين.''',
+      'ach_439':
+          '''المريض ≥80. تعامل مثل الخزف الصيني الفاخر مع وصول أفضل للشرايين.''',
       'ach_440': '''عشرة مرضى ≥80. عضوية النادي: الاحترام مطلوب.''',
-      'ach_441': '''المريض ≥100. نادر مثل ASA الحقيقي الذي يبلغ من العمر أربعين عامًا.''',
+      'ach_441':
+          '''المريض ≥100. نادر مثل ASA الحقيقي الذي يبلغ من العمر أربعين عامًا.''',
       'ach_442': '''مؤشر كتلة الجسم 30-34.9. تحديد المواقع هي رياضة جماعية.''',
-      'ach_443': '''عشر حالات سمنة من الدرجة الأولى. منتظم في القائمة المنحدرة.''',
-      'ach_444': '''عشرون درجة ثانية (مؤشر كتلة الجسم 35-39.9). متخصص في الخطوط الجوية والحساب.''',
-      'ach_445': '''مؤشر كتلة الجسم الأول ≥40. الخطة أ، ب، والأكسجة المسبقة الأطول.''',
-      'ach_446': '''عشرة مؤشر كتلة الجسم ≥40. حصلت التفضيلات بالطريقة الصعبة.''',
+      'ach_443':
+          '''عشر حالات سمنة من الدرجة الأولى. منتظم في القائمة المنحدرة.''',
+      'ach_444':
+          '''عشرون درجة ثانية (مؤشر كتلة الجسم 35-39.9). متخصص في الخطوط الجوية والحساب.''',
+      'ach_445':
+          '''مؤشر كتلة الجسم الأول ≥40. الخطة أ، ب، والأكسجة المسبقة الأطول.''',
+      'ach_446':
+          '''عشرة مؤشر كتلة الجسم ≥40. حصلت التفضيلات بالطريقة الصعبة.''',
       'ach_447': '''مؤشر كتلة الجسم <18.5. جسم خفيف، اهتمام شديد بالجرعات.''',
       'ach_448': '''البالغ أقل من 40 كجم. وزن الريشة، بروتوكول كامل.''',
-      'ach_449': '''أكثر من 100 كجم. نوبة الوزن الثقيل. أنت في الزاوية مع VL.''',
+      'ach_449':
+          '''أكثر من 100 كجم. نوبة الوزن الثقيل. أنت في الزاوية مع VL.''',
       'ach_450': '''أكثر من 130 كجم. جولات البطولة. يوصى بالتسلق.''',
-      'ach_451': '''تم تسجيل كل فئة عمرية. من حديثي الولادة إلى كبار السن - قوس قزح كامل.''',
-      'ach_452': '''تم تسجيل كل نطاق لمؤشر كتلة الجسم. قائمة التشغيل الكاملة للقياسات البشرية.''',
-      'ach_453': '''خمسون حالة أطفال تحت سن 12 عامًا. خطيرة تمامًا بشأن الأطفال.''',
+      'ach_451':
+          '''تم تسجيل كل فئة عمرية. من حديثي الولادة إلى كبار السن - قوس قزح كامل.''',
+      'ach_452':
+          '''تم تسجيل كل نطاق لمؤشر كتلة الجسم. قائمة التشغيل الكاملة للقياسات البشرية.''',
+      'ach_453':
+          '''خمسون حالة أطفال تحت سن 12 عامًا. خطيرة تمامًا بشأن الأطفال.''',
       'ach_454': '''مئتان وخمسون حالة لكبار السن. القيادة هي خريطة مستقرة.''',
       'ach_455': '''خمسون حالة مؤشر كتلة الجسم ≥30. بطل المنحدر والخطة.''',
       'ach_456': '''خمسة عشر حالة نقص الوزن. خبير في كتلة أقل ورعاية أكبر.''',
-      'ach_457': '''تم تسجيل كل من حديثي الولادة والمعمرين. العمر هو مجرد رقم ما قبل العملية.''',
-      'ach_458': '''نقص الوزن والسمنة المفرطة في نفس الأسبوع. يوم المدى في صالة القياسات البشرية.''',
-      'ach_459': '''إدارة مجرى الهواء الصعب عند الأطفال حديثي الولادة أو الرضع. ايس مجرى الهواء الصغير .''',
-      'ach_460': '''مجرى الهواء الصعب أكثر من 80 تمكنت. الآس مع احترام الأسنان الهشة والرقبة المتصلبة.''',
+      'ach_457':
+          '''تم تسجيل كل من حديثي الولادة والمعمرين. العمر هو مجرد رقم ما قبل العملية.''',
+      'ach_458':
+          '''نقص الوزن والسمنة المفرطة في نفس الأسبوع. يوم المدى في صالة القياسات البشرية.''',
+      'ach_459':
+          '''إدارة مجرى الهواء الصعب عند الأطفال حديثي الولادة أو الرضع. ايس مجرى الهواء الصغير .''',
+      'ach_460':
+          '''مجرى الهواء الصعب أكثر من 80 تمكنت. الآس مع احترام الأسنان الهشة والرقبة المتصلبة.''',
       'ach_461': '''أولا لا شيء/هادئ. الملل هو أعلى مجاملة.''',
       'ach_462': '''عشرة متتالية هادئة. الأيدي آمنة؛ ارتفاع الخرافات.''',
       'ach_463': '''خمسة وعشرون متتالية هادئة. لا تقل كلمة Q.''',
       'ach_464': '''مائة مجموع هادئ. السلامة خط ونظام.''',
       'ach_465': '''مائتان وخمسون هادئا. الرصاص هو استعارة. في الغالب.''',
       'ach_466': '''التخدير خلال عشر دقائق من وقت الجراحة. الظهور كفن موقوت.''',
-      'ach_467': '''الاستيقاظ السريع خمسين مرة. كفاءة دون الحاجة إلى قطع الزوايا — أو الأسلاك.''',
+      'ach_467':
+          '''الاستيقاظ السريع خمسين مرة. كفاءة دون الحاجة إلى قطع الزوايا — أو الأسلاك.''',
       'ach_468': '''تمكن بونف. أوندانسيترون هي لغة الحب.''',
-      'ach_469': '''تم التحكم في انخفاض ضغط الدم أثناء العملية. السوائل، الضغوطات، رباطة جأش.''',
-      'ach_470': '''تمكنت من تشنج قصبي أو تشنج الحنجرة. ضيق الصدر؛ رئيس واضح.''',
+      'ach_469':
+          '''تم التحكم في انخفاض ضغط الدم أثناء العملية. السوائل، الضغوطات، رباطة جأش.''',
+      'ach_470':
+          '''تمكنت من تشنج قصبي أو تشنج الحنجرة. ضيق الصدر؛ رئيس واضح.''',
       'ach_471': '''تمت إدارة التشبع. FiO₂ لأعلى، صوت لأسفل، تم حل المشكلة.''',
-      'ach_472': '''مائة عملية تفريغ هادئة لـ PACU. التعافي: حضن النصر الهادئ.''',
-      'ach_473': '''اكتمل الملف الشخصي. +10 نقاط وضربة نادرة من الدوبامين الإداري.''',
-      'ach_474': '''تم تصدير إحصائيات PDF. الأرقام: مفيدة أخيراً خارج الامتحان.''',
-      'ach_475': '''الحالة الأولى أو سجل PDF. يمكن للمستشفى الذي لا يحتوي على أوراق أن ينظر بعيدًا لثانية واحدة.''',
-      'ach_476': '''عشرة تصديرات PDF. المستقبل - أنت في التقييم مدين لك بتقديم القهوة.''',
-      'ach_477': '''أول نسخة احتياطية لـ JSON. جنون العظمة هو مجرد تقييم جيد قبل الجراحة.''',
-      'ach_478': '''خمس نسخ احتياطية لـ JSON. التكرار: ASA الحقيقي الوحيد الذي أخطط له.''',
+      'ach_472':
+          '''مائة عملية تفريغ هادئة لـ PACU. التعافي: حضن النصر الهادئ.''',
+      'ach_473':
+          '''اكتمل الملف الشخصي. +10 نقاط وضربة نادرة من الدوبامين الإداري.''',
+      'ach_474':
+          '''تم تصدير إحصائيات PDF. الأرقام: مفيدة أخيراً خارج الامتحان.''',
+      'ach_475':
+          '''الحالة الأولى أو سجل PDF. يمكن للمستشفى الذي لا يحتوي على أوراق أن ينظر بعيدًا لثانية واحدة.''',
+      'ach_476':
+          '''عشرة تصديرات PDF. المستقبل - أنت في التقييم مدين لك بتقديم القهوة.''',
+      'ach_477':
+          '''أول نسخة احتياطية لـ JSON. جنون العظمة هو مجرد تقييم جيد قبل الجراحة.''',
+      'ach_478':
+          '''خمس نسخ احتياطية لـ JSON. التكرار: ASA الحقيقي الوحيد الذي أخطط له.''',
       'ach_479': '''مائة نقطة. التطبيق يسجل لك مثل فيفا.''',
-      'ach_480': '''ألف نقطة. طاقة الشخصية الرئيسية، لا تزال متدرجة على مجرى الهواء.''',
+      'ach_480':
+          '''ألف نقطة. طاقة الشخصية الرئيسية، لا تزال متدرجة على مجرى الهواء.''',
       'ach_481': '''خمسة آلاف نقطة. لم يتم تضمين الجلد المميز - المجد فقط.''',
-      'ach_482': '''عشرة آلاف نقطة. لقد نفدت منا الصفات الرصينة والمخدرات المتطايرة.''',
-      'ach_483': '''الحالة الأولى للأسنان/الوجه والفكين. الفم مفتوح، خطة مجرى الهواء أعلى.''',
-      'ach_484': '''خمس حالات للأسنان/الفكين. الشفط هو مساعد الطيار الخاص بك.''',
-      'ach_485': '''عشر حالات أسنان/فك سفلي. مجرى هوائي مشترك، إجهاد مشترك، مجد مشترك.''',
-      'ach_486': '''خمسة وعشرون حالة أسنان/الفكين. أنت وجراح الفم تتواصلان الآن من خلال نقرات الشفط.''',
-      'ach_487': '''خمسون حالة أسنان/فك . الفكوك السلكية لا تخيفك، بل إن نزع الأنبوب غير المخطط له هو ما يخيفك.''',
+      'ach_482':
+          '''عشرة آلاف نقطة. لقد نفدت منا الصفات الرصينة والمخدرات المتطايرة.''',
+      'ach_483':
+          '''الحالة الأولى للأسنان/الوجه والفكين. الفم مفتوح، خطة مجرى الهواء أعلى.''',
+      'ach_484':
+          '''خمس حالات للأسنان/الفكين. الشفط هو مساعد الطيار الخاص بك.''',
+      'ach_485':
+          '''عشر حالات أسنان/فك سفلي. مجرى هوائي مشترك، إجهاد مشترك، مجد مشترك.''',
+      'ach_486':
+          '''خمسة وعشرون حالة أسنان/الفكين. أنت وجراح الفم تتواصلان الآن من خلال نقرات الشفط.''',
+      'ach_487':
+          '''خمسون حالة أسنان/فك . الفكوك السلكية لا تخيفك، بل إن نزع الأنبوب غير المخطط له هو ما يخيفك.''',
       'ach_488': '''مائة حالة أسنان/الفكين. الوجوه تتغير؛ تبقى خطتك B.''',
-      'ach_489': '''عشر حالات فكية علوية مع تنبيب أنفي. الأنف يعرف أفضل – عندما يكون الفم هو ساحة المعركة.''',
-      'ach_490': '''خمس حالات للفك العلوي تنتهي بسلام. الأسلاك في؛ الدراما خارج.''',
-      'ach_491': '''طوارئ الأسنان/الفكين بعد ساعات العمل. التثبيت بين الفكين والكافيين بين الفكين.''',
-      'ach_492': '''عشرون حالة من حالات مجرى الهواء المشترك. الدبلوماسية مع منظار الحنجرة.''',
-      'ach_493': '''أول حالة جراحة السمنة. المنحدر، ما قبل الأكسجين، احترام علم وظائف الأعضاء.''',
+      'ach_489':
+          '''عشر حالات فكية علوية مع تنبيب أنفي. الأنف يعرف أفضل – عندما يكون الفم هو ساحة المعركة.''',
+      'ach_490':
+          '''خمس حالات للفك العلوي تنتهي بسلام. الأسلاك في؛ الدراما خارج.''',
+      'ach_491':
+          '''طوارئ الأسنان/الفكين بعد ساعات العمل. التثبيت بين الفكين والكافيين بين الفكين.''',
+      'ach_492':
+          '''عشرون حالة من حالات مجرى الهواء المشترك. الدبلوماسية مع منظار الحنجرة.''',
+      'ach_493':
+          '''أول حالة جراحة السمنة. المنحدر، ما قبل الأكسجين، احترام علم وظائف الأعضاء.''',
       'ach_494': '''خمس حالات جراحة السمنة. تحديد المواقع هي رياضة جماعية.''',
-      'ach_495': '''خمسة عشر حالة جراحة السمنة. يمكنك قياس محيط الرقبة مثل الخياط.''',
-      'ach_496': '''ثلاثون حالة جراحة السمنة. متخصص في المنحدرات، VL، والصبر.''',
-      'ach_497': '''خمسون حالة جراحة السمنة. الجراحة الأيضية، التركيز الأيضي.''',
-      'ach_498': '''مائة حالة جراحة السمنة. عنوان الوزن الثقيل، الأنا خفيفة الوزن.''',
-      'ach_499': '''صعوبة مجرى الهواء في حالة السمنة. الخطة أ، ب، وعجلة أطول.''',
+      'ach_495':
+          '''خمسة عشر حالة جراحة السمنة. يمكنك قياس محيط الرقبة مثل الخياط.''',
+      'ach_496':
+          '''ثلاثون حالة جراحة السمنة. متخصص في المنحدرات، VL، والصبر.''',
+      'ach_497':
+          '''خمسون حالة جراحة السمنة. الجراحة الأيضية، التركيز الأيضي.''',
+      'ach_498':
+          '''مائة حالة جراحة السمنة. عنوان الوزن الثقيل، الأنا خفيفة الوزن.''',
+      'ach_499':
+          '''صعوبة مجرى الهواء في حالة السمنة. الخطة أ، ب، وعجلة أطول.''',
       'ach_500': '''عشرون حالة للسمنة، لا شيء/هادئ. مملة هو الهدف.''',
       'ach_501': '''أول حالة أشعة تداخلية. إطفاء الأنوار ورفع المعايير.''',
       'ach_502': '''خمس حالات IR. موضة المئزر الرصاص، إلى الأبد.''',
-      'ach_503': '''خمسة عشر حالة IR. يمكنك الآن أن تغفو وعيناك مفتوحتان، من فضلك لا تفعل ذلك.''',
-      'ach_504': '''خمسة وعشرون حالة IR. بعيد عن المسرح، قريب من عربة التصادم.''',
+      'ach_503':
+          '''خمسة عشر حالة IR. يمكنك الآن أن تغفو وعيناك مفتوحتان، من فضلك لا تفعل ذلك.''',
+      'ach_504':
+          '''خمسة وعشرون حالة IR. بعيد عن المسرح، قريب من عربة التصادم.''',
       'ach_505': '''خمسون حالة IR. متخصص في الغرف الهادئة والشاشات العالية.''',
       'ach_506': '''عشر حالات IR تنتهي بهدوء. الهدوء معدي. هكذا هو التباين.''',
-      'ach_507': '''حالة الأشعة تحت الحمراء تستغرق أكثر من ثلاث ساعات من التخدير. وقت الأسلاك هو وقتك.''',
+      'ach_507':
+          '''حالة الأشعة تحت الحمراء تستغرق أكثر من ثلاث ساعات من التخدير. وقت الأسلاك هو وقتك.''',
       'ach_508': '''الأشعة التداخلية الطارئة. وعاء ينزف، وأيدي ثابتة.''',
-      'ach_509': '''حالة الأشعة تحت الحمراء تحت سن 18 عامًا. السفن الصغيرة، الاهتمام الكامل.''',
-      'ach_510': '''حالة الأشعة تحت الحمراء تبدأ بعد منتصف الليل. التنظير الفلوري والأسئلة الوجودية.''',
+      'ach_509':
+          '''حالة الأشعة تحت الحمراء تحت سن 18 عامًا. السفن الصغيرة، الاهتمام الكامل.''',
+      'ach_510':
+          '''حالة الأشعة تحت الحمراء تبدأ بعد منتصف الليل. التنظير الفلوري والأسئلة الوجودية.''',
       'ach_511': '''التخدير الأول للعلاج الإشعاعي. السكون هو الوصفة الطبية.''',
-      'ach_512': '''خمس حالات علاج إشعاعي. الحركة هي العدو. أنت معاهدة السلام.''',
+      'ach_512':
+          '''خمس حالات علاج إشعاعي. الحركة هي العدو. أنت معاهدة السلام.''',
       'ach_513': '''عشر حالات علاج إشعاعي. أجهزة الشلل، أقصى قدر من اليقظة.''',
-      'ach_514': '''خمسة وعشرون حالة علاج إشعاعي. متخصص في الحالات القصيرة والتركيز الطويل.''',
-      'ach_515': '''العلاج الإشعاعي لمن هم دون سن 18 عامًا. بشر صغار شجعان، وخطط كبيرة حذرة.''',
+      'ach_514':
+          '''خمسة وعشرون حالة علاج إشعاعي. متخصص في الحالات القصيرة والتركيز الطويل.''',
+      'ach_515':
+          '''العلاج الإشعاعي لمن هم دون سن 18 عامًا. بشر صغار شجعان، وخطط كبيرة حذرة.''',
       'ach_516': '''خمسة عشر حالة علاج إشعاعي، لا شيء/هادئ. السكون يتحقق.''',
-      'ach_517': '''عشرة أدوية تخدير إشعاعي متكررة لنفس المسار. وجوه مألوفة، نفس المعايير.''',
-      'ach_518': '''العلاج الإشعاعي مع عقلية المراقبة عن بعد. العين على المريض دائما.''',
-      'ach_519': '''أول حالة جراحة قلب للأطفال. قلب صغير، وقائمة مرجعية كبيرة.''',
+      'ach_517':
+          '''عشرة أدوية تخدير إشعاعي متكررة لنفس المسار. وجوه مألوفة، نفس المعايير.''',
+      'ach_518':
+          '''العلاج الإشعاعي مع عقلية المراقبة عن بعد. العين على المريض دائما.''',
+      'ach_519':
+          '''أول حالة جراحة قلب للأطفال. قلب صغير، وقائمة مرجعية كبيرة.''',
       'ach_520': '''ثلاث حالات قلب للأطفال. الصدى والسطور والتواضع.''',
-      'ach_521': '''عشر حالات قلب أطفال. دوائر بحجم المجوهرات، ورهانات بحجم الحياة.''',
+      'ach_521':
+          '''عشر حالات قلب أطفال. دوائر بحجم المجوهرات، ورهانات بحجم الحياة.''',
       'ach_522': '''عشرون حالة قلب للأطفال. منتظم في القائمة الخلقية.''',
-      'ach_523': '''أربعون حالة قلب للأطفال. متخصص في القنيات الصغيرة والمسؤولية العملاقة.''',
-      'ach_524': '''خمسة عشر حالة قلب للأطفال، لا شيء/هادئ. الهدوء هو مهارة سريرية.''',
-      'ach_525': '''حالة قلبية لدى الأطفال حديثي الولادة. الإنسان الصغير، والتركيز الكلي.''',
+      'ach_523':
+          '''أربعون حالة قلب للأطفال. متخصص في القنيات الصغيرة والمسؤولية العملاقة.''',
+      'ach_524':
+          '''خمسة عشر حالة قلب للأطفال، لا شيء/هادئ. الهدوء هو مهارة سريرية.''',
+      'ach_525':
+          '''حالة قلبية لدى الأطفال حديثي الولادة. الإنسان الصغير، والتركيز الكلي.''',
       'ach_526': '''خمس حالات خلقية معقدة. التشريح اختياري؛ التحضير إلزامي.''',
-      'ach_527': '''قلب الأطفال بعد ساعات. تم إلغاء النوم. المعايير ليست كذلك.''',
-      'ach_528': '''عشر حالات CPB للأطفال. طنين الآلة الالتفافية؛ أنت لا تطنين.''',
+      'ach_527':
+          '''قلب الأطفال بعد ساعات. تم إلغاء النوم. المعايير ليست كذلك.''',
+      'ach_528':
+          '''عشر حالات CPB للأطفال. طنين الآلة الالتفافية؛ أنت لا تطنين.''',
       'ach_529': '''طوارئ الأسنان/الفكين. التورم والكزز وأفضل VL لديك.''',
-      'ach_530': '''حالة السمنة الطارئة. علم وظائف الأعضاء أولا، والبطولات ثانيا.''',
+      'ach_530':
+          '''حالة السمنة الطارئة. علم وظائف الأعضاء أولا، والبطولات ثانيا.''',
       'ach_531': '''الأشعة تحت الحمراء لانصمام الصدمات. تدخلية، مقصودة.''',
-      'ach_532': '''تم تسجيل كل من الفك العلوي والعمود الفقري. عظام مختلفة، نفس احترام مجرى الهواء.''',
-      'ach_533': '''حالة السمنة مع الإقليمية المنجزة. منع حيثما أمكن ذلك؛ مجرى الهواء جاهز دائمًا.''',
-      'ach_534': '''قلب الأطفال بالإضافة إلى حالة منفصلة لحديثي الولادة. الطيف العمري، نفس الطاقة الليلية.''',
-      'ach_535': '''تم تسجيل طب الأسنان/الفكين، وطب السمنة، والأشعة تحت الحمراء، والعلاج الإشعاعي، وطب القلب مرة واحدة على الأقل. اكتملت المجموعة.''',
-      'ach_536': '''حالة واحدة على الأقل في كل من المسارات التخصصية الخمسة الجديدة. تم فتح شارة المستكشف.''',
-      'ach_537': '''تم تسجيل كل من الأشعة تحت الحمراء والعلاج الإشعاعي. الإشعاع المؤين، الهدوء غير المؤين.''',
-      'ach_538': '''خمسون حالة عبر الأسنان/الفكين العلوي والرأس والرقبة مجتمعة. خريجو الخطوط الجوية المشتركة.''',
-      'ach_539': '''ثلاثون حالة أسنان/الفكين. صندوق النقد الدولي هو يوم الثلاثاء فقط.''',
-      'ach_540': '''عشرون حالة للسمنة مع طاقة خطة مجرى الهواء الموثقة. الخطة مكتوبة؛ الأنا لا.''',
+      'ach_532':
+          '''تم تسجيل كل من الفك العلوي والعمود الفقري. عظام مختلفة، نفس احترام مجرى الهواء.''',
+      'ach_533':
+          '''حالة السمنة مع الإقليمية المنجزة. منع حيثما أمكن ذلك؛ مجرى الهواء جاهز دائمًا.''',
+      'ach_534':
+          '''قلب الأطفال بالإضافة إلى حالة منفصلة لحديثي الولادة. الطيف العمري، نفس الطاقة الليلية.''',
+      'ach_535':
+          '''تم تسجيل طب الأسنان/الفكين، وطب السمنة، والأشعة تحت الحمراء، والعلاج الإشعاعي، وطب القلب مرة واحدة على الأقل. اكتملت المجموعة.''',
+      'ach_536':
+          '''حالة واحدة على الأقل في كل من المسارات التخصصية الخمسة الجديدة. تم فتح شارة المستكشف.''',
+      'ach_537':
+          '''تم تسجيل كل من الأشعة تحت الحمراء والعلاج الإشعاعي. الإشعاع المؤين، الهدوء غير المؤين.''',
+      'ach_538':
+          '''خمسون حالة عبر الأسنان/الفكين العلوي والرأس والرقبة مجتمعة. خريجو الخطوط الجوية المشتركة.''',
+      'ach_539':
+          '''ثلاثون حالة أسنان/الفكين. صندوق النقد الدولي هو يوم الثلاثاء فقط.''',
+      'ach_540':
+          '''عشرون حالة للسمنة مع طاقة خطة مجرى الهواء الموثقة. الخطة مكتوبة؛ الأنا لا.''',
       'ach_541': '''ثلاثون حالة IR. عمودك الفقري يشكر الرصاص. ربما.''',
-      'ach_542': '''أربعون حالة علاج إشعاعي. يمكنك الفوز بمسابقة التحديق باستخدام جهاز محاكاة التصوير المقطعي المحوسب.''',
-      'ach_543': '''خمسون حالة قلب أطفال. جاهز للتدريس؛ لا تزال مستعدة للتعلم.''',
-      'ach_544': '''عشرون تنبيبًا أنفيًا في الفك العلوي. طريق الأنف المسافر الدائم.''',
-      'ach_545': '''خمسة عشر حالة للسمنة مع تنظير الحنجرة بالفيديو. وقت الشاشة، وقت ممتع.''',
+      'ach_542':
+          '''أربعون حالة علاج إشعاعي. يمكنك الفوز بمسابقة التحديق باستخدام جهاز محاكاة التصوير المقطعي المحوسب.''',
+      'ach_543':
+          '''خمسون حالة قلب أطفال. جاهز للتدريس؛ لا تزال مستعدة للتعلم.''',
+      'ach_544':
+          '''عشرون تنبيبًا أنفيًا في الفك العلوي. طريق الأنف المسافر الدائم.''',
+      'ach_545':
+          '''خمسة عشر حالة للسمنة مع تنظير الحنجرة بالفيديو. وقت الشاشة، وقت ممتع.''',
       'ach_546': '''عشرين حالة IR هادئة. التناقض ليس شخصية.''',
       'ach_547': '''عشر حالات علاج إشعاعي للأطفال. السكون للأصغر.''',
       'ach_548': '''خمسة وعشرون حالة قلب للأطفال. مسلسل عادي.''',
       'ach_549': '''طب الأسنان/الفكين مع ملحق إقليمي. المحلية حيث يهم.''',
       'ach_550': '''حالة السمنة مع خط الشرايين. الموجي في فسيولوجيا كبيرة.''',
       'ach_551': '''حالة IR مع مراقبة الشرايين. الأحمر هو لغة.''',
-      'ach_552': '''تم تسجيل العلاج الإشعاعي تحت مسار MAC/التخدير. لمسة خفيفة، واهتمام شديد.''',
-      'ach_553': '''أمراض القلب لدى الأطفال مع المراقبة الغازية. الخطوط قبل التجاوز.''',
-      'ach_554': '''علم مجرى الهواء الصعب على حالة الفك العلوي. Trismus يلتقي بالتدريب.''',
+      'ach_552':
+          '''تم تسجيل العلاج الإشعاعي تحت مسار MAC/التخدير. لمسة خفيفة، واهتمام شديد.''',
+      'ach_553':
+          '''أمراض القلب لدى الأطفال مع المراقبة الغازية. الخطوط قبل التجاوز.''',
+      'ach_554':
+          '''علم مجرى الهواء الصعب على حالة الفك العلوي. Trismus يلتقي بالتدريب.''',
       'ach_555': '''تمكنت إزالة التشبع في حالة السمنة. الإنقاذ بدون دراما.''',
-      'ach_556': '''التخدير بالأشعة تحت الحمراء لمدة أربع ساعات. ماراثون التنظير الفلوري.''',
+      'ach_556':
+          '''التخدير بالأشعة تحت الحمراء لمدة أربع ساعات. ماراثون التنظير الفلوري.''',
       'ach_557': '''يبدأ العلاج الإشعاعي قبل الساعة 07:00. الساعة شعاع.''',
       'ach_558': '''طوارئ قلب الاطفال. الأدرينالين اختياري. الأنظمة إلزامية.''',
-      'ach_559': '''تم تسجيل ثمانية تخصصات جراحية متميزة بما في ذلك تخصص جديد واحد على الأقل. متعدد اللغات من القائمة.''',
-      'ach_560': '''خمسون حالة عبر مجموعة التخصصات الجديدة مجتمعة. مستكشف عادي.''',
-      'ach_561': '''خمسة وسبعون حالة أسنان/الفكين. سجل حافل في دوري الفم والهواء.''',
+      'ach_559':
+          '''تم تسجيل ثمانية تخصصات جراحية متميزة بما في ذلك تخصص جديد واحد على الأقل. متعدد اللغات من القائمة.''',
+      'ach_560':
+          '''خمسون حالة عبر مجموعة التخصصات الجديدة مجتمعة. مستكشف عادي.''',
+      'ach_561':
+          '''خمسة وسبعون حالة أسنان/الفكين. سجل حافل في دوري الفم والهواء.''',
       'ach_562': '''خمسة وسبعون حالة جراحة للسمنة. سجل حافل على المنحدر.''',
       'ach_563': '''خمسة وسبعون حالة IR. أسطورة الغرفة المظلمة''',
       'ach_564': '''خمسة وسبعون حالة قلب للأطفال. عنوان ثقيل، أيدي خفيفة.''',
       'ach_565': '''خمسون حالة علاج إشعاعي. ثقيل على السكون.''',
-      'ach_566': '''خمس وعشرون حالة في التخصصات الجديدة مجتمعة. التقدم الحدودي.''',
+      'ach_566':
+          '''خمس وعشرون حالة في التخصصات الجديدة مجتمعة. التقدم الحدودي.''',
       'ach_567': '''مائة حالة عبر التخصصات الجديدة مجتمعة. استقرت الحدود.''',
       'ach_568': '''أربعون حالة أسنان/فك سفلي. حليف جراح الفم، حارس الأنبوب.''',
-      'ach_569': '''أول كتلة مستوية من اللفافة الحرقفية. تم العثور على الطائرة؛ الألم المودع تحت "في وقت لاحق".''',
+      'ach_569':
+          '''أول كتلة مستوية من اللفافة الحرقفية. تم العثور على الطائرة؛ الألم المودع تحت "في وقت لاحق".''',
       'ach_570': '''خمس كتل من اللفافة الحرقفية. كسور الورك أشكركم بصمت.''',
       'ach_571': '''خمسة عشر كتلة من اللفافة الحرقفية. منتظم في قائمة #NOF.''',
-      'ach_572': '''ثلاثون كتلة من اللفافة الحرقفية. متخصص في الطائرات والصبر.''',
+      'ach_572':
+          '''ثلاثون كتلة من اللفافة الحرقفية. متخصص في الطائرات والصبر.''',
       'ach_573': '''خمسون كتلة من اللفافة الحرقفية. سيد الهمس الحرقفي.''',
-      'ach_574': '''عشر كتل من اللفافة الحرقفية الموجهة بواسطة USG. جل، مسبار، سلام.''',
+      'ach_574':
+          '''عشر كتل من اللفافة الحرقفية الموجهة بواسطة USG. جل، مسبار، سلام.''',
       'ach_575': '''اللفافة الحرقفية مع وضع القسطرة. باقة الراحة المستمرة.''',
-      'ach_576': '''تم تنفيذ عشرين كتلة من اللفافة الحرقفية (لم يتم ملاحظتها فقط). العمل اليدوي على الطائرة.''',
+      'ach_576':
+          '''تم تنفيذ عشرين كتلة من اللفافة الحرقفية (لم يتم ملاحظتها فقط). العمل اليدوي على الطائرة.''',
       'ach_577': '''أول كتلة نمط حجرة psoas / psoas. مستوى عميق، هدوء أعمق.''',
-      'ach_578': '''خمس كتل من مستوى psoas تحت اللفافة. تحت اللفافة، وليس دون المستوى.''',
-      'ach_579': '''خمسة عشر بسواس كتل الطائرة تحت اللفافة. منتظم في النهاية العميقة.''',
-      'ach_580': '''ثلاثون كتلة من البسواس تحت اللفافة. متخصص حيث تخشى المعالم أن تخطو.''',
-      'ach_581': '''خمسون كتلة من العضلة القطنية تحت اللفافة. ماجستير في طاقة النهج الخلفي.''',
-      'ach_582': '''عشر كتل طائرة psoas موجهة من قبل USG. شاهد الطائرة؛ تكون الطائرة.''',
+      'ach_578':
+          '''خمس كتل من مستوى psoas تحت اللفافة. تحت اللفافة، وليس دون المستوى.''',
+      'ach_579':
+          '''خمسة عشر بسواس كتل الطائرة تحت اللفافة. منتظم في النهاية العميقة.''',
+      'ach_580':
+          '''ثلاثون كتلة من البسواس تحت اللفافة. متخصص حيث تخشى المعالم أن تخطو.''',
+      'ach_581':
+          '''خمسون كتلة من العضلة القطنية تحت اللفافة. ماجستير في طاقة النهج الخلفي.''',
+      'ach_582':
+          '''عشر كتل طائرة psoas موجهة من قبل USG. شاهد الطائرة؛ تكون الطائرة.''',
       'ach_583': '''كتلة بسواس الطائرة مع القسطرة. ضخ للفوز.''',
       'ach_584': '''تم تنفيذ عشرين كتلة مستوية من البسواس. التطريز الفضل.''',
-      'ach_585': '''تم تسجيل كلا من كتل اللفافة الحرقفية والعضلة القطنية. جامع الطائرة.''',
-      'ach_586': '''اللفافة الحرقفية أو العضلة القطنية في حالة الصدمة العظمية. طائرات للألم، وليس للعرض.''',
-      'ach_587': '''عشر كتل من اللفافة الحرقفية لمسارات كسر الورك. #NOF أفضل صديق.''',
-      'ach_588': '''خمس حالات مصابة إما باللفافة أو العضلة القطنية بالإضافة إلى كتلة أخرى في الطرف السفلي. وضع الثنائي.''',
+      'ach_585':
+          '''تم تسجيل كلا من كتل اللفافة الحرقفية والعضلة القطنية. جامع الطائرة.''',
+      'ach_586':
+          '''اللفافة الحرقفية أو العضلة القطنية في حالة الصدمة العظمية. طائرات للألم، وليس للعرض.''',
+      'ach_587':
+          '''عشر كتل من اللفافة الحرقفية لمسارات كسر الورك. #NOF أفضل صديق.''',
+      'ach_588':
+          '''خمس حالات مصابة إما باللفافة أو العضلة القطنية بالإضافة إلى كتلة أخرى في الطرف السفلي. وضع الثنائي.''',
       'ach_589': '''أول ارتعاش تسجيل وإدارتها. دبلوماسية الحرارة.''',
       'ach_590': '''تمكنت خمسة أحداث مرتجفة. الدفء دواء.''',
       'ach_591': '''خمسة عشر حدثًا مرتعشًا. متخصص في البطانيات والصبر.''',
       'ach_592': '''تمكنت من ثلاثين حدثًا مرتعشًا. سيد الارتعاش بعد العملية.''',
-      'ach_593': '''تم التحكم في أول ارتفاع ضغط الدم أثناء العملية. رسم خريطة لأعلى؛ لقد بقيت في المستوى.''',
-      'ach_594': '''تمكنت خمس حلقات ارتفاع ضغط الدم. ضواغط اختيارية. الفكر إلزامي.''',
-      'ach_595': '''خمسة عشر حدثًا لارتفاع ضغط الدم. منتظم في الجانب العالي من الكفة.''',
-      'ach_596': '''تم إدارة ثلاثين حدثًا لارتفاع ضغط الدم. متخصص في لماذا وماذا بعد ذلك.''',
+      'ach_593':
+          '''تم التحكم في أول ارتفاع ضغط الدم أثناء العملية. رسم خريطة لأعلى؛ لقد بقيت في المستوى.''',
+      'ach_594':
+          '''تمكنت خمس حلقات ارتفاع ضغط الدم. ضواغط اختيارية. الفكر إلزامي.''',
+      'ach_595':
+          '''خمسة عشر حدثًا لارتفاع ضغط الدم. منتظم في الجانب العالي من الكفة.''',
+      'ach_596':
+          '''تم إدارة ثلاثين حدثًا لارتفاع ضغط الدم. متخصص في لماذا وماذا بعد ذلك.''',
       'ach_597': '''تم تسجيل أول مضاعفات النزيف. الشفط على؛ الدماغ على.''',
       'ach_598': '''تمكنت خمسة أحداث النزيف. منتجات الدم وضغط الدم.''',
       'ach_599': '''خمسة عشر حادثة نزيف. منتظم باللون الأحمر.''',
-      'ach_600': '''تمكنت من إدارة ثلاثين حدث نزيف. متخصص عندما يتحول الحقل إلى اللون الأحمر.''',
-      'ach_601': '''تم تسجيل انخفاض حرارة الجسم لأول مرة. تدفئة المريض، وليس الأعذار.''',
-      'ach_602': '''خمسة أحداث انخفاض حرارة الجسم. الهواء القسري هو لغة الحب.''',
-      'ach_603': '''تمت إدارة خمسة عشر حدثًا لانخفاض حرارة الجسم. درجة الحرارة أمر حيوي.''',
-      'ach_604': '''ثلاثون حدثًا لانخفاض حرارة الجسم. متخصص في الدرجات والتفاصيل.''',
-      'ach_605': '''تمكنت أولا من عدم انتظام ضربات القلب. تخطيط القلب ليس موسيقى خلفية.''',
-      'ach_606': '''تمكنت خمسة من عدم انتظام ضربات القلب. المعدل، الإيقاع، الاستجابة.''',
+      'ach_600':
+          '''تمكنت من إدارة ثلاثين حدث نزيف. متخصص عندما يتحول الحقل إلى اللون الأحمر.''',
+      'ach_601':
+          '''تم تسجيل انخفاض حرارة الجسم لأول مرة. تدفئة المريض، وليس الأعذار.''',
+      'ach_602':
+          '''خمسة أحداث انخفاض حرارة الجسم. الهواء القسري هو لغة الحب.''',
+      'ach_603':
+          '''تمت إدارة خمسة عشر حدثًا لانخفاض حرارة الجسم. درجة الحرارة أمر حيوي.''',
+      'ach_604':
+          '''ثلاثون حدثًا لانخفاض حرارة الجسم. متخصص في الدرجات والتفاصيل.''',
+      'ach_605':
+          '''تمكنت أولا من عدم انتظام ضربات القلب. تخطيط القلب ليس موسيقى خلفية.''',
+      'ach_606':
+          '''تمكنت خمسة من عدم انتظام ضربات القلب. المعدل، الإيقاع، الاستجابة.''',
       'ach_607': '''خمسة عشر عدم انتظام ضربات القلب. منتظم في التعرجات.''',
-      'ach_608': '''تمكنت ثلاثين عدم انتظام ضربات القلب. متخصص عندما يصبح الخط تجريديًا.''',
+      'ach_608':
+          '''تمكنت ثلاثين عدم انتظام ضربات القلب. متخصص عندما يصبح الخط تجريديًا.''',
       'ach_609': '''تمكنت أول استرواح الصدر. إبرة، استنزاف، الهدوء.''',
       'ach_610': '''ثلاث حالات استرواح الصدر. تفضل الهواء في الدائرة فقط.''',
       'ach_611': '''تمكنت خمسة أحداث استرواح الصدر. منتظم في غير متوقع.''',
-      'ach_612': '''عشرة أحداث استرواح الصدر. متخصص في الهواء السيئ، قرارات جيدة.''',
-      'ach_613': '''أول مسار كبير لفقدان الدم. الخطة المتوسطة الأجل ليست ورقة نظرية.''',
-      'ach_614': '''تمكنت من إدارة ثلاث أحداث فقدان دم هائلة. التنشيط مبكرًا؛ فكر بوضوح.''',
-      'ach_615': '''خمسة أحداث فقدان الدم الهائلة. منتظم عندما يغني موفر الخلية.''',
-      'ach_616': '''تمكنت عشرة أحداث فقدان الدم الهائلة. متخصص في النسب وضبط النفس.''',
-      'ach_617': '''تمت إدارة رد فعل نقل الدم الأول. أوقف الخط؛ بدء البروتوكول.''',
+      'ach_612':
+          '''عشرة أحداث استرواح الصدر. متخصص في الهواء السيئ، قرارات جيدة.''',
+      'ach_613':
+          '''أول مسار كبير لفقدان الدم. الخطة المتوسطة الأجل ليست ورقة نظرية.''',
+      'ach_614':
+          '''تمكنت من إدارة ثلاث أحداث فقدان دم هائلة. التنشيط مبكرًا؛ فكر بوضوح.''',
+      'ach_615':
+          '''خمسة أحداث فقدان الدم الهائلة. منتظم عندما يغني موفر الخلية.''',
+      'ach_616':
+          '''تمكنت عشرة أحداث فقدان الدم الهائلة. متخصص في النسب وضبط النفس.''',
+      'ach_617':
+          '''تمت إدارة رد فعل نقل الدم الأول. أوقف الخط؛ بدء البروتوكول.''',
       'ach_618': '''ثلاثة ردود فعل نقل. البروتوكولات موجودة لسبب ما.''',
-      'ach_619': '''تمكنت خمسة ردود فعل نقل الدم. منتظم في الأيام السيئة النادرة.''',
+      'ach_619':
+          '''تمكنت خمسة ردود فعل نقل الدم. منتظم في الأيام السيئة النادرة.''',
       'ach_620': '''عشرة ردود فعل نقل. متخصص عندما يسيء التصرف الدم.''',
-      'ach_621': '''تم علاج أول انسداد هوائي وريدي. الجانب الأيسر اختياري؛ الدماغ إلزامي.''',
+      'ach_621':
+          '''تم علاج أول انسداد هوائي وريدي. الجانب الأيسر اختياري؛ الدماغ إلزامي.''',
       'ach_622': '''تمت إدارة ثلاثة أحداث VAE. الهواء ليس دواء''',
       'ach_623': '''خمسة أحداث VAE. منتظم في أسوأ الأحوال.''',
-      'ach_624': '''تمت إدارة عشرة أحداث VAE. متخصص عندما تصبح الفقاعات هي المؤامرة.''',
+      'ach_624':
+          '''تمت إدارة عشرة أحداث VAE. متخصص عندما تصبح الفقاعات هي المؤامرة.''',
       'ach_625': '''تم إدارة حدث الطموح الأول. الشفط والأكسجين والتواضع.''',
-      'ach_626': '''تمكنت ثلاثة تطلعات. قم بحماية مجرى الهواء الذي قمت بتأمينه بالفعل.''',
+      'ach_626':
+          '''تمكنت ثلاثة تطلعات. قم بحماية مجرى الهواء الذي قمت بتأمينه بالفعل.''',
       'ach_627': '''خمس طموحات. منتظم في غير المخطط له.''',
       'ach_628': '''تمكنت عشرة تطلعات. متخصص بعد ما لا يمكن تصوره.''',
-      'ach_629': '''تم تسجيل أول عملية تنبيب فاشلة. الخطة البديلة هي سبب تدريبك.''',
-      'ach_630': '''تمت إدارة ثلاث عمليات تنبيب فاشلة. أعلن مبكرا؛ الأكسجين دائما.''',
+      'ach_629':
+          '''تم تسجيل أول عملية تنبيب فاشلة. الخطة البديلة هي سبب تدريبك.''',
+      'ach_630':
+          '''تمت إدارة ثلاث عمليات تنبيب فاشلة. أعلن مبكرا؛ الأكسجين دائما.''',
       'ach_631': '''خمس عمليات تنبيب فاشلة. منتظم في الصدق تحت الضغط.''',
-      'ach_632': '''تمكنت من إجراء عشر عمليات تنبيب فاشلة. متخصص في عدم التحول إلى تعقيد.''',
+      'ach_632':
+          '''تمكنت من إجراء عشر عمليات تنبيب فاشلة. متخصص في عدم التحول إلى تعقيد.''',
       'ach_633': '''تم تسجيل أول تهوية صعبة للقناع. يدان، خطة واحدة.''',
       'ach_634': '''خمسة أحداث صعبة لتهوية القناع. OPA/NPA صديقان.''',
-      'ach_635': '''خمسة عشر حدثًا صعبًا لتهوية القناع. منتظم عندما تقاوم الحقيبة.''',
-      'ach_636': '''تمت إدارة ثلاثين حدثًا صعبًا للتهوية بالقناع. متخصص في المهارة المنسية.''',
-      'ach_637': '''تم تسجيل خمسة أنواع مختلفة من المضاعفات الجديدة. جامع اللحظات القابلة للتعليم.''',
-      'ach_638': '''تم تسجيل ثمانية أنواع مختلفة من المضاعفات الجديدة. متذوق الفوضى الواردة.''',
-      'ach_639': '''تم تسجيل جميع فئات المضاعفات الاثنتي عشرة الجديدة مرة واحدة على الأقل. المنهج الكامل.''',
-      'ach_640': '''إجمالي عشرين حدثًا عبر مجموعة المضاعفات الجديدة. كتالوج رباطة جأش.''',
-      'ach_641': '''تمت إدارة إجمالي خمسين حدثًا من المضاعفات الجديدة. حجم مع الفضيلة.''',
-      'ach_642': '''لا تزال تفضل عدم وجود أي شيء/هادئ - ولكنك قمت بالتسجيل وتعلمت من الباقي. توازن.''',
-      'ach_643': '''تم التحكم في كل من الارتعاش وارتفاع ضغط الدم عبر الحالات. الملفات الساخنة والباردة.''',
-      'ach_644': '''تم التحكم في كل من النزيف وانخفاض حرارة الجسم. دروس الأحمر والأزرق.''',
-      'ach_645': '''تتم إدارة الطموح أو VAE أو استرواح الصدر. عندما يسيء التصرف الهواء.''',
-      'ach_646': '''تم تسجيل فشل التنبيب وصعوبة تهوية القناع. شارة صدق مجرى الهواء.''',
-      'ach_647': '''تم تسجيل فقدان الدم بشكل كبير ورد فعل نقل الدم. فصل الدم كامل''',
-      'ach_648': '''تم التحكم في عدم انتظام ضربات القلب وارتفاع ضغط الدم. حبكة فرعية للقلب.''',
-      'ach_649': '''أي تعقيد جديد بعد منتصف الليل. المدرسة الليلية، الطبعة السريرية''',
-      'ach_650': '''تعقيد جديد تمت إدارته في ASA IV+. مخاطر عالية، مستوى عال.''',
-      'ach_651': '''تم تسجيل المضاعفات ولكن النتيجة PACU هادئة. تم تجنب الأزمة، حقا.''',
-      'ach_652': '''تم تسجيل حالة تحتوي على اثنين أو أكثر من المضاعفات المميزة. قضية مشغولة، ورأس واضح.''',
+      'ach_635':
+          '''خمسة عشر حدثًا صعبًا لتهوية القناع. منتظم عندما تقاوم الحقيبة.''',
+      'ach_636':
+          '''تمت إدارة ثلاثين حدثًا صعبًا للتهوية بالقناع. متخصص في المهارة المنسية.''',
+      'ach_637':
+          '''تم تسجيل خمسة أنواع مختلفة من المضاعفات الجديدة. جامع اللحظات القابلة للتعليم.''',
+      'ach_638':
+          '''تم تسجيل ثمانية أنواع مختلفة من المضاعفات الجديدة. متذوق الفوضى الواردة.''',
+      'ach_639':
+          '''تم تسجيل جميع فئات المضاعفات الاثنتي عشرة الجديدة مرة واحدة على الأقل. المنهج الكامل.''',
+      'ach_640':
+          '''إجمالي عشرين حدثًا عبر مجموعة المضاعفات الجديدة. كتالوج رباطة جأش.''',
+      'ach_641':
+          '''تمت إدارة إجمالي خمسين حدثًا من المضاعفات الجديدة. حجم مع الفضيلة.''',
+      'ach_642':
+          '''لا تزال تفضل عدم وجود أي شيء/هادئ - ولكنك قمت بالتسجيل وتعلمت من الباقي. توازن.''',
+      'ach_643':
+          '''تم التحكم في كل من الارتعاش وارتفاع ضغط الدم عبر الحالات. الملفات الساخنة والباردة.''',
+      'ach_644':
+          '''تم التحكم في كل من النزيف وانخفاض حرارة الجسم. دروس الأحمر والأزرق.''',
+      'ach_645':
+          '''تتم إدارة الطموح أو VAE أو استرواح الصدر. عندما يسيء التصرف الهواء.''',
+      'ach_646':
+          '''تم تسجيل فشل التنبيب وصعوبة تهوية القناع. شارة صدق مجرى الهواء.''',
+      'ach_647':
+          '''تم تسجيل فقدان الدم بشكل كبير ورد فعل نقل الدم. فصل الدم كامل''',
+      'ach_648':
+          '''تم التحكم في عدم انتظام ضربات القلب وارتفاع ضغط الدم. حبكة فرعية للقلب.''',
+      'ach_649':
+          '''أي تعقيد جديد بعد منتصف الليل. المدرسة الليلية، الطبعة السريرية''',
+      'ach_650':
+          '''تعقيد جديد تمت إدارته في ASA IV+. مخاطر عالية، مستوى عال.''',
+      'ach_651':
+          '''تم تسجيل المضاعفات ولكن النتيجة PACU هادئة. تم تجنب الأزمة، حقا.''',
+      'ach_652':
+          '''تم تسجيل حالة تحتوي على اثنين أو أكثر من المضاعفات المميزة. قضية مشغولة، ورأس واضح.''',
       'ach_653': '''عشرة مضاعفات مدارة عبر الفئات. لحظات التدريس محفوظة.''',
       'ach_654': '''ثلاثون حدثًا مُدارًا عبر تعقيدات جديدة. اتسعت صافي.''',
-      'ach_655': '''يتم احترام تفاعل نقل الدم أو مسار MTP في السجل. البروتوكول هو الشخصية.''',
-      'ach_656': '''تمكن كل من الارتعاش وانخفاض حرارة الجسم. درجة الحرارة ليست اختيارية.''',
-      'ach_657': '''DMV بالإضافة إلى عدم صدق التنبيب في السجل. الصدق ينقذ الأرواح.''',
-      'ach_658': '''تمت إدارة VAE وتسجيله. الوعي هو نصف المعركة؛ العمل هو الباقي.''',
-      'ach_659': '''تم التحكم في النزيف أو فقدان الدم بشكل كبير عشر مرات مجتمعة. المخضرم في الميدان الأحمر.''',
+      'ach_655':
+          '''يتم احترام تفاعل نقل الدم أو مسار MTP في السجل. البروتوكول هو الشخصية.''',
+      'ach_656':
+          '''تمكن كل من الارتعاش وانخفاض حرارة الجسم. درجة الحرارة ليست اختيارية.''',
+      'ach_657':
+          '''DMV بالإضافة إلى عدم صدق التنبيب في السجل. الصدق ينقذ الأرواح.''',
+      'ach_658':
+          '''تمت إدارة VAE وتسجيله. الوعي هو نصف المعركة؛ العمل هو الباقي.''',
+      'ach_659':
+          '''تم التحكم في النزيف أو فقدان الدم بشكل كبير عشر مرات مجتمعة. المخضرم في الميدان الأحمر.''',
       'ach_660': '''تمكنت من ارتفاع ضغط الدم عشرين مرة. الضغط، التعامل معها.''',
       'ach_661': '''تمكنت من خمسين حدثًا مرتجفًا. شراء مؤسسة أكثر دفئا.''',
-      'ach_662': '''تمت إدارة خمسين حدثًا لارتفاع ضغط الدم. قصص MAP لعدة أيام.''',
+      'ach_662':
+          '''تمت إدارة خمسين حدثًا لارتفاع ضغط الدم. قصص MAP لعدة أيام.''',
       'ach_663': '''تمت إدارة خمسين حدث نزيف. سيرة شفط.''',
-      'ach_664': '''تمت إدارة خمسين حدثًا لانخفاض حرارة الجسم. سيرة درجة الحرارة.''',
-      'ach_665': '''تمكنت خمسين من عدم انتظام ضربات القلب. رواية تخطيط القلب.''',
+      'ach_664':
+          '''تمت إدارة خمسين حدثًا لانخفاض حرارة الجسم. سيرة درجة الحرارة.''',
+      'ach_665':
+          '''تمكنت خمسين من عدم انتظام ضربات القلب. رواية تخطيط القلب.''',
       'ach_666': '''بعد إدارة الطموح، عشر حالات هادئة لاحقة. تم تطبيق الدرس.''',
-      'ach_667': '''صعوبة تهوية القناع تليها مجرى هوائي نهائي ناجح في نفس الحالة. التسلسل مهم.''',
-      'ach_668': '''حالة تنبيب فاشلة تنتهي بدون وفاة على الطاولة. الانتعاش هو النقطة.''',
-      'ach_669': '''تتم إدارة استرواح الصدر باستخدام طاقة التدخل النهائية. الهواء خارجا، والهدوء في الداخل.''',
-      'ach_670': '''خمسة أحداث على مستوى الخطة المتوسطة الأجل حيث بقيت الكابتن. حصل على المرتبة.''',
-      'ach_671': '''خمسة تفاعلات نقل الدم مع طاقة البروتوكول. توقف، قيم، عالج.''',
+      'ach_667':
+          '''صعوبة تهوية القناع تليها مجرى هوائي نهائي ناجح في نفس الحالة. التسلسل مهم.''',
+      'ach_668':
+          '''حالة تنبيب فاشلة تنتهي بدون وفاة على الطاولة. الانتعاش هو النقطة.''',
+      'ach_669':
+          '''تتم إدارة استرواح الصدر باستخدام طاقة التدخل النهائية. الهواء خارجا، والهدوء في الداخل.''',
+      'ach_670':
+          '''خمسة أحداث على مستوى الخطة المتوسطة الأجل حيث بقيت الكابتن. حصل على المرتبة.''',
+      'ach_671':
+          '''خمسة تفاعلات نقل الدم مع طاقة البروتوكول. توقف، قيم، عالج.''',
       'ach_672': '''VAE في حالة الجلوس أو وضعية الخطر. موقف المخاطر، محترم.''',
       'ach_673': '''تم التحكم في الارتعاش بنتيجة PACU جيدة. دافئة واستيقاظ.''',
-      'ach_674': '''ارتفاع ضغط الدم عند ظهوره تمكنت. أنبوب خارج، الضغط المدني.''',
-      'ach_675': '''تم تسجيل مضاعفات النزيف مع مسار نقل وحدة العناية المركزة. المكان المناسب، الوقت المناسب.''',
-      'ach_676': '''انخفاض حرارة الجسم في حالة قلبية أو كبيرة. قم بتدفئة دائرة الرعاية.''',
-      'ach_677': '''تمكنت طاقة عدم انتظام ضربات القلب غير المستقرة. الكهرباء اختيارية. لا أعتقد ذلك.''',
-      'ach_678': '''صعوبة تهوية القناع وصعوبة مجرى الهواء كلاهما صحيح في حالة واحدة. منهج مجرى الهواء كاملا في جلسة واحدة.''',
-      'ach_679': '''ثلاثة أنواع مختلفة من المضاعفات في حالة واحدة. لا يزال هنا. لا يزال التسجيل.''',
+      'ach_674':
+          '''ارتفاع ضغط الدم عند ظهوره تمكنت. أنبوب خارج، الضغط المدني.''',
+      'ach_675':
+          '''تم تسجيل مضاعفات النزيف مع مسار نقل وحدة العناية المركزة. المكان المناسب، الوقت المناسب.''',
+      'ach_676':
+          '''انخفاض حرارة الجسم في حالة قلبية أو كبيرة. قم بتدفئة دائرة الرعاية.''',
+      'ach_677':
+          '''تمكنت طاقة عدم انتظام ضربات القلب غير المستقرة. الكهرباء اختيارية. لا أعتقد ذلك.''',
+      'ach_678':
+          '''صعوبة تهوية القناع وصعوبة مجرى الهواء كلاهما صحيح في حالة واحدة. منهج مجرى الهواء كاملا في جلسة واحدة.''',
+      'ach_679':
+          '''ثلاثة أنواع مختلفة من المضاعفات في حالة واحدة. لا يزال هنا. لا يزال التسجيل.''',
       'ach_680': '''بعد حدوث تعقيد، عد إلى خط هادئ من عشرة. صمود.''',
-      'ach_681': '''تم تسجيل عشرين مضاعفات بدلاً من التقليل منها. ثقافة الصدق.''',
-      'ach_682': '''أولًا: الرعشة، ارتفاع ضغط الدم، النزيف. مجموعة البداية كاملة.''',
-      'ach_683': '''تم تسجيل فقدان الدم بشكل كبير، وVAE، وفشل التنبيب مرة واحدة. مجموعة حرجة.''',
-      'ach_684': '''الطموح، فشل التنبيب، تم تسجيل كل DMV. مضاعفات مجرى الهواء ثلاثية.''',
-      'ach_685': '''الارتعاش وانخفاض حرارة الجسم خمسة لكل منهما. محو الأمية الحرارية.''',
-      'ach_686': '''النزيف وفقدان الدم الشديد خمسة لكل مسار مجتمعة. محو الأمية هيمو.''',
-      'ach_687': '''ارتفاع ضغط الدم وعدم انتظام ضربات القلب عشرة لكل مسار. محو الأمية مضاعفات القلب.''',
+      'ach_681':
+          '''تم تسجيل عشرين مضاعفات بدلاً من التقليل منها. ثقافة الصدق.''',
+      'ach_682':
+          '''أولًا: الرعشة، ارتفاع ضغط الدم، النزيف. مجموعة البداية كاملة.''',
+      'ach_683':
+          '''تم تسجيل فقدان الدم بشكل كبير، وVAE، وفشل التنبيب مرة واحدة. مجموعة حرجة.''',
+      'ach_684':
+          '''الطموح، فشل التنبيب، تم تسجيل كل DMV. مضاعفات مجرى الهواء ثلاثية.''',
+      'ach_685':
+          '''الارتعاش وانخفاض حرارة الجسم خمسة لكل منهما. محو الأمية الحرارية.''',
+      'ach_686':
+          '''النزيف وفقدان الدم الشديد خمسة لكل مسار مجتمعة. محو الأمية هيمو.''',
+      'ach_687':
+          '''ارتفاع ضغط الدم وعدم انتظام ضربات القلب عشرة لكل مسار. محو الأمية مضاعفات القلب.''',
       'ach_688': '''عشرة إجمالي أحداث المضاعفات الجديدة. التوسع جاري.''',
-      'ach_689': '''إجمالي خمسة وعشرون حدثًا من المضاعفات الجديدة. التوسع حقيقي''',
-      'ach_690': '''إجمالي خمسة وسبعون حدثًا من المضاعفات الجديدة. التوسع المؤسسي.''',
-      'ach_691': '''تمت إدارة إجمالي مائة حدث من المضاعفات الجديدة. اكتمل التوسع.''',
-      'ach_692': '''تم تسجيل خمسين تعقيدًا من أي نوع عبر الحياة المهنية داخل التطبيق. مقياس الصدق.''',
-      'ach_693': '''حالة المضاعفات تليها لاحقًا خط لا شيء / هادئ من خمسة وعشرين. تم تصحيح الدورة.''',
+      'ach_689':
+          '''إجمالي خمسة وعشرون حدثًا من المضاعفات الجديدة. التوسع حقيقي''',
+      'ach_690':
+          '''إجمالي خمسة وسبعون حدثًا من المضاعفات الجديدة. التوسع المؤسسي.''',
+      'ach_691':
+          '''تمت إدارة إجمالي مائة حدث من المضاعفات الجديدة. اكتمل التوسع.''',
+      'ach_692':
+          '''تم تسجيل خمسين تعقيدًا من أي نوع عبر الحياة المهنية داخل التطبيق. مقياس الصدق.''',
+      'ach_693':
+          '''حالة المضاعفات تليها لاحقًا خط لا شيء / هادئ من خمسة وعشرين. تم تصحيح الدورة.''',
       'ach_694': '''مضاعفات جديدة أثناء حالة الطوارئ. الضغط على الضغط.''',
-      'ach_695': '''مضاعفات جديدة لدى مريض أقل من 18 عامًا. مريض صغير، بروتوكول كامل.''',
-      'ach_696': '''مضاعفات جديدة في المريض ≥65. علم وظائف الأعضاء الهش، خطط ثابتة.''',
-      'ach_697': '''مضاعفات جديدة في حالة جراحة السمنة. مربع علم وظائف الأعضاء.''',
-      'ach_698': '''مضاعفات جديدة في الأسنان / الفك العلوي. مؤامرة فرعية مجرى الهواء المشترك.''',
-      'ach_699': '''تعقيد جديد في الأشعة تحت الحمراء. غرفة مظلمة، تفكير مشرق.''',
-      'ach_700': '''مضاعفات جديدة في قلب الأطفال. أعلى الفصول الدراسية المخاطر.''',
-      'ach_701': '''تم تسجيل ما يكفي من تفاصيل التعقيد التي يمكن لملف PDF تدريسها. التوثيق كإرث.''',
+      'ach_695':
+          '''مضاعفات جديدة لدى مريض أقل من 18 عامًا. مريض صغير، بروتوكول كامل.''',
+      'ach_696':
+          '''مضاعفات جديدة في المريض ≥65. علم وظائف الأعضاء الهش، خطط ثابتة.''',
+      'ach_697':
+          '''مضاعفات جديدة في حالة جراحة السمنة. مربع علم وظائف الأعضاء.''',
+      'ach_698':
+          '''مضاعفات جديدة في الأسنان / الفك العلوي. مؤامرة فرعية مجرى الهواء المشترك.''',
+      'ach_699':
+          '''تعقيد جديد في الأشعة تحت الحمراء. غرفة مظلمة، تفكير مشرق.''',
+      'ach_700':
+          '''مضاعفات جديدة في قلب الأطفال. أعلى الفصول الدراسية المخاطر.''',
+      'ach_701':
+          '''تم تسجيل ما يكفي من تفاصيل التعقيد التي يمكن لملف PDF تدريسها. التوثيق كإرث.''',
     },
     'ko': {
       'ach_0': '''모든 그랜드마스터는 한때 겁에 질린 주민이었습니다. 주사기를 떨어뜨리지 마십시오.''',
@@ -10702,7 +13605,8 @@ class AchievementLocalizations {
       'ach_23': '''150건. 일지가 존경스러워지고 있습니다. 당신의 잠은 그렇지 않습니다.''',
       'ach_24': '''175건의 사례입니다. MAP 개최. 사기: 보상됨.''',
       'ach_25': '''200가지 경우. 범위의 끝이 어디인지 초보자에게 가르칠 시간입니다.''',
-      'ach_26': '''225건의 사례입니다. Theatre는 당신의 이름을 알고 있습니다. 일반적으로 목록이 초과될 때입니다.''',
+      'ach_26':
+          '''225건의 사례입니다. Theatre는 당신의 이름을 알고 있습니다. 일반적으로 목록이 초과될 때입니다.''',
       'ach_27': '''250건. 프로포폴은 더 이상 선에서 실행되지 않습니다.''',
       'ach_28': '''300가지 경우. 라운지 커피와 남은 의지력이 원동력입니다.''',
       'ach_29': '''350건. 어려운 기도는 심박수가 아니라 눈썹을 치켜뜨게 합니다.''',
@@ -10742,14 +13646,15 @@ class AchievementLocalizations {
       'ach_63': '''500시간. 신화적인 불면증의 절반.''',
       'ach_64': '''750시간. 긴 케이스는 성격과 후만증을 형성합니다.''',
       'ach_65': '''1000시간. 엘리트. 아직도 회의가 더 길게 느껴집니다.''',
-      'ach_66': '''한 건은 자정부터 오전 5시까지 시작됩니다. 왜냐하면 잠은 전화를 받지 않는 사람들을 위한 것이기 때문입니다.''',
+      'ach_66':
+          '''한 건은 자정부터 오전 5시까지 시작됩니다. 왜냐하면 잠은 전화를 받지 않는 사람들을 위한 것이기 때문입니다.''',
       'ach_67': '''5박이 시작됩니다. 당신은 기본적으로 스크럽을 입은 뱀파이어입니다.''',
       'ach_68': '''10박이 시작됩니다. 일주기리듬이 채팅을 떠났습니다.''',
       'ach_69': '''스물밤이 시작됩니다. 일광은 수술 전 소문입니다.''',
       'ach_70': '''오전 6~7시에 시작합니다. 웜 잡기 - 또는 오늘의 첫 번째 지연.''',
       'ach_71': '''10개의 조기 시작. 커피는 부조종사이자 혈역학적 지원입니다.''',
       'ach_72': '''주말 사건 하나. 토요일은 남자아이들을 위한 날이고... 긴급 랩 콜도 있습니다.''',
-      'ach_73': '''주말 10건. 당신이 말하는 \'브런치\'는 무엇인가요?''',
+      'ach_73': '''주말 10건. 당신이 말하는 '브런치'는 무엇인가요?''',
       'ach_74': '''50개의 주말 사례. 의료인이 아닌 친구가 귀하를 초대하는 것을 중단했습니다.''',
       'ach_75': '''15분 안에 수술이 가능합니다. 프로포폴 낮잠. 다음!''',
       'ach_76': '''10번의 초고속 수술. 하우스키핑보다 방을 더 빨리 돌립니다.''',
@@ -10762,7 +13667,8 @@ class AchievementLocalizations {
       'ach_83': '''50개의 완벽한 출현. 그들을 깨우는 것은 예술이고 당신은 피카소입니다.''',
       'ach_84': '''100번의 시간적 출현. 우리는 당신에게 타임머신이 있는지 확인하고 있습니다.''',
       'ach_85': '''12월 25일이나 1월 1일 사건. 호호, 미다졸람을 잡아라.''',
-      'ach_86': '''12월 31일 또는 1월 1일의 사례. 한 손에는 후두경이 있고 다른 손에는 조용한 낙관주의가 있습니다.''',
+      'ach_86':
+          '''12월 31일 또는 1월 1일의 사례. 한 손에는 후두경이 있고 다른 손에는 조용한 낙관주의가 있습니다.''',
       'ach_87': '''당신의 생일에 대한 사건. 생일 축하합니다. 여기 비상 전 랩이 있습니다.''',
       'ach_88': '''ASA I. 너무 건강한 당신은 숨겨진 캐치를 계속 찾고 있습니다.''',
       'ach_89': '''10개의 ASA I 사례. 어느 유토피아 병원인가요?''',
@@ -10791,7 +13697,8 @@ class AchievementLocalizations {
       'ach_112': '''스물 ASA 대. 모니터는 존중의 의미로 침묵을 지킵니다.''',
       'ach_113': '''ASA III–V 케이스 100개. 더 나은 약을 취급하는 차분한 중개인처럼 위험을 관리합니다.''',
       'ach_114': '''사건이 없는 PACU 방전이 있는 ASA IV 또는 V. 인정하세요. 바람을 피웠나요?''',
-      'ach_115': '''ASA IV/V에서 ICU까지 여전히 삽관되어 있습니다. GO를 통과하지 마십시오. 발관하지 마십시오.''',
+      'ach_115':
+          '''ASA IV/V에서 ICU까지 여전히 삽관되어 있습니다. GO를 통과하지 마십시오. 발관하지 마십시오.''',
       'ach_116': '''10연속의 쉬운 사건. 즐겨보세요. 그것은 지속되지 않을 것입니다.''',
       'ach_117': '''25회 연속 ASA I/II에 문제가 없습니다. 의심스러울 정도로 편안한 달입니다.''',
       'ach_118': '''하루에 ASA III+ 사례 3건. 저녁 시간을 신중하게 계획하세요.''',
@@ -10822,11 +13729,14 @@ class AchievementLocalizations {
       'ach_143': '''응급 산부인과. 환자 2명, 기도 계획 1개, 냉기 제로.''',
       'ach_144': '''응급 신경외과. 집세를 지불하는 것처럼 뇌를 대하십시오.''',
       'ach_145': '''50개의 긴급 상황. 보드에서 긴급이라고 말하면 RSI라고 말합니다.''',
-      'ach_146': '''비상 시작 시간은 00:00~04:00입니다. 유능한 손을 제외하고는 지금 좋은 일이 시작되지 않습니다.''',
-      'ach_147': '''12월 25일 또는 1월 1일에 비상 사태가 발생했습니다. 메리 크리스마스 — 여기 비스커스가 파열되었습니다.''',
+      'ach_146':
+          '''비상 시작 시간은 00:00~04:00입니다. 유능한 손을 제외하고는 지금 좋은 일이 시작되지 않습니다.''',
+      'ach_147':
+          '''12월 25일 또는 1월 1일에 비상 사태가 발생했습니다. 메리 크리스마스 — 여기 비스커스가 파열되었습니다.''',
       'ach_148': '''10개의 주말 긴급 상황. 혈액은행을 사업적으로 유지합니다.''',
       'ach_149': '''응급으로 어려운 기도. 계획 A~C가 실패했습니다. 당신은 플랜 D입니다.''',
-      'ach_150': '''사건이 없는 PACU 방전이 있는 응급 ASA IV. 방에 불이 붙었습니다. BP는 정중한 120/80입니다.''',
+      'ach_150':
+          '''사건이 없는 PACU 방전이 있는 응급 ASA IV. 방에 불이 붙었습니다. BP는 정중한 120/80입니다.''',
       'ach_151': '''18세 미만 긴급상황. 최고의 성과와 가장 차분한 목소리를 가져오세요.''',
       'ach_152': '''65세 이상 긴급 상황. 더 나은 모니터링으로 고급 도자기처럼 대하십시오.''',
       'ach_153': '''긴급 종료 시간은 08:00~08:30입니다. 저녁 식사 계획: 명예롭게 취소되었습니다.''',
@@ -10880,7 +13790,7 @@ class AchievementLocalizations {
       'ach_201': '''10가지 독특한 특산품. 귀하의 일지에는 건전한 헌신 문제가 있습니다.''',
       'ach_202': '''15가지 독특한 특산품. 극장 GPS는 어디에나 있습니다.''',
       'ach_203': '''25가지 독특한 특산품. Da Vinci에는 TIVA 펌프가 없었습니다. 당신은 그렇지 않습니다.''',
-      'ach_204': '''10개의 \'기타\' 특수 사례. 드롭다운에 맞지 않더라도 책에는 맞습니다.''',
+      'ach_204': '''10개의 '기타' 특수 사례. 드롭다운에 맞지 않더라도 책에는 맞습니다.''',
       'ach_205': '''250개의 오르토 케이스. 본시멘트로 제작된 타이틀 벨트.''',
       'ach_206': '''250개의 산부인과 사례. 약간의 피가 묻은 노동당 왕관.''',
       'ach_207': '''신경증 사례 100개. ICP는 당신이 부드럽게 괴롭히는 또 다른 숫자입니다.''',
@@ -11211,7 +14121,8 @@ class AchievementLocalizations {
       'ach_532': '''Maxillo와 척추가 모두 기록되었습니다. 다른 뼈, 동일한 기도 존중.''',
       'ach_533': '''수행된 지역의 비만 사례. 가능한 경우 차단하세요. 기도는 항상 준비되어 있습니다.''',
       'ach_534': '''소아 심장과 별도의 신생아 케이스. 연령 스펙트럼, 같은 밤 에너지.''',
-      'ach_535': '''치과/악악, 비만치료, IR, 방사선요법 및 심장 페이즈를 최소 한 번 이상 기록했습니다. 수집이 완료되었습니다.''',
+      'ach_535':
+          '''치과/악악, 비만치료, IR, 방사선요법 및 심장 페이즈를 최소 한 번 이상 기록했습니다. 수집이 완료되었습니다.''',
       'ach_536': '''5개의 새로운 전문 분야 각각에 최소 1건의 사례가 있습니다. 탐험가 배지가 잠금 해제되었습니다.''',
       'ach_537': '''IR 및 방사선 치료가 모두 기록되었습니다. 이온화 방사선, 비이온화 진정.''',
       'ach_538': '''치과/상악 및 두경부에 걸쳐 50건이 통합되었습니다. 공유기도 졸업생.''',
@@ -11235,7 +14146,8 @@ class AchievementLocalizations {
       'ach_556': '''4시간에 걸친 IR 마취. 투시 마라톤.''',
       'ach_557': '''방사선 치료는 07:00 이전에 시작됩니다. 빔 시.''',
       'ach_558': '''응급 소아 심장. 아드레날린은 선택 사항입니다. 시스템 필수.''',
-      'ach_559': '''적어도 하나의 새로운 전문 분야를 포함하여 8개의 별개의 수술 전문 분야가 기록되었습니다. 목록의 다중 언어.''',
+      'ach_559':
+          '''적어도 하나의 새로운 전문 분야를 포함하여 8개의 별개의 수술 전문 분야가 기록되었습니다. 목록의 다중 언어.''',
       'ach_560': '''새로운 전문 세트에 걸쳐 50가지 케이스가 결합되었습니다. 일반 탐험가.''',
       'ach_561': '''75개의 치과/악악 사례. 구강 및 기도 리그의 실적.''',
       'ach_562': '''75건의 비만 수술 사례. 경사로에서의 기록.''',
@@ -11245,7 +14157,7 @@ class AchievementLocalizations {
       'ach_566': '''새로운 전문 분야에 걸쳐 25가지 사례가 결합되었습니다. 프론티어 진행.''',
       'ach_567': '''새로운 전문 분야에 걸쳐 100가지 사례가 결합되었습니다. 프론티어가 정착했습니다.''',
       'ach_568': '''40개의 치과/악악 사례. 구강외과 의사의 동맹자, 튜브의 수호자.''',
-      'ach_569': '''첫 번째 근막 장골 평면 블록. 비행기 발견; 고통은 \'나중에\'로 분류됩니다.''',
+      'ach_569': '''첫 번째 근막 장골 평면 블록. 비행기 발견; 고통은 '나중에'로 분류됩니다.''',
       'ach_570': '''5개의 장골근막 블록. 고관절 골절은 조용히 감사드립니다.''',
       'ach_571': '''15개의 장골근막 블록. #NOF 목록의 일반 항목입니다.''',
       'ach_572': '''장골근막 블록 30개. 비행기와 인내심의 전문가.''',
@@ -11354,7 +14266,8 @@ class AchievementLocalizations {
       'ach_675': '''ICU 이송 경로에 따른 출혈 합병증이 기록되었습니다. 적절한 장소, 적절한 시간.''',
       'ach_676': '''심장 또는 주요 사례의 저체온증이 관리되었습니다. 치료 회로를 따뜻하게 하세요.''',
       'ach_677': '''불안정한 부정맥 에너지 관리. 선택 전기; 생각하지 않았다.''',
-      'ach_678': '''마스크 환기가 어렵고 기도가 어려운 경우 모두 한 가지 경우에 해당됩니다. 한 번에 전체 기도 강의 계획서를 학습할 수 있습니다.''',
+      'ach_678':
+          '''마스크 환기가 어렵고 기도가 어려운 경우 모두 한 가지 경우에 해당됩니다. 한 번에 전체 기도 강의 계획서를 학습할 수 있습니다.''',
       'ach_679': '''한 사례에 세 가지 다른 합병증 유형이 있습니다. 아직 여기 있어요. 아직 로깅 중입니다.''',
       'ach_680': '''합병증이 발생한 후에는 무사히 10회 연속으로 돌아갑니다. 회복력.''',
       'ach_681': '''최소화되는 대신 20개의 합병증이 기록되었습니다. 정직의 문화.''',
@@ -11493,7 +14406,8 @@ class AchievementLocalizations {
       'ach_110': '''5 つの ASA 対死神は尋ねた。今日はダメって言いましたね。''',
       'ach_111': '''10 人の ASA 対リードエプロンの下のケープはオプションです。''',
       'ach_112': '''20 の ASA 対モニターたちは敬意を表して沈黙する。''',
-      'ach_113': '''ASA III ～ V のケース 100 件。リスクは、より優れた麻薬を扱う冷静なブローカーのように管理されました。''',
+      'ach_113':
+          '''ASA III ～ V のケース 100 件。リスクは、より優れた麻薬を扱う冷静なブローカーのように管理されました。''',
       'ach_114': '''ASA IV または ASA V、PACU 放電に問題はありません。それを認めてください—不正行為をしましたか？''',
       'ach_115': '''ASA IV/V から ICU まで挿管されたまま。 GOをパスしないでください。抜管しないでください。''',
       'ach_116': '''10回連続の簡単な平穏なケース。楽しめ。それは続かないでしょう。''',
@@ -12058,7 +14972,8 @@ class AchievementLocalizations {
       'ach_675': '''ICU 移行経路に伴う出血合併症が記録されました。適切な場所、適切な時間。''',
       'ach_676': '''心臓疾患または重篤な症例における低体温症の管理。ケアの回路を温めます。''',
       'ach_677': '''不安定な不整脈のエネルギー管理。電気はオプションです。そうではないと思いました。''',
-      'ach_678': '''あるケースでは、マスク換気困難と気道確保困難の両方が当てはまります。気道に関する完全なシラバスを 1 回で受講可能。''',
+      'ach_678':
+          '''あるケースでは、マスク換気困難と気道確保困難の両方が当てはまります。気道に関する完全なシラバスを 1 回で受講可能。''',
       'ach_679': '''1 つのケースに 3 つの異なる合併症タイプ。まだここにいます。まだログを記録しています。''',
       'ach_680': '''合併症を経て、何事もなく10連勝に戻る。回復力。''',
       'ach_681': '''20件の合併症が最小限に抑えられる代わりに記録されました。正直さの文化。''',
@@ -12084,708 +14999,1271 @@ class AchievementLocalizations {
       'ach_701': '''PDF で学べる十分な複雑さの詳細が記録されています。レガシーとしてのドキュメント。''',
     },
     'id': {
-      'ach_0': '''Setiap grandmaster pernah menjadi penduduk yang ketakutan. Cobalah untuk tidak menjatuhkan jarum suntiknya.''',
-      'ach_1': '''Dua kasus masuk. Anda sudah berhenti menceritakan daftar periksa dengan lantang. Kemajuan.''',
-      'ach_2': '''Tiga kasus. Teater mulai tidak lagi terasa seperti situasi penyanderaan.''',
-      'ach_3': '''Empat kasus. Anda dapat mengeja Sevoflurane tanpa memeriksa botolnya. Sebagian besar.''',
-      'ach_4': '''Lima kasus. Tos mesin anestesi — hanya itu yang mendapatkannya.''',
+      'ach_0':
+          '''Setiap grandmaster pernah menjadi penduduk yang ketakutan. Cobalah untuk tidak menjatuhkan jarum suntiknya.''',
+      'ach_1':
+          '''Dua kasus masuk. Anda sudah berhenti menceritakan daftar periksa dengan lantang. Kemajuan.''',
+      'ach_2':
+          '''Tiga kasus. Teater mulai tidak lagi terasa seperti situasi penyanderaan.''',
+      'ach_3':
+          '''Empat kasus. Anda dapat mengeja Sevoflurane tanpa memeriksa botolnya. Sebagian besar.''',
+      'ach_4':
+          '''Lima kasus. Tos mesin anestesi — hanya itu yang mendapatkannya.''',
       'ach_5': '''Enam kasus. ETCO₂ menjadi bahasa cinta Anda.''',
-      'ach_6': '''Tujuh kasus. Semoga pandangan Anda berikutnya menjadi kelas 1 dan dokter bedah Anda tepat waktu.''',
-      'ach_7': '''Delapan di dalam buku. Buku catatan tersebut bukan lagi sebuah rumor.''',
+      'ach_6':
+          '''Tujuh kasus. Semoga pandangan Anda berikutnya menjadi kelas 1 dan dokter bedah Anda tepat waktu.''',
+      'ach_7':
+          '''Delapan di dalam buku. Buku catatan tersebut bukan lagi sebuah rumor.''',
       'ach_8': '''Sembilan kasus. Kurangnya dua digit dan keunggulan ringan.''',
-      'ach_9': '''Sepuluh kasus. Anda secara resmi telah berhenti meminta maaf kepada tiang infus ketika Anda menabraknya.''',
-      'ach_10': '''Tiga belas kasus. Tidak beruntung bagi sebagian orang. Mulus untuk Anda — diduga.''',
-      'ach_11': '''Enam belas kasus. Manis seperti induksi sevo hingga mereka meminta relaksasi lebih.''',
-      'ach_12': '''Dua puluh kasus. Lebih banyak waktu memakai scrub dibandingkan dengan pakaian sipil. Klasik.''',
-      'ach_13': '''Dua puluh lima kasus. Para ahli bedah mulai mengingat nama depan Anda.''',
-      'ach_14': '''Tiga puluh kasus. Kafein adalah co-pilot dan inotrop primer.''',
-      'ach_15': '''Empat puluh kasus. Ironisnya, hanya kamu satu-satunya di ruangan ini yang tidak tidur.''',
-      'ach_16': '''Lima puluh kasus. Bunyi bip pulse ox pada dasarnya adalah ritme istirahat baru Anda.''',
-      'ach_17': '''Enam puluh kasus. Hampir cukup untuk melakukan intubasi sambil memutuskan makan siang.''',
-      'ach_18': '''Tujuh puluh lima kasus. Tiga perempat jalan menuju klub abad ini.''',
-      'ach_19': '''Delapan puluh delapan kasus. Nomor keberuntungan. Jangan sia-siakan pada bougie yang hilang.''',
-      'ach_20': '''Sembilan puluh kasus. Begitu dekat Anda dapat mencicipi kopi perayaan pasca-panggilan.''',
-      'ach_21': '''Seratus kasus. Anda membaca monitor sebelum dokter bedah menyelesaikan pertanyaannya.''',
-      'ach_22': '''Seratus dua puluh lima kasus. Teknik perekaman mata secara diam-diam: tidak terkunci.''',
-      'ach_23': '''Seratus lima puluh kasus. Buku catatan itu semakin terhormat. Tidurmu tidak.''',
-      'ach_24': '''Seratus tujuh puluh lima kasus. PETA diselenggarakan. Semangat: kompensasi.''',
-      'ach_25': '''Dua ratus kasus. Saatnya untuk mengajari para pemula cakupan akhir mana yang sudah habis.''',
-      'ach_26': '''Dua ratus dua puluh lima kasus. Teater mengetahui nama Anda - biasanya ketika daftarnya berlebihan.''',
-      'ach_27': '''Dua ratus lima puluh kasus. Propofol tidak lagi beredar begitu saja.''',
-      'ach_28': '''Tiga ratus kasus. Dipicu oleh kopi lounge dan sisa kemauan.''',
-      'ach_29': '''Tiga ratus lima puluh kasus. Saluran udara yang sulit menaikkan alis, bukan detak jantung.''',
-      'ach_30': '''Empat ratus kasus. Anda tidak lagi takut dengan pager. Pager itu takut padamu.''',
-      'ach_31': '''Lima ratus kasus. Setengah ribu. Pencerahan jalan napas total (dengan kerendahan hati sesekali).''',
-      'ach_32': '''Lima ratus lima puluh kasus. Kedudukan lain pada pegangan laringoskop kehidupan.''',
-      'ach_33': '''Enam ratus kasus. Tidak ada yang mengganggu Anda - kecuali ventilator yang mati saat induksi.''',
-      'ach_34': '''Enam ratus lima puluh kasus. Masih di atas garis. Cukup bagus.''',
-      'ach_35': '''Tujuh ratus kasus. PDF Anda bisa berfungsi ganda sebagai palang pintu.''',
-      'ach_36': '''Tujuh ratus lima puluh kasus. Anda dan sirkulasi sekarang berkomunikasi dengan anggukan murni.''',
-      'ach_37': '''Delapan ratus kasus. Aplikasi ini berhutang makan malam dan hari libur kepada Anda.''',
-      'ach_38': '''Delapan ratus lima puluh kasus. Tonggak sejarah tercapai. Neostigmin opsional.''',
-      'ach_39': '''Sembilan ratus kasus. Hampir besar. Jangan membawa sial pada seratus berikutnya.''',
-      'ach_40': '''Sembilan ratus lima puluh kasus. Elite tinggal satu bulan yang baik dan satu cakupan yang tidak terputus.''',
-      'ach_41': '''Seribu kasus. Mesin anestesi baru saja meminta saran *Anda*.''',
-      'ach_42': '''Dua belas ratus lima puluh kasus. Pernahkah Anda mempertimbangkan untuk bertemu matahari? Secara sosial?''',
-      'ach_43': '''Lima belas ratus kasus. Anestesi adalah sifat kedua. Kopi masih yang pertama.''',
-      'ach_44': '''Tujuh belas ratus lima puluh kasus. Hantu energi ruang operasi.''',
-      'ach_45': '''Dua ribu kasus. Anda telah melihat setiap "tambahan cepat". Dua kali. Sebelum makan siang.''',
-      'ach_46': '''Dua puluh lima ratus kasus. Beri nama lemari persediaan dengan nama orang ini.''',
-      'ach_47': '''Tiga ribu kasus. Kami secara aktif kehabisan judul dan anestesi yang mudah menguap.''',
-      'ach_48': '''Empat ribu kasus. Anda menatap pasien dan mereka mempertimbangkan untuk tidur secara sukarela.''',
-      'ach_49': '''Lima ribu kasus. Apakah Anda baru saja menemukan gas mudah menguap yang baru?''',
-      'ach_50': '''Satu jam waktu anestesi. Hampir sebagian kecil dari MAC. Masih penting.''',
-      'ach_51': '''Lima jam kumulatif. Mereka tidur. Anda memantau. Perdagangan yang adil.''',
-      'ach_52': '''Sepuluh jam. Jam selalu menang. Anda tinggal menjaga MAP-nya.''',
-      'ach_53': '''Lima belas jam. Ritme sirkadian Anda telah mengajukan keluhan resmi.''',
-      'ach_54': '''Dua puluh empat jam kumulatif. Sehari penuh ketidaksadaran terkendali.''',
+      'ach_9':
+          '''Sepuluh kasus. Anda secara resmi telah berhenti meminta maaf kepada tiang infus ketika Anda menabraknya.''',
+      'ach_10':
+          '''Tiga belas kasus. Tidak beruntung bagi sebagian orang. Mulus untuk Anda — diduga.''',
+      'ach_11':
+          '''Enam belas kasus. Manis seperti induksi sevo hingga mereka meminta relaksasi lebih.''',
+      'ach_12':
+          '''Dua puluh kasus. Lebih banyak waktu memakai scrub dibandingkan dengan pakaian sipil. Klasik.''',
+      'ach_13':
+          '''Dua puluh lima kasus. Para ahli bedah mulai mengingat nama depan Anda.''',
+      'ach_14':
+          '''Tiga puluh kasus. Kafein adalah co-pilot dan inotrop primer.''',
+      'ach_15':
+          '''Empat puluh kasus. Ironisnya, hanya kamu satu-satunya di ruangan ini yang tidak tidur.''',
+      'ach_16':
+          '''Lima puluh kasus. Bunyi bip pulse ox pada dasarnya adalah ritme istirahat baru Anda.''',
+      'ach_17':
+          '''Enam puluh kasus. Hampir cukup untuk melakukan intubasi sambil memutuskan makan siang.''',
+      'ach_18':
+          '''Tujuh puluh lima kasus. Tiga perempat jalan menuju klub abad ini.''',
+      'ach_19':
+          '''Delapan puluh delapan kasus. Nomor keberuntungan. Jangan sia-siakan pada bougie yang hilang.''',
+      'ach_20':
+          '''Sembilan puluh kasus. Begitu dekat Anda dapat mencicipi kopi perayaan pasca-panggilan.''',
+      'ach_21':
+          '''Seratus kasus. Anda membaca monitor sebelum dokter bedah menyelesaikan pertanyaannya.''',
+      'ach_22':
+          '''Seratus dua puluh lima kasus. Teknik perekaman mata secara diam-diam: tidak terkunci.''',
+      'ach_23':
+          '''Seratus lima puluh kasus. Buku catatan itu semakin terhormat. Tidurmu tidak.''',
+      'ach_24':
+          '''Seratus tujuh puluh lima kasus. PETA diselenggarakan. Semangat: kompensasi.''',
+      'ach_25':
+          '''Dua ratus kasus. Saatnya untuk mengajari para pemula cakupan akhir mana yang sudah habis.''',
+      'ach_26':
+          '''Dua ratus dua puluh lima kasus. Teater mengetahui nama Anda - biasanya ketika daftarnya berlebihan.''',
+      'ach_27':
+          '''Dua ratus lima puluh kasus. Propofol tidak lagi beredar begitu saja.''',
+      'ach_28':
+          '''Tiga ratus kasus. Dipicu oleh kopi lounge dan sisa kemauan.''',
+      'ach_29':
+          '''Tiga ratus lima puluh kasus. Saluran udara yang sulit menaikkan alis, bukan detak jantung.''',
+      'ach_30':
+          '''Empat ratus kasus. Anda tidak lagi takut dengan pager. Pager itu takut padamu.''',
+      'ach_31':
+          '''Lima ratus kasus. Setengah ribu. Pencerahan jalan napas total (dengan kerendahan hati sesekali).''',
+      'ach_32':
+          '''Lima ratus lima puluh kasus. Kedudukan lain pada pegangan laringoskop kehidupan.''',
+      'ach_33':
+          '''Enam ratus kasus. Tidak ada yang mengganggu Anda - kecuali ventilator yang mati saat induksi.''',
+      'ach_34':
+          '''Enam ratus lima puluh kasus. Masih di atas garis. Cukup bagus.''',
+      'ach_35':
+          '''Tujuh ratus kasus. PDF Anda bisa berfungsi ganda sebagai palang pintu.''',
+      'ach_36':
+          '''Tujuh ratus lima puluh kasus. Anda dan sirkulasi sekarang berkomunikasi dengan anggukan murni.''',
+      'ach_37':
+          '''Delapan ratus kasus. Aplikasi ini berhutang makan malam dan hari libur kepada Anda.''',
+      'ach_38':
+          '''Delapan ratus lima puluh kasus. Tonggak sejarah tercapai. Neostigmin opsional.''',
+      'ach_39':
+          '''Sembilan ratus kasus. Hampir besar. Jangan membawa sial pada seratus berikutnya.''',
+      'ach_40':
+          '''Sembilan ratus lima puluh kasus. Elite tinggal satu bulan yang baik dan satu cakupan yang tidak terputus.''',
+      'ach_41':
+          '''Seribu kasus. Mesin anestesi baru saja meminta saran *Anda*.''',
+      'ach_42':
+          '''Dua belas ratus lima puluh kasus. Pernahkah Anda mempertimbangkan untuk bertemu matahari? Secara sosial?''',
+      'ach_43':
+          '''Lima belas ratus kasus. Anestesi adalah sifat kedua. Kopi masih yang pertama.''',
+      'ach_44':
+          '''Tujuh belas ratus lima puluh kasus. Hantu energi ruang operasi.''',
+      'ach_45':
+          '''Dua ribu kasus. Anda telah melihat setiap "tambahan cepat". Dua kali. Sebelum makan siang.''',
+      'ach_46':
+          '''Dua puluh lima ratus kasus. Beri nama lemari persediaan dengan nama orang ini.''',
+      'ach_47':
+          '''Tiga ribu kasus. Kami secara aktif kehabisan judul dan anestesi yang mudah menguap.''',
+      'ach_48':
+          '''Empat ribu kasus. Anda menatap pasien dan mereka mempertimbangkan untuk tidur secara sukarela.''',
+      'ach_49':
+          '''Lima ribu kasus. Apakah Anda baru saja menemukan gas mudah menguap yang baru?''',
+      'ach_50':
+          '''Satu jam waktu anestesi. Hampir sebagian kecil dari MAC. Masih penting.''',
+      'ach_51':
+          '''Lima jam kumulatif. Mereka tidur. Anda memantau. Perdagangan yang adil.''',
+      'ach_52':
+          '''Sepuluh jam. Jam selalu menang. Anda tinggal menjaga MAP-nya.''',
+      'ach_53':
+          '''Lima belas jam. Ritme sirkadian Anda telah mengajukan keluhan resmi.''',
+      'ach_54':
+          '''Dua puluh empat jam kumulatif. Sehari penuh ketidaksadaran terkendali.''',
       'ach_55': '''Empat puluh delapan jam. Dua hari ETCO₂ dan kesabaran.''',
-      'ach_56': '''Lima puluh jam. Pekerjaan paruh waktu di mana pasien masih dapat mencoba keluar karena aritmia.''',
-      'ach_57': '''Tujuh puluh dua jam. Jam tangan Anda lebih banyak melihat matahari terbit daripada bantal Anda.''',
+      'ach_56':
+          '''Lima puluh jam. Pekerjaan paruh waktu di mana pasien masih dapat mencoba keluar karena aritmia.''',
+      'ach_57':
+          '''Tujuh puluh dua jam. Jam tangan Anda lebih banyak melihat matahari terbit daripada bantal Anda.''',
       'ach_58': '''Seratus jam. Satu abad gas, bukan gosip.''',
-      'ach_59': '''Seratus lima puluh jam. Waktu berlalu ketika Anda membalikkan keadaan.''',
-      'ach_60': '''Dua ratus jam. Cukup mudah menguap untuk mengharumkan ruangan kecil.''',
-      'ach_61': '''Tiga ratus jam. Kaki Anda meminta daerah untuk diri mereka sendiri.''',
-      'ach_62': '''Empat ratus jam. Masih belum ada lembur tradisional. Hanya kemuliaan.''',
+      'ach_59':
+          '''Seratus lima puluh jam. Waktu berlalu ketika Anda membalikkan keadaan.''',
+      'ach_60':
+          '''Dua ratus jam. Cukup mudah menguap untuk mengharumkan ruangan kecil.''',
+      'ach_61':
+          '''Tiga ratus jam. Kaki Anda meminta daerah untuk diri mereka sendiri.''',
+      'ach_62':
+          '''Empat ratus jam. Masih belum ada lembur tradisional. Hanya kemuliaan.''',
       'ach_63': '''Lima ratus jam. Setengah jalan menuju insomnia mitis.''',
-      'ach_64': '''Tujuh ratus lima puluh jam. Kasus yang panjang membangun karakter dan kifosis.''',
-      'ach_65': '''Seribu jam. Elite. Rapat entah kenapa masih terasa lebih lama.''',
-      'ach_66': '''Satu kasus dimulai tengah malam–5 pagi. Karena tidur itu untuk orang yang tidak sedang dipanggil.''',
-      'ach_67': '''Lima malam dimulai. Anda pada dasarnya adalah vampir yang memakai scrub.''',
-      'ach_68': '''Sepuluh malam dimulai. Ritme sirkadian telah meninggalkan obrolan.''',
-      'ach_69': '''Dua puluh malam dimulai. Siang hari adalah rumor sebelum operasi.''',
-      'ach_70': '''Satu jam 6–7 pagi dimulai. Menangkap cacing — atau penundaan pertama hari itu.''',
-      'ach_71': '''Sepuluh permulaan awal. Kopi adalah co-pilot dan penunjang hemodinamik.''',
-      'ach_72': '''Satu kasus akhir pekan. Hari Sabtu adalah untuk anak laki-laki… dan tugas darurat.''',
-      'ach_73': '''Sepuluh kasus akhir pekan. Apa yang dimaksud dengan "makan siang" ini?''',
-      'ach_74': '''Lima puluh kasus akhir pekan. Teman non-medis sudah berhenti mengundang Anda.''',
-      'ach_75': '''Operasi di bawah lima belas menit. Propofol tidur siang. Berikutnya!''',
-      'ach_76': '''Sepuluh operasi ultra-cepat. Anda mengubah kamar lebih cepat daripada membersihkan rumah.''',
-      'ach_77': '''Anestesi selama empat jam. Saatnya berdiskusi tentang sepak bola fantasi dengan scrub.''',
-      'ach_78': '''Lebih dari enam jam. Anda telah menghafal setiap ubin di dinding OR.''',
-      'ach_79': '''Lebih dari delapan jam. Pertumbuhan janggut sejak induksi: dapat diukur.''',
-      'ach_80': '''Lebih dari sepuluh jam. Pasien itu praktis adalah teman sekamar Anda sekarang.''',
-      'ach_81': '''Anestesi dalam waktu lima belas menit setelah waktu operasi. Diekstubasi sebelum tirai selesai diturunkan.''',
-      'ach_82': '''Dua puluh lima turnover ketat. Anda dan dokter bedah berbagi satu sel otak. Cantik.''',
-      'ach_83': '''Lima puluh kemunculan sempurna. Membangunkan mereka adalah sebuah seni, dan Anda adalah Picasso.''',
-      'ach_84': '''Seratus kemunculan waktunya. Kami sedang memeriksamu untuk mesin waktu.''',
-      'ach_85': '''Kasus pada 25 Des atau 1 Jan. Ho, ho, pegang midazolamnya.''',
-      'ach_86': '''Kasus pada 31 Desember atau 1 Januari. Laringoskop di satu sisi, optimisme yang tenang di sisi lain.''',
-      'ach_87': '''Kasus di hari ulang tahunmu. Selamat ulang tahun - ini adalah contoh keadaan darurat.''',
-      'ach_88': '''ASA I. Sehat sekali sehingga Anda terus mencari tangkapan yang tersembunyi.''',
+      'ach_64':
+          '''Tujuh ratus lima puluh jam. Kasus yang panjang membangun karakter dan kifosis.''',
+      'ach_65':
+          '''Seribu jam. Elite. Rapat entah kenapa masih terasa lebih lama.''',
+      'ach_66':
+          '''Satu kasus dimulai tengah malam–5 pagi. Karena tidur itu untuk orang yang tidak sedang dipanggil.''',
+      'ach_67':
+          '''Lima malam dimulai. Anda pada dasarnya adalah vampir yang memakai scrub.''',
+      'ach_68':
+          '''Sepuluh malam dimulai. Ritme sirkadian telah meninggalkan obrolan.''',
+      'ach_69':
+          '''Dua puluh malam dimulai. Siang hari adalah rumor sebelum operasi.''',
+      'ach_70':
+          '''Satu jam 6–7 pagi dimulai. Menangkap cacing — atau penundaan pertama hari itu.''',
+      'ach_71':
+          '''Sepuluh permulaan awal. Kopi adalah co-pilot dan penunjang hemodinamik.''',
+      'ach_72':
+          '''Satu kasus akhir pekan. Hari Sabtu adalah untuk anak laki-laki… dan tugas darurat.''',
+      'ach_73':
+          '''Sepuluh kasus akhir pekan. Apa yang dimaksud dengan "makan siang" ini?''',
+      'ach_74':
+          '''Lima puluh kasus akhir pekan. Teman non-medis sudah berhenti mengundang Anda.''',
+      'ach_75':
+          '''Operasi di bawah lima belas menit. Propofol tidur siang. Berikutnya!''',
+      'ach_76':
+          '''Sepuluh operasi ultra-cepat. Anda mengubah kamar lebih cepat daripada membersihkan rumah.''',
+      'ach_77':
+          '''Anestesi selama empat jam. Saatnya berdiskusi tentang sepak bola fantasi dengan scrub.''',
+      'ach_78':
+          '''Lebih dari enam jam. Anda telah menghafal setiap ubin di dinding OR.''',
+      'ach_79':
+          '''Lebih dari delapan jam. Pertumbuhan janggut sejak induksi: dapat diukur.''',
+      'ach_80':
+          '''Lebih dari sepuluh jam. Pasien itu praktis adalah teman sekamar Anda sekarang.''',
+      'ach_81':
+          '''Anestesi dalam waktu lima belas menit setelah waktu operasi. Diekstubasi sebelum tirai selesai diturunkan.''',
+      'ach_82':
+          '''Dua puluh lima turnover ketat. Anda dan dokter bedah berbagi satu sel otak. Cantik.''',
+      'ach_83':
+          '''Lima puluh kemunculan sempurna. Membangunkan mereka adalah sebuah seni, dan Anda adalah Picasso.''',
+      'ach_84':
+          '''Seratus kemunculan waktunya. Kami sedang memeriksamu untuk mesin waktu.''',
+      'ach_85':
+          '''Kasus pada 25 Des atau 1 Jan. Ho, ho, pegang midazolamnya.''',
+      'ach_86':
+          '''Kasus pada 31 Desember atau 1 Januari. Laringoskop di satu sisi, optimisme yang tenang di sisi lain.''',
+      'ach_87':
+          '''Kasus di hari ulang tahunmu. Selamat ulang tahun - ini adalah contoh keadaan darurat.''',
+      'ach_88':
+          '''ASA I. Sehat sekali sehingga Anda terus mencari tangkapan yang tersembunyi.''',
       'ach_89': '''Sepuluh kasus ASA I. Rumah sakit utopis manakah ini?''',
       'ach_90': '''Dua puluh lima ASA Is. Tentu saja hanya daftar olahraga.''',
       'ach_91': '''Lima puluh ASA Adalah. Grafiknya sangat tipis.''',
-      'ach_92': '''Seratus ASA Adalah. Anda harus melakukan kedokteran gigi khusus sehari-hari.''',
-      'ach_93': '''ASA II. Karena hampir tidak ada seorang pun yang berusia di atas empat puluh tahun yang benar-benar ASA I.''',
+      'ach_92':
+          '''Seratus ASA Adalah. Anda harus melakukan kedokteran gigi khusus sehari-hari.''',
+      'ach_93':
+          '''ASA II. Karena hampir tidak ada seorang pun yang berusia di atas empat puluh tahun yang benar-benar ASA I.''',
       'ach_94': '''Sepuluh ASA II. Roti, mentega, dan hipertensi yang sopan.''',
       'ach_95': '''Dua puluh lima ASA II. Spesial sehari-hari dari OR.''',
-      'ach_96': '''Lima puluh ASA II. Dosis induksi dihitung dalam tidur Anda.''',
-      'ach_97': '''Seratus ASA II. Anda dapat menulis bab buku teks di ruang pra-operasi.''',
+      'ach_96':
+          '''Lima puluh ASA II. Dosis induksi dihitung dalam tidur Anda.''',
+      'ach_97':
+          '''Seratus ASA II. Anda dapat menulis bab buku teks di ruang pra-operasi.''',
       'ach_98': '''ASA III. Segalanya menjadi sedikit pedas.''',
       'ach_99': '''Sepuluh ASA III. Bagan lebih tebal dari buku telepon.''',
-      'ach_100': '''Dua puluh lima ASA III. Polifarmasi adalah nama tengah Anda.''',
+      'ach_100':
+          '''Dua puluh lima ASA III. Polifarmasi adalah nama tengah Anda.''',
       'ach_101': '''Lima puluh ASA III. Penyakit penyerta untuk sarapan.''',
-      'ach_102': '''Seratus ASA III. Anda memakan daftar masalah dan meminta waktu beberapa detik.''',
-      'ach_103': '''ASA IV. Mesin penuai ada di pojok — Anda punya epi di laci.''',
+      'ach_102':
+          '''Seratus ASA III. Anda memakan daftar masalah dan meminta waktu beberapa detik.''',
+      'ach_103':
+          '''ASA IV. Mesin penuai ada di pojok — Anda punya epi di laci.''',
       'ach_104': '''Lima ASA IV. HR dasar Anda sendiri sedang bernegosiasi.''',
-      'ach_105': '''Lima belas ASA IV. Selamat datang di ujung pisau fisiologis.''',
-      'ach_106': '''Dua puluh lima ASA IV. Anda tertawa sopan saat menghadapi malapetaka.''',
-      'ach_107': '''Lima puluh ASA IV. Es di pembuluh darah; sevo di sirkuit.''',
+      'ach_105':
+          '''Lima belas ASA IV. Selamat datang di ujung pisau fisiologis.''',
+      'ach_106':
+          '''Dua puluh lima ASA IV. Anda tertawa sopan saat menghadapi malapetaka.''',
+      'ach_107':
+          '''Lima puluh ASA IV. Es di pembuluh darah; sevo di sirkuit.''',
       'ach_108': '''ASA V. Salam Maria, penuh tekanan.''',
-      'ach_109': '''Tiga ASA Vs. Sebagian ahli anestesi, sebagian optimis, sebagian lagi ahli nujum.''',
-      'ach_110': '''Lima ASA Vs. Kematian bertanya. Kamu bilang tidak hari ini.''',
+      'ach_109':
+          '''Tiga ASA Vs. Sebagian ahli anestesi, sebagian optimis, sebagian lagi ahli nujum.''',
+      'ach_110':
+          '''Lima ASA Vs. Kematian bertanya. Kamu bilang tidak hari ini.''',
       'ach_111': '''Sepuluh ASA Vs. Jubah opsional di bawah celemek utama.''',
-      'ach_112': '''Dua Puluh ASA Vs. Para pengawas membungkam diri mereka sendiri untuk menghormati.''',
-      'ach_113': '''Seratus kasus ASA III – V. Risiko dikelola seperti broker yang tenang dengan obat yang lebih baik.''',
-      'ach_114': '''ASA IV atau V dengan keluarnya PACU lancar. Akui saja — apakah Anda curang?''',
-      'ach_115': '''ASA IV/V ke ICU masih terintubasi. Jangan lulus GO. Jangan melakukan ekstubasi.''',
-      'ach_116': '''Sepuluh kasus mudah lancar berturut-turut. Nikmatilah. Itu tidak akan bertahan lama.''',
-      'ach_117': '''Dua puluh lima ASA I/II berturut-turut lancar. Bulan yang mencurigakan dan menenangkan.''',
-      'ach_118': '''Tiga kasus ASA III+ dalam satu hari. Rencanakan malam itu dengan hati-hati.''',
-      'ach_119': '''Lima ASA III+ dalam satu hari. Kelenjar adrenal: disadap sepenuhnya.''',
-      'ach_120': '''Setidaknya satu dari setiap ASA kelas 1–5. Yang baik, yang buruk, dan yang diintubasi.''',
-      'ach_121': '''Lima puluh kasus lancar dengan ASA tinggi. Risiko tinggi, tidak ada kepanikan.''',
+      'ach_112':
+          '''Dua Puluh ASA Vs. Para pengawas membungkam diri mereka sendiri untuk menghormati.''',
+      'ach_113':
+          '''Seratus kasus ASA III – V. Risiko dikelola seperti broker yang tenang dengan obat yang lebih baik.''',
+      'ach_114':
+          '''ASA IV atau V dengan keluarnya PACU lancar. Akui saja — apakah Anda curang?''',
+      'ach_115':
+          '''ASA IV/V ke ICU masih terintubasi. Jangan lulus GO. Jangan melakukan ekstubasi.''',
+      'ach_116':
+          '''Sepuluh kasus mudah lancar berturut-turut. Nikmatilah. Itu tidak akan bertahan lama.''',
+      'ach_117':
+          '''Dua puluh lima ASA I/II berturut-turut lancar. Bulan yang mencurigakan dan menenangkan.''',
+      'ach_118':
+          '''Tiga kasus ASA III+ dalam satu hari. Rencanakan malam itu dengan hati-hati.''',
+      'ach_119':
+          '''Lima ASA III+ dalam satu hari. Kelenjar adrenal: disadap sepenuhnya.''',
+      'ach_120':
+          '''Setidaknya satu dari setiap ASA kelas 1–5. Yang baik, yang buruk, dan yang diintubasi.''',
+      'ach_121':
+          '''Lima puluh kasus lancar dengan ASA tinggi. Risiko tinggi, tidak ada kepanikan.''',
       'ach_122': '''Sepuluh kasus ASA IV/V. Anda masuk; kekacauan terjadi.''',
-      'ach_123': '''Seratus pelepasan PACU lancar. Hanya hari Selasa yang lain, diulangi.''',
-      'ach_124': '''Darurat pertama. Karena tentu saja mereka pecah pada pukul 16:55.''',
+      'ach_123':
+          '''Seratus pelepasan PACU lancar. Hanya hari Selasa yang lain, diulangi.''',
+      'ach_124':
+          '''Darurat pertama. Karena tentu saja mereka pecah pada pukul 16:55.''',
       'ach_125': '''Lima keadaan darurat. Siapa yang butuh gym?''',
       'ach_126': '''Sepuluh keadaan darurat. Kekacauan adalah kardio Anda.''',
-      'ach_127': '''Dua puluh keadaan darurat. HR istirahat tidak lagi berpartisipasi.''',
-      'ach_128': '''Lima puluh keadaan darurat di bawah tekanan. Anda berkembang ketika daftar itu menarik perhatian.''',
-      'ach_129': '''Tujuh puluh lima panggilan darurat. Papan trauma mengetahui jejak Anda.''',
-      'ach_130': '''Seratus keadaan darurat. Tidak terkesan adalah keterampilan klinis.''',
-      'ach_131': '''Seratus lima puluh keadaan darurat. Anda bisa melakukan ini saat Anda tidur - tolong jangan.''',
-      'ach_132': '''Dua ratus keadaan darurat. Pager tersentak terlebih dahulu.''',
-      'ach_133': '''Lima keadaan darurat dalam satu hari. Protokol bulan purnama?''',
-      'ach_134': '''Dua keadaan darurat berturut-turut. Dipesan ganda untuk heroik.''',
-      'ach_135': '''Darurat ASA V. Ambil epi, kurangi bicara, dorong dengan hati-hati.''',
-      'ach_136': '''Dua puluh kasus darurat, PACU lancar. Bencana di atas kertas; membosankan di dalam ruangan.''',
-      'ach_137': '''Darurat dengan dilakukan regional. Blokir saat ruangan panik. Fokus puncak.''',
-      'ach_138': '''Sepuluh regional darurat dilakukan. Penembak jitu dari daftar mendesak.''',
-      'ach_139': '''Operasi darurat ≤30 menit. Masuk, perbaiki, tutup, keluar - energi pit-stop.''',
+      'ach_127':
+          '''Dua puluh keadaan darurat. HR istirahat tidak lagi berpartisipasi.''',
+      'ach_128':
+          '''Lima puluh keadaan darurat di bawah tekanan. Anda berkembang ketika daftar itu menarik perhatian.''',
+      'ach_129':
+          '''Tujuh puluh lima panggilan darurat. Papan trauma mengetahui jejak Anda.''',
+      'ach_130':
+          '''Seratus keadaan darurat. Tidak terkesan adalah keterampilan klinis.''',
+      'ach_131':
+          '''Seratus lima puluh keadaan darurat. Anda bisa melakukan ini saat Anda tidur - tolong jangan.''',
+      'ach_132':
+          '''Dua ratus keadaan darurat. Pager tersentak terlebih dahulu.''',
+      'ach_133':
+          '''Lima keadaan darurat dalam satu hari. Protokol bulan purnama?''',
+      'ach_134':
+          '''Dua keadaan darurat berturut-turut. Dipesan ganda untuk heroik.''',
+      'ach_135':
+          '''Darurat ASA V. Ambil epi, kurangi bicara, dorong dengan hati-hati.''',
+      'ach_136':
+          '''Dua puluh kasus darurat, PACU lancar. Bencana di atas kertas; membosankan di dalam ruangan.''',
+      'ach_137':
+          '''Darurat dengan dilakukan regional. Blokir saat ruangan panik. Fokus puncak.''',
+      'ach_138':
+          '''Sepuluh regional darurat dilakukan. Penembak jitu dari daftar mendesak.''',
+      'ach_139':
+          '''Operasi darurat ≤30 menit. Masuk, perbaiki, tutup, keluar - energi pit-stop.''',
       'ach_140': '''Fiberoptik darurat terjaga. Saraf titanium.''',
-      'ach_141': '''Tulang belakang darurat. Jangan bergerak. Tabungnya juga tidak boleh.''',
-      'ach_142': '''Kardiotoraks darurat. Monitor besar, perasaan lebih besar.''',
-      'ach_143': '''kebidanan darurat. Dua pasien, satu rencana saluran napas, tanpa rasa dingin.''',
-      'ach_144': '''Bedah saraf darurat. Perlakukan otak seperti ia membayar sewa.''',
-      'ach_145': '''Lima puluh keadaan darurat. Ketika dewan mengatakan mendesak, Anda mengatakan RSI.''',
-      'ach_146': '''Darurat mulai pukul 00:00–04:00. Tidak ada hal baik yang dimulai sekarang – kecuali tangan yang kompeten.''',
-      'ach_147': '''Darurat pada tanggal 25 Desember atau 1 Januari. Selamat Natal — inilah viskus yang pecah.''',
-      'ach_148': '''Sepuluh keadaan darurat akhir pekan. Menjaga bank darah tetap beroperasi.''',
-      'ach_149': '''Keadaan darurat jalan napas sulit. Rencana A–C gagal. Anda adalah Rencana D.''',
-      'ach_150': '''Darurat ASA IV dengan pelepasan PACU yang lancar. Ruangan terbakar; BP sopan 120/80.''',
-      'ach_151': '''Darurat di bawah 18 tahun. Bawalah karya terbaik Anda dan suara Anda yang paling tenang.''',
-      'ach_152': '''Keadaan darurat di atas 65 tahun. Perlakukan seperti barang pecah belah dengan pemantauan yang lebih baik.''',
-      'ach_153': '''Keadaan darurat berakhir pada pukul 08:00–08:30. Rencana makan malam: dibatalkan dengan hormat.''',
+      'ach_141':
+          '''Tulang belakang darurat. Jangan bergerak. Tabungnya juga tidak boleh.''',
+      'ach_142':
+          '''Kardiotoraks darurat. Monitor besar, perasaan lebih besar.''',
+      'ach_143':
+          '''kebidanan darurat. Dua pasien, satu rencana saluran napas, tanpa rasa dingin.''',
+      'ach_144':
+          '''Bedah saraf darurat. Perlakukan otak seperti ia membayar sewa.''',
+      'ach_145':
+          '''Lima puluh keadaan darurat. Ketika dewan mengatakan mendesak, Anda mengatakan RSI.''',
+      'ach_146':
+          '''Darurat mulai pukul 00:00–04:00. Tidak ada hal baik yang dimulai sekarang – kecuali tangan yang kompeten.''',
+      'ach_147':
+          '''Darurat pada tanggal 25 Desember atau 1 Januari. Selamat Natal — inilah viskus yang pecah.''',
+      'ach_148':
+          '''Sepuluh keadaan darurat akhir pekan. Menjaga bank darah tetap beroperasi.''',
+      'ach_149':
+          '''Keadaan darurat jalan napas sulit. Rencana A–C gagal. Anda adalah Rencana D.''',
+      'ach_150':
+          '''Darurat ASA IV dengan pelepasan PACU yang lancar. Ruangan terbakar; BP sopan 120/80.''',
+      'ach_151':
+          '''Darurat di bawah 18 tahun. Bawalah karya terbaik Anda dan suara Anda yang paling tenang.''',
+      'ach_152':
+          '''Keadaan darurat di atas 65 tahun. Perlakukan seperti barang pecah belah dengan pemantauan yang lebih baik.''',
+      'ach_153':
+          '''Keadaan darurat berakhir pada pukul 08:00–08:30. Rencana makan malam: dibatalkan dengan hormat.''',
       'ach_154': '''Tiga keadaan darurat dalam dua belas jam. Pukulan medis.''',
-      'ach_155': '''Sepuluh pelepasan PACU darurat yang lancar. MTP hanyalah resep lain.''',
-      'ach_156': '''Dua puluh lima kasus operasi trauma darurat. Konduktor orkestra resusitasi.''',
-      'ach_157': '''Dua puluh laparotomi darurat. Sepsis, pressor, dan aroma yang tidak salah lagi.''',
-      'ach_158': '''Dua puluh kasus orto darurat. Bor, semen, dan "Tolong BP."''',
-      'ach_159': '''Dua puluh kasus kebidanan darurat. Kategori satu dan fokus murni.''',
-      'ach_160': '''Sepuluh kraniotomi neuro darurat. BP halus adalah satu-satunya kepribadian yang diperbolehkan.''',
+      'ach_155':
+          '''Sepuluh pelepasan PACU darurat yang lancar. MTP hanyalah resep lain.''',
+      'ach_156':
+          '''Dua puluh lima kasus operasi trauma darurat. Konduktor orkestra resusitasi.''',
+      'ach_157':
+          '''Dua puluh laparotomi darurat. Sepsis, pressor, dan aroma yang tidak salah lagi.''',
+      'ach_158':
+          '''Dua puluh kasus orto darurat. Bor, semen, dan "Tolong BP."''',
+      'ach_159':
+          '''Dua puluh kasus kebidanan darurat. Kategori satu dan fokus murni.''',
+      'ach_160':
+          '''Sepuluh kraniotomi neuro darurat. BP halus adalah satu-satunya kepribadian yang diperbolehkan.''',
       'ach_161': '''Sepuluh kasus vaskular darurat. Menjepit; tenang.''',
-      'ach_162': '''Tiga ratus keadaan darurat. Chaos mengajukan permohonan pensiun dini.''',
-      'ach_163': '''Sepuluh kasus darurat dengan spesialisasi unik. Rentang di bawah tembakan.''',
-      'ach_164': '''Lima keadaan darurat dalam dua puluh empat jam. 90% kafein, 10% dendam.''',
-      'ach_165': '''Satu kasus bedah umum. Roti dan mentega — hisap saat siaga.''',
-      'ach_166': '''Dua puluh lima kasus GS. Lebih mendalam daripada meme daftar hari Jumat.''',
-      'ach_167': '''Seratus kasus GS. Anda dan ahli bedah umum berada dalam hubungan MAC yang berkomitmen.''',
-      'ach_168': '''Satu kasus orto. Selamat datang di bor, sekrup, dan perkakas listrik sebagai white noise.''',
-      'ach_169': '''Dua puluh lima kasus orto. Telinga dikalibrasi ke gergaji.''',
-      'ach_170': '''Seratus kasus orto. Kru kerangka, tapi jadikan obat bius.''',
-      'ach_171': '''Salah satu kasus kebidanan. Logistik manusia berukuran kecil dengan taruhan tinggi.''',
-      'ach_172': '''Dua puluh lima kasus obs. Bangsal persalinan mengetahui jejak Anda.''',
-      'ach_173': '''Seratus kasus obs. Epidural, kategori satu, dan abadi "apakah dia sepenuhnya?"''',
+      'ach_162':
+          '''Tiga ratus keadaan darurat. Chaos mengajukan permohonan pensiun dini.''',
+      'ach_163':
+          '''Sepuluh kasus darurat dengan spesialisasi unik. Rentang di bawah tembakan.''',
+      'ach_164':
+          '''Lima keadaan darurat dalam dua puluh empat jam. 90% kafein, 10% dendam.''',
+      'ach_165':
+          '''Satu kasus bedah umum. Roti dan mentega — hisap saat siaga.''',
+      'ach_166':
+          '''Dua puluh lima kasus GS. Lebih mendalam daripada meme daftar hari Jumat.''',
+      'ach_167':
+          '''Seratus kasus GS. Anda dan ahli bedah umum berada dalam hubungan MAC yang berkomitmen.''',
+      'ach_168':
+          '''Satu kasus orto. Selamat datang di bor, sekrup, dan perkakas listrik sebagai white noise.''',
+      'ach_169':
+          '''Dua puluh lima kasus orto. Telinga dikalibrasi ke gergaji.''',
+      'ach_170':
+          '''Seratus kasus orto. Kru kerangka, tapi jadikan obat bius.''',
+      'ach_171':
+          '''Salah satu kasus kebidanan. Logistik manusia berukuran kecil dengan taruhan tinggi.''',
+      'ach_172':
+          '''Dua puluh lima kasus obs. Bangsal persalinan mengetahui jejak Anda.''',
+      'ach_173':
+          '''Seratus kasus obs. Epidural, kategori satu, dan abadi "apakah dia sepenuhnya?"''',
       'ach_174': '''Dua puluh lima kasus gynae. Trendelenburg dan keuletan.''',
-      'ach_175': '''Satu kasus bedah saraf. Tangani dengan hati-hati - otak mengawasi.''',
-      'ach_176': '''Dua puluh lima kasus neuro. Tekanan darah yang lancar adalah bahasa cinta Anda.''',
-      'ach_177': '''Lima puluh kasus neuro. Wilayah yang dalam. Dibutuhkan tangan yang stabil.''',
-      'ach_178': '''Satu kasus kardiotoraks. Monitor besar, perasaan lebih besar.''',
-      'ach_179': '''Dua puluh lima kasus CT. Lewati obrolan adalah latar belakang ETCO₂.''',
-      'ach_180': '''Lima puluh kasus kardiotoraks. Asistol elektif masih liar. Kamu tetap membosankan. Bagus.''',
-      'ach_181': '''Dua puluh lima kasus THT. Jalan napas bersama: kepercayaan utama jatuh.''',
-      'ach_182': '''Dua puluh lima kasus urologi. Siram, fokus, diam dengan sopan.''',
-      'ach_183': '''Dua puluh lima kotak plastik. Kosmesis bagi mereka; ketahanan untukmu.''',
+      'ach_175':
+          '''Satu kasus bedah saraf. Tangani dengan hati-hati - otak mengawasi.''',
+      'ach_176':
+          '''Dua puluh lima kasus neuro. Tekanan darah yang lancar adalah bahasa cinta Anda.''',
+      'ach_177':
+          '''Lima puluh kasus neuro. Wilayah yang dalam. Dibutuhkan tangan yang stabil.''',
+      'ach_178':
+          '''Satu kasus kardiotoraks. Monitor besar, perasaan lebih besar.''',
+      'ach_179':
+          '''Dua puluh lima kasus CT. Lewati obrolan adalah latar belakang ETCO₂.''',
+      'ach_180':
+          '''Lima puluh kasus kardiotoraks. Asistol elektif masih liar. Kamu tetap membosankan. Bagus.''',
+      'ach_181':
+          '''Dua puluh lima kasus THT. Jalan napas bersama: kepercayaan utama jatuh.''',
+      'ach_182':
+          '''Dua puluh lima kasus urologi. Siram, fokus, diam dengan sopan.''',
+      'ach_183':
+          '''Dua puluh lima kotak plastik. Kosmesis bagi mereka; ketahanan untukmu.''',
       'ach_184': '''Satu kasus bedah anak. ETT kecil, akuntabilitas penuh.''',
-      'ach_185': '''Dua puluh lima kasus bedah anak. Anda fasih berbicara tentang kepanikan orang tua.''',
-      'ach_186': '''Dua puluh lima kasus operasi trauma. Kalau di papan bilang politrauma, kamu bilang oke.''',
-      'ach_187': '''Dua puluh lima kasus oftalmologi. Keheningan adalah olahraga kompetitif.''',
-      'ach_188': '''Satu kasus tulang belakang. Jangan bergerak. Benar-benar. Jangan.''',
-      'ach_189': '''Dua puluh lima kasus tulang belakang. Rawan, empuk, selaras secara filosofis dengan meja.''',
-      'ach_190': '''Dua puluh lima kasus kepala & leher. Real estat saluran udara memiliki harga premium.''',
-      'ach_191': '''Dua puluh lima kasus HPB. Operasi panjang, konsentrasi lebih lama.''',
-      'ach_192': '''Dua puluh lima kasus GI atas atau kolorektal. Perutnya tak pernah kehabisan alur cerita.''',
-      'ach_193': '''Sepuluh kasus endokrin. Hormon menulis protokolnya; kamu memaksakannya.''',
-      'ach_194': '''Sepuluh kasus NORA/MRI/DSA. Situs jarak jauh, pemantauan kreatif, kaki kuat.''',
-      'ach_195': '''Sepuluh kasus intervensi nyeri. Terkadang obat yang paling baik adalah obat lokal.''',
-      'ach_196': '''Lima kasus RMU. Teater yang tenang, tangan yang hati-hati, ruangan yang penuh harapan.''',
-      'ach_197': '''Dua puluh lima kasus ginekologi-onkologi. Patologi parah; tangan yang mantap.''',
-      'ach_198': '''Dua puluh lima kasus tangan & rekonstruksi. Milimeter lebih penting daripada ego.''',
-      'ach_199': '''Sepuluh kasus orto pediatrik. Menumbuhkan tulang, menumbuhkan kesabaran.''',
+      'ach_185':
+          '''Dua puluh lima kasus bedah anak. Anda fasih berbicara tentang kepanikan orang tua.''',
+      'ach_186':
+          '''Dua puluh lima kasus operasi trauma. Kalau di papan bilang politrauma, kamu bilang oke.''',
+      'ach_187':
+          '''Dua puluh lima kasus oftalmologi. Keheningan adalah olahraga kompetitif.''',
+      'ach_188':
+          '''Satu kasus tulang belakang. Jangan bergerak. Benar-benar. Jangan.''',
+      'ach_189':
+          '''Dua puluh lima kasus tulang belakang. Rawan, empuk, selaras secara filosofis dengan meja.''',
+      'ach_190':
+          '''Dua puluh lima kasus kepala & leher. Real estat saluran udara memiliki harga premium.''',
+      'ach_191':
+          '''Dua puluh lima kasus HPB. Operasi panjang, konsentrasi lebih lama.''',
+      'ach_192':
+          '''Dua puluh lima kasus GI atas atau kolorektal. Perutnya tak pernah kehabisan alur cerita.''',
+      'ach_193':
+          '''Sepuluh kasus endokrin. Hormon menulis protokolnya; kamu memaksakannya.''',
+      'ach_194':
+          '''Sepuluh kasus NORA/MRI/DSA. Situs jarak jauh, pemantauan kreatif, kaki kuat.''',
+      'ach_195':
+          '''Sepuluh kasus intervensi nyeri. Terkadang obat yang paling baik adalah obat lokal.''',
+      'ach_196':
+          '''Lima kasus RMU. Teater yang tenang, tangan yang hati-hati, ruangan yang penuh harapan.''',
+      'ach_197':
+          '''Dua puluh lima kasus ginekologi-onkologi. Patologi parah; tangan yang mantap.''',
+      'ach_198':
+          '''Dua puluh lima kasus tangan & rekonstruksi. Milimeter lebih penting daripada ego.''',
+      'ach_199':
+          '''Sepuluh kasus orto pediatrik. Menumbuhkan tulang, menumbuhkan kesabaran.''',
       'ach_200': '''Lima spesialisasi unik. Rentang itu fleksibel.''',
-      'ach_201': '''Sepuluh spesialisasi unik. Buku catatan Anda memiliki masalah komitmen yang sehat.''',
-      'ach_202': '''Lima belas spesialisasi unik. GPS teater membawa Anda ke mana saja.''',
-      'ach_203': '''Dua puluh lima spesialisasi unik. Da Vinci tidak memiliki pompa TIVA. Anda tidak.''',
-      'ach_204': '''Sepuluh kasus khusus \'Lainnya\'. Jika tidak cocok dengan dropdown, berarti masih cocok dengan buku Anda.''',
-      'ach_205': '''Dua ratus lima puluh kasus orto. Sabuk judul terbuat dari semen tulang.''',
-      'ach_206': '''Dua ratus lima puluh kasus obs atau gynae. Mahkota bangsal persalinan, sedikit berlumuran darah.''',
-      'ach_207': '''Seratus kasus neuro. ICP hanyalah nomor lain yang Anda intimidasi dengan lembut.''',
-      'ach_208': '''Seratus kasus CT. Kasus besar, stamina lebih besar, pemeriksaan ACT tiada habisnya.''',
-      'ach_209': '''Seratus kasus tulang belakang. Lumbar Anda sendiri telah mengajukan Datix.''',
+      'ach_201':
+          '''Sepuluh spesialisasi unik. Buku catatan Anda memiliki masalah komitmen yang sehat.''',
+      'ach_202':
+          '''Lima belas spesialisasi unik. GPS teater membawa Anda ke mana saja.''',
+      'ach_203':
+          '''Dua puluh lima spesialisasi unik. Da Vinci tidak memiliki pompa TIVA. Anda tidak.''',
+      'ach_204':
+          '''Sepuluh kasus khusus 'Lainnya'. Jika tidak cocok dengan dropdown, berarti masih cocok dengan buku Anda.''',
+      'ach_205':
+          '''Dua ratus lima puluh kasus orto. Sabuk judul terbuat dari semen tulang.''',
+      'ach_206':
+          '''Dua ratus lima puluh kasus obs atau gynae. Mahkota bangsal persalinan, sedikit berlumuran darah.''',
+      'ach_207':
+          '''Seratus kasus neuro. ICP hanyalah nomor lain yang Anda intimidasi dengan lembut.''',
+      'ach_208':
+          '''Seratus kasus CT. Kasus besar, stamina lebih besar, pemeriksaan ACT tiada habisnya.''',
+      'ach_209':
+          '''Seratus kasus tulang belakang. Lumbar Anda sendiri telah mengajukan Datix.''',
       'ach_210': '''Seratus kasus urologi. Ahli irigasi lembut.''',
-      'ach_211': '''Seratus kasus THT. Zen saluran napas bersama, diperoleh dengan susah payah.''',
-      'ach_212': '''Seratus kotak plastik. Estetika atau rekonstruktif — induksi stabil yang sama.''',
-      'ach_213': '''Seratus kasus bedah anak. Tabung kecil, status legenda besar.''',
-      'ach_214': '''Seratus kasus oftalmologi. Keunggulan tak bergerak, jiwa berkafein.''',
-      'ach_215': '''Lima puluh kasus kolorektal. Anda tahu anastomosis seperti bentuk gelombang.''',
-      'ach_216': '''Lima puluh kasus GI atas. Sering terbang dari mulut ke ligamen Treitz.''',
-      'ach_217': '''Lima puluh kasus HPB. Operasi yang panjang; kesabaran singkat untuk hipotensi misterius.''',
+      'ach_211':
+          '''Seratus kasus THT. Zen saluran napas bersama, diperoleh dengan susah payah.''',
+      'ach_212':
+          '''Seratus kotak plastik. Estetika atau rekonstruktif — induksi stabil yang sama.''',
+      'ach_213':
+          '''Seratus kasus bedah anak. Tabung kecil, status legenda besar.''',
+      'ach_214':
+          '''Seratus kasus oftalmologi. Keunggulan tak bergerak, jiwa berkafein.''',
+      'ach_215':
+          '''Lima puluh kasus kolorektal. Anda tahu anastomosis seperti bentuk gelombang.''',
+      'ach_216':
+          '''Lima puluh kasus GI atas. Sering terbang dari mulut ke ligamen Treitz.''',
+      'ach_217':
+          '''Lima puluh kasus HPB. Operasi yang panjang; kesabaran singkat untuk hipotensi misterius.''',
       'ach_218': '''GA pertama. Selamat datang di gereja alat penguap.''',
-      'ach_219': '''Lima puluh GA. Sevo pada dasarnya adalah ciri kepribadian sekarang.''',
+      'ach_219':
+          '''Lima puluh GA. Sevo pada dasarnya adalah ciri kepribadian sekarang.''',
       'ach_220': '''Dua ratus GA. Anda bisa mencium bau MAC dari koridor.''',
       'ach_221': '''Lima ratus GA. Tombolnya memberi hormat saat Anda masuk.''',
       'ach_222': '''TIVA pertama. Propofol: ilmu putih asli.''',
       'ach_223': '''Kasus TIVA pertama. Tanpa bensin, semua kelas.''',
-      'ach_224': '''Dua puluh lima TIVA. Target terkendali dan stabil secara emosional.''',
-      'ach_225': '''Lima puluh TIVA. Pompa berdengung seperti lemari es yang terisi.''',
+      'ach_224':
+          '''Dua puluh lima TIVA. Target terkendali dan stabil secara emosional.''',
+      'ach_225':
+          '''Lima puluh TIVA. Pompa berdengung seperti lemari es yang terisi.''',
       'ach_226': '''Seratus TIVA. Volatil siapa?''',
-      'ach_227': '''CSE pertama. Yang terbaik dari keduanya, dokumennya dua kali lipat.''',
+      'ach_227':
+          '''CSE pertama. Yang terbaik dari keduanya, dokumennya dua kali lipat.''',
       'ach_228': '''Sepuluh CSE. Hilangnya resistensi adalah kardio Anda.''',
-      'ach_229': '''Dua puluh lima CSE. Kateter dan jarum dalam pernikahan yang harmonis.''',
-      'ach_230': '''Primer tulang belakang pertama. Glitter CSF: jenis yang bagus.''',
+      'ach_229':
+          '''Dua puluh lima CSE. Kateter dan jarum dalam pernikahan yang harmonis.''',
+      'ach_230':
+          '''Primer tulang belakang pertama. Glitter CSF: jenis yang bagus.''',
       'ach_231': '''Lima puluh tulang belakang. Tetes, jatuhkan, blokir.''',
-      'ach_232': '''Seratus lima puluh tulang belakang. Anda dapat menemukan L3–4 dalam kegelapan.''',
+      'ach_232':
+          '''Seratus lima puluh tulang belakang. Anda dapat menemukan L3–4 dalam kegelapan.''',
       'ach_233': '''Epidural primer pertama. Gantung tasnya; pegang iman.''',
       'ach_234': '''Dua puluh lima epidural. Ruang mitos, jarum kebenaran.''',
-      'ach_235': '''Lima puluh epidural. Kemahiran melebihi kekuatan. Selalu.''',
-      'ach_236': '''Sedasi pertama/MAC. Cukup sadar untuk menyesali obrolan ringan itu.''',
-      'ach_237': '''Dua puluh lima MAC. Halus seperti pujian yang dikendalikan target.''',
+      'ach_235':
+          '''Lima puluh epidural. Kemahiran melebihi kekuatan. Selalu.''',
+      'ach_236':
+          '''Sedasi pertama/MAC. Cukup sadar untuk menyesali obrolan ringan itu.''',
+      'ach_237':
+          '''Dua puluh lima MAC. Halus seperti pujian yang dikendalikan target.''',
       'ach_238': '''Lima puluh MAC. Mereka tertidur; Anda menipu ahli bedah.''',
       'ach_239': '''Kasus lokal pertama. Mode siaga: diaktifkan.''',
-      'ach_240': '''Dua puluh kasus lokal saja. Kepahlawanan opsional; kehadiran wajib.''',
-      'ach_241': '''Blok saraf tepi pertama sebagai primer. Kedutan atau kilauan — lakukan.''',
+      'ach_240':
+          '''Dua puluh kasus lokal saja. Kepahlawanan opsional; kehadiran wajib.''',
+      'ach_241':
+          '''Blok saraf tepi pertama sebagai primer. Kedutan atau kilauan — lakukan.''',
       'ach_242': '''Dua puluh lima PNB. Saraf terletak; ego diperiksa.''',
-      'ach_243': '''Kotak pompa TCI pertama. Algoritmanya adalah co-pilot Anda.''',
-      'ach_244': '''Dua puluh lima kasus TCI. Mimpi lokasi efek, realitas plasma.''',
+      'ach_243':
+          '''Kotak pompa TCI pertama. Algoritmanya adalah co-pilot Anda.''',
+      'ach_244':
+          '''Dua puluh lima kasus TCI. Mimpi lokasi efek, realitas plasma.''',
       'ach_245': '''Lima puluh kasus TCI. Pompa mempercayai Anda. Langka.''',
-      'ach_246': '''Tujuh atau lebih teknik utama yang unik. Rentang adalah fleksibilitasnya.''',
-      'ach_247': '''Spinal, epidural, CSE, PNB, atau lokal — pasien terjaga, Anda lebih tajam.''',
+      'ach_246':
+          '''Tujuh atau lebih teknik utama yang unik. Rentang adalah fleksibilitasnya.''',
+      'ach_247':
+          '''Spinal, epidural, CSE, PNB, atau lokal — pasien terjaga, Anda lebih tajam.''',
       'ach_248': '''Seratus GA. Tidur nyenyak, alasan dangkal.''',
-      'ach_249': '''Dua ratus lima puluh GA. Anda bisa mengajarkan tata krama alat penguap.''',
+      'ach_249':
+          '''Dua ratus lima puluh GA. Anda bisa mengajarkan tata krama alat penguap.''',
       'ach_250': '''Lima ratus GA. Energi gasman/gaswoman yang legendaris.''',
-      'ach_251': '''Seratus kasus tipe regional yang terjaga. Jarum di atas nozel.''',
-      'ach_252': '''Seratus TIVA. Keanggotaan masyarakat garis putih dikonfirmasi.''',
-      'ach_253': '''Tiga ratus tulang belakang. Mahkota terbuat dari pengantar.''',
+      'ach_251':
+          '''Seratus kasus tipe regional yang terjaga. Jarum di atas nozel.''',
+      'ach_252':
+          '''Seratus TIVA. Keanggotaan masyarakat garis putih dikonfirmasi.''',
+      'ach_253':
+          '''Tiga ratus tulang belakang. Mahkota terbuat dari pengantar.''',
       'ach_254': '''Seratus epidural. Royalti di ruang epidural.''',
-      'ach_255': '''Seratus kasus MAC. Sedasinya begitu halus sehingga ahli bedah lupa Anda berada di sana.''',
-      'ach_256': '''Keberhasilan ETT pertama. Capnograph: satu-satunya tepuk tangan yang penting.''',
+      'ach_255':
+          '''Seratus kasus MAC. Sedasinya begitu halus sehingga ahli bedah lupa Anda berada di sana.''',
+      'ach_256':
+          '''Keberhasilan ETT pertama. Capnograph: satu-satunya tepuk tangan yang penting.''',
       'ach_257': '''Sepuluh ETT. Tangan lebih mantap. Ego masih diawasi.''',
       'ach_258': '''Lima puluh ETT. Tabung masuk; makan siang bisa menunggu.''',
       'ach_259': '''Seratus ETT. Anda dan trakea sedang berbicara.''',
       'ach_260': '''Dua ratus lima puluh ETT. Gaya opsional; tidak sombong.''',
-      'ach_261': '''Lima ratus intubasi. Kabelnya terlepas karena kesopanan profesional.''',
+      'ach_261':
+          '''Lima ratus intubasi. Kabelnya terlepas karena kesopanan profesional.''',
       'ach_262': '''LMA pertama. Duduklah seperti yang Anda maksudkan.''',
-      'ach_263': '''Sepuluh LMA. Gel, klasik, atau tertinggi — masalah komitmen diterima.''',
-      'ach_264': '''Lima puluh LMA. Status puasa dihormati; rahang lebih dihormati.''',
-      'ach_265': '''Seratus LMA. Alternatif yang lembut dengan opini yang kuat.''',
-      'ach_266': '''Dua ratus lima puluh LMA. Anda dapat menempatkan satu di tengah percakapan.''',
-      'ach_267': '''Kasing khusus masker pertama. Terkadang lebih sedikit tabung lebih banyak kebijaksanaan.''',
-      'ach_268': '''Dua puluh kasus khusus masker. Ambubag kardio tidak terkunci.''',
-      'ach_269': '''Dukungan trakeostomi pertama. Ketika soft skill bertemu dengan plastik keras.''',
-      'ach_270': '''Lima kasus trakea. Olahraga tim dengan aturan yang sangat tegas.''',
-      'ach_271': '''Ventilasi jet pertama. Frekuensi tinggi, tekanan darah lebih tinggi di dalam ruangan.''',
+      'ach_263':
+          '''Sepuluh LMA. Gel, klasik, atau tertinggi — masalah komitmen diterima.''',
+      'ach_264':
+          '''Lima puluh LMA. Status puasa dihormati; rahang lebih dihormati.''',
+      'ach_265':
+          '''Seratus LMA. Alternatif yang lembut dengan opini yang kuat.''',
+      'ach_266':
+          '''Dua ratus lima puluh LMA. Anda dapat menempatkan satu di tengah percakapan.''',
+      'ach_267':
+          '''Kasing khusus masker pertama. Terkadang lebih sedikit tabung lebih banyak kebijaksanaan.''',
+      'ach_268':
+          '''Dua puluh kasus khusus masker. Ambubag kardio tidak terkunci.''',
+      'ach_269':
+          '''Dukungan trakeostomi pertama. Ketika soft skill bertemu dengan plastik keras.''',
+      'ach_270':
+          '''Lima kasus trakea. Olahraga tim dengan aturan yang sangat tegas.''',
+      'ach_271':
+          '''Ventilasi jet pertama. Frekuensi tinggi, tekanan darah lebih tinggi di dalam ruangan.''',
       'ach_272': '''DLT pertama. Dua lumen, satu doa, penempatan sempurna.''',
-      'ach_273': '''Dua puluh DLT. Kiri, kanan, dan sesekali "apakah kita yakin?"''',
-      'ach_274': '''Lima puluh DLT. Konfirmasi fiberoptik adalah bahasa cinta Anda.''',
-      'ach_275': '''Penghambat bronkus pertama. Isolasi tanpa drama argumen DLT.''',
-      'ach_276': '''Sepuluh penghambat bronkial. Parkir presisi di garasi saluran napas.''',
+      'ach_273':
+          '''Dua puluh DLT. Kiri, kanan, dan sesekali "apakah kita yakin?"''',
+      'ach_274':
+          '''Lima puluh DLT. Konfirmasi fiberoptik adalah bahasa cinta Anda.''',
+      'ach_275':
+          '''Penghambat bronkus pertama. Isolasi tanpa drama argumen DLT.''',
+      'ach_276':
+          '''Sepuluh penghambat bronkial. Parkir presisi di garasi saluran napas.''',
       'ach_277': '''LMA klasik dua puluh kali. Sekolah tua. Masih berfungsi.''',
-      'ach_278': '''ProSeal dua puluh kali. Tabung pembuangan: pahlawan tanpa tanda jasa.''',
-      'ach_279': '''i-gel dua puluh kali. Tanpa manset, tidak masalah (biasanya).''',
-      'ach_280': '''LMA Tertinggi dua puluh kali. Kepemimpinan adalah mengetahui kapan harus menutupi.''',
-      'ach_281': '''Ambu LMA sepuluh kali. Sekali pakai, tidak bisa dilupakan.''',
-      'ach_282': '''Fleksibel atau Fastrach sepuluh kali. Saat anatomi menjadi kreatif.''',
-      'ach_283': '''Intubasi hidung pertama. Dengan lembut, lembut, melalui turbinat.''',
+      'ach_278':
+          '''ProSeal dua puluh kali. Tabung pembuangan: pahlawan tanpa tanda jasa.''',
+      'ach_279':
+          '''i-gel dua puluh kali. Tanpa manset, tidak masalah (biasanya).''',
+      'ach_280':
+          '''LMA Tertinggi dua puluh kali. Kepemimpinan adalah mengetahui kapan harus menutupi.''',
+      'ach_281':
+          '''Ambu LMA sepuluh kali. Sekali pakai, tidak bisa dilupakan.''',
+      'ach_282':
+          '''Fleksibel atau Fastrach sepuluh kali. Saat anatomi menjadi kreatif.''',
+      'ach_283':
+          '''Intubasi hidung pertama. Dengan lembut, lembut, melalui turbinat.''',
       'ach_284': '''Dua puluh intubasi hidung. GPS untuk nasofaring.''',
       'ach_285': '''Lima puluh intubasi hidung. Tetangga favorit THT.''',
       'ach_286': '''Intubasi submental. Saat wajah adalah medan perang.''',
       'ach_287': '''Laringoskop video pertama. Netflix, tapi buatlah kabel.''',
-      'ach_288': '''VL sepuluh kali. Waktu layar yang benar-benar membantu pasien.''',
+      'ach_288':
+          '''VL sepuluh kali. Waktu layar yang benar-benar membantu pasien.''',
       'ach_289': '''VL lima puluh kali. Bilah, layar, sukses.''',
-      'ach_290': '''VL seratus kali. Laringoskopi langsung untuk kilas balik.''',
-      'ach_291': '''Pertama bangun fiberoptik. Pasien sadar; kamu sangat sadar.''',
+      'ach_290':
+          '''VL seratus kali. Laringoskopi langsung untuk kilas balik.''',
+      'ach_291':
+          '''Pertama bangun fiberoptik. Pasien sadar; kamu sangat sadar.''',
       'ach_292': '''Lima fiberoptik terjaga. Saraf titanium, topik legenda.''',
-      'ach_293': '''Lima belas fiberoptik terjaga. Standar emas, dikejar dengan lidokain.''',
+      'ach_293':
+          '''Lima belas fiberoptik terjaga. Standar emas, dikejar dengan lidokain.''',
       'ach_294': '''Fiberoptik tertidur pertama. Tabung dulu, angkuh kedua.''',
-      'ach_295': '''Sepuluh serat optik tertidur. Keterampilan lingkup tanpa basa-basi.''',
-      'ach_296': '''Total dua puluh lima serat optik. Teman yang fleksibel, standar yang kaku.''',
-      'ach_297': '''Microcuff ETT sepuluh kali. Tabung kecil, tanggung jawab orang dewasa.''',
-      'ach_298': '''RAE atau flexometallic dua puluh kali. Geometri adalah keterampilan klinis.''',
+      'ach_295':
+          '''Sepuluh serat optik tertidur. Keterampilan lingkup tanpa basa-basi.''',
+      'ach_296':
+          '''Total dua puluh lima serat optik. Teman yang fleksibel, standar yang kaku.''',
+      'ach_297':
+          '''Microcuff ETT sepuluh kali. Tabung kecil, tanggung jawab orang dewasa.''',
+      'ach_298':
+          '''RAE atau flexometallic dua puluh kali. Geometri adalah keterampilan klinis.''',
       'ach_299': '''Cormack-Lehane Pertama 3. Pandangan adalah sebuah saran.''',
-      'ach_300': '''Sepuluh kelas 3 berhasil. Koleksi selesai; detak jantung opsional.''',
-      'ach_301': '''Cormack-Lehane Pertama 4. Keyakinan, bougie, dan pencahayaan yang bagus di tempat lain.''',
-      'ach_302': '''Lima kelas 4 ditaklukkan. Anda telah mendapatkan stiker VL.''',
-      'ach_303': '''Kesulitan jalan napas pertama ditandai. Rencana A punya rencana B. Bijaksana.''',
-      'ach_304': '''Lima saluran udara yang sulit. Magang bertugas di bawah tekanan.''',
-      'ach_305': '''Sepuluh saluran udara yang sulit. Perjalanan berlanjut; desat menurun.''',
-      'ach_306': '''Dua puluh lima saluran udara yang sulit. Mode ahli: tetap rendah hati.''',
-      'ach_307': '''Lima puluh saluran udara yang sulit. Diam, efektif, sedikit menakutkan.''',
-      'ach_308': '''Kesulitan jalan nafas dalam sekali percobaan. Energi lintasan pertama. ciuman koki.''',
-      'ach_309': '''Sepuluh kemenangan jalan napas sulit pada percobaan pertama. Bersih seperti peluit, lebih tajam dari satu.''',
-      'ach_310': '''Jalan napas yang sulit memerlukan 3+ kali percobaan. Selamat. Belajar. Dicatat.''',
-      'ach_311': '''Lima puluh LMA tampil secara pribadi. Langsung, bukan langsung.''',
+      'ach_300':
+          '''Sepuluh kelas 3 berhasil. Koleksi selesai; detak jantung opsional.''',
+      'ach_301':
+          '''Cormack-Lehane Pertama 4. Keyakinan, bougie, dan pencahayaan yang bagus di tempat lain.''',
+      'ach_302':
+          '''Lima kelas 4 ditaklukkan. Anda telah mendapatkan stiker VL.''',
+      'ach_303':
+          '''Kesulitan jalan napas pertama ditandai. Rencana A punya rencana B. Bijaksana.''',
+      'ach_304':
+          '''Lima saluran udara yang sulit. Magang bertugas di bawah tekanan.''',
+      'ach_305':
+          '''Sepuluh saluran udara yang sulit. Perjalanan berlanjut; desat menurun.''',
+      'ach_306':
+          '''Dua puluh lima saluran udara yang sulit. Mode ahli: tetap rendah hati.''',
+      'ach_307':
+          '''Lima puluh saluran udara yang sulit. Diam, efektif, sedikit menakutkan.''',
+      'ach_308':
+          '''Kesulitan jalan nafas dalam sekali percobaan. Energi lintasan pertama. ciuman koki.''',
+      'ach_309':
+          '''Sepuluh kemenangan jalan napas sulit pada percobaan pertama. Bersih seperti peluit, lebih tajam dari satu.''',
+      'ach_310':
+          '''Jalan napas yang sulit memerlukan 3+ kali percobaan. Selamat. Belajar. Dicatat.''',
+      'ach_311':
+          '''Lima puluh LMA tampil secara pribadi. Langsung, bukan langsung.''',
       'ach_312': '''Dua ratus ETT dilakukan. Tabung itu tahu namamu.''',
-      'ach_313': '''Lima puluh saluran udara dibantu. Pemeran pendukung, masih kritis.''',
-      'ach_314': '''Lima puluh saluran udara diamati. Menonton adalah awal mula legenda.''',
-      'ach_315': '''ETT di bawah 4.0 pada neonatus atau bayi. Lumen kecil, rasa hormat yang besar.''',
+      'ach_313':
+          '''Lima puluh saluran udara dibantu. Pemeran pendukung, masih kritis.''',
+      'ach_314':
+          '''Lima puluh saluran udara diamati. Menonton adalah awal mula legenda.''',
+      'ach_315':
+          '''ETT di bawah 4.0 pada neonatus atau bayi. Lumen kecil, rasa hormat yang besar.''',
       'ach_316': '''Ukuran ETT ≥8,5. Energi saluran napas besar.''',
-      'ach_317': '''ETT yang tidak diborgol digunakan dengan benar di paeds. Aturan lama, penilaian bagus.''',
-      'ach_318': '''Seratus ETT bermanset biasa. Masalah standar, eksekusi ahli.''',
-      'ach_319': '''Dua ratus tampilan kelas 1. Jelas sekali. Jangan sombong.''',
-      'ach_320': '''Lima puluh kelas 2a/2b. Hampir sempurna — masih dianggap sebagai keterampilan.''',
-      'ach_321': '''Sepuluh fiberoptik terjaga dilakukan. Topikal, bicara, tabung.''',
-      'ach_322': '''Dua puluh fiberoptik tidur dilakukan. Cakupan saat mereka tidur; kamu tidak.''',
-      'ach_323': '''Keadaan darurat jalan napas sulit dikelola. Saat ruangan menjadi sunyi, Anda tidak melakukannya.''',
-      'ach_324': '''Rincian saluran napas mencatat lima ratus kasus. Data adalah semacam kebijaksanaan.''',
-      'ach_325': '''Setiap alat dan modalitas disentuh. Persenjataan lengkap. Menghormati.''',
-      'ach_326': '''Tulang belakang pertama dilakukan. Glitter CSF: jenis yang bagus.''',
+      'ach_317':
+          '''ETT yang tidak diborgol digunakan dengan benar di paeds. Aturan lama, penilaian bagus.''',
+      'ach_318':
+          '''Seratus ETT bermanset biasa. Masalah standar, eksekusi ahli.''',
+      'ach_319':
+          '''Dua ratus tampilan kelas 1. Jelas sekali. Jangan sombong.''',
+      'ach_320':
+          '''Lima puluh kelas 2a/2b. Hampir sempurna — masih dianggap sebagai keterampilan.''',
+      'ach_321':
+          '''Sepuluh fiberoptik terjaga dilakukan. Topikal, bicara, tabung.''',
+      'ach_322':
+          '''Dua puluh fiberoptik tidur dilakukan. Cakupan saat mereka tidur; kamu tidak.''',
+      'ach_323':
+          '''Keadaan darurat jalan napas sulit dikelola. Saat ruangan menjadi sunyi, Anda tidak melakukannya.''',
+      'ach_324':
+          '''Rincian saluran napas mencatat lima ratus kasus. Data adalah semacam kebijaksanaan.''',
+      'ach_325':
+          '''Setiap alat dan modalitas disentuh. Persenjataan lengkap. Menghormati.''',
+      'ach_326':
+          '''Tulang belakang pertama dilakukan. Glitter CSF: jenis yang bagus.''',
       'ach_327': '''Sepuluh tulang belakang. Tetes, jatuhkan, blokir.''',
       'ach_328': '''Lima puluh tulang belakang. L3–4 adalah rumah.''',
-      'ach_329': '''Seratus tulang belakang. Subarachnoid adalah kode pos Anda.''',
+      'ach_329':
+          '''Seratus tulang belakang. Subarachnoid adalah kode pos Anda.''',
       'ach_330': '''Dua ratus lima puluh tulang belakang. Menjahit elit.''',
       'ach_331': '''Epidural pertama. Gantung tasnya; pegang iman.''',
-      'ach_332': '''Dua puluh lima epidural. Hilangnya resistensi adalah kardio.''',
-      'ach_333': '''Lima puluh epidural dengan kemahiran. Kekuatan adalah untuk amatir.''',
+      'ach_332':
+          '''Dua puluh lima epidural. Hilangnya resistensi adalah kardio.''',
+      'ach_333':
+          '''Lima puluh epidural dengan kemahiran. Kekuatan adalah untuk amatir.''',
       'ach_334': '''Seratus epidural. Ruang ditemukan, ego diparkir.''',
-      'ach_335': '''Blok saraf tepi pertama. Kedutan atau kilauan — pilih salah satu sisinya.''',
+      'ach_335':
+          '''Blok saraf tepi pertama. Kedutan atau kilauan — pilih salah satu sisinya.''',
       'ach_336': '''Sepuluh PNB. Saraf terletak; kopi diperoleh.''',
       'ach_337': '''Dua puluh lima PNB. Gel USG adalah kelompok makanan.''',
       'ach_338': '''Lima puluh PNB. Mode bos: masih menandai kulit.''',
       'ach_339': '''Seratus PNB. Pakar berarti Anda tetap menghormati fasia.''',
-      'ach_340': '''Dua ratus PNB. Penguasaan adalah kesuksesan yang tenang dan berulang.''',
-      'ach_341': '''Regional pertama yang dipandu USG. Saraf muncul; begitu juga kepercayaan diri.''',
-      'ach_342': '''bimbingan USG sebanyak dua puluh lima kali. Selidiki keterampilan yang terbuka.''',
-      'ach_343': '''USG lima puluh kali. Jarumnya cerah; pikiran lebih cerah.''',
-      'ach_344': '''USG seratus kali. Anda melihat apa yang dirasakan orang lain.''',
+      'ach_340':
+          '''Dua ratus PNB. Penguasaan adalah kesuksesan yang tenang dan berulang.''',
+      'ach_341':
+          '''Regional pertama yang dipandu USG. Saraf muncul; begitu juga kepercayaan diri.''',
+      'ach_342':
+          '''bimbingan USG sebanyak dua puluh lima kali. Selidiki keterampilan yang terbuka.''',
+      'ach_343':
+          '''USG lima puluh kali. Jarumnya cerah; pikiran lebih cerah.''',
+      'ach_344':
+          '''USG seratus kali. Anda melihat apa yang dirasakan orang lain.''',
       'ach_345': '''USG dua ratus lima puluh kali. Legenda bernoda gel.''',
-      'ach_346': '''Stimulator saraf digunakan. Kedutan jadul, rasa hormat sekolah baru.''',
+      'ach_346':
+          '''Stimulator saraf digunakan. Kedutan jadul, rasa hormat sekolah baru.''',
       'ach_347': '''Stimulator dua puluh lima kali. Miliamp dan memori otot.''',
-      'ach_348': '''Kateter regional pertama. Infus terus menerus, kebajikan terus menerus.''',
+      'ach_348':
+          '''Kateter regional pertama. Infus terus menerus, kebajikan terus menerus.''',
       'ach_349': '''Sepuluh blok kateter. Juara tabung terowongan.''',
       'ach_350': '''Dua puluh lima kateter. Sakit dengan tali.''',
-      'ach_351': '''Interscalene, supra, atau axillary dicatat. Ekstremitas atas, keterampilan atas.''',
-      'ach_352': '''Dua puluh blok pleksus brakialis. Tangan ke bawah; standar naik.''',
-      'ach_353': '''Penguasaan femoralis, skiatik, atau poplitea. Hari leg, edisi klinis.''',
-      'ach_354': '''Dua puluh blok ekstremitas bawah. Lewati gym; lakukan blok.''',
+      'ach_351':
+          '''Interscalene, supra, atau axillary dicatat. Ekstremitas atas, keterampilan atas.''',
+      'ach_352':
+          '''Dua puluh blok pleksus brakialis. Tangan ke bawah; standar naik.''',
+      'ach_353':
+          '''Penguasaan femoralis, skiatik, atau poplitea. Hari leg, edisi klinis.''',
+      'ach_354':
+          '''Dua puluh blok ekstremitas bawah. Lewati gym; lakukan blok.''',
       'ach_355': '''TAP, rektus, QL, atau ESP. Kekuatan inti, edisi jarum.''',
-      'ach_356': '''Dua puluh blok batang/perut. Perjanjian perdamaian garis tengah.''',
+      'ach_356':
+          '''Dua puluh blok batang/perut. Perjanjian perdamaian garis tengah.''',
       'ach_357': '''PECS atau serratus. Dinding dada, protokol dingin.''',
-      'ach_358': '''Sepuluh paravertebral. Dekat dengan tulang belakang, lebih dekat dengan keahlian.''',
-      'ach_359': '''Pleksus serviks atau blok kulit kepala. Di atas bahu, di atas rata-rata.''',
+      'ach_358':
+          '''Sepuluh paravertebral. Dekat dengan tulang belakang, lebih dekat dengan keahlian.''',
+      'ach_359':
+          '''Pleksus serviks atau blok kulit kepala. Di atas bahu, di atas rata-rata.''',
       'ach_360': '''Sepuluh ekor. Punggung kecil, lega sekali.''',
       'ach_361': '''Sepuluh blok pergelangan kaki. Sahabat bedah kaki.''',
       'ach_362': '''Blok bir (IVRA). Teknik vintage, masih hits.''',
-      'ach_363': '''Lima blok pleksus lumbal atau sakral. Blok yang dalam, ketenangan yang lebih dalam.''',
-      'ach_364': '''Sepuluh jenis blok regional yang berbeda. Harus menempelkan semuanya.''',
+      'ach_363':
+          '''Lima blok pleksus lumbal atau sakral. Blok yang dalam, ketenangan yang lebih dalam.''',
+      'ach_364':
+          '''Sepuluh jenis blok regional yang berbeda. Harus menempelkan semuanya.''',
       'ach_365': '''Dua puluh jenis blok berbeda. Sommelier anestesi lokal.''',
-      'ach_366': '''Lima belas antarskala. Frenik opsional; keterampilan tidak.''',
+      'ach_366':
+          '''Lima belas antarskala. Frenik opsional; keterampilan tidak.''',
       'ach_367': '''Dua puluh lima supraklavikula. Royalti saku sudut.''',
-      'ach_368': '''Lima belas infraklavikula. Di bawah tulang selangka, di atas standar.''',
+      'ach_368':
+          '''Lima belas infraklavikula. Di bawah tulang selangka, di atas standar.''',
       'ach_369': '''Lima belas blok aksila. Jalur klasik, hasil modern.''',
       'ach_370': '''Dua puluh femoralis. Paha anterior, perhatian penuh.''',
       'ach_371': '''Dua puluh saluran adduktor. Hemat motor, hemat reputasi.''',
-      'ach_372': '''Dua puluh orang sciatic. Keberanian yang besar, rasa hormat yang lebih besar.''',
-      'ach_373': '''Lima belas orang sciatica poplitea. Di belakang lutut, di depan rasa sakit.''',
+      'ach_372':
+          '''Dua puluh orang sciatic. Keberanian yang besar, rasa hormat yang lebih besar.''',
+      'ach_373':
+          '''Lima belas orang sciatica poplitea. Di belakang lutut, di depan rasa sakit.''',
       'ach_374': '''Tiga puluh TAP. Pesawat ditemukan, perut tenang.''',
       'ach_375': '''Lima belas selubung rektus. Tata krama garis tengah.''',
       'ach_376': '''Lima belas QL. Dalam, lateral, efektif.''',
-      'ach_377': '''Lima belas ESP. Pesawat berlayar di sepanjang tulang belakang.''',
+      'ach_377':
+          '''Lima belas ESP. Pesawat berlayar di sepanjang tulang belakang.''',
       'ach_378': '''Lima belas PECS I/II. Diplomasi dinding dada.''',
-      'ach_379': '''Sepuluh blok serratus anterior. Dada lateral, pemikiran lateral.''',
-      'ach_380': '''Sepuluh blok pleksus serviks. Pekerjaan leher, tangan hati-hati.''',
+      'ach_379':
+          '''Sepuluh blok serratus anterior. Dada lateral, pemikiran lateral.''',
+      'ach_380':
+          '''Sepuluh blok pleksus serviks. Pekerjaan leher, tangan hati-hati.''',
       'ach_381': '''Sepuluh blok kulit kepala. Paket kenyamanan tengkorak.''',
       'ach_382': '''Dua puluh lima ekor anak. Ruang kecil, perbedaan besar.''',
       'ach_383': '''Lima IVRA. Pasang tourniquet; nostalgia diaktifkan.''',
-      'ach_384': '''Dua regional berbeda dalam satu kasus. Media campuran, edisi klinis.''',
-      'ach_385': '''Lima ratus total regional. Status dewa, tetap cuci tangan.''',
-      'ach_386': '''Jalur arteri pertama. Bentuk gelombang: satu-satunya bendera merah yang Anda suka.''',
+      'ach_384':
+          '''Dua regional berbeda dalam satu kasus. Media campuran, edisi klinis.''',
+      'ach_385':
+          '''Lima ratus total regional. Status dewa, tetap cuci tangan.''',
+      'ach_386':
+          '''Jalur arteri pertama. Bentuk gelombang: satu-satunya bendera merah yang Anda suka.''',
       'ach_387': '''Sepuluh garis seni. Agen real estat radial.''',
-      'ach_388': '''Dua puluh lima garis seni. Jejak yang teredam menyinggung perasaan Anda secara pribadi.''',
+      'ach_388':
+          '''Dua puluh lima garis seni. Jejak yang teredam menyinggung perasaan Anda secara pribadi.''',
       'ach_389': '''Lima puluh garis seni. As sekop, as arteri.''',
-      'ach_390': '''Seratus garis seni. Ahli dalam gosip BP yang berkelanjutan.''',
+      'ach_390':
+          '''Seratus garis seni. Ahli dalam gosip BP yang berkelanjutan.''',
       'ach_391': '''CVC pertama. Garis sentral, kepentingan sentral.''',
       'ach_392': '''Lima CVC. Kawat, dilator, kerendahan hati.''',
-      'ach_393': '''Lima belas CVC. IJ atau subklavia — Anda memiliki preferensi sekarang.''',
+      'ach_393':
+          '''Lima belas CVC. IJ atau subklavia — Anda memiliki preferensi sekarang.''',
       'ach_394': '''Dua puluh lima CVC. Perintahkan lumen.''',
       'ach_395': '''Lima puluh CVC. Akses sentral adalah gaya hidup.''',
-      'ach_396': '''USG untuk CVC atau art line. Perhatikan hadiahnya, bukan mitos penting.''',
-      'ach_397': '''USG vaskular sebanyak dua puluh lima kali. Selidiki, komplikasi berkurang.''',
-      'ach_398': '''USG vaskular sebanyak tujuh puluh lima kali. Dinding kapal takut akan penyelidikan Anda.''',
-      'ach_399': '''BIS/Entropi Pertama. Karena "tampak tertidur" bukanlah sebuah angka.''',
-      'ach_400': '''BIS/Entropi dua puluh lima kali. Biaya kedalaman untuk kesadaran.''',
+      'ach_396':
+          '''USG untuk CVC atau art line. Perhatikan hadiahnya, bukan mitos penting.''',
+      'ach_397':
+          '''USG vaskular sebanyak dua puluh lima kali. Selidiki, komplikasi berkurang.''',
+      'ach_398':
+          '''USG vaskular sebanyak tujuh puluh lima kali. Dinding kapal takut akan penyelidikan Anda.''',
+      'ach_399':
+          '''BIS/Entropi Pertama. Karena "tampak tertidur" bukanlah sebuah angka.''',
+      'ach_400':
+          '''BIS/Entropi dua puluh lima kali. Biaya kedalaman untuk kesadaran.''',
       'ach_401': '''BIS/Entropi lima puluh kali. Angka melebihi getaran.''',
       'ach_402': '''BIS/Entropi seratus kali. Penjaga kortikal.''',
       'ach_403': '''NIRS sepuluh kali. Brain O₂: sekarang sedang tren.''',
-      'ach_404': '''Masimo SedLine sepuluh kali. Gelombang mewah untuk kasus mewah.''',
-      'ach_405': '''Kateter TEE atau PA sebanyak lima kali. Rahasia hati, diterjemahkan.''',
+      'ach_404':
+          '''Masimo SedLine sepuluh kali. Gelombang mewah untuk kasus mewah.''',
+      'ach_405':
+          '''Kateter TEE atau PA sebanyak lima kali. Rahasia hati, diterjemahkan.''',
       'ach_406': '''PiCCO lima kali. Aliran itu penting. Anda mengukurnya.''',
-      'ach_407': '''Drainase subarachnoid lumbal sebanyak lima kali. Manajemen CSF, tingkat lanjutan.''',
+      'ach_407':
+          '''Drainase subarachnoid lumbal sebanyak lima kali. Manajemen CSF, tingkat lanjutan.''',
       'ach_408': '''Tiga monitor invasif sekaligus. Dasbor menyala penuh.''',
-      'ach_409': '''Empat atau lebih monitor invasif. Kontrol misi, edisi OR.''',
-      'ach_410': '''Lima tipe saluran/monitor berbeda yang digunakan. Harus kanulasi semuanya.''',
-      'ach_411': '''Lima puluh baris seni ditampilkan. Pedagang bentuk gelombang langsung.''',
+      'ach_409':
+          '''Empat atau lebih monitor invasif. Kontrol misi, edisi OR.''',
+      'ach_410':
+          '''Lima tipe saluran/monitor berbeda yang digunakan. Harus kanulasi semuanya.''',
+      'ach_411':
+          '''Lima puluh baris seni ditampilkan. Pedagang bentuk gelombang langsung.''',
       'ach_412': '''Tiga puluh CVC dilakukan. Pembisik kawat.''',
       'ach_413': '''Dua puluh garis seni dibantu. Mendukung tim merah.''',
-      'ach_414': '''Dua puluh CVC dibantu. Sepasang tangan kedua, bantuan kelas satu.''',
-      'ach_415': '''BIS/Entropi secara mandiri lima puluh kali. Tidak ada roda pelatihan.''',
-      'ach_416': '''SedLine secara mandiri dua puluh kali. Pengawasan otak tunggal.''',
+      'ach_414':
+          '''Dua puluh CVC dibantu. Sepasang tangan kedua, bantuan kelas satu.''',
+      'ach_415':
+          '''BIS/Entropi secara mandiri lima puluh kali. Tidak ada roda pelatihan.''',
+      'ach_416':
+          '''SedLine secara mandiri dua puluh kali. Pengawasan otak tunggal.''',
       'ach_417': '''TCI secara mandiri lima puluh kali. Pompa dan keadaan.''',
-      'ach_418': '''NIRS secara mandiri dua puluh kali. Penerbangan solo otak.''',
-      'ach_419': '''PiCCO secara mandiri sepuluh kali. Keluaran tanpa pendamping.''',
-      'ach_420': '''TEE diamati sepuluh kali pada penyakit jantung. Menonton jantung bekerja lembur.''',
+      'ach_418':
+          '''NIRS secara mandiri dua puluh kali. Penerbangan solo otak.''',
+      'ach_419':
+          '''PiCCO secara mandiri sepuluh kali. Keluaran tanpa pendamping.''',
+      'ach_420':
+          '''TEE diamati sepuluh kali pada penyakit jantung. Menonton jantung bekerja lembur.''',
       'ach_421': '''Kateter PA diamati sepuluh kali. Melayanglah, pengamat.''',
-      'ach_422': '''Sepuluh saluran pembuangan lumbal berhasil. Politik tekanan.''',
-      'ach_423': '''Seratus kasus dengan pelacakan garis seni. Ahli dalam argumen berkelanjutan BP.''',
+      'ach_422':
+          '''Sepuluh saluran pembuangan lumbal berhasil. Politik tekanan.''',
+      'ach_423':
+          '''Seratus kasus dengan pelacakan garis seni. Ahli dalam argumen berkelanjutan BP.''',
       'ach_424': '''Lima puluh kasus dengan akses terpusat. Veteran kawat.''',
-      'ach_425': '''Semua opsi pemantauan invasif disentuh. Izin kokpit penuh.''',
-      'ach_426': '''Neonatus pertama (<28 hari). Manusia kecil, protokol lengkap.''',
-      'ach_427': '''Lima neonatus. Biasa di ruangan terkecil dengan taruhan terbesar.''',
-      'ach_428': '''Lima belas neonatus berhasil dengan selamat. Penjaga sirkuit mikro.''',
-      'ach_429': '''Bayi pertama (29 hari – 1 tahun). Tumbuh cepat; kewaspadaanmu lebih cepat.''',
-      'ach_430': '''Dua puluh bayi. Spesialis dalam tabung kecil dan mata besar.''',
+      'ach_425':
+          '''Semua opsi pemantauan invasif disentuh. Izin kokpit penuh.''',
+      'ach_426':
+          '''Neonatus pertama (<28 hari). Manusia kecil, protokol lengkap.''',
+      'ach_427':
+          '''Lima neonatus. Biasa di ruangan terkecil dengan taruhan terbesar.''',
+      'ach_428':
+          '''Lima belas neonatus berhasil dengan selamat. Penjaga sirkuit mikro.''',
+      'ach_429':
+          '''Bayi pertama (29 hari – 1 tahun). Tumbuh cepat; kewaspadaanmu lebih cepat.''',
+      'ach_430':
+          '''Dua puluh bayi. Spesialis dalam tabung kecil dan mata besar.''',
       'ach_431': '''Dua puluh balita. Premed opsional; kesabaran itu wajib.''',
-      'ach_432': '''Lima puluh kasus bayi atau balita. Pro dalam gangguan dan pencegahan desaturasi.''',
-      'ach_433': '''Dua puluh lima anak (3–12). Stiker tetap menjadi obat yang valid.''',
-      'ach_434': '''Dua puluh remaja (12–18). Hampir dewasa, masih belum menjadi filosof NPO.''',
-      'ach_435': '''Lansia pertama (≥65). Perawatan standar emas untuk tahun-tahun emas.''',
-      'ach_436': '''Dua puluh lima kasus lanjut usia. Penjaga terhadap kejutan polifarmasi.''',
-      'ach_437': '''Lima puluh kasus lanjut usia. Lindungi MAP seperti keluarga.''',
-      'ach_438': '''Seratus kasus lanjut usia. Spesialis dalam induksi lembut dan penilaian tajam.''',
-      'ach_439': '''Pasien ≥80. Perlakukan seperti porselen halus dengan akses arteri yang lebih baik.''',
-      'ach_440': '''Sepuluh pasien ≥80. Keanggotaan klub: diperlukan rasa hormat.''',
-      'ach_441': '''Pasien ≥100. Jarang sekali seorang ASA sejati berusia empat puluh tahun.''',
+      'ach_432':
+          '''Lima puluh kasus bayi atau balita. Pro dalam gangguan dan pencegahan desaturasi.''',
+      'ach_433':
+          '''Dua puluh lima anak (3–12). Stiker tetap menjadi obat yang valid.''',
+      'ach_434':
+          '''Dua puluh remaja (12–18). Hampir dewasa, masih belum menjadi filosof NPO.''',
+      'ach_435':
+          '''Lansia pertama (≥65). Perawatan standar emas untuk tahun-tahun emas.''',
+      'ach_436':
+          '''Dua puluh lima kasus lanjut usia. Penjaga terhadap kejutan polifarmasi.''',
+      'ach_437':
+          '''Lima puluh kasus lanjut usia. Lindungi MAP seperti keluarga.''',
+      'ach_438':
+          '''Seratus kasus lanjut usia. Spesialis dalam induksi lembut dan penilaian tajam.''',
+      'ach_439':
+          '''Pasien ≥80. Perlakukan seperti porselen halus dengan akses arteri yang lebih baik.''',
+      'ach_440':
+          '''Sepuluh pasien ≥80. Keanggotaan klub: diperlukan rasa hormat.''',
+      'ach_441':
+          '''Pasien ≥100. Jarang sekali seorang ASA sejati berusia empat puluh tahun.''',
       'ach_442': '''IMT 30–34,9. Positioning adalah olahraga tim.''',
-      'ach_443': '''Sepuluh kasus obesitas kelas I. Reguler di daftar yang menggenjot.''',
-      'ach_444': '''Dua puluh kelas II (BMI 35–39.9). Spesialis saluran udara dan aritmatika.''',
-      'ach_445': '''BMI pertama ≥40. Rencana A, B, dan pra-oksigenasi yang lebih lama.''',
+      'ach_443':
+          '''Sepuluh kasus obesitas kelas I. Reguler di daftar yang menggenjot.''',
+      'ach_444':
+          '''Dua puluh kelas II (BMI 35–39.9). Spesialis saluran udara dan aritmatika.''',
+      'ach_445':
+          '''BMI pertama ≥40. Rencana A, B, dan pra-oksigenasi yang lebih lama.''',
       'ach_446': '''Sepuluh BMI ≥40. Superlatif memperoleh hasil yang sulit.''',
       'ach_447': '''BMI <18,5. Tubuh ringan, perhatian besar terhadap dosis.''',
       'ach_448': '''Dewasa di bawah 40 kg. Kelas bulu, protokol lengkap.''',
-      'ach_449': '''Lebih dari 100kg. Pertarungan kelas berat; Anda di sudut dengan VL.''',
-      'ach_450': '''Lebih dari 130kg. Putaran kejuaraan. Ramping direkomendasikan.''',
-      'ach_451': '''Setiap kelompok umur dicatat. Dari neonatus hingga lanjut usia — pelangi penuh.''',
+      'ach_449':
+          '''Lebih dari 100kg. Pertarungan kelas berat; Anda di sudut dengan VL.''',
+      'ach_450':
+          '''Lebih dari 130kg. Putaran kejuaraan. Ramping direkomendasikan.''',
+      'ach_451':
+          '''Setiap kelompok umur dicatat. Dari neonatus hingga lanjut usia — pelangi penuh.''',
       'ach_452': '''Setiap band BMI login. Playlist antropometri lengkap.''',
-      'ach_453': '''Lima puluh kasus anak di bawah 12 tahun. Benar-benar serius mengenai anak-anak.''',
-      'ach_454': '''Dua ratus lima puluh kasus lanjut usia. Kepemimpinan adalah PETA yang stabil.''',
+      'ach_453':
+          '''Lima puluh kasus anak di bawah 12 tahun. Benar-benar serius mengenai anak-anak.''',
+      'ach_454':
+          '''Dua ratus lima puluh kasus lanjut usia. Kepemimpinan adalah PETA yang stabil.''',
       'ach_455': '''Lima puluh BMI ≥30 kasus. Juara jalan dan rencananya.''',
-      'ach_456': '''Lima belas kasus kekurangan berat badan. Ahli dalam massa yang lebih sedikit, lebih banyak perhatian.''',
-      'ach_457': '''Neonatus dan centenarian keduanya dicatat. Usia hanyalah angka sebelum operasi.''',
-      'ach_458': '''Berat badan kurang dan super gemuk pada minggu yang sama. Rentang hari di gym antropometri.''',
-      'ach_459': '''Kesulitan jalan napas pada neonatus atau bayi ditangani. Ace dari saluran napas kecil.''',
-      'ach_460': '''Kesulitan jalan nafas diatas 80 berhasil. Ace sehubungan dengan gigi rapuh dan leher kaku.''',
-      'ach_461': '''Pertama tidak ada/lancar. Membosankan adalah pujian tertinggi.''',
-      'ach_462': '''Sepuluh kali berturut-turut lancar. Aman untuk tangan; takhayul meningkat.''',
-      'ach_463': '''Dua puluh lima kali berturut-turut lancar. Jangan ucapkan kata-Q.''',
-      'ach_464': '''Total seratus lancar. Keselamatan adalah sebuah garis dan sebuah sistem.''',
-      'ach_465': '''Dua ratus lima puluh lancar. Antipeluru adalah sebuah metafora. Sebagian besar.''',
-      'ach_466': '''Anestesi dalam waktu sepuluh menit setelah waktu operasi. Kemunculan sebagai seni berjangka waktu.''',
-      'ach_467': '''Bangun cepat lima puluh kali. Efisiensi tanpa mengambil jalan pintas — atau kabel.''',
+      'ach_456':
+          '''Lima belas kasus kekurangan berat badan. Ahli dalam massa yang lebih sedikit, lebih banyak perhatian.''',
+      'ach_457':
+          '''Neonatus dan centenarian keduanya dicatat. Usia hanyalah angka sebelum operasi.''',
+      'ach_458':
+          '''Berat badan kurang dan super gemuk pada minggu yang sama. Rentang hari di gym antropometri.''',
+      'ach_459':
+          '''Kesulitan jalan napas pada neonatus atau bayi ditangani. Ace dari saluran napas kecil.''',
+      'ach_460':
+          '''Kesulitan jalan nafas diatas 80 berhasil. Ace sehubungan dengan gigi rapuh dan leher kaku.''',
+      'ach_461':
+          '''Pertama tidak ada/lancar. Membosankan adalah pujian tertinggi.''',
+      'ach_462':
+          '''Sepuluh kali berturut-turut lancar. Aman untuk tangan; takhayul meningkat.''',
+      'ach_463':
+          '''Dua puluh lima kali berturut-turut lancar. Jangan ucapkan kata-Q.''',
+      'ach_464':
+          '''Total seratus lancar. Keselamatan adalah sebuah garis dan sebuah sistem.''',
+      'ach_465':
+          '''Dua ratus lima puluh lancar. Antipeluru adalah sebuah metafora. Sebagian besar.''',
+      'ach_466':
+          '''Anestesi dalam waktu sepuluh menit setelah waktu operasi. Kemunculan sebagai seni berjangka waktu.''',
+      'ach_467':
+          '''Bangun cepat lima puluh kali. Efisiensi tanpa mengambil jalan pintas — atau kabel.''',
       'ach_468': '''PONV berhasil. Ondansetron adalah bahasa cinta.''',
-      'ach_469': '''Hipotensi intra-op berhasil. Cairan, penekan, ketenangan.''',
-      'ach_470': '''Bronkospasme atau laringospasme berhasil diatasi. Dada sesak; kepala jernih.''',
-      'ach_471': '''Desaturasi berhasil. FiO₂ naik, suara turun, masalah terpecahkan.''',
-      'ach_472': '''Seratus pelepasan PACU lancar. Pemulihan: putaran kemenangan yang tenang.''',
-      'ach_473': '''Profil selesai. +10 poin dan serangan dopamin administratif yang jarang terjadi.''',
-      'ach_474': '''Statistik PDF diekspor. Angka: akhirnya berguna di luar ujian.''',
-      'ach_475': '''Kasus pertama atau buku catatan PDF. Rumah sakit tanpa kertas dapat mengalihkan pandangan selama satu detik.''',
-      'ach_476': '''Sepuluh ekspor PDF. Masa depan-Anda di penilaian berhutang hadiah-Anda kopi.''',
-      'ach_477': '''Cadangan JSON pertama. Paranoia hanyalah penilaian pra operasi yang baik.''',
-      'ach_478': '''Lima cadangan JSON. Redundansi: satu-satunya ASA sejati yang saya rencanakan.''',
+      'ach_469':
+          '''Hipotensi intra-op berhasil. Cairan, penekan, ketenangan.''',
+      'ach_470':
+          '''Bronkospasme atau laringospasme berhasil diatasi. Dada sesak; kepala jernih.''',
+      'ach_471':
+          '''Desaturasi berhasil. FiO₂ naik, suara turun, masalah terpecahkan.''',
+      'ach_472':
+          '''Seratus pelepasan PACU lancar. Pemulihan: putaran kemenangan yang tenang.''',
+      'ach_473':
+          '''Profil selesai. +10 poin dan serangan dopamin administratif yang jarang terjadi.''',
+      'ach_474':
+          '''Statistik PDF diekspor. Angka: akhirnya berguna di luar ujian.''',
+      'ach_475':
+          '''Kasus pertama atau buku catatan PDF. Rumah sakit tanpa kertas dapat mengalihkan pandangan selama satu detik.''',
+      'ach_476':
+          '''Sepuluh ekspor PDF. Masa depan-Anda di penilaian berhutang hadiah-Anda kopi.''',
+      'ach_477':
+          '''Cadangan JSON pertama. Paranoia hanyalah penilaian pra operasi yang baik.''',
+      'ach_478':
+          '''Lima cadangan JSON. Redundansi: satu-satunya ASA sejati yang saya rencanakan.''',
       'ach_479': '''Seratus poin. Aplikasi ini menilai Anda seperti viva.''',
-      'ach_480': '''Seribu poin. Energi karakter utama, masih dinilai pada saluran napas.''',
-      'ach_481': '''Lima ribu poin. Kulit prestise tidak termasuk — hanya kemuliaan.''',
-      'ach_482': '''Sepuluh ribu poin. Kami kehabisan kata sifat sederhana dan obat bius yang mudah menguap.''',
-      'ach_483': '''Kasus gigi/maksilofasial pertama. Mulut terbuka, rencana jalan nafas lebih keras.''',
+      'ach_480':
+          '''Seribu poin. Energi karakter utama, masih dinilai pada saluran napas.''',
+      'ach_481':
+          '''Lima ribu poin. Kulit prestise tidak termasuk — hanya kemuliaan.''',
+      'ach_482':
+          '''Sepuluh ribu poin. Kami kehabisan kata sifat sederhana dan obat bius yang mudah menguap.''',
+      'ach_483':
+          '''Kasus gigi/maksilofasial pertama. Mulut terbuka, rencana jalan nafas lebih keras.''',
       'ach_484': '''Lima kasus gigi/maksillo. Hisap adalah co-pilot Anda.''',
-      'ach_485': '''Sepuluh kasus gigi/maksillo. Berbagi jalan napas, berbagi stres, berbagi kemuliaan.''',
-      'ach_486': '''Dua puluh lima kasus gigi/maksillo. Anda dan ahli bedah mulut sekarang berkomunikasi melalui klik hisap.''',
-      'ach_487': '''Lima puluh kasus gigi/maksillo. Rahang berkabel tidak membuat Anda takut - ekstubasi yang tidak direncanakan dapat membuat Anda takut.''',
-      'ach_488': '''Seratus kasus gigi/maksillo. Wajah berubah; rencana B Anda tetap ada.''',
-      'ach_489': '''Sepuluh kasus rahang atas dengan intubasi hidung. Hidung tahu yang terbaik — ketika mulut adalah medan perangnya.''',
-      'ach_490': '''Lima kasus rahang atas berakhir lancar. Kabel masuk; drama keluar.''',
-      'ach_491': '''Gigi darurat/maksillo setelah jam kerja. Fiksasi intermaksila dan kafein intermaksila.''',
-      'ach_492': '''Dua puluh kasus maxillo saluran napas bersama. Diplomasi dengan laringoskop.''',
-      'ach_493': '''Kasus bedah bariatrik pertama. Jalan, pra-oksigenasi, hormati fisiologi.''',
-      'ach_494': '''Lima kasus operasi bariatrik. Positioning adalah olahraga tim.''',
-      'ach_495': '''Lima belas kasus operasi bariatrik. Anda mengukur lingkar leher seperti penjahit.''',
-      'ach_496': '''Tiga puluh kasus operasi bariatrik. Spesialis dalam bidang landai, VL, dan kesabaran.''',
-      'ach_497': '''Lima puluh kasus operasi bariatrik. Operasi metabolik, fokus metabolik.''',
-      'ach_498': '''Seratus kasus operasi bariatrik. Gelar kelas berat, ego ringan.''',
-      'ach_499': '''Kesulitan jalan napas pada kasus bariatrik. Rencana A, B, dan pra-sapi yang lebih panjang.''',
-      'ach_500': '''Dua puluh kasus bariatrik, tidak ada/lancar. Membosankan adalah tujuannya.''',
-      'ach_501': '''Kasus radiologi intervensi pertama. Lampu padam, standar naik.''',
+      'ach_485':
+          '''Sepuluh kasus gigi/maksillo. Berbagi jalan napas, berbagi stres, berbagi kemuliaan.''',
+      'ach_486':
+          '''Dua puluh lima kasus gigi/maksillo. Anda dan ahli bedah mulut sekarang berkomunikasi melalui klik hisap.''',
+      'ach_487':
+          '''Lima puluh kasus gigi/maksillo. Rahang berkabel tidak membuat Anda takut - ekstubasi yang tidak direncanakan dapat membuat Anda takut.''',
+      'ach_488':
+          '''Seratus kasus gigi/maksillo. Wajah berubah; rencana B Anda tetap ada.''',
+      'ach_489':
+          '''Sepuluh kasus rahang atas dengan intubasi hidung. Hidung tahu yang terbaik — ketika mulut adalah medan perangnya.''',
+      'ach_490':
+          '''Lima kasus rahang atas berakhir lancar. Kabel masuk; drama keluar.''',
+      'ach_491':
+          '''Gigi darurat/maksillo setelah jam kerja. Fiksasi intermaksila dan kafein intermaksila.''',
+      'ach_492':
+          '''Dua puluh kasus maxillo saluran napas bersama. Diplomasi dengan laringoskop.''',
+      'ach_493':
+          '''Kasus bedah bariatrik pertama. Jalan, pra-oksigenasi, hormati fisiologi.''',
+      'ach_494':
+          '''Lima kasus operasi bariatrik. Positioning adalah olahraga tim.''',
+      'ach_495':
+          '''Lima belas kasus operasi bariatrik. Anda mengukur lingkar leher seperti penjahit.''',
+      'ach_496':
+          '''Tiga puluh kasus operasi bariatrik. Spesialis dalam bidang landai, VL, dan kesabaran.''',
+      'ach_497':
+          '''Lima puluh kasus operasi bariatrik. Operasi metabolik, fokus metabolik.''',
+      'ach_498':
+          '''Seratus kasus operasi bariatrik. Gelar kelas berat, ego ringan.''',
+      'ach_499':
+          '''Kesulitan jalan napas pada kasus bariatrik. Rencana A, B, dan pra-sapi yang lebih panjang.''',
+      'ach_500':
+          '''Dua puluh kasus bariatrik, tidak ada/lancar. Membosankan adalah tujuannya.''',
+      'ach_501':
+          '''Kasus radiologi intervensi pertama. Lampu padam, standar naik.''',
       'ach_502': '''Lima kasus IR. Mode celemek terdepan, selamanya.''',
-      'ach_503': '''Lima belas kasus IR. Anda sekarang dapat tidur siang dengan mata terbuka - mohon jangan.''',
-      'ach_504': '''Dua puluh lima kasus IR. Jauh dari teater, dekat dengan troli kecelakaan.''',
-      'ach_505': '''Lima puluh kasus IR. Spesialis di ruangan yang tenang dan monitor yang keras.''',
-      'ach_506': '''Sepuluh kasus IR berakhir lancar. Ketenangan itu menular; begitu juga kontras.''',
-      'ach_507': '''Kasus IR selama tiga jam waktu anestesi. Waktu kawat adalah waktu Anda.''',
-      'ach_508': '''Radiologi intervensi darurat. Pembuluh darah berdarah, tangan stabil.''',
-      'ach_509': '''Kasus IR di bawah 18 tahun. Kapal kecil, perhatian penuh.''',
-      'ach_510': '''Kasus IR dimulai setelah tengah malam. Fluoroskopi dan pertanyaan eksistensial.''',
-      'ach_511': '''Anestesi radioterapi pertama. Keheningan adalah resepnya.''',
-      'ach_512': '''Lima kasus radioterapi. Gerakan adalah musuh; kamu adalah perjanjian damai.''',
-      'ach_513': '''Sepuluh kasus radioterapi. Alat imobilisasi, kewaspadaan maksimal.''',
-      'ach_514': '''Dua puluh lima kasus radioterapi. Spesialis dalam kasus pendek dan konsentrasi panjang.''',
-      'ach_515': '''Radioterapi di bawah 18 tahun. Manusia kecil pemberani, rencana besar yang cermat.''',
-      'ach_516': '''Lima belas kasus radioterapi, tidak ada/lancar. Keheningan tercapai.''',
-      'ach_517': '''Sepuluh anestesi radioterapi ulangan untuk jalur yang sama. Wajah-wajah yang familier, standar yang sama.''',
-      'ach_518': '''Radioterapi dengan pola pikir pemantauan jarak jauh. Selalu perhatikan pasien.''',
-      'ach_519': '''Kasus bedah jantung anak pertama. Hati kecil, daftar periksa besar.''',
-      'ach_520': '''Tiga kasus jantung anak. Gema, garis, dan kerendahan hati.''',
-      'ach_521': '''Sepuluh kasus jantung anak. Sirkuit berukuran seperti perhiasan, taruhannya berukuran seperti kehidupan.''',
-      'ach_522': '''Dua puluh kasus jantung anak. Reguler dalam daftar bawaan.''',
-      'ach_523': '''Empat puluh kasus jantung anak. Spesialis dalam kanula kecil dan tanggung jawab besar.''',
-      'ach_524': '''Lima belas kasus jantung anak, tidak ada/lancar. Tenang adalah keterampilan klinis.''',
-      'ach_525': '''Kasus jantung anak pada neonatus. Manusia mikro, fokus makro.''',
-      'ach_526': '''Lima kasus bawaan yang kompleks. Anatomi opsional; persiapan wajib.''',
-      'ach_527': '''Jantung anak setelah jam kerja. Tidur dibatalkan; standar tidak.''',
-      'ach_528': '''Sepuluh kasus CPB pediatrik. Mesin bypass berdengung; kamu tidak bersenandung.''',
-      'ach_529': '''Gigi darurat/maksillo. Bengkak, trismus, dan VL terbaik Anda.''',
-      'ach_530': '''Kasus bariatrik darurat. Fisiologi pertama, heroik kedua.''',
+      'ach_503':
+          '''Lima belas kasus IR. Anda sekarang dapat tidur siang dengan mata terbuka - mohon jangan.''',
+      'ach_504':
+          '''Dua puluh lima kasus IR. Jauh dari teater, dekat dengan troli kecelakaan.''',
+      'ach_505':
+          '''Lima puluh kasus IR. Spesialis di ruangan yang tenang dan monitor yang keras.''',
+      'ach_506':
+          '''Sepuluh kasus IR berakhir lancar. Ketenangan itu menular; begitu juga kontras.''',
+      'ach_507':
+          '''Kasus IR selama tiga jam waktu anestesi. Waktu kawat adalah waktu Anda.''',
+      'ach_508':
+          '''Radiologi intervensi darurat. Pembuluh darah berdarah, tangan stabil.''',
+      'ach_509':
+          '''Kasus IR di bawah 18 tahun. Kapal kecil, perhatian penuh.''',
+      'ach_510':
+          '''Kasus IR dimulai setelah tengah malam. Fluoroskopi dan pertanyaan eksistensial.''',
+      'ach_511':
+          '''Anestesi radioterapi pertama. Keheningan adalah resepnya.''',
+      'ach_512':
+          '''Lima kasus radioterapi. Gerakan adalah musuh; kamu adalah perjanjian damai.''',
+      'ach_513':
+          '''Sepuluh kasus radioterapi. Alat imobilisasi, kewaspadaan maksimal.''',
+      'ach_514':
+          '''Dua puluh lima kasus radioterapi. Spesialis dalam kasus pendek dan konsentrasi panjang.''',
+      'ach_515':
+          '''Radioterapi di bawah 18 tahun. Manusia kecil pemberani, rencana besar yang cermat.''',
+      'ach_516':
+          '''Lima belas kasus radioterapi, tidak ada/lancar. Keheningan tercapai.''',
+      'ach_517':
+          '''Sepuluh anestesi radioterapi ulangan untuk jalur yang sama. Wajah-wajah yang familier, standar yang sama.''',
+      'ach_518':
+          '''Radioterapi dengan pola pikir pemantauan jarak jauh. Selalu perhatikan pasien.''',
+      'ach_519':
+          '''Kasus bedah jantung anak pertama. Hati kecil, daftar periksa besar.''',
+      'ach_520':
+          '''Tiga kasus jantung anak. Gema, garis, dan kerendahan hati.''',
+      'ach_521':
+          '''Sepuluh kasus jantung anak. Sirkuit berukuran seperti perhiasan, taruhannya berukuran seperti kehidupan.''',
+      'ach_522':
+          '''Dua puluh kasus jantung anak. Reguler dalam daftar bawaan.''',
+      'ach_523':
+          '''Empat puluh kasus jantung anak. Spesialis dalam kanula kecil dan tanggung jawab besar.''',
+      'ach_524':
+          '''Lima belas kasus jantung anak, tidak ada/lancar. Tenang adalah keterampilan klinis.''',
+      'ach_525':
+          '''Kasus jantung anak pada neonatus. Manusia mikro, fokus makro.''',
+      'ach_526':
+          '''Lima kasus bawaan yang kompleks. Anatomi opsional; persiapan wajib.''',
+      'ach_527':
+          '''Jantung anak setelah jam kerja. Tidur dibatalkan; standar tidak.''',
+      'ach_528':
+          '''Sepuluh kasus CPB pediatrik. Mesin bypass berdengung; kamu tidak bersenandung.''',
+      'ach_529':
+          '''Gigi darurat/maksillo. Bengkak, trismus, dan VL terbaik Anda.''',
+      'ach_530':
+          '''Kasus bariatrik darurat. Fisiologi pertama, heroik kedua.''',
       'ach_531': '''IR untuk embolisasi trauma. Intervensi, disengaja.''',
-      'ach_532': '''Maxillo dan tulang belakang keduanya dicatat. Tulang berbeda, rasa hormat saluran napas sama.''',
-      'ach_533': '''Kasus bariatrik dengan regional yang dilakukan. Blokir jika memungkinkan; jalan napas selalu siap.''',
-      'ach_534': '''Jantung pediatrik ditambah kasus neonatus terpisah. Spektrum usia, energi malam yang sama.''',
-      'ach_535': '''Tercatat Gigi/Maxillo, Bariatrik, IR, Radioterapi, dan Paeds jantung setidaknya satu kali. Koleksi selesai.''',
-      'ach_536': '''Setidaknya satu kasus di masing-masing dari lima jalur khusus baru. Lencana penjelajah tidak terkunci.''',
-      'ach_537': '''IR dan Radioterapi dicatat. Radiasi pengion, ketenangan non-pengion.''',
-      'ach_538': '''Lima puluh kasus gabungan pada gigi/maksillo dan kepala & leher. Alumni saluran napas bersama.''',
+      'ach_532':
+          '''Maxillo dan tulang belakang keduanya dicatat. Tulang berbeda, rasa hormat saluran napas sama.''',
+      'ach_533':
+          '''Kasus bariatrik dengan regional yang dilakukan. Blokir jika memungkinkan; jalan napas selalu siap.''',
+      'ach_534':
+          '''Jantung pediatrik ditambah kasus neonatus terpisah. Spektrum usia, energi malam yang sama.''',
+      'ach_535':
+          '''Tercatat Gigi/Maxillo, Bariatrik, IR, Radioterapi, dan Paeds jantung setidaknya satu kali. Koleksi selesai.''',
+      'ach_536':
+          '''Setidaknya satu kasus di masing-masing dari lima jalur khusus baru. Lencana penjelajah tidak terkunci.''',
+      'ach_537':
+          '''IR dan Radioterapi dicatat. Radiasi pengion, ketenangan non-pengion.''',
+      'ach_538':
+          '''Lima puluh kasus gabungan pada gigi/maksillo dan kepala & leher. Alumni saluran napas bersama.''',
       'ach_539': '''Tiga puluh kasus gigi/maksillo. IMF baru hari Selasa.''',
-      'ach_540': '''Dua puluh kasus bariatrik dengan energi rencana saluran napas yang terdokumentasi. Rencana tertulis; ego tidak.''',
-      'ach_541': '''Tiga puluh kasus IR. Tulang belakang Anda berterima kasih atas petunjuknya. Mungkin.''',
-      'ach_542': '''Empat puluh kasus radioterapi. Anda bisa memenangkan kontes menatap dengan simulator CT.''',
-      'ach_543': '''Lima puluh kasus jantung anak. Siap mengajar; masih siap untuk belajar.''',
-      'ach_544': '''Dua puluh intubasi hidung di rahang atas. Rute hidung frequent flyer.''',
-      'ach_545': '''Lima belas kasus bariatrik dengan laringoskopi video. Waktu layar, waktu yang tepat.''',
-      'ach_546': '''Dua puluh kasus IR berjalan lancar. Kontras bukanlah kepribadian.''',
-      'ach_547': '''Sepuluh kasus radioterapi pediatrik. Keheningan untuk yang terkecil.''',
+      'ach_540':
+          '''Dua puluh kasus bariatrik dengan energi rencana saluran napas yang terdokumentasi. Rencana tertulis; ego tidak.''',
+      'ach_541':
+          '''Tiga puluh kasus IR. Tulang belakang Anda berterima kasih atas petunjuknya. Mungkin.''',
+      'ach_542':
+          '''Empat puluh kasus radioterapi. Anda bisa memenangkan kontes menatap dengan simulator CT.''',
+      'ach_543':
+          '''Lima puluh kasus jantung anak. Siap mengajar; masih siap untuk belajar.''',
+      'ach_544':
+          '''Dua puluh intubasi hidung di rahang atas. Rute hidung frequent flyer.''',
+      'ach_545':
+          '''Lima belas kasus bariatrik dengan laringoskopi video. Waktu layar, waktu yang tepat.''',
+      'ach_546':
+          '''Dua puluh kasus IR berjalan lancar. Kontras bukanlah kepribadian.''',
+      'ach_547':
+          '''Sepuluh kasus radioterapi pediatrik. Keheningan untuk yang terkecil.''',
       'ach_548': '''Dua puluh lima kasus jantung anak. Seri reguler.''',
-      'ach_549': '''Gigi/maksillo dengan tambahan regional. Lokal yang penting.''',
-      'ach_550': '''Kasus bariatrik dengan garis arteri. Bentuk gelombang dalam fisiologi besar.''',
-      'ach_551': '''Kasus IR dengan pemantauan arteri. Merah adalah sebuah bahasa.''',
-      'ach_552': '''Radioterapi dengan jalur MAC/sedasi dicatat. Sentuhan ringan, perhatian berat.''',
-      'ach_553': '''Jantung anak dengan pemantauan invasif. Jalur sebelum bypass.''',
-      'ach_554': '''Tanda kesulitan jalan napas pada kasus rahang atas. Trismus bertemu dengan pelatihan.''',
-      'ach_555': '''Desaturasi dikelola dalam kasus bariatrik. Penyelamatan tanpa drama.''',
+      'ach_549':
+          '''Gigi/maksillo dengan tambahan regional. Lokal yang penting.''',
+      'ach_550':
+          '''Kasus bariatrik dengan garis arteri. Bentuk gelombang dalam fisiologi besar.''',
+      'ach_551':
+          '''Kasus IR dengan pemantauan arteri. Merah adalah sebuah bahasa.''',
+      'ach_552':
+          '''Radioterapi dengan jalur MAC/sedasi dicatat. Sentuhan ringan, perhatian berat.''',
+      'ach_553':
+          '''Jantung anak dengan pemantauan invasif. Jalur sebelum bypass.''',
+      'ach_554':
+          '''Tanda kesulitan jalan napas pada kasus rahang atas. Trismus bertemu dengan pelatihan.''',
+      'ach_555':
+          '''Desaturasi dikelola dalam kasus bariatrik. Penyelamatan tanpa drama.''',
       'ach_556': '''Anestesi IR selama empat jam. Maraton fluoroskopi.''',
       'ach_557': '''Radioterapi dimulai sebelum pukul 07:00. Jam balok.''',
-      'ach_558': '''Jantung pediatrik darurat. Adrenalin opsional; sistem wajib.''',
-      'ach_559': '''Delapan spesialisasi bedah berbeda dicatat termasuk setidaknya satu spesialisasi baru. Poliglot dari daftar.''',
-      'ach_560': '''Lima puluh kasus di seluruh rangkaian spesialisasi baru digabungkan. Penjelajah biasa.''',
-      'ach_561': '''Tujuh puluh lima kasus gigi/maksillo. Rekam jejak di liga mulut-dan-saluran napas.''',
-      'ach_562': '''Tujuh puluh lima kasus operasi bariatrik. Rekam jejak di jalan.''',
+      'ach_558':
+          '''Jantung pediatrik darurat. Adrenalin opsional; sistem wajib.''',
+      'ach_559':
+          '''Delapan spesialisasi bedah berbeda dicatat termasuk setidaknya satu spesialisasi baru. Poliglot dari daftar.''',
+      'ach_560':
+          '''Lima puluh kasus di seluruh rangkaian spesialisasi baru digabungkan. Penjelajah biasa.''',
+      'ach_561':
+          '''Tujuh puluh lima kasus gigi/maksillo. Rekam jejak di liga mulut-dan-saluran napas.''',
+      'ach_562':
+          '''Tujuh puluh lima kasus operasi bariatrik. Rekam jejak di jalan.''',
       'ach_563': '''Tujuh puluh lima kasus IR. Legenda ruangan gelap.''',
-      'ach_564': '''Tujuh puluh lima kasus jantung anak. Gelar berat, tangan ringan.''',
+      'ach_564':
+          '''Tujuh puluh lima kasus jantung anak. Gelar berat, tangan ringan.''',
       'ach_565': '''Lima puluh kasus radioterapi. Berat dalam keheningan.''',
-      'ach_566': '''Gabungan dua puluh lima kasus di berbagai spesialisasi baru. Kemajuan perbatasan.''',
-      'ach_567': '''Gabungan seratus kasus di berbagai spesialisasi baru. Perbatasan diselesaikan.''',
-      'ach_568': '''Empat puluh kasus gigi/maksillo. Sekutu ahli bedah mulut, penjaga tabung.''',
-      'ach_569': '''Blok bidang fascia iliaca pertama. Pesawat ditemukan; rasa sakit diajukan di bawah \'nanti\'.''',
-      'ach_570': '''Lima blok fascia iliaca. Patah tulang pinggul terima kasih dalam hati.''',
+      'ach_566':
+          '''Gabungan dua puluh lima kasus di berbagai spesialisasi baru. Kemajuan perbatasan.''',
+      'ach_567':
+          '''Gabungan seratus kasus di berbagai spesialisasi baru. Perbatasan diselesaikan.''',
+      'ach_568':
+          '''Empat puluh kasus gigi/maksillo. Sekutu ahli bedah mulut, penjaga tabung.''',
+      'ach_569':
+          '''Blok bidang fascia iliaca pertama. Pesawat ditemukan; rasa sakit diajukan di bawah 'nanti'.''',
+      'ach_570':
+          '''Lima blok fascia iliaca. Patah tulang pinggul terima kasih dalam hati.''',
       'ach_571': '''Lima belas blok fascia iliaca. Reguler di daftar #NOF.''',
-      'ach_572': '''Tiga puluh blok fascia iliaca. Spesialis di bidang pesawat dan kesabaran.''',
+      'ach_572':
+          '''Tiga puluh blok fascia iliaca. Spesialis di bidang pesawat dan kesabaran.''',
       'ach_573': '''Lima puluh blok fascia iliaca. Penguasa bisikan iliaka.''',
-      'ach_574': '''Sepuluh blok fasia iliaca yang dipandu USG. Gel, selidiki, damai.''',
-      'ach_575': '''Fascia iliaca dengan kateter dipasang. Paket kenyamanan berkelanjutan.''',
-      'ach_576': '''Dua puluh blok fasia iliaca dilakukan (tidak hanya diamati). Pekerjaan langsung di pesawat.''',
-      'ach_577': '''Blok gaya kompartemen psoas / psoas pertama. Bidang yang dalam, ketenangan yang lebih dalam.''',
-      'ach_578': '''Lima blok bidang subfascial psoas. Subfascial, bukan sub-standar.''',
-      'ach_579': '''Lima belas blok bidang subfascial psoas. Biasa di ujung yang dalam.''',
-      'ach_580': '''Tiga puluh blok bidang subfascial psoas. Spesialis di mana landmark takut untuk diinjak.''',
-      'ach_581': '''Lima puluh blok bidang subfascial psoas. Ahli energi pendekatan posterior.''',
-      'ach_582': '''Sepuluh blok pesawat psoas yang dipandu USG. Lihat pesawatnya; menjadi pesawatnya.''',
-      'ach_583': '''Blok bidang psoas dengan kateter. Infus untuk kemenangan.''',
-      'ach_584': '''Dua puluh blok pesawat psoas dilakukan. Menjahit dikreditkan.''',
-      'ach_585': '''Blok pesawat fascia iliaca dan psoas ditebang. Kolektor pesawat.''',
-      'ach_586': '''Fascia iliaca atau psoas pada kasus trauma ortho. Pesawat untuk kesakitan, bukan untuk pertunjukan.''',
-      'ach_587': '''Sepuluh blok fasia iliaca untuk jalur patah tulang pinggul. #Sahabat NOF.''',
-      'ach_588': '''Lima kasus dengan fasia atau psoas ditambah blok ekstremitas bawah lainnya. Modus duo.''',
-      'ach_589': '''Menggigil pertama dicatat dan dikelola. Diplomasi termostat.''',
-      'ach_590': '''Lima peristiwa menggigil berhasil. Kehangatan adalah obat.''',
-      'ach_591': '''Lima belas peristiwa yang menggigil. Spesialis dalam selimut dan kesabaran.''',
-      'ach_592': '''Tiga puluh peristiwa menggigil berhasil. Ahli gemetar pasca operasi.''',
-      'ach_593': '''Hipertensi intra-op pertama berhasil. PETA ke atas; kamu tetap sejajar.''',
-      'ach_594': '''Lima episode hipertensi berhasil. Penekan opsional; dianggap wajib.''',
-      'ach_595': '''Lima belas kejadian hipertensi. Biasa di bagian atas manset.''',
-      'ach_596': '''Tiga puluh kejadian hipertensi berhasil. Spesialis dalam mengapa dan apa selanjutnya.''',
-      'ach_597': '''Komplikasi perdarahan pertama dicatat. Hisap; otak aktif.''',
-      'ach_598': '''Lima peristiwa pendarahan berhasil. Produk darah dan tekanan darah.''',
+      'ach_574':
+          '''Sepuluh blok fasia iliaca yang dipandu USG. Gel, selidiki, damai.''',
+      'ach_575':
+          '''Fascia iliaca dengan kateter dipasang. Paket kenyamanan berkelanjutan.''',
+      'ach_576':
+          '''Dua puluh blok fasia iliaca dilakukan (tidak hanya diamati). Pekerjaan langsung di pesawat.''',
+      'ach_577':
+          '''Blok gaya kompartemen psoas / psoas pertama. Bidang yang dalam, ketenangan yang lebih dalam.''',
+      'ach_578':
+          '''Lima blok bidang subfascial psoas. Subfascial, bukan sub-standar.''',
+      'ach_579':
+          '''Lima belas blok bidang subfascial psoas. Biasa di ujung yang dalam.''',
+      'ach_580':
+          '''Tiga puluh blok bidang subfascial psoas. Spesialis di mana landmark takut untuk diinjak.''',
+      'ach_581':
+          '''Lima puluh blok bidang subfascial psoas. Ahli energi pendekatan posterior.''',
+      'ach_582':
+          '''Sepuluh blok pesawat psoas yang dipandu USG. Lihat pesawatnya; menjadi pesawatnya.''',
+      'ach_583':
+          '''Blok bidang psoas dengan kateter. Infus untuk kemenangan.''',
+      'ach_584':
+          '''Dua puluh blok pesawat psoas dilakukan. Menjahit dikreditkan.''',
+      'ach_585':
+          '''Blok pesawat fascia iliaca dan psoas ditebang. Kolektor pesawat.''',
+      'ach_586':
+          '''Fascia iliaca atau psoas pada kasus trauma ortho. Pesawat untuk kesakitan, bukan untuk pertunjukan.''',
+      'ach_587':
+          '''Sepuluh blok fasia iliaca untuk jalur patah tulang pinggul. #Sahabat NOF.''',
+      'ach_588':
+          '''Lima kasus dengan fasia atau psoas ditambah blok ekstremitas bawah lainnya. Modus duo.''',
+      'ach_589':
+          '''Menggigil pertama dicatat dan dikelola. Diplomasi termostat.''',
+      'ach_590':
+          '''Lima peristiwa menggigil berhasil. Kehangatan adalah obat.''',
+      'ach_591':
+          '''Lima belas peristiwa yang menggigil. Spesialis dalam selimut dan kesabaran.''',
+      'ach_592':
+          '''Tiga puluh peristiwa menggigil berhasil. Ahli gemetar pasca operasi.''',
+      'ach_593':
+          '''Hipertensi intra-op pertama berhasil. PETA ke atas; kamu tetap sejajar.''',
+      'ach_594':
+          '''Lima episode hipertensi berhasil. Penekan opsional; dianggap wajib.''',
+      'ach_595':
+          '''Lima belas kejadian hipertensi. Biasa di bagian atas manset.''',
+      'ach_596':
+          '''Tiga puluh kejadian hipertensi berhasil. Spesialis dalam mengapa dan apa selanjutnya.''',
+      'ach_597':
+          '''Komplikasi perdarahan pertama dicatat. Hisap; otak aktif.''',
+      'ach_598':
+          '''Lima peristiwa pendarahan berhasil. Produk darah dan tekanan darah.''',
       'ach_599': '''Lima belas peristiwa berdarah. Biasa di warna merah.''',
-      'ach_600': '''Tiga puluh peristiwa berdarah berhasil. Spesialis saat lapangan berubah menjadi merah.''',
-      'ach_601': '''Hipotermia pertama tercatat. Hangatkan pasiennya, bukan alasannya.''',
-      'ach_602': '''Lima peristiwa hipotermia. Udara yang dipaksakan adalah bahasa cinta.''',
-      'ach_603': '''Lima belas kejadian hipotermia berhasil. Suhu sangatlah penting.''',
-      'ach_604': '''Tiga puluh peristiwa hipotermia. Spesialis dalam derajat dan detail.''',
+      'ach_600':
+          '''Tiga puluh peristiwa berdarah berhasil. Spesialis saat lapangan berubah menjadi merah.''',
+      'ach_601':
+          '''Hipotermia pertama tercatat. Hangatkan pasiennya, bukan alasannya.''',
+      'ach_602':
+          '''Lima peristiwa hipotermia. Udara yang dipaksakan adalah bahasa cinta.''',
+      'ach_603':
+          '''Lima belas kejadian hipotermia berhasil. Suhu sangatlah penting.''',
+      'ach_604':
+          '''Tiga puluh peristiwa hipotermia. Spesialis dalam derajat dan detail.''',
       'ach_605': '''Aritmia pertama berhasil. EKG bukan musik latar.''',
       'ach_606': '''Lima aritmia berhasil. Laju, ritme, respons.''',
       'ach_607': '''Lima belas aritmia. Biasa di coretan.''',
-      'ach_608': '''Tiga puluh aritmia berhasil. Spesialis ketika garis menjadi abstrak.''',
+      'ach_608':
+          '''Tiga puluh aritmia berhasil. Spesialis ketika garis menjadi abstrak.''',
       'ach_609': '''Pneumotoraks pertama berhasil. Jarum, tiriskan, tenang.''',
-      'ach_610': '''Tiga kejadian pneumotoraks. Anda lebih memilih udara di sirkuit saja.''',
-      'ach_611': '''Lima kejadian pneumotoraks berhasil. Biasa pada saat yang tidak terduga.''',
-      'ach_612': '''Sepuluh kejadian pneumotoraks. Spesialis dalam situasi buruk, keputusan bagus.''',
-      'ach_613': '''Jalur kehilangan darah besar-besaran yang pertama. MTP bukanlah makalah teori.''',
-      'ach_614': '''Tiga peristiwa kehilangan banyak darah berhasil dilakukan. Aktifkan lebih awal; berpikir jernih.''',
-      'ach_615': '''Lima peristiwa kehilangan banyak darah. Biasa saat cell saver bernyanyi.''',
-      'ach_616': '''Sepuluh peristiwa kehilangan banyak darah berhasil. Spesialis dalam rasio dan pengendalian.''',
-      'ach_617': '''Reaksi transfusi pertama berhasil. Hentikan jalurnya; memulai protokol.''',
+      'ach_610':
+          '''Tiga kejadian pneumotoraks. Anda lebih memilih udara di sirkuit saja.''',
+      'ach_611':
+          '''Lima kejadian pneumotoraks berhasil. Biasa pada saat yang tidak terduga.''',
+      'ach_612':
+          '''Sepuluh kejadian pneumotoraks. Spesialis dalam situasi buruk, keputusan bagus.''',
+      'ach_613':
+          '''Jalur kehilangan darah besar-besaran yang pertama. MTP bukanlah makalah teori.''',
+      'ach_614':
+          '''Tiga peristiwa kehilangan banyak darah berhasil dilakukan. Aktifkan lebih awal; berpikir jernih.''',
+      'ach_615':
+          '''Lima peristiwa kehilangan banyak darah. Biasa saat cell saver bernyanyi.''',
+      'ach_616':
+          '''Sepuluh peristiwa kehilangan banyak darah berhasil. Spesialis dalam rasio dan pengendalian.''',
+      'ach_617':
+          '''Reaksi transfusi pertama berhasil. Hentikan jalurnya; memulai protokol.''',
       'ach_618': '''Tiga reaksi transfusi. Protokol ada karena suatu alasan.''',
-      'ach_619': '''Lima reaksi transfusi berhasil. Biasa pada hari-hari buruk yang jarang terjadi.''',
-      'ach_620': '''Sepuluh reaksi transfusi. Spesialis ketika darah berperilaku buruk.''',
-      'ach_621': '''Emboli udara vena pertama berhasil. Sisi kiri opsional; otak wajib.''',
+      'ach_619':
+          '''Lima reaksi transfusi berhasil. Biasa pada hari-hari buruk yang jarang terjadi.''',
+      'ach_620':
+          '''Sepuluh reaksi transfusi. Spesialis ketika darah berperilaku buruk.''',
+      'ach_621':
+          '''Emboli udara vena pertama berhasil. Sisi kiri opsional; otak wajib.''',
       'ach_622': '''Tiga acara VAE berhasil. Udara bukanlah obat.''',
       'ach_623': '''Lima acara VAE. Biasa, paling buruk.''',
-      'ach_624': '''Sepuluh acara VAE berhasil. Spesialis ketika gelembung menjadi plot.''',
-      'ach_625': '''Acara aspirasi pertama berhasil. Hisap, oksigen, kerendahan hati.''',
-      'ach_626': '''Tiga aspirasi berhasil. Lindungi jalan napas yang sudah Anda amankan.''',
+      'ach_624':
+          '''Sepuluh acara VAE berhasil. Spesialis ketika gelembung menjadi plot.''',
+      'ach_625':
+          '''Acara aspirasi pertama berhasil. Hisap, oksigen, kerendahan hati.''',
+      'ach_626':
+          '''Tiga aspirasi berhasil. Lindungi jalan napas yang sudah Anda amankan.''',
       'ach_627': '''Lima aspirasi. Biasa pada hal yang tidak direncanakan.''',
-      'ach_628': '''Sepuluh aspirasi berhasil. Spesialis setelah hal yang tak terpikirkan.''',
-      'ach_629': '''Intubasi pertama yang gagal dicatat. Rencana B adalah alasan Anda berlatih.''',
-      'ach_630': '''Tiga intubasi gagal berhasil. Nyatakan lebih awal; oksigen selalu.''',
-      'ach_631': '''Lima intubasi gagal. Biasa dalam kejujuran di bawah tekanan.''',
-      'ach_632': '''Sepuluh intubasi gagal berhasil. Spesialis agar tidak menjadi komplikasi.''',
-      'ach_633': '''Ventilasi masker pertama yang sulit dicatat. Dua tangan, satu rencana.''',
-      'ach_634': '''Lima peristiwa ventilasi masker yang sulit. OPA/NPA adalah teman.''',
-      'ach_635': '''Lima belas kejadian ventilasi masker yang sulit. Biasa ketika tas melawan.''',
-      'ach_636': '''Tiga puluh peristiwa ventilasi masker yang sulit berhasil dilakukan. Spesialis dalam keterampilan yang terlupakan.''',
-      'ach_637': '''Mencatat lima jenis komplikasi baru yang berbeda. Kolektor momen yang bisa diajar.''',
-      'ach_638': '''Mencatat delapan jenis komplikasi baru yang berbeda. Penikmat kekacauan terkandung.''',
-      'ach_639': '''Mencatat kedua belas kategori komplikasi baru setidaknya satu kali. Silabus lengkap.''',
-      'ach_640': '''Total dua puluh peristiwa di kumpulan komplikasi baru. Katalog ketenangan.''',
-      'ach_641': '''Lima puluh total kejadian komplikasi baru berhasil. Volume dengan kebajikan.''',
-      'ach_642': '''Masih memilih tidak ada/lancar — tetapi Anda login dan belajar dari yang lain. Keseimbangan.''',
-      'ach_643': '''Menggigil dan hipertensi ditangani pada berbagai kasus. File panas dan dingin.''',
-      'ach_644': '''Pendarahan dan hipotermia berhasil diatasi. Pelajaran merah dan biru.''',
-      'ach_645': '''Aspirasi, VAE, atau pneumotoraks dikelola. Ketika udara berperilaku buruk.''',
-      'ach_646': '''Kegagalan intubasi dan kesulitan ventilasi masker dicatat. Lencana kejujuran saluran napas.''',
-      'ach_647': '''Kehilangan banyak darah dan reaksi transfusi keduanya tercatat. Bab darah selesai.''',
-      'ach_648': '''Aritmia dan hipertensi keduanya berhasil. Subplot kardio.''',
-      'ach_649': '''Setiap komplikasi baru setelah tengah malam. Sekolah malam, edisi klinis.''',
-      'ach_650': '''Komplikasi baru ditangani dengan ASA IV+. Risiko tinggi, standar tinggi.''',
-      'ach_651': '''Komplikasi dicatat tetapi hasil PACU lancar. Krisis dapat dihindari, sungguh.''',
-      'ach_652': '''Kasus dengan dua atau lebih komplikasi berbeda dicatat. Kasus sibuk, pikiran jernih.''',
-      'ach_653': '''Sepuluh komplikasi yang dikelola di berbagai kategori. Saat-saat mengajar membelok.''',
-      'ach_654': '''Tiga puluh peristiwa yang dikelola di seluruh komplikasi baru. Jaring melebar.''',
-      'ach_655': '''Reaksi transfusi atau jalur MTP dicatat dalam log. Protokol adalah kepribadian.''',
-      'ach_656': '''Menggigil dan hipotermia berhasil. Suhu bukanlah suatu pilihan.''',
-      'ach_657': '''DMV plus kejujuran intubasi yang gagal di buku catatan. Kejujuran menyelamatkan nyawa.''',
-      'ach_658': '''VAE dikelola dan dicatat. Kesadaran adalah setengah dari perjuangan; tindakan adalah sisanya.''',
-      'ach_659': '''Pendarahan atau kehilangan banyak darah dapat diatasi sepuluh kali lipat jika digabungkan. Veteran lapangan merah.''',
-      'ach_660': '''Hipertensi berhasil dua puluh kali lipat. Tekanan, ditangani.''',
-      'ach_661': '''Lima puluh peristiwa menggigil berhasil. Beli institusi penghangat yang lebih baik.''',
-      'ach_662': '''Lima puluh kejadian hipertensi berhasil ditangani. Cerita PETA selama berhari-hari.''',
+      'ach_628':
+          '''Sepuluh aspirasi berhasil. Spesialis setelah hal yang tak terpikirkan.''',
+      'ach_629':
+          '''Intubasi pertama yang gagal dicatat. Rencana B adalah alasan Anda berlatih.''',
+      'ach_630':
+          '''Tiga intubasi gagal berhasil. Nyatakan lebih awal; oksigen selalu.''',
+      'ach_631':
+          '''Lima intubasi gagal. Biasa dalam kejujuran di bawah tekanan.''',
+      'ach_632':
+          '''Sepuluh intubasi gagal berhasil. Spesialis agar tidak menjadi komplikasi.''',
+      'ach_633':
+          '''Ventilasi masker pertama yang sulit dicatat. Dua tangan, satu rencana.''',
+      'ach_634':
+          '''Lima peristiwa ventilasi masker yang sulit. OPA/NPA adalah teman.''',
+      'ach_635':
+          '''Lima belas kejadian ventilasi masker yang sulit. Biasa ketika tas melawan.''',
+      'ach_636':
+          '''Tiga puluh peristiwa ventilasi masker yang sulit berhasil dilakukan. Spesialis dalam keterampilan yang terlupakan.''',
+      'ach_637':
+          '''Mencatat lima jenis komplikasi baru yang berbeda. Kolektor momen yang bisa diajar.''',
+      'ach_638':
+          '''Mencatat delapan jenis komplikasi baru yang berbeda. Penikmat kekacauan terkandung.''',
+      'ach_639':
+          '''Mencatat kedua belas kategori komplikasi baru setidaknya satu kali. Silabus lengkap.''',
+      'ach_640':
+          '''Total dua puluh peristiwa di kumpulan komplikasi baru. Katalog ketenangan.''',
+      'ach_641':
+          '''Lima puluh total kejadian komplikasi baru berhasil. Volume dengan kebajikan.''',
+      'ach_642':
+          '''Masih memilih tidak ada/lancar — tetapi Anda login dan belajar dari yang lain. Keseimbangan.''',
+      'ach_643':
+          '''Menggigil dan hipertensi ditangani pada berbagai kasus. File panas dan dingin.''',
+      'ach_644':
+          '''Pendarahan dan hipotermia berhasil diatasi. Pelajaran merah dan biru.''',
+      'ach_645':
+          '''Aspirasi, VAE, atau pneumotoraks dikelola. Ketika udara berperilaku buruk.''',
+      'ach_646':
+          '''Kegagalan intubasi dan kesulitan ventilasi masker dicatat. Lencana kejujuran saluran napas.''',
+      'ach_647':
+          '''Kehilangan banyak darah dan reaksi transfusi keduanya tercatat. Bab darah selesai.''',
+      'ach_648':
+          '''Aritmia dan hipertensi keduanya berhasil. Subplot kardio.''',
+      'ach_649':
+          '''Setiap komplikasi baru setelah tengah malam. Sekolah malam, edisi klinis.''',
+      'ach_650':
+          '''Komplikasi baru ditangani dengan ASA IV+. Risiko tinggi, standar tinggi.''',
+      'ach_651':
+          '''Komplikasi dicatat tetapi hasil PACU lancar. Krisis dapat dihindari, sungguh.''',
+      'ach_652':
+          '''Kasus dengan dua atau lebih komplikasi berbeda dicatat. Kasus sibuk, pikiran jernih.''',
+      'ach_653':
+          '''Sepuluh komplikasi yang dikelola di berbagai kategori. Saat-saat mengajar membelok.''',
+      'ach_654':
+          '''Tiga puluh peristiwa yang dikelola di seluruh komplikasi baru. Jaring melebar.''',
+      'ach_655':
+          '''Reaksi transfusi atau jalur MTP dicatat dalam log. Protokol adalah kepribadian.''',
+      'ach_656':
+          '''Menggigil dan hipotermia berhasil. Suhu bukanlah suatu pilihan.''',
+      'ach_657':
+          '''DMV plus kejujuran intubasi yang gagal di buku catatan. Kejujuran menyelamatkan nyawa.''',
+      'ach_658':
+          '''VAE dikelola dan dicatat. Kesadaran adalah setengah dari perjuangan; tindakan adalah sisanya.''',
+      'ach_659':
+          '''Pendarahan atau kehilangan banyak darah dapat diatasi sepuluh kali lipat jika digabungkan. Veteran lapangan merah.''',
+      'ach_660':
+          '''Hipertensi berhasil dua puluh kali lipat. Tekanan, ditangani.''',
+      'ach_661':
+          '''Lima puluh peristiwa menggigil berhasil. Beli institusi penghangat yang lebih baik.''',
+      'ach_662':
+          '''Lima puluh kejadian hipertensi berhasil ditangani. Cerita PETA selama berhari-hari.''',
       'ach_663': '''Lima puluh peristiwa berdarah berhasil. biografi hisap.''',
       'ach_664': '''Lima puluh kejadian hipotermia berhasil. Biografi suhu.''',
       'ach_665': '''Lima puluh aritmia berhasil. Novel EKG.''',
-      'ach_666': '''Setelah penanganan aspirasi, sepuluh kasus berikutnya lancar. Pelajaran diterapkan.''',
-      'ach_667': '''Ventilasi sungkup yang sulit diikuti dengan keberhasilan jalan napas definitif pada kasus yang sama. Urutan penting.''',
-      'ach_668': '''Kasus intubasi yang gagal berakhir tanpa kematian di atas meja. Pemulihan adalah intinya.''',
-      'ach_669': '''Pneumotoraks ditangani dengan intervensi energi definitif. Keluarkan udara, tenangkan diri.''',
-      'ach_670': '''Lima acara tingkat MTP di mana Anda tetap menjadi kapten. Peringkat diperoleh.''',
-      'ach_671': '''Lima reaksi transfusi dengan energi protokol. Hentikan, nilai, obati.''',
-      'ach_672': '''VAE dalam energi kasus duduk atau posisi berisiko. Risiko posisi, dihormati.''',
-      'ach_673': '''Menggigil dikelola dengan hasil PACU yang baik. Hangat dan terjaga.''',
-      'ach_674': '''Hipertensi saat kemunculannya berhasil. Tabung keluar, tekanan sipil.''',
-      'ach_675': '''Komplikasi perdarahan dengan jalur transfer ICU dicatat. Tempat yang tepat, waktu yang tepat.''',
-      'ach_676': '''Hipotermia pada kasus jantung atau kasus besar ditangani. Hangatkan sirkuit perawatan.''',
-      'ach_677': '''Energi aritmia yang tidak stabil berhasil. Listrik opsional; pikir tidak.''',
-      'ach_678': '''Ventilasi sungkup yang sulit dan kesulitan jalan napas keduanya benar dalam satu kasus. Silabus saluran napas lengkap dalam sekali duduk.''',
-      'ach_679': '''Tiga jenis komplikasi berbeda dalam satu kasus. Masih disini. Masih masuk.''',
-      'ach_680': '''Setelah mengalami komplikasi, kembalilah ke sepuluh pukulan yang lancar. Ketangguhan.''',
-      'ach_681': '''Dua puluh komplikasi dicatat, bukannya diminimalkan. Budaya kejujuran.''',
-      'ach_682': '''Yang pertama: menggigil, hipertensi, pendarahan. Set starter selesai.''',
-      'ach_683': '''Kehilangan banyak darah, VAE, dan kegagalan intubasi dicatat satu kali. Himpunan kritis.''',
-      'ach_684': '''Aspirasi, intubasi gagal, DMV masing-masing dicatat. Trifecta komplikasi jalan napas.''',
-      'ach_685': '''Menggigil dan hipotermia masing-masing lima. Literasi termal.''',
-      'ach_686': '''Pendarahan dan kehilangan banyak darah masing-masing lima jalur gabungan. Literasi hemo.''',
-      'ach_687': '''Hipertensi dan aritmia sepuluh jalur masing-masing. Literasi komplikasi kardio.''',
-      'ach_688': '''Sepuluh total kejadian komplikasi baru. Ekspansi sedang berlangsung.''',
-      'ach_689': '''Total dua puluh lima kejadian komplikasi baru. Ekspansi nyata.''',
-      'ach_690': '''Total tujuh puluh lima kejadian komplikasi baru. Ekspansi kelembagaan.''',
-      'ach_691': '''Total seratus kejadian komplikasi baru berhasil. Ekspansi selesai.''',
-      'ach_692': '''Lima puluh komplikasi apa pun yang dicatat dalam karier dalam aplikasi. Metrik kejujuran.''',
-      'ach_693': '''Kasus komplikasi diikuti kemudian oleh dua puluh lima pukulan yang tidak ada/berhasil. Kursus dikoreksi.''',
-      'ach_694': '''Komplikasi baru dalam kasus darurat. Tekanan pada tekanan.''',
-      'ach_695': '''Komplikasi baru pada pasien di bawah 18 tahun. Pasien kecil, protokol lengkap.''',
-      'ach_696': '''Komplikasi baru pada pasien ≥65. Fisiologi rapuh, rencana tegas.''',
-      'ach_697': '''Komplikasi baru dalam kasus operasi bariatrik. Fisiologi kuadrat.''',
-      'ach_698': '''Komplikasi baru pada gigi/maksillo. Subplot saluran napas bersama.''',
+      'ach_666':
+          '''Setelah penanganan aspirasi, sepuluh kasus berikutnya lancar. Pelajaran diterapkan.''',
+      'ach_667':
+          '''Ventilasi sungkup yang sulit diikuti dengan keberhasilan jalan napas definitif pada kasus yang sama. Urutan penting.''',
+      'ach_668':
+          '''Kasus intubasi yang gagal berakhir tanpa kematian di atas meja. Pemulihan adalah intinya.''',
+      'ach_669':
+          '''Pneumotoraks ditangani dengan intervensi energi definitif. Keluarkan udara, tenangkan diri.''',
+      'ach_670':
+          '''Lima acara tingkat MTP di mana Anda tetap menjadi kapten. Peringkat diperoleh.''',
+      'ach_671':
+          '''Lima reaksi transfusi dengan energi protokol. Hentikan, nilai, obati.''',
+      'ach_672':
+          '''VAE dalam energi kasus duduk atau posisi berisiko. Risiko posisi, dihormati.''',
+      'ach_673':
+          '''Menggigil dikelola dengan hasil PACU yang baik. Hangat dan terjaga.''',
+      'ach_674':
+          '''Hipertensi saat kemunculannya berhasil. Tabung keluar, tekanan sipil.''',
+      'ach_675':
+          '''Komplikasi perdarahan dengan jalur transfer ICU dicatat. Tempat yang tepat, waktu yang tepat.''',
+      'ach_676':
+          '''Hipotermia pada kasus jantung atau kasus besar ditangani. Hangatkan sirkuit perawatan.''',
+      'ach_677':
+          '''Energi aritmia yang tidak stabil berhasil. Listrik opsional; pikir tidak.''',
+      'ach_678':
+          '''Ventilasi sungkup yang sulit dan kesulitan jalan napas keduanya benar dalam satu kasus. Silabus saluran napas lengkap dalam sekali duduk.''',
+      'ach_679':
+          '''Tiga jenis komplikasi berbeda dalam satu kasus. Masih disini. Masih masuk.''',
+      'ach_680':
+          '''Setelah mengalami komplikasi, kembalilah ke sepuluh pukulan yang lancar. Ketangguhan.''',
+      'ach_681':
+          '''Dua puluh komplikasi dicatat, bukannya diminimalkan. Budaya kejujuran.''',
+      'ach_682':
+          '''Yang pertama: menggigil, hipertensi, pendarahan. Set starter selesai.''',
+      'ach_683':
+          '''Kehilangan banyak darah, VAE, dan kegagalan intubasi dicatat satu kali. Himpunan kritis.''',
+      'ach_684':
+          '''Aspirasi, intubasi gagal, DMV masing-masing dicatat. Trifecta komplikasi jalan napas.''',
+      'ach_685':
+          '''Menggigil dan hipotermia masing-masing lima. Literasi termal.''',
+      'ach_686':
+          '''Pendarahan dan kehilangan banyak darah masing-masing lima jalur gabungan. Literasi hemo.''',
+      'ach_687':
+          '''Hipertensi dan aritmia sepuluh jalur masing-masing. Literasi komplikasi kardio.''',
+      'ach_688':
+          '''Sepuluh total kejadian komplikasi baru. Ekspansi sedang berlangsung.''',
+      'ach_689':
+          '''Total dua puluh lima kejadian komplikasi baru. Ekspansi nyata.''',
+      'ach_690':
+          '''Total tujuh puluh lima kejadian komplikasi baru. Ekspansi kelembagaan.''',
+      'ach_691':
+          '''Total seratus kejadian komplikasi baru berhasil. Ekspansi selesai.''',
+      'ach_692':
+          '''Lima puluh komplikasi apa pun yang dicatat dalam karier dalam aplikasi. Metrik kejujuran.''',
+      'ach_693':
+          '''Kasus komplikasi diikuti kemudian oleh dua puluh lima pukulan yang tidak ada/berhasil. Kursus dikoreksi.''',
+      'ach_694':
+          '''Komplikasi baru dalam kasus darurat. Tekanan pada tekanan.''',
+      'ach_695':
+          '''Komplikasi baru pada pasien di bawah 18 tahun. Pasien kecil, protokol lengkap.''',
+      'ach_696':
+          '''Komplikasi baru pada pasien ≥65. Fisiologi rapuh, rencana tegas.''',
+      'ach_697':
+          '''Komplikasi baru dalam kasus operasi bariatrik. Fisiologi kuadrat.''',
+      'ach_698':
+          '''Komplikasi baru pada gigi/maksillo. Subplot saluran napas bersama.''',
       'ach_699': '''Komplikasi baru di IR. Ruangan gelap, pemikiran cerah.''',
-      'ach_700': '''Komplikasi baru pada jantung anak. Ruang kelas dengan taruhan tertinggi.''',
-      'ach_701': '''Detail komplikasi yang cukup dicatat sehingga PDF dapat mengajarkannya. Dokumentasi sebagai warisan.''',
+      'ach_700':
+          '''Komplikasi baru pada jantung anak. Ruang kelas dengan taruhan tertinggi.''',
+      'ach_701':
+          '''Detail komplikasi yang cukup dicatat sehingga PDF dapat mengajarkannya. Dokumentasi sebagai warisan.''',
     },
   };
 }

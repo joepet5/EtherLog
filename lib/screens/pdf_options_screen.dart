@@ -9,7 +9,6 @@ import '../services/csv_service.dart';
 import '../services/auth_service.dart';
 import '../services/case_storage.dart';
 import '../utils/app_haptics.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class PdfOptionsScreen extends StatefulWidget {
   const PdfOptionsScreen({super.key});
@@ -339,6 +338,13 @@ class _PdfOptionsScreenState extends State<PdfOptionsScreen> {
                 _set(_prefs.copyWith(includeComplications: v)),
           ),
           _tile(
+            title: l10n.postOpFollowUp,
+            subtitle: l10n.postOpFollowUpSubtitle,
+            value: _prefs.includeFollowUp,
+            onChanged: (v) =>
+                _set(_prefs.copyWith(includeFollowUp: v)),
+          ),
+          _tile(
             title: l10n.includeSpecialtySummary,
             subtitle: l10n.summaryTablesSubtitle,
             value: _prefs.includeSummaryTables,
@@ -451,7 +457,7 @@ class _PdfOptionsScreenState extends State<PdfOptionsScreen> {
           style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
         ),
         value: value,
-        activeColor: AppTheme.primary,
+        activeThumbColor: AppTheme.primary,
         onChanged: onChanged,
       ),
     );

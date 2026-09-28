@@ -3,9 +3,10 @@ import '../theme/app_theme.dart';
 import '../services/backup_service.dart';
 import '../services/auth_service.dart';
 import '../services/case_storage.dart';
+import '../services/csv_service.dart';
+import '../services/pdf_preferences.dart';
 import '../utils/app_haptics.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class DataBackupScreen extends StatefulWidget {
   const DataBackupScreen({super.key});
@@ -53,6 +54,44 @@ class _DataBackupScreenState extends State<DataBackupScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(l10n.backupSaved(fileName)),
+            backgroundColor: AppTheme.success,
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${l10n.error}: $e')),
+      );
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _exportCsv() async {
+    if (_busy) return;
+    await AppHaptics.light();
+    if (_caseCount == 0) {
+      await AppHaptics.heavy();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.noCasesToBackup)),
+      );
+      return;
+    }
+
+    final authOk = await AuthService.verifyBiometrics('Authenticate to export Excel/CSV spreadsheet');
+    if (!authOk) return;
+    setState(() => _busy = true);
+    try {
+      final cases = await CaseStorage.getAllCases();
+      final prefs = await PdfPreferences.load();
+      final path = await CsvService.exportToCsv(cases, prefs: prefs);
+      if (!mounted) return;
+      if (path != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Excel / CSV Exported Successfully!'),
             backgroundColor: AppTheme.success,
           ),
         );
@@ -128,6 +167,14 @@ class _DataBackupScreenState extends State<DataBackupScreen> {
             subtitle: l10n.backupDescription,
             buttonLabel: l10n.exportBackupFile,
             onTap: _busy ? null : _export,
+          ),
+          const SizedBox(height: 12),
+          _actionCard(
+            icon: Icons.table_chart_outlined,
+            title: 'Export Excel (CSV)',
+            subtitle: 'Export complete logbook with all clinical and detailed assessment fields to an Excel-compatible spreadsheet.',
+            buttonLabel: 'Export Excel File',
+            onTap: _busy ? null : _exportCsv,
           ),
           const SizedBox(height: 12),
           _actionCard(

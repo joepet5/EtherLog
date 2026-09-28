@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/complication_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 
 class ComplicationDetailScreen extends StatelessWidget {
   final String complicationName;

@@ -5,9 +5,10 @@ import '../services/usage_stats.dart';
 import '../services/case_storage.dart';
 import '../services/pdf_service.dart';
 import '../services/points_service.dart';
+import '../services/fatigue_service.dart';
 import '../services/profile_storage.dart';
+import '../services/pac_storage.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/animated_gradient_background.dart';
 import 'points_breakdown_screen.dart';
 import '../utils/page_transitions.dart';
 
@@ -22,6 +23,9 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   bool _loading = true;
   List<CaseRecord> _cases = [];
   int _profileBonus = 0;
+  bool _zenMode = false;
+  FatigueStats? _fatigueStats;
+  int _totalPacPatients = 0;
 
   String? _expandedRegional;
   String? _expandedInvasive;
@@ -49,9 +53,16 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   Future<void> _load() async {
     final cases = await CaseStorage.getAllCases();
     final bonus = await ProfileStorage.getProfileBonusPoints();
+    final profile = await ProfileStorage.getProfile();
+    final fatigue = FatigueService.getFatigueStats(cases);
+    final pacRecords = await PacStorage.getAllPacRecords();
+    final totalPac = pacRecords.fold<int>(0, (sum, p) => sum + p.patientCount);
     setState(() {
       _cases = cases;
       _profileBonus = bonus;
+      _zenMode = profile.zenMode;
+      _fatigueStats = fatigue;
+      _totalPacPatients = totalPac;
       _loading = false;
     });
   }
@@ -261,7 +272,8 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(title: Text(l10n.statistics),
+      appBar: AppBar(
+        title: Text(l10n.statistics),
         actions: [
           IconButton(
             icon: const Icon(Icons.picture_as_pdf_outlined),
@@ -270,153 +282,309 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           ),
         ],
       ),
-      body: total == 0
+      body: (total == 0 && _totalPacPatients == 0)
           ? Center(
-        child: Text(
-          l10n.noCasesYet,
-          style: TextStyle(color: AppTheme.textSecondary, fontSize: 16),
-        ),
-      )
+              child: Text(
+                l10n.noCasesYet,
+                style: TextStyle(color: AppTheme.textSecondary, fontSize: 16),
+              ),
+            )
           : ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: _colorStatCard(
-                      l10n.total, '$total', AppTheme.primary)),
-              const SizedBox(width: 8),
-              Expanded(
-                  child: _colorStatCard(
-                      l10n.elective, '$elective', AppTheme.success)),
-              const SizedBox(width: 8),
-              Expanded(
-                  child: _colorStatCard(
-                      l10n.emergency, '$emergency', AppTheme.warning)),
-              const SizedBox(width: 8),
-              Expanded(
-                  child: _colorStatCard(l10n.diffAirwayShort,
-                      '$difficult', AppTheme.danger)),
-            ],
-          ),
-          const SizedBox(height: 12),
-          GestureDetector(onTap: () => AppPageRoute.push(context, const PointsBreakdownScreen()), child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppTheme.surface,
-              borderRadius: BorderRadius.circular(12),
-              border:
-              Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
-            ),
-            child: Row(
+              padding: const EdgeInsets.all(16),
               children: [
-                Icon(Icons.stars_rounded,
-                    color: AppTheme.primary, size: 28),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  children: [
+                    Expanded(
+                        child: _colorStatCard(
+                            l10n.total, '$total', AppTheme.primary)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: _colorStatCard(
+                            l10n.elective, '$elective', AppTheme.success)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: _colorStatCard(
+                            l10n.emergency, '$emergency', AppTheme.warning)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: _colorStatCard(l10n.diffAirwayShort,
+                            '$difficult', AppTheme.danger)),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                _buildFatigueInsights(),
+                if (!_zenMode)
+                  GestureDetector(
+                    onTap: () => AppPageRoute.push(
+                        context, const PointsBreakdownScreen()),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppTheme.surface,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color: AppTheme.primary.withValues(alpha: 0.35)),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.stars_rounded,
+                              color: AppTheme.primary, size: 28),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  l10n.totalPoints,
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: AppTheme.textSecondary),
+                                ),
+                                Text(
+                                  '$points',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppTheme.primary,
+                                  ),
+                                ),
+                                if (_profileBonus > 0)
+                                  Text(
+                                    l10n.includesProfileBonus(_profileBonus),
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: AppTheme.textSecondary),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                l10n.avgPerCase,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppTheme.textSecondary),
+                              ),
+                              Text(
+                                avgPoints.toStringAsFixed(1),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 12),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppTheme.surface,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFF0D9488).withValues(alpha: 0.35),
+                    ),
+                  ),
+                  child: Row(
                     children: [
-                      Text(
-                        l10n.totalPoints,
-                        style: TextStyle(
-                            fontSize: 13, color: AppTheme.textSecondary),
-                      ),
-                      Text(
-                        '$points',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                          color: AppTheme.primary,
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color:
+                              const Color(0xFF0D9488).withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            'assets/icon/pac_icon.png',
+                            width: 24,
+                            height: 24,
+                            color: const Color(0xFF0D9488),
+                          ),
                         ),
                       ),
-                      if (_profileBonus > 0)
-                        Text(
-                          l10n.includesProfileBonus(_profileBonus),
-                          style: TextStyle(
-                              fontSize: 11,
-                              color: AppTheme.textSecondary),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Pre-Anaesthetic Checkup (PAC)',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: AppTheme.textSecondary,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              '$_totalPacPatients',
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFF0D9488),
+                              ),
+                            ),
+                            Text(
+                              'Total patients evaluated in PAC',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: AppTheme.textSecondary
+                                    .withValues(alpha: 0.8),
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
                     ],
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                const SizedBox(height: 12),
+                _summaryCard(
+                  title: l10n.averageAnaesthesiaDuration,
+                  value: avgDuration == null
+                      ? '—'
+                      : _formatAvgMinutes(avgDuration),
+                  subtitle: durationMinutes.isEmpty
+                      ? l10n.noDurationData
+                      : l10n.basedOnCases(durationMinutes.length),
+                ),
+                const SizedBox(height: 20),
+                _section(l10n.divisionByAge),
+                _barList(_orderedAge(ageMap), total, color: AppTheme.primary),
+                _section(l10n.divisionByBmi),
+                _barList(_sorted(bmiMap), total, color: AppTheme.success),
+                _section(l10n.regionalBlocksByType),
+                _expandableTypeList(
+                  entries: _sorted(regionalNameMap),
+                  expandedKey: _expandedRegional,
+                  onToggle: (name) => setState(() {
+                    _expandedRegional = _expandedRegional == name ? null : name;
+                  }),
+                  breakdownBuilder: _regionalRoleBreakdown,
+                  accent: AppTheme.warning,
+                ),
+                _section(l10n.airwayManagementStats),
+                _barList(_sorted(airwayMap), null, color: AppTheme.primary),
+                _section(l10n.typeOfIntubation),
+                _barList(_sorted(intubationTypeMap), null,
+                    color: AppTheme.success),
+                _section(l10n.methodOfIntubation),
+                _expandableTypeList(
+                  entries: _sorted(intubationMethodMap),
+                  expandedKey: _expandedIntubationMethod,
+                  onToggle: (name) => setState(() {
+                    _expandedIntubationMethod =
+                        _expandedIntubationMethod == name ? null : name;
+                  }),
+                  breakdownBuilder: _intubationMethodRoleBreakdown,
+                  accent: AppTheme.warning,
+                ),
+                _section(l10n.invasiveLinesByType),
+                _expandableTypeList(
+                  entries: _sorted(invasiveNameMap),
+                  expandedKey: _expandedInvasive,
+                  onToggle: (name) => setState(() {
+                    _expandedInvasive = _expandedInvasive == name ? null : name;
+                  }),
+                  breakdownBuilder: _invasiveRoleBreakdown,
+                  accent: AppTheme.danger,
+                ),
+                const SizedBox(height: 32),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildFatigueInsights() {
+    if (_fatigueStats == null) return const SizedBox.shrink();
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: AppTheme.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppTheme.surfaceLight),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Image.asset(
+                'assets/icon/fatigue_icon.png',
+                width: 24,
+                height: 24,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Shift Insights (24h)',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.textPrimary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              _PulsatingFatigueRing(
+                progress: _fatigueStats!.progress,
+                color: _fatigueStats!.statusColor,
+                size: 54,
+                isHighAlert: _fatigueStats!.showNudge ||
+                    _fatigueStats!.activeMinutes24h >=
+                        (FatigueService.fatigueThresholdMinutes * 0.75),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.avgPerCase,
+                      FatigueService.formatDuration(
+                          _fatigueStats!.activeMinutes24h),
                       style: TextStyle(
-                          fontSize: 12, color: AppTheme.textSecondary),
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.textPrimary,
+                      ),
                     ),
                     Text(
-                      avgPoints.toStringAsFixed(1),
+                      'Active Case Time',
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.textPrimary,
+                        fontSize: 12,
+                        color: AppTheme.textSecondary,
                       ),
                     ),
                   ],
                 ),
-              ],
+              ),
+            ],
+          ),
+          if (_fatigueStats!.showNudge) ...[
+            const SizedBox(height: 12),
+            Text(
+              'You have exceeded the standard active threshold. Ensure you are taking adequate breaks.',
+              style: TextStyle(
+                fontSize: 12,
+                color: AppTheme.warning,
+                height: 1.4,
+              ),
             ),
-          ),
-          ),
-          const SizedBox(height: 12),
-          _summaryCard(
-            title: l10n.averageAnaesthesiaDuration,
-            value: avgDuration == null
-                ? '—'
-                : _formatAvgMinutes(avgDuration),
-            subtitle: durationMinutes.isEmpty
-                ? l10n.noDurationData
-                : l10n.basedOnCases(durationMinutes.length),
-          ),
-          const SizedBox(height: 20),
-          _section(l10n.divisionByAge),
-          _barList(_orderedAge(ageMap), total, color: AppTheme.primary),
-          _section(l10n.divisionByBmi),
-          _barList(_sorted(bmiMap), total, color: AppTheme.success),
-          _section(l10n.regionalBlocksByType),
-          _expandableTypeList(
-            entries: _sorted(regionalNameMap),
-            expandedKey: _expandedRegional,
-            onToggle: (name) => setState(() {
-              _expandedRegional =
-              _expandedRegional == name ? null : name;
-            }),
-            breakdownBuilder: _regionalRoleBreakdown,
-            accent: AppTheme.warning,
-          ),
-          _section(l10n.airwayManagementStats),
-          _barList(_sorted(airwayMap), null, color: AppTheme.primary),
-          _section(l10n.typeOfIntubation),
-          _barList(_sorted(intubationTypeMap), null,
-              color: AppTheme.success),
-          _section(l10n.methodOfIntubation),
-          _expandableTypeList(
-            entries: _sorted(intubationMethodMap),
-            expandedKey: _expandedIntubationMethod,
-            onToggle: (name) => setState(() {
-              _expandedIntubationMethod =
-              _expandedIntubationMethod == name ? null : name;
-            }),
-            breakdownBuilder: _intubationMethodRoleBreakdown,
-            accent: AppTheme.warning,
-          ),
-          _section(l10n.invasiveLinesByType),
-          _expandableTypeList(
-            entries: _sorted(invasiveNameMap),
-            expandedKey: _expandedInvasive,
-            onToggle: (name) => setState(() {
-              _expandedInvasive =
-              _expandedInvasive == name ? null : name;
-            }),
-            breakdownBuilder: _invasiveRoleBreakdown,
-            accent: AppTheme.danger,
-          ),
-          const SizedBox(height: 32),
+          ]
         ],
       ),
     );
@@ -478,8 +646,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
           if (subtitle != null) ...[
             const SizedBox(height: 4),
             Text(subtitle,
-                style:
-                TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
+                style: TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
           ],
         ],
       ),
@@ -658,42 +825,144 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
                   child: Column(
                     children: breakdownEntries.isEmpty
                         ? [
-                      Text(l10n.noRoleData,
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: AppTheme.textSecondary)),
-                    ]
-                        : breakdownEntries.map((role) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                l10n.term(role.key),
+                            Text(l10n.noRoleData,
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: AppTheme.textSecondary),
+                                    color: AppTheme.textSecondary)),
+                          ]
+                        : breakdownEntries.map((role) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      l10n.term(role.key),
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: AppTheme.textSecondary),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${role.value}',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppTheme.textPrimary,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Text(
-                              '${role.value}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.textPrimary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                            );
+                          }).toList(),
                   ),
                 ),
             ],
           ),
         );
       }).toList(),
+    );
+  }
+}
+
+class _PulsatingFatigueRing extends StatefulWidget {
+  final double progress;
+  final Color color;
+  final double size;
+  final bool isHighAlert;
+
+  const _PulsatingFatigueRing({
+    required this.progress,
+    required this.color,
+    this.size = 54,
+    this.isHighAlert = false,
+  });
+
+  @override
+  State<_PulsatingFatigueRing> createState() => _PulsatingFatigueRingState();
+}
+
+class _PulsatingFatigueRingState extends State<_PulsatingFatigueRing>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _glowAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: widget.isHighAlert ? 1200 : 1800),
+    )..repeat(reverse: true);
+
+    _scaleAnimation = Tween<double>(
+      begin: widget.isHighAlert ? 0.95 : 0.97,
+      end: widget.isHighAlert ? 1.06 : 1.03,
+    ).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine),
+    );
+
+    _glowAnimation = Tween<double>(
+      begin: widget.isHighAlert ? 0.35 : 0.2,
+      end: widget.isHighAlert ? 0.75 : 0.55,
+    ).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _PulsatingFatigueRing oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isHighAlert != widget.isHighAlert) {
+      _controller.duration =
+          Duration(milliseconds: widget.isHighAlert ? 1200 : 1800);
+      if (!_controller.isAnimating) {
+        _controller.repeat(reverse: true);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        final glow = _glowAnimation.value;
+        final scale = _scaleAnimation.value;
+
+        return Transform.scale(
+          scale: scale,
+          child: Container(
+            width: widget.size,
+            height: widget.size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: widget.color.withValues(alpha: glow),
+                  blurRadius:
+                      widget.isHighAlert ? 16 * glow + 6 : 12 * glow + 4,
+                  spreadRadius: widget.isHighAlert ? 4 * glow : 2 * glow,
+                ),
+              ],
+            ),
+            child: CircularProgressIndicator(
+              value: widget.progress,
+              strokeWidth: 6,
+              strokeCap: StrokeCap.round,
+              backgroundColor: AppTheme.surfaceLight.withValues(alpha: 0.6),
+              color: widget.color,
+            ),
+          ),
+        );
+      },
     );
   }
 }
